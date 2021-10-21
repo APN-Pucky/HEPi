@@ -1,5 +1,7 @@
 import pyslha
 
 
-d = pyslha.read("mastercode.in")
-print(d)
+d = pyslha.read("../../tests/mastercode.in")
+
+print(d.blocks["MASS"])
+pyslha.write("../../tests/mastercode2.in", d)

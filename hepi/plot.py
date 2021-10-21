@@ -5,20 +5,24 @@ import uncertainties as unc
 from scipy.interpolate import make_interp_spline, BSpline
 
 from uncertainties import unumpy
+import matplotlib.pyplot as plt
 
 
-def plot(dict_list, x, y, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True):
+def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True):
     # TODO handle negative axis
+    if label is None:
+        label = y
     vx = dict_list[x]
     vy = dict_list[y]
     xnew = np.linspace(vx[0], vx[-1], 300,)
     spl = make_interp_spline(
         vx, splot.unv(vy), k=3)  # type: BSpline
     power_smooth = spl(xnew)
+    bl, = plt.gca().plot([], [])
+    splot.data(vx, vy, logy=logy, data_color=bl.get_color())
     splot.data(xnew, power_smooth, logy=logy, fmt="-",
-               label="$\sigma_\\mathrm{" + y + "}$",
-               xaxis=xaxis, yaxis=yaxis, init=False)
-    splot.data(vx, vy, logy=logy)
+               label=label,
+               xaxis=xaxis, yaxis=yaxis, init=False, data_color=bl.get_color())
 
 
 """

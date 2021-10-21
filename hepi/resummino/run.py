@@ -3,7 +3,7 @@ import subprocess
 from string import Template
 import numpy as np
 import pkgutil
-from .. import Input, Result, LD2DL
+from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
 import re
 from uncertainties import ufloat_fromstr
 import os.path
@@ -31,8 +31,8 @@ class RunParams:
         self.out_path = out_path
 
 
-def run(params: List[Input]):
-    rps = _queue(params)
+def run(params: List[Input], noskip=False):
+    rps = _queue(params, noskip)
     _run(rps)
     outs = LD2DL(rps)["out_path"]
     results = _parse(outs)
@@ -72,7 +72,7 @@ def _parse_single(file) -> Result:
     return Result(lo_result, nlo_result, nll_result)
 
 
-def _queue(params: List[Input]) -> List[RunParams]:
+def _queue(params: List[Input], noskip=False) -> List[RunParams]:
     Path("output").mkdir(parents=True, exist_ok=True)
     Path("input").mkdir(parents=True, exist_ok=True)
     ret = []
@@ -80,9 +80,9 @@ def _queue(params: List[Input]) -> List[RunParams]:
         d = p.__dict__
         # TODO insert defautl if missing in d!
         name = "_".join("".join(str(_[0]) + "_" + str(_[1]))
-                        for _ in d.items())
+                        for _ in d.items()).replace("/", "-")
         skip = False
-        if os.path.isfile("output/" + name + ".out"):
+        if not noskip and os.path.isfile(get_output_dir() + name + ".out"):
             print("skip", end='')
             skip = True
         data = pkgutil.get_data(__name__, "plot_template.in").decode(
@@ -90,20 +90,21 @@ def _queue(params: List[Input]) -> List[RunParams]:
 
         src = Template(data)
         result = src.substitute(d)
-        open("input/" + name, "w").write(result)
+        open(get_input_dir() + name + ".in", "w").write(result)
         if not skip:
-            open("output/" + name + ".out", "w").write(result + "\n\n")
+            open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
 
         sname = d['slha']
-        with open('mastercode.in', 'r') as f:
-            src = Template(f.read())
-            result = src.substitute(d)
-            open("input/" + sname, "w").write(result)
+        with open(get_input_dir() + sname, 'r') as f:
+            #src = Template(f.read())
+            #result = src.substitute(d)
+            #open(get_input_dir() + sname + ".in", "w").write(result)
             if not skip:
-                open("output/" + name + ".out", "a").write(result + "\n\n")
+                open(get_output_dir() + name + ".out",
+                     "a").write(f.read() + "\n\n")
 
         ret.append(RunParams(["--lo", "--nlo", "--nll"]
-                             [p.order], "./input/"+name, "./output/"+name + ".out", skip))
+                             [p.order], get_input_dir()+name + ".in", get_output_dir()+name + ".out", skip))
 
     return ret
 
