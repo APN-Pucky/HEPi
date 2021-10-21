@@ -3,9 +3,35 @@ import numpy as np
 from typing import List
 import copy
 import pyslha
+from particle import PDGID
+import pyslha
+from particle import Particle
+from particle.converters.bimap import DirectionalMaps
 # TODO setters
 in_dir = "./input/"
 out_dir = "./output/"
+
+PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps(
+    "PDGID", "LaTexName", converters=(PDGID, str))
+
+PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
+    "PDGName", "PDGID", converters=(str, PDGID))
+
+
+def get_name(id):
+    global PDG2LaTeXNameMap
+    pdgid = PDG2LaTeXNameMap[1000002]
+    return pdgid
+
+
+def get_LR_partner(id):
+    n = PDGID2NameMap[id]
+    if "L" in n:
+        n = n.replace("L", "R")
+        return -1, int(PDG2Name2IDMap[n])
+    if "R" in n:
+        n = n.replace("R", "L")
+        return 1, int(PDG2Name2IDMap[n])
 
 
 def get_input_dir():
@@ -38,16 +64,20 @@ class Input:
         self.mu_r = mu_r
 
 
-def mass_scan(l: List[Input], var: int, range) -> List[Input]:
+def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
     ret = []
     for s in l:
         for r in range:
             d = pyslha.read(s.slha)
             d.blocks["MASS"][var] = r
+            if not (diff_L_R is None):
+                is_L, v = get_LR_partner(var)
+                d.blocks["MASS"][v] = r + is_L*diff_L_R
+
             newname = s.slha + "_" + str(var) + "_" + str(r)
             pyslha.write(get_input_dir()+newname, d)
             tmp = copy.copy(s)
-            setattr(tmp, "mass_" +str(var), r)
+            setattr(tmp, "mass_" + str(var), r)
             setattr(tmp, "slha", newname)
             ret.append(tmp)
     return ret

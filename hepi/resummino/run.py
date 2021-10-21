@@ -8,6 +8,7 @@ import re
 from uncertainties import ufloat_fromstr
 import os.path
 from pathlib import Path
+from .result import ResumminoResult, parse_single
 
 
 resummino_path = "~/resummino/"
@@ -41,35 +42,12 @@ def run(params: List[Input], noskip=False):
     return {**rdl, **pdl}
 
 
-def _parse(outputs: List[str]) -> List[Result]:
+def _parse(outputs: List[str]) -> List[ResumminoResult]:
     rsl = []
     for f in outputs:
-        res = _parse_single(f)
+        res = parse_single(f)
         rsl.append(res)
     return rsl
-
-
-def _parse_single(file) -> Result:
-    lo_pattern = re.compile(r'^LO = \((.*)\) pb')
-    nlo_pattern = re.compile(r'^NLO = \((.*)\) pb')
-    nll_pattern = re.compile(r'^NLO\+NLL = \((.*)\) pb')
-
-    lo_result = None
-    nlo_result = None
-    nll_result = None
-    with open(file) as output:
-        for line in output:
-            tmp = lo_pattern.search(line)
-            if tmp is not None:
-                lo_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
-            tmp = nlo_pattern.search(line)
-            if tmp is not None:
-                nlo_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
-            tmp = nll_pattern.search(line)
-            if tmp is not None:
-                nll_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
-
-    return Result(lo_result, nlo_result, nll_result)
 
 
 def _queue(params: List[Input], noskip=False) -> List[RunParams]:
@@ -110,6 +88,7 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
 
 
 def _run(rps: List[RunParams]):
+    # TODO clean up on exit emergency
     global resummino_path
     # TODO RS build path checks?!?!
     template = resummino_path + 'build/bin/resummino {} {} >> {}'

@@ -7,6 +7,23 @@ from scipy.interpolate import make_interp_spline, BSpline
 from uncertainties import unumpy
 import matplotlib.pyplot as plt
 
+from particle import PDGID
+import pyslha
+from particle import Particle
+from particle.converters.bimap import DirectionalMaps
+
+from .input import get_name
+
+
+def energy_plot(dict_list, y):
+    plot(dict_list, "energy", y, label=None,
+         xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True)
+
+
+def mass_plot(dict_list, part, y):
+    plot(dict_list, "mass_" + str(part), y, label=None,
+         xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis="$\sigma$ [pb]", logy=True)
+
 
 def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True):
     # TODO handle negative axis

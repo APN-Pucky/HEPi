@@ -26,7 +26,7 @@ setuptools.setup(
         "scipy",
         "sympy",
         "smpl",
-        "pyslha"
+        "pyslha",
         # "requests",
         # "tqdm",
         # "pandas",
