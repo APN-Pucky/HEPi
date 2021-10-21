@@ -1,0 +1,121 @@
+from typing import List
+import subprocess
+from string import Template
+import numpy as np
+import pkgutil
+from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
+import re
+from uncertainties import ufloat_fromstr
+import os.path
+from pathlib import Path
+from .result import ResumminoResult, parse_single
+
+
+resummino_path = "~/resummino/"
+
+
+def set_path(p):
+    global resummino_path
+    resummino_path = p
+
+
+def get_path():
+    global resummino_path
+    return resummino_path
+
+
+class RunParams:
+    def __init__(self, flags: str, in_path: str, out_path: str, skip=False):
+        self.skip = skip
+        self.flags = flags
+        self.in_path = in_path
+        self.out_path = out_path
+
+
+def run(params: List[Input], noskip=False):
+    rps = _queue(params, noskip)
+    _run(rps)
+    outs = LD2DL(rps)["out_path"]
+    results = _parse(outs)
+    rdl = LD2DL(results)
+    pdl = LD2DL(params)
+    return {**rdl, **pdl}
+
+
+def _parse(outputs: List[str]) -> List[ResumminoResult]:
+    rsl = []
+    for f in outputs:
+        res = parse_single(f)
+        rsl.append(res)
+    return rsl
+
+
+def _queue(params: List[Input], noskip=False) -> List[RunParams]:
+    Path("output").mkdir(parents=True, exist_ok=True)
+    Path("input").mkdir(parents=True, exist_ok=True)
+    ret = []
+    for p in params:
+        d = p.__dict__
+        # TODO insert defautl if missing in d!
+        name = "_".join("".join(str(_[0]) + "_" + str(_[1]))
+                        for _ in d.items()).replace("/", "-")
+        skip = False
+        if not noskip and os.path.isfile(get_output_dir() + name + ".out"):
+            print("skip", end='')
+            skip = True
+        data = pkgutil.get_data(__name__, "plot_template.in").decode(
+            'utf-8')
+
+        src = Template(data)
+        result = src.substitute(d)
+        open(get_input_dir() + name + ".in", "w").write(result)
+        if not skip:
+            open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
+
+        sname = d['slha']
+        with open(get_input_dir() + sname, 'r') as f:
+            #src = Template(f.read())
+            #result = src.substitute(d)
+            #open(get_input_dir() + sname + ".in", "w").write(result)
+            if not skip:
+                open(get_output_dir() + name + ".out",
+                     "a").write(f.read() + "\n\n")
+
+        ret.append(RunParams(["--lo", "--nlo", "--nll"]
+                             [p.order], get_input_dir()+name + ".in", get_output_dir()+name + ".out", skip))
+
+    return ret
+
+
+def _run(rps: List[RunParams]):
+    # TODO clean up on exit emergency
+    global resummino_path
+    # TODO RS build path checks?!?!
+    template = resummino_path + 'build/bin/resummino {} {} >> {}'
+
+    # Run commands in parallel
+    processes = []
+
+    for rp in rps:
+        if not rp.skip:
+            command = template.format(rp.in_path, rp.flags, rp.out_path)
+            process = subprocess.Popen(command, shell=True)
+            processes.append(process)
+
+    # Collect statuses
+    output = [p.wait() for p in processes]
+    return output
+
+
+sp = []
+p = {'energy': 13000, 'p1': 2000002, 'p2': 1000022,
+     'slha': "mastercode.in", "mu_f": 1., "mu_r": 1.}
+for mu_f in np.logspace(-1, 1, 3):
+    for mu_r in np.logspace(-1, 1, 3):
+        p['mu_r'] = mu_r
+        p['mu_f'] = mu_f
+        sp.append(p.copy())
+
+# print(sp)
+# names = queue(sp)
+# run(names)
