@@ -20,7 +20,7 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
 
 def get_name(id):
     global PDG2LaTeXNameMap
-    pdgid = PDG2LaTeXNameMap[1000002]
+    pdgid = PDG2LaTeXNameMap[id]
     return pdgid
 
 
@@ -52,7 +52,7 @@ class Order(IntEnum):
 
 class Input:
     # TODO allow unspecified input? Maybe with kwargs + defaults
-    def __init__(self, order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f, mu_r):
+    def __init__(self, order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f, mu_r, id=""):
         self.order = order
         self.energy = energy
         self.particle1 = particle1
@@ -62,6 +62,7 @@ class Input:
         self.pdf_nlo = pdf_nlo
         self.mu_f = mu_f
         self.mu_r = mu_r
+        self.id = id
 
 
 def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:

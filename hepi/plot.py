@@ -15,31 +15,49 @@ from particle.converters.bimap import DirectionalMaps
 from .input import get_name
 
 
-def energy_plot(dict_list, y):
+def energy_plot(dict_list, y, yscale=1.):
     plot(dict_list, "energy", y, label=None,
-         xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True)
+         xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True, yscale=yscale)
 
 
-def mass_plot(dict_list, part, y):
-    plot(dict_list, "mass_" + str(part), y, label=None,
-         xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis="$\sigma$ [pb]", logy=True)
+def mass_plot(dict_list, part, y, logy=True, yaxis="$\sigma$ [pb]", yscale=1.,label =None):
+    plot(dict_list, "mass_" + str(part), y, label=label,
+         xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale)
 
 
-def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True):
-    # TODO handle negative axis
+def mass_vplot(dict_list, part, y, logy=True, yaxis="$\sigma$ [pb]", yscale=1.,label =None):
+    vplot(dict_list["mass_" + str(part)], y, label=label,
+          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale)
+
+
+def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True, yscale=1.):
+    # TODO use kwargs
     if label is None:
         label = y
     vx = dict_list[x]
     vy = dict_list[y]
+    vplot(vx, vy, label, xaxis, yaxis, logy, yscale)
+
+
+def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True, yscale=1.):
+    if label is None:
+        label = "??"
+    vx = x
+    vy = y
     xnew = np.linspace(vx[0], vx[-1], 300,)
     spl = make_interp_spline(
         vx, splot.unv(vy), k=3)  # type: BSpline
     power_smooth = spl(xnew)
     bl, = plt.gca().plot([], [])
-    splot.data(vx, vy, logy=logy, data_color=bl.get_color())
-    splot.data(xnew, power_smooth, logy=logy, fmt="-",
+    splot.data(vx, vy*yscale, logy=logy, data_color=bl.get_color())
+    splot.data(xnew, power_smooth*yscale, logy=logy, fmt="-",
                label=label,
                xaxis=xaxis, yaxis=yaxis, init=False, data_color=bl.get_color())
+    if(np.any(np.less(power_smooth, 0)) and logy):
+        splot.data(vx, -vy*yscale, logy=logy, data_color=bl.get_color())
+        splot.data(xnew, -power_smooth*yscale, logy=logy, fmt="--",
+                   label="-"+label,
+                   xaxis=xaxis, yaxis=yaxis, init=False, data_color=bl.get_color())
 
 
 """
