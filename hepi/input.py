@@ -69,7 +69,11 @@ def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
     ret = []
     for s in l:
         for r in range:
-            d = pyslha.read(s.slha)
+            d = None
+            try:
+                d = pyslha.read(s.slha)
+            except:
+                d = pyslha.read(get_input_dir() + s.slha)
             d.blocks["MASS"][var] = r
             if not (diff_L_R is None):
                 is_L, v = get_LR_partner(var)

@@ -62,6 +62,9 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
                    label="-"+label,
                    xaxis=xaxis, yaxis=yaxis, init=False, data_color=bl.get_color())
 
+def mass_mapplot(dict_list, part1,part2, z, logz=True, zaxis="$\\sigma$ [pb]", zscale=1., label=None):
+    mapplot(dict_list, "mass_" + str(part1),"mass_" + str(part2), z, 
+         xaxis="$M_{"+get_name(part1) + "}$ [GeV]",yaxis="$M_{"+get_name(part2) + "}$ [GeV]", zaxis=zaxis, logz=logz, zscale=zscale)
 
 def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.):
     vx = dict_list[x]
@@ -85,7 +88,7 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, logz=True, z
         x, y = y, x
         vx, vy = vy, vx
 
-    grid = vz.reshape((int(np.rint(np.size(vx)/s)), s))*zscale
+    grid = splot.unv(vz).reshape((int(np.rint(np.size(vx)/s)), s))*zscale
     if(logz):
         plt.imshow(grid, origin="lower", extent=(vx.min(), vx.max(),
                                                  vy.min(), vy.max()), cmap=cm.gist_heat, interpolation='nearest', norm=colors.LogNorm())
