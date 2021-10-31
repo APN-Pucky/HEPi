@@ -12,25 +12,28 @@ import pyslha
 from particle import Particle
 from particle.converters.bimap import DirectionalMaps
 
+import matplotlib.cm as cm
+from matplotlib import colors
+
 from .input import get_name
 
 
 def energy_plot(dict_list, y, yscale=1.):
     plot(dict_list, "energy", y, label=None,
-         xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True, yscale=yscale)
+         xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=yscale)
 
 
-def mass_plot(dict_list, part, y, logy=True, yaxis="$\sigma$ [pb]", yscale=1.,label =None):
+def mass_plot(dict_list, part, y, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None):
     plot(dict_list, "mass_" + str(part), y, label=label,
          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale)
 
 
-def mass_vplot(dict_list, part, y, logy=True, yaxis="$\sigma$ [pb]", yscale=1.,label =None):
+def mass_vplot(dict_list, part, y, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None):
     vplot(dict_list["mass_" + str(part)], y, label=label,
           xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale)
 
 
-def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True, yscale=1.):
+def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.):
     # TODO use kwargs
     if label is None:
         label = y
@@ -39,7 +42,7 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", lo
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale)
 
 
-def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True, yscale=1.):
+def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.):
     if label is None:
         label = "??"
     vx = x
@@ -58,6 +61,42 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\sigma$ [pb]", logy=True, y
         splot.data(xnew, -power_smooth*yscale, logy=logy, fmt="--",
                    label="-"+label,
                    xaxis=xaxis, yaxis=yaxis, init=False, data_color=bl.get_color())
+
+
+def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.):
+    vx = dict_list[x]
+    vy = dict_list[y]
+    vz = dict_list[z]
+    if xaxis is None:
+        xaxis = x
+    if yaxis is None:
+        yaxis = y
+    if zaxis is None:
+        zaxis = z
+    s = 1
+    while vy[s] == vy[s-1]:
+        s = s+1
+    if s == 1:
+        while vx[s] == vx[s-1]:
+            s = s+1
+        if s == 1:
+            print("error too small map")
+            return
+        x, y = y, x
+        vx, vy = vy, vx
+
+    grid = vz.reshape((int(np.rint(np.size(vx)/s)), s))*zscale
+    if(logz):
+        plt.imshow(grid, origin="lower", extent=(vx.min(), vx.max(),
+                                                 vy.min(), vy.max()), cmap=cm.gist_heat, interpolation='nearest', norm=colors.LogNorm())
+    else:
+        plt.imshow(grid, origin="lower", extent=(vx.min(), vx.max(),
+                                                 vy.min(), vy.max()), cmap=cm.gist_heat, interpolation='nearest')
+    cb = plt.colorbar()
+    cb.set_label(zaxis)
+    plt.xlabel(xaxis)
+    plt.ylabel(yaxis)
+    plt.show()
 
 
 """
