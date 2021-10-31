@@ -11,7 +11,7 @@ from pathlib import Path
 from .result import ResumminoResult, parse_single
 import enlighten
 import time
-
+import difflib
 
 resummino_path = "~/resummino/"
 
@@ -101,6 +101,13 @@ def _run(rps: List[RunParams], bar=True):
     processesbar = {}
     manager = enlighten.get_manager()
     status_format = '{program}{fill}Stage: {stage}{fill} Status {status}:{fill}{lastline}'
+    main_format = '{program}'
+    mp = ""
+    if bar:
+        mp = rps[0].out_path
+        main_bar = manager.status_bar(status_format=main_format,
+                                      program=mp)
+        mp = rps[1].out_path
 
     for rp in rps:
         if not rp.skip:
@@ -109,11 +116,25 @@ def _run(rps: List[RunParams], bar=True):
             processes.append(process)
             processesrpo[process] = rp.out_path
             if bar:
+                nnn=""
+                nn = ""
+                ch = False
+                for i,s in enumerate(difflib.ndiff(mp+"_",rp.out_path+"_")):
+                    if s[-1] =="_":
+                        if ch:
+                            nnn = nnn + " ... " + nn 
+                        ch = False
+                        nn=""
+                    if s[0]=='+':
+                        ch = True
+                    if (s[0]=='+' or s[0] == ' ') and s[-1] != "_":
+                        nn = nn + s[-1]
                 processesbar[process] = manager.status_bar(status_format=status_format,
-                                                           program=rp.flags,
+                                                           program=nnn,
                                                            stage='INIT',
                                                            status='OKAY',
                                                            lastline="0")
+        mp = rps[0].out_path
     if bar:
         c = True
         while c:
@@ -133,11 +154,14 @@ def _run(rps: List[RunParams], bar=True):
                                 cl = 0
                             cl = cl+1
 
-                    processesbar[p].update(stage=n, status=cl,lastline = l[int(len(l)/2)::])
+                    processesbar[p].update(
+                        stage=n, status=cl, lastline=l[int(len(l)/2)::])
                 else:
-                    processesbar[p].update(stage="DONE", status='DONE',lastline="")
+                    processesbar[p].update(
+                        stage="DONE", status='DONE', lastline="")
         for p in processes:
             processesbar[p].close()
+        main_bar.close()
 
     # Collect statuses
     output = [p.wait() for p in processes]
