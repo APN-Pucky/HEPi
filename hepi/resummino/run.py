@@ -100,7 +100,7 @@ def _run(rps: List[RunParams], bar=True):
     processesrpo = {}
     processesbar = {}
     manager = enlighten.get_manager()
-    status_format = '{program}{fill}Stage: {stage}{fill} Status {status}'
+    status_format = '{program}{fill}Stage: {stage}{fill} Status {status}:{fill}{lastline}'
 
     for rp in rps:
         if not rp.skip:
@@ -112,7 +112,8 @@ def _run(rps: List[RunParams], bar=True):
                 processesbar[process] = manager.status_bar(status_format=status_format,
                                                            program=rp.flags,
                                                            stage='INIT',
-                                                           status='OKAY')
+                                                           status='OKAY',
+                                                           lastline="0")
     if bar:
         c = True
         while c:
@@ -132,9 +133,9 @@ def _run(rps: List[RunParams], bar=True):
                                 cl = 0
                             cl = cl+1
 
-                    processesbar[p].update(stage=n, status=cl)
+                    processesbar[p].update(stage=n, status=cl,lastline = l[int(len(l)/2)::])
                 else:
-                    processesbar[p].update(stage="DONE", status='DONE')
+                    processesbar[p].update(stage="DONE", status='DONE',lastline="")
         for p in processes:
             processesbar[p].close()
 
