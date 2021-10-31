@@ -62,9 +62,11 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
                    label="-"+label,
                    xaxis=xaxis, yaxis=yaxis, init=False, data_color=bl.get_color())
 
-def mass_mapplot(dict_list, part1,part2, z, logz=True, zaxis="$\\sigma$ [pb]", zscale=1., label=None):
-    mapplot(dict_list, "mass_" + str(part1),"mass_" + str(part2), z, 
-         xaxis="$M_{"+get_name(part1) + "}$ [GeV]",yaxis="$M_{"+get_name(part2) + "}$ [GeV]", zaxis=zaxis, logz=logz, zscale=zscale)
+
+def mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis="$\\sigma$ [pb]", zscale=1., label=None):
+    mapplot(dict_list, "mass_" + str(part1), "mass_" + str(part2), z,
+            xaxis="$M_{"+get_name(part1) + "}$ [GeV]", yaxis="$M_{"+get_name(part2) + "}$ [GeV]", zaxis=zaxis, logz=logz, zscale=zscale)
+
 
 def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.):
     vx = dict_list[x]
@@ -99,6 +101,78 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, logz=True, z
     cb.set_label(zaxis)
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)
+    plt.show()
+
+
+def scale_plot(dict_list, v):
+    fig, axs = plt.subplots(1, 5, figsize=(10, 8), sharey=True)
+    # Remove horizontal space between axes
+    fig.subplots_adjust(wspace=0)
+
+    mr = dict_list["mu_r"]
+    mf = dict_list["mu_f"]
+    mv = splot.unv(dict_list[v])
+
+    axs[0].set_ylabel("$\sigma$ [pb]")
+
+    axs[0].set_xscale("log")
+    axs[0].set_xlim(np.min(mf), np.max(mf))
+    #axs[0].set_xticks([.1, 1, 10])
+    axs[0].set_xlabel("$\mu_{R,F}/\mu_0$")
+
+    # axs[1].plot(t, s2)
+    axs[1].set_xscale("log")
+    axs[1].set_xlim(np.max(mf), np.min(mf))
+    axs[1].set_xticks(axs[1].get_xticks()[2:-2])
+    #axs[1].set_xlim(10, .1)
+    #axs[1].set_xticks([1, ])
+    axs[1].set_xlabel("$\mu_{F}/\mu_0$")
+
+    # axs[2].plot(t, s3)
+    axs[2].set_xscale("log")
+    axs[2].set_xlim(np.max(mf), np.min(mf))
+    axs[2].set_xticks(axs[2].get_xticks()[2:-2])
+    #axs[2].set_xlim(10, .10)
+    #axs[2].set_xticks([1, ])
+    axs[2].set_xlabel("$\mu_{R}/\mu_0$")
+
+    # axs[3].plot(t, s3)
+    axs[3].set_xscale("log")
+    axs[3].set_xlim(np.min(mf), np.max(mf))
+    axs[3].set_xticks(axs[3].get_xticks()[2:-2])
+    #axs[3].set_xlim(.10, 10)
+    #axs[3].set_xticks([1, ])
+    axs[3].set_xlabel("$\mu_{F}/\mu_0$")
+
+    # axs[4].plot(t, s3)
+    axs[4].set_xscale("log")
+    axs[4].set_xlim(np.min(mf), np.max(mf))
+    axs[4].set_xticks(axs[4].get_xticks()[2:-2])
+    #axs[4].set_xlim(.10, 10)
+    # axs[4].set_xticks([1])
+    axs[4].set_xlabel("$\mu_{R}/\mu_0$")
+
+    # TODO check order
+    mask = mf == mr
+    axs[0].plot(mf[mask], mv[mask], label=v)
+    mask = mr == np.max(mr)
+    axs[1].plot(mf[mask], mv[mask])
+    mask = mf == np.min(mf)
+    axs[2].plot(mr[mask], mv[mask])
+    mask = mr == np.min(mr)
+    axs[3].plot(mf[mask], mv[mask])
+    mask = mf == np.max(mf)
+    axs[4].plot(mr[mask], mv[mask])
+
+    axs[1].plot([], [], ' ', label="$\mu_R=" + str(np.max(mf)) + "\mu_0$")
+    axs[2].plot([], [], ' ', label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
+    axs[3].plot([], [], ' ', label="$\mu_R=" + str(np.min(mf)) + "\mu_0$")
+    axs[4].plot([], [], ' ', label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
+    axs[0].legend()
+    axs[1].legend()
+    axs[2].legend()
+    axs[3].legend()
+    axs[4].legend()
     plt.show()
 
 
