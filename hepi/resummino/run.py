@@ -9,6 +9,8 @@ from uncertainties import ufloat_fromstr
 import os.path
 from pathlib import Path
 from .result import ResumminoResult, parse_single
+import enlighten
+import time
 
 
 resummino_path = "~/resummino/"
@@ -87,7 +89,7 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
     return ret
 
 
-def _run(rps: List[RunParams]):
+def _run(rps: List[RunParams], bar=True):
     # TODO clean up on exit emergency
     global resummino_path
     # TODO RS build path checks?!?!
@@ -95,12 +97,46 @@ def _run(rps: List[RunParams]):
 
     # Run commands in parallel
     processes = []
+    processesrpo = {}
+    processesbar = {}
+    manager = enlighten.get_manager()
+    status_format = '{program}{fill}Stage: {stage}{fill} Status {status}'
 
     for rp in rps:
         if not rp.skip:
             command = template.format(rp.in_path, rp.flags, rp.out_path)
             process = subprocess.Popen(command, shell=True)
             processes.append(process)
+            processesrpo[process] = rp.out_path
+            if bar:
+                processesbar[process] = manager.status_bar(status_format=status_format,
+                                                           program=rp.flags,
+                                                           stage='INIT',
+                                                           status='OKAY')
+    if bar:
+        c = True
+        while c:
+            time.sleep(1)
+            c = False
+            for p in processes:
+                if p.poll() is None:
+                    c = True
+                    pat = re.compile(r'^\* (.*) \*')
+                    n = ""
+                    cl = 0
+                    with open(processesrpo[p], mode="r") as f:
+                        for l in f:
+                            tmp = pat.search(l)
+                            if(tmp is not None):
+                                n = tmp.group(1)
+                                cl = 0
+                            cl = cl+1
+
+                    processesbar[p].update(stage=n, status=cl)
+                else:
+                    processesbar[p].update(stage="DONE", status='DONE')
+        for p in processes:
+            processesbar[p].close()
 
     # Collect statuses
     output = [p.wait() for p in processes]
