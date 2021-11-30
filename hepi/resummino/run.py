@@ -138,7 +138,7 @@ def _run(rps: List[RunParams], bar=True):
     if bar:
         c = True
         while c:
-            time.sleep(1)
+            time.sleep(10)
             c = False
             for p in processes:
                 if p.poll() is None:

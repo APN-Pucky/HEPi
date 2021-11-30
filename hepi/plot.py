@@ -16,7 +16,7 @@ import matplotlib.cm as cm
 from matplotlib import colors
 
 from .input import get_name
-
+from matplotlib.ticker import ScalarFormatter, NullFormatter
 
 def energy_plot(dict_list, y, yscale=1.):
     plot(dict_list, "energy", y, label=None,
@@ -104,76 +104,98 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, logz=True, z
     plt.show()
 
 
-def scale_plot(dict_list, v):
-    fig, axs = plt.subplots(1, 5, figsize=(10, 8), sharey=True)
+def scale_plot(dict_list, vl, seven_point_band=False):
+    fig, axs = plt.subplots(1, 5, figsize=(12, 8), sharey=True)
     # Remove horizontal space between axes
     fig.subplots_adjust(wspace=0)
 
     mr = dict_list["mu_r"]
     mf = dict_list["mu_f"]
-    mv = splot.unv(dict_list[v])
 
-    axs[0].set_ylabel("$\sigma$ [pb]")
 
-    axs[0].set_xscale("log")
-    axs[0].set_xlim(np.min(mf), np.max(mf))
-    #axs[0].set_xticks([.1, 1, 10])
-    axs[0].set_xlabel("$\mu_{R,F}/\mu_0$")
 
-    # axs[1].plot(t, s2)
-    axs[1].set_xscale("log")
-    axs[1].set_xlim(np.max(mf), np.min(mf))
-    axs[1].set_xticks(axs[1].get_xticks()[2:-2])
-    #axs[1].set_xlim(10, .1)
-    #axs[1].set_xticks([1, ])
-    axs[1].set_xlabel("$\mu_{F}/\mu_0$")
+    for v in vl:
+        mv = dict_list[v]
+        if seven_point_band:
+            mask = (mf/mr < 4.) & (mf/mr > 1./4.) & (mf <= 2) & (mf >=1./2.)& (mr <= 2) & (mr >=1./2.)
+            mvmax = np.max(splot.unv(mv[mask]))
+            mvmin = np.min(splot.unv(mv[mask]))
 
-    # axs[2].plot(t, s3)
-    axs[2].set_xscale("log")
-    axs[2].set_xlim(np.max(mf), np.min(mf))
-    axs[2].set_xticks(axs[2].get_xticks()[2:-2])
-    #axs[2].set_xlim(10, .10)
-    #axs[2].set_xticks([1, ])
-    axs[2].set_xlabel("$\mu_{R}/\mu_0$")
+        mask = mf == mr
+        l,_,_=axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
+                        yerr=splot.usd(mv[mask]), capsize=5, label=v)
+        if seven_point_band:
+            axs[0].fill_between(mf[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
 
-    # axs[3].plot(t, s3)
-    axs[3].set_xscale("log")
-    axs[3].set_xlim(np.min(mf), np.max(mf))
-    axs[3].set_xticks(axs[3].get_xticks()[2:-2])
-    #axs[3].set_xlim(.10, 10)
-    #axs[3].set_xticks([1, ])
-    axs[3].set_xlabel("$\mu_{F}/\mu_0$")
+        mask = mr == np.max(mr)
+        l,_,_=axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
+                        yerr=splot.usd(mv[mask]), capsize=5)
+        if seven_point_band:
+            axs[1].fill_between(mf[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
 
-    # axs[4].plot(t, s3)
-    axs[4].set_xscale("log")
-    axs[4].set_xlim(np.min(mf), np.max(mf))
-    axs[4].set_xticks(axs[4].get_xticks()[2:-2])
-    #axs[4].set_xlim(.10, 10)
-    # axs[4].set_xticks([1])
-    axs[4].set_xlabel("$\mu_{R}/\mu_0$")
+        mask = mf == np.min(mf)
+        l,_,_=axs[2].errorbar(mr[mask], splot.unv(mv[mask]),
+                        yerr=splot.usd(mv[mask]), capsize=5)
+        if seven_point_band:
+            axs[2].fill_between(mr[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
 
-    # TODO check order
-    mask = mf == mr
-    axs[0].plot(mf[mask], mv[mask], label=v)
-    mask = mr == np.max(mr)
-    axs[1].plot(mf[mask], mv[mask])
-    mask = mf == np.min(mf)
-    axs[2].plot(mr[mask], mv[mask])
-    mask = mr == np.min(mr)
-    axs[3].plot(mf[mask], mv[mask])
-    mask = mf == np.max(mf)
-    axs[4].plot(mr[mask], mv[mask])
+        mask = mr == np.min(mr)
+        l,_,_=axs[3].errorbar(mf[mask], splot.unv(mv[mask]),
+                        yerr=splot.usd(mv[mask]), capsize=5)
+        if seven_point_band:
+            axs[3].fill_between(mf[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
+
+        mask = mf == np.max(mf)
+        l,_,_=axs[4].errorbar(mr[mask], splot.unv(mv[mask]),
+                        yerr=splot.usd(mv[mask]), capsize=5)
+        if seven_point_band:
+            axs[4].fill_between(mr[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
 
     axs[1].plot([], [], ' ', label="$\mu_R=" + str(np.max(mf)) + "\mu_0$")
     axs[2].plot([], [], ' ', label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
     axs[3].plot([], [], ' ', label="$\mu_R=" + str(np.min(mf)) + "\mu_0$")
     axs[4].plot([], [], ' ', label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
+
+    axs[0].set_ylabel("$\sigma$ [pb]")
+
+    axs[0].set_xscale("log")
+    axs[0].set_xlim(np.min(mf), np.max(mf))
+    axs[0].set_xlabel("$\mu_{R,F}/\mu_0$")
+
+    # axs[1].plot(t, s2)
+    axs[1].set_xscale("log")
+    axs[1].set_xlim(np.max(mf), np.min(mf))
+    axs[1].set_xticks([1. ])
+    axs[1].xaxis.set_minor_formatter(NullFormatter())
+    axs[1].set_xlabel("$\mu_{F}/\mu_0$")
+
+    # axs[2].plot(t, s3)
+    axs[2].set_xscale("log")
+    axs[2].set_xlim(np.max(mf), np.min(mf))
+    axs[2].set_xticks([1. ])
+    axs[2].xaxis.set_minor_formatter(NullFormatter())
+    axs[2].set_xlabel("$\mu_{R}/\mu_0$")
+
+    # axs[3].plot(t, s3)
+    axs[3].set_xscale("log")
+    axs[3].set_xlim(np.min(mf), np.max(mf))
+    axs[3].set_xticks([1. ])
+    axs[3].xaxis.set_minor_formatter(NullFormatter())
+    axs[3].set_xlabel("$\mu_{F}/\mu_0$")
+
+    # axs[4].plot(t, s3)
+    axs[4].set_xscale("log")
+    axs[4].set_xlim(np.min(mf), np.max(mf))
+    axs[4].set_xticks([1.])
+    axs[4].xaxis.set_minor_formatter(NullFormatter())
+    axs[4].set_xlabel("$\mu_{R}/\mu_0$")
+
     axs[0].legend()
     axs[1].legend()
     axs[2].legend()
     axs[3].legend()
     axs[4].legend()
-    plt.show()
+    # plt.show()
 
 
 """
