@@ -100,7 +100,7 @@ def _run(rps: List[RunParams], bar=True):
     processesrpo = {}
     processesbar = {}
     manager = enlighten.get_manager()
-    status_format = '{program}{fill}Stage: {stage}{fill} Status {status}:{fill}{lastline}'
+    status_format = '{program}{fill} Stage: {stage}{fill} Status {status}:{fill}{lastline}'
     main_format = '{program}'
     mp = ""
     if bar:
@@ -116,18 +116,18 @@ def _run(rps: List[RunParams], bar=True):
             processes.append(process)
             processesrpo[process] = rp.out_path
             if bar:
-                nnn=""
+                nnn = ""
                 nn = ""
                 ch = False
-                for i,s in enumerate(difflib.ndiff(mp+"_",rp.out_path+"_")):
-                    if s[-1] =="_":
+                for i, s in enumerate(difflib.ndiff(mp+"_", rp.out_path+"_")):
+                    if s[-1] == "_":
                         if ch:
-                            nnn = nnn + " ... " + nn 
+                            nnn = nnn + " ... " + nn
                         ch = False
-                        nn=""
-                    if s[0]=='+':
+                        nn = ""
+                    if s[0] == '+':
                         ch = True
-                    if (s[0]=='+' or s[0] == ' ') and s[-1] != "_":
+                    if (s[0] == '+' or s[0] == ' ') and s[-1] != "_":
                         nn = nn + s[-1]
                 processesbar[process] = manager.status_bar(status_format=status_format,
                                                            program=nnn,
