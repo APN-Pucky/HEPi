@@ -2,7 +2,6 @@ from enum import IntEnum
 import numpy as np
 from typing import List
 import copy
-import pyslha
 from particle import PDGID
 import pyslha
 from particle import Particle

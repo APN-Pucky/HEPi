@@ -58,6 +58,7 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
     ret = []
     for p in params:
         d = p.__dict__
+        d["code"] = "RS"
         # TODO insert defautl if missing in d!
         name = "_".join("".join(str(_[0]) + "_" + str(_[1]))
                         for _ in d.items()).replace("/", "-")
@@ -166,17 +167,3 @@ def _run(rps: List[RunParams], bar=True):
     # Collect statuses
     output = [p.wait() for p in processes]
     return output
-
-
-sp = []
-p = {'energy': 13000, 'p1': 2000002, 'p2': 1000022,
-     'slha': "mastercode.in", "mu_f": 1., "mu_r": 1.}
-for mu_f in np.logspace(-1, 1, 3):
-    for mu_r in np.logspace(-1, 1, 3):
-        p['mu_r'] = mu_r
-        p['mu_f'] = mu_f
-        sp.append(p.copy())
-
-# print(sp)
-# names = queue(sp)
-# run(names)
