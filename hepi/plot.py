@@ -18,6 +18,7 @@ from matplotlib import colors
 from .input import get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
 
+
 def energy_plot(dict_list, y, yscale=1.):
     plot(dict_list, "energy", y, label=None,
          xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=yscale)
@@ -104,57 +105,69 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, logz=True, z
     plt.show()
 
 
-def scale_plot(dict_list, vl, seven_point_band=False):
-    fig, axs = plt.subplots(1, 5, figsize=(12, 8), sharey=True)
-    # Remove horizontal space between axes
-    fig.subplots_adjust(wspace=0)
+fig = None
+axs = None
+
+
+def scale_plot(dict_list, vl, seven_point_band=False, cont=False):
+    global fig, axs
+    if not cont:
+        fig, axs = plt.subplots(1, 5, figsize=(12, 8), sharey=True)
+        # Remove horizontal space between axes
+        fig.subplots_adjust(wspace=0)
 
     mr = dict_list["mu_r"]
     mf = dict_list["mu_f"]
 
-
-
     for v in vl:
         mv = dict_list[v]
         if seven_point_band:
-            mask = (mf/mr < 4.) & (mf/mr > 1./4.) & (mf <= 2) & (mf >=1./2.)& (mr <= 2) & (mr >=1./2.)
+            mask = (mf/mr < 4.) & (mf/mr > 1./4.) & (mf <=
+                                                     2) & (mf >= 1./2.) & (mr <= 2) & (mr >= 1./2.)
             mvmax = np.max(splot.unv(mv[mask]))
             mvmin = np.min(splot.unv(mv[mask]))
 
         mask = mf == mr
-        l,_,_=axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
-                        yerr=splot.usd(mv[mask]), capsize=5, label=v)
+        l, _, _ = axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
+                                  yerr=splot.usd(mv[mask]), capsize=5, label=v)
         if seven_point_band:
-            axs[0].fill_between(mf[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
+            axs[0].fill_between(mf[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
 
         mask = mr == np.max(mr)
-        l,_,_=axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
-                        yerr=splot.usd(mv[mask]), capsize=5)
+        l, _, _ = axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
+                                  yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
-            axs[1].fill_between(mf[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
+            axs[1].fill_between(mf[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
 
         mask = mf == np.min(mf)
-        l,_,_=axs[2].errorbar(mr[mask], splot.unv(mv[mask]),
-                        yerr=splot.usd(mv[mask]), capsize=5)
+        l, _, _ = axs[2].errorbar(mr[mask], splot.unv(mv[mask]),
+                                  yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
-            axs[2].fill_between(mr[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
+            axs[2].fill_between(mr[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
 
         mask = mr == np.min(mr)
-        l,_,_=axs[3].errorbar(mf[mask], splot.unv(mv[mask]),
-                        yerr=splot.usd(mv[mask]), capsize=5)
+        l, _, _ = axs[3].errorbar(mf[mask], splot.unv(mv[mask]),
+                                  yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
-            axs[3].fill_between(mf[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
+            axs[3].fill_between(mf[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
 
         mask = mf == np.max(mf)
-        l,_,_=axs[4].errorbar(mr[mask], splot.unv(mv[mask]),
-                        yerr=splot.usd(mv[mask]), capsize=5)
+        l, _, _ = axs[4].errorbar(mr[mask], splot.unv(mv[mask]),
+                                  yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
-            axs[4].fill_between(mr[mask],mvmax,mvmin,facecolor=l.get_color(),alpha=0.3)
+            axs[4].fill_between(mr[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
 
-    axs[1].plot([], [], ' ', label="$\mu_R=" + str(np.max(mf)) + "\mu_0$")
-    axs[2].plot([], [], ' ', label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
-    axs[3].plot([], [], ' ', label="$\mu_R=" + str(np.min(mf)) + "\mu_0$")
-    axs[4].plot([], [], ' ', label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
+    if not cont:
+        axs[0].plot([], [], ' ', label="$\mu_R=" + "\mu_F$")
+        axs[1].plot([], [], ' ', label="$\mu_R=" + str(np.max(mf)) + "\mu_0$")
+        axs[2].plot([], [], ' ', label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
+        axs[3].plot([], [], ' ', label="$\mu_R=" + str(np.min(mf)) + "\mu_0$")
+        axs[4].plot([], [], ' ', label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
 
     axs[0].set_ylabel("$\sigma$ [pb]")
 
@@ -165,21 +178,21 @@ def scale_plot(dict_list, vl, seven_point_band=False):
     # axs[1].plot(t, s2)
     axs[1].set_xscale("log")
     axs[1].set_xlim(np.max(mf), np.min(mf))
-    axs[1].set_xticks([1. ])
+    axs[1].set_xticks([1.])
     axs[1].xaxis.set_minor_formatter(NullFormatter())
     axs[1].set_xlabel("$\mu_{F}/\mu_0$")
 
     # axs[2].plot(t, s3)
     axs[2].set_xscale("log")
     axs[2].set_xlim(np.max(mf), np.min(mf))
-    axs[2].set_xticks([1. ])
+    axs[2].set_xticks([1.])
     axs[2].xaxis.set_minor_formatter(NullFormatter())
     axs[2].set_xlabel("$\mu_{R}/\mu_0$")
 
     # axs[3].plot(t, s3)
     axs[3].set_xscale("log")
     axs[3].set_xlim(np.min(mf), np.max(mf))
-    axs[3].set_xticks([1. ])
+    axs[3].set_xticks([1.])
     axs[3].xaxis.set_minor_formatter(NullFormatter())
     axs[3].set_xlabel("$\mu_{F}/\mu_0$")
 

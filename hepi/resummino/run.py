@@ -94,7 +94,7 @@ def _run(rps: List[RunParams], bar=True):
     # TODO clean up on exit emergency
     global resummino_path
     # TODO RS build path checks?!?!
-    template = resummino_path + 'build/bin/resummino {} {} >> {}'
+    template = "nice -n 5 " + resummino_path + 'build/bin/resummino {} {} >> {}'
 
     # Run commands in parallel
     processes = []

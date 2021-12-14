@@ -114,11 +114,11 @@ def _run(rps: List[RunParams]):
     # TODO RS build path checks?!?!
     template =  \
         'rm -rf {dir} && cp -r ' + rps[0].dic["bdir"] + \
-        ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && {dir}/bin/calculate_xsect -f >> {out}'
+        ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && nice -n 5 {dir}/bin/calculate_xsect -f >> {out}'
     print(rps[0].dic["out"])
     if not rps[0].skip:
         pp = subprocess.Popen(madgraph_path +
-                          'bin/mg5_aMC --mode="MadSTR" --file {in} >> {out}'.format(**rps[0].dic), shell=True)
+                              'bin/mg5_aMC --mode="MadSTR" --file {in} >> {out} && cp {slha} {bdir}/Cards/param_card.dat && cp {run} {bdir}/Cards/run_card.dat && echo "automatic_html_opening = False" >> {bdir}/Cards/amcatnlo_configuration.txt && {bdir}/bin/calculate_xsect -f'.format(**rps[0].dic), shell=True)
         pp.wait()
     # Run commands in parallel
     processes = []
@@ -126,7 +126,7 @@ def _run(rps: List[RunParams]):
     for rp in rps:
         if not rp.skip:
             command = template.format(**rp.dic)
-            #print(command)
+            # print(command)
             process = subprocess.Popen(command, shell=True)
             processes.append(process)
 
