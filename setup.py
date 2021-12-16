@@ -42,5 +42,10 @@ setuptools.setup(
         "count_commits_from_version_file": False
     },
     include_package_data=True,
+    # https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+    # package_data={
+    #    # If any package contains *.txt or *.rst files, include them:
+    #    "": ["*.mg", "*.in", "*.dat"],
+    # },
     python_requires='>=3.6',
 )

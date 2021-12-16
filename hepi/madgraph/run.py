@@ -13,6 +13,7 @@ import enlighten
 import time
 import difflib
 import pyslha
+from smpl.parallel import *
 
 madgraph_path = "/opt/MG5_aMC_v2_7_0/"
 
@@ -45,9 +46,8 @@ def run(params: List[Input], noskip=False):
 
 def _parse(outputs: List[str]) -> List[MadgraphResult]:
     rsl = []
-    for f in outputs:
-        res = parse_single(f["out"])
-        rsl.append(res)
+    for r in par(lambda f: parse_single(f["out"]), outputs):
+        rsl.append(r)
     return rsl
 
 
@@ -69,7 +69,7 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
         d["dir"] = get_output_dir() + name + ".dir"
         d["bdir"] = get_output_dir() + name + ".bdir"
         d["energyhalf"] = d["energy"]/2.
-        b = pyslha.read(d["slha"])
+        b = pyslha.read(get_input_dir() + d["slha"])
         d["mu"] = (b.blocks["MASS"][d["particle1"]] +
                    b.blocks["MASS"][d["particle2"]])/2.
 
@@ -117,8 +117,9 @@ def _run(rps: List[RunParams]):
         ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && nice -n 5 {dir}/bin/calculate_xsect -f >> {out}'
     print(rps[0].dic["out"])
     if not rps[0].skip:
-        pp = subprocess.Popen(madgraph_path +
-                              'bin/mg5_aMC --mode="MadSTR" --file {in} >> {out} && cp {slha} {bdir}/Cards/param_card.dat && cp {run} {bdir}/Cards/run_card.dat && echo "automatic_html_opening = False" >> {bdir}/Cards/amcatnlo_configuration.txt && {bdir}/bin/calculate_xsect -f'.format(**rps[0].dic), shell=True)
+        com = madgraph_path + \
+            'bin/mg5_aMC --mode="MadSTR" --file {in} >> {out} && cp {slha} {bdir}/Cards/param_card.dat && cp {run} {bdir}/Cards/run_card.dat && sed -i \'s/.*= req_acc_FO/ 1 = req_acc_FO/g\' {bdir}/Cards/run_card.dat && echo "automatic_html_opening = False" >> {bdir}/Cards/amcatnlo_configuration.txt && nice -n 5 {bdir}/bin/calculate_xsect -f'
+        pp = subprocess.Popen(com.format(**rps[0].dic), shell=True)
         pp.wait()
     # Run commands in parallel
     processes = []

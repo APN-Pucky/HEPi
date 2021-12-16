@@ -12,6 +12,7 @@ from .result import ResumminoResult, parse_single
 import enlighten
 import time
 import difflib
+from smpl.parallel import *
 
 resummino_path = "~/resummino/"
 
@@ -46,9 +47,8 @@ def run(params: List[Input], noskip=False):
 
 def _parse(outputs: List[str]) -> List[ResumminoResult]:
     rsl = []
-    for f in outputs:
-        res = parse_single(f)
-        rsl.append(res)
+    for r in par(parse_single, outputs):
+        rsl.append(r)
     return rsl
 
 
@@ -66,21 +66,20 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
         if not noskip and os.path.isfile(get_output_dir() + name + ".out"):
             print("skip", end='')
             skip = True
-        data = pkgutil.get_data(__name__, "plot_template.in").decode(
-            'utf-8')
-
-        src = Template(data)
-        result = src.substitute(d)
-        open(get_input_dir() + name + ".in", "w").write(result)
         if not skip:
+            data = pkgutil.get_data(__name__, "plot_template.in").decode(
+                'utf-8')
+
+            src = Template(data)
+            result = src.substitute(d)
+            open(get_input_dir() + name + ".in", "w").write(result)
             open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
 
-        sname = d['slha']
-        with open(get_input_dir() + sname, 'r') as f:
-            #src = Template(f.read())
-            #result = src.substitute(d)
-            #open(get_input_dir() + sname + ".in", "w").write(result)
-            if not skip:
+            sname = d['slha']
+            with open(get_input_dir() + sname, 'r') as f:
+                #src = Template(f.read())
+                #result = src.substitute(d)
+                #open(get_input_dir() + sname + ".in", "w").write(result)
                 open(get_output_dir() + name + ".out",
                      "a").write(f.read() + "\n\n")
 
@@ -139,7 +138,8 @@ def _run(rps: List[RunParams], bar=True):
     if bar:
         c = True
         while c:
-            time.sleep(10)
+            if len(processes) >0:
+                time.sleep(10)
             c = False
             for p in processes:
                 if p.poll() is None:
