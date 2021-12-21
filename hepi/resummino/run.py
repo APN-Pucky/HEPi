@@ -35,9 +35,9 @@ class RunParams:
         self.out_path = out_path
 
 
-def run(params: List[Input], noskip=False):
+def run(params: List[Input], noskip=False,bar=True):
     rps = _queue(params, noskip)
-    _run(rps)
+    _run(rps,bar)
     outs = LD2DL(rps)["out_path"]
     results = _parse(outs)
     rdl = LD2DL(results)

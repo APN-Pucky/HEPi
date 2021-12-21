@@ -9,6 +9,9 @@ class Result:
         self.lo = lo
         self.nlo = nlo
         self.nlo_plus_nll = nlo_plus_nll
-        self.K_lo = lo/lo
-        self.K_nlo = nlo/lo
-        self.K_nlo_plus_nll = nlo_plus_nll/lo
+        if lo is not None and lo != 0:
+            self.K_lo = lo/lo
+        if nlo is not None and nlo != 0:
+            self.K_nlo = nlo/lo
+        if nlo_plus_nll is not None and nlo_plus_nll != 0:
+            self.K_nlo_plus_nll = nlo_plus_nll/lo

@@ -70,8 +70,8 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
         d["bdir"] = get_output_dir() + name + ".bdir"
         d["energyhalf"] = d["energy"]/2.
         b = pyslha.read(get_input_dir() + d["slha"])
-        d["mu"] = (b.blocks["MASS"][d["particle1"]] +
-                   b.blocks["MASS"][d["particle2"]])/2.
+        d["mu"] = (b.blocks["MASS"][abs(d["particle1"])] +
+                   b.blocks["MASS"][abs(d["particle2"])])/2.
 
         data = pkgutil.get_data(__name__, ["lo.mg", "nlo.mg"][p.order]).decode(
             'utf-8')
