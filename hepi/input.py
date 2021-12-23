@@ -4,6 +4,7 @@ from typing import List
 import copy
 from particle import PDGID
 import pyslha
+from util import lhapdf_name_to_id
 from particle import Particle
 from particle.converters.bimap import DirectionalMaps
 # TODO setters
@@ -54,14 +55,20 @@ class Input:
     def __init__(self, order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f, mu_r, id=""):
         self.order = order
         self.energy = energy
+        self.energyhalf = energy/2.
         self.particle1 = particle1
         self.particle2 = particle2
         self.slha = slha
         self.pdf_lo = pdf_lo
         self.pdf_nlo = pdf_nlo
+        self.pdf_lo_id = lhapdf_name_to_id(pdf_lo)
+        self.pdf_nlo_id = lhapdf_name_to_id(pdf_nlo)
         self.mu_f = mu_f
         self.mu_r = mu_r
         self.id = id
+        b = pyslha.read(get_input_dir() + slha)
+        self.mu = (b.blocks["MASS"][abs(particle1)] +
+                   b.blocks["MASS"][abs(particle2)])/2.
 
 
 def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
