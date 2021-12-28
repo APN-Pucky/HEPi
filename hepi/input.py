@@ -4,7 +4,7 @@ from typing import List
 import copy
 from particle import PDGID
 import pyslha
-from util import lhapdf_name_to_id
+from .util import lhapdf_name_to_id
 from particle import Particle
 from particle.converters.bimap import DirectionalMaps
 # TODO setters

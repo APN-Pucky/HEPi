@@ -28,7 +28,7 @@ setuptools.setup(
         "smpl",
         "pyslha",
         "enlighten",
-        # "requests",
+        "particle",
         # "tqdm",
         # "pandas",
     ],
