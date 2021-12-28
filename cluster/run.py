@@ -2,6 +2,7 @@ import hepi
 import smpl
 import hepi.resummino as rs
 import hepi.input as input
+#import hepi
 import numpy as np
 import matplotlib.pyplot as plt
 
