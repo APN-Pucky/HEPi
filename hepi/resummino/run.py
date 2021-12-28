@@ -3,7 +3,7 @@ import subprocess
 from string import Template
 import numpy as np
 import pkgutil
-from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
+from .. import Input, Result, LD2DL, get_output_dir, get_input_dir, get_pre
 import re
 from uncertainties import ufloat_fromstr
 import os.path
@@ -35,9 +35,9 @@ class RunParams:
         self.out_path = out_path
 
 
-def run(params: List[Input], noskip=False,bar=True):
+def run(params: List[Input], noskip=False, bar=True):
     rps = _queue(params, noskip)
-    _run(rps,bar)
+    _run(rps, bar)
     outs = LD2DL(rps)["out_path"]
     results = _parse(outs)
     rdl = LD2DL(results)
@@ -93,7 +93,7 @@ def _run(rps: List[RunParams], bar=True):
     # TODO clean up on exit emergency
     global resummino_path
     # TODO RS build path checks?!?!
-    template = "nice -n 5 " + resummino_path + 'build/bin/resummino {} {} >> {}'
+    template = get_pre() + " " + resummino_path + 'build/bin/resummino {} {} >> {}'
 
     # Run commands in parallel
     processes = []
@@ -138,7 +138,7 @@ def _run(rps: List[RunParams], bar=True):
     if bar:
         c = True
         while c:
-            if len(processes) >0:
+            if len(processes) > 0:
                 time.sleep(10)
             c = False
             for p in processes:

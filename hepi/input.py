@@ -10,6 +10,7 @@ from particle.converters.bimap import DirectionalMaps
 # TODO setters
 in_dir = "./input/"
 out_dir = "./output/"
+pre = "nice -n 5"
 
 PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps(
     "PDGID", "LaTexName", converters=(PDGID, str))
@@ -42,6 +43,26 @@ def get_input_dir():
 def get_output_dir():
     global out_dir
     return out_dir
+
+
+def set_input_dir(ind):
+    global in_dir
+    in_dir = ind
+
+
+def set_output_dir(outd):
+    global out_dir
+    out_dir = outd
+
+
+def set_pre(ppre):
+    global pre
+    pre = ppre
+
+
+def get_pre():
+    global pre
+    return pre
 
 
 class Order(IntEnum):
