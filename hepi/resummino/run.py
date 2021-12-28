@@ -57,7 +57,7 @@ def _parse(outputs: List[str]) -> List[ResumminoResult]:
 
 def namehash(n):
     m = hashlib.sha256()
-    m.update(n)
+    m.update(str(n).encode('utf-8'))
     return str(m.digest())
 
 
