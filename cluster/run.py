@@ -9,7 +9,7 @@ rs.set_path("~/git/resummino/")
 input.set_output_dir("/scratch/tmp/a_neuw01/hepi")
 input.set_input_dir("~/git/hepi/tests/input/")
 input.set_pre(
-    "srun --nodes 1 --cpus-per-task 1 --partition normal --mail-type=ALL --mail-user=a_neuw01@uni-muenster.de")
+    "srun --nodes 1 --cpus-per-task 1 --partition normal --mail-type=ALL --time=06:00:00 --mail-user=a_neuw01@uni-muenster.de")
 print(rs.get_path())
 
 for pdf in ["CT14lo"]:
