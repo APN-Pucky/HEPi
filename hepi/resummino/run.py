@@ -13,6 +13,7 @@ import enlighten
 import time
 import difflib
 from smpl.parallel import *
+import hashlib
 
 resummino_path = "~/resummino/"
 
@@ -54,6 +55,12 @@ def _parse(outputs: List[str]) -> List[ResumminoResult]:
     return rsl
 
 
+def namehash(n):
+    m = hashlib.sha256()
+    m.update(n)
+    return str(m.digest())
+
+
 def _queue(params: List[Input], noskip=False) -> List[RunParams]:
     Path("output").mkdir(parents=True, exist_ok=True)
     Path("input").mkdir(parents=True, exist_ok=True)
@@ -62,8 +69,8 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
         d = p.__dict__
         d["code"] = "RS"
         # TODO insert defautl if missing in d!
-        name = "_".join("".join(str(_[0]) + "_" + str(_[1]))
-                        for _ in d.items()).replace("/", "-")
+        name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
+                        for _ in d.items()).replace("/", "-"))
         skip = False
         if not noskip and os.path.isfile(get_output_dir() + name + ".out"):
             print("skip", end='')
