@@ -1,4 +1,4 @@
-
+import cluster
 from . import *
 
 for run_plot in [True, False]:

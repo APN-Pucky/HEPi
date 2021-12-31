@@ -7,10 +7,11 @@ import pyslha
 from .util import lhapdf_name_to_id
 from particle import Particle
 from particle.converters.bimap import DirectionalMaps
-# TODO setters
+import lhapdf
+
 in_dir = "./input/"
 out_dir = "./output/"
-pre = "nice -n 5" 
+pre = "nice -n 5"
 
 PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps(
     "PDGID", "LaTexName", converters=(PDGID, str))
@@ -59,6 +60,7 @@ def set_pre(ppre):
     global pre
     pre = ppre
 
+
 def get_pre():
     global pre
     return pre
@@ -72,7 +74,7 @@ class Order(IntEnum):
 
 class Input:
     # TODO allow unspecified input? Maybe with kwargs + defaults
-    def __init__(self, order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f, mu_r, id=""):
+    def __init__(self, order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f, mu_r, pdfset_lo=0, pdfset_nlo=0, id=""):
         self.order = order
         self.energy = energy
         self.energyhalf = energy/2.
@@ -80,7 +82,9 @@ class Input:
         self.particle2 = particle2
         self.slha = slha
         self.pdf_lo = pdf_lo
+        self.pdfset_lo = pdfset_lo
         self.pdf_nlo = pdf_nlo
+        self.pdfset_nlo = pdfset_nlo
         self.pdf_lo_id = lhapdf_name_to_id(pdf_lo)
         self.pdf_nlo_id = lhapdf_name_to_id(pdf_nlo)
         self.mu_f = mu_f
@@ -120,5 +124,16 @@ def scan(l: List[Input], var: str, range) -> List[Input]:
         for r in range:
             tmp = copy.copy(s)
             setattr(tmp, var, r)
+            ret.append(tmp)
+    return ret
+
+
+def pdf_scan(l: List[Input]):
+    ret = []
+    for s in l:
+        set = lhapdf.getPDFSet(s.pdf_nlo)
+        for r in range(set.size()):
+            tmp = copy.copy(s)
+            setattr(tmp, "pdfset_nlo", r)
             ret.append(tmp)
     return ret

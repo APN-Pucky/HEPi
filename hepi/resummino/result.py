@@ -16,6 +16,7 @@ class ResumminoResult(Result):
             self.rnlo = None
 
 
+
 def parse_single(file) -> ResumminoResult:
     # TODO generalize units like RS
     lo_pattern = re.compile(r'^LO = \((.*)\) pb')
