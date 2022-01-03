@@ -6,6 +6,8 @@ import uncertainties as unc
 from smpl import plot
 import lhapdf
 
+#numerical convergence should be better by a factor of 10 to avoid spoiling the scale/pdf uncertainties
+required_numerical_uncertainty_factor = 10 
 
 class Result:
     def __init__(self, lo, nlo, nlo_plus_nll):
@@ -32,6 +34,7 @@ class ResultWithError(Result):
 
 
 def pdf_error(li, dl):
+    global required_numerical_uncertainty_factor
     example = li[0]
     members = [attr for attr in dir(example) if not callable(
         getattr(example, attr)) and not attr.startswith("__")]
@@ -68,7 +71,7 @@ def pdf_error(li, dl):
             dl["nlo_pdf_errminus"][i] = -nlo_unc.errminus
             dl["nlo_pdf_errsym"][i] = nlo_unc.errsymm
             #TODO error sym to minus and plus
-            if(plot.usd(dl["nlo"][i])*10. > dl["nlo_pdf_errplus"][i] or  plot.usd(dl["nlo"][i])*10. > -dl["nlo_pdf_errminus"][i]):
+            if(plot.usd(dl["nlo"][i])*required_numerical_uncertainty_factor > dl["nlo_pdf_errplus"][i] or  plot.usd(dl["nlo"][i])*required_numerical_uncertainty_factor > -dl["nlo_pdf_errminus"][i]):
                 print("WARNING: too low numerical nlo precision vs pdf")
             nlo_plus_nll_unc = set.uncertainty(
                 [plot.unv(dl["nlo_plus_nll"][k]) for k in pdfs], -1)
@@ -77,12 +80,13 @@ def pdf_error(li, dl):
             dl["nlo_plus_nll_pdf_errminus"][i] = -nlo_plus_nll_unc.errminus
             dl["nlo_plus_nll_pdf_errsym"][i] = nlo_plus_nll_unc.errsymm
             #TODO error sym to minus and plus
-            if(plot.usd(dl["nlo_plus_nll"][i])*10. > dl["nlo_plus_nll_pdf_errplus"][i] or  plot.usd(dl["nlo_plus_nll"][i])*10. > -dl["nlo_plus_nll_pdf_errminus"][i]):
+            if(plot.usd(dl["nlo_plus_nll"][i])*required_numerical_uncertainty_factor > dl["nlo_plus_nll_pdf_errplus"][i] or  plot.usd(dl["nlo_plus_nll"][i])*required_numerical_uncertainty_factor > -dl["nlo_plus_nll_pdf_errminus"][i]):
                 print("WARNING: too low numerical nlo_plus_nll precision vs pdf")
     return dl
 
 
 def scale_error(li, dl):
+    global required_numerical_uncertainty_factor
     example = li[0]
     members = [attr for attr in dir(example) if not callable(
         getattr(example, attr)) and not attr.startswith("__")]
@@ -107,13 +111,13 @@ def scale_error(li, dl):
                 [plot.unv(dl["nlo"][k]) for k in scales])-plot.unv(dl["nlo"][i])
             dl["nlo_scale_errminus"][i] = np.min(
                 [plot.unv(dl["nlo"][k]) for k in scales])-plot.unv(dl["nlo"][i])
-            if(plot.usd(dl["nlo"][i])*10. > dl["nlo_scale_errplus"][i] or  plot.usd(dl["nlo"][i])*10. > -dl["nlo_scale_errminus"][i]):
+            if(plot.usd(dl["nlo"][i])*required_numerical_uncertainty_factor > dl["nlo_scale_errplus"][i] or  plot.usd(dl["nlo"][i])*required_numerical_uncertainty_factor > -dl["nlo_scale_errminus"][i]):
                 print("WARNING: too low numerical nlo precision vs scale")
             dl["nlo_plus_nll_scale_errplus"][i] = np.max(
                 [plot.unv(dl["nlo_plus_nll"][k]) for k in scales])-plot.unv(dl["nlo_plus_nll"][i])
             dl["nlo_plus_nll_scale_errminus"][i] = np.min(
                 [plot.unv(dl["nlo_plus_nll"][k]) for k in scales])-plot.unv(dl["nlo_plus_nll"][i])
-            if(plot.usd(dl["nlo_plus_nll"][i])*10. > dl["nlo_plus_nll_scale_errplus"][i] or  plot.usd(dl["nlo_plus_nll"][i])*10. > -dl["nlo_plus_nll_scale_errminus"][i]):
+            if(plot.usd(dl["nlo_plus_nll"][i])*required_numerical_uncertainty_factor > dl["nlo_plus_nll_scale_errplus"][i] or  plot.usd(dl["nlo_plus_nll"][i])*required_numerical_uncertainty_factor > -dl["nlo_plus_nll_scale_errminus"][i]):
                 print("WARNING: too low numerical nlo_plus_nll precision vs scale")
 
     return dl
