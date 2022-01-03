@@ -75,7 +75,7 @@ class Order(IntEnum):
 
 class Input:
     # TODO allow unspecified input? Maybe with kwargs + defaults
-    def __init__(self, order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f, mu_r, pdfset_lo=0, pdfset_nlo=0, id=""):
+    def __init__(self, order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f, mu_r, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, id=""):
         self.order = order
         self.energy = energy
         self.energyhalf = energy/2.
@@ -90,6 +90,8 @@ class Input:
         self.pdf_nlo_id = lhapdf_name_to_id(pdf_nlo)
         self.mu_f = mu_f
         self.mu_r = mu_r
+        self.precision = precision
+        self.max_iters = max_iters
         self.id = id
         b = pyslha.read(get_input_dir() + slha)
         self.mu = (b.blocks["MASS"][abs(particle1)] +
@@ -134,9 +136,9 @@ def scale_scan(l: List[Input], range=3, distance=2.):
     for s in l:
         # not on error pdfs
         if s.pdfset_nlo == 0:
-            ret += scan([s], "mu_f", np.logspace(np.log10(1. /
+            tmp = scan([s], "mu_f", np.logspace(np.log10(1. /
                         distance), np.log10(distance), range))
-            ret += scan([s], "mu_r", np.logspace(np.log10(1. /
+            ret += scan(tmp, "mu_r", np.logspace(np.log10(1. /
                         distance), np.log10(distance), range))
         else:
             ret.append(s)

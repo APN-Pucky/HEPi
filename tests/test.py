@@ -18,4 +18,17 @@ for p in [1000002]:
     
     hepi.scale_plot(dl,["lo","nlo","nlo_plus_nll"],seven_point_band=True)
     plt.savefig("scale_variation_" + str(p) + ".pdf")    
+    mask = dl["nlo_pdf_errplus"]!= np.array(None)
+    print(mask)
+    print(dl["nlo"][mask])
+    print(dl["nlo_pdf_central"][mask])
+    print(dl["nlo_pdf_errplus"][mask])
+    print(dl["nlo_pdf_errminus"][mask])
+    print(dl["nlo_scale_errplus"][mask])
+    print(dl["nlo_scale_errminus"][mask])
 
+    print(dl["nlo_plus_nll_pdf_central"][mask])
+    print(dl["nlo_plus_nll_pdf_errplus"][mask])
+    print(dl["nlo_plus_nll_pdf_errminus"][mask])
+    print(dl["nlo_plus_nll_scale_errplus"][mask])
+    print(dl["nlo_plus_nll_scale_errminus"][mask])
