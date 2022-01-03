@@ -2,6 +2,8 @@ from .util import LD2DL
 import numpy as np
 from typing import List
 from uncertainties import unumpy
+import uncertainties as unc
+from smpl import plot
 import lhapdf
 
 
@@ -31,10 +33,18 @@ def pdf_error(li, dl):
     example = li[0]
     members = [attr for attr in dir(example) if not callable(
         getattr(example, attr)) and not attr.startswith("__")]
+    dl["nlo_pdf_central"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_pdf_errplus"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_pdf_errminus"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_pdf_errsym"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_plus_nll_pdf_central"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_plus_nll_pdf_errplus"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_plus_nll_pdf_errminus"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_plus_nll_pdf_errsym"] = [None]*len(dl["pdfset_nlo"])
     for i in range(len(dl["pdfset_nlo"])):
-        if dl["pdfset_nlo"][i] == 0:
+        if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0:
             set = lhapdf.getPDFSet(dl["pdf_nlo"][i])
-            pdfs = [None] * set.size()
+            pdfs = [None] * set.size
             for j in range(len(dl["pdfset_nlo"])):
                 same = True
                 for s in members:
@@ -43,7 +53,51 @@ def pdf_error(li, dl):
                 if same:
                     pdfs[dl["pdfset_nlo"][j]] = j
 
-            lo_unc = set.uncertainty([dl["lo"][k] for k in pdfs], -1)
-            nlo_unc = set.uncertainty([dl["nlo"][k] for k in pdfs], -1)
+            # lo_unc = set.uncertainty(
+            #    [plot.unv(dl["lo"][k]) for k in pdfs], -1)
+            nlo_unc = set.uncertainty(
+                [plot.unv(dl["nlo"][k]) for k in pdfs], -1)
+            dl["nlo_pdf_central"][i] = nlo_unc.central
+            dl["nlo_pdf_errplus"][i] = nlo_unc.errplus
+            dl["nlo_pdf_errminus"][i] = nlo_unc.errminus
+            dl["nlo_pdf_errsym"][i] = nlo_unc.errsym
             nlo_plus_nll_unc = set.uncertainty(
-                [dl["nlo_plus_nll"][k] for k in pdfs], -1)
+                [plot.unv(dl["nlo_plus_nll"][k]) for k in pdfs], -1)
+            dl["nlo_plus_nll_pdf_central"][i] = nlo_plus_nll_unc.central
+            dl["nlo_plus_nll_pdf_errplus"][i] = nlo_plus_nll_unc.errplus
+            dl["nlo_plus_nll_pdf_errminus"][i] = nlo_plus_nll_unc.errminus
+            dl["nlo_plus_nll_pdf_errsym"][i] = nlo_plus_nll_unc.errsym
+    return dl
+
+
+def scale_error(li, dl):
+    example = li[0]
+    members = [attr for attr in dir(example) if not callable(
+        getattr(example, attr)) and not attr.startswith("__")]
+    dl["nlo_scale_errplus"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_scale_errminus"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_plus_nll_scale_errplus"] = [None]*len(dl["pdfset_nlo"])
+    dl["nlo_plus_nll_scale_errminus"] = [None]*len(dl["pdfset_nlo"])
+    for i in range(len(dl["pdfset_nlo"])):
+        if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0:
+            scales = []
+            for j in range(len(dl["pdfset_nlo"])):
+                same = True
+                for s in members:
+                    if not (dl[s][i] == dl[s][j] and s != "mu_f" and s != "mu_r"):
+                        same = False
+                if same:
+                    scales.append(j)
+
+            # lo_unc = set.uncertainty(
+            #    [plot.unv(dl["lo"][k]) for k in pdfs], -1)
+            dl["nlo_scale_errplus"][i] = np.max(
+                [plot.unv(dl["nlo"][k]) for k in scales])-plot.unv(dl["nlo"][i])
+            dl["nlo_scale_errminus"][i] = np.min(
+                [plot.unv(dl["nlo"][k]) for k in scales])-plot.unv(dl["nlo"][i])
+            dl["nlo_plus_nll_scale_errplus"][i] = np.max(
+                [plot.unv(dl["nlo_plus_nll"][k]) for k in scales])-plot.unv(dl["nlo_plus_nll"][i])
+            dl["nlo_plus_nll_scale_errminus"][i] = np.min(
+                [plot.unv(dl["nlo_plus_nll"][k]) for k in scales])-plot.unv(dl["nlo_plus_nll"][i])
+
+    return dl

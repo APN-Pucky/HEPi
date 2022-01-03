@@ -1,4 +1,5 @@
 from enum import IntEnum
+#from math import dist
 import numpy as np
 from typing import List
 import copy
@@ -128,12 +129,31 @@ def scan(l: List[Input], var: str, range) -> List[Input]:
     return ret
 
 
+def scale_scan(l: List[Input], range=3, distance=2.):
+    ret = []
+    for s in l:
+        # not on error pdfs
+        if s.pdfset_nlo == 0:
+            ret += scan([s], "mu_f", np.logspace(np.log10(1. /
+                        distance), np.log10(distance), range))
+            ret += scan([s], "mu_r", np.logspace(np.log10(1. /
+                        distance), np.log10(distance), range))
+        else:
+            ret.append(s)
+
+    return ret
+
+
 def pdf_scan(l: List[Input]):
     ret = []
     for s in l:
-        set = lhapdf.getPDFSet(s.pdf_nlo)
-        for r in range(set.size()):
-            tmp = copy.copy(s)
-            setattr(tmp, "pdfset_nlo", r)
-            ret.append(tmp)
+        # only central scale
+        if s.mu_f == 1.0 and s.mu_r == 1.0:
+            set = lhapdf.getPDFSet(s.pdf_nlo)
+            for r in range(set.size):
+                tmp = copy.copy(s)
+                setattr(tmp, "pdfset_nlo", r)
+                ret.append(tmp)
+        else:
+            ret.append(s)
     return ret

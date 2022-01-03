@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://gitlab.com/APN-Pucky/hepi",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(exclude="test"),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
@@ -42,10 +42,11 @@ setuptools.setup(
         "count_commits_from_version_file": False
     },
     include_package_data=True,
+    #packages=['hepi'],
     # https://setuptools.pypa.io/en/latest/userguide/datafiles.html
-    # package_data={
+    #package_data={
     #    # If any package contains *.txt or *.rst files, include them:
-    #    "": ["*.mg", "*.in", "*.dat"],
-    # },
+    #    "hepi": ["*.mg", "*.in", "*.dat"],
+    #},
     python_requires='>=3.6',
 )
