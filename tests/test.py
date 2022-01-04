@@ -1,3 +1,4 @@
+from scipy import interpolate
 import hepi
 import smpl
 import numpy as np
@@ -17,9 +18,9 @@ for p in [1000002]:
     dl = hepi.scale_error(li,dl)
     dl = hepi.combine_errors(dl)
     
-    hepi.combined_energy_plot(dl,"lo")
-    hepi.combined_energy_plot(dl,"nlo")
-    hepi.combined_energy_plot(dl,"nlo_plus_nll")
+    hepi.combined_plot(hepi.energy_plot,dl,"lo",interpolate=False)
+    hepi.combined_plot(hepi.energy_plot,dl,"nlo",interpolate=False)
+    hepi.combined_plot(hepi.energy_plot,dl,"nlo_plus_nll",interpolate=False)
     plt.savefig("test" + str(p) + ".pdf")    
     mask = dl["nlo_pdf_errplus"]!= np.array(None)
     print(mask)
