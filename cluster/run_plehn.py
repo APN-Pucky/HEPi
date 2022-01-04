@@ -1,15 +1,21 @@
 import cluster
-from . import *
+from cluster import *
 
-for run_plot in [True, False]:
-    for lo_pdf,nlo_pdf in [("CTEQ6L1","CTEQ66")]:
+for run_plot in [True]:
+    for lo_pdf,nlo_pdf in [("cteq6l1","cteq66")]:
         for p in [2000002, 1000002]:
             i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 7000, p, 1000022,
-                           "sps1a1000.in", lo_pdf, nlo_pdf, 1., 1.)
+                           "sps1a1000_mod.in", lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=50)
             li = hepi.mass_scan([i], p, np.linspace(300, 950, 16), diff_L_R=20)
+            li = hepi.scale_scan(li)
+            li = hepi.pdf_scan(li)
             dll = rs.run(li, run_plot, False, run_plot)
 
+
             if not run_plot:
+                dl = hepi.pdf_error(li,dl)
+                dl = hepi.scale_error(li,dl)
+                dl = hepi.combine_errors(dl)
                 hepi.mass_plot(dll,p,"lo",yscale=1000,yaxis="$\sigma$ [fb]")
                 hepi.mass_plot(dll,p,"nlo",yscale=1000,yaxis="$\sigma$ [fb]")
                 hepi.mass_plot(dll,p,"nlo_plus_nll",yscale=1000,yaxis="$\sigma$ [fb]",label="nlo+nll")
@@ -25,4 +31,4 @@ for run_plot in [True, False]:
                 # hepi.mass_plot(dll, p, "K_nlo", logy=False,
                 #               yaxis="$K_\\mathrm{nlo}$", label="nlo")
 
-    wait()
+    #wait()

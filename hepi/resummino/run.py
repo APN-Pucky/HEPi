@@ -124,6 +124,9 @@ def _run(rps: List[RunParams], bar=True, no_parse=False):
             process = subprocess.Popen(command, shell=True)
             processes.append(process)
             processesrpo[process] = rp.out_path
+
+            if no_parse:
+                time.sleep(5)
             if bar:
                 nnn = ""
                 nn = ""
@@ -177,6 +180,4 @@ def _run(rps: List[RunParams], bar=True, no_parse=False):
         # Collect statuses
         output = [p.wait() for p in processes]
         return output
-    else:
-        time.sleep(5)
     return []
