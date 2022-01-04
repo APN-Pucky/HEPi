@@ -177,4 +177,6 @@ def _run(rps: List[RunParams], bar=True, no_parse=False):
         # Collect statuses
         output = [p.wait() for p in processes]
         return output
+    else:
+        time.sleep(5)
     return []

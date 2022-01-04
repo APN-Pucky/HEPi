@@ -19,9 +19,10 @@ from .input import get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
 
 
-def energy_plot(dict_list, y, yscale=1.):
-    plot(dict_list, "energy", y, label=None,
-         xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=yscale)
+def energy_plot(dict_list, y, yscale=1.,xaxis="E [GeV]",yaxis="$\\sigma$ [pb]",label=None,**kwargs):
+    plot(dict_list, "energy", y, label=label,
+         xaxis=xaxis, yaxis=yaxis, logy=True, yscale=yscale,**kwargs)
+
 
 def combined_energy_plot(dict_list,t):
     dl = dict_list
@@ -35,46 +36,64 @@ def combined_energy_plot(dict_list,t):
     splot.data(dict_list["energy"][mask],dict_list[t+ "_combined"][mask],
         xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=" ",logy=True,data_color=color,capsize=None)
 
+def combined_plot(func,dict_list,t,*args,**kwargs):
+    dl = dict_list
+    mask = dl[t+"_pdf_central"]!= np.array(None)
+    color = next(plt.gca()._get_lines.prop_cycler)['color']
+    func(dict_list,t+ "_noerr",*args,
+         label=t,data_color=color,mask = mask,**kwargs)
+    func(dict_list,t+ "_scale",*args,
+        fmt=" ",data_color=color,mask = mask,label="",**kwargs)
+    func(dict_list,t+ "_combined",*args,
+         fmt=" ",data_color=color,capsize=None,label="",mask = mask,**kwargs)
 
 
-def mass_plot(dict_list, part, y, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None):
+
+
+def mass_plot(dict_list,  y,part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,**kwargs):
     plot(dict_list, "mass_" + str(part), y, label=label,
-         xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale)
+         xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,**kwargs)
 
 
-def mass_vplot(dict_list, part, y, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None):
-    vplot(dict_list["mass_" + str(part)], y, label=label,
-          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale)
+def mass_vplot(dict_list,  y,part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,mask=None,**kwargs):
+    vplot(dict_list["mass_" + str(part)][mask], y[mask], label=label,
+          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 
 
-def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.):
+def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,mask=None,**kwargs):
     # TODO use kwargs
     if label is None:
         label = y
-    vx = dict_list[x]
-    vy = dict_list[y]
-    vplot(vx, vy, label, xaxis, yaxis, logy, yscale)
+    vx = dict_list[x][mask]
+    vy = dict_list[y][mask]
+    vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 
 
-def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.):
+def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,data_color=None,**kwargs):
+    color = data_color
     if label is None:
         label = "??"
     vx = x
     vy = y
-    xnew = np.linspace(vx[0], vx[-1], 300,)
-    spl = make_interp_spline(
-        vx, splot.unv(vy), k=3)  # type: BSpline
-    power_smooth = spl(xnew)
-    bl, = plt.gca().plot([], [])
-    splot.data(vx, vy*yscale, logy=logy, data_color=bl.get_color())
-    splot.data(xnew, power_smooth*yscale, logy=logy, fmt="-",
-               label=label,
-               xaxis=xaxis, yaxis=yaxis, init=False, data_color=bl.get_color())
-    if(np.any(np.less(power_smooth, 0)) and logy):
-        splot.data(vx, -vy*yscale, logy=logy, data_color=bl.get_color())
-        splot.data(xnew, -power_smooth*yscale, logy=logy, fmt="--",
-                   label="-"+label,
-                   xaxis=xaxis, yaxis=yaxis, init=False, data_color=bl.get_color())
+    print(label)
+
+    if interpolate:
+        xnew = np.linspace(vx[0], vx[-1], 300,)
+        spl = make_interp_spline(
+            vx, splot.unv(vy), k=3)  # type: BSpline
+        power_smooth = spl(xnew)
+    if data_color is None:
+        bl, = plt.gca().plot([], [])
+        color = bl.get_color()
+    splot.data(vx, vy*yscale, label=label,logy=logy, data_color=color, **kwargs)
+    if interpolate:
+        splot.data(xnew, power_smooth*yscale, logy=logy, fmt="-",
+               xaxis=xaxis, yaxis=yaxis, init=False, data_color=color, **kwargs)
+    if((np.any(np.less(vy,0)) or ( interpolate and np.any(np.less(power_smooth, 0)))) and logy):
+        splot.data(vx, -vy*yscale,label="-"+label, logy=logy, data_color=color, **kwargs)
+        if interpolate:
+            splot.data(xnew, -power_smooth*yscale, logy=logy, fmt="--",
+                   xaxis=xaxis, yaxis=yaxis, init=False, data_color=color, **kwargs)
 
 
 def mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis="$\\sigma$ [pb]", zscale=1., label=None):

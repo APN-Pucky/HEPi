@@ -170,30 +170,36 @@ def scale_error(li, dl):
     return dl
 
 def combine_errors(dl):
+    dl["lo_noerr"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["lo_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["lo_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["lo_combined"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["nlo_noerr"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["nlo_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["nlo_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["nlo_combined"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["nlo_plus_nll_noerr"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["nlo_plus_nll_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["nlo_plus_nll_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["nlo_plus_nll_combined"] = np.array([None]*len(dl["pdfset_nlo"]))
 
 
     mask = dl["lo_pdf_central"]!= np.array(None)
+    dl["lo_noerr"][mask]= plot.unv(dl["lo"][mask]).astype(float)
     dl["lo_errplus"][mask]= np.sqrt(dl["lo_pdf_errplus"][mask].astype(float)**2+dl["lo_scale_errplus"][mask].astype(float)**2)
     dl["lo_errminus"][mask]= -np.sqrt(dl["lo_pdf_errminus"][mask].astype(float)**2+dl["lo_scale_errminus"][mask].astype(float)**2)
     dl["lo_combined"][mask] = unumpy.uarray(plot.unv(dl["lo"][mask])+dl["lo_errplus"][mask]/2.+dl["lo_errminus"][mask]/2.,
         +dl["lo_errplus"][mask]-dl["lo_errminus"][mask])
 
     mask = dl["nlo_pdf_central"]!= np.array(None)
+    dl["nlo_noerr"][mask]= plot.unv(dl["nlo"][mask]).astype(float)
     dl["nlo_errplus"][mask]= np.sqrt(dl["nlo_pdf_errplus"][mask].astype(float)**2+dl["nlo_scale_errplus"][mask].astype(float)**2)
     dl["nlo_errminus"][mask]= -np.sqrt(dl["nlo_pdf_errminus"][mask].astype(float)**2+dl["nlo_scale_errminus"][mask].astype(float)**2)
     dl["nlo_combined"][mask] = unumpy.uarray(plot.unv(dl["nlo"][mask])+dl["nlo_errplus"][mask]/2.+dl["nlo_errminus"][mask]/2.,
         +dl["nlo_errplus"][mask]-dl["nlo_errminus"][mask])
 
     mask = dl["nlo_plus_nll_pdf_central"]!= np.array(None)
+    dl["nlo_plus_nll_noerr"][mask]= plot.unv(dl["nlo_plus_nll"][mask]).astype(float)
     dl["nlo_plus_nll_errplus"][mask]= np.sqrt(dl["nlo_plus_nll_pdf_errplus"][mask].astype(float)**2+dl["nlo_plus_nll_scale_errplus"][mask].astype(float)**2)
     dl["nlo_plus_nll_errminus"][mask]= -np.sqrt(dl["nlo_plus_nll_pdf_errminus"][mask].astype(float)**2+dl["nlo_plus_nll_scale_errminus"][mask].astype(float)**2)
     dl["nlo_plus_nll_combined"][mask] = unumpy.uarray(plot.unv(dl["nlo_plus_nll"][mask])+dl["nlo_plus_nll_errplus"][mask]/2.+dl["nlo_plus_nll_errminus"][mask]/2.,
