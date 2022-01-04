@@ -4,9 +4,8 @@ from . import *
 for run_plot in [True, False]:
     for lo_pdf,nlo_pdf in [("CT18NLO","CT18NLO"), ("MSHT20nlo_as118","MSHT20nlo_as118", ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180"))]:
         for p in [2000002, 1000002]:
-            i = hepi.Input(hepi.Order.LO, 7000, p, 1000022,
-                           "sps1a1000.in", lo_pdf, nlo_pdf, 1., 1.)
-            li = hepi.mass_scan([i], p, np.linspace(300, 950, 16), diff_L_R=20)
+            i = hepi.Input(hepi.Order.LO, 13000, p, 1000022, "scenarioB.in", lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=50)
+            li = hepi.mass_scan([i], 1000022, np.linspace(900, 2000, 32))
             dll = rs.run(li, run_plot, False, run_plot)
 
             if not run_plot:

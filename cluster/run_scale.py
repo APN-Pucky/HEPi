@@ -2,22 +2,20 @@ import cluster
 from . import *
 
 for run_plot in [True, False]:
-    for scenario in ["scenarioA.in","scenarioB.in"]
-    for lo_pdf,nlo_pdf in [("CT18NLO","CT18NLO"), ("MSHT20nlo_as118","MSHT20nlo_as118", ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180"))]:
-        for p in [2000002, 1000002]:
-            i = hepi.Input(hepi.Order.LO, 7000, p, 1000022,
-                           "sps1a1000.in", lo_pdf, nlo_pdf, 1., 1.)
-            li = hepi.mass_scan([i], p, np.linspace(300, 950, 16), diff_L_R=20)
-            dll = rs.run(li, run_plot, False, run_plot)
+    for scenario in ["scenarioA.in","scenarioB.in"]:
+        for lo_pdf,nlo_pdf in [("CT18NLO","CT18NLO"), ("MSHT20nlo_as118","MSHT20nlo_as118", ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180"))]:
+            for p in [2000002, 1000002]:
+                li = [hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, p, 1000022, scenario, lo_pdf, nlo_pdf, 1., 1.)]
 
-            if not run_plot:
-                hepi.mass_plot(dll, p, "K_lo", logy=False, label="lo")
-                # hepi.mass_vplot(dll,p,((dll["vnlo"]+dll["p_plus_k"]+dll["lo"])/dll["lo"]),logy=False,label="vnlo+P+K")
-                # hepi.mass_vplot(dll,p,((dll["rnlo"]+dll["lo"])/dll["lo"]),logy=False,label="rnlo")
+                li = hepi.scan(li,"mu_f",np.logspace(np.log10(1/10.), np.log10(10), 9))
+                li = hepi.scan(li,"mu_r",np.logspace(np.log10(1/10.), np.log10(10), 9))
+                #li = hepi.pdf_scan(li)
+                dll = rs.run(li, run_plot, False, run_plot)
+                #dl = hepi.pdf_error(li,dl)
 
-                # hepi.mass_plot(dll, p, "K_nlo", logy=False,
-                #               yaxis="$K_\\mathrm{nlo}$", label="nlo")
-
-                plt.savefig(input.get_output_dir() + "test" + str(p) + ".pdf")
+                if not run_plot:
+                    hepi.scale_plot(dll,["lo_pdf","nlo_pdf","nlo_plus_nll_pdf"],seven_point_band=True)
+                    plt.savefig(input.get_output_dir() +"scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf")
+                    plt.savefig( "test" + str(p) + ".pdf")
     wait()
 
