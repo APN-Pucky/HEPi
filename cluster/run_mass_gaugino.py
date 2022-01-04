@@ -6,9 +6,11 @@ for run_plot in [True, False]:
         for p in [2000002, 1000002]:
             i = hepi.Input(hepi.Order.LO, 13000, p, 1000022, "scenarioB.in", lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=50)
             li = hepi.mass_scan([i], 1000022, np.linspace(900, 2000, 32))
+            li = hepi.scale_scan(li)
             dll = rs.run(li, run_plot, False, run_plot)
 
             if not run_plot:
+                dl = hepi.scale_error(li,dl)
                 hepi.mass_plot(dll, p, "K_lo", logy=False, label="lo")
                 # hepi.mass_vplot(dll,p,((dll["vnlo"]+dll["p_plus_k"]+dll["lo"])/dll["lo"]),logy=False,label="vnlo+P+K")
                 # hepi.mass_vplot(dll,p,((dll["rnlo"]+dll["lo"])/dll["lo"]),logy=False,label="rnlo")
@@ -16,6 +18,6 @@ for run_plot in [True, False]:
                 # hepi.mass_plot(dll, p, "K_nlo", logy=False,
                 #               yaxis="$K_\\mathrm{nlo}$", label="nlo")
 
-                plt.savefig(input.get_output_dir() + "test" + str(p) + ".pdf")
+                plt.savefig(input.get_output_dir() + "mass" + str(p) + ".pdf")
     wait()
 
