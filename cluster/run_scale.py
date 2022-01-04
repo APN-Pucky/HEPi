@@ -1,7 +1,7 @@
 import cluster
 from . import *
 
-for run_plot in [True, False]:
+for run_plot in [True ]:
     for scenario in ["scenarioA.in","scenarioB.in"]:
         for lo_pdf,nlo_pdf in [("CT18NLO","CT18NLO"), ("MSHT20nlo_as118","MSHT20nlo_as118", ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180"))]:
             for p in [2000002, 1000002]:
@@ -10,12 +10,11 @@ for run_plot in [True, False]:
                 li = hepi.scan(li,"mu_f",np.logspace(np.log10(1/10.), np.log10(10), 9))
                 li = hepi.scan(li,"mu_r",np.logspace(np.log10(1/10.), np.log10(10), 9))
                 #li = hepi.pdf_scan(li)
-                dll = rs.run(li, run_plot, False, run_plot)
+                dll = rs.run(li, False, False, run_plot)
                 #dl = hepi.pdf_error(li,dl)
 
                 if not run_plot:
-                    hepi.scale_plot(dll,["lo_pdf","nlo_pdf","nlo_plus_nll_pdf"],seven_point_band=True)
+                    hepi.scale_plot(dll,["lo","nlo","nlo_plus_nll"],seven_point_band=True)
                     plt.savefig(input.get_output_dir() +"scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf")
-                    plt.savefig( "test" + str(p) + ".pdf")
-    wait()
+    #wait()
 
