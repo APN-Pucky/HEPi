@@ -1,22 +1,21 @@
-import hepi
-import smpl
-import hepi.resummino as rs
-import hepi.input as input
-#import hepi
-import numpy as np
-import matplotlib.pyplot as plt
+import cluster
+from cluster import *
 
-rs.set_path("/home/a/a_neuw01/git/resummino/")
-input.set_output_dir("/scratch/tmp/a_neuw01/hepi/")
-input.set_input_dir("/home/a/a_neuw01/git/hepi/tests/input/")
-input.set_pre(
-    "srun --nodes 1 -c 2 --partition normal --mail-type=ALL --time=03:00:00 --mail-user=a_neuw01@uni-muenster.de")
-print(rs.get_path())
+for run_plot in [True,False]:
+    for pdf in ["CT14lo"]:
+        for p in [2000002, ]:
+            i = hepi.Input(hepi.Order.LO, 7000, p, 1000022,
+                           "sps1a1000.in", pdf, pdf, 1., 1.)
+            li = hepi.mass_scan([i], p, np.linspace(300, 950, 16), diff_L_R=20)
+            dll = rs.run(li, run_plot, False, run_plot)
 
+            if not run_plot:
+                hepi.mass_plot(dll, p, "K_lo", logy=False, label="lo")
+                # hepi.mass_vplot(dll,p,((dll["vnlo"]+dll["p_plus_k"]+dll["lo"])/dll["lo"]),logy=False,label="vnlo+P+K")
+                # hepi.mass_vplot(dll,p,((dll["rnlo"]+dll["lo"])/dll["lo"]),logy=False,label="rnlo")
 
-for pdf in ["CT14lo"]:
-    for p in [2000002, ]:
-        i = hepi.Input(hepi.Order.LO, 7000, p, 1000022,
-                       "sps1a1000.in", pdf, pdf, 1., 1.)
-        li = hepi.mass_scan([i], p, np.linspace(300, 950, 16), diff_L_R=20)
-        dll = rs.run(li, True, False, True)
+                # hepi.mass_plot(dll, p, "K_nlo", logy=False,
+                #               yaxis="$K_\\mathrm{nlo}$", label="nlo")
+
+                plt.savefig(input.get_output_dir() + "test" + str(p) + ".pdf")
+    wait()
