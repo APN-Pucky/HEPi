@@ -14,6 +14,8 @@ import time
 import difflib
 from smpl.parallel import *
 import hashlib
+import os 
+import stat
 
 resummino_path = "~/resummino/"
 
@@ -62,6 +64,7 @@ def namehash(n):
 
 
 def _queue(params: List[Input], noskip=False) -> List[RunParams]:
+    global resummino_path
     Path("output").mkdir(parents=True, exist_ok=True)
     Path("input").mkdir(parents=True, exist_ok=True)
     ret = []
@@ -82,6 +85,12 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
             src = Template(data)
             result = src.substitute(d)
             open(get_input_dir() + name + ".in", "w").write(result)
+            open(get_input_dir() + name + ".sh", "w").write("#!/bin/sh\n"+
+                resummino_path + 'build/bin/resummino {} {} >> {}'.format(
+                    get_input_dir()+name + ".in",["--lo", "--nlo", "--nll"][p.order],get_output_dir()+name + ".out"
+                ))
+            st = os.stat(get_input_dir() + name + ".sh")
+            os.chmod(get_input_dir() + name + ".sh", st.st_mode | stat.S_IEXEC)
             open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
 
             sname = d['slha']
@@ -102,7 +111,7 @@ def _run(rps: List[RunParams], bar=True, no_parse=False):
     # TODO clean up on exit emergency
     global resummino_path
     # TODO RS build path checks?!?!
-    template = get_pre() + " " + resummino_path + 'build/bin/resummino {} {} >> {}'
+    template = get_pre() + " " +  "{}"
 
     # Run commands in parallel
     processes = []
@@ -120,7 +129,7 @@ def _run(rps: List[RunParams], bar=True, no_parse=False):
 
     for rp in rps:
         if not rp.skip:
-            command = template.format(rp.in_path, rp.flags, rp.out_path)
+            command = template.format(rp.in_path.replace(".in",".sh"))
             process = subprocess.Popen(command, shell=True)
             processes.append(process)
             processesrpo[process] = rp.out_path
