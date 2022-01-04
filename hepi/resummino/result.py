@@ -1,3 +1,4 @@
+from hepi.input import Order
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
 import re
 from uncertainties import ufloat_fromstr
@@ -15,6 +16,15 @@ class ResumminoResult(Result):
         else:
             self.rnlo = None
 
+def is_valid(file,order :Order):
+    res = parse_single(file)
+    if res.lo is not None and order is Order.LO:
+        return True
+    if res.lo is not None and res.nlo is not None and order is Order.NLO:
+        return True
+    if res.lo is not None and res.nlo is not None and res.nlo_plus_nll is not None and order is Order.NLO_PLUS_NLL:
+        return True
+    return False
 
 
 def parse_single(file) -> ResumminoResult:
