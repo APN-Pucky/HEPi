@@ -19,8 +19,6 @@ class Result:
             self.K_lo = lo/lo
         if nlo is not None and lo != 0:
             self.K_nlo = nlo/lo
-        else:
-            print("K_nlo is none")
         if nlo_plus_nll is not None and lo != 0:
             self.K_nlo_plus_nll = nlo_plus_nll/lo
 
