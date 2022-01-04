@@ -8,7 +8,7 @@ import re
 from uncertainties import ufloat_fromstr
 import os.path
 from pathlib import Path
-from .result import ResumminoResult, parse_single
+from .result import ResumminoResult, is_valid, parse_single
 import enlighten
 import time
 import difflib
@@ -72,7 +72,7 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
                         for _ in d.items()).replace("/", "-"))
         skip = False
-        if not noskip and os.path.isfile(get_output_dir() + name + ".out"):
+        if not noskip and os.path.isfile(get_output_dir() + name + ".out") and is_valid(get_output_dir() + name + ".out",p.order):
             print("skip", end='')
             skip = True
         if not skip:
