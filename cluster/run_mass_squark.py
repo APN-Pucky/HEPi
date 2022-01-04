@@ -1,5 +1,5 @@
 import cluster
-from . import *
+from cluster import *
 
 for run_plot in [True, ]:
     for lo_pdf,nlo_pdf in [("CT18NLO","CT18NLO"), ("MSHT20nlo_as118","MSHT20nlo_as118"), ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180")]:
