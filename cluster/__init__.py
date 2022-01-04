@@ -23,7 +23,7 @@ print(rs.get_path())
 
 def wait():
     output = "\n\n\n"
-    while(output.count('\n') > 1):
+    while(len(output.split('\n')) > 1):
         bashCommand = "squeue -u " + user
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
