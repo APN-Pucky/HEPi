@@ -75,7 +75,7 @@ class Order(IntEnum):
 
 class Input:
     # TODO allow unspecified input? Maybe with kwargs + defaults
-    def __init__(self, order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f, mu_r, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, id=""):
+    def __init__(self, order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, id=""):
         self.order = order
         self.energy = energy
         self.energyhalf = energy/2.

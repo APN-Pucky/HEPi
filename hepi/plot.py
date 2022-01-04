@@ -23,6 +23,19 @@ def energy_plot(dict_list, y, yscale=1.):
     plot(dict_list, "energy", y, label=None,
          xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=yscale)
 
+def combined_energy_plot(dict_list,t):
+    dl = dict_list
+    mask = dl[t+"_pdf_central"]!= np.array(None)
+    color = next(plt.gca()._get_lines.prop_cycler)['color']
+    print(color)
+    splot.data(dict_list["energy"][mask],splot.unv(dict_list[t][mask]),
+        xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=".",logy=True, label=t,data_color=color)
+    splot.data(dict_list["energy"][mask],dict_list[t+ "_scale"][mask],
+        xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=" ",logy=True,data_color=color)
+    splot.data(dict_list["energy"][mask],dict_list[t+ "_combined"][mask],
+        xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=" ",logy=True,data_color=color,capsize=None)
+
+
 
 def mass_plot(dict_list, part, y, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None):
     plot(dict_list, "mass_" + str(part), y, label=label,
