@@ -63,9 +63,9 @@ slha = $slha
 pdf_format = lhgrid  # lhgrid or lhpdf
 #pdf_lo     = cteq6l1 
 pdf_lo     = $pdf_lo 
-pdfset_lo  = 0
+pdfset_lo  = $pdfset_lo
 pdf_nlo    = $pdf_nlo
-pdfset_nlo = 0
+pdfset_nlo = $pdfset_nlo
 
 #scale factors 
 # (1.0 is central scale mu = (m1 + m2) / 2)
@@ -73,8 +73,8 @@ mu_f = $mu_f
 mu_r = $mu_r
 
 # Integration parameters.
-precision = 0.001  # desired precision
-max_iters = 50  # maximum iterations
+precision = $precision  # desired precision
+max_iters = $max_iters  # maximum iterations
 #ptcutmax = 0 #6491.18850451893
 #ptcutmin = 0.1
 
