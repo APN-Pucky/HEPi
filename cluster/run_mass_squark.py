@@ -13,9 +13,9 @@ for run_plot in [True, ]:
 
             if not run_plot:
                 dl = hepi.scale_error(li,dl)
-                hepi.mass_plot(dll, p, "lo_scale", logy=True, label="lo")
-                hepi.mass_plot(dll, p, "nlo_scale", logy=True, label="nlo")
-                hepi.mass_plot(dll, p, "nlo_plus_nll_scale", logy=True, label="nlo+nll")
+                hepi.mass_plot(dl, p, "lo_scale", logy=True, label="lo")
+                hepi.mass_plot(dl, p, "nlo_scale", logy=True, label="nlo")
+                hepi.mass_plot(dl, p, "nlo_plus_nll_scale", logy=True, label="nlo+nll")
 
                 plt.savefig(input.get_output_dir() + "mass_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
     #wait()

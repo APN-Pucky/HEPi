@@ -7,14 +7,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import subprocess
 import time
+import os
+import sys
 
 user = "a_neuw01"
 
 rs.set_path("/home/a/"+user+"/git/resummino/")
 input.set_output_dir("/scratch/tmp/"+user+"/hepi/")
 input.set_input_dir("/home/a/"+user+"/git/hepi/tests/input/")
-input.set_pre(
-    "srun --ntasks-per-node 1 --cpus-per-task 1 --partition normal --mem=100M --mail-type=ALL --time=06:00:00 --mail-user="+user+"@uni-muenster.de")
+input.set_pre("srun --job-name=" + sys.argv[0] +
+" --ntasks-per-node 1 --cpus-per-task 1  --time=06:00:00 --mem=100M --partition normal" +
+" --mail-type=ALL --mail-user="+user+"@uni-muenster.de")
 print(rs.get_path())
 
 
