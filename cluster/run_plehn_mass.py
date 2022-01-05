@@ -1,7 +1,7 @@
 import cluster
 from cluster import *
 
-for run_plot in [True]:
+for run_plot in [False]:
     for lo_pdf,nlo_pdf in [("cteq6l1","cteq66")]:
         for p in [2000002, 1000002]:
             i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 7000, p, 1000022, "sps1a1000_mod.in", lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=50)
@@ -10,22 +10,23 @@ for run_plot in [True]:
             li = hepi.scale_scan(li)
             li = hepi.pdf_scan(li)
 
-            dll = rs.run(li, False, False, run_plot)
+            dl = rs.run(li, False, False, run_plot)
 
 
             if not run_plot:
                 dl = hepi.pdf_error(li,dl)
                 dl = hepi.scale_error(li,dl)
                 dl = hepi.combine_errors(dl)
-                hepi.mass_plot(dll,p,"lo",yscale=1000,yaxis="$\sigma$ [fb]")
-                hepi.mass_plot(dll,p,"nlo",yscale=1000,yaxis="$\sigma$ [fb]")
-                hepi.mass_plot(dll,p,"nlo_plus_nll",yscale=1000,yaxis="$\sigma$ [fb]",label="nlo+nll")
+                hepi.combined_plot(hepi.mass_plot,dl,"lo",p,yscale=1000,yaxis="$\sigma$ [fb]",interpolate=False)
+                hepi.combined_plot(hepi.mass_plot,dl,"nlo",p,yscale=1000,yaxis="$\sigma$ [fb]",interpolate=False)
+                hepi.combined_plot(hepi.mass_plot,dl,"nlo_plus_nll",p,yscale=1000,yaxis="$\sigma$ [fb]",interpolate=False)
        
                 plt.savefig(input.get_output_dir()+ "comp_" + nlo_pdf + "_" + str(p) + ".pdf")
 
-                hepi.mass_plot(dll, p, "K_lo", logy=False, label="lo")
-                hepi.mass_plot(dll, p, "K_nlo", logy=False, label="lo")
-                hepi.mass_plot(dll, p, "K_nlo_plus_nll", logy=False, label="lo")
+
+                hepi.combined_plot(hepi.mass_vplot,dl, "lo",p, yscale=logy=False,K=True, label="lo",interpolate=False)
+                hepi.combined_plot(hepi.mass_vplot,dl, "nlo",p, logy=False,K=True, label="nlo",interpolate=False)
+                hepi.combined_plot(hepi.mass_vplot,dl, "nlo_plus_nll",p,K=True, logy=False, label="nlo+nll",interpolate=False)
                 plt.savefig(input.get_output_dir()+ "Kcomp_" + nlo_pdf + "_" + str(p) + ".pdf")
 
     #wait()
