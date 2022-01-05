@@ -29,4 +29,4 @@ for run_plot in [False]:
                 hepi.combined_plot(hepi.mass_vplot,dl, "nlo_plus_nll",p,K=True, logy=False, label="nlo+nll",interpolate=False)
                 plt.savefig(input.get_output_dir()+ "Kcomp_" + nlo_pdf + "_" + str(p) + ".pdf")
 
-    #wait()
+    wait()
