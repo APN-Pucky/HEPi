@@ -11,7 +11,7 @@ for run_plot in [False]:
             li = hepi.scale_scan(li)
             li = hepi.pdf_scan(li)
 
-            dl = rs.run(li, False, False, run_plot)
+            dl = rs.run(li, False, False, run_plot,False)
 
 
             if not run_plot:
