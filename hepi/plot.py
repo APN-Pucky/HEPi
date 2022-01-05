@@ -68,7 +68,7 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",K=
     vy = dict_list[y][mask]
 
     if K:
-        vy = vy / splot.unv(dict_list["lo"])
+        vy = vy / splot.unv(dict_list["lo"][mask])
 
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 

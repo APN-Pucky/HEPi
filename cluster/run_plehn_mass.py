@@ -24,9 +24,9 @@ for run_plot in [False]:
                 plt.savefig(input.get_output_dir()+ "comp_" + nlo_pdf + "_" + str(p) + ".pdf")
 
 
-                hepi.combined_plot(hepi.mass_vplot,dl, "lo",p, yscale=logy=False,K=True, label="lo",interpolate=False)
-                hepi.combined_plot(hepi.mass_vplot,dl, "nlo",p, logy=False,K=True, label="nlo",interpolate=False)
-                hepi.combined_plot(hepi.mass_vplot,dl, "nlo_plus_nll",p,K=True, logy=False, label="nlo+nll",interpolate=False)
+                hepi.combined_plot(hepi.mass_plot,dl, "lo",p, logy=False,K=True, label="lo",interpolate=False)
+                hepi.combined_plot(hepi.mass_plot,dl, "nlo",p, logy=False,K=True, label="nlo",interpolate=False)
+                hepi.combined_plot(hepi.mass_plot,dl, "nlo_plus_nll",p,K=True, logy=False, label="nlo+nll",interpolate=False)
                 plt.savefig(input.get_output_dir()+ "Kcomp_" + nlo_pdf + "_" + str(p) + ".pdf")
 
     wait()
