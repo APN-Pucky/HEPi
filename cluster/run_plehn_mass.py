@@ -1,7 +1,7 @@
 import cluster
 from cluster import *
 
-for run_plot in [True]:
+for run_plot in [False]:
     for lo_pdf,nlo_pdf in [("cteq6l1","cteq66")]:
         for p in [2000002, 1000002]:
             i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 7000, p, 1000022, "sps1a1000_mod.in", lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=50)
@@ -28,4 +28,4 @@ for run_plot in [True]:
                 hepi.mass_plot(dll, p, "K_nlo_plus_nll", logy=False, label="lo")
                 plt.savefig(input.get_output_dir()+ "Kcomp_" + nlo_pdf + "_" + str(p) + ".pdf")
 
-    #wait()
+    wait()
