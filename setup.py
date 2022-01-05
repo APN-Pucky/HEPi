@@ -25,7 +25,7 @@ setuptools.setup(
         "matplotlib",
         "scipy",
         "sympy",
-        "smpl",
+        "smpl>=0.0.113",
         "pyslha",
         "enlighten",
         "particle",
