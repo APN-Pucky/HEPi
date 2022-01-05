@@ -27,4 +27,5 @@ def wait():
         bashCommand = "squeue -u " + user
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
+        output=output.decode()
         time.sleep(60)
