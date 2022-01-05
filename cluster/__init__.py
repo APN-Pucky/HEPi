@@ -23,7 +23,7 @@ print(rs.get_path())
 
 def wait():
     output = "\n\n\n"
-    while(len(output.split('\n')) > 1):
+    while(len(output.split('\n')) > 2):
         bashCommand = "squeue -u " + user + " --name=" + os.path.basename(sys.argv[0])
         if output != "\n\n\n":
             print(bashCommand , " -> ", output)
