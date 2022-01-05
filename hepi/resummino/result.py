@@ -2,7 +2,9 @@ from hepi.input import Order
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
 import re
 from uncertainties import ufloat_fromstr
-
+from string import Template
+import pkgutil
+import warnings
 
 class ResumminoResult(Result):
     def __init__(self, lo, nlo, nlo_plus_nll, vnlo, p_plus_k, rnlog, rnloq):
@@ -16,7 +18,19 @@ class ResumminoResult(Result):
         else:
             self.rnlo = None
 
-def is_valid(file,order :Order):
+def is_valid(file:str,p:Input,d):
+    order = p.order
+    data = pkgutil.get_data(__name__, "plot_template.in").decode(
+                'utf-8')
+    src = Template(data)
+    result = src.substitute(d)
+    sname = d['slha']
+    with open(file,mode='r') as f:
+        with open(get_input_dir() + sname, 'r') as sf:
+            if not f.read().startswith(result + "\n\n" + sf.read()):
+                warnings.warn("Possible hash collision in " + file,RuntimeWarning)
+                exit(1)
+                return False
     res = parse_single(file)
     if res.lo is not None and order is Order.LO:
         return True

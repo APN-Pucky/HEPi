@@ -10,7 +10,7 @@ print (rs.get_path())
 
 #time.sleep(60*60*0.5)
 for p in [1000002]:
-    li = [hepi.Input(hepi.Order.NLO_PLUS_NLL,13000,p,1000022,"mastercode.in","MSHT20nlo_as118","MSHT20nlo_as118",1., 1.,precision=1,max_iters=20)]
+    li = [hepi.Input(hepi.Order.LO,13000,p,1000022,"mastercode.in","MSHT20nlo_as118","MSHT20nlo_as118",1., 1.,precision=1,max_iters=20)]
     #li = hepi.scale_scan(li)
     #li = hepi.pdf_scan(li)
     dl = rs.run(li,False,False)
