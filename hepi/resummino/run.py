@@ -38,9 +38,9 @@ class RunParams:
         self.out_path = out_path
 
 
-def run(params: List[Input], noskip=False, bar=True, no_parse=False):
+def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True):
     rps = _queue(params, noskip)
-    _run(rps, bar, no_parse)
+    _run(rps, bar, no_parse,para)
     if not no_parse:
         outs = LD2DL(rps)["out_path"]
         results = _parse(outs)
@@ -107,7 +107,7 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
     return ret
 
 
-def _run(rps: List[RunParams], bar=True, no_parse=False):
+def _run(rps: List[RunParams], bar=True, no_parse=False,para=True):
     # TODO clean up on exit emergency
     global resummino_path
     # TODO RS build path checks?!?!
@@ -133,7 +133,8 @@ def _run(rps: List[RunParams], bar=True, no_parse=False):
             process = subprocess.Popen(command, shell=True)
             processes.append(process)
             processesrpo[process] = rp.out_path
-
+            if not para:
+                process.wait()
             if no_parse:
                 time.sleep(5)
             if bar:
