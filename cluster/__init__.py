@@ -24,9 +24,10 @@ print(rs.get_path())
 def wait():
     output = "\n\n\n"
     while(len(output.split('\n')) > 1):
-        if output != "\n\n\n":
-            time.sleep(60)
         bashCommand = "squeue -u " + user + " --name=" + os.path.basename(sys.argv[0])
+        if output != "\n\n\n":
+            print(bashCommand , " -> ", output)
+            time.sleep(60)
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
         output=output.decode()
