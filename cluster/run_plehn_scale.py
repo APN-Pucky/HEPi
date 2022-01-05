@@ -12,7 +12,7 @@ for run_plot in [False]:
                 li = hepi.scan(li,"mu_r",np.logspace(np.log10(1/10.), np.log10(10), 9))
                 #li = hepi.pdf_scan(li)
 
-                dll = rs.run(li, False, False, run_plot)
+                dll = rs.run(li, False, False, run_plot,False)
 
                 if not run_plot:
                     #dl = hepi.pdf_error(li,dl)

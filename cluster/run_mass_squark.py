@@ -10,7 +10,7 @@ for run_plot in [True, ]:
             li = hepi.mass_scan([i], p, np.linspace(1000, 3000, 32), diff_L_R=100)
             li = hepi.scale_scan(li)
 
-            dl = rs.run(li, False, False, run_plot)
+            dl = rs.run(li, False, False, run_plot,False)
 
             if not run_plot:
                 dl = hepi.scale_error(li,dl)
