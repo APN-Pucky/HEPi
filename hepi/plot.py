@@ -73,16 +73,19 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",K=
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 
 
-def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,data_color=None,**kwargs):
+def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,data_color=None,mask=-1,**kwargs):
     color = data_color
     if label is None:
         label = "??"
+    if mask is None:
+        x = x[0]
+        y = y[0]
     vx = x
     vy = y
-    print(label)
 
     if interpolate:
         xnew = np.linspace(vx[0], vx[-1], 300,)
+        #print(vx,vy)
         spl = make_interp_spline(
             vx, splot.unv(vy), k=3)  # type: BSpline
         power_smooth = spl(xnew)
