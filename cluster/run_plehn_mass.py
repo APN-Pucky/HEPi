@@ -18,6 +18,7 @@ for run_plot in [False]:
                 dl = hepi.pdf_error(li,dl)
                 dl = hepi.scale_error(li,dl)
                 dl = hepi.combine_errors(dl)
+                
                 plot.data([],[],init=True)
                 hepi.combined_plot(hepi.mass_plot,dl,"lo",p,yscale=1000,yaxis="$\sigma$ [fb]",interpolate=False)
                 hepi.combined_plot(hepi.mass_plot,dl,"nlo",p,yscale=1000,yaxis="$\sigma$ [fb]",interpolate=False)

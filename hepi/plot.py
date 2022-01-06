@@ -17,7 +17,33 @@ from matplotlib import colors
 
 from .input import get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
+from smpl import io
 
+def total_tex_table(dict_list,key,fname):
+ dl = dict_list
+ mask = dl["nlo_pdf_central"]!= np.array(None)
+ with open(fname) as f:
+     for i in len(dl["lo"][mask]):
+        f.write(
+            "$" + dl[key][mask][i] + "$ & $"+
+            io.gf(4).format(dl["lo"][mask][i]) 
+                + "^{+"+io.gf().format(dl["lo_scale_errplus"][mask][i]/dl["lo"][mask][i]*100.)
+                + "%%}_{-" +io.gf().format(dl["lo_scale_errminus"][mask][i]/dl["lo"][mask][i]*100.)
+                +  "%%}$ & "+
+            io.gf(4).format(dl["nlo"][mask][i]) 
+                + "^{+"+io.gf().format(dl["nlo_scale_errplus"][mask][i]/dl["nlo"][mask][i]*100.)
+                + "%%+"+io.gf().format(dl["nlo_pdf_errplus"][mask][i]/dl["nlo"][mask][i]*100.)
+                + "%%}_{-" +io.gf().format(dl["nlo_scale_errminus"][mask][i]/dl["nlo"][mask][i]*100.)
+                + "%%-"+io.gf().format(dl["nlo_pdf_errminus"][mask][i]/dl["nlo"][mask][i]*100.)
+                +  "%%}$ & "+
+            io.gf(4).format(dl["nlo_plus_nll"][mask][i]) 
+                + "^{+"+io.gf().format(dl["nlo_plus_nll_scale_errplus"][mask][i]/dl["nlo_plus_nll"][mask][i]*100.)
+                + "%%+"+io.gf().format(dl["nlo_plus_nll_pdf_errplus"][mask][i]/dl["nlo"][mask][i]*100.)
+                + "%%}_{-" +io.gf().format(dl["nlo_plus_nll_scale_errminus"][mask][i]/dl["nlo_plus_nll"][mask][i]*100.)
+                + "%%-"+io.gf().format(dl["nlo_plus_nll_pdf_errminus"][mask][i]/dl["nlo"][mask][i]*100.)
+                +  "%%}$ "+
+            "\n"
+        )
 
 def energy_plot(dict_list, y, yscale=1.,xaxis="E [GeV]",yaxis="$\\sigma$ [pb]",label=None,**kwargs):
     plot(dict_list, "energy", y, label=label,
