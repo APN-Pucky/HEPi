@@ -17,19 +17,19 @@ class Result:
         self.nlo_plus_nll = nlo_plus_nll
         if lo is not None and lo != 0:
             self.K_lo = lo/lo
+        #else:
+        #    print("lo None or lo=",lo)
         if nlo is not None and lo != 0:
             self.K_nlo = nlo/lo
+        #else:
+        #    print("nlo None or lo=",lo)
         if nlo_plus_nll is not None and lo != 0:
             self.K_nlo_plus_nll = nlo_plus_nll/lo
+        #else:
+        #    print("nlo+nll None or lo=",lo)
 
 
-class ResultWithError(Result):
-    def __init__(self,
-                 lo, lo_up_scale, lo_down_scale,
-                 nlo,  nlo_up_scale, nlo_down_scale, nlo_up_pdf, nlo_down_pdf,
-                 nlo_plus_nll, nlo_plus_nll_up_scale, nlo_plus_nll_down_scale, nlo_plus_nll_up_pdf, nlo_plus_nll_down_pdf,
-                 ):
-        Result.__init__(self, lo, nlo, nlo_plus_nll)
+
 
 
 def pdf_error(li, dl):

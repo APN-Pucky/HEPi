@@ -48,9 +48,9 @@ particle2 =  $particle2
 # - result = m:     Outputs the value for the invariant mass distribution at the
 #                   value specified by the `M` variable.
 #
-result = total  # total, pt, ptj or m.
-M      = auto  # auto = sqrt((p1 + p2)^2)
-pt     = auto
+result = $result # total, pt, ptj or m.
+M      = $invariant_mass  # auto = sqrt((p1 + p2)^2)
+pt     = $pt
 
 # SLHA input file that defines the SUSY benchmark point.
 slha = $slha

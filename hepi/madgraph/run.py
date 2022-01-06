@@ -8,12 +8,13 @@ import re
 from uncertainties import ufloat_fromstr
 import os.path
 from pathlib import Path
-from .result import MadgraphResult, parse_single
+from .result import MadgraphResult, is_valid, parse_single
 import enlighten
 import time
 import difflib
 import pyslha
 from smpl.parallel import *
+import hashlib
 
 madgraph_path = "/opt/MG5_aMC_v2_7_0/"
 
@@ -49,7 +50,10 @@ def _parse(outputs: List[str]) -> List[MadgraphResult]:
     for r in par(lambda f: parse_single(f["out"]), outputs):
         rsl.append(r)
     return rsl
-
+def namehash(n):
+    m = hashlib.sha256()
+    m.update(str(n).encode('utf-8'))
+    return m.hexdigest()
 
 def _queue(params: List[Input], noskip=False) -> List[RunParams]:
     Path("output").mkdir(parents=True, exist_ok=True)
@@ -59,10 +63,10 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
         d = p.__dict__
         d["code"] = "MG"
         # TODO insert defautl if missing in d!
-        name = "_".join("".join(str(_[0]) + "_" + str(_[1]))
-                        for _ in d.items()).replace("/", "-")
+        name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
+                        for _ in d.items()).replace("/", "-"))
         skip = False
-        if not noskip and os.path.isfile(get_output_dir() + name + ".out"):
+        if not noskip and os.path.isfile(get_output_dir() + name + ".out") and is_valid(get_output_dir() + name + ".out",p,d):
             print("skip", end='')
             skip = True
 

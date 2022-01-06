@@ -1,3 +1,4 @@
+from hepi.input import Order
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
 import re
 from uncertainties import ufloat_fromstr
@@ -7,6 +8,18 @@ class MadgraphResult(Result):
     def __init__(self, lo, nlo):
         Result.__init__(self, lo, nlo, nlo)
 
+
+def is_valid(file:str,p:Input,d):
+    order = p.order
+    res = parse_single(file)
+    if res.lo is not None and order is Order.LO:
+        return True
+    if res.lo is not None and res.nlo is not None and order is Order.NLO:
+        return True
+    if res.lo is not None and res.nlo is not None and res.nlo_plus_nll is not None and order is Order.NLO_PLUS_NLL:
+        return True
+    print("FAILED " ,res.lo, res.nlo,res.nlo_plus_nll, file)
+    return False
 
 def parse_single(file) -> MadgraphResult:
     # TODO generalize units like RS
