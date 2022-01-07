@@ -14,8 +14,8 @@ for run_plot in [True,False]:
 
                 if not run_plot:
                     hepi.scale_plot(dl,["lo","nlo","nlo_plus_nll"])
-                    plt.savefig(input.get_output_dir() +"scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf")
+                    plt.savefig(input.get_output_dir() +get_job_name() + "_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf")
                     hepi.central_scale_plot(dl,["lo","nlo","nlo_plus_nll"])
-                    plt.savefig(input.get_output_dir() +"central_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf")
+                    plt.savefig(input.get_output_dir() +get_job_name() +"_central_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf")
     wait()
 
