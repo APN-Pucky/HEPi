@@ -187,7 +187,16 @@ fig = None
 axs = None
 
 
-def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=False):
+def err_plt(axes,x,y,label=None,error=False):
+    v= label
+    if error:
+        l, _, _ = axes.errorbar(x, splot.unv(y), yerr=splot.usd(y), capsize=5, label=v)
+        return l
+    else:
+        l = axes.plot(x, splot.unv(y), label=v)
+        return l
+
+def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(1, 5, figsize=(12, 8), sharey=True)
@@ -206,36 +215,41 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=False):
             mvmin = np.min(splot.unv(mv[mask]))
 
         mask = mf == mr
-        l, _, _ = axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
-                                  yerr=splot.usd(mv[mask]), capsize=5, label=v)
+        l = err_plt(axs[0],mf[mask],mv[mask],label=v,error=error)
+        #l, _, _ = axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5, label=v)
         if seven_point_band:
             axs[0].fill_between(mf[mask], mvmax, mvmin,
                                 facecolor=l.get_color(), alpha=0.3)
 
         mask = mr == np.max(mr)
-        l, _, _ = axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
-                                  yerr=splot.usd(mv[mask]), capsize=5)
+        l = err_plt(axs[1],mf[mask],mv[mask],error=error)
+        #l, _, _ = axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
             axs[1].fill_between(mf[mask], mvmax, mvmin,
                                 facecolor=l.get_color(), alpha=0.3)
 
         mask = mf == np.min(mf)
-        l, _, _ = axs[2].errorbar(mr[mask], splot.unv(mv[mask]),
-                                  yerr=splot.usd(mv[mask]), capsize=5)
+        l = err_plt(axs[2],mr[mask],mv[mask],error=error)
+        #l, _, _ = axs[2].errorbar(mr[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
             axs[2].fill_between(mr[mask], mvmax, mvmin,
                                 facecolor=l.get_color(), alpha=0.3)
 
         mask = mr == np.min(mr)
-        l, _, _ = axs[3].errorbar(mf[mask], splot.unv(mv[mask]),
-                                  yerr=splot.usd(mv[mask]), capsize=5)
+        l = err_plt(axs[3],mf[mask],mv[mask],error=error)
+        #l, _, _ = axs[3].errorbar(mf[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
             axs[3].fill_between(mf[mask], mvmax, mvmin,
                                 facecolor=l.get_color(), alpha=0.3)
 
         mask = mf == np.max(mf)
-        l, _, _ = axs[4].errorbar(mr[mask], splot.unv(mv[mask]),
-                                  yerr=splot.usd(mv[mask]), capsize=5)
+        l = err_plt(axs[4],mr[mask],mv[mask],error=error)
+        #l, _, _ = axs[4].errorbar(mr[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
             axs[4].fill_between(mr[mask], mvmax, mvmin,
                                 facecolor=l.get_color(), alpha=0.3)
@@ -288,14 +302,6 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=False):
     axs[4].legend()
     # plt.show()
 
-def err_plt(axes,x,y,label=None,error=False):
-    v= label
-    if error:
-        l, _, _ = axes.errorbar(x, splot.unv(y), yerr=splot.usd(y), capsize=5, label=v)
-        return l
-    else:
-        l = axes.plot(x, splot.unv(y), label=v)
-        return l
     
 
 def central_scale_plot(dict_list, vl, cont=False,error=True):
