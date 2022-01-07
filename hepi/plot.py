@@ -54,6 +54,7 @@ def title(axe,i:Input,scenario="",diff_L_R=None):
         "$pp\\to"+get_name(i.particle1)+get_name(i.particle2)
         +"$ at $\\sqrt{s} = " +str(i.energy/1000) + "$ TeV"
         +" for " +(i.slha.split(".")[0] if scenario =="" else scenario)
+        +" with " + i.pdf_nlo
     )
 
 
