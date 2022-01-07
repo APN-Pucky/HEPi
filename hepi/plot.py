@@ -128,7 +128,10 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
                 vx, splot.unv(vy)-splot.usd(vy), k=3)  # type: BSpline
         power_down_smooth = spl_down(xnew)
     if data_color is None:
-        bl, = plt.gca().plot([], [])
+        if 'axes' in kwargs and kwargs['axes'] is not None:
+            bl, = kwargs['axes'].plot([], [])
+        else:
+            bl, = plt.gca().plot([], [])
         color = bl.get_color()
     if plot_data:
         splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color, **kwargs)
