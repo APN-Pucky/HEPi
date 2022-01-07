@@ -1,5 +1,6 @@
 import cluster
 from cluster import *
+from hepi.plot import mass_and_K_plot
 
 #wait()
 for run_plot in [True,False ]:
@@ -15,19 +16,10 @@ for run_plot in [True,False ]:
 
                 if not run_plot:
                     dl = hepi.scale_error(li,dl)
-                    plot.data([],[],init=True)
-                    hepi.mass_plot(dl,  "lo_scale",p,           logy=True,mask=dl["lo_scale"]!=np.array(None), plot_data=False,fill=True,label="lo")
-                    hepi.mass_plot(dl,  "nlo_scale",p,          logy=True,mask=dl["lo_scale"]!=np.array(None), plot_data=False,fill=True,label="nlo")
-                    hepi.mass_plot(dl,  "nlo_plus_nll_scale",p, logy=True,mask=dl["lo_scale"]!=np.array(None), plot_data=False,fill=True,label="nlo+nll")
+                    mass_and_K_plot(dl,p,scale=True)
 
                     plt.savefig(input.get_output_dir() + get_job_name() + "_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
 
-                    plot.data([],[],init=True)
-                    hepi.mass_plot(dl,  "lo_scale",p,           logy=False,K=True,mask=dl["lo_scale"]!=np.array(None), plot_data=False,fill=True,label="lo")
-                    hepi.mass_plot(dl,  "nlo_scale",p,          logy=False,K=True,mask=dl["lo_scale"]!=np.array(None), plot_data=False,fill=True,label="nlo")
-                    hepi.mass_plot(dl,  "nlo_plus_nll_scale",p, logy=False,K=True,mask=dl["lo_scale"]!=np.array(None), plot_data=False,fill=True,label="nlo+nll")
-
-                    plt.savefig(input.get_output_dir() + get_job_name() + "_K_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
 
                     hepi.tex_table(dl,"mass_no_pdf_"+str(p),input.get_output_dir() + "mass" + str(p)+  "_"+ str(nlo_pdf) +"_"+ str(scenario)+ ".tex",pdf=False)
     wait()

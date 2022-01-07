@@ -25,16 +25,16 @@ for run_plot in [True, ]:
                     hepi.combined_plot(hepi.mass_plot,dl,"nlo",p,logy=True,interpolate=False)
                     hepi.combined_plot(hepi.mass_plot,dl,"nlo_plus_nll",p,logy=True,interpolate=False)
 
-                    plt.savefig(input.get_output_dir()+ "comp_" + nlo_pdf + "_" + str(p) + ".pdf")
+                    plt.savefig(input.get_output_dir()+ get_job_name()+"_comp_" + nlo_pdf + "_" + str(p) +"_" + str(ps)+ "_" +str(scenario)+ ".pdf")
 
 
                     plot.data([],[],init=True)
                     hepi.combined_plot(hepi.mass_plot,dl, "lo",p, logy=False,K=True, label="lo",interpolate=False)
                     hepi.combined_plot(hepi.mass_plot,dl, "nlo",p, logy=False,K=True, label="nlo",interpolate=False)
                     hepi.combined_plot(hepi.mass_plot,dl, "nlo_plus_nll",p, logy=False,K=True, label="nlo+nll",interpolate=False)
-                    plt.savefig(input.get_output_dir()+ "Kcomp_" + nlo_pdf + "_" + str(p) + ".pdf")
+                    plt.savefig(input.get_output_dir()+ get_job_name()+"_Kcomp_" + nlo_pdf + "_" + str(p) +"_" + str(ps)+ "_" +str(scenario)+ ".pdf")
 
-                    hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + "mass" + str(p)+  "_"+ str(nlo_pdf) + "_" +str(scenario) + ".tex")
+                    hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name()+"_mass" + str(p)+ "_" + str(ps)+  "_"+ str(nlo_pdf) + "_" +str(scenario) + ".tex")
 
     #wait()
 
