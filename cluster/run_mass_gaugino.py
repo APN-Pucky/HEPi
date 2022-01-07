@@ -19,9 +19,8 @@ for run_plot in [True, ]:
                     dl = hepi.pdf_error(li,dl)
                     dl = hepi.scale_error(li,dl)
                     dl = hepi.combine_errors(dl)
-                    hepi.mass_and_K_plot(dl,p,combined=True,plot_data=True,fill=True)
 
-
+                    hepi.mass_and_K_plot(dl,li,p,combined=True,plot_data=True,fill=True)
                     plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_" + nlo_pdf + "_" + str(p) +"_" + str(ps)+ "_" +str(scenario)+ ".pdf")
 
 

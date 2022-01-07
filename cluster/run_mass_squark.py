@@ -19,10 +19,10 @@ for run_plot in [True,False ]:
                     dl = hepi.scale_error(li,dl)
                     dl = hepi.combine_errors(dl)
 
-                    hepi.mass_and_K_plot(dl,p,combined=True,plot_data=True,fill=True)
+                    hepi.mass_and_K_plot(dl,li,p,combined=True,plot_data=True,fill=True)
                     plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_K_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf")
 
-                    hepi.mass_and_ratio_plot(dl,p,combined=True,plot_data=True,fill=True)
+                    hepi.mass_and_ratio_plot(dl,li,p,combined=True,plot_data=True,fill=True)
                     plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf")
 
                     hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name()+"_mass" + str(p)+  "_"+ str(nlo_pdf) + "_" +str(scenario) + ".tex")

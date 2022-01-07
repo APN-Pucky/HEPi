@@ -49,11 +49,11 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True):
             "\n"
         )
 
-def title(i:Input,diff_L_R=None):
-    plt.suptitle(
+def title(axe,i:Input,diff_L_R=None):
+    axe.set_title(
         "$pp\\to"+get_name(i.particle1)+get_name(i.particle2)
-        +"$ at $\\sqrt{s} = " +str(i.energy/1000) + "$ TeV "
-        +i.slha.split(".")[0]
+        +"$ at $\\sqrt{s} = " +str(i.energy/1000) + "$ TeV"
+        +"for " +i.slha.split(".")[0]
     )
 
 
@@ -378,12 +378,13 @@ def central_scale_plot(dict_list, vl, cont=False,error=True):
     # plt.show()
 
 
-def mass_and_K_plot(dl,p,*args,scale=False,combined=False,cont = False,**kwargs):
+def mass_and_K_plot(dl,li,p,scale=False,combined=False,cont = False,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
+        title(axs[0],li[0])
     if combined:
         for i in [0,1]:
             kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'K':[False,True][i],'tight':False}
@@ -398,12 +399,13 @@ def mass_and_K_plot(dl,p,*args,scale=False,combined=False,cont = False,**kwargs)
             mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,label="nlo+nll")
 
 
-def mass_and_ratio_plot(dl,p,*args,scale=False,combined=False,cont = False,plot_data=True,fill=True,**kwargs):
+def mass_and_ratio_plot(dl,li,p,scale=False,combined=False,cont = False,plot_data=True,fill=True,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
+        title(axs[0],li[0])
     if combined:
         for i in [0,1]:
             kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'tight':False}
