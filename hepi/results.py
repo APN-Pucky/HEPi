@@ -95,15 +95,15 @@ def pdf_error(li, dl):
 
     mask = dl["lo_pdf_central"]!= np.array(None)
     dl["lo_pdf"][mask] = unumpy.uarray(plot.unv(dl["lo"][mask])+dl["lo_pdf_errplus"][mask]/2.+dl["lo_pdf_errminus"][mask]/2.,
-        +dl["lo_pdf_errplus"][mask]-dl["lo_pdf_errminus"][mask])
+        (+dl["lo_pdf_errplus"][mask]-dl["lo_pdf_errminus"][mask])/2.)
 
     mask = dl["nlo_pdf_central"]!= np.array(None)
     dl["nlo_pdf"][mask] = unumpy.uarray(plot.unv(dl["nlo"][mask])+dl["nlo_pdf_errplus"][mask]/2.+dl["nlo_pdf_errminus"][mask]/2.,
-        +dl["nlo_pdf_errplus"][mask]-dl["nlo_pdf_errminus"][mask])
+        (+dl["nlo_pdf_errplus"][mask]-dl["nlo_pdf_errminus"][mask])/2.)
 
     mask = dl["nlo_plus_nll_pdf_central"]!= np.array(None)
     dl["nlo_plus_nll_pdf"][mask] = unumpy.uarray(plot.unv(dl["nlo_plus_nll"][mask])+dl["nlo_plus_nll_pdf_errplus"][mask]/2.+dl["nlo_plus_nll_pdf_errminus"][mask]/2.,
-        +dl["nlo_plus_nll_pdf_errplus"][mask]-dl["nlo_plus_nll_pdf_errminus"][mask])
+        (+dl["nlo_plus_nll_pdf_errplus"][mask]-dl["nlo_plus_nll_pdf_errminus"][mask])/2.)
     return dl
 
 
@@ -157,15 +157,15 @@ def scale_error(li, dl):
 
     mask = dl["lo_scale_errplus"]!= np.array(None)
     dl["lo_scale"][mask] = unumpy.uarray(plot.unv(dl["lo"][mask])+dl["lo_scale_errplus"][mask]/2.+dl["lo_scale_errminus"][mask]/2.,
-        +dl["lo_scale_errplus"][mask]-dl["lo_scale_errminus"][mask])
+        (+dl["lo_scale_errplus"][mask]-dl["lo_scale_errminus"][mask])/2.)
 
     mask = dl["nlo_scale_errplus"]!= np.array(None)
     dl["nlo_scale"][mask] = unumpy.uarray(plot.unv(dl["nlo"][mask])+dl["nlo_scale_errplus"][mask]/2.+dl["nlo_scale_errminus"][mask]/2.,
-        +dl["nlo_scale_errplus"][mask]-dl["nlo_scale_errminus"][mask])
+        (+dl["nlo_scale_errplus"][mask]-dl["nlo_scale_errminus"][mask])/2.)
 
     mask = dl["nlo_plus_nll_scale_errplus"]!= np.array(None)
     dl["nlo_plus_nll_scale"][mask] = unumpy.uarray(plot.unv(dl["nlo_plus_nll"][mask])+dl["nlo_plus_nll_scale_errplus"][mask]/2.+dl["nlo_plus_nll_scale_errminus"][mask]/2.,
-        +dl["nlo_plus_nll_scale_errplus"][mask]-dl["nlo_plus_nll_scale_errminus"][mask])
+        (+dl["nlo_plus_nll_scale_errplus"][mask]-dl["nlo_plus_nll_scale_errminus"][mask])/2.)
     
     return dl
 
