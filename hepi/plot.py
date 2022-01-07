@@ -177,7 +177,7 @@ fig = None
 axs = None
 
 
-def scale_plot(dict_list, vl, seven_point_band=False, cont=False):
+def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=False):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(1, 5, figsize=(12, 8), sharey=True)
@@ -276,6 +276,72 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False):
     axs[2].legend()
     axs[3].legend()
     axs[4].legend()
+    # plt.show()
+
+def err_plt(axes,x,y,label=None,error=False):
+    v= label
+    if error:
+        l, _, _ = axes.errorbar(x, splot.unv(y), yerr=splot.usd(y), capsize=5, label=v)
+        return l
+    else:
+        l = axes.plot(x, splot.unv(y), label=v)
+        return l
+    
+
+def central_scale_plot(dict_list, vl, cont=False,error=True):
+    global fig, axs
+    if not cont:
+        fig, axs = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
+        # Remove horizontal space between axes
+        fig.subplots_adjust(hspace=0)
+
+    mr = dict_list["mu_r"]
+    mf = dict_list["mu_f"]
+
+    for v in vl:
+        mv = dict_list[v]
+
+        mask = mf == mr
+        l = err_plt(axs[0],mf[mask],mv[mask],label=v,error=error)
+  
+
+        mask = mf == 1.0
+        l = err_plt(axs[1],mr[mask],mv[mask],error=error)
+
+
+        mask = mr == 1.0
+        l = err_plt(axs[2],mf[mask],mv[mask],error=error)
+
+
+
+    if not cont:
+        axs[0].plot([], [], ' ', label="$\mu_R=\mu_F=\mu$")
+        axs[1].plot([], [], ' ', label="$\mu_F=\mu_0$, $\mu_R=\mu$")
+        axs[2].plot([], [], ' ', label="$\mu_R=\mu_0$, $\mu_F=\mu$")
+
+    axs[1].set_ylabel("$\sigma$ [pb]")
+
+    axs[0].set_xscale("log")
+    #axs[0].set_xlim(np.min(mf), np.max(mf))
+    axs[2].set_xlabel("$\mu/\mu_0$")
+
+    # axs[1].plot(t, s2)
+    #axs[1].set_xscale("log")
+    #axs[1].set_xlim(np.max(mf), np.min(mf))
+    #axs[1].set_xticks([1.])
+    #axs[1].xaxis.set_minor_formatter(NullFormatter())
+    #axs[1].set_xlabel("$\mu_{F}/\mu_0$")
+
+    # axs[2].plot(t, s3)
+    #axs[2].set_xscale("log")
+    #axs[2].set_xlim(np.max(mf), np.min(mf))
+    #axs[2].set_xticks([1.])
+    #axs[2].xaxis.set_minor_formatter(NullFormatter())
+    #axs[2].set_xlabel("$\mu_{R}/\mu_0$")
+
+    axs[0].legend()
+    axs[1].legend()
+    axs[2].legend()
     # plt.show()
 
 

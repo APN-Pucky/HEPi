@@ -144,7 +144,27 @@ def scale_scan(l: List[Input], range=3, distance=2.):
             tmp = scan(tmp, "mu_r", np.logspace(np.log10(1. /
                         distance), np.log10(distance), range))
             for t in tmp:
-                if t.mu_f == t.mu_r or t.mu_f == distance or t.mu_f == 1./distance or t.mu_r == distance or t.mu_r == 1./distance:
+                if t.mu_f == 1.0 or t.mu_r == 1.0 or t.mu_f == t.mu_r or t.mu_f == distance or t.mu_f == 1./distance or t.mu_r == distance or t.mu_r == 1./distance:
+                    ret.append(t)
+
+        else:
+            ret.append(s)
+
+    return ret
+
+def seven_point_scan(l: List[Input]):
+    range=3
+    distance=2.
+    ret = []
+    for s in l:
+        # not on error pdfs
+        if s.pdfset_nlo == 0:
+            tmp = scan([s], "mu_f", np.logspace(np.log10(1. /
+                        distance), np.log10(distance), range))
+            tmp = scan(tmp, "mu_r", np.logspace(np.log10(1. /
+                        distance), np.log10(distance), range))
+            for t in tmp:
+                if not ((t.mu_f == distance and  t.mu_r == 1./distance) or (t.mu_r == distance and  t.mu_f == 1./distance)):
                     ret.append(t)
 
         else:
