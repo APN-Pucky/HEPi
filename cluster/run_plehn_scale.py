@@ -17,6 +17,6 @@ for run_plot in [True,False]:
                 if not run_plot:
                     #dl = hepi.pdf_error(li,dl)
                     hepi.scale_plot(dl,["lo","nlo","nlo_plus_nll"],seven_point_band=True)
-                    plt.savefig(input.get_output_dir() +"scale_variation2_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf")
+                    plt.savefig(input.get_output_dir() +"scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf")
     wait()
 

@@ -18,7 +18,7 @@ for run_plot in [False]:
                 dl = hepi.pdf_error(li,dl)
                 dl = hepi.scale_error(li,dl)
                 dl = hepi.combine_errors(dl)
-                
+
                 plot.data([],[],init=True)
                 hepi.combined_plot(hepi.mass_plot,dl,"lo",p,yscale=1000,yaxis="$\sigma$ [fb]",interpolate=False)
                 hepi.combined_plot(hepi.mass_plot,dl,"nlo",p,yscale=1000,yaxis="$\sigma$ [fb]",interpolate=False)
@@ -33,4 +33,6 @@ for run_plot in [False]:
                 hepi.combined_plot(hepi.mass_plot,dl, "nlo_plus_nll",p,K=True, logy=False, label="nlo+nll",interpolate=False)
                 plt.savefig(input.get_output_dir()+ "Kcomp_" + nlo_pdf + "_" + str(p) + ".pdf")
 
+
+                hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + "mass" + str(p)+  "_"+ str(nlo_pdf) + ".tex")
     wait()
