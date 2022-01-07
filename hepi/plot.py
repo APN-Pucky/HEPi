@@ -403,7 +403,7 @@ def mass_and_ratio_plot(dl,p,*args,scale=False,combined=False,cont = False,plot_
             combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,**kargs,**kwargs)
             combined_plot(mass_plot,dl,"nlo_plus_nll",p,plot_data=plot_data,fill=fill,**kargs,**kwargs)
             if i == 1:
-                mass_plot(dl,  "nlo_plus_nll_over_nlo",p,plot_data=False,fill=False, **kargs,**kwargs,color='0',label="(nlo+nll)/nlo")
+                mass_plot(dl,  "nlo_plus_nll_over_nlo",p,interpolate=True,plot_data=False,fill=False, **kargs,**kwargs,color='0',label="(nlo+nll)/nlo")
 
     elif scale:
         for i in [0,1]:
@@ -412,4 +412,4 @@ def mass_and_ratio_plot(dl,p,*args,scale=False,combined=False,cont = False,plot_
             mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,label="nlo")
             mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,label="nlo+nll")
             if i == 1:
-                mass_plot(dl,  "nlo_plus_nll_over_nlo",p, plot_data=False,fill=False,**kargs,**kwargs,color='0',label="(nlo+nll)/nlo")
+                mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,color='0',label="(nlo+nll)/nlo")
