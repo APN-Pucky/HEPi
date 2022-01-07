@@ -16,9 +16,13 @@ for run_plot in [True,False ]:
 
                 if not run_plot:
                     dl = hepi.scale_error(li,dl)
-                    mass_and_K_plot(dl,p,scale=True,plot_data=True,fill=True)
 
-                    plt.savefig(input.get_output_dir() + get_job_name() + "_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
+                    hepi.mass_and_K_plot(dl,p,scale=True,plot_data=True,fill=True)
+                    plt.savefig(input.get_output_dir() + get_job_name() + "_mass_and_K_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
+
+                    hepi.mass_and_ratio_plot(dl,p,scale=True,plot_data=True,fill=True)
+                    plt.savefig(input.get_output_dir() + get_job_name() + "_mass_and_ratio_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
+
 
 
                     #hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name() + "_" + str(p)+  "_"+ str(nlo_pdf) +"_"+ str(scenario)+ ".tex",pdf=False)

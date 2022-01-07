@@ -19,19 +19,11 @@ for run_plot in [True,False ]:
                     dl = hepi.scale_error(li,dl)
                     dl = hepi.combine_errors(dl)
 
-                    plot.data([],[],init=True)
-                    hepi.combined_plot(hepi.mass_plot,dl,"lo",p,logy=True,interpolate=False)
-                    hepi.combined_plot(hepi.mass_plot,dl,"nlo",p,logy=True,interpolate=False)
-                    hepi.combined_plot(hepi.mass_plot,dl,"nlo_plus_nll",p,logy=True,interpolate=False)
-           
-                    plt.savefig(input.get_output_dir()+ get_job_name()+"_comp_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf")
+                    hepi.mass_and_K_plot(dl,p,combined=True,plot_data=True,fill=True)
+                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_K_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf")
 
-
-                    plot.data([],[],init=True)
-                    hepi.combined_plot(hepi.mass_plot,dl, "lo",p, logy=False,K=True, label="lo",interpolate=False)
-                    hepi.combined_plot(hepi.mass_plot,dl, "nlo",p, logy=False,K=True, label="nlo",interpolate=False)
-                    hepi.combined_plot(hepi.mass_plot,dl, "nlo_plus_nll",p, logy=False,K=True, label="nlo+nll",interpolate=False)
-                    plt.savefig(input.get_output_dir()+ get_job_name()+"_Kcomp_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf")
+                    hepi.mass_and_ratio_plot(dl,p,combined=True,plot_data=True,fill=True)
+                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf")
 
                     hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name()+"_mass" + str(p)+  "_"+ str(nlo_pdf) + "_" +str(scenario) + ".tex")
 

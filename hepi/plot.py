@@ -90,7 +90,7 @@ def mass_vplot(dict_list,  y,part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1.,
           xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 
 
-def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",K=False, logy=True, yscale=1.,mask=None,**kwargs):
+def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ratio=False,K=False, logy=True, yscale=1.,mask=None,**kwargs):
     # TODO use kwargs
     if label is None:
         label = y
@@ -100,6 +100,10 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",K=
     if K:
         yaxis = "$K$"
         vy = vy / splot.unv(dict_list["lo"][mask])
+    if ratio:
+        yaxis = "Ratio"
+        vy = vy / splot.unv(vy)
+
 
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 
@@ -381,6 +385,26 @@ def mass_and_K_plot(dl,p,*args,scale=False,combined=False,cont = False,**kwargs)
     elif scale:
         for i in [0,1]:
             kargs = {'logy':[True,False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
+            mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,label="lo")
+            mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,label="nlo")
+            mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,label="nlo+nll")
+
+
+def mass_and_ratio_plot(dl,p,*args,scale=False,combined=False,cont = False,**kwargs):
+    global fig, axs
+    if not cont:
+        fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+        # Remove horizontal space between axes
+        fig.subplots_adjust(hspace=0)
+    if combined:
+        for i in [0,1]:
+            kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'ratio':[False,True][i],'tight':False}
+            combined_plot(mass_plot,dl,"lo",p,**kargs,**kwargs)
+            combined_plot(mass_plot,dl,"nlo",p,**kargs,**kwargs)
+            combined_plot(mass_plot,dl,"nlo_plus_nll",p,**kargs,**kwargs)
+    elif scale:
+        for i in [0,1]:
+            kargs = {'logy':[True,False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'ratio':[False,True][i],'tight':False}
             mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,label="lo")
             mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,label="nlo")
             mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,label="nlo+nll")
