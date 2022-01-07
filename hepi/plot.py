@@ -74,7 +74,7 @@ def combined_plot(func,dict_list,t,*args,label=None,**kwargs):
     func(dict_list,t+ "_scale",*args,
         fmt=" ",data_color=color,mask = mask,label="",**kwargs)
     func(dict_list,t+ "_combined",*args,
-         fmt=" ",data_color=color,capsize=None,label="",mask = mask,**kwargs)
+         fmt=" ",data_color=color,capsize=None,label="",mask = mask,fill=True,**kwargs)
 
 
 
@@ -102,7 +102,7 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",K=
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 
 
-def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,data_color=None,mask=-1,**kwargs):
+def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,**kwargs):
     color = data_color
     if label is None:
         label = "??"
@@ -112,19 +112,29 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
     vx = x
     vy = y
 
+    xnew = np.linspace(vx[0], vx[-1], 300,)
     if interpolate:
-        xnew = np.linspace(vx[0], vx[-1], 300,)
         #print(vx,vy)
         spl = make_interp_spline(
             vx, splot.unv(vy), k=3)  # type: BSpline
         power_smooth = spl(xnew)
+    if fill:
+        spl_up = make_interp_spline(
+                vx, splot.unv(vy)+splot.usd(vy), k=3)  # type: BSpline
+        power_up_smooth = spl_up(xnew)
+        spl_down = make_interp_spline(
+                vx, splot.unv(vy)-splot.usd(vy), k=3)  # type: BSpline
+        power_down_smooth = spl_down(xnew)
     if data_color is None:
         bl, = plt.gca().plot([], [])
         color = bl.get_color()
-    splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color, **kwargs)
+    if plot_data:
+        splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color, **kwargs)
     if interpolate:
         splot.data(xnew, power_smooth*yscale, logy=logy, fmt="-"
               , init=False, data_color=color, **kwargs)
+    if fill:
+        plt.fill_between(xnew,power_up_smooth,power_down_smooth,alpha=0.3,color=color)
     if((np.any(np.less(vy,0)) or ( interpolate and np.any(np.less(power_smooth, 0)))) and logy):
         splot.data(vx, -vy*yscale,label="-"+label,xaxis=xaxis, yaxis=yaxis, logy=logy, data_color=color, **kwargs)
         if interpolate:
