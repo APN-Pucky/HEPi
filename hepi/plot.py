@@ -16,7 +16,7 @@ from particle.converters.bimap import DirectionalMaps
 import matplotlib.cm as cm
 from matplotlib import colors
 
-from .input import get_name
+from .input import Input, get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
 from smpl import io
 
@@ -48,6 +48,15 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True):
                 +  "%%}$ "+
             "\n"
         )
+
+def title(i:Input,diff_L_R=None):
+    plt.suptitle(
+        "$pp\\to"+get_name(i.particle1)+get_name(i.particle2)
+        +"$ at $\\sqrt{s} = " +str(i.energy/1000) + "$ TeV "
+        +i.slha.split(".")[0]
+    )
+
+
 
 def energy_plot(dict_list, y, yscale=1.,xaxis="E [GeV]",yaxis="$\\sigma$ [pb]",label=None,**kwargs):
     plot(dict_list, "energy", y, label=label,

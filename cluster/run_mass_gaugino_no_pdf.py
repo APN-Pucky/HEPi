@@ -9,7 +9,7 @@ for run_plot in [True, ]:
                 p = 1000022
                 i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, ps, p, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=50)
 
-                li = hepi.mass_scan([i], p, np.linspace(1000, 2000, 20+1))
+                li = hepi.mass_scan([i], p, np.linspace(1000, 2000, 40+1))
                 li = hepi.seven_point_scan(li)
 
                 dll = rs.run(li, False, False, run_plot,False)

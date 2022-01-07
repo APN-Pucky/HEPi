@@ -18,6 +18,7 @@ for run_plot in [True,False ]:
                     dl = hepi.scale_error(li,dl)
 
                     hepi.mass_and_K_plot(dl,p,scale=True,plot_data=True,fill=True)
+                    hepi.title(i)
                     plt.savefig(input.get_output_dir() + get_job_name() + "_mass_and_K_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
 
                     hepi.mass_and_ratio_plot(dl,p,scale=True,plot_data=True,fill=True)
