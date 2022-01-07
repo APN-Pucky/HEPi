@@ -9,14 +9,14 @@ for run_plot in [True,False ]:
             for p in [2000002, 1000002]:
                 i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, p, 1000022, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=50)
 
-                li = hepi.mass_scan([i], p, np.linspace(1000, 3000, 20+1), diff_L_R=100)
+                li = hepi.mass_scan([i], p, np.linspace(1000, 3000, 32), diff_L_R=100)
                 li = hepi.seven_point_scan(li)
 
                 dl = rs.run(li, False, False, run_plot,False)
 
                 if not run_plot:
                     dl = hepi.scale_error(li,dl)
-                    mass_and_K_plot(dl,p,scale=True)
+                    mass_and_K_plot(dl,p,scale=True,plot_data=True,fill=True)
 
                     plt.savefig(input.get_output_dir() + get_job_name() + "_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
 
