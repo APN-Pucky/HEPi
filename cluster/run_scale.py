@@ -7,7 +7,7 @@ for run_plot in [True,False ]:
             for p in [2000002, 1000002]:
                 li = [hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, p, 1000022, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=50)]
 
-                hepi.scale_scan(li, 9,10.)
+                li = hepi.scale_scan(li, 9,10.)
 
                 dl = rs.run(li, False, False, run_plot,False)
 
