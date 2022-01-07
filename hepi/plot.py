@@ -397,18 +397,18 @@ def mass_and_ratio_plot(dl,p,*args,scale=False,combined=False,cont = False,plot_
         fig.subplots_adjust(hspace=0)
     if combined:
         for i in [0,1]:
-            kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'ratio':[False,True][i],'tight':False}
-            combined_plot(mass_plot,dl,"lo",p,plot_data=plot_data,fill=fill,**kargs,**kwargs)
-            combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,**kargs,**kwargs)
-            combined_plot(mass_plot,dl,"nlo_plus_nll",p,plot_data=plot_data,fill=fill,**kargs,**kwargs)
+            kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'tight':False}
+            combined_plot(mass_plot,dl,"lo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+            combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+            combined_plot(mass_plot,dl,"nlo_plus_nll",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
             if i == 1:
                 mass_plot(dl,  "nlo_plus_nll_over_nlo",p,interpolate=True,plot_data=False,fill=False, **kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
 
     elif scale:
         for i in [0,1]:
-            kargs = {'logy':[True,False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'ratio':[False,True][i],'tight':False}
-            mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,label="lo")
-            mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,label="nlo")
-            mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,label="nlo+nll")
+            kargs = {'logy':[True,False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'tight':False}
+            mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
+            mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
+            mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
             if i == 1:
                 mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
