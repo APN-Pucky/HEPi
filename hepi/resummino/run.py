@@ -39,6 +39,7 @@ class RunParams:
 
 
 def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True):
+    print("Running: " + len(params)  +" jobs" )
     rps = _queue(params, noskip)
     _run(rps, bar, no_parse,para)
     if not no_parse:
