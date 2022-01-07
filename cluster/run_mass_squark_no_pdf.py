@@ -17,10 +17,10 @@ for run_plot in [True,False ]:
                 if not run_plot:
                     dl = hepi.scale_error(li,dl)
 
-                    hepi.mass_and_K_plot(dl,li,p,scale=True,plot_data=True,fill=True)
+                    hepi.mass_and_K_plot(dl,li,p,scale=True,plot_data=True,fill=True,scenario="scenario B")
                     plt.savefig(input.get_output_dir() + get_job_name() + "_mass_and_K_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
 
-                    hepi.mass_and_ratio_plot(dl,li,p,scale=True,plot_data=True,fill=True)
+                    hepi.mass_and_ratio_plot(dl,li,p,scale=True,plot_data=True,fill=True,scenario="scenario B")
                     plt.savefig(input.get_output_dir() + get_job_name() + "_mass_and_ratio_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
 
 

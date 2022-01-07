@@ -49,11 +49,11 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True):
             "\n"
         )
 
-def title(axe,i:Input,diff_L_R=None):
+def title(axe,i:Input,scenario="",diff_L_R=None):
     axe.set_title(
         "$pp\\to"+get_name(i.particle1)+get_name(i.particle2)
         +"$ at $\\sqrt{s} = " +str(i.energy/1000) + "$ TeV"
-        +"for " +i.slha.split(".")[0]
+        +" for " +(i.slha.split(".")[0] if scenario =="" else scenario)
     )
 
 
@@ -384,7 +384,7 @@ def mass_and_K_plot(dl,li,p,scale=False,combined=False,cont = False,**kwargs):
         fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
-        title(axs[0],li[0])
+        title(axs[0],li[0],**kwargs)
     if combined:
         for i in [0,1]:
             kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'K':[False,True][i],'tight':False}
@@ -405,7 +405,7 @@ def mass_and_ratio_plot(dl,li,p,scale=False,combined=False,cont = False,plot_dat
         fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
-        title(axs[0],li[0])
+        title(axs[0],li[0],**kwargs)
     if combined:
         for i in [0,1]:
             kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'tight':False}
