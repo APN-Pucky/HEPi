@@ -25,6 +25,8 @@ class Result:
         #    print("nlo None or lo=",lo)
         if nlo_plus_nll is not None and lo != 0:
             self.K_nlo_plus_nll = nlo_plus_nll/lo
+        if nlo_plus_nll is not None and nlo != 0:
+            self.nlo_plus_nll_over_nlo = nlo_plus_nll/nlo
         #else:
         #    print("nlo+nll None or lo=",lo)
 
