@@ -19,28 +19,31 @@ from .input import get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
 from smpl import io
 
-def total_tex_table(dict_list,key,fname):
+def tex_table(dict_list,key,fname,scale=True,pdf=True):
  dl = dict_list
- mask = dl["nlo_pdf_central"]!= np.array(None)
- with open(fname) as f:
-     for i in len(dl["lo"][mask]):
+ mask = dl["nlo_scale"]!= np.array(None)
+ lo = splot.unv(dl["lo"][mask])
+ nlo = splot.unv(dl["nlo"][mask])
+ nlo_plus_nll = splot.unv(dl["nlo_plus_nll"][mask])
+ with open(fname,'w+') as f:
+     for i in range(len(dl["lo"][mask])):
         f.write(
-            "$" + dl[key][mask][i] + "$ & $"+
-            io.gf(4).format(dl["lo"][mask][i]) 
-                + "^{+"+io.gf().format(dl["lo_scale_errplus"][mask][i]/dl["lo"][mask][i]*100.)
-                + "%%}_{-" +io.gf().format(dl["lo_scale_errminus"][mask][i]/dl["lo"][mask][i]*100.)
+            "$" + io.gf(4).format(dl[key][mask][i]) + "$ & $"+
+            io.gf(4).format(lo[i]) 
+                + "^{+"+io.gf().format(dl["lo_scale_errplus"][mask][i]/lo[i]*100.)
+                + "%%}_{" +io.gf().format(dl["lo_scale_errminus"][mask][i]/lo[i]*100.)
                 +  "%%}$ & "+
             io.gf(4).format(dl["nlo"][mask][i]) 
-                + "^{+"+io.gf().format(dl["nlo_scale_errplus"][mask][i]/dl["nlo"][mask][i]*100.)
-                + "%%+"+io.gf().format(dl["nlo_pdf_errplus"][mask][i]/dl["nlo"][mask][i]*100.)
-                + "%%}_{-" +io.gf().format(dl["nlo_scale_errminus"][mask][i]/dl["nlo"][mask][i]*100.)
-                + "%%-"+io.gf().format(dl["nlo_pdf_errminus"][mask][i]/dl["nlo"][mask][i]*100.)
+                + "^{+"+io.gf().format(dl["nlo_scale_errplus"][mask][i]/nlo[i]*100.)
+                + ("%%+"+io.gf().format(dl["nlo_pdf_errplus"][mask][i] /nlo[i]*100.) if pdf else "")
+                + "%%}_{" +io.gf().format(dl["nlo_scale_errminus"][mask][i]/nlo[i]*100.)
+                + ("%%"+io.gf().format(dl["nlo_pdf_errminus"][mask][i]/nlo[i]*100.) if pdf else "")
                 +  "%%}$ & "+
             io.gf(4).format(dl["nlo_plus_nll"][mask][i]) 
-                + "^{+"+io.gf().format(dl["nlo_plus_nll_scale_errplus"][mask][i]/dl["nlo_plus_nll"][mask][i]*100.)
-                + "%%+"+io.gf().format(dl["nlo_plus_nll_pdf_errplus"][mask][i]/dl["nlo"][mask][i]*100.)
-                + "%%}_{-" +io.gf().format(dl["nlo_plus_nll_scale_errminus"][mask][i]/dl["nlo_plus_nll"][mask][i]*100.)
-                + "%%-"+io.gf().format(dl["nlo_plus_nll_pdf_errminus"][mask][i]/dl["nlo"][mask][i]*100.)
+                + "^{+"+io.gf().format(dl["nlo_plus_nll_scale_errplus"][mask][i]/nlo_plus_nll[i]*100.)
+                + ("%%+"+io.gf().format(dl["nlo_plus_nll_pdf_errplus"][mask][i]/nlo[i]*100.) if pdf else "")
+                + "%%}_{" +io.gf().format(dl["nlo_plus_nll_scale_errminus"][mask][i]/nlo_plus_nll[i]*100.)
+                + ("%%"+io.gf().format(dl["nlo_plus_nll_pdf_errminus"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
                 +  "%%}$ "+
             "\n"
         )
