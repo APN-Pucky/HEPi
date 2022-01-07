@@ -98,6 +98,7 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",K=
     vy = dict_list[y][mask]
 
     if K:
+        yaxis = "$K$"
         vy = vy / splot.unv(dict_list["lo"][mask])
 
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
@@ -370,13 +371,13 @@ def mass_and_K_plot(dl,p,*args,scale=False,combined=False,cont = False,**kwargs)
         fig.subplots_adjust(hspace=0)
     if combined:
         for i in [0,1]:
-            kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'K':[False,True][i],'plot_data':False,'fill':True,}
+            kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'K':[False,True][i],'tight':False}
             combined_plot(mass_plot,dl,"lo",p,**kargs,**kwargs)
             combined_plot(mass_plot,dl,"nlo",p,**kargs,**kwargs)
             combined_plot(mass_plot,dl,"nlo_plus_nll",p,**kargs,**kwargs)
     elif scale:
         for i in [0,1]:
-            kargs = {'logy':[True,False][i],'mask':dl["lo_scale"]!=np.array(None), 'plot_data':False,'fill':True,'axes':axs[i],'K':[False,True][i]}
+            kargs = {'logy':[True,False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
             mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,label="lo")
             mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,label="nlo")
             mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,label="nlo+nll")

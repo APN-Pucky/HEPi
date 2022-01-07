@@ -21,7 +21,7 @@ def wait():
     while(len(output.split('\n')) > 2):
         bashCommand = "squeue -u " + user + " --name=" + get_job_name() 
         if output != "\n\n\n":
-            print(bashCommand , " -> ", output)
+            #print(bashCommand , " -> ", output)
             time.sleep(60)
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
