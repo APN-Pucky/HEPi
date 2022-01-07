@@ -1,3 +1,4 @@
+from scipy import interpolate
 from smpl import plot as splot
 import smpl
 import numpy as np
@@ -361,3 +362,21 @@ def central_scale_plot(dict_list, vl, cont=False,error=True):
     # plt.show()
 
 
+def mass_and_K_plot(dl,p,*args,scale=False,combined=False,cont = False,**kwargs):
+    global fig, axs
+    if not cont:
+        fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+        # Remove horizontal space between axes
+        fig.subplots_adjust(hspace=0)
+    if combined:
+        for i in [0,1]:
+            kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'K':[False,True][i],'plot_data':False,'fill':True,}
+            combined_plot(mass_plot,dl,"lo",p,**kargs,**kwargs)
+            combined_plot(mass_plot,dl,"nlo",p,**kargs,**kwargs)
+            combined_plot(mass_plot,dl,"nlo_plus_nll",p,**kargs,**kwargs)
+    elif scale:
+        for i in [0,1]:
+            kargs = {'logy':[True,False][i],'mask':dl["lo_scale"]!=np.array(None), 'plot_data':False,'fill':True,'axes':axs[i],'K':[False,True][i]}
+            mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,label="lo")
+            mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,label="nlo")
+            mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,label="nlo+nll")
