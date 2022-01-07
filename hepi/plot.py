@@ -58,7 +58,6 @@ def combined_energy_plot(dict_list,t):
     dl = dict_list
     mask = dl[t+"_pdf_central"]!= np.array(None)
     color = next(plt.gca()._get_lines.prop_cycler)['color']
-    print(color)
     splot.data(dict_list["energy"][mask],splot.unv(dict_list[t][mask]),
         xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=".",logy=True, label=t,data_color=color)
     splot.data(dict_list["energy"][mask],dict_list[t+ "_scale"][mask],
@@ -390,7 +389,7 @@ def mass_and_K_plot(dl,p,*args,scale=False,combined=False,cont = False,**kwargs)
             mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,label="nlo+nll")
 
 
-def mass_and_ratio_plot(dl,p,*args,scale=False,combined=False,cont = False,plot_data=plot_data,fill=fill,**kwargs):
+def mass_and_ratio_plot(dl,p,*args,scale=False,combined=False,cont = False,plot_data=True,fill=True,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
@@ -403,7 +402,7 @@ def mass_and_ratio_plot(dl,p,*args,scale=False,combined=False,cont = False,plot_
             combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,**kargs,**kwargs)
             combined_plot(mass_plot,dl,"nlo_plus_nll",p,plot_data=plot_data,fill=fill,**kargs,**kwargs)
             if i == 1:
-                mass_plot(dl,  "nlo_plus_nll_over_nlo",p,interpolate=True,plot_data=False,fill=False, **kargs,**kwargs,color='0',label="(nlo+nll)/nlo")
+                mass_plot(dl,  "nlo_plus_nll_over_nlo",p,interpolate=True,plot_data=False,fill=False, **kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
 
     elif scale:
         for i in [0,1]:
@@ -412,4 +411,4 @@ def mass_and_ratio_plot(dl,p,*args,scale=False,combined=False,cont = False,plot_
             mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,label="nlo")
             mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,label="nlo+nll")
             if i == 1:
-                mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,color='0',label="(nlo+nll)/nlo")
+                mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")

@@ -27,3 +27,5 @@ for run_plot in [True,False ]:
 
                     #hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name() + "_" + str(p)+  "_"+ str(nlo_pdf) +"_"+ str(scenario)+ ".tex",pdf=False)
     wait()
+
+# title process,energy, diff_l_R, 
