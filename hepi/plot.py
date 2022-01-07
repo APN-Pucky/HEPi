@@ -74,7 +74,7 @@ def combined_plot(func,dict_list,t,*args,label=None,**kwargs):
     func(dict_list,t+ "_scale",*args,
         fmt=" ",data_color=color,mask = mask,label="",**kwargs)
     func(dict_list,t+ "_combined",*args,
-         fmt=" ",data_color=color,capsize=None,label="",mask = mask,**kwargs)
+         fmt=" ",data_color=color,capsize=None,label="",mask = mask,fill=True,**kwargs)
 
 
 
@@ -102,7 +102,7 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",K=
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 
 
-def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,data_color=None,mask=-1,**kwargs):
+def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,**kwargs):
     color = data_color
     if label is None:
         label = "??"
@@ -112,19 +112,29 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
     vx = x
     vy = y
 
+    xnew = np.linspace(vx[0], vx[-1], 300,)
     if interpolate:
-        xnew = np.linspace(vx[0], vx[-1], 300,)
         #print(vx,vy)
         spl = make_interp_spline(
             vx, splot.unv(vy), k=3)  # type: BSpline
         power_smooth = spl(xnew)
+    if fill:
+        spl_up = make_interp_spline(
+                vx, splot.unv(vy)+splot.usd(vy), k=3)  # type: BSpline
+        power_up_smooth = spl_up(xnew)
+        spl_down = make_interp_spline(
+                vx, splot.unv(vy)-splot.usd(vy), k=3)  # type: BSpline
+        power_down_smooth = spl_down(xnew)
     if data_color is None:
         bl, = plt.gca().plot([], [])
         color = bl.get_color()
-    splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color, **kwargs)
+    if plot_data:
+        splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color, **kwargs)
     if interpolate:
         splot.data(xnew, power_smooth*yscale, logy=logy, fmt="-"
               , init=False, data_color=color, **kwargs)
+    if fill:
+        plt.fill_between(xnew,power_up_smooth,power_down_smooth,alpha=0.3,color=color)
     if((np.any(np.less(vy,0)) or ( interpolate and np.any(np.less(power_smooth, 0)))) and logy):
         splot.data(vx, -vy*yscale,label="-"+label,xaxis=xaxis, yaxis=yaxis, logy=logy, data_color=color, **kwargs)
         if interpolate:
@@ -177,7 +187,7 @@ fig = None
 axs = None
 
 
-def scale_plot(dict_list, vl, seven_point_band=False, cont=False):
+def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=False):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(1, 5, figsize=(12, 8), sharey=True)
@@ -276,6 +286,72 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False):
     axs[2].legend()
     axs[3].legend()
     axs[4].legend()
+    # plt.show()
+
+def err_plt(axes,x,y,label=None,error=False):
+    v= label
+    if error:
+        l, _, _ = axes.errorbar(x, splot.unv(y), yerr=splot.usd(y), capsize=5, label=v)
+        return l
+    else:
+        l = axes.plot(x, splot.unv(y), label=v)
+        return l
+    
+
+def central_scale_plot(dict_list, vl, cont=False,error=True):
+    global fig, axs
+    if not cont:
+        fig, axs = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
+        # Remove horizontal space between axes
+        fig.subplots_adjust(hspace=0)
+
+    mr = dict_list["mu_r"]
+    mf = dict_list["mu_f"]
+
+    for v in vl:
+        mv = dict_list[v]
+
+        mask = mf == mr
+        l = err_plt(axs[0],mf[mask],mv[mask],label=v,error=error)
+  
+
+        mask = mf == 1.0
+        l = err_plt(axs[1],mr[mask],mv[mask],error=error)
+
+
+        mask = mr == 1.0
+        l = err_plt(axs[2],mf[mask],mv[mask],error=error)
+
+
+
+    if not cont:
+        axs[0].plot([], [], ' ', label="$\mu_R=\mu_F=\mu$")
+        axs[1].plot([], [], ' ', label="$\mu_F=\mu_0$, $\mu_R=\mu$")
+        axs[2].plot([], [], ' ', label="$\mu_R=\mu_0$, $\mu_F=\mu$")
+
+    axs[1].set_ylabel("$\sigma$ [pb]")
+
+    axs[0].set_xscale("log")
+    #axs[0].set_xlim(np.min(mf), np.max(mf))
+    axs[2].set_xlabel("$\mu/\mu_0$")
+
+    # axs[1].plot(t, s2)
+    #axs[1].set_xscale("log")
+    #axs[1].set_xlim(np.max(mf), np.min(mf))
+    #axs[1].set_xticks([1.])
+    #axs[1].xaxis.set_minor_formatter(NullFormatter())
+    #axs[1].set_xlabel("$\mu_{F}/\mu_0$")
+
+    # axs[2].plot(t, s3)
+    #axs[2].set_xscale("log")
+    #axs[2].set_xlim(np.max(mf), np.min(mf))
+    #axs[2].set_xticks([1.])
+    #axs[2].xaxis.set_minor_formatter(NullFormatter())
+    #axs[2].set_xlabel("$\mu_{R}/\mu_0$")
+
+    axs[0].legend()
+    axs[1].legend()
+    axs[2].legend()
     # plt.show()
 
 
