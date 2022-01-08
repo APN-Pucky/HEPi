@@ -8,8 +8,8 @@ for run_plot in [False ]:
             for p in [2000002, 1000002]:
                 li = [hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, p, 1000022, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=50)]
 
-                massmin = 2000 if scenario == "scenarioB.in" else 4500
-                li = hepi.scan_invariant_mass(li, np.linspace(massmin , massmin + 4000, 40+1))
+                
+                li = hepi.scan_invariant_mass(li, 4000,40+1)
                 li = hepi.seven_point_scan(li)
 
                 dl = rs.run(li, False, False, run_plot,False)

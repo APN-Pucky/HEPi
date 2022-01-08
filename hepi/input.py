@@ -187,10 +187,10 @@ def pdf_scan(l: List[Input]):
             ret.append(s)
     return ret
 
-def scan_invariant_mass(l : List[Input],range):
+def scan_invariant_mass(l : List[Input],diff,points):
     ret = []
     for s in l:
-        for r in range:
+        for r in np.linspace(s.mu*2.+diff/points,s.mu*2+diff,points):
             tmp = copy.copy(s)
             setattr(tmp, "invariant_mass", r)
             tmp.result = "m"
