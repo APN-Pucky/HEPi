@@ -20,9 +20,9 @@ for run_plot in [True,False ]:
                     print(dl["nlo_scale"][mask])
                     print(dl["nlo_plus_nll_scale"][mask])
                     plot.data([],[],init=True)
-                    hepi.plot(dl, "invariant_mass", "lo_scale", logy=False, label="lo",mask= mask,xaxis="$M$",yaxis="$d\\sigma/dM$ [pb/GeV]")
-                    hepi.plot(dl, "invariant_mass", "nlo_scale", logy=False, label="nlo",mask= mask,xaxis="$M$",yaxis="$d\\sigma/dM$ [pb/GeV]")
-                    hepi.plot(dl, "invariant_mass", "nlo_plus_nll_scale", logy=False, label="nlo+nll",mask= mask,xaxis="$M$",yaxis="$d\\sigma/dM$ [pb/GeV]")
+                    hepi.plot(dl, "invariant_mass", "lo_scale", logy=False, label="lo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
+                    hepi.plot(dl, "invariant_mass", "nlo_scale", logy=False, label="nlo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
+                    hepi.plot(dl, "invariant_mass", "nlo_plus_nll_scale", logy=False, label="nlo+nll",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
 
                     plt.savefig(input.get_output_dir() + "inv_mass_" + str(p) + "_" + str(nlo_pdf) + "_" +str(scenario) + ".pdf")
     wait()
