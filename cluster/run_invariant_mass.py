@@ -16,9 +16,9 @@ for run_plot in [True,False ]:
 
                 if not run_plot:
                     dl = hepi.scale_error(li,dl)
-                    hepi.plot(dl, "invariant_mass", "lo_scale", logy=False, label="lo",yaxis="$d\\sigma/dM$ [pb/GeV]")
-                    hepi.plot(dl, "invariant_mass", "nlo_scale", logy=False, label="nlo",yaxis="$d\\sigma/dM$ [pb/GeV]")
-                    hepi.plot(dl, "invariant_mass", "nlo_plus_nll_scale", logy=False, label="nlo+nll",yaxis="$d\\sigma/dM$ [pb/GeV]")
+                    hepi.plot(dl, "invariant_mass", "lo_scale", logy=False, label="lo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
+                    hepi.plot(dl, "invariant_mass", "nlo_scale", logy=False, label="nlo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
+                    hepi.plot(dl, "invariant_mass", "nlo_plus_nll_scale", logy=False, label="nlo+nll",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
 
                     plt.savefig(input.get_output_dir() + "inv_mass_" + str(p) + "_" + str(nlo_pdf) + ".pdf")
     wait()
