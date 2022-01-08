@@ -38,7 +38,7 @@ def is_valid(file:str,p:Input,d):
         return True
     if res.lo is not None and res.nlo is not None and res.nlo_plus_nll is not None and order is Order.NLO_PLUS_NLL:
         return True
-    print("FAILED " ,res.lo, res.nlo,res.nlo_plus_nll, file)
+    print("RESTART" ,res.lo, res.nlo,res.nlo_plus_nll, file)
     return False
 
 
