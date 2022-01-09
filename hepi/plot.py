@@ -152,7 +152,7 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
         splot.data(xnew, power_smooth*yscale, logy=logy,label=label if not plot_data else None, fmt="-"
               , init=False, data_color=color, **kwargs)
     if fill:
-        plt.fill_between(xnew,power_up_smooth,power_down_smooth,alpha=0.3,color=color)
+        plt.fill_between(xnew,power_up_smooth*yscale,power_down_smooth*yscale,alpha=0.3,color=color)
     if((np.any(np.less(vy,0)) or ( interpolate and np.any(np.less(power_smooth, 0)))) and logy):
         splot.data(vx, -vy*yscale,label="-"+label,xaxis=xaxis, yaxis=yaxis, logy=logy, data_color=color, **kwargs)
         if interpolate:
