@@ -49,7 +49,7 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True):
             "\n"
         )
 
-def title(axe,i:Input,scenario="",diff_L_R=None):
+def title(axe,i:Input,scenario="",diff_L_R=None,**kwargs):
     axe.set_title(
         "$pp\\to"+get_name(i.particle1)+get_name(i.particle2)
         +"$ at $\\sqrt{s} = " +str(i.energy/1000) + "$ TeV"
