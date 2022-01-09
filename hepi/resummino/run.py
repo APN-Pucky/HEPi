@@ -137,7 +137,7 @@ def _run(rps: List[RunParams], bar=True, no_parse=False,para=True):
             if not para:
                 process.wait()
             if no_parse:
-                time.sleep(3)
+                time.sleep(5)
             if bar:
                 nnn = ""
                 nn = ""
