@@ -80,7 +80,7 @@ def combined_plot(func,dict_list,t,*args,label=None,fill = False,fmt=".",interpo
     mask = dl[t+"_pdf_central"]!= np.array(None)
     color = next(plt.gca()._get_lines.prop_cycler)['color']
     func(dict_list,t+ "_noerr",*args,
-         label=t if label is None else label,data_color=color,fill=False,fmt=fmt,interpolate=interpolate,mask = mask,**kwargs)
+         label=t if label is None else label,data_color=color,fill=False,interpolate=interpolate,mask = mask,**kwargs)
     func(dict_list,t+ "_scale",*args,
         fmt=" ",interpolate=False,data_color=color,mask = mask,label="",fill=False,**kwargs)
     func(dict_list,t+ "_combined",*args,
@@ -117,7 +117,7 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ra
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 
 
-def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,**kwargs):
+def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,fmt=".",**kwargs):
     color = data_color
     if label is None:
         label = "??"
@@ -147,14 +147,14 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
             bl, = plt.gca().plot([], [])
         color = bl.get_color()
     if plot_data:
-        splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color, **kwargs)
+        splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color,fmt=fmt, **kwargs)
     if interpolate:
         splot.data(xnew, power_smooth*yscale, logy=logy,label=label if not plot_data else None, fmt="-"
               , init=False, data_color=color, **kwargs)
     if fill:
         plt.fill_between(xnew,power_up_smooth*yscale,power_down_smooth*yscale,alpha=0.3,color=color)
     if((np.any(np.less(vy,0)) or ( interpolate and np.any(np.less(power_smooth, 0)))) and logy):
-        splot.data(vx, -vy*yscale,label="-"+label,xaxis=xaxis, yaxis=yaxis, logy=logy, data_color=color, **kwargs)
+        splot.data(vx, -vy*yscale,label="-"+label,xaxis=xaxis, yaxis=yaxis, logy=logy, data_color=color,fmt=fmt, **kwargs)
         if interpolate:
             splot.data(xnew, -power_smooth*yscale, logy=logy, fmt="--",
                     init=False, data_color=color, **kwargs)
