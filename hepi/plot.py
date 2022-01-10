@@ -143,6 +143,7 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
     if data_color is None:
         if 'axes' in kwargs and kwargs['axes'] is not None:
             bl, = kwargs['axes'].plot([], [])
+            print("used axes")
         else:
             bl, = plt.gca().plot([], [])
         color = bl.get_color()
