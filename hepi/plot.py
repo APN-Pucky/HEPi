@@ -409,7 +409,7 @@ def mass_and_ratio_plot(dl,li,p,scale=False,combined=False,cont = False,plot_dat
         title(axs[0],li[0],**kwargs)
     if combined:
         for i in [0,1]:
-            kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'tight':False}
+            kargs = {'logy' : [True,False][i], 'axes':axs[i],'tight':False}
             combined_plot(mass_plot,dl,"lo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
             combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
             combined_plot(mass_plot,dl,"nlo_plus_nll",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
