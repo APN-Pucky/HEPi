@@ -75,16 +75,16 @@ def combined_energy_plot(dict_list,t):
     splot.data(dict_list["energy"][mask],dict_list[t+ "_combined"][mask],
         xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=" ",logy=True,data_color=color,capsize=None)
 
-def combined_plot(func,dict_list,t,*args,label=None,fill = False,**kwargs):
+def combined_plot(func,dict_list,t,*args,label=None,fill = False,fmt=".",interpolate=True,**kwargs):
     dl = dict_list
     mask = dl[t+"_pdf_central"]!= np.array(None)
     color = next(plt.gca()._get_lines.prop_cycler)['color']
     func(dict_list,t+ "_noerr",*args,
-         label=t if label is None else label,data_color=color,fill=False,mask = mask,**kwargs)
+         label=t if label is None else label,data_color=color,fill=False,fmt=fmt,interpolate=interpolate,mask = mask,**kwargs)
     func(dict_list,t+ "_scale",*args,
-        fmt=" ",data_color=color,mask = mask,label="",fill=False,**kwargs)
+        fmt=" ",interpolate=False,data_color=color,mask = mask,label="",fill=False,**kwargs)
     func(dict_list,t+ "_combined",*args,
-         fmt=" ",data_color=color,capsize=None,label="",mask = mask,fill=fill,**kwargs)
+         fmt=" ",interpolate=False,data_color=color,capsize=None,label="",mask = mask,fill=fill,**kwargs)
 
 
 
