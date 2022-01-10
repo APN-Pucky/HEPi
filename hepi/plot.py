@@ -415,7 +415,7 @@ def mass_and_ratio_plot(dl,li,p,scale=False,combined=False,cont = False,plot_dat
             combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
             combined_plot(mass_plot,dl,"nlo_plus_nll",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
             if i == 1:
-                mass_plot(dl,  "nlo_plus_nll_over_nlo",p,interpolate=True,plot_data=False,fill=False, **kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                mass_plot(dl,  "nlo_plus_nll_over_nlo",p,interpolate=True,plot_data=False,fill=False,mask=dl["lo_scale"]!=np.array(None), **kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
 
     elif scale:
         for i in [0,1]:
