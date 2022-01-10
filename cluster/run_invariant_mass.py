@@ -21,6 +21,6 @@ for run_plot in [True,False ]:
                     hepi.plot(dl, "invariant_mass", "nlo_scale", logy=False, label="nlo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
                     hepi.plot(dl, "invariant_mass", "nlo_plus_nll_scale", logy=False, label="nlo+nll",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
 
-                    plt.savefig(input.get_output_dir() + "inv_mass_" + str(p) + "_" + str(nlo_pdf) + "_" +str(scenario) + ".pdf")
+                    plt.savefig(input.get_output_dir() + get_job_name() +  "_inv_mass_" + str(p) + "_" + str(nlo_pdf) + "_" +str(scenario) + ".pdf")
     wait()
 
