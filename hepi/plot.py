@@ -64,10 +64,14 @@ def energy_plot(dict_list, y, yscale=1.,xaxis="E [GeV]",yaxis="$\\sigma$ [pb]",l
          xaxis=xaxis, yaxis=yaxis, logy=True, yscale=yscale,**kwargs)
 
 
-def combined_energy_plot(dict_list,t):
+def combined_energy_plot(dict_list,t,**kwargs):
     dl = dict_list
     mask = dl[t+"_pdf_central"]!= np.array(None)
-    color = next(plt.gca()._get_lines.prop_cycler)['color']
+    if 'axes' in kwargs and kwargs['axes'] is not None:
+        color = next(kwargs['axes']._get_lines.prop_cycler)['color']
+    else:
+        color = next(plt.gca()._get_lines.prop_cycler)['color']
+ 
     splot.data(dict_list["energy"][mask],splot.unv(dict_list[t][mask]),
         xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=".",logy=True, label=t,data_color=color)
     splot.data(dict_list["energy"][mask],dict_list[t+ "_scale"][mask],
@@ -78,7 +82,11 @@ def combined_energy_plot(dict_list,t):
 def combined_plot(func,dict_list,t,*args,label=None,fill = False,fmt=".",interpolate=True,**kwargs):
     dl = dict_list
     mask = dl[t+"_pdf_central"]!= np.array(None)
-    color = next(plt.gca()._get_lines.prop_cycler)['color']
+
+    if 'axes' in kwargs and kwargs['axes'] is not None:
+        color = next(kwargs['axes']._get_lines.prop_cycler)['color']
+    else:
+        color = next(plt.gca()._get_lines.prop_cycler)['color']
     func(dict_list,t+ "_noerr",*args,
          label=t if label is None else label,data_color=color,fill=False,interpolate=interpolate,mask = mask,**kwargs)
     func(dict_list,t+ "_scale",*args,
@@ -143,7 +151,6 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
     if data_color is None:
         if 'axes' in kwargs and kwargs['axes'] is not None:
             bl, = kwargs['axes'].plot([], [])
-            print("used axes")
         else:
             bl, = plt.gca().plot([], [])
         color = bl.get_color()
