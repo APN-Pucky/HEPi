@@ -105,7 +105,7 @@ def update_slha( i:Input ):
         i.mu = (b.blocks["MASS"][abs(i.particle1)] +
                    b.blocks["MASS"][abs(i.particle2)])/2.
     except:
-        warnings.warn("slha broken?")
+        pass
         
 
 
