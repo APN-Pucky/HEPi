@@ -29,6 +29,7 @@ setuptools.setup(
         "pyslha",
         "enlighten",
         "particle",
+        "lhapdf",
         # "tqdm",
         # "pandas",
     ],

@@ -4,10 +4,9 @@ from cluster import *
 #wait()
 for run_plot in [True,False ]:
     for scenario in ["scenarioB.in"]:
-        for p in [2000002, 1000002]:
+        for p in [2000002, 1000002,2000004,1000004,]:
             dp = {}
-            pdfs= [ ("MSHT20nlo_as118","MSHT20nlo_as118"),("CT18NLO","CT18NLO"), ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180")
-            ]
+            pdfs= [("CT18NLO","CT18NLO"), ("MSHT20nlo_as118","MSHT20nlo_as118"), ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180")]
             for lo_pdf,nlo_pdf in pdfs:
                 i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, p, 1000022, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.01,max_iters=50)
 

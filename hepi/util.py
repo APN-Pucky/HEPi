@@ -6,6 +6,7 @@ def LD2DL(l: List):
     return {k: np.array([dic.__dict__[k] for dic in l]) for k in l[0].__dict__}
 
 
+# TODO rework to work with lhapdf
 id_name = {
     251:    "GRVPI0",
     252:    "GRVPI1",

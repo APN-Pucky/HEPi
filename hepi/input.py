@@ -1,8 +1,10 @@
+from distutils.log import warn
 from enum import IntEnum
 #from math import dist
+import copy
+import warnings
 import numpy as np
 from typing import List
-import copy
 from particle import PDGID
 import pyslha
 from .util import lhapdf_name_to_id
@@ -96,32 +98,18 @@ class Input:
         self.pt = pt
         self.result = result
         self.id = id
-        b = pyslha.read(get_input_dir() + slha)
-        self.mu = (b.blocks["MASS"][abs(particle1)] +
-                   b.blocks["MASS"][abs(particle2)])/2.
+        update_slha(self)
+def update_slha( i:Input ):
+    b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
+    try:
+        i.mu = (b.blocks["MASS"][abs(i.particle1)] +
+                   b.blocks["MASS"][abs(i.particle2)])/2.
+    except:
+        warnings.warn("slha broken?")
+        
 
 
-def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
-    ret = []
-    for s in l:
-        for r in range:
-            d = None
-            try:
-                d = pyslha.read(s.slha)
-            except:
-                d = pyslha.read(get_input_dir() + s.slha)
-            d.blocks["MASS"][var] = r
-            if not (diff_L_R is None):
-                is_L, v = get_LR_partner(var)
-                d.blocks["MASS"][v] = r + is_L*diff_L_R
 
-            newname = s.slha + "_" + str(var) + "_" + str(r)
-            pyslha.write(get_input_dir()+newname, d)
-            tmp = copy.copy(s)
-            setattr(tmp, "mass_" + str(var), r)
-            setattr(tmp, "slha", newname)
-            ret.append(tmp)
-    return ret
 
 
 def scan(l: List[Input], var: str, range) -> List[Input]:
@@ -194,5 +182,56 @@ def scan_invariant_mass(l : List[Input],diff,points):
             tmp = copy.copy(s)
             setattr(tmp, "invariant_mass", r)
             tmp.result = "m"
+            ret.append(tmp)
+    return ret
+
+def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
+    ret = []
+    for s in l:
+        for r in range:
+            d = None
+            try:
+                d = pyslha.read(s.slha)
+            except:
+                d = pyslha.read(get_input_dir() + s.slha)
+            d.blocks["MASS"][var] = r
+            if not (diff_L_R is None):
+                is_L, v = get_LR_partner(var)
+                d.blocks["MASS"][v] = r + is_L*diff_L_R
+
+            newname = s.slha + "_mass_" + str(var) + "_" + str(r)
+            pyslha.write(get_input_dir()+newname, d)
+
+            tmp = copy.copy(s)
+            setattr(tmp, "mass_" + str(var), r)
+            setattr(tmp, "slha", newname)
+            update_slha(tmp)
+            ret.append(tmp)
+    return ret
+
+def slha_scan(l : List[Input],block,var,range : List) -> List[Input]:
+    return slha_scan_rel(l,lambda r,: [(block,var,r)],range)
+
+def slha_scan_rel(l : List[Input],lambdas ,range : List) -> List[Input]:
+    ret = []
+    for s in l:
+        for r in range:
+            d = None
+            tmp = copy.copy(s)
+            newname = s.slha
+            try:
+                d = pyslha.read(s.slha,ignorenomass=True)
+            except:
+                d = pyslha.read(get_input_dir() + s.slha,ignorenomass=True)
+            ls = lambdas(r)
+            for b,v,res in ls:
+                d.blocks[b][v] = res
+                setattr(tmp, b+ "_" + str(v), res)
+                newname = newname +  "_" +str(b) + "_" + str(v) + "_" + str(res)
+
+            pyslha.write(get_input_dir()+newname, d)
+
+            setattr(tmp, "slha", newname)
+            update_slha(tmp)
             ret.append(tmp)
     return ret
