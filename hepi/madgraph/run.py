@@ -21,7 +21,7 @@ madgraph_path = "/opt/MG5_aMC_v2_7_0/"
 
 def set_path(p):
     global madgraph_path
-    madgraph_path = p
+    madgraph_path = p+ ("/" if p[-1]!="/" else "")
 
 
 def get_path():

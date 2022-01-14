@@ -1,10 +1,42 @@
 from typing import List
 import numpy as np
-
+import hashlib
+from particle import Particle
+from particle.converters.bimap import DirectionalMaps
+from particle import PDGID
 
 def LD2DL(l: List):
     return {k: np.array([dic.__dict__[k] for dic in l]) for k in l[0].__dict__}
 
+
+PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps(
+    "PDGID", "LaTexName", converters=(PDGID, str))
+
+PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
+    "PDGName", "PDGID", converters=(str, PDGID))
+
+
+def get_name(id):
+    global PDG2LaTeXNameMap
+    pdgid = PDG2LaTeXNameMap[id]
+    return pdgid
+
+
+
+def get_LR_partner(id):
+    n = PDGID2NameMap[id]
+    if "L" in n:
+        n = n.replace("L", "R")
+        return -1, int(PDG2Name2IDMap[n])
+    if "R" in n:
+        n = n.replace("R", "L")
+        return 1, int(PDG2Name2IDMap[n])
+    return None
+
+def namehash(n):
+    m = hashlib.sha256()
+    m.update(str(n).encode('utf-8'))
+    return m.hexdigest()
 
 # TODO rework to work with lhapdf
 id_name = {

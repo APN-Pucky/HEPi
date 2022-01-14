@@ -16,9 +16,11 @@ from particle.converters.bimap import DirectionalMaps
 import matplotlib.cm as cm
 from matplotlib import colors
 
-from .input import Input, get_name
+from .input import Input, get_input_dir
+from .util import get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
 from smpl import io
+from typing import List
 
 def tex_table(dict_list,key,fname,scale=True,pdf=True):
  dl = dict_list
@@ -96,15 +98,24 @@ def combined_plot(func,dict_list,t,*args,label=None,fill = False,fmt=".",interpo
 
 
 
+def get_mass(l, id):
+    ret = []
+    for s in l["slha"]:
+        d = pyslha.read(get_input_dir() + s)
+        ret.append(d.blocks["MASS"][id])
+    return np.array(ret)
 
-def mass_plot(dict_list,  y,part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,**kwargs):
+def mass_plot(dict_list,  y, part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,**kwargs):
+    dict_list["mass_"+ str(part)] = get_mass(dict_list, part)
     plot(dict_list, "mass_" + str(part), y, label=label,
          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,**kwargs)
 
 
 def mass_vplot(dict_list,  y,part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,mask=None,**kwargs):
-    vplot(dict_list["mass_" + str(part)][mask], y[mask], label=label,
+  vplot(get_mass(dict_list,part)[mask], y[mask], label=label,
           xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
+#    vplot(dict_list["mass_" + str(part)][mask], y[mask], label=label,
+#          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 
 
 def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ratio=False,K=False, logy=True, yscale=1.,mask=None,**kwargs):
@@ -124,6 +135,23 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ra
 
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 
+def index_open(var,idx):
+    if len(idx) is 1:
+        return var[idx]
+    return index_open(var[idx[0]],idx[1:])
+
+def slha_data(li,index_list):
+    vx = []
+    for l in li:
+        b = pyslha.read(get_input_dir() + l.slha)
+        vx.append(index_open(b.blocks,index_list))
+    return np.array(vx)
+
+def slha_plot(li,x,y,**kwargs):
+    vx = slha_data(li,x)
+    vy = slha_data(li,y)
+
+    vplot(np.array(vx),np.array(vy),**kwargs)
 
 def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,fmt=".",**kwargs):
     color = data_color
@@ -157,8 +185,11 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
     if plot_data:
         splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color,fmt=fmt, **kwargs)
     if interpolate:
-        splot.data(xnew, power_smooth*yscale, logy=logy,label=label if not plot_data else None, fmt="-"
-              , init=False, data_color=color, **kwargs)
+        kargs = {}
+        if not plot_data:
+            kargs = {'xaxis':xaxis, 'yaxis':yaxis,'label':label}
+        splot.data(xnew, power_smooth*yscale, logy=logy, fmt="-"
+              , init=False, data_color=color, **kargs,**kwargs)
     if fill:
         plt.fill_between(xnew,power_up_smooth*yscale,power_down_smooth*yscale,alpha=0.3,color=color)
     if((np.any(np.less(vy,0)) or ( interpolate and np.any(np.less(power_smooth, 0)))) and logy):
@@ -173,26 +204,31 @@ def mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis="$\\sigma$ [pb]", 
             xaxis="$M_{"+get_name(part1) + "}$ [GeV]", yaxis="$M_{"+get_name(part2) + "}$ [GeV]", zaxis=zaxis, logz=logz, zscale=zscale)
 
 
-def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.):
-    vx = dict_list[x]
-    vy = dict_list[y]
-    vz = dict_list[z]
+def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None,**kwargs):
     if xaxis is None:
         xaxis = x
     if yaxis is None:
         yaxis = y
     if zaxis is None:
         zaxis = z
+    vx = dict_list[x]
+    vy = dict_list[y]
+    vz = dict_list[z]
+    map_vplot(vx,vy,vz,xaxis=xaxis,yaxis=yaxis,zaxis=zaxis,**kwargs)
+
+def map_vplot(vx,vy,vz, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.):
     s = 1
     while vy[s] == vy[s-1]:
         s = s+1
     if s == 1:
+        #print("flipped x y ")
         while vx[s] == vx[s-1]:
             s = s+1
         if s == 1:
             print("error too small map")
             return
-        x, y = y, x
+        #x, y = y, x
+        xaxis ,yaxis = yaxis,xaxis
         vx, vy = vy, vx
 
     grid = splot.unv(vz).reshape((int(np.rint(np.size(vx)/s)), s))*zscale

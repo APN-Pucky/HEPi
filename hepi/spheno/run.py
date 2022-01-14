@@ -7,14 +7,14 @@ from hepi import get_input_dir, get_output_dir
 import subprocess
 import os
 
-from hepi.input import Input
+from hepi.input import Input, update_slha
 
 spheno_path = "~/git/SPheno-3.3.8/"
 
 
 def set_path(p):
     global spheno_path
-    spheno_path = p
+    spheno_path = p + ("/" if p[-1]!="/" else "")
 
 
 def get_path():
@@ -26,9 +26,11 @@ def run(slhas : List[Input]) -> List[Input]:
 	if os.path.exists("Messages.out"):
 		os.remove("Messages.out")
 	for s in slhas:
-		comm= get_path() + "bin/SPheno " + get_input_dir() + s.slha + " && mv "  + "SPheno.spc " + get_input_dir() + s.slha
-		proc = subprocess.Popen(comm, shell=True, stdout=subprocess.PIPE)
+		#print(s.slha)
+		comm= "cp " +  get_input_dir() + s.slha  + " spheno_tmp.in && " +get_path() + "bin/SPheno spheno_tmp.in && mv "  + "SPheno.spc " + get_input_dir() + s.slha  + " && sed -i '/Created/d' " + get_input_dir() + s.slha
+		proc = subprocess.Popen(comm, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		proc.wait()
+		update_slha(s)
 	if os.path.exists("Messages.out"):
 		with open("Messages.out",'r') as r:
 			t = r.read()

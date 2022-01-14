@@ -5,38 +5,16 @@ import copy
 import warnings
 import numpy as np
 from typing import List
-from particle import PDGID
+
 import pyslha
-from .util import lhapdf_name_to_id
-from particle import Particle
-from particle.converters.bimap import DirectionalMaps
+from .util import get_LR_partner, lhapdf_name_to_id, namehash
+
 import lhapdf
 
 in_dir = "./input/"
 out_dir = "./output/"
 pre = "nice -n 5"
 
-PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps(
-    "PDGID", "LaTexName", converters=(PDGID, str))
-
-PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
-    "PDGName", "PDGID", converters=(str, PDGID))
-
-
-def get_name(id):
-    global PDG2LaTeXNameMap
-    pdgid = PDG2LaTeXNameMap[id]
-    return pdgid
-
-
-def get_LR_partner(id):
-    n = PDGID2NameMap[id]
-    if "L" in n:
-        n = n.replace("L", "R")
-        return -1, int(PDG2Name2IDMap[n])
-    if "R" in n:
-        n = n.replace("R", "L")
-        return 1, int(PDG2Name2IDMap[n])
 
 
 def get_input_dir():
@@ -228,7 +206,6 @@ def slha_scan_rel(l : List[Input],lambdas ,range : List) -> List[Input]:
                 d.blocks[b][v] = res
                 setattr(tmp, b+ "_" + str(v), res)
                 newname = newname +  "_" +str(b) + "_" + str(v) + "_" + str(res)
-
             pyslha.write(get_input_dir()+newname, d)
 
             setattr(tmp, "slha", newname)

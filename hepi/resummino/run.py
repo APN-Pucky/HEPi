@@ -3,6 +3,8 @@ import subprocess
 from string import Template
 import numpy as np
 import pkgutil
+
+from hepi.util import namehash
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir, get_pre
 import re
 from uncertainties import ufloat_fromstr
@@ -22,7 +24,7 @@ resummino_path = "~/resummino/"
 
 def set_path(p):
     global resummino_path
-    resummino_path = p
+    resummino_path = p+ ("/" if p[-1]!="/" else "")
 
 
 def get_path():
@@ -57,11 +59,6 @@ def _parse(outputs: List[str]) -> List[ResumminoResult]:
         rsl.append(r)
     return rsl
 
-
-def namehash(n):
-    m = hashlib.sha256()
-    m.update(str(n).encode('utf-8'))
-    return m.hexdigest()
 
 
 def _queue(params: List[Input], noskip=False) -> List[RunParams]:

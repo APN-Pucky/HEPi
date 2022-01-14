@@ -1,6 +1,6 @@
 from .input import *
 from .results import *
-from .util import LD2DL
+from .util import *
 from .plot import *
 
 import pkg_resources as pkg  # part of setuptools
