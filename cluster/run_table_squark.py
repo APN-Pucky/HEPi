@@ -3,7 +3,7 @@ from cluster import *
 
 #wait()
 for run_plot in [True,False ]:
-    for scenario in ["scenarioB.in"]:
+    for scenario in ["scenarioB_mod.in"]:
         for p in [2000002, 1000002]:
             dp = {}
             pdfs= [ ("MSHT20nlo_as118","MSHT20nlo_as118"),("CT18NLO","CT18NLO"), ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180")
