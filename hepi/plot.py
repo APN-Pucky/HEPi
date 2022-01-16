@@ -423,7 +423,7 @@ def central_scale_plot(dict_list, vl, cont=False,error=True):
     # plt.show()
 
 
-def mass_and_K_plot(dl,li,p,scale=False,combined=False,cont = False,**kwargs):
+def mass_and_K_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
@@ -442,9 +442,15 @@ def mass_and_K_plot(dl,li,p,scale=False,combined=False,cont = False,**kwargs):
             mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,label="lo")
             mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,label="nlo")
             mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,label="nlo+nll")
+    elif scale:
+        for i in [0,1]:
+            kargs = {'logy':[True,False][i],'mask':dl["lo_pdf"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
+            mass_plot(dl,  "lo_pdf",p,           **kargs,**kwargs,label="lo")
+            mass_plot(dl,  "nlo_pdf",p,          **kargs,**kwargs,label="nlo")
+            mass_plot(dl,  "nlo_plus_nll_pdf",p, **kargs,**kwargs,label="nlo+nll")
 
 
-def mass_and_ratio_plot(dl,li,p,scale=False,combined=False,cont = False,plot_data=True,fill=True,**kwargs):
+def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,plot_data=True,fill=True,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
@@ -468,3 +474,12 @@ def mass_and_ratio_plot(dl,li,p,scale=False,combined=False,cont = False,plot_dat
             mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
             if i == 1:
                 mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+    elif scale:
+        for i in [0,1]:
+            kargs = {'logy':[True,False][i],'mask':dl["lo_pdf"]!=np.array(None), 'axes':axs[i],'tight':False}
+            mass_plot(dl,  "lo_pdf",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
+            mass_plot(dl,  "nlo_pdf",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
+            mass_plot(dl,  "nlo_plus_nll_pdf",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
+            if i == 1:
+                mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+

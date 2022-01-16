@@ -13,19 +13,15 @@ for run_plot in [True,False ]:
 
                 li = hepi.mass_scan([i], p, np.linspace(500, 1500, 20+1))
                 li = hepi.seven_point_scan(li)
-                #li = hepi.pdf_scan(li)
+                li = hepi.pdf_scan(li)
 
                 dl = rs.run(li, False, False, run_plot,False)
 
                 if not run_plot:
-                    #dl = hepi.pdf_error(li,dl)
+                    dl = hepi.pdf_error(li,dl)
                     dl = hepi.scale_error(li,dl)
-                    #dl = hepi.combine_errors(dl)
+                    dl = hepi.combine_errors(dl)
 
-                    hepi.mass_and_K_plot(dl,li,p,scale=True,plot_data=True,fill=True)
-                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_K_" + nlo_pdf + "_" + str(p) +"_" + str(ps)+ "_" +str(scenario)+ ".pdf")
+                    hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name()+"_mass" + str(p)+ "_" + str(ps)+  "_"+ str(nlo_pdf) + "_" +str(scenario) + ".tex")
 
-                    hepi.mass_and_ratio_plot(dl,li,p,scale=True,plot_data=True,fill=True)
-                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" + str(ps) + "_" +str(scenario) + ".pdf")
     wait()
-
