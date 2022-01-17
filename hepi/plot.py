@@ -54,7 +54,7 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True):
 def title(axe,i:Input,scenario="",diff_L_R=None,extra="",**kwargs):
     axe.set_title(
         "$pp\\to"+get_name(i.particle1)+get_name(i.particle2)
-        +"$ at $\\sqrt{s} = " +str(i.energy/1000) + "$ TeV"
+        +"$ at $\\sqrt{S} = " +str(i.energy/1000) + "$ TeV"
         +" for " +(i.slha.split(".")[0] if scenario =="" else scenario)
         +" with " + i.pdf_nlo
         + " " + extra
@@ -266,12 +266,14 @@ def err_plt(axes,x,y,label=None,error=False):
         l = axes.plot(x, splot.unv(y), label=v)
         return l
 
-def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True):
+def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(1, 5, figsize=(12, 3), sharey=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(wspace=0)
+        if li is not None:
+            title(axs[2],li[0],**kwargs)
 
     mr = dict_list["mu_r"]
     mf = dict_list["mu_f"]
