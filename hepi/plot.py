@@ -51,12 +51,13 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True):
             "\n"
         )
 
-def title(axe,i:Input,scenario="",diff_L_R=None,**kwargs):
+def title(axe,i:Input,scenario="",diff_L_R=None,extra="",**kwargs):
     axe.set_title(
         "$pp\\to"+get_name(i.particle1)+get_name(i.particle2)
         +"$ at $\\sqrt{s} = " +str(i.energy/1000) + "$ TeV"
         +" for " +(i.slha.split(".")[0] if scenario =="" else scenario)
         +" with " + i.pdf_nlo
+        + " " + extra
     )
 
 
@@ -118,7 +119,7 @@ def mass_vplot(dict_list,  y,part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1.,
 #          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 
 
-def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ratio=False,K=False, logy=True, yscale=1.,mask=None,**kwargs):
+def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ratio=False,K=False,K_plus_1=False, logy=True, yscale=1.,mask=None,**kwargs):
     # TODO use kwargs
     if label is None:
         label = y
@@ -127,7 +128,10 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ra
 
     if K:
         yaxis = "$K$"
+        yscale = 1.0
         vy = vy / splot.unv(dict_list["lo"][mask])
+        if K_plus_1:
+            vy = vy + vy/vy
     if ratio:
         yaxis = "Ratio"
         vy = vy / splot.unv(vy)
@@ -153,7 +157,7 @@ def slha_plot(li,x,y,**kwargs):
 
     vplot(np.array(vx),np.array(vy),**kwargs)
 
-def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,fmt=".",**kwargs):
+def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,data_fmt=".",fmt="-",**kwargs):
     color = data_color
     if label is None:
         label = "??"
@@ -183,20 +187,23 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
             bl, = plt.gca().plot([], [])
         color = bl.get_color()
     if plot_data:
-        splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color,fmt=fmt, **kwargs)
+        splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color,fmt=data_fmt, **kwargs)
     if interpolate:
         kargs = {}
         if not plot_data:
             kargs = {'xaxis':xaxis, 'yaxis':yaxis,'label':label}
-        splot.data(xnew, power_smooth*yscale, logy=logy, fmt="-"
-              , init=False, data_color=color, **kargs,**kwargs)
+        splot.data(xnew, power_smooth*yscale, logy=logy, fmt=fmt
+              , init=False, data_color=color,  **kargs,**kwargs)
     if fill:
         plt.fill_between(xnew,power_up_smooth*yscale,power_down_smooth*yscale,alpha=0.3,color=color)
     if((np.any(np.less(vy,0)) or ( interpolate and np.any(np.less(power_smooth, 0)))) and logy):
-        splot.data(vx, -vy*yscale,label="-"+label,xaxis=xaxis, yaxis=yaxis, logy=logy, data_color=color,fmt=fmt, **kwargs)
+        if plot_data:
+            splot.data(vx, -vy*yscale,label="-"+label,xaxis=xaxis, yaxis=yaxis, logy=logy, data_color=color,fmt=data_fmt, **kwargs)
         if interpolate:
-            splot.data(xnew, -power_smooth*yscale, logy=logy, fmt="--",
-                    init=False, data_color=color, **kwargs)
+            if not plot_data:
+                kargs = {'xaxis':xaxis, 'yaxis':yaxis,'label':"-"+label}
+            splot.data(xnew, -power_smooth*yscale, logy=logy, fmt=None,linestyle=(0, (3, 1, 3, 1, 1, 1)),
+                    init=False, data_color=color, **kargs,**kwargs)
 
 
 def mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis="$\\sigma$ [pb]", zscale=1., label=None):
@@ -423,10 +430,10 @@ def central_scale_plot(dict_list, vl, cont=False,error=True):
     # plt.show()
 
 
-def mass_and_K_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,**kwargs):
+def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont = False,figsize=(12,8),**kwargs):
     global fig, axs
     if not cont:
-        fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
         title(axs[0],li[0],**kwargs)
@@ -448,12 +455,26 @@ def mass_and_K_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,**
             mass_plot(dl,  "lo_pdf",p,           **kargs,**kwargs,label="lo")
             mass_plot(dl,  "nlo_pdf",p,          **kargs,**kwargs,label="nlo")
             mass_plot(dl,  "nlo_plus_nll_pdf",p, **kargs,**kwargs,label="nlo+nll")
+    elif plehn:
+        axs[0].set_ylim([0.2*10**-2,10**3])
+        axs[1].set_ylim([0.9,1.85])
+        for i in [0,1]:
+            kargs = {'yscale':1000, 'yaxis':"$\\sigma$ [fb]",'logy':[True,False][i],'axes':axs[i],'K':[False,True][i],'tight':False,'error':False}
+            if i == 0:
+                mass_plot(dl,  "lo",p,           **kargs,**kwargs,data_color='b',fmt='--',label="lo")
+            mass_plot(dl,  "rnlo",p,          **kargs,**kwargs,data_color='k',K_plus_1=True,fmt='-.',label="real")
+            if i == 0:
+                mass_plot(dl,  "nlo",p,          **kargs,**kwargs,data_color='r',fmt='-',label="nlo")
+            mass_plot(dl,  "vnlo_plus_p_plus_k",p,          **kargs,**kwargs,K_plus_1=True,data_color='k',fmt=':',label="virtual")
+            if i == 1:
+                mass_plot(dl,  "rnlo_plus_vnlo_plus_p_plus_k",p,K_plus_1=True,          **kargs,**kwargs,data_color='r',label="nlo")
+            #mass_plot(dl,  "nlo_plus_nll",p, **kargs,**kwargs,label="nlo+nll")
 
 
-def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,plot_data=True,fill=True,**kwargs):
+def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,figsize=(12,8),plot_data=True,fill=True,**kwargs):
     global fig, axs
     if not cont:
-        fig, axs = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
+        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
         title(axs[0],li[0],**kwargs)
