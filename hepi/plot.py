@@ -266,12 +266,14 @@ def err_plt(axes,x,y,label=None,error=False):
         l = axes.plot(x, splot.unv(y), label=v)
         return l
 
-def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True):
+def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(1, 5, figsize=(12, 3), sharey=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(wspace=0)
+        if li is not None:
+            title(axs[2],li[0],**kwargs)
 
     mr = dict_list["mu_r"]
     mf = dict_list["mu_f"]
