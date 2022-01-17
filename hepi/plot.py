@@ -279,13 +279,21 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True):
     for v in vl:
         mv = dict_list[v]
         if seven_point_band:
-            mask = (mf/mr < 4.) & (mf/mr > 1./4.) & (mf <=
-                                                     2) & (mf >= 1./2.) & (mr <= 2) & (mr >= 1./2.)
+            #mask = (mf/mr < 4.) & (mf/mr > 1./4.) & (mf <= 2) & (mf >= 1./2.) & (mr <= 2) & (mr >= 1./2.)
+            mask =  (
+                ((mf == 2.) & (mr == 2.)) | 
+                 (   (mf == 2.) & (mr == 1.))  |            
+                 (   (mf == 1.) & (mr == 1.))  |            
+                 (   (mf == 1.) & (mr == 2.) ) |            
+                (    (mf == 1/2.) & (mr == 1/2.)) | 
+                (    (mf == 1/2.) & (mr == 1.)  )|            
+                (    (mf == 1.) & (mr == 1/2.) ) 
+            )
             mvmax = np.max(splot.unv(mv[mask]))
             mvmin = np.min(splot.unv(mv[mask]))
 
         mask = mf == mr
-        l = err_plt(axs[0],mf[mask],mv[mask],label=v,error=error)
+        l = err_plt(axs[0],mf[mask],mv[mask],label="$\\sigma_{"+v+"}$",error=error)
         #l, _, _ = axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5, label=v)
         if seven_point_band:
@@ -322,7 +330,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True):
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
             axs[4].fill_between(mr[mask], mvmax, mvmin,
-                                facecolor=l.get_color(), alpha=0.3)
+                                facecolor=l.get_color(), alpha=0.3,label="$\\Delta \\sigma_{" + v + "}$")
 
     if not cont:
         axs[0].plot([], [], ' ', label="$\mu_R=" + "\mu_F$")

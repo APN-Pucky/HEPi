@@ -124,7 +124,7 @@ def seven_point_scan(l: List[Input]):
     ret = []
     for s in l:
         # not on error pdfs
-        if s.pdfset_nlo == 0:
+        if s.pdfset_nlo == 0 and s.mu_f == 1.0 and s.mu_r == 1.0:
             tmp = scan([s], "mu_f", np.logspace(np.log10(1. /
                         distance), np.log10(distance), range))
             tmp = scan(tmp, "mu_r", np.logspace(np.log10(1. /
