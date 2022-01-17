@@ -134,6 +134,7 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ra
             vy = vy + vy/vy
     if ratio:
         yaxis = "Ratio"
+        yscale = 1.0
         vy = vy / splot.unv(vy)
 
 
@@ -487,7 +488,7 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
                 plot(dl,  "invariant_mass","nlo",          **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
                 plot(dl,  "invariant_mass","nlo_plus_nll", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
                 if i == 1:
-                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo", interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
             else:
                 combined_plot(mass_plot,dl,"lo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
                 combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
@@ -503,7 +504,7 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
                 plot(dl,  "invariant_mass","nlo_scale",       **kinv,   **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
                 plot(dl,  "invariant_mass","nlo_plus_nll_scale", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
                 if i == 1:
-                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo", interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
             else:
                 mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
                 mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
@@ -518,7 +519,7 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
                 plot(dl,  "invariant_mass","nlo_pdf",         **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
                 plot(dl,  "invariant_mass","nlo_plus_nll_pdf", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
                 if i == 1:
-                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo", interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
             else:
                 mass_plot(dl,  "lo_pdf",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
                 mass_plot(dl,  "nlo_pdf",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
