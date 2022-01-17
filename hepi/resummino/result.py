@@ -13,10 +13,16 @@ class ResumminoResult(Result):
         self.p_plus_k = p_plus_k
         self.rnlog = rnlog
         self.rnloq = rnloq
+        if not (vnlo is None or p_plus_k is None):
+            self.vnlo_plus_p_plus_k = self.vnlo + self.p_plus_k
+        else:
+            self.vnlo_plus_p_plus_k = None
         if not (rnlog is None or rnloq is None):
             self.rnlo = rnlog+rnloq
         else:
             self.rnlo = None
+        if not ( self.rnlo is None or self.vnlo_plus_p_plus_k is None):
+            self.rnlo_plus_vnlo_plus_p_plus_k = self.rnlo + self.vnlo_plus_p_plus_k
 
 def is_valid(file:str,p:Input,d):
     order = p.order
