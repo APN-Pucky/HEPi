@@ -18,7 +18,7 @@ for run_plot in [True,False ]:
 
                 if not run_plot:
                     dl = hepi.scale_error(li,dl)
-                    plot.data([],[],init=True)
+                    plot.data([],[],data_color='k',init=True)
                     mask = dl["lo_scale"]!=np.array(None)
                     hepi.plot(dl, "invariant_mass", "lo_scale",mask=mask, logy=False, label="lo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
                     hepi.plot(dl, "invariant_mass", "nlo_scale",mask=mask, logy=False, label="nlo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
