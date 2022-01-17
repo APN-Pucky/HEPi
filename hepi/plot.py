@@ -54,7 +54,7 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True):
 def title(axe,i:Input,scenario="",diff_L_R=None,extra="",**kwargs):
     axe.set_title(
         "$pp\\to"+get_name(i.particle1)+get_name(i.particle2)
-        +"$ at $\\sqrt{s} = " +str(i.energy/1000) + "$ TeV"
+        +"$ at $\\sqrt{S} = " +str(i.energy/1000) + "$ TeV"
         +" for " +(i.slha.split(".")[0] if scenario =="" else scenario)
         +" with " + i.pdf_nlo
         + " " + extra
