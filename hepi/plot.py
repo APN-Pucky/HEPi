@@ -269,7 +269,7 @@ def err_plt(axes,x,y,label=None,error=False):
 def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True):
     global fig, axs
     if not cont:
-        fig, axs = plt.subplots(1, 5, figsize=(12, 8), sharey=True)
+        fig, axs = plt.subplots(1, 5, figsize=(12, 3), sharey=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(wspace=0)
 
