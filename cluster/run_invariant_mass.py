@@ -27,6 +27,6 @@ for run_plot in [True,False ]:
                     plt.savefig(input.get_output_dir() + get_job_name() +  "_inv_mass_" + str(p) + "_" + str(nlo_pdf) + "_" +str(scenario) + ".pdf")
 
                     hepi.mass_and_ratio_plot(dl,li,"invariant_mass",scale=True,plot_data=False,fill=True)
-                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" + str("inv") + "_" +str(scenario) + ".pdf")
+                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" + str("inv") + "_" +str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
     wait()
 

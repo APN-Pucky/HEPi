@@ -23,9 +23,9 @@ for run_plot in [True,False ]:
                     #dl = hepi.combine_errors(dl)
 
                     hepi.mass_and_K_plot(dl,li,p,scale=True,plot_data=True,fill=True)
-                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_K_" + nlo_pdf + "_" + str(p) +"_" + str(ps)+ "_" +str(scenario)+ ".pdf")
+                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_K_" + nlo_pdf + "_" + str(p) +"_" + str(ps)+ "_" +str(scenario)+ ".pdf",bbox_inches = 'tight', pad_inches = 0)
 
                     hepi.mass_and_ratio_plot(dl,li,p,scale=True,plot_data=True,fill=True)
-                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" + str(ps) + "_" +str(scenario) + ".pdf")
+                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" + str(ps) + "_" +str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
     wait()
 
