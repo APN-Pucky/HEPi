@@ -18,10 +18,11 @@ for run_plot in [True,False ]:
 
                 if not run_plot:
                     dl = hepi.scale_error(li,dl)
-                    plot.data([],[],init=True)
-                    hepi.plot(dl, "invariant_mass", "lo_scale", logy=False, label="lo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
-                    hepi.plot(dl, "invariant_mass", "nlo_scale", logy=False, label="nlo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
-                    hepi.plot(dl, "invariant_mass", "nlo_plus_nll_scale", logy=False, label="nlo+nll",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
+                    plot.data([],[],init=True,data_color='k')
+                    mask = dl["lo_scale"]!=np.array(None)
+                    hepi.plot(dl, "invariant_mass", "lo_scale",           mask=mask,plot_data=False,fill=True,logy=False, label="lo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
+                    hepi.plot(dl, "invariant_mass", "nlo_scale",          mask=mask,plot_data=False,fill=True,logy=False, label="nlo",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
+                    hepi.plot(dl, "invariant_mass", "nlo_plus_nll_scale", mask=mask,plot_data=False,fill=True,logy=False, label="nlo+nll",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
 
                     plt.savefig(input.get_output_dir() + get_job_name() +  "_inv_mass_" + str(p) + "_" + str(nlo_pdf) + "_" +str(scenario) + ".pdf")
     wait()

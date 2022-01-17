@@ -8,7 +8,7 @@ for run_plot in [True,False]:
             for p in [2000002, 1000002]:
                 i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 7000, p, 1000022, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=100)
 
-                li = hepi.mass_scan([i], p, np.linspace(300, 950, 13+14), diff_L_R=20)
+                li = hepi.mass_scan([i], p, np.linspace(300, 950, 26+27), diff_L_R=20)
                 #li = hepi.seven_point_scan(li)
                 #li = hepi.pdf_scan(li)
 
