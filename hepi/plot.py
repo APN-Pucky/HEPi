@@ -449,7 +449,7 @@ def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont
             mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,label="lo")
             mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,label="nlo")
             mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,label="nlo+nll")
-    elif scale:
+    elif pdf:
         for i in [0,1]:
             kargs = {'logy':[True,False][i],'mask':dl["lo_pdf"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
             mass_plot(dl,  "lo_pdf",p,           **kargs,**kwargs,label="lo")
@@ -478,29 +478,50 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
         title(axs[0],li[0],**kwargs)
+    kinv = {'xaxis':"$M$ [GeV]",'yaxis':"$d\\sigma/dM$ [pb/GeV]"}
     if combined:
         for i in [0,1]:
-            kargs = {'logy' : [True,False][i], 'axes':axs[i],'tight':False}
-            combined_plot(mass_plot,dl,"lo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
-            combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
-            combined_plot(mass_plot,dl,"nlo_plus_nll",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
-            if i == 1:
-                mass_plot(dl,  "nlo_plus_nll_over_nlo",p,interpolate=True,plot_data=False,fill=False,mask=dl["lo_scale"]!=np.array(None), **kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+            kargs = {'logy' : [p!="invariant_mass",False][i], 'axes':axs[i],'tight':False}
+            if p == "invariant_mass":
+                plot(dl,  "invariant_mass","lo",           **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
+                plot(dl,  "invariant_mass","nlo",          **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
+                plot(dl,  "invariant_mass","nlo_plus_nll", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
+                if i == 1:
+                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo", interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+            else:
+                combined_plot(mass_plot,dl,"lo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                combined_plot(mass_plot,dl,"nlo_plus_nll",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                if i == 1:
+                    mass_plot(dl,  "nlo_plus_nll_over_nlo",p,interpolate=True,plot_data=False,fill=False,mask=dl["lo_scale"]!=np.array(None), **kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
 
     elif scale:
         for i in [0,1]:
-            kargs = {'logy':[True,False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'tight':False}
-            mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
-            mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
-            mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
-            if i == 1:
-                mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
-    elif scale:
+            kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'tight':False}
+            if p == "invariant_mass":
+                plot(dl,  "invariant_mass","lo_scale",         **kinv,  **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
+                plot(dl,  "invariant_mass","nlo_scale",       **kinv,   **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
+                plot(dl,  "invariant_mass","nlo_plus_nll_scale", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
+                if i == 1:
+                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo", interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+            else:
+                mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
+                mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
+                mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
+                if i == 1:
+                    mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+    elif pdf:
         for i in [0,1]:
-            kargs = {'logy':[True,False][i],'mask':dl["lo_pdf"]!=np.array(None), 'axes':axs[i],'tight':False}
-            mass_plot(dl,  "lo_pdf",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
-            mass_plot(dl,  "nlo_pdf",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
-            mass_plot(dl,  "nlo_plus_nll_pdf",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
-            if i == 1:
-                mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
-
+            kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["lo_pdf"]!=np.array(None), 'axes':axs[i],'tight':False}
+            if p == "invariant_mass":
+                plot(dl,  "invariant_mass","lo_pdf",          **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
+                plot(dl,  "invariant_mass","nlo_pdf",         **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
+                plot(dl,  "invariant_mass","nlo_plus_nll_pdf", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
+                if i == 1:
+                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo", interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+            else:
+                mass_plot(dl,  "lo_pdf",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo")
+                mass_plot(dl,  "nlo_pdf",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo")
+                mass_plot(dl,  "nlo_plus_nll_pdf",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll")
+                if i == 1:
+                    mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")

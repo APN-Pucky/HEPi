@@ -92,5 +92,4 @@ def parse_single(file) -> ResumminoResult:
             if tmp is not None:
                 rnloq_result = ufloat_fromstr(
                     tmp.group(1).replace("+-", "+/-"))
-
     return ResumminoResult(lo_result, nlo_result, nll_result, vnlo_result, ppk_result, rnlog_result, rnloq_result)
