@@ -25,5 +25,8 @@ for run_plot in [True,False ]:
                     hepi.plot(dl, "invariant_mass", "nlo_plus_nll_scale", mask=mask,plot_data=False,fill=True,logy=False, label="nlo+nll",xaxis="$M$ [GeV]",yaxis="$d\\sigma/dM$ [pb/GeV]")
 
                     plt.savefig(input.get_output_dir() + get_job_name() +  "_inv_mass_" + str(p) + "_" + str(nlo_pdf) + "_" +str(scenario) + ".pdf")
+
+                    hepi.mass_and_ratio_plot(dl,li,"invariant_mass",scale=True,plot_data=False,fill=True)
+                    plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" + str(ps) + "_" +str(scenario) + ".pdf")
     wait()
 
