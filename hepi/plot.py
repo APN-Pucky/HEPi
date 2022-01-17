@@ -431,10 +431,10 @@ def central_scale_plot(dict_list, vl, cont=False,error=True):
     # plt.show()
 
 
-def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont = False,figsize=(12,8),**kwargs):
+def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont = False,figsize=(6,6),**kwargs):
     global fig, axs
     if not cont:
-        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True)
+        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True, gridspec_kw={'height_ratios': [3, 1]})
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
         title(axs[0],li[0],**kwargs)
@@ -472,10 +472,10 @@ def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont
             #mass_plot(dl,  "nlo_plus_nll",p, **kargs,**kwargs,label="nlo+nll")
 
 
-def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,figsize=(12,8),plot_data=True,fill=True,**kwargs):
+def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,figsize=(6,6),plot_data=True,fill=True,**kwargs):
     global fig, axs
     if not cont:
-        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True)
+        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True, gridspec_kw={'height_ratios': [3, 1]})
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
         title(axs[0],li[0],**kwargs)
