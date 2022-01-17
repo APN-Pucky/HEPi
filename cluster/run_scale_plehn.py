@@ -12,7 +12,7 @@ for run_plot in [True,False]:
                 dl = rs.run(li, False, False, run_plot,False)
 
                 if not run_plot:
-                    hepi.scale_plot(dl,["lo","nlo","nlo_plus_nll"])
+                    hepi.scale_plot(dl,["lo","nlo","nlo_plus_nll"],error=False)
                     plt.savefig(input.get_output_dir() +get_job_name() + "_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
                     hepi.central_scale_plot(dl,["lo","nlo","nlo_plus_nll"])
                     plt.savefig(input.get_output_dir() +get_job_name() +"_central_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
