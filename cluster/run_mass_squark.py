@@ -29,12 +29,12 @@ for run_plot in [True,False ]:
                     hepi.mass_and_ratio_plot(dl,li,p,scale=True,plot_data=True,fill=True,scenario=scenario[0:9])
                     plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
 
-            if not run_plot:
-                plot.data([],[],init=True)
-                for l,n in pdfs:
-                    mask = dp[n]["nlo_plus_nll_pdf"] != np.array(None)
-                    hepi.mass_vplot(dp[n],dp[n]["nlo_plus_nll_pdf"],p,yscale=1./dp[pdfs[0][1]]["nlo_plus_nll_noerr"][mask],yaxis="Ratio",fill=True,plot_data=True,mask=mask,label=n)
-                plt.savefig(input.get_output_dir()+ get_job_name()+"_pdfs_ratio_" + "_" + str(p)+ "_" +str(scenario) + ".pdf")
+            #if not run_plot:
+            #    plot.data([],[],init=True)
+            #    for l,n in pdfs:
+            #        mask = dp[n]["nlo_plus_nll_pdf"] != np.array(None)
+            #        hepi.mass_vplot(dp[n],dp[n]["nlo_plus_nll_pdf"],p,yscale=1./dp[pdfs[0][1]]["nlo_plus_nll_noerr"][mask],yaxis="Ratio",fill=True,plot_data=True,mask=mask,label=n)
+            #    plt.savefig(input.get_output_dir()+ get_job_name()+"_pdfs_ratio_" + "_" + str(p)+ "_" +str(scenario) + ".pdf")
 
                     
     wait()
