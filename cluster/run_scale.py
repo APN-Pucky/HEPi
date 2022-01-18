@@ -10,11 +10,12 @@ for run_plot in [True,False ]:
                 li = [hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, p, 1000022, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=100)]
 
                 li = hepi.scale_scan(li, 9+8,10.)
+                li = hepi.seven_point_scan(li)
 
                 dl = rs.run(li, False, False, run_plot,False)
 
                 if not run_plot:
-                    hepi.scale_plot(dl,["lo","nlo","nlo_plus_nll"],error=False,li=li,scenario=scenario[0:9])
+                    hepi.scale_plot(dl,["lo","nlo","nlo_plus_nll"],error=False,seven_point_band=True,li=li,scenario=scenario[0:9])
                     plt.savefig(input.get_output_dir() + get_job_name() + "_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
                     hepi.central_scale_plot(dl,["lo","nlo","nlo_plus_nll"])
                     plt.savefig(input.get_output_dir() +get_job_name() +"_central_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
