@@ -486,14 +486,15 @@ def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont
             #mass_plot(dl,  "nlo_plus_nll",p, **kargs,**kwargs,label="nlo+nll")
 
 
-def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,figsize=(6,4),plot_data=True,fill=True,yscale=1.0,**kwargs):
+#TODO unit and yscale for each case and mass_and_plot!
+def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,figsize=(6,4),plot_data=True,fill=True,unit="pb",yscale=1.0,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True, gridspec_kw={'height_ratios': [2, 1]})
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
         title(axs[0],li[0],**kwargs)
-    kinv = {'xaxis':"$M$ [GeV]",'yaxis':"$d\\sigma/dM$ [pb/GeV]"}
+    kinv = {'xaxis':"$M$ [GeV]",'yaxis':"$d\\sigma/dM$ ["+unit+"/GeV]"}
     if combined:
         for i in [0,1]:
             kargs = {'logy' : [p!="invariant_mass",False][i], 'axes':axs[i],'tight':False}
