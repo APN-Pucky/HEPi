@@ -23,10 +23,10 @@ for run_plot in [True,False ]:
                     #dl = hepi.combine_errors(dl)
                     dp[nlo_pdf] = dl
 
-                    hepi.mass_and_K_plot(dl,li,p,scale=True,plot_data=True,fill=True,scenario=scenario[0:9])
+                    hepi.mass_and_K_plot(dl,li,p,scale=True,plot_data=False,fill=True,scenario=scenario[0:9])
                     plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_K_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
 
-                    hepi.mass_and_ratio_plot(dl,li,p,scale=True,plot_data=True,fill=True,scenario=scenario[0:9])
+                    hepi.mass_and_ratio_plot(dl,li,p,scale=True,plot_data=False,fill=True,scenario=scenario[0:9])
                     plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
 
             #if not run_plot:
