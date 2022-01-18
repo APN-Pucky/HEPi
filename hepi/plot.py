@@ -273,15 +273,16 @@ def err_plt(axes,x,y,label=None,error=False):
 
 def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,**kwargs):
     global fig, axs
+    cycle_safe = mpl.rcParams['axes.prop_cycle'] 
+    if plehn_color:
+        mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=["r", "b", "g"]) 
     if not cont:
         fig, axs = plt.subplots(1, 5, figsize=(12, 3), sharey=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(wspace=0)
         if li is not None:
             title(axs[2],li[0],**kwargs)
-    cycle_safe = mpl.rcParams['axes.prop_cycle'] 
-    if plehn_color:
-        mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=["r", "b", "g"]) 
+   
 
     mr = dict_list["mu_r"]
     mf = dict_list["mu_f"]

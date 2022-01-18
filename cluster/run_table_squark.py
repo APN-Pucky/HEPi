@@ -18,7 +18,7 @@ for run_plot in [True,False ]:
                 dl = rs.run(li, False, False, run_plot,False)
 
                 if not run_plot:
-                    #dl = hepi.pdf_error(li,dl)
+                    dl = hepi.pdf_error(li,dl)
                     dl = hepi.scale_error(li,dl)
                     dl = hepi.combine_errors(dl)
 
