@@ -531,7 +531,7 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
                 mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo"if i==0 else "")
                 mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll"if i==0 else "")
                 if i == 1:
-                    mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,yaxis="Ratio",**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
     elif pdf:
         for i in [0,1]:
             kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["lo_pdf"]!=np.array(None), 'axes':axs[i],'tight':False}
