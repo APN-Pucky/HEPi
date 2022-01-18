@@ -1,4 +1,5 @@
 from scipy import interpolate
+import matplotlib as mpl
 from smpl import plot as splot
 import smpl
 import numpy as np
@@ -270,7 +271,7 @@ def err_plt(axes,x,y,label=None,error=False):
         l = axes.plot(x, splot.unv(y), label=v)
         return l
 
-def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,**kwargs):
+def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(1, 5, figsize=(12, 3), sharey=True)
@@ -278,6 +279,9 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
         fig.subplots_adjust(wspace=0)
         if li is not None:
             title(axs[2],li[0],**kwargs)
+    cycle_safe = mpl.rcParams['axes.prop_cycle'] 
+    if plehn_color:
+        mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=["r", "b", "g"]) 
 
     mr = dict_list["mu_r"]
     mf = dict_list["mu_f"]
@@ -338,6 +342,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
             axs[4].fill_between(mr[mask], mvmax, mvmin,
                                 facecolor=l.get_color(), alpha=0.3,label="$\\Delta \\sigma_{" + v + "}$")
 
+
     if not cont:
         axs[0].plot([], [], ' ', label="$\mu_R=" + "\mu_F$")
         axs[1].plot([], [], ' ', label="$\mu_R=" + str(np.max(mf)) + "\mu_0$")
@@ -385,6 +390,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
     axs[3].legend()
     axs[4].legend()
     # plt.show()
+    mpl.rcParams['axes.prop_cycle'] = cycle_safe
 
     
 
