@@ -123,6 +123,9 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ra
     # TODO use kwargs
     if label is None:
         label = y
+    if label == "":
+        label = None
+
     vx = dict_list[x][mask]
     vy = dict_list[y][mask]
 
