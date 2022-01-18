@@ -513,9 +513,9 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
         for i in [0,1]:
             kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'tight':False}
             if p == "invariant_mass":
-                plot(dl,  "invariant_mass","lo_scale",         **kinv,  **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo" if i==0 else None)
-                plot(dl,  "invariant_mass","nlo_scale",       **kinv,   **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo"if i==0 else None)
-                plot(dl,  "invariant_mass","nlo_plus_nll_scale", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll"if i==0 else None)
+                plot(dl,  "invariant_mass","lo_scale",         **kinv,  **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo" if i==0 else "")
+                plot(dl,  "invariant_mass","nlo_scale",       **kinv,   **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo"if i==0 else "")
+                plot(dl,  "invariant_mass","nlo_plus_nll_scale", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll"if i==0 else "")
                 if i == 1:
                     plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo",**kargs, interpolate=True,plot_data=False,fill=False,xaxis="$M$ [GeV]",yaxis="Ratio",**kwargs,data_color='0',label="(nlo+nll)/nlo")
             else:
