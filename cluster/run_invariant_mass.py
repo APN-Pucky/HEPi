@@ -4,7 +4,7 @@ from cluster import *
 #wait()
 for run_plot in [True,False ]:
     for diff_m,scenario in [(2000,"scenarioB_mod.in"),(4000,"scenarioA.in"),]:
-        pdfs = [("MSHT20nlo_as118","MSHT20nlo_as118"), #("CT18NLO","CT18NLO"),  ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180")
+        pdfs = [("MSHT20lo_as130","MSHT20nlo_as118"), #("CT18NLO","CT18NLO"),  ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180")
         ]
         for lo_pdf,nlo_pdf in pdfs:
             for p in [2000002, 1000002]:
