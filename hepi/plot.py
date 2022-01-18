@@ -269,7 +269,7 @@ def err_plt(axes,x,y,label=None,error=False):
         return l
     else:
         l = axes.plot(x, splot.unv(y), label=v)
-        return l
+        return l[0]
 
 def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,**kwargs):
     global fig, axs
