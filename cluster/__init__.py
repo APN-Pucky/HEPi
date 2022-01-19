@@ -33,7 +33,7 @@ input.set_output_dir("/scratch/tmp/"+user+"/hepi/")
 input.set_input_dir("/home/a/"+user+"/input/")
 input.set_pre("while [[ $(squeue -u " + user+ " | wc -l) -gt 1990 ]]; do sleep 60; done && sbatch --job-name=" +get_job_name() +
 " --ntasks-per-node 1 --cpus-per-task 1  --time=12:00:00 --mem=100M --partition normal" +
-" --mail-type=ALL --mail-user="+user+"@uni-muenster.de")
+" --mail-type=FAIL --mail-user="+user+"@uni-muenster.de")
 print(rs.get_path())
 
 
