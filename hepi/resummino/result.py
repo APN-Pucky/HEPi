@@ -9,20 +9,20 @@ import warnings
 class ResumminoResult(Result):
     def __init__(self, lo, nlo, nlo_plus_nll, vnlo, p_plus_k, rnlog, rnloq):
         Result.__init__(self, lo, nlo, nlo_plus_nll)
-        self.vnlo = vnlo
-        self.p_plus_k = p_plus_k
-        self.rnlog = rnlog
-        self.rnloq = rnloq
+        self.VNLO = vnlo
+        self.P_PLUS_K = p_plus_k
+        self.RNLOG = rnlog
+        self.RNLOQ = rnloq
         if not (vnlo is None or p_plus_k is None):
-            self.vnlo_plus_p_plus_k = self.vnlo + self.p_plus_k
+            self.VNLO_PLUS_P_PLUS_K = self.VNLO + self.P_PLUS_K
         else:
-            self.vnlo_plus_p_plus_k = None
+            self.VNLO_PLUS_P_PLUS_K = None
         if not (rnlog is None or rnloq is None):
-            self.rnlo = rnlog+rnloq
+            self.RNLO = rnlog+rnloq
         else:
-            self.rnlo = None
-        if not ( self.rnlo is None or self.vnlo_plus_p_plus_k is None):
-            self.rnlo_plus_vnlo_plus_p_plus_k = self.rnlo + self.vnlo_plus_p_plus_k
+            self.RNLO = None
+        if not ( self.RNLO is None or self.VNLO_PLUS_P_PLUS_K is None):
+            self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = self.RNLO + self.VNLO_PLUS_P_PLUS_K
 
 def is_valid(file:str,p:Input,d):
     order = p.order
@@ -38,13 +38,13 @@ def is_valid(file:str,p:Input,d):
                 exit(1)
                 return False
     res = parse_single(file)
-    if res.lo is not None and order is Order.LO:
+    if res.LO is not None and order is Order.LO:
         return True
-    if res.lo is not None and res.nlo is not None and order is Order.NLO:
+    if res.LO is not None and res.NLO is not None and order is Order.NLO:
         return True
-    if res.lo is not None and res.nlo is not None and res.nlo_plus_nll is not None and order is Order.NLO_PLUS_NLL:
+    if res.LO is not None and res.NLO is not None and res.NLO_PLUS_NLL is not None and order is Order.NLO_PLUS_NLL:
         return True
-    print("RESTART" ,res.lo, res.nlo,res.nlo_plus_nll, file)
+    print("RESTART" ,res.LO, res.NLO,res.NLO_PLUS_NLL, file)
     return False
 
 

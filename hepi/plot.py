@@ -25,39 +25,39 @@ from typing import List
 
 def tex_table(dict_list,key,fname,scale=True,pdf=True):
  dl = dict_list
- mask = dl["nlo_scale"]!= np.array(None)
- lo = splot.unv(dl["lo"][mask])
- nlo = splot.unv(dl["nlo"][mask])
- nlo_plus_nll = splot.unv(dl["nlo_plus_nll"][mask])
+ mask = dl["NLO_SCALE"]!= np.array(None)
+ lo = splot.unv(dl["LO"][mask])
+ nlo = splot.unv(dl["NLO"][mask])
+ nlo_plus_nll = splot.unv(dl["NLO_PLUS_NLL"][mask])
  with open(fname,'w+') as f:
-     for i in range(len(dl["lo"][mask])):
+     for i in range(len(dl["LO"][mask])):
         f.write(
             "$" + io.gf(4).format(dl[key][mask][i]) + "$ & $"+
             io.gf(4).format(lo[i]) 
-                + "^{+"+io.gf().format(dl["lo_scale_errplus"][mask][i]/lo[i]*100.)
-                + "%%}_{" +io.gf().format(dl["lo_scale_errminus"][mask][i]/lo[i]*100.)
+                + "^{+"+io.gf().format(dl["LO_SCALE_ERRPLUS"][mask][i]/lo[i]*100.)
+                + "%%}_{" +io.gf().format(dl["LO_SCALE_ERRMINUS"][mask][i]/lo[i]*100.)
                 +  "%%}$ & "+
             io.gf(4).format(nlo[i]) 
-                + "^{+"+io.gf().format(dl["nlo_scale_errplus"][mask][i]/nlo[i]*100.)
-                + ("%%+"+io.gf().format(dl["nlo_pdf_errplus"][mask][i] /nlo[i]*100.) if pdf else "")
-                + "%%}_{" +io.gf().format(dl["nlo_scale_errminus"][mask][i]/nlo[i]*100.)
-                + ("%%"+io.gf().format(dl["nlo_pdf_errminus"][mask][i]/nlo[i]*100.) if pdf else "")
+                + "^{+"+io.gf().format(dl["NLO_SCALE_ERRPLUS"][mask][i]/nlo[i]*100.)
+                + ("%%+"+io.gf().format(dl["NLO_PDF_ERRPLUS"][mask][i] /nlo[i]*100.) if pdf else "")
+                + "%%}_{" +io.gf().format(dl["NLO_SCALE_ERRMINUS"][mask][i]/nlo[i]*100.)
+                + ("%%"+io.gf().format(dl["NLO_PDF_ERRMINUS"][mask][i]/nlo[i]*100.) if pdf else "")
                 +  "%%}$ & "+
             io.gf(4).format(nlo_plus_nll[i]) 
-                + "^{+"+io.gf().format(dl["nlo_plus_nll_scale_errplus"][mask][i]/nlo_plus_nll[i]*100.)
-                + ("%%+"+io.gf().format(dl["nlo_plus_nll_pdf_errplus"][mask][i]/nlo[i]*100.) if pdf else "")
-                + "%%}_{" +io.gf().format(dl["nlo_plus_nll_scale_errminus"][mask][i]/nlo_plus_nll[i]*100.)
-                + ("%%"+io.gf().format(dl["nlo_plus_nll_pdf_errminus"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
+                + "^{+"+io.gf().format(dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask][i]/nlo_plus_nll[i]*100.)
+                + ("%%+"+io.gf().format(dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask][i]/nlo[i]*100.) if pdf else "")
+                + "%%}_{" +io.gf().format(dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.)
+                + ("%%"+io.gf().format(dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
                 +  "%%}$ "+
             "\n"
         )
 
 def title(axe,i:Input,scenario="",diff_L_R=None,extra="",**kwargs):
     axe.set_title(
-        "$pp\\to"+get_name(i.particle1)+get_name(i.particle2)
-        +"$ at $\\sqrt{S} = " +str(i.energy/1000) + "$ TeV"
+        "$pp\\to"+get_name(i.particle1)+get_name(i.particle2) + "$"
+        #+" at $\\sqrt{S} = " +str(i.energy/1000) + "$ TeV"
         +" for " +(i.slha.split(".")[0] if scenario =="" else scenario)
-        +" with " + i.pdf_nlo
+        #+" with " + i.pdf_nlo
         + " " + extra
     )
 
@@ -110,12 +110,12 @@ def get_mass(l, id):
 def mass_plot(dict_list,  y, part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,**kwargs):
     dict_list["mass_"+ str(part)] = get_mass(dict_list, part)
     plot(dict_list, "mass_" + str(part), y, label=label,
-         xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,**kwargs)
+         xaxis="$m_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,**kwargs)
 
 
 def mass_vplot(dict_list,  y,part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,mask=None,**kwargs):
   vplot(get_mass(dict_list,part)[mask], y[mask], label=label,
-          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
+          xaxis="$m_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 #    vplot(dict_list["mass_" + str(part)][mask], y[mask], label=label,
 #          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 
@@ -133,7 +133,7 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ra
     if K:
         yaxis = "$K$"
         yscale = 1.0
-        vy = vy / splot.unv(dict_list["lo"][mask])
+        vy = vy / splot.unv(dict_list["LO"][mask])
         if K_plus_1:
             vy = vy + vy/vy
     if ratio:
@@ -304,7 +304,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
             mvmin = np.min(splot.unv(mv[mask]))
 
         mask = mf == mr
-        l = err_plt(axs[0],mf[mask],mv[mask],label="$\\sigma_{"+v+"}$",error=error)
+        l = err_plt(axs[0],mf[mask],mv[mask],label="$\\sigma_{"+v.replace("NLO_PLUS_NLL","NLO+NLL")+"}$",error=error)
         #l, _, _ = axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5, label=v)
         if seven_point_band:
@@ -341,7 +341,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
             axs[4].fill_between(mr[mask], mvmax, mvmin,
-                                facecolor=l.get_color(), alpha=0.3,label="$\\Delta \\sigma_{" + v + "}$")
+                                facecolor=l.get_color(), alpha=0.3,label="$\\Delta \\sigma_{" + v.replace("NLO_PLUS_NLL","NLO+NLL") + "}$")
 
 
     if not cont:
@@ -462,35 +462,35 @@ def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont
     if combined:
         for i in [0,1]:
             kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'K':[False,True][i],'tight':False}
-            combined_plot(mass_plot,dl,"lo",p,**kargs,**kwargs)
-            combined_plot(mass_plot,dl,"nlo",p,**kargs,**kwargs)
-            combined_plot(mass_plot,dl,"nlo_plus_nll",p,**kargs,**kwargs)
+            combined_plot(mass_plot,dl,"LO",p,**kargs,**kwargs)
+            combined_plot(mass_plot,dl,"NLO",p,**kargs,**kwargs)
+            combined_plot(mass_plot,dl,"NLO_PLUS_NLL",p,**kargs,**kwargs)
     elif scale:
         for i in [0,1]:
-            kargs = {'logy':[True,False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
-            mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,label="lo")
-            mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,label="nlo")
-            mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,label="nlo+nll")
+            kargs = {'logy':[True,False][i],'mask':dl["LO_SCALE"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
+            mass_plot(dl,  "LO_SCALE",p,           **kargs,**kwargs,label="LO")
+            mass_plot(dl,  "NLO_SCALE",p,          **kargs,**kwargs,label="NLO")
+            mass_plot(dl,  "NLO_PLUS_NLL_SCALE",p, **kargs,**kwargs,label="NLO+NLL")
     elif pdf:
         for i in [0,1]:
-            kargs = {'logy':[True,False][i],'mask':dl["lo_pdf"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
-            mass_plot(dl,  "lo_pdf",p,           **kargs,**kwargs,label="lo")
-            mass_plot(dl,  "nlo_pdf",p,          **kargs,**kwargs,label="nlo")
-            mass_plot(dl,  "nlo_plus_nll_pdf",p, **kargs,**kwargs,label="nlo+nll")
+            kargs = {'logy':[True,False][i],'mask':dl["LO_PDF"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
+            mass_plot(dl,  "LO_PDF",p,           **kargs,**kwargs,label="LO")
+            mass_plot(dl,  "NLO_PDF",p,          **kargs,**kwargs,label="NLO")
+            mass_plot(dl,  "NLO_PLUS_NLL_PDF",p, **kargs,**kwargs,label="NLO+NLL")
     elif plehn:
         axs[0].set_ylim([0.2*10**-2,10**3])
         axs[1].set_ylim([0.9,1.85])
         for i in [0,1]:
             kargs = {'yscale':1000, 'yaxis':"$\\sigma$ [fb]",'logy':[True,False][i],'axes':axs[i],'K':[False,True][i],'tight':False,'error':False}
             if i == 0:
-                mass_plot(dl,  "lo",p,           **kargs,**kwargs,data_color='b',fmt='--',label="lo")
-            mass_plot(dl,  "rnlo",p,          **kargs,**kwargs,data_color='k',K_plus_1=True,fmt='-.',label="real")
+                mass_plot(dl,  "LO",p,           **kargs,**kwargs,data_color='b',fmt='--',label="LO")
+            mass_plot(dl,  "RNLO",p,          **kargs,**kwargs,data_color='k',K_plus_1=True,fmt='-.',label="Real")
             if i == 0:
-                mass_plot(dl,  "nlo",p,          **kargs,**kwargs,data_color='r',fmt='-',label="nlo")
-            mass_plot(dl,  "vnlo_plus_p_plus_k",p,          **kargs,**kwargs,K_plus_1=True,data_color='k',fmt=':',label="virtual")
+                mass_plot(dl,  "NLO",p,          **kargs,**kwargs,data_color='r',fmt='-',label="NLO")
+            mass_plot(dl,  "VNLO_PLUS_P_PLUS_K",p,          **kargs,**kwargs,K_plus_1=True,data_color='k',fmt=':',label="Virtual")
             if i == 1:
-                mass_plot(dl,  "rnlo_plus_vnlo_plus_p_plus_k",p,K_plus_1=True,          **kargs,**kwargs,data_color='r',label="nlo")
-            #mass_plot(dl,  "nlo_plus_nll",p, **kargs,**kwargs,label="nlo+nll")
+                mass_plot(dl,  "RNLO_PLUS_VNLO_PLUS_P_PLUS_K",p,K_plus_1=True,          **kargs,**kwargs,data_color='r',label="NLO")
+            #mass_plot(dl,  "NLO_PLUS_NLL",p, **kargs,**kwargs,label="NLO+NLL")
 
 
 #TODO unit and yscale for each case and mass_and_plot!
@@ -506,45 +506,45 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
         for i in [0,1]:
             kargs = {'logy' : [p!="invariant_mass",False][i], 'axes':axs[i],'tight':False}
             if p == "invariant_mass":
-                plot(dl,  "invariant_mass","lo",           **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo"if i==0 else None)
-                plot(dl,  "invariant_mass","nlo",          **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo"if i==0 else None)
-                plot(dl,  "invariant_mass","nlo_plus_nll", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll"if i==0 else None)
+                plot(dl,  "invariant_mass","LO",           **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else None)
+                plot(dl,  "invariant_mass","NLO",          **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else None)
+                plot(dl,  "invariant_mass","NLO_PLUS_NLL", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else None)
                 if i == 1:
-                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    plot(dl,  "invariant_mass","NLO_PLUS_NLL_OVER_NLO",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
             else:
-                combined_plot(mass_plot,dl,"lo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
-                combined_plot(mass_plot,dl,"nlo",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
-                combined_plot(mass_plot,dl,"nlo_plus_nll",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                combined_plot(mass_plot,dl,"LO",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                combined_plot(mass_plot,dl,"NLO",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                combined_plot(mass_plot,dl,"NLO_PLUS_NLL",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
                 if i == 1:
-                    mass_plot(dl,  "nlo_plus_nll_over_nlo",p,interpolate=True,plot_data=False,fill=False,mask=dl["lo_scale"]!=np.array(None), *kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    mass_plot(dl,  "NLO_PLUS_NLL_OVER_NLO",p,interpolate=True,plot_data=False,fill=False,mask=dl["LO_SCALE"]!=np.array(None), *kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
 
     elif scale:
         for i in [0,1]:
-            kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["lo_scale"]!=np.array(None), 'axes':axs[i],'tight':False}
+            kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["LO_SCALE"]!=np.array(None), 'axes':axs[i],'tight':False}
             if p == "invariant_mass":
-                plot(dl,  "invariant_mass","lo_scale",         **kinv,  **kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo" if i==0 else "")
-                plot(dl,  "invariant_mass","nlo_scale",       **kinv,   **kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo"if i==0 else "")
-                plot(dl,  "invariant_mass","nlo_plus_nll_scale", **kinv,**kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll"if i==0 else "")
+                plot(dl,  "invariant_mass","LO_SCALE",         **kinv,  **kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO" if i==0 else "")
+                plot(dl,  "invariant_mass","NLO_SCALE",       **kinv,   **kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
+                plot(dl,  "invariant_mass","NLO_PLUS_NLL_SCALE", **kinv,**kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
                 if i == 1:
-                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo",**kargs, interpolate=True,plot_data=False,fill=False,xaxis="$M$ [GeV]",yaxis="Ratio",**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    plot(dl,  "invariant_mass","NLO_PLUS_NLL_OVER_NLO",**kargs, interpolate=True,plot_data=False,fill=False,xaxis="$M$ [GeV]",yaxis="Ratio",**kwargs,data_color='0',label="(NLO+NLL)/NLO")
             else:
-                mass_plot(dl,  "lo_scale",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo"if i==0 else "")
-                mass_plot(dl,  "nlo_scale",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo"if i==0 else "")
-                mass_plot(dl,  "nlo_plus_nll_scale",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll"if i==0 else "")
+                mass_plot(dl,  "LO_SCALE",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else "")
+                mass_plot(dl,  "NLO_SCALE",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
+                mass_plot(dl,  "NLO_PLUS_NLL_SCALE",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
                 if i == 1:
-                    mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,yaxis="Ratio",**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    mass_plot(dl,  "NLO_PLUS_NLL_OVER_NLO",p, interpolate=True,plot_data=False,fill=False,yaxis="Ratio",**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
     elif pdf:
         for i in [0,1]:
-            kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["lo_pdf"]!=np.array(None), 'axes':axs[i],'tight':False}
+            kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["LO_PDF"]!=np.array(None), 'axes':axs[i],'tight':False}
             if p == "invariant_mass":
-                plot(dl,  "invariant_mass","lo_pdf",          **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo"if i==0 else None)
-                plot(dl,  "invariant_mass","nlo_pdf",         **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo"if i==0 else None)
-                plot(dl,  "invariant_mass","nlo_plus_nll_pdf", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll"if i==0 else None)
+                plot(dl,  "invariant_mass","LO_PDF",          **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else None)
+                plot(dl,  "invariant_mass","NLO_PDF",         **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else None)
+                plot(dl,  "invariant_mass","NLO_PLUS_NLL_PDF", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else None)
                 if i == 1:
-                    plot(dl,  "invariant_mass","nlo_plus_nll_over_nlo",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    plot(dl,  "invariant_mass","NLO_PLUS_NLL_OVER_NLO",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
             else:
-                mass_plot(dl,  "lo_pdf",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="lo"if i==0 else None)
-                mass_plot(dl,  "nlo_pdf",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo"if i==0 else None)
-                mass_plot(dl,  "nlo_plus_nll_pdf",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="nlo+nll"if i==0 else None)
+                mass_plot(dl,  "LO_PDF",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else None)
+                mass_plot(dl,  "NLO_PDF",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else None)
+                mass_plot(dl,  "NLO_PLUS_NLL_PDF",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else None)
                 if i == 1:
-                    mass_plot(dl,  "nlo_plus_nll_over_nlo",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(nlo+nll)/nlo")
+                    mass_plot(dl,  "NLO_PLUS_NLL_OVER_NLO",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")

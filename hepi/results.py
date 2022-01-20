@@ -12,21 +12,21 @@ required_numerical_uncertainty_factor = 10
 
 class Result:
     def __init__(self, lo, nlo, nlo_plus_nll):
-        self.lo = lo
-        self.nlo = nlo
-        self.nlo_plus_nll = nlo_plus_nll
+        self.LO = lo
+        self.NLO = nlo
+        self.NLO_PLUS_NLL = nlo_plus_nll
         if lo is not None and lo != 0:
-            self.K_lo = lo/lo
+            self.K_LO = lo/lo
         #else:
         #    print("lo None or lo=",lo)
         if nlo is not None and lo != 0:
-            self.K_nlo = nlo/lo
+            self.K_NLO = nlo/lo
         #else:
         #    print("nlo None or lo=",lo)
         if nlo_plus_nll is not None and lo != 0:
-            self.K_nlo_plus_nll = nlo_plus_nll/lo
+            self.K_NLO_PLUS_NLL = nlo_plus_nll/lo
         if nlo_plus_nll is not None and nlo != 0:
-            self.nlo_plus_nll_over_nlo = nlo_plus_nll/nlo
+            self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll/nlo
         #else:
         #    print("nlo+nll None or lo=",lo)
 
@@ -39,21 +39,21 @@ def pdf_error(li, dl):
     example = li[0]
     members = [attr for attr in dir(example) if not callable(
         getattr(example, attr)) and not attr.startswith("__")]
-    dl["lo_pdf"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["lo_pdf_central"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["lo_pdf_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["lo_pdf_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["lo_pdf_errsym"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_pdf"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_pdf_central"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_pdf_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_pdf_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_pdf_errsym"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_pdf"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_pdf_central"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_pdf_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_pdf_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_pdf_errsym"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_PDF"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_PDF_CENTRAL"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_PDF_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_PDF_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_PDF_ERRSYM"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PDF"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PDF_CENTRAL"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PDF_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PDF_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PDF_ERRSYM"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_PDF"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_PDF_CENTRAL"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_PDF_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_PDF_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_PDF_ERRSYM"] = np.array([None]*len(dl["pdfset_nlo"]))
     for i in range(len(dl["pdfset_nlo"])):
         if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0:
             set = lhapdf.getPDFSet(dl["pdf_nlo"][i])
@@ -66,44 +66,44 @@ def pdf_error(li, dl):
                 if same:
                     pdfs[dl["pdfset_nlo"][j]] = j
 
-            dl["lo_pdf_central"][i] = plot.unv(dl["lo"][i])
-            dl["lo_pdf_errplus"][i] = 0.0
-            dl["lo_pdf_errminus"][i] = 0.0
-            dl["lo_pdf_errsym"][i] = 0.0
+            dl["LO_PDF_CENTRAL"][i] = plot.unv(dl["LO"][i])
+            dl["LO_PDF_ERRPLUS"][i] = 0.0
+            dl["LO_PDF_ERRMINUS"][i] = 0.0
+            dl["LO_PDF_ERRSYM"][i] = 0.0
             # lo_unc = set.uncertainty(
-            #    [plot.unv(dl["lo"][k]) for k in pdfs], -1)
+            #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
             nlo_unc = set.uncertainty(
-                [plot.unv(dl["nlo"][k]) for k in pdfs], -1)
-            dl["nlo_pdf_central"][i] = nlo_unc.central
-            dl["nlo_pdf_errplus"][i] = nlo_unc.errplus
-            dl["nlo_pdf_errminus"][i] = -nlo_unc.errminus
-            dl["nlo_pdf_errsym"][i] = nlo_unc.errsymm
+                [plot.unv(dl["NLO"][k]) for k in pdfs], -1)
+            dl["NLO_PDF_CENTRAL"][i] = nlo_unc.central
+            dl["NLO_PDF_ERRPLUS"][i] = nlo_unc.errplus
+            dl["NLO_PDF_ERRMINUS"][i] = -nlo_unc.errminus
+            dl["NLO_PDF_ERRSYM"][i] = nlo_unc.errsymm
             #TODO error sym to minus and plus
-            if(plot.usd(dl["nlo"][i])*required_numerical_uncertainty_factor > dl["nlo_pdf_errplus"][i] or  plot.usd(dl["nlo"][i])*required_numerical_uncertainty_factor > -dl["nlo_pdf_errminus"][i]):
+            if(plot.usd(dl["NLO"][i])*required_numerical_uncertainty_factor > dl["NLO_PDF_ERRPLUS"][i] or  plot.usd(dl["NLO"][i])*required_numerical_uncertainty_factor > -dl["NLO_PDF_ERRMINUS"][i]):
                 warnings.warn("too low numerical nlo precision vs pdf", RuntimeWarning)
 
             nlo_plus_nll_unc = set.uncertainty(
-                [plot.unv(dl["nlo_plus_nll"][k]) for k in pdfs], -1)
-            dl["nlo_plus_nll_pdf_central"][i] = nlo_plus_nll_unc.central
-            dl["nlo_plus_nll_pdf_errplus"][i] = nlo_plus_nll_unc.errplus
-            dl["nlo_plus_nll_pdf_errminus"][i] = -nlo_plus_nll_unc.errminus
-            dl["nlo_plus_nll_pdf_errsym"][i] = nlo_plus_nll_unc.errsymm
+                [plot.unv(dl["NLO_PLUS_NLL"][k]) for k in pdfs], -1)
+            dl["NLO_PLUS_NLL_PDF_CENTRAL"][i] = nlo_plus_nll_unc.central
+            dl["NLO_PLUS_NLL_PDF_ERRPLUS"][i] = nlo_plus_nll_unc.errplus
+            dl["NLO_PLUS_NLL_PDF_ERRMINUS"][i] = -nlo_plus_nll_unc.errminus
+            dl["NLO_PLUS_NLL_PDF_ERRSYM"][i] = nlo_plus_nll_unc.errsymm
             #TODO error sym to minus and plus
-            if(plot.usd(dl["nlo_plus_nll"][i])*required_numerical_uncertainty_factor > dl["nlo_plus_nll_pdf_errplus"][i] or  plot.usd(dl["nlo_plus_nll"][i])*required_numerical_uncertainty_factor > -dl["nlo_plus_nll_pdf_errminus"][i]):
+            if(plot.usd(dl["NLO_PLUS_NLL"][i])*required_numerical_uncertainty_factor > dl["NLO_PLUS_NLL_PDF_ERRPLUS"][i] or  plot.usd(dl["NLO_PLUS_NLL"][i])*required_numerical_uncertainty_factor > -dl["NLO_PLUS_NLL_PDF_ERRMINUS"][i]):
                 warnings.warn("too low numerical nlo_plus_nll precision vs pdf", RuntimeWarning)
 
 
-    mask = dl["lo_pdf_central"]!= np.array(None)
-    dl["lo_pdf"][mask] = unumpy.uarray(plot.unv(dl["lo"][mask])+dl["lo_pdf_errplus"][mask]/2.+dl["lo_pdf_errminus"][mask]/2.,
-        (+dl["lo_pdf_errplus"][mask]-dl["lo_pdf_errminus"][mask])/2.)
+    mask = dl["LO_PDF_CENTRAL"]!= np.array(None)
+    dl["LO_PDF"][mask] = unumpy.uarray(plot.unv(dl["LO"][mask])+dl["LO_PDF_ERRPLUS"][mask]/2.+dl["LO_PDF_ERRMINUS"][mask]/2.,
+        (+dl["LO_PDF_ERRPLUS"][mask]-dl["LO_PDF_ERRMINUS"][mask])/2.)
 
-    mask = dl["nlo_pdf_central"]!= np.array(None)
-    dl["nlo_pdf"][mask] = unumpy.uarray(plot.unv(dl["nlo"][mask])+dl["nlo_pdf_errplus"][mask]/2.+dl["nlo_pdf_errminus"][mask]/2.,
-        (+dl["nlo_pdf_errplus"][mask]-dl["nlo_pdf_errminus"][mask])/2.)
+    mask = dl["NLO_PDF_CENTRAL"]!= np.array(None)
+    dl["NLO_PDF"][mask] = unumpy.uarray(plot.unv(dl["NLO"][mask])+dl["NLO_PDF_ERRPLUS"][mask]/2.+dl["NLO_PDF_ERRMINUS"][mask]/2.,
+        (+dl["NLO_PDF_ERRPLUS"][mask]-dl["NLO_PDF_ERRMINUS"][mask])/2.)
 
-    mask = dl["nlo_plus_nll_pdf_central"]!= np.array(None)
-    dl["nlo_plus_nll_pdf"][mask] = unumpy.uarray(plot.unv(dl["nlo_plus_nll"][mask])+dl["nlo_plus_nll_pdf_errplus"][mask]/2.+dl["nlo_plus_nll_pdf_errminus"][mask]/2.,
-        (+dl["nlo_plus_nll_pdf_errplus"][mask]-dl["nlo_plus_nll_pdf_errminus"][mask])/2.)
+    mask = dl["NLO_PLUS_NLL_PDF_CENTRAL"]!= np.array(None)
+    dl["NLO_PLUS_NLL_PDF"][mask] = unumpy.uarray(plot.unv(dl["NLO_PLUS_NLL"][mask])+dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask]/2.+dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask]/2.,
+        (+dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask]-dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask])/2.)
     return dl
 
 
@@ -112,15 +112,15 @@ def scale_error(li, dl):
     example = li[0]
     members = [attr for attr in dir(example) if not callable(
         getattr(example, attr)) and not attr.startswith("__")]
-    dl["lo_scale"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["lo_scale_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["lo_scale_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_scale"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_scale_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_scale_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_scale"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_scale_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_scale_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_SCALE"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_SCALE_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_SCALE_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_SCALE"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_SCALE_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_SCALE_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_SCALE"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_SCALE_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_SCALE_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     for i in range(len(dl["pdfset_nlo"])):
         if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0:
             scales = []
@@ -133,76 +133,76 @@ def scale_error(li, dl):
                     scales.append(j)
 
             # lo_unc = set.uncertainty(
-            #    [plot.unv(dl["lo"][k]) for k in pdfs], -1)
-            dl["lo_scale_errplus"][i] = np.max(
-                [plot.unv(dl["lo"][k]) for k in scales])-plot.unv(dl["lo"][i])
-            dl["lo_scale_errminus"][i] = np.min(
-                [plot.unv(dl["lo"][k]) for k in scales])-plot.unv(dl["lo"][i])
-            if(plot.usd(dl["lo"][i])*required_numerical_uncertainty_factor > dl["lo_scale_errplus"][i] or  plot.usd(dl["lo"][i])*required_numerical_uncertainty_factor > -dl["lo_scale_errminus"][i]):
+            #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
+            dl["LO_SCALE_ERRPLUS"][i] = np.max(
+                [plot.unv(dl["LO"][k]) for k in scales])-plot.unv(dl["LO"][i])
+            dl["LO_SCALE_ERRMINUS"][i] = np.min(
+                [plot.unv(dl["LO"][k]) for k in scales])-plot.unv(dl["LO"][i])
+            if(plot.usd(dl["LO"][i])*required_numerical_uncertainty_factor > dl["LO_SCALE_ERRPLUS"][i] or  plot.usd(dl["LO"][i])*required_numerical_uncertainty_factor > -dl["LO_SCALE_ERRMINUS"][i]):
                 warnings.warn("too low numerical lo precision vs scale", RuntimeWarning)
 
-            dl["nlo_scale_errplus"][i] = np.max(
-                [plot.unv(dl["nlo"][k]) for k in scales])-plot.unv(dl["nlo"][i])
-            dl["nlo_scale_errminus"][i] = np.min(
-                [plot.unv(dl["nlo"][k]) for k in scales])-plot.unv(dl["nlo"][i])
-            if(plot.usd(dl["nlo"][i])*required_numerical_uncertainty_factor > dl["nlo_scale_errplus"][i] or  plot.usd(dl["nlo"][i])*required_numerical_uncertainty_factor > -dl["nlo_scale_errminus"][i]):
+            dl["NLO_SCALE_ERRPLUS"][i] = np.max(
+                [plot.unv(dl["NLO"][k]) for k in scales])-plot.unv(dl["NLO"][i])
+            dl["NLO_SCALE_ERRMINUS"][i] = np.min(
+                [plot.unv(dl["NLO"][k]) for k in scales])-plot.unv(dl["NLO"][i])
+            if(plot.usd(dl["NLO"][i])*required_numerical_uncertainty_factor > dl["NLO_SCALE_ERRPLUS"][i] or  plot.usd(dl["NLO"][i])*required_numerical_uncertainty_factor > -dl["NLO_SCALE_ERRMINUS"][i]):
                 warnings.warn("too low numerical nlo precision vs scale", RuntimeWarning)
 
-            dl["nlo_plus_nll_scale_errplus"][i] = np.max(
-                [plot.unv(dl["nlo_plus_nll"][k]) for k in scales])-plot.unv(dl["nlo_plus_nll"][i])
-            dl["nlo_plus_nll_scale_errminus"][i] = np.min(
-                [plot.unv(dl["nlo_plus_nll"][k]) for k in scales])-plot.unv(dl["nlo_plus_nll"][i])
-            if(plot.usd(dl["nlo_plus_nll"][i])*required_numerical_uncertainty_factor > dl["nlo_plus_nll_scale_errplus"][i] or  plot.usd(dl["nlo_plus_nll"][i])*required_numerical_uncertainty_factor > -dl["nlo_plus_nll_scale_errminus"][i]):
+            dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][i] = np.max(
+                [plot.unv(dl["NLO_PLUS_NLL"][k]) for k in scales])-plot.unv(dl["NLO_PLUS_NLL"][i])
+            dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][i] = np.min(
+                [plot.unv(dl["NLO_PLUS_NLL"][k]) for k in scales])-plot.unv(dl["NLO_PLUS_NLL"][i])
+            if(plot.usd(dl["NLO_PLUS_NLL"][i])*required_numerical_uncertainty_factor > dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][i] or  plot.usd(dl["NLO_PLUS_NLL"][i])*required_numerical_uncertainty_factor > -dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][i]):
                 warnings.warn("too low numerical nlo_plus_nll precision vs scale", RuntimeWarning)
 
-    mask = dl["lo_scale_errplus"]!= np.array(None)
-    dl["lo_scale"][mask] = unumpy.uarray(plot.unv(dl["lo"][mask])+dl["lo_scale_errplus"][mask]/2.+dl["lo_scale_errminus"][mask]/2.,
-        (+dl["lo_scale_errplus"][mask]-dl["lo_scale_errminus"][mask])/2.)
+    mask = dl["LO_SCALE_ERRPLUS"]!= np.array(None)
+    dl["LO_SCALE"][mask] = unumpy.uarray(plot.unv(dl["LO"][mask])+dl["LO_SCALE_ERRPLUS"][mask]/2.+dl["LO_SCALE_ERRMINUS"][mask]/2.,
+        (+dl["LO_SCALE_ERRPLUS"][mask]-dl["LO_SCALE_ERRMINUS"][mask])/2.)
 
-    mask = dl["nlo_scale_errplus"]!= np.array(None)
-    dl["nlo_scale"][mask] = unumpy.uarray(plot.unv(dl["nlo"][mask])+dl["nlo_scale_errplus"][mask]/2.+dl["nlo_scale_errminus"][mask]/2.,
-        (+dl["nlo_scale_errplus"][mask]-dl["nlo_scale_errminus"][mask])/2.)
+    mask = dl["NLO_SCALE_ERRPLUS"]!= np.array(None)
+    dl["NLO_SCALE"][mask] = unumpy.uarray(plot.unv(dl["NLO"][mask])+dl["NLO_SCALE_ERRPLUS"][mask]/2.+dl["NLO_SCALE_ERRMINUS"][mask]/2.,
+        (+dl["NLO_SCALE_ERRPLUS"][mask]-dl["NLO_SCALE_ERRMINUS"][mask])/2.)
 
-    mask = dl["nlo_plus_nll_scale_errplus"]!= np.array(None)
-    dl["nlo_plus_nll_scale"][mask] = unumpy.uarray(plot.unv(dl["nlo_plus_nll"][mask])+dl["nlo_plus_nll_scale_errplus"][mask]/2.+dl["nlo_plus_nll_scale_errminus"][mask]/2.,
-        (+dl["nlo_plus_nll_scale_errplus"][mask]-dl["nlo_plus_nll_scale_errminus"][mask])/2.)
+    mask = dl["NLO_PLUS_NLL_SCALE_ERRPLUS"]!= np.array(None)
+    dl["NLO_PLUS_NLL_SCALE"][mask] = unumpy.uarray(plot.unv(dl["NLO_PLUS_NLL"][mask])+dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask]/2.+dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask]/2.,
+        (+dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask]-dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask])/2.)
     
     return dl
 
 def combine_errors(dl):
-    dl["lo_noerr"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["lo_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["lo_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["lo_combined"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_noerr"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_combined"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_noerr"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_errplus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_errminus"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["nlo_plus_nll_combined"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_NOERR"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["LO_COMBINED"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_NOERR"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_COMBINED"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_NOERR"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_COMBINED"] = np.array([None]*len(dl["pdfset_nlo"]))
 
 
-    mask = dl["lo_pdf_central"]!= np.array(None)
-    dl["lo_noerr"][mask]= plot.unv(dl["lo"][mask]).astype(float)
-    dl["lo_errplus"][mask]= np.sqrt(dl["lo_pdf_errplus"][mask].astype(float)**2+dl["lo_scale_errplus"][mask].astype(float)**2)
-    dl["lo_errminus"][mask]= -np.sqrt(dl["lo_pdf_errminus"][mask].astype(float)**2+dl["lo_scale_errminus"][mask].astype(float)**2)
-    dl["lo_combined"][mask] = unumpy.uarray(plot.unv(dl["lo"][mask])+dl["lo_errplus"][mask]/2.+dl["lo_errminus"][mask]/2.,
-        +dl["lo_errplus"][mask]-dl["lo_errminus"][mask])
+    mask = dl["LO_PDF_CENTRAL"]!= np.array(None)
+    dl["LO_NOERR"][mask]= plot.unv(dl["LO"][mask]).astype(float)
+    dl["LO_ERRPLUS"][mask]= np.sqrt(dl["LO_PDF_ERRPLUS"][mask].astype(float)**2+dl["LO_SCALE_ERRPLUS"][mask].astype(float)**2)
+    dl["LO_ERRMINUS"][mask]= -np.sqrt(dl["LO_PDF_ERRMINUS"][mask].astype(float)**2+dl["LO_SCALE_ERRMINUS"][mask].astype(float)**2)
+    dl["LO_COMBINED"][mask] = unumpy.uarray(plot.unv(dl["LO"][mask])+dl["LO_ERRPLUS"][mask]/2.+dl["LO_ERRMINUS"][mask]/2.,
+        +dl["LO_ERRPLUS"][mask]-dl["LO_ERRMINUS"][mask])
 
-    mask = dl["nlo_pdf_central"]!= np.array(None)
-    dl["nlo_noerr"][mask]= plot.unv(dl["nlo"][mask]).astype(float)
-    dl["nlo_errplus"][mask]= np.sqrt(dl["nlo_pdf_errplus"][mask].astype(float)**2+dl["nlo_scale_errplus"][mask].astype(float)**2)
-    dl["nlo_errminus"][mask]= -np.sqrt(dl["nlo_pdf_errminus"][mask].astype(float)**2+dl["nlo_scale_errminus"][mask].astype(float)**2)
-    dl["nlo_combined"][mask] = unumpy.uarray(plot.unv(dl["nlo"][mask])+dl["nlo_errplus"][mask]/2.+dl["nlo_errminus"][mask]/2.,
-        +dl["nlo_errplus"][mask]-dl["nlo_errminus"][mask])
+    mask = dl["NLO_PDF_CENTRAL"]!= np.array(None)
+    dl["NLO_NOERR"][mask]= plot.unv(dl["NLO"][mask]).astype(float)
+    dl["NLO_ERRPLUS"][mask]= np.sqrt(dl["NLO_PDF_ERRPLUS"][mask].astype(float)**2+dl["NLO_SCALE_ERRPLUS"][mask].astype(float)**2)
+    dl["NLO_ERRMINUS"][mask]= -np.sqrt(dl["NLO_PDF_ERRMINUS"][mask].astype(float)**2+dl["NLO_SCALE_ERRMINUS"][mask].astype(float)**2)
+    dl["NLO_COMBINED"][mask] = unumpy.uarray(plot.unv(dl["NLO"][mask])+dl["NLO_ERRPLUS"][mask]/2.+dl["NLO_ERRMINUS"][mask]/2.,
+        +dl["NLO_ERRPLUS"][mask]-dl["NLO_ERRMINUS"][mask])
 
-    mask = dl["nlo_plus_nll_pdf_central"]!= np.array(None)
-    dl["nlo_plus_nll_noerr"][mask]= plot.unv(dl["nlo_plus_nll"][mask]).astype(float)
-    dl["nlo_plus_nll_errplus"][mask]= np.sqrt(dl["nlo_plus_nll_pdf_errplus"][mask].astype(float)**2+dl["nlo_plus_nll_scale_errplus"][mask].astype(float)**2)
-    dl["nlo_plus_nll_errminus"][mask]= -np.sqrt(dl["nlo_plus_nll_pdf_errminus"][mask].astype(float)**2+dl["nlo_plus_nll_scale_errminus"][mask].astype(float)**2)
-    dl["nlo_plus_nll_combined"][mask] = unumpy.uarray(plot.unv(dl["nlo_plus_nll"][mask])+dl["nlo_plus_nll_errplus"][mask]/2.+dl["nlo_plus_nll_errminus"][mask]/2.,
-        +dl["nlo_plus_nll_errplus"][mask]-dl["nlo_plus_nll_errminus"][mask])
+    mask = dl["NLO_PLUS_NLL_PDF_CENTRAL"]!= np.array(None)
+    dl["NLO_PLUS_NLL_NOERR"][mask]= plot.unv(dl["NLO_PLUS_NLL"][mask]).astype(float)
+    dl["NLO_PLUS_NLL_ERRPLUS"][mask]= np.sqrt(dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask].astype(float)**2+dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask].astype(float)**2)
+    dl["NLO_PLUS_NLL_ERRMINUS"][mask]= -np.sqrt(dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask].astype(float)**2+dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask].astype(float)**2)
+    dl["NLO_PLUS_NLL_COMBINED"][mask] = unumpy.uarray(plot.unv(dl["NLO_PLUS_NLL"][mask])+dl["NLO_PLUS_NLL_ERRPLUS"][mask]/2.+dl["NLO_PLUS_NLL_ERRMINUS"][mask]/2.,
+        +dl["NLO_PLUS_NLL_ERRPLUS"][mask]-dl["NLO_PLUS_NLL_ERRMINUS"][mask])
 
     return dl
