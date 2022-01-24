@@ -276,7 +276,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
     global fig, axs
     cycle_safe = mpl.rcParams['axes.prop_cycle'] 
     if plehn_color:
-        mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=["r", "b", "g"]) 
+        mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=["b", "r", "g"]) 
     if not cont:
         fig, axs = plt.subplots(1, 5, figsize=(12, 3), sharey=True)
         # Remove horizontal space between axes
@@ -486,7 +486,7 @@ def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont
         for i in [0,1]:
             kargs = {'yscale':1000, 'yaxis':"$\\sigma$ [fb]",'logy':[True,False][i],'axes':axs[i],'K':[False,True][i],'tight':False,'error':False}
             if i == 0:
-                mass_plot(dl,  "LO",p,           **kargs,**kwargs,data_color='b',fmt='--',label="LO")
+                mass_plot(dl,  "LO",p,           **kargs,**kwargs,data_color='b',fmt='-',label="LO")
             mass_plot(dl,  "RNLO",p,          **kargs,**kwargs,data_color='k',K_plus_1=True,fmt='-.',label="Real")
             if i == 0:
                 mass_plot(dl,  "NLO",p,          **kargs,**kwargs,data_color='r',fmt='-',label="NLO")
