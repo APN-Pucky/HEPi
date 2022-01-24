@@ -31,11 +31,14 @@ for run_plot in [True,False ]:
                     #hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name()+"_mass" + str(p)+  "_"+ str(nlo_pdf) + "_" +str(scenario) + ".tex")
             if not run_plot:
                 plot.data([],[],init=True,color='k')
+                cs = plt.rcParams['axes.prop_cycle'].by_key()['color']
+                ci = 0
                 for l,n in pdfs:
+                    ci = ci +1
                     mask = dp[n]["NLO_PLUS_NLL_PDF"] != np.array(None)
                     nmask = dp[pdfs[0][1]]["NLO_PLUS_NLL_PDF"] != np.array(None)
-                    hepi.vplot(hepi.get_mass(dp[n],p)[mask],dp[n]["NLO_PLUS_NLL"][mask]/plot.unv(dp[pdfs[0][1]]["NLO_PLUS_NLL"][nmask]),yaxis="Ratio",fill=False,interpolate=True,plot_data=False,label=n.replace('_','').replace('as','').upper(), xaxis="$m_{"+hepi.get_name(p) + "}$ [GeV]")
-                    hepi.vplot(hepi.get_mass(dp[n],p)[mask],dp[n]["NLO_PLUS_NLL_PDF"][mask]/plot.unv(dp[pdfs[0][1]]["NLO_PLUS_NLL"][nmask]),yaxis="Ratio",fill=True,interpolate=False,plot_data=False,label="", xaxis="$m_{"+hepi.get_name(p) + "}$ [GeV]")
+                    hepi.vplot(hepi.get_mass(dp[n],p)[mask],dp[n]["NLO_PLUS_NLL"][mask]/plot.unv(dp[pdfs[0][1]]["NLO_PLUS_NLL"][nmask]),yaxis="Ratio",fill=False,interpolate=True,plot_data=False,label=n.replace('_','').replace('as','').upper(), xaxis="$m_{"+hepi.get_name(p) + "}$ [GeV]",data_color=cs[ci])
+                    hepi.vplot(hepi.get_mass(dp[n],p)[mask],dp[n]["NLO_PLUS_NLL_PDF"][mask]/plot.unv(dp[pdfs[0][1]]["NLO_PLUS_NLL"][nmask]),yaxis="Ratio",fill=True,interpolate=False,plot_data=False,label="", xaxis="$m_{"+hepi.get_name(p) + "}$ [GeV]",data_color=cs[ci])
                 plt.savefig(input.get_output_dir()+ get_job_name()+"_pdfs_ratio_" + "_" + str(p)+ "_" +str(scenario) + ".pdf")
 
                     
