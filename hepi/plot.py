@@ -264,11 +264,12 @@ axs = None
 
 def err_plt(axes,x,y,label=None,error=False):
     v= label
+    ind = np.argsort(plot.unv(x))
     if error:
-        l, _, _ = axes.errorbar(x, splot.unv(y), yerr=splot.usd(y), capsize=5, label=v)
+        l, _, _ = axes.errorbar(x[ind], splot.unv(y)[ind], yerr=splot.usd(y), capsize=5, label=v)
         return l
     else:
-        l = axes.plot(x, splot.unv(y), label=v)
+        l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
         return l[0]
 
 def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,**kwargs):
@@ -313,7 +314,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
             mvmin = np.min(splot.unv(mv[mask]))
 
         mask = mf == mr
-        l = err_plt(axs[0],mf[mask],mv[mask],label="$\\sigma_{"+v.replace("NLO_PLUS_NLL","NLO+NLL")+"}$",error=error)
+        l = err_plt(axs[0],mf[mask],mv[mask],label="$\\sigma_{\\mathrm{"+v.replace("NLO_PLUS_NLL","NLO+NLL")+"} }$",error=error)
         #l, _, _ = axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5, label=v)
         if seven_point_band:
@@ -350,7 +351,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
             axs[4].fill_between(mr[mask], mvmax, mvmin,
-                                facecolor=l.get_color(), alpha=0.3,label="$\\Delta \\sigma_{" + v.replace("NLO_PLUS_NLL","NLO+NLL") + "}$")
+                                facecolor=l.get_color(), alpha=0.3,label="$\\Delta \\sigma_{\\mathrm{" + v.replace("NLO_PLUS_NLL","NLO+NLL") + "} }$")
 
 
     axs[0].set_ylabel("$\sigma$ [pb]")
