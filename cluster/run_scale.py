@@ -24,9 +24,9 @@ for run_plot in [True,False ]:
                 rs.set_path("/home/a/"+user+"/git/resummino_nll/")
 
                 dl_exp = rs.run(li_exp, False, False, run_plot,False)
-                dl_exp["NLL Exp."] = dl_exp["NLO_PLUS_NLL"]
 
                 if not run_plot:
+                    dl_exp["NLL Exp."] = -dl_exp["NLO_PLUS_NLL"]
                     hepi.scale_plot(dl,["LO","NLO","NLO_PLUS_NLL"],error=False,seven_point_band=True,li=li,scenario=scenario[0:8]+ " " + scenario[8])
                     hepi.scale_plot(dl_exp,["NLL Exp."],error=False,seven_point_band=False,li=li,cont=True)
                     plt.savefig(input.get_output_dir() + get_job_name() + "_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
