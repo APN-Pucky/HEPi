@@ -291,11 +291,11 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
 
 
     if not cont:
-        axs[0].plot([], [], ' ', label="$\mu_R=" + "\mu_F$")
-        axs[1].plot([], [], ' ', label="$\mu_R=" + str(np.max(mr)) + "\mu_0$")
-        axs[2].plot([], [], ' ', label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
-        axs[3].plot([], [], ' ', label="$\mu_R=" + str(np.min(mr)) + "\mu_0$")
-        axs[4].plot([], [], ' ', label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
+        axs[0].plot([], [], ' ', color='k',label="$\mu_R=" + "\mu_F$")
+        axs[1].plot([], [], ' ', color='k',label="$\mu_R=" + str(np.max(mr)) + "\mu_0$")
+        axs[2].plot([], [], ' ', color='k',label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
+        axs[3].plot([], [], ' ', color='k',label="$\mu_R=" + str(np.min(mr)) + "\mu_0$")
+        axs[4].plot([], [], ' ', color='k',label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
 
     for v in vl:
         mv = dict_list[v]
