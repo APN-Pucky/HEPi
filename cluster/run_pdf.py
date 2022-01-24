@@ -6,7 +6,7 @@ for run_plot in [True,False ]:
     for scenario in ["scenarioB_mod.in"]:
         for p in [2000002, 1000002,2000004,1000004,]:
             dp = {}
-            pdfs= [("CT18NLO","CT18NLO"), ("MSHT20lo_as130","MSHT20nlo_as118"), ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180")]
+            pdfs= [("MSHT20lo_as130","MSHT20nlo_as118"),("CT18NLO","CT18NLO"),  ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180")]
             for lo_pdf,nlo_pdf in pdfs:
                 i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, p, 1000022, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.01,max_iters=50)
 
@@ -29,12 +29,12 @@ for run_plot in [True,False ]:
                     plt.savefig(input.get_output_dir()+ get_job_name()+"_mass_and_ratio_" + nlo_pdf + "_" + str(p)+ "_" +str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
 
                     #hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name()+"_mass" + str(p)+  "_"+ str(nlo_pdf) + "_" +str(scenario) + ".tex")
-            #if not run_plot:
-            #    plot.data([],[],init=True)
-            #    for l,n in pdfs:
-            #        mask = dp[n]["NLO_PLUS_NLL_PDF"] != np.array(None)
-            #        hepi.mass_vplot(dp[n],dp[n]["NLO_PLUS_NLL_PDF"],p,yscale=1./dp[pdfs[0][1]]["NLO_PLUS_NLL_NOERR"][mask],yaxis="Ratio",fill=True,plot_data=True,mask=mask,label=n)
-            #    plt.savefig(input.get_output_dir()+ get_job_name()+"_pdfs_ratio_" + "_" + str(p)+ "_" +str(scenario) + ".pdf")
+            if not run_plot:
+                plot.data([],[],init=True)
+                for l,n in pdfs:
+                    mask = dp[n]["NLO_PLUS_NLL_PDF"] != np.array(None)
+                    hepi.mass_vplot(dp[n],dp[n]["NLO_PLUS_NLL_PDF"],p,yscale=1./dp[pdfs[0][1]]["NLO_PLUS_NLL_NOERR"][mask],yaxis="Ratio",fill=True,plot_data=False,mask=mask,label=n)
+                plt.savefig(input.get_output_dir()+ get_job_name()+"_pdfs_ratio_" + "_" + str(p)+ "_" +str(scenario) + ".pdf")
 
                     
     wait()
