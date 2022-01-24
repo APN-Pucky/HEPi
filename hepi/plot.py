@@ -287,6 +287,15 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
     mr = dict_list["mu_r"]
     mf = dict_list["mu_f"]
 
+
+
+    if not cont:
+        axs[0].plot([], [], ' ', label="$\mu_R=" + "\mu_F$")
+        axs[1].plot([], [], ' ', label="$\mu_R=" + str(np.max(mr)) + "\mu_0$")
+        axs[2].plot([], [], ' ', label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
+        axs[3].plot([], [], ' ', label="$\mu_R=" + str(np.min(mr)) + "\mu_0$")
+        axs[4].plot([], [], ' ', label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
+
     for v in vl:
         mv = dict_list[v]
         if seven_point_band:
@@ -343,13 +352,6 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
             axs[4].fill_between(mr[mask], mvmax, mvmin,
                                 facecolor=l.get_color(), alpha=0.3,label="$\\Delta \\sigma_{" + v.replace("NLO_PLUS_NLL","NLO+NLL") + "}$")
 
-
-    if not cont:
-        axs[0].plot([], [], ' ', label="$\mu_R=" + "\mu_F$")
-        axs[1].plot([], [], ' ', label="$\mu_R=" + str(np.max(mf)) + "\mu_0$")
-        axs[2].plot([], [], ' ', label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
-        axs[3].plot([], [], ' ', label="$\mu_R=" + str(np.min(mf)) + "\mu_0$")
-        axs[4].plot([], [], ' ', label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
 
     axs[0].set_ylabel("$\sigma$ [pb]")
 
