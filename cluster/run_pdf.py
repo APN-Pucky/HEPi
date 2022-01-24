@@ -33,7 +33,8 @@ for run_plot in [True,False ]:
                 plot.data([],[],init=True,color='k')
                 for l,n in pdfs:
                     mask = dp[n]["NLO_PLUS_NLL_PDF"] != np.array(None)
-                    hepi.vplot(hepi.get_mass(dp[n],p)[mask],dp[n]["NLO_PLUS_NLL_PDF"][mask]/plot.unv(dp[pdfs[0][1]]["NLO_PLUS_NLL"][mask]),yaxis="Ratio",fill=True,plot_data=False,label=n, xaxis="$m_{"+hepi.get_name(p) + "}$ [GeV]")
+                    nmask = dp[pdfs[0][1]]["NLO_PLUS_NLL_PDF"] != np.array(None)
+                    hepi.vplot(hepi.get_mass(dp[n],p)[mask],dp[n]["NLO_PLUS_NLL_PDF"][mask]/plot.unv(dp[pdfs[0][1]]["NLO_PLUS_NLL"][nmask]),yaxis="Ratio",fill=True,plot_data=False,label=n.replace('_','').replace('as','').upper(), xaxis="$m_{"+hepi.get_name(p) + "}$ [GeV]")
                 plt.savefig(input.get_output_dir()+ get_job_name()+"_pdfs_ratio_" + "_" + str(p)+ "_" +str(scenario) + ".pdf")
 
                     
