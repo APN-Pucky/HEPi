@@ -32,7 +32,7 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
  with open(fname,'w+') as f:
      for i in range(len(dl["LO"][mask])):
         f.write(
-            "$" + "{:.3f}".format(dl[key][mask][i]) + "$ & $"+
+            "$" + io.gf(4).format(dl[key][mask][i]) + "$ & $"+
             "{:.3f}".format(lo[i]*yscale) 
                 + "^{+"+"{:.1f}".format(dl["LO_SCALE_ERRPLUS"][mask][i]/lo[i]*100.)
                 + "\%}_{" +"{:.1f}".format(dl["LO_SCALE_ERRMINUS"][mask][i]/lo[i]*100.)
