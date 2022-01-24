@@ -264,7 +264,7 @@ axs = None
 
 def err_plt(axes,x,y,label=None,error=False):
     v= label
-    ind = np.argsort(plot.unv(x))
+    ind = np.argsort(splot.unv(x))
     if error:
         l, _, _ = axes.errorbar(x[ind], splot.unv(y)[ind], yerr=splot.usd(y), capsize=5, label=v)
         return l
