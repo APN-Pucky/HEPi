@@ -49,7 +49,7 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
                 + "\%}_{" +io.gf().format(dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.)
                 + ("\%"+io.gf().format(dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
                 +  "\%}$ "+
-            "\\\n"
+            "\\\\\n"
         )
 
 def title(axe,i:Input,scenario="",diff_L_R=None,extra="",**kwargs):
