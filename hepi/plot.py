@@ -23,7 +23,7 @@ from matplotlib.ticker import ScalarFormatter, NullFormatter
 from smpl import io
 from typing import List
 
-def tex_table(dict_list,key,fname,scale=True,pdf=True):
+def tex_table(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
  dl = dict_list
  mask = dl["NLO_SCALE"]!= np.array(None)
  lo = splot.unv(dl["LO"][mask])
@@ -33,23 +33,23 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True):
      for i in range(len(dl["LO"][mask])):
         f.write(
             "$" + io.gf(4).format(dl[key][mask][i]) + "$ & $"+
-            io.gf(4).format(lo[i]) 
+            io.gf(4).format(lo[i]*yscale) 
                 + "^{+"+io.gf().format(dl["LO_SCALE_ERRPLUS"][mask][i]/lo[i]*100.)
                 + "\%}_{" +io.gf().format(dl["LO_SCALE_ERRMINUS"][mask][i]/lo[i]*100.)
                 +  "\%}$ & $"+
-            io.gf(4).format(nlo[i]) 
+            io.gf(4).format(nlo[i]*yscale) 
                 + "^{+"+io.gf().format(dl["NLO_SCALE_ERRPLUS"][mask][i]/nlo[i]*100.)
                 + ("\%+"+io.gf().format(dl["NLO_PDF_ERRPLUS"][mask][i] /nlo[i]*100.) if pdf else "")
                 + "\%}_{" +io.gf().format(dl["NLO_SCALE_ERRMINUS"][mask][i]/nlo[i]*100.)
                 + ("\%"+io.gf().format(dl["NLO_PDF_ERRMINUS"][mask][i]/nlo[i]*100.) if pdf else "")
                 +  "\%}$ & $"+
-            io.gf(4).format(nlo_plus_nll[i]) 
+            io.gf(4).format(nlo_plus_nll[i]*yscale) 
                 + "^{+"+io.gf().format(dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask][i]/nlo_plus_nll[i]*100.)
                 + ("\%+"+io.gf().format(dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask][i]/nlo[i]*100.) if pdf else "")
                 + "\%}_{" +io.gf().format(dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.)
                 + ("\%"+io.gf().format(dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
                 +  "\%}$ "+
-            "\n"
+            "\\\n"
         )
 
 def title(axe,i:Input,scenario="",diff_L_R=None,extra="",**kwargs):
