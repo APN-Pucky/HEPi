@@ -486,13 +486,13 @@ def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont
         for i in [0,1]:
             kargs = {'yscale':1000, 'yaxis':"$\\sigma$ [fb]",'logy':[True,False][i],'axes':axs[i],'K':[False,True][i],'tight':False,'error':False}
             if i == 0:
-                mass_plot(dl,  "LO",p,           **kargs,**kwargs,data_color='b',fmt='-',label="LO")
-            mass_plot(dl,  "RNLO",p,          **kargs,**kwargs,data_color='k',K_plus_1=True,fmt='-.',label="Real")
+                mass_plot(dl,  "LO",p,           **kargs,**kwargs,data_color='b',fmt='-',label="LO"if i==0 else "")
+            mass_plot(dl,  "RNLO",p,          **kargs,**kwargs,data_color='k',K_plus_1=True,fmt='-.',label="Real"if i==0 else "")
             if i == 0:
-                mass_plot(dl,  "NLO",p,          **kargs,**kwargs,data_color='r',fmt='-',label="NLO")
-            mass_plot(dl,  "VNLO_PLUS_P_PLUS_K",p,          **kargs,**kwargs,K_plus_1=True,data_color='k',fmt=':',label="Virtual")
+                mass_plot(dl,  "NLO",p,          **kargs,**kwargs,data_color='r',fmt='-',label="NLO"if i==0 else "")
+            mass_plot(dl,  "VNLO_PLUS_P_PLUS_K",p,          **kargs,**kwargs,K_plus_1=True,data_color='k',fmt=':',label="Virtual"if i==0 else "")
             if i == 1:
-                mass_plot(dl,  "RNLO_PLUS_VNLO_PLUS_P_PLUS_K",p,K_plus_1=True,          **kargs,**kwargs,data_color='r',label="NLO")
+                mass_plot(dl,  "RNLO_PLUS_VNLO_PLUS_P_PLUS_K",p,K_plus_1=True,          **kargs,**kwargs,data_color='r',label="NLO"if i==0 else "")
             #mass_plot(dl,  "NLO_PLUS_NLL",p, **kargs,**kwargs,label="NLO+NLL")
 
 
