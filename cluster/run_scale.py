@@ -17,8 +17,12 @@ for run_plot in [True,False ]:
                 li_exp = hepi.seven_point_scan(li_exp)
 
 
+                rs.set_path("/home/a/"+user+"/git/resummino/")
 
                 dl = rs.run(li, False, False, run_plot,False)
+
+                rs.set_path("/home/a/"+user+"/git/resummino_nll/")
+
                 dl_exp = rs.run(li_exp, False, False, run_plot,False)
                 dl_exp["NLL Exp."] = dl_exp["NLO_PLUS_NLL"]
 
