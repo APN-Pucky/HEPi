@@ -32,22 +32,22 @@ def tex_table(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
  with open(fname,'w+') as f:
      for i in range(len(dl["LO"][mask])):
         f.write(
-            "$" + io.gf(4).format(dl[key][mask][i]) + "$ & $"+
-            io.gf(4).format(lo[i]*yscale) 
-                + "^{+"+io.gf().format(dl["LO_SCALE_ERRPLUS"][mask][i]/lo[i]*100.)
-                + "\%}_{" +io.gf().format(dl["LO_SCALE_ERRMINUS"][mask][i]/lo[i]*100.)
+            "$" + "{:.3f}".format(dl[key][mask][i]) + "$ & $"+
+            "{:.3f}".format(lo[i]*yscale) 
+                + "^{+"+"{:.1f}".format(dl["LO_SCALE_ERRPLUS"][mask][i]/lo[i]*100.)
+                + "\%}_{" +"{:.1f}".format(dl["LO_SCALE_ERRMINUS"][mask][i]/lo[i]*100.)
                 +  "\%}$ & $"+
-            io.gf(4).format(nlo[i]*yscale) 
-                + "^{+"+io.gf().format(dl["NLO_SCALE_ERRPLUS"][mask][i]/nlo[i]*100.)
-                + ("\%+"+io.gf().format(dl["NLO_PDF_ERRPLUS"][mask][i] /nlo[i]*100.) if pdf else "")
-                + "\%}_{" +io.gf().format(dl["NLO_SCALE_ERRMINUS"][mask][i]/nlo[i]*100.)
-                + ("\%"+io.gf().format(dl["NLO_PDF_ERRMINUS"][mask][i]/nlo[i]*100.) if pdf else "")
+            "{:.3f}".format(nlo[i]*yscale) 
+                + "^{+"+"{:.1f}".format(dl["NLO_SCALE_ERRPLUS"][mask][i]/nlo[i]*100.)
+                + ("\%+"+"{:.1f}".format(dl["NLO_PDF_ERRPLUS"][mask][i] /nlo[i]*100.) if pdf else "")
+                + "\%}_{" +"{:.1f}".format(dl["NLO_SCALE_ERRMINUS"][mask][i]/nlo[i]*100.)
+                + ("\%"+"{:.1f}".format(dl["NLO_PDF_ERRMINUS"][mask][i]/nlo[i]*100.) if pdf else "")
                 +  "\%}$ & $"+
-            io.gf(4).format(nlo_plus_nll[i]*yscale) 
-                + "^{+"+io.gf().format(dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask][i]/nlo_plus_nll[i]*100.)
-                + ("\%+"+io.gf().format(dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask][i]/nlo[i]*100.) if pdf else "")
-                + "\%}_{" +io.gf().format(dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.)
-                + ("\%"+io.gf().format(dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
+            "{:.3f}".format(nlo_plus_nll[i]*yscale) 
+                + "^{+"+"{:.1f}".format(dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask][i]/nlo_plus_nll[i]*100.)
+                + ("\%+"+"{:.1f}".format(dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
+                + "\%}_{" +"{:.1f}".format(dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.)
+                + ("\%"+"{:.1f}".format(dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
                 +  "\%}$ "+
             "\\\\\n"
         )
