@@ -22,6 +22,6 @@ for run_plot in [True,False ]:
                     dl = hepi.scale_error(li,dl)
                     dl = hepi.combine_errors(dl)
 
-                    hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name()+"_mass" + str(p)+ "_" + str(ps)+  "_"+ str(nlo_pdf) + "_" +str(scenario) + ".tex")
+                    hepi.tex_table(dl,"mass_"+str(p),input.get_output_dir() + get_job_name()+"_mass" + str(p)+ "_" + str(ps)+  "_"+ str(nlo_pdf) + "_" +str(scenario) + ".tex",yscale=1000.)
 
     wait()
