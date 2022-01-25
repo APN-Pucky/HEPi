@@ -272,7 +272,7 @@ def err_plt(axes,x,y,label=None,error=False):
         l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
         return l[0]
 
-def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,**kwargs):
+def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit="pb",**kwargs):
     global fig, axs
     cycle_safe = mpl.rcParams['axes.prop_cycle'] 
     if plehn_color:
@@ -298,7 +298,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
         axs[4].plot([], [], ' ', color='k',label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
 
     for v in vl:
-        mv = dict_list[v]
+        mv = dict_list[v]*yscale
         if seven_point_band:
             #mask = (mf/mr < 4.) & (mf/mr > 1./4.) & (mf <= 2) & (mf >= 1./2.) & (mr <= 2) & (mr >= 1./2.)
             mask =  (
@@ -354,7 +354,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
                                 facecolor=l.get_color(), alpha=0.3,label="$\\Delta \\sigma_{\\mathrm{" + v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\<space>") + "} }$")
 
 
-    axs[0].set_ylabel("$\sigma$ [pb]")
+    axs[0].set_ylabel("$\sigma$ ["+unit+"]")
 
     axs[0].set_xscale("log")
     axs[0].set_xlim(np.min(mf), np.max(mf))
@@ -398,7 +398,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
 
     
 
-def central_scale_plot(dict_list, vl, cont=False,error=True):
+def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb"):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
@@ -409,7 +409,7 @@ def central_scale_plot(dict_list, vl, cont=False,error=True):
     mf = dict_list["mu_f"]
 
     for v in vl:
-        mv = dict_list[v]
+        mv = dict_list[v]*yscale
 
         mask = mf == mr
         l = err_plt(axs[0],mf[mask],mv[mask],label=v,error=error)
@@ -429,7 +429,7 @@ def central_scale_plot(dict_list, vl, cont=False,error=True):
         axs[1].plot([], [], ' ', label="$\mu_F=\mu_0$, $\mu_R=\mu$")
         axs[2].plot([], [], ' ', label="$\mu_R=\mu_0$, $\mu_F=\mu$")
 
-    axs[1].set_ylabel("$\sigma$ [pb]")
+    axs[1].set_ylabel("$\sigma$ ["+unit+"]")
 
     axs[0].set_xscale("log")
     #axs[0].set_xlim(np.min(mf), np.max(mf))
