@@ -27,11 +27,11 @@ for run_plot in [True,False ]:
 
                 if not run_plot:
                     dl_exp["NLL Exp."] = -dl_exp["NLO_PLUS_NLL"]
-                    hepi.scale_plot(dl,["LO","NLO","NLO_PLUS_NLL"],error=False,seven_point_band=True,li=li,scenario=scenario[0:8]+ " " + scenario[8])
-                    hepi.scale_plot(dl_exp,["NLL Exp."],error=False,seven_point_band=False,li=li,cont=True)
+                    hepi.scale_plot(dl,["LO","NLO","NLO_PLUS_NLL"],error=False,seven_point_band=True,li=li,unit="fb",yscale=1000.,scenario=scenario[0:8]+ " " + scenario[8])
+                    hepi.scale_plot(dl_exp,["NLL Exp."],error=False,seven_point_band=False,li=li,cont=True,unit="fb",yscale=1000.)
                     plt.savefig(input.get_output_dir() + get_job_name() + "_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
-                    hepi.central_scale_plot(dl,["LO","NLO","NLO_PLUS_NLL"],error=False)
-                    hepi.central_scale_plot(dl_exp,["NLL Exp."],error=False,cont=True)
+                    hepi.central_scale_plot(dl,["LO","NLO","NLO_PLUS_NLL"],error=False,unit="fb",yscale=1000.)
+                    hepi.central_scale_plot(dl_exp,["NLL Exp."],error=False,cont=True,unit="fb",yscale=1000.)
                     plt.savefig(input.get_output_dir() +get_job_name() +"_central_scale_variation_" + str(p) + "_" + str(nlo_pdf) + "_" + str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
     wait()
 
