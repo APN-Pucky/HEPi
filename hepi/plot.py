@@ -322,7 +322,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
                                 facecolor=l.get_color(), alpha=0.3)
 
         mask = mr == np.max(mr)
-        l = err_plt(axs[1],mf[mask],mv[mask],label="$\\sigma_{\\mathrm{"+v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\<space>")+"} }$",error=error)
+        l = err_plt(axs[1],mf[mask],mv[mask],label="$\\sigma_{\\mathrm{"+v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\ ")+"} }$",error=error)
         #l, _, _ = axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
