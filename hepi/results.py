@@ -61,7 +61,7 @@ def pdf_error(li, dl):
             for j in range(len(dl["pdfset_nlo"])):
                 same = True
                 for s in members:
-                    if not (dl[s][i] == dl[s][j]) and s != "pdfset_nlo":
+                    if not (dl[s][i] == dl[s][j]) and s != "pdfset_nlo" and s != "precision" and s!="max_iters":
                         same = False
                 if same:
                     pdfs[dl["pdfset_nlo"][j]] = j
@@ -127,7 +127,7 @@ def scale_error(li, dl):
             for j in range(len(dl["pdfset_nlo"])):
                 same = True
                 for s in members:
-                    if not (dl[s][i] == dl[s][j]) and s != "mu_f" and s != "mu_r":
+                    if not (dl[s][i] == dl[s][j]) and s != "mu_f" and s != "mu_r" and s != "precision" and s!="max_iters":
                         same = False
                 if same:
                     scales.append(j)

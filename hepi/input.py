@@ -153,6 +153,23 @@ def pdf_scan(l: List[Input]):
             ret.append(s)
     return ret
 
+def change_where(l:List[Input], dicts : dict, **kwargs):
+    ret = []
+    for s in l:
+        ok = True
+        for k,v in kwargs.items():
+            if getattr(s,k) != v:
+                ok = False
+        if ok:
+            tmp = copy.copy(s)
+            for k,v in dicts.items():
+                setattr(tmp, k, v)
+            ret.append(tmp)
+        else:
+            ret.append(s)
+            
+    return ret
+
 def scan_invariant_mass(l : List[Input],diff,points,low=0.001):
     ret = []
     for s in l:
