@@ -18,6 +18,7 @@ for run_plot in [True,False ]:
                 li = hepi.mass_scan([i], p, np.linspace(1000, 3000, 20+1), diff_L_R=100)
                 # li = hepi.seven_point_scan(li)
                 li = hepi.pdf_scan(li)
+                li = hepi.change_where(li, {"precision" : 0.0001 , "max_iters" : 200}, pdfset_nlo=0)
 
                 dl = rs.run(li, False, False, run_plot,False)
 
