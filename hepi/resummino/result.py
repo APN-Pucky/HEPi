@@ -23,6 +23,8 @@ class ResumminoResult(Result):
             self.RNLO = None
         if not ( self.RNLO is None or self.VNLO_PLUS_P_PLUS_K is None):
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = self.RNLO + self.VNLO_PLUS_P_PLUS_K
+        else:
+            self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None
 
 def is_valid(file:str,p:Input,d):
     order = p.order

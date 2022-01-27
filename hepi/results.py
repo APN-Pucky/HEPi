@@ -17,16 +17,25 @@ class Result:
         self.NLO_PLUS_NLL = nlo_plus_nll
         if lo is not None and lo != 0:
             self.K_LO = lo/lo
+        else:
+            self.K_NLO =None
         #else:
         #    print("lo None or lo=",lo)
         if nlo is not None and lo != 0:
             self.K_NLO = nlo/lo
+        else:
+            self.K_NLO = None
         #else:
         #    print("nlo None or lo=",lo)
         if nlo_plus_nll is not None and lo != 0:
             self.K_NLO_PLUS_NLL = nlo_plus_nll/lo
+        else:
+            self.K_NLO_PLUS_NLL = None
+
         if nlo_plus_nll is not None and nlo != 0:
             self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll/nlo
+        else:
+            self.NLO_PLUS_NLL_OVER_NLO  =None
         #else:
         #    print("nlo+nll None or lo=",lo)
 
