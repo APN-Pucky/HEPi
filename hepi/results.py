@@ -82,7 +82,7 @@ def pdf_error(li, dl):
             # lo_unc = set.uncertainty(
             #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
             nlo_unc = set.uncertainty(
-                [plot.unv(dl["NLO"][k]) for k in pdfs], -1)
+                [plot.unv(dl["NLO"][k]) for k in pdfs], 90)
             dl["NLO_PDF_CENTRAL"][i] = nlo_unc.central
             dl["NLO_PDF_ERRPLUS"][i] = nlo_unc.errplus
             dl["NLO_PDF_ERRMINUS"][i] = -nlo_unc.errminus
