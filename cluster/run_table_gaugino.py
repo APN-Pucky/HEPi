@@ -9,11 +9,12 @@ for run_plot in [True,False ]:
         for lo_pdf,nlo_pdf in pdfs:
             for ps in [2000002, 1000002]:
                 p = 1000022
-                i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, ps, p, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.01,max_iters=50)
+                i = hepi.Input(hepi.Order.NLO_PLUS_NLL, 13000, ps, p, scenario, lo_pdf, nlo_pdf, 1., 1.,precision=0.001,max_iters=100)
 
                 li = hepi.mass_scan([i], p, np.linspace(500, 1500, 20+1))
                 li = hepi.seven_point_scan(li)
                 li = hepi.pdf_scan(li)
+                li = hepi.change_where(li, {"precision" : 0.0001 , "max_iters" : 200}, pdfset_nlo=0)
 
                 dl = rs.run(li, False, False, run_plot,False)
 
