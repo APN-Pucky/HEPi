@@ -406,6 +406,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
     fig.legend()
     fig.legends = []
     fig.legend(handles=lines,    labels=labels,   loc="center right")
+    plt.subplots_adjust(right=0.85)
     # plt.show()
     mpl.rcParams['axes.prop_cycle'] = cycle_safe
 
