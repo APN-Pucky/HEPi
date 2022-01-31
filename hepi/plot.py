@@ -260,6 +260,8 @@ def map_vplot(vx,vy,vz, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.
 
 fig = None
 axs = None
+lines = []
+labels = []
 
 
 def err_plt(axes,x,y,label=None,error=False):
@@ -273,7 +275,7 @@ def err_plt(axes,x,y,label=None,error=False):
         return l[0]
 
 def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit="pb",**kwargs):
-    global fig, axs
+    global fig, axs,lines,labels
     cycle_safe = mpl.rcParams['axes.prop_cycle'] 
     if plehn_color:
         mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=["b", "r", "g"]) 
@@ -290,7 +292,11 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
 
 
 
+
+
     if not cont:
+        lines = []
+        labels = []
         axs[0].plot([], [], ' ', color='k',label="$\mu_R=" + "\mu_F$")
         axs[1].plot([], [], ' ', color='k',label="$\mu_R=" + str(np.max(mr)) + "\mu_0$")
         axs[2].plot([], [], ' ', color='k',label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
@@ -322,7 +328,9 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
                                 facecolor=l.get_color(), alpha=0.3)
 
         mask = mr == np.max(mr)
-        l = err_plt(axs[1],mf[mask],mv[mask],label="$\\sigma_{\\mathrm{"+v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\ ")+"} }$",error=error)
+        l = err_plt(axs[1],mf[mask],mv[mask],error=error)
+        lines.append(l)
+        labels.append("$\\sigma_{\\mathrm{"+v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\ ")+"} }$")
         #l, _, _ = axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
@@ -350,8 +358,10 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
         #l, _, _ = axs[4].errorbar(mr[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
-            axs[4].fill_between(mr[mask], mvmax, mvmin,
-                                facecolor=l.get_color(), alpha=0.3,label="$\\Delta \\sigma_{\\mathrm{" + v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\<space>") + "} }$")
+            f = axs[4].fill_between(mr[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
+            lines.append(f)
+            labels.append("$\\Delta \\sigma_{\\mathrm{" + v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\<space>") + "} }$")
 
 
     axs[0].set_ylabel("$\sigma$ ["+unit+"]")
@@ -393,6 +403,8 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
     axs[2].legend()
     axs[3].legend()
     axs[4].legend()
+
+    fig.legend(handles=lines,    labels=labels,   loc="center right")
     # plt.show()
     mpl.rcParams['axes.prop_cycle'] = cycle_safe
 
