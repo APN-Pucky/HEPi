@@ -18,7 +18,7 @@ class Result:
         if lo is not None and lo != 0:
             self.K_LO = lo/lo
         else:
-            self.K_NLO =None
+            self.K_LO = None
         #else:
         #    print("lo None or lo=",lo)
         if nlo is not None and lo != 0:
