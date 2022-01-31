@@ -48,6 +48,19 @@ for run_plot in [True,False ]:
                 hepi.title(plt.gca(),li[0],scenario=scenario[0:8]+ " " + scenario[8])
                 plt.savefig(input.get_output_dir()+ get_job_name()+"_pdfs_ratio_" + "_" + str(p)+ "_" +str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
 
+                plot.data([],[],init=True,color='k')
+                cs = plt.rcParams['axes.prop_cycle'].by_key()['color']
+                ci = 0
+                for l,n in pdfs:
+                    mask = dp[n]["NLO_PDF"] != np.array(None)
+                    nmask = dp[pdfs[0][1]]["NLO_PDF"] != np.array(None)
+                    hepi.vplot(hepi.get_mass(dp[n],p)[mask],dp[n]["NLO"][mask]/plot.unv(dp[pdfs[0][1]]["NLO"][nmask]),yaxis="Ratio",fill=False,interpolate=True,plot_data=False,label=n.replace('_','').replace('as','').upper(), xaxis="$m_{"+hepi.get_name(p) + "}$ [GeV]",logy=False,data_color=cs[ci])
+                    hepi.vplot(hepi.get_mass(dp[n],p)[mask],dp[n]["NLO_PDF"][mask]/plot.unv(dp[pdfs[0][1]]["NLO"][nmask]),yaxis="Ratio",fill=True,interpolate=False,plot_data=False,label="", xaxis="$m_{"+hepi.get_name(p) + "}$ [GeV]",logy=False,data_color=cs[ci])
+                    ci = ci +1
+                hepi.title(plt.gca(),li[0],scenario=scenario[0:8]+ " " + scenario[8])
+                plt.savefig(input.get_output_dir()+ get_job_name()+"_pdfs_ratio_nlo" + "_" + str(p)+ "_" +str(scenario) + ".pdf",bbox_inches = 'tight', pad_inches = 0)
+
+
                     
     wait()
 
