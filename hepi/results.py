@@ -92,7 +92,7 @@ def pdf_error(li, dl):
                 warnings.warn("too low numerical nlo precision vs pdf", RuntimeWarning)
 
             nlo_plus_nll_unc = set.uncertainty(
-                [plot.unv(dl["NLO_PLUS_NLL"][k]) for k in pdfs], -1)
+                [plot.unv(dl["NLO_PLUS_NLL"][k]) for k in pdfs], 90)
             dl["NLO_PLUS_NLL_PDF_CENTRAL"][i] = nlo_plus_nll_unc.central
             dl["NLO_PLUS_NLL_PDF_ERRPLUS"][i] = nlo_plus_nll_unc.errplus
             dl["NLO_PLUS_NLL_PDF_ERRMINUS"][i] = -nlo_plus_nll_unc.errminus
