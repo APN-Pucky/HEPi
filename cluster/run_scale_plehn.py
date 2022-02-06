@@ -1,5 +1,6 @@
 import cluster
 from cluster import *
+plt.rc('legend', fontsize=15)
 
 for run_plot in [True,False]:
     for scenario in ["sps1a1000_mod.in"]:

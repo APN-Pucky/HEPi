@@ -1,6 +1,8 @@
 import cluster
 from cluster import *
 
+plt.rc('legend', fontsize=15)
+
 for run_plot in [True,False ]:
     for scenario in ["scenarioA.in","scenarioB_mod.in"]:
         pdfs = [("MSHT20lo_as130","MSHT20nlo_as118"),#("CT18NLO","CT18NLO"),  ("NNPDF40_lo_as_01180","NNPDF40_nlo_as_01180")
