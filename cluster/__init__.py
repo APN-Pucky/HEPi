@@ -12,6 +12,9 @@ import sys
 from smpl import plot
 
 user = "a_neuw01"
+plt.rcParams.update({'font.size': 15})
+plt.rc('legend', fontsize=12)
+
 
 def get_job_name() -> str:
     return os.path.basename(sys.argv[0])
