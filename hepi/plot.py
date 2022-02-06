@@ -398,15 +398,15 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
     axs[4].xaxis.set_minor_formatter(NullFormatter())
     axs[4].set_xlabel("$\mu_{R}/\mu_0$")
 
-    axs[0].legend(markerscale=0)
-    axs[1].legend(markerscale=0)
-    axs[2].legend(markerscale=0)
-    axs[3].legend(markerscale=0)
-    axs[4].legend(markerscale=0)
+    axs[0].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    axs[1].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    axs[2].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    axs[3].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    axs[4].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
     fig.legend()
     fig.legends = []
     fig.legend(handles=lines,    labels=labels,   loc="center right")
-    plt.subplots_adjust(right=0.87)
+    plt.subplots_adjust(right=0.88)
     # plt.show()
     mpl.rcParams['axes.prop_cycle'] = cycle_safe
 
