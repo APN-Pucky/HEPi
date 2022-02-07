@@ -511,7 +511,7 @@ def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont
 
 
 #TODO unit and yscale for each case and mass_and_plot!
-def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,figsize=(6,4),plot_data=True,fill=True,unit="pb",yscale=1.0,**kwargs):
+def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,figsize=(6,4),plot_data=True,fill=True,unit="pb",yscale=1.0,ylim=None,**kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True, gridspec_kw={'height_ratios': [2, 1]})
@@ -519,6 +519,8 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
         fig.subplots_adjust(hspace=0)
         title(axs[0],li[0],**kwargs)
     kinv = {'xaxis':"$M$ [GeV]",'yaxis':"$d\\sigma/dM$ ["+unit+"/GeV]"}
+    if ylim is not None:
+        axs[0].set_ylim(ylim)
     if combined:
         for i in [0,1]:
             kargs = {'logy' : [p!="invariant_mass",False][i], 'axes':axs[i],'tight':False}
