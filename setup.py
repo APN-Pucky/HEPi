@@ -25,6 +25,7 @@ setuptools.setup(
         "matplotlib",
         "scipy",
         "sympy",
+        "scikit-learn",
         "smpl>=0.0.118",
         "pyslha",
         "enlighten",

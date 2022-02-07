@@ -1,4 +1,6 @@
 from scipy import interpolate
+
+from sklearn.metrics import auc
 import matplotlib as mpl
 from smpl import plot as splot
 import smpl
@@ -198,6 +200,7 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
         kargs = {}
         if not plot_data:
             kargs = {'xaxis':xaxis, 'yaxis':yaxis,'label':label}
+        print('computed AUC using sklearn.metrics.auc: {}'.format(auc(xnew,power_smooth*yscale)))
         splot.data(xnew, power_smooth*yscale, logy=logy, fmt=fmt
               , init=False, data_color=color,  **kargs,**kwargs)
     if fill:
