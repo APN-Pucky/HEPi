@@ -103,15 +103,15 @@ def pdf_error(li, dl):
 
 
     mask = dl["LO_PDF_CENTRAL"]!= np.array(None)
-    dl["LO_PDF"][mask] = unumpy.uarray(plot.unv(dl["LO"][mask])+dl["LO_PDF_ERRPLUS"][mask]/2.+dl["LO_PDF_ERRMINUS"][mask]/2.,
+    dl["LO_PDF"][mask] = unumpy.uarray(plot.unv(dl["LO_PDF_CENTRAL"][mask])+dl["LO_PDF_ERRPLUS"][mask]/2.+dl["LO_PDF_ERRMINUS"][mask]/2.,
         (+dl["LO_PDF_ERRPLUS"][mask]-dl["LO_PDF_ERRMINUS"][mask])/2.)
 
     mask = dl["NLO_PDF_CENTRAL"]!= np.array(None)
-    dl["NLO_PDF"][mask] = unumpy.uarray(plot.unv(dl["NLO"][mask])+dl["NLO_PDF_ERRPLUS"][mask]/2.+dl["NLO_PDF_ERRMINUS"][mask]/2.,
+    dl["NLO_PDF"][mask] = unumpy.uarray(plot.unv(dl["NLO_PDF_CENTRAL"][mask])+dl["NLO_PDF_ERRPLUS"][mask]/2.+dl["NLO_PDF_ERRMINUS"][mask]/2.,
         (+dl["NLO_PDF_ERRPLUS"][mask]-dl["NLO_PDF_ERRMINUS"][mask])/2.)
 
     mask = dl["NLO_PLUS_NLL_PDF_CENTRAL"]!= np.array(None)
-    dl["NLO_PLUS_NLL_PDF"][mask] = unumpy.uarray(plot.unv(dl["NLO_PLUS_NLL"][mask])+dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask]/2.+dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask]/2.,
+    dl["NLO_PLUS_NLL_PDF"][mask] = unumpy.uarray(plot.unv(dl["NLO_PLUS_NLL_PDF_CENTRAL"][mask])+dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask]/2.+dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask]/2.,
         (+dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask]-dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask])/2.)
     return dl
 
