@@ -528,9 +528,9 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
         for i in [0,1]:
             kargs = {'logy' : [p!="invariant_mass",False][i], 'axes':axs[i],'tight':False}
             if p == "invariant_mass":
-                plot(dl,  "invariant_mass","LO",           **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else None)
-                plot(dl,  "invariant_mass","NLO",          **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else None)
-                plot(dl,  "invariant_mass","NLO_PLUS_NLL", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else None)
+                plot(dl,  "invariant_mass","LO",           **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else "")
+                plot(dl,  "invariant_mass","NLO",          **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
+                plot(dl,  "invariant_mass","NLO_PLUS_NLL", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
                 if i == 1:
                     plot(dl,  "invariant_mass","NLO_PLUS_NLL_OVER_NLO",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
             else:
@@ -559,14 +559,14 @@ def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = Fals
         for i in [0,1]:
             kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["LO_PDF"]!=np.array(None), 'axes':axs[i],'tight':False}
             if p == "invariant_mass":
-                plot(dl,  "invariant_mass","LO_PDF",          **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else None)
-                plot(dl,  "invariant_mass","NLO_PDF",         **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else None)
-                plot(dl,  "invariant_mass","NLO_PLUS_NLL_PDF", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else None)
+                plot(dl,  "invariant_mass","LO_PDF",          **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else "")
+                plot(dl,  "invariant_mass","NLO_PDF",         **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
+                plot(dl,  "invariant_mass","NLO_PLUS_NLL_PDF", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
                 if i == 1:
                     plot(dl,  "invariant_mass","NLO_PLUS_NLL_OVER_NLO",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
             else:
-                mass_plot(dl,  "LO_PDF",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else None)
-                mass_plot(dl,  "NLO_PDF",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else None)
-                mass_plot(dl,  "NLO_PLUS_NLL_PDF",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else None)
+                mass_plot(dl,  "LO_PDF",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else "")
+                mass_plot(dl,  "NLO_PDF",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
+                mass_plot(dl,  "NLO_PLUS_NLL_PDF",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
                 if i == 1:
                     mass_plot(dl,  "NLO_PLUS_NLL_OVER_NLO",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")

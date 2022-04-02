@@ -12,13 +12,13 @@ class MadgraphResult(Result):
 def is_valid(file:str,p:Input,d):
     order = p.order
     res = parse_single(file)
-    if res.lo is not None and order is Order.LO:
+    if res.LO is not None and order is Order.LO:
         return True
-    if res.lo is not None and res.nlo is not None and order is Order.NLO:
+    if res.LO is not None and res.NLO is not None and order is Order.NLO:
         return True
-    if res.lo is not None and res.nlo is not None and res.nlo_plus_nll is not None and order is Order.NLO_PLUS_NLL:
+    if res.LO is not None and res.NLO is not None and res.NLO_PLUS_NLL is not None and order is Order.NLO_PLUS_NLL:
         return True
-    print("RESTART" ,res.lo, res.nlo,res.nlo_plus_nll, file)
+    print("RESTART" ,res.LO, res.NLO,res.NLO_PLUS_NLL, file)
     return False
 
 def parse_single(file) -> MadgraphResult:

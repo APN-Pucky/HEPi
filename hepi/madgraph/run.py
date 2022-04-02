@@ -30,13 +30,14 @@ def get_path():
 
 
 class RunParams:
-    def __init__(self, dic,  skip=False):
+    def __init__(self, dic,  skip=False,madstr=True):
         self.dic = dic
         self.skip = skip
+        self.madstr = madstr
 
 
-def run(params: List[Input], noskip=False):
-    rps = _queue(params, noskip)
+def run(params: List[Input], noskip=False,madstr=True):
+    rps = _queue(params, noskip,madstr)
     _run(rps)
     outs = LD2DL(rps)["dic"]
     results = _parse(outs)
@@ -55,7 +56,7 @@ def namehash(n):
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
 
-def _queue(params: List[Input], noskip=False) -> List[RunParams]:
+def _queue(params: List[Input], noskip=False,madstr=True) -> List[RunParams]:
     Path("output").mkdir(parents=True, exist_ok=True)
     Path("input").mkdir(parents=True, exist_ok=True)
     ret = []
@@ -103,7 +104,7 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
                               'bdir': d["bdir"],
                               'run': get_input_dir() + name + ".dat",
                               'slha': get_input_dir() + sname,
-                              'out': get_output_dir()+name + ".out"}, skip))
+                              'out': get_output_dir()+name + ".out"}, skip,madstr))
 
     return ret
 
@@ -117,8 +118,11 @@ def _run(rps: List[RunParams]):
         ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && nice -n 5 {dir}/bin/calculate_xsect -f >> {out}'
     print(rps[0].dic["out"])
     if not rps[0].skip:
-        com = madgraph_path + \
-            'bin/mg5_aMC --mode="MadSTR" --file {in} >> {out} && cp {slha} {bdir}/Cards/param_card.dat && cp {run} {bdir}/Cards/run_card.dat && sed -i \'s/.*= req_acc_FO/ 1 = req_acc_FO/g\' {bdir}/Cards/run_card.dat && echo "automatic_html_opening = False" >> {bdir}/Cards/amcatnlo_configuration.txt && nice -n 5 {bdir}/bin/calculate_xsect -f'
+        mgcom = 'bin/mg5_aMC'
+        if rps[0].madstr:
+            mgcom = 'bin/mg5_aMC --mode="MadSTR"'
+        com = madgraph_path + mgcom + \
+            ' --file {in} >> {out} && cp {slha} {bdir}/Cards/param_card.dat && cp {run} {bdir}/Cards/run_card.dat && sed -i \'s/.*= req_acc_FO/ 1 = req_acc_FO/g\' {bdir}/Cards/run_card.dat && echo "automatic_html_opening = False" >> {bdir}/Cards/amcatnlo_configuration.txt && nice -n 5 {bdir}/bin/calculate_xsect -f'
         pp = subprocess.Popen(com.format(**rps[0].dic), shell=True)
         pp.wait()
     # Run commands in parallel
