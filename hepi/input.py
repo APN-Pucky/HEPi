@@ -81,8 +81,8 @@ class Input:
 def update_slha( i:Input ):
     b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
     try:
-        i.mu = (b.blocks["MASS"][abs(i.particle1)] +
-                   b.blocks["MASS"][abs(i.particle2)])/2.
+        i.mu = (abs(b.blocks["MASS"][abs(i.particle1)]) +
+                   abs(b.blocks["MASS"][abs(i.particle2)]))/2.
     except:
         pass
         

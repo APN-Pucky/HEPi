@@ -106,11 +106,11 @@ def get_mass(l, id):
     ret = []
     for s in l["slha"]:
         d = pyslha.read(get_input_dir() + s)
-        ret.append(d.blocks["MASS"][id])
+        ret.append(d.blocks["MASS"][abs(id)])
     return np.array(ret)
 
 def mass_plot(dict_list,  y, part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,**kwargs):
-    dict_list["mass_"+ str(part)] = get_mass(dict_list, part)
+    dict_list["mass_"+ str(part)] = get_mass(dict_list, abs(part))
     plot(dict_list, "mass_" + str(part), y, label=label,
          xaxis="$m_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,**kwargs)
 
@@ -147,7 +147,7 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ra
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 
 def index_open(var,idx):
-    if len(idx) is 1:
+    if len(idx) == 1:
         return var[idx]
     return index_open(var[idx[0]],idx[1:])
 

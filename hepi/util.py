@@ -31,6 +31,12 @@ def get_LR_partner(id):
     if "R" in n:
         n = n.replace("R", "L")
         return 1, int(PDG2Name2IDMap[n])
+    if "1" in n:
+        n = n.replace("1", "2")
+        return -1, int(PDG2Name2IDMap[n])
+    if "2" in n:
+        n = n.replace("2", "1")
+        return 1, int(PDG2Name2IDMap[n])
     return None
 
 def namehash(n):
