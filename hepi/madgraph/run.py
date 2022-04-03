@@ -36,9 +36,9 @@ class RunParams:
         self.madstr = madstr
 
 
-def run(params: List[Input], noskip=False,madstr=True):
+def run(params: List[Input], noskip=False,madstr=True,para=True):
     rps = _queue(params, noskip,madstr)
-    _run(rps)
+    _run(rps,para)
     outs = LD2DL(rps)["dic"]
     results = _parse(outs)
     rdl = LD2DL(results)
@@ -56,7 +56,7 @@ def namehash(n):
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
 
-def _queue(params: List[Input], noskip=False,madstr=True) -> List[RunParams]:
+def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[RunParams]:
     Path("output").mkdir(parents=True, exist_ok=True)
     Path("input").mkdir(parents=True, exist_ok=True)
     ret = []
@@ -74,16 +74,18 @@ def _queue(params: List[Input], noskip=False,madstr=True) -> List[RunParams]:
         d["dir"] = get_output_dir() + name + ".dir"
         d["bdir"] = get_output_dir() + name + ".bdir"
 
-        data = pkgutil.get_data(__name__, ["lo.mg", "nlo.mg"][p.order]).decode(
-            'utf-8')
+        data = pkgutil.get_data(__name__, ["lo.mg", "nlo.mg"][p.order]).decode( 'utf-8')
         src = Template(data)
         result = src.substitute(d)
         open(get_input_dir() + name + ".mg", "w").write(result)
         if not skip:
             open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
 
-        data = pkgutil.get_data(__name__, ["run_card_lo.dat", "run_card_nlo.dat"][p.order]).decode(
-            'utf-8')
+        mgfile = ["run_card_no_madstr.dat", "run_card_with_madstr.dat"][p.order]
+        if not madstr:
+            mgfile = "run_card_no_madstr.dat"
+        data = pkgutil.get_data(__name__, mgfile).decode( 'utf-8')
+
         src = Template(data)
         result = src.substitute(d)
         open(get_input_dir() + name + ".dat", "w").write(result)
@@ -109,13 +111,13 @@ def _queue(params: List[Input], noskip=False,madstr=True) -> List[RunParams]:
     return ret
 
 
-def _run(rps: List[RunParams]):
+def _run(rps: List[RunParams],para=True):
     # TODO clean up on exit emergency
     global madgraph_path
     # TODO RS build path checks?!?!
     template =  \
         'rm -rf {dir} && cp -r ' + rps[0].dic["bdir"] + \
-        ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && nice -n 5 {dir}/bin/calculate_xsect -f >> {out}'
+        ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && echo "nb_core = 1" >> {dir}/Cards/amcatnlo_configuration.txt && nice -n 5 {dir}/bin/calculate_xsect -f >> {out}'
     print(rps[0].dic["out"])
     if not rps[0].skip:
         mgcom = 'bin/mg5_aMC'
@@ -134,6 +136,8 @@ def _run(rps: List[RunParams]):
             # print(command)
             process = subprocess.Popen(command, shell=True)
             processes.append(process)
+            if not para:
+                process.wait()
 
     # Collect statuses
     output = [p.wait() for p in processes]

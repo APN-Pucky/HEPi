@@ -55,7 +55,7 @@ class Order(IntEnum):
 
 class Input:
     # TODO allow unspecified input? Maybe with kwargs + defaults
-    def __init__(self, order :Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, invariant_mass="auto",result="total",pt="auto",id=""):
+    def __init__(self, order :Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, invariant_mass="auto",result="total",pt="auto",id="",model_path="/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO"):
         self.order = order
         self.energy = energy
         self.energyhalf = energy/2.
@@ -76,6 +76,7 @@ class Input:
         self.pt = pt
         self.result = result
         self.id = id
+        self.model_path = model_path
         update_slha(self)
 def update_slha( i:Input ):
     b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
@@ -189,10 +190,10 @@ def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
                 d = pyslha.read(s.slha)
             except:
                 d = pyslha.read(get_input_dir() + s.slha)
-            d.blocks["MASS"][var] = r
+            d.blocks["MASS"][abs(var)] = r
             if not (diff_L_R is None):
-                is_L, v = get_LR_partner(var)
-                d.blocks["MASS"][v] = r + is_L*diff_L_R
+                is_L, v = get_LR_partner(abs(var))
+                d.blocks["MASS"][abs(v)] = r + is_L*diff_L_R
 
             newname = s.slha + "_mass_" + str(var) + "_" + str(r)
             pyslha.write(get_input_dir()+newname, d)
