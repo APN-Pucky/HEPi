@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.input &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Test</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../hepi.html">hepi</a> &raquo;</li>
+      <li>hepi.input</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for hepi.input</h1><div class="highlight"><pre>
+<span></span>from distutils.log import warn
+from enum import IntEnum
+#from math import dist
+import copy
+import warnings
+import numpy as np
+from typing import List
+
+import pyslha
+from .util import get_LR_partner, lhapdf_name_to_id, namehash
+
+import lhapdf
+
+<div class="viewcode-block" id="in_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.in_dir">[docs]</a>in_dir = &quot;./input/&quot;</div>
+&quot;&quot;&quot;input directory&quot;&quot;&quot;
+<div class="viewcode-block" id="out_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.out_dir">[docs]</a>out_dir = &quot;./output/&quot;</div>
+&quot;&quot;&quot;output directory&quot;&quot;&quot;
+<div class="viewcode-block" id="pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pre">[docs]</a>pre = &quot;nice -n 5&quot;</div>
+&quot;&quot;&quot;run command prefix.&quot;&quot;&quot;
+
+
+
+<div class="viewcode-block" id="get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_input_dir">[docs]</a>def get_input_dir():
+    &quot;&quot;&quot;
+    Gets the input directory.
+    &quot;&quot;&quot;
+    global in_dir
+    return in_dir</div>
+
+
+<div class="viewcode-block" id="get_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_output_dir">[docs]</a>def get_output_dir():
+    &quot;&quot;&quot;
+    Gets the input directory.
+    &quot;&quot;&quot;
+    global out_dir
+    return out_dir</div>
+
+
+<div class="viewcode-block" id="set_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_input_dir">[docs]</a>def set_input_dir(ind):
+    &quot;&quot;&quot;
+    Sets the input directory.
+    &quot;&quot;&quot;
+    global in_dir
+    in_dir = ind</div>
+
+
+<div class="viewcode-block" id="set_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_output_dir">[docs]</a>def set_output_dir(outd):
+    &quot;&quot;&quot;
+    Sets the output directory.
+    &quot;&quot;&quot;
+    global out_dir
+    out_dir = outd</div>
+
+
+<div class="viewcode-block" id="set_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_pre">[docs]</a>def set_pre(ppre):
+    &quot;&quot;&quot;
+    Sets the command prefix. 
+    &quot;&quot;&quot;
+    global pre
+    pre = ppre</div>
+
+
+<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_pre">[docs]</a>def get_pre():
+    &quot;&quot;&quot;
+    Gets the command prefix. 
+    &quot;&quot;&quot;
+    global pre
+    return pre</div>
+
+
+<div class="viewcode-block" id="Order"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order">[docs]</a>class Order(IntEnum):
+    &quot;&quot;&quot;
+    Computation orders.
+    &quot;&quot;&quot;
+<div class="viewcode-block" id="Order.LO"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.LO">[docs]</a>    LO = 0</div>
+<div class="viewcode-block" id="Order.NLO"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.NLO">[docs]</a>    NLO = 1</div>
+<div class="viewcode-block" id="Order.NLO_PLUS_NLL"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.NLO_PLUS_NLL">[docs]</a>    NLO_PLUS_NLL = 2</div></div>
+
+
+<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input">[docs]</a>class Input:
+    &quot;&quot;&quot;
+    Input for computation.
+    &quot;&quot;&quot;
+    # TODO allow unspecified input? Maybe with kwargs + defaults
+    def __init__(self, order :Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, invariant_mass=&quot;auto&quot;,result=&quot;total&quot;,pt=&quot;auto&quot;,id=&quot;&quot;,model_path=&quot;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&quot;):
+        self.order = order
+        self.energy = energy
+        self.energyhalf = energy/2.
+        self.particle1 = particle1
+        self.particle2 = particle2
+        self.slha = slha
+        self.pdf_lo = pdf_lo
+        self.pdfset_lo = pdfset_lo
+        self.pdf_nlo = pdf_nlo
+        self.pdfset_nlo = pdfset_nlo
+        self.pdf_lo_id = lhapdf_name_to_id(pdf_lo)
+        self.pdf_nlo_id = lhapdf_name_to_id(pdf_nlo)
+        self.mu_f = mu_f
+        self.mu_r = mu_r
+        self.precision = precision
+        self.max_iters = max_iters
+        self.invariant_mass = invariant_mass
+        self.pt = pt
+        self.result = result
+        self.id = id
+        self.model_path = model_path
+        update_slha(self)</div>
+
+<div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.update_slha">[docs]</a>def update_slha( i:Input ):
+    &quot;&quot;&quot;
+    Updates dependent parameters in Input `i`.
+
+    Mainly concerns the `mu` value used by `madgraph`.
+    &quot;&quot;&quot;
+    b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
+    try:
+        i.mu = (abs(b.blocks[&quot;MASS&quot;][abs(i.particle1)]) +
+                   abs(b.blocks[&quot;MASS&quot;][abs(i.particle2)]))/2.
+    except:
+        pass</div>
+        
+
+
+
+
+
+<div class="viewcode-block" id="scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan">[docs]</a>def scan(l: List[Input], var: str, range) -&gt; List[Input]:
+    &quot;&quot;&quot;
+    Scans a variable `var` over `range` in `l`.
+    &quot;&quot;&quot;
+    ret = []
+    for s in l:
+        for r in range:
+            tmp = copy.copy(s)
+            setattr(tmp, var, r)
+            ret.append(tmp)
+    return ret</div>
+
+
+<div class="viewcode-block" id="scale_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scale_scan">[docs]</a>def scale_scan(l: List[Input], range=3, distance=2.):
+    &quot;&quot;&quot;
+    Scans scale by varying `mu_f` and `mu_r`.
+    They take `range` values from 1/`distance` to `distance` in lograthmic spacing.
+    Only points with `mu_f`=`mu_r` or `mu_r/f`=1 or `mu_r/f`=`distance` or `mu_r/f`=1/`distance` are returned.
+    &quot;&quot;&quot;
+    ret = []
+    for s in l:
+        # not on error pdfs
+        if s.pdfset_nlo == 0:
+            tmp = scan([s], &quot;mu_f&quot;, np.logspace(np.log10(1. /
+                        distance), np.log10(distance), range))
+            tmp = scan(tmp, &quot;mu_r&quot;, np.logspace(np.log10(1. /
+                        distance), np.log10(distance), range))
+            for t in tmp:
+                if t.mu_f == 1.0 or t.mu_r == 1.0 or t.mu_f == t.mu_r or t.mu_f == distance or t.mu_f == 1./distance or t.mu_r == distance or t.mu_r == 1./distance:
+                    ret.append(t)
+
+        else:
+            ret.append(s)
+
+    return ret</div>
+
+<div class="viewcode-block" id="seven_point_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.seven_point_scan">[docs]</a>def seven_point_scan(l: List[Input]):
+    &quot;&quot;&quot;
+    Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
+    &quot;&quot;&quot;
+    range=3
+    distance=2.
+    ret = []
+    for s in l:
+        # not on error pdfs
+        if s.pdfset_nlo == 0 and s.mu_f == 1.0 and s.mu_r == 1.0:
+            tmp = scan([s], &quot;mu_f&quot;, np.logspace(np.log10(1. /
+                        distance), np.log10(distance), range))
+            tmp = scan(tmp, &quot;mu_r&quot;, np.logspace(np.log10(1. /
+                        distance), np.log10(distance), range))
+            for t in tmp:
+                if not ((t.mu_f == distance and  t.mu_r == 1./distance) or (t.mu_r == distance and  t.mu_f == 1./distance)):
+                    ret.append(t)
+
+        else:
+            ret.append(s)
+
+    return ret</div>
+
+
+<div class="viewcode-block" id="pdf_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pdf_scan">[docs]</a>def pdf_scan(l: List[Input]):
+    &quot;&quot;&quot;
+    Scans NLO PDF sets. 
+
+    The PDF sets are infered from `lhapdf.getPDFSet` with the argument of `pdfset_nlo`.
+    &quot;&quot;&quot;
+    ret = []
+    for s in l:
+        # only central scale
+        if s.mu_f == 1.0 and s.mu_r == 1.0:
+            set = lhapdf.getPDFSet(s.pdf_nlo)
+            for r in range(set.size):
+                tmp = copy.copy(s)
+                setattr(tmp, &quot;pdfset_nlo&quot;, r)
+                ret.append(tmp)
+        else:
+            ret.append(s)
+    return ret</div>
+
+<div class="viewcode-block" id="change_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.change_where">[docs]</a>def change_where(l:List[Input], dicts : dict, **kwargs):
+    &quot;&quot;&quot;
+    Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
+
+    The changes only applied to the matching list members.
+    &quot;&quot;&quot;
+    ret = []
+    for s in l:
+        ok = True
+        for k,v in kwargs.items():
+            if getattr(s,k) != v:
+                ok = False
+        if ok:
+            tmp = copy.copy(s)
+            for k,v in dicts.items():
+                setattr(tmp, k, v)
+            ret.append(tmp)
+        else:
+            ret.append(s)
+            
+    return ret</div>
+
+<div class="viewcode-block" id="scan_invariant_mass"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_invariant_mass">[docs]</a>def scan_invariant_mass(l : List[Input],diff,points,low=0.001):
+    &quot;&quot;&quot;
+    Logarithmic `invariant_mass` scan close to the production threshold.
+    &quot;&quot;&quot;
+    ret = []
+    for s in l:
+        for r in s.mu*2.+ low+ (np.logspace(np.log10(low),np.log10(1+low),points)-low) *diff:
+            tmp = copy.copy(s)
+            setattr(tmp, &quot;invariant_mass&quot;, r)
+            tmp.result = &quot;m&quot;
+            ret.append(tmp)
+    return ret</div>
+
+<div class="viewcode-block" id="mass_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.mass_scan">[docs]</a>def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -&gt; List[Input]:
+    &quot;&quot;&quot;
+    Scans the PDG identified mass `var` over `range` in the list `l`.
+    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
+    &quot;&quot;&quot;
+    ret = []
+    for s in l:
+        for r in range:
+            d = None
+            try:
+                d = pyslha.read(s.slha)
+            except:
+                d = pyslha.read(get_input_dir() + s.slha)
+            d.blocks[&quot;MASS&quot;][abs(var)] = r
+            if not (diff_L_R is None):
+                is_L, v = get_LR_partner(abs(var))
+                d.blocks[&quot;MASS&quot;][abs(v)] = r + is_L*diff_L_R
+
+            newname = s.slha + &quot;_mass_&quot; + str(var) + &quot;_&quot; + str(r)
+            pyslha.write(get_input_dir()+newname, d)
+
+            tmp = copy.copy(s)
+            setattr(tmp, &quot;mass_&quot; + str(var), r)
+            setattr(tmp, &quot;slha&quot;, newname)
+            update_slha(tmp)
+            ret.append(tmp)
+    return ret</div>
+
+<div class="viewcode-block" id="slha_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan">[docs]</a>def slha_scan(l : List[Input],block,var,range : List) -&gt; List[Input]:
+    &quot;&quot;&quot;
+    Scan a generic 
+    &quot;&quot;&quot;
+    return slha_scan_rel(l,lambda r,: [(block,var,r)],range)</div>
+
+<div class="viewcode-block" id="slha_scan_rel"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan_rel">[docs]</a>def slha_scan_rel(l : List[Input],lambdas ,range : List) -&gt; List[Input]:
+    &quot;&quot;&quot;
+    Scan a generic slha variable.
+    &quot;&quot;&quot;
+    ret = []
+    for s in l:
+        for r in range:
+            d = None
+            tmp = copy.copy(s)
+            newname = s.slha
+            try:
+                d = pyslha.read(s.slha,ignorenomass=True)
+            except:
+                d = pyslha.read(get_input_dir() + s.slha,ignorenomass=True)
+            ls = lambdas(r)
+            for b,v,res in ls:
+                d.blocks[b][v] = res
+                setattr(tmp, b+ &quot;_&quot; + str(v), res)
+                newname = newname +  &quot;_&quot; +str(b) + &quot;_&quot; + str(v) + &quot;_&quot; + str(res)
+            pyslha.write(get_input_dir()+newname, d)
+
+            setattr(tmp, &quot;slha&quot;, newname)
+            update_slha(tmp)
+            ret.append(tmp)
+    return ret</div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

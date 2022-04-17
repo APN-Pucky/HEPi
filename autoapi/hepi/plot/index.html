@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.plot &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hepi.results" href="../results/index.html" />
+    <link rel="prev" title="hepi.input" href="../input/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Test</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cluster/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.cluster</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../madgraph/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.madgraph</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.resummino</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.spheno</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../input/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../results/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.results</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.util</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/hepi/plot/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-hepi.plot">
+<span id="hepi-plot"></span><h1><a class="reference internal" href="#module-hepi.plot" title="hepi.plot"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a><a class="headerlink" href="#module-hepi.plot" title="Permalink to this headline"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.tex_table" title="hepi.plot.tex_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tex_table</span></code></a>(dict_list, key, fname, scale=True, pdf=True, yscale=1.0)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.title" title="hepi.plot.title"><code class="xref py py-obj docutils literal notranslate"><span class="pre">title</span></code></a>(axe, i: hepi.input.Input, scenario='', diff_L_R=None, extra='', **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.energy_plot" title="hepi.plot.energy_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_plot</span></code></a>(dict_list, y, yscale=1.0, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', label=None, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.combined_energy_plot" title="hepi.plot.combined_energy_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_energy_plot</span></code></a>(dict_list, t, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.combined_plot" title="hepi.plot.combined_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_plot</span></code></a>(func, dict_list, t, *args, label=None, fill=False, fmt='.', interpolate=True, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.get_mass" title="hepi.plot.get_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mass</span></code></a>(l, id)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.mass_plot" title="hepi.plot.mass_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_plot</span></code></a>(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.mass_vplot" title="hepi.plot.mass_vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_vplot</span></code></a>(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.plot" title="hepi.plot.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(dict_list, x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.index_open" title="hepi.plot.index_open"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_open</span></code></a>(var, idx)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.slha_data" title="hepi.plot.slha_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_data</span></code></a>(li, index_list)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.slha_plot" title="hepi.plot.slha_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_plot</span></code></a>(li, x, y, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.vplot" title="hepi.plot.vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vplot</span></code></a>(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.mass_mapplot" title="hepi.plot.mass_mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_mapplot</span></code></a>(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.mapplot" title="hepi.plot.mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapplot</span></code></a>(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.map_vplot" title="hepi.plot.map_vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_vplot</span></code></a>(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.0)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.err_plt" title="hepi.plot.err_plt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">err_plt</span></code></a>(axes, x, y, label=None, error=False)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.scale_plot" title="hepi.plot.scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_plot</span></code></a>(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.central_scale_plot" title="hepi.plot.central_scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">central_scale_plot</span></code></a>(dict_list, vl, cont=False, error=True, yscale=1.0, unit='pb')</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.mass_and_K_plot" title="hepi.plot.mass_and_K_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_and_K_plot</span></code></a>(dl, li, p, scale=False, pdf=False, plehn=True, combined=False, cont=False, figsize=(6, 8), **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.mass_and_ratio_plot" title="hepi.plot.mass_and_ratio_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_and_ratio_plot</span></code></a>(dl, li, p, scale=False, pdf=False, combined=False, cont=False, figsize=(6, 4), plot_data=True, fill=True, unit='pb', yscale=1.0, ylim=None, **kwargs)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.fig" title="hepi.plot.fig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fig</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.axs" title="hepi.plot.axs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">axs</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.plot.lines" title="hepi.plot.lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lines</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.plot.labels" title="hepi.plot.labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">labels</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.tex_table">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">tex_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#tex_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.tex_table" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.title">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../input/index.html#hepi.input.Input" title="hepi.input.Input"><span class="pre">hepi.input.Input</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_L_R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#title"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.title" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.energy_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">energy_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'E</span> <span class="pre">[GeV]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#energy_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.energy_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.combined_energy_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">combined_energy_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#combined_energy_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.combined_energy_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.combined_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">combined_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#combined_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.combined_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.get_mass">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">get_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#get_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.get_mass" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.mass_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">mass_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#mass_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.mass_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.mass_vplot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">mass_vplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#mass_vplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.mass_vplot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'E</span> <span class="pre">[GeV]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_plus_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.index_open">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">index_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#index_open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.index_open" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.slha_data">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">slha_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#slha_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.slha_data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.slha_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">slha_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#slha_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.slha_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.vplot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">vplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'E</span> <span class="pre">[GeV]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#vplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.vplot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.mass_mapplot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">mass_mapplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#mass_mapplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.mass_mapplot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.mapplot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">mapplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#mapplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.mapplot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.map_vplot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">map_vplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#map_vplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.map_vplot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.plot.fig">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">fig</span></span><a class="reference internal" href="../../../_modules/hepi/plot.html#fig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.fig" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.plot.axs">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">axs</span></span><a class="reference internal" href="../../../_modules/hepi/plot.html#axs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.axs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.plot.lines">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">lines</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">[]</span></em><a class="reference internal" href="../../../_modules/hepi/plot.html#lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.lines" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.plot.labels">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">[]</span></em><a class="reference internal" href="../../../_modules/hepi/plot.html#labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.labels" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.err_plt">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">err_plt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#err_plt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.err_plt" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.scale_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">scale_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seven_point_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">li</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plehn_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pb'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#scale_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.scale_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.central_scale_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">central_scale_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pb'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#central_scale_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.central_scale_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.mass_and_K_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">mass_and_K_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plehn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#mass_and_K_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.mass_and_K_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.plot.mass_and_ratio_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">mass_and_ratio_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6,</span> <span class="pre">4)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot.html#mass_and_ratio_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.mass_and_ratio_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../input/index.html" class="btn btn-neutral float-left" title="hepi.input" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../results/index.html" class="btn btn-neutral float-right" title="hepi.results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

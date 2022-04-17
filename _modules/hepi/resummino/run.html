@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.resummino.run &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Test</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/hepi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../hepi.html">hepi</a> &raquo;</li>
+      <li>hepi.resummino.run</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for hepi.resummino.run</h1><div class="highlight"><pre>
+<span></span>from typing import List
+import subprocess
+from string import Template
+import numpy as np
+import pkgutil
+
+from hepi.util import namehash
+from .. import Input, Result, LD2DL, get_output_dir, get_input_dir, get_pre
+import re
+from uncertainties import ufloat_fromstr
+import os.path
+from pathlib import Path
+from .result import ResumminoResult, is_valid, parse_single
+import enlighten
+import time
+import difflib
+from smpl.parallel import par
+import hashlib
+import os 
+import stat
+
+
+<div class="viewcode-block" id="resummino_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.resummino_path">[docs]</a>resummino_path = &quot;~/resummino/&quot;</div>
+&quot;&quot;&quot;resummino folder containing the binary in &#39;./build/bin&#39;.&quot;&quot;&quot;
+
+
+
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.set_path">[docs]</a>def set_path(p):
+    &quot;&quot;&quot;
+    Set the path to the resummino folder containing the binary in &#39;./build/bin&#39;.
+    &quot;&quot;&quot;
+    global resummino_path
+    resummino_path = p+ (&quot;/&quot; if p[-1]!=&quot;/&quot; else &quot;&quot;)</div>
+
+
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.get_path">[docs]</a>def get_path():
+    &quot;&quot;&quot;
+    Returns the currently set resummino path
+    &quot;&quot;&quot;
+    global resummino_path
+    return resummino_path</div>
+
+
+<div class="viewcode-block" id="RunParams"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.RunParams">[docs]</a>class RunParams:
+    &quot;&quot;&quot;
+    Parameters for Resummino.
+    &quot;&quot;&quot;
+    def __init__(self, flags: str, in_path: str, out_path: str, skip=False):
+        self.skip = skip
+        self.flags = flags
+        self.in_path = in_path
+        self.out_path = out_path</div>
+
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.run">[docs]</a>def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True):
+    &quot;&quot;&quot;
+    Run the passed list of parameters.
+    &quot;&quot;&quot;
+    print(&quot;Running: &quot; + str(len(params))  +&quot; jobs&quot; )
+    rps = _queue(params, noskip)
+    _run(rps, bar, no_parse,para)
+    if not no_parse:
+        outs = LD2DL(rps)[&quot;out_path&quot;]
+        results = _parse(outs)
+        rdl = LD2DL(results)
+        pdl = LD2DL(params)
+        return {**rdl, **pdl}
+    return {}</div>
+
+
+<div class="viewcode-block" id="_parse"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._parse">[docs]</a>def _parse(outputs: List[str]) -&gt; List[ResumminoResult]:
+    &quot;&quot;&quot;
+    Parses Resummino output files and returns List of Results.
+    &quot;&quot;&quot;
+    rsl = []
+    for r in par(parse_single, outputs):
+        rsl.append(r)
+    return rsl</div>
+
+
+
+<div class="viewcode-block" id="_queue"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._queue">[docs]</a>def _queue(params: List[Input], noskip=False) -&gt; List[RunParams]:
+    &quot;&quot;&quot;
+    Queues and generates Resummino run files.
+    &quot;&quot;&quot;
+    global resummino_path
+    Path(&quot;output&quot;).mkdir(parents=True, exist_ok=True)
+    Path(&quot;input&quot;).mkdir(parents=True, exist_ok=True)
+    ret = []
+    for p in params:
+        d = p.__dict__
+        d[&quot;code&quot;] = &quot;RS&quot;
+        # TODO insert defautl if missing in d!
+        name = namehash(&quot;_&quot;.join(&quot;&quot;.join(str(_[0]) + &quot;_&quot; + str(_[1]))
+                        for _ in d.items()).replace(&quot;/&quot;, &quot;-&quot;))
+        print(name)
+        skip = False
+        if not noskip and os.path.isfile(get_output_dir() + name + &quot;.out&quot;) and is_valid(get_output_dir() + name + &quot;.out&quot;,p,d):
+            print(&quot;skip&quot;, end=&#39;&#39;)
+            skip = True
+        if not skip:
+            data = pkgutil.get_data(__name__, &quot;plot_template.in&quot;).decode(
+                &#39;utf-8&#39;)
+
+            src = Template(data)
+            result = src.substitute(d)
+            open(get_input_dir() + name + &quot;.in&quot;, &quot;w&quot;).write(result)
+            open(get_input_dir() + name + &quot;.sh&quot;, &quot;w&quot;).write(&quot;#!/bin/sh\n&quot;+
+                resummino_path + &#39;build/bin/resummino {} {} &gt;&gt; {}&#39;.format(
+                    get_input_dir()+name + &quot;.in&quot;,[&quot;--lo&quot;, &quot;--nlo&quot;, &quot;--nll&quot;][p.order],get_output_dir()+name + &quot;.out&quot;
+                ))
+            st = os.stat(get_input_dir() + name + &quot;.sh&quot;)
+            os.chmod(get_input_dir() + name + &quot;.sh&quot;, st.st_mode | stat.S_IEXEC)
+            open(get_output_dir() + name + &quot;.out&quot;, &quot;w&quot;).write(result + &quot;\n\n&quot;)
+
+            sname = d[&#39;slha&#39;]
+            with open(get_input_dir() + sname, &#39;r&#39;) as f:
+                #src = Template(f.read())
+                #result = src.substitute(d)
+                #open(get_input_dir() + sname + &quot;.in&quot;, &quot;w&quot;).write(result)
+                open(get_output_dir() + name + &quot;.out&quot;,
+                     &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
+
+        ret.append(RunParams([&quot;--lo&quot;, &quot;--nlo&quot;, &quot;--nll&quot;]
+                             [p.order], get_input_dir()+name + &quot;.in&quot;, get_output_dir()+name + &quot;.out&quot;, skip))
+
+    return ret</div>
+
+
+<div class="viewcode-block" id="_run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._run">[docs]</a>def _run(rps: List[RunParams], bar=True, no_parse=False,para=True):
+    &quot;&quot;&quot;
+    Runs resummino per RunParam.
+    &quot;&quot;&quot;
+    # TODO clean up on exit emergency
+    global resummino_path
+    # TODO RS build path checks?!?!
+    template = get_pre() + &quot; &quot; +  &quot;{}&quot;
+
+    # Run commands in parallel
+    processes = []
+    processesrpo = {}
+    processesbar = {}
+    manager = enlighten.get_manager()
+    status_format = &#39;{program}{fill} Stage: {stage}{fill} Status {status}:{fill}{lastline}&#39;
+    main_format = &#39;{program}&#39;
+    mp = &quot;&quot;
+    if bar:
+        mp = rps[0].out_path
+        main_bar = manager.status_bar(status_format=main_format,
+                                      program=mp)
+        mp = rps[1].out_path
+
+    for rp in rps:
+        if not rp.skip:
+            command = template.format(rp.in_path.replace(&quot;.in&quot;,&quot;.sh&quot;))
+            process = subprocess.Popen(command, shell=True)
+            processes.append(process)
+            processesrpo[process] = rp.out_path
+            if not para:
+                process.wait()
+            if no_parse:
+                time.sleep(5)
+            if bar:
+                nnn = &quot;&quot;
+                nn = &quot;&quot;
+                ch = False
+                for i, s in enumerate(difflib.ndiff(mp+&quot;_&quot;, rp.out_path+&quot;_&quot;)):
+                    if s[-1] == &quot;_&quot;:
+                        if ch:
+                            nnn = nnn + &quot; ... &quot; + nn
+                        ch = False
+                        nn = &quot;&quot;
+                    if s[0] == &#39;+&#39;:
+                        ch = True
+                    if (s[0] == &#39;+&#39; or s[0] == &#39; &#39;) and s[-1] != &quot;_&quot;:
+                        nn = nn + s[-1]
+                processesbar[process] = manager.status_bar(status_format=status_format,
+                                                           program=nnn,
+                                                           stage=&#39;INIT&#39;,
+                                                           status=&#39;OKAY&#39;,
+                                                           lastline=&quot;0&quot;)
+        mp = rps[0].out_path
+    if bar:
+        c = True
+        while c:
+            if len(processes) &gt; 0:
+                time.sleep(10)
+            c = False
+            for p in processes:
+                if p.poll() is None:
+                    c = True
+                    pat = re.compile(r&#39;^\* (.*) \*&#39;)
+                    n = &quot;&quot;
+                    cl = 0
+                    with open(processesrpo[p], mode=&quot;r&quot;) as f:
+                        for l in f:
+                            tmp = pat.search(l)
+                            if(tmp is not None):
+                                n = tmp.group(1)
+                                cl = 0
+                            cl = cl+1
+
+                    processesbar[p].update(
+                        stage=n, status=cl, lastline=l[int(len(l)/2)::])
+                else:
+                    processesbar[p].update(
+                        stage=&quot;DONE&quot;, status=&#39;DONE&#39;, lastline=&quot;&quot;)
+        for p in processes:
+            processesbar[p].close()
+        main_bar.close()
+
+    if not no_parse:
+        # Collect statuses
+        output = [p.wait() for p in processes]
+        return output
+    return []</div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

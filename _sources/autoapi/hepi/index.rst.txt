@@ -1,0 +1,1755 @@
+:py:mod:`hepi`
+==============
+
+.. py:module:: hepi
+
+.. autoapi-nested-parse::
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   cluster/index.rst
+   madgraph/index.rst
+   resummino/index.rst
+   spheno/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   input/index.rst
+   plot/index.rst
+   results/index.rst
+   util/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   hepi.Order
+   hepi.Input
+   hepi.Result
+   hepi.Input
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.get_LR_partner
+   hepi.lhapdf_name_to_id
+   hepi.namehash
+   hepi.get_input_dir
+   hepi.get_output_dir
+   hepi.set_input_dir
+   hepi.set_output_dir
+   hepi.set_pre
+   hepi.get_pre
+   hepi.update_slha
+   hepi.scan
+   hepi.scale_scan
+   hepi.seven_point_scan
+   hepi.pdf_scan
+   hepi.change_where
+   hepi.scan_invariant_mass
+   hepi.mass_scan
+   hepi.slha_scan
+   hepi.slha_scan_rel
+   hepi.LD2DL
+   hepi.pdf_error
+   hepi.scale_error
+   hepi.combine_errors
+   hepi.LD2DL
+   hepi.get_name
+   hepi.get_LR_partner
+   hepi.namehash
+   hepi.lhapdf_name_to_id
+   hepi.get_input_dir
+   hepi.get_name
+   hepi.tex_table
+   hepi.title
+   hepi.energy_plot
+   hepi.combined_energy_plot
+   hepi.combined_plot
+   hepi.get_mass
+   hepi.mass_plot
+   hepi.mass_vplot
+   hepi.plot
+   hepi.index_open
+   hepi.slha_data
+   hepi.slha_plot
+   hepi.vplot
+   hepi.mass_mapplot
+   hepi.mapplot
+   hepi.map_vplot
+   hepi.err_plt
+   hepi.scale_plot
+   hepi.central_scale_plot
+   hepi.mass_and_K_plot
+   hepi.mass_and_ratio_plot
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.in_dir
+   hepi.out_dir
+   hepi.pre
+   hepi.required_numerical_uncertainty_factor
+   hepi.id_name
+   hepi.name_id
+   hepi.fig
+   hepi.axs
+   hepi.lines
+   hepi.labels
+   hepi.package
+   hepi.version
+   hepi.__version__
+
+
+.. py:function:: get_LR_partner(id)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: lhapdf_name_to_id(name)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: namehash(n)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: in_dir
+   :annotation: = ./input/
+
+   
+   input directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: out_dir
+   :annotation: = ./output/
+
+   
+   output directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: pre
+   :annotation: = nice -n 5
+
+   
+   run command prefix.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_input_dir()
+
+   
+   Gets the input directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_output_dir()
+
+   
+   Gets the input directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: set_input_dir(ind)
+
+   
+   Sets the input directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: set_output_dir(outd)
+
+   
+   Sets the output directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: set_pre(ppre)
+
+   
+   Sets the command prefix. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_pre()
+
+   
+   Gets the command prefix. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: Order
+
+   Bases: :py:obj:`enum.IntEnum`
+
+   
+   Computation orders.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: LO
+      :annotation: = 0
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:attribute:: NLO
+      :annotation: = 1
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:attribute:: NLO_PLUS_NLL
+      :annotation: = 2
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
+
+   
+   Input for computation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: update_slha(i: Input)
+
+   
+   Updates dependent parameters in Input `i`.
+
+   Mainly concerns the `mu` value used by `madgraph`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: scan(l: List[Input], var: str, range) -> List[Input]
+
+   
+   Scans a variable `var` over `range` in `l`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: scale_scan(l: List[Input], range=3, distance=2.0)
+
+   
+   Scans scale by varying `mu_f` and `mu_r`.
+   They take `range` values from 1/`distance` to `distance` in lograthmic spacing.
+   Only points with `mu_f`=`mu_r` or `mu_r/f`=1 or `mu_r/f`=`distance` or `mu_r/f`=1/`distance` are returned.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: seven_point_scan(l: List[Input])
+
+   
+   Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: pdf_scan(l: List[Input])
+
+   
+   Scans NLO PDF sets. 
+
+   The PDF sets are infered from `lhapdf.getPDFSet` with the argument of `pdfset_nlo`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: change_where(l: List[Input], dicts: dict, **kwargs)
+
+   
+   Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
+
+   The changes only applied to the matching list members.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: scan_invariant_mass(l: List[Input], diff, points, low=0.001)
+
+   
+   Logarithmic `invariant_mass` scan close to the production threshold.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]
+
+   
+   Scans the PDG identified mass `var` over `range` in the list `l`.
+   `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: slha_scan(l: List[Input], block, var, range: List) -> List[Input]
+
+   
+   Scan a generic 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: slha_scan_rel(l: List[Input], lambdas, range: List) -> List[Input]
+
+   
+   Scan a generic slha variable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: LD2DL(l: List)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: required_numerical_uncertainty_factor
+   :annotation: = 10
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: Result(lo, nlo, nlo_plus_nll)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: pdf_error(li, dl)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: scale_error(li, dl)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: combine_errors(dl)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: LD2DL(l: List)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_name(id)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_LR_partner(id)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: namehash(n)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: id_name
+   
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: name_id
+   
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: lhapdf_name_to_id(name)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
+
+   
+   Input for computation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_input_dir()
+
+   
+   Gets the input directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_name(id)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: tex_table(dict_list, key, fname, scale=True, pdf=True, yscale=1.0)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: title(axe, i: hepi.input.Input, scenario='', diff_L_R=None, extra='', **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: energy_plot(dict_list, y, yscale=1.0, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', label=None, **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: combined_energy_plot(dict_list, t, **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: combined_plot(func, dict_list, t, *args, label=None, fill=False, fmt='.', interpolate=True, **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_mass(l, id)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: plot(dict_list, x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: index_open(var, idx)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: slha_data(li, index_list)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: slha_plot(li, x, y, **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: map_vplot(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.0)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: fig
+   
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: axs
+   
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: lines
+   :annotation: = []
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: labels
+   :annotation: = []
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: err_plt(axes, x, y, label=None, error=False)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: scale_plot(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: central_scale_plot(dict_list, vl, cont=False, error=True, yscale=1.0, unit='pb')
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: mass_and_K_plot(dl, li, p, scale=False, pdf=False, plehn=True, combined=False, cont=False, figsize=(6, 8), **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: mass_and_ratio_plot(dl, li, p, scale=False, pdf=False, combined=False, cont=False, figsize=(6, 4), plot_data=True, fill=True, unit='pb', yscale=1.0, ylim=None, **kwargs)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: package
+   :annotation: = hepi
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: version
+   
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: __version__
+   
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

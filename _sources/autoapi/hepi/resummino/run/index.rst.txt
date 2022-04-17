@@ -1,0 +1,231 @@
+:py:mod:`hepi.resummino.run`
+============================
+
+.. py:module:: hepi.resummino.run
+
+.. autoapi-nested-parse::
+
+   
+   ..
+       !! processed by numpydoc !!
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   hepi.resummino.run.RunParams
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.resummino.run.set_path
+   hepi.resummino.run.get_path
+   hepi.resummino.run.run
+   hepi.resummino.run._parse
+   hepi.resummino.run._queue
+   hepi.resummino.run._run
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.resummino.run.resummino_path
+
+
+.. py:data:: resummino_path
+   :annotation: = ~/resummino/
+
+   
+   resummino folder containing the binary in './build/bin'.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: set_path(p)
+
+   
+   Set the path to the resummino folder containing the binary in './build/bin'.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_path()
+
+   
+   Returns the currently set resummino path
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: RunParams(flags: str, in_path: str, out_path: str, skip=False)
+
+   
+   Parameters for Resummino.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: run(params: List[hepi.Input], noskip=False, bar=True, no_parse=False, para=True)
+
+   
+   Run the passed list of parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: _parse(outputs: List[str]) -> List[hepi.resummino.result.ResumminoResult]
+
+   
+   Parses Resummino output files and returns List of Results.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: _queue(params: List[hepi.Input], noskip=False) -> List[RunParams]
+
+   
+   Queues and generates Resummino run files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: _run(rps: List[RunParams], bar=True, no_parse=False, para=True)
+
+   
+   Runs resummino per RunParam.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

@@ -1,0 +1,257 @@
+:py:mod:`hepi.spheno`
+=====================
+
+.. py:module:: hepi.spheno
+
+.. autoapi-nested-parse::
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   run/index.rst
+
+
+Package Contents
+----------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   hepi.spheno.Input
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.spheno.get_input_dir
+   hepi.spheno.get_output_dir
+   hepi.spheno.update_slha
+   hepi.spheno.set_path
+   hepi.spheno.get_path
+   hepi.spheno.run
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.spheno.spheno_path
+
+
+.. py:function:: get_input_dir()
+
+   
+   Gets the input directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_output_dir()
+
+   
+   Gets the input directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
+
+   
+   Input for computation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: update_slha(i: Input)
+
+   
+   Updates dependent parameters in Input `i`.
+
+   Mainly concerns the `mu` value used by `madgraph`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: spheno_path
+   :annotation: = ~/git/SPheno-3.3.8/
+
+   
+   spheno folder containing the binary in './bin'.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: set_path(p)
+
+   
+   Set the path to the Spheno folder containing the binary in './bin'.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_path()
+
+   
+   Returns the currently set resummino path
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: run(slhas: List[hepi.input.Input]) -> List[hepi.input.Input]
+
+   
+   Run the passed list of parameters for SPheno.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

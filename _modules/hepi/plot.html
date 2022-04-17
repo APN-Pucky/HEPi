@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.plot &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Test</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../hepi.html">hepi</a> &raquo;</li>
+      <li>hepi.plot</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for hepi.plot</h1><div class="highlight"><pre>
+<span></span>from scipy import interpolate
+
+from sklearn.metrics import auc
+import matplotlib as mpl
+from smpl import plot as splot
+import smpl
+import numpy as np
+import uncertainties as unc
+from scipy.interpolate import make_interp_spline, BSpline
+
+from uncertainties import unumpy
+import matplotlib.pyplot as plt
+
+from particle import PDGID
+import pyslha
+from particle import Particle
+from particle.converters.bimap import DirectionalMaps
+
+import matplotlib.cm as cm
+from matplotlib import colors
+
+from .input import Input, get_input_dir
+from .util import get_name
+from matplotlib.ticker import ScalarFormatter, NullFormatter
+from smpl import io
+from typing import List
+
+<div class="viewcode-block" id="tex_table"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.tex_table">[docs]</a>def tex_table(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
+ dl = dict_list
+ mask = dl[&quot;NLO_SCALE&quot;]!= np.array(None)
+ lo = splot.unv(dl[&quot;LO&quot;][mask])
+ nlo = splot.unv(dl[&quot;NLO&quot;][mask])
+ nlo_plus_nll = splot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])
+ with open(fname,&#39;w+&#39;) as f:
+     for i in range(len(dl[&quot;LO&quot;][mask])):
+        f.write(
+            &quot;$&quot; + io.gf(4).format(dl[key][mask][i]) + &quot;$ \t&amp;\t $&quot;+
+            &quot;{:.3f}&quot;.format(lo[i]*yscale) 
+                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRPLUS&quot;][mask][i]/lo[i]*100.)
+                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRMINUS&quot;][mask][i]/lo[i]*100.)
+                +  &quot;\%}$ \t&amp;\t $&quot;+
+            &quot;{:.3f}&quot;.format(nlo[i]*yscale) 
+                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRPLUS&quot;][mask][i]/nlo[i]*100.)
+                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRPLUS&quot;][mask][i] /nlo[i]*100.) if pdf else &quot;&quot;)
+                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask][i]/nlo[i]*100.)
+                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRMINUS&quot;][mask][i]/nlo[i]*100.) if pdf else &quot;&quot;)
+                +  &quot;\%}$ \t&amp;\t $&quot;+
+            &quot;{:.3f}&quot;.format(nlo_plus_nll[i]*yscale) 
+                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
+                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
+                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
+                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
+                +  &quot;\%}$ &quot;+
+            &quot;\\\\\n&quot;
+        )</div>
+
+<div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(axe,i:Input,scenario=&quot;&quot;,diff_L_R=None,extra=&quot;&quot;,**kwargs):
+    axe.set_title(
+        &quot;$pp\\to&quot;+get_name(i.particle1)+get_name(i.particle2) + &quot;$&quot;
+        #+&quot; at $\\sqrt{S} = &quot; +str(i.energy/1000) + &quot;$ TeV&quot;
+        +&quot; for &quot; +(i.slha.split(&quot;.&quot;)[0] if scenario ==&quot;&quot; else scenario)
+        #+&quot; with &quot; + i.pdf_nlo
+        + &quot; &quot; + extra
+    )</div>
+
+
+
+<div class="viewcode-block" id="energy_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.energy_plot">[docs]</a>def energy_plot(dict_list, y, yscale=1.,xaxis=&quot;E [GeV]&quot;,yaxis=&quot;$\\sigma$ [pb]&quot;,label=None,**kwargs):
+    plot(dict_list, &quot;energy&quot;, y, label=label,
+         xaxis=xaxis, yaxis=yaxis, logy=True, yscale=yscale,**kwargs)</div>
+
+
+<div class="viewcode-block" id="combined_energy_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.combined_energy_plot">[docs]</a>def combined_energy_plot(dict_list,t,**kwargs):
+    dl = dict_list
+    mask = dl[t+&quot;_pdf_central&quot;]!= np.array(None)
+    if &#39;axes&#39; in kwargs and kwargs[&#39;axes&#39;] is not None:
+        color = next(kwargs[&#39;axes&#39;]._get_lines.prop_cycler)[&#39;color&#39;]
+    else:
+        color = next(plt.gca()._get_lines.prop_cycler)[&#39;color&#39;]
+ 
+    splot.data(dict_list[&quot;energy&quot;][mask],splot.unv(dict_list[t][mask]),
+        xaxis=&quot;E [GeV]&quot;, yaxis=&quot;$\\sigma$ [pb]&quot;, fmt=&quot;.&quot;,logy=True, label=t,data_color=color)
+    splot.data(dict_list[&quot;energy&quot;][mask],dict_list[t+ &quot;_scale&quot;][mask],
+        xaxis=&quot;E [GeV]&quot;, yaxis=&quot;$\\sigma$ [pb]&quot;, fmt=&quot; &quot;,logy=True,data_color=color)
+    splot.data(dict_list[&quot;energy&quot;][mask],dict_list[t+ &quot;_combined&quot;][mask],
+        xaxis=&quot;E [GeV]&quot;, yaxis=&quot;$\\sigma$ [pb]&quot;, fmt=&quot; &quot;,logy=True,data_color=color,capsize=None)</div>
+
+<div class="viewcode-block" id="combined_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.combined_plot">[docs]</a>def combined_plot(func,dict_list,t,*args,label=None,fill = False,fmt=&quot;.&quot;,interpolate=True,**kwargs):
+    dl = dict_list
+    mask = dl[t+&quot;_pdf_central&quot;]!= np.array(None)
+
+    if &#39;axes&#39; in kwargs and kwargs[&#39;axes&#39;] is not None:
+        color = next(kwargs[&#39;axes&#39;]._get_lines.prop_cycler)[&#39;color&#39;]
+    else:
+        color = next(plt.gca()._get_lines.prop_cycler)[&#39;color&#39;]
+    func(dict_list,t+ &quot;_noerr&quot;,*args,
+         label=t if label is None else label,data_color=color,fill=False,interpolate=interpolate,mask = mask,**kwargs)
+    func(dict_list,t+ &quot;_scale&quot;,*args,
+        fmt=&quot; &quot;,interpolate=False,data_color=color,mask = mask,label=&quot;&quot;,fill=False,**kwargs)
+    func(dict_list,t+ &quot;_combined&quot;,*args,
+         fmt=&quot; &quot;,interpolate=False,data_color=color,capsize=None,label=&quot;&quot;,mask = mask,fill=fill,**kwargs)</div>
+
+
+
+<div class="viewcode-block" id="get_mass"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.get_mass">[docs]</a>def get_mass(l, id):
+    ret = []
+    for s in l[&quot;slha&quot;]:
+        d = pyslha.read(get_input_dir() + s)
+        ret.append(d.blocks[&quot;MASS&quot;][abs(id)])
+    return np.array(ret)</div>
+
+<div class="viewcode-block" id="mass_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mass_plot">[docs]</a>def mass_plot(dict_list,  y, part, logy=True, yaxis=&quot;$\\sigma$ [pb]&quot;, yscale=1., label=None,**kwargs):
+    dict_list[&quot;mass_&quot;+ str(part)] = get_mass(dict_list, abs(part))
+    plot(dict_list, &quot;mass_&quot; + str(part), y, label=label,
+         xaxis=&quot;$m_{&quot;+get_name(part) + &quot;}$ [GeV]&quot;, yaxis=yaxis, logy=logy, yscale=yscale,**kwargs)</div>
+
+
+<div class="viewcode-block" id="mass_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mass_vplot">[docs]</a>def mass_vplot(dict_list,  y,part, logy=True, yaxis=&quot;$\\sigma$ [pb]&quot;, yscale=1., label=None,mask=None,**kwargs):
+  vplot(get_mass(dict_list,part)[mask], y[mask], label=label,
+          xaxis=&quot;$m_{&quot;+get_name(part) + &quot;}$ [GeV]&quot;, yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)</div>
+#    vplot(dict_list[&quot;mass_&quot; + str(part)][mask], y[mask], label=label,
+#          xaxis=&quot;$M_{&quot;+get_name(part) + &quot;}$ [GeV]&quot;, yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
+
+
+<div class="viewcode-block" id="plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.plot">[docs]</a>def plot(dict_list, x, y, label=None, xaxis=&quot;E [GeV]&quot;, yaxis=&quot;$\\sigma$ [pb]&quot;,ratio=False,K=False,K_plus_1=False, logy=True, yscale=1.,mask=None,**kwargs):
+    # TODO use kwargs
+    if label is None:
+        label = y
+    if label == &quot;&quot;:
+        label = None
+
+    vx = dict_list[x][mask]
+    vy = dict_list[y][mask]
+
+    if K:
+        yaxis = &quot;$K$&quot;
+        yscale = 1.0
+        vy = vy / splot.unv(dict_list[&quot;LO&quot;][mask])
+        if K_plus_1:
+            vy = vy + vy/vy
+    if ratio:
+        yaxis = &quot;Ratio&quot;
+        yscale = 1.0
+        vy = vy / splot.unv(vy)
+
+
+    vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)</div>
+
+<div class="viewcode-block" id="index_open"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.index_open">[docs]</a>def index_open(var,idx):
+    if len(idx) == 1:
+        return var[idx]
+    return index_open(var[idx[0]],idx[1:])</div>
+
+<div class="viewcode-block" id="slha_data"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.slha_data">[docs]</a>def slha_data(li,index_list):
+    vx = []
+    for l in li:
+        b = pyslha.read(get_input_dir() + l.slha)
+        vx.append(index_open(b.blocks,index_list))
+    return np.array(vx)</div>
+
+<div class="viewcode-block" id="slha_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.slha_plot">[docs]</a>def slha_plot(li,x,y,**kwargs):
+    vx = slha_data(li,x)
+    vy = slha_data(li,y)
+
+    vplot(np.array(vx),np.array(vy),**kwargs)</div>
+
+<div class="viewcode-block" id="vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.vplot">[docs]</a>def vplot(x, y, label=None, xaxis=&quot;E [GeV]&quot;, yaxis=&quot;$\\sigma$ [pb]&quot;, logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,data_fmt=&quot;.&quot;,fmt=&quot;-&quot;,**kwargs):
+    color = data_color
+    if label is None:
+        #label = &quot;??&quot;
+        pass
+    if mask is None:
+        x = x[0]
+        y = y[0]
+    vx = x
+    vy = y
+
+    xnew = np.linspace(vx[0], vx[-1], 300,)
+    if interpolate:
+        #print(vx,vy)
+        spl = make_interp_spline(
+            vx, splot.unv(vy), k=3)  # type: BSpline
+        power_smooth = spl(xnew)
+    if fill:
+        spl_up = make_interp_spline(
+                vx, splot.unv(vy)+splot.usd(vy), k=3)  # type: BSpline
+        power_up_smooth = spl_up(xnew)
+        spl_down = make_interp_spline(
+                vx, splot.unv(vy)-splot.usd(vy), k=3)  # type: BSpline
+        power_down_smooth = spl_down(xnew)
+    if data_color is None:
+        if &#39;axes&#39; in kwargs and kwargs[&#39;axes&#39;] is not None:
+            bl, = kwargs[&#39;axes&#39;].plot([], [])
+        else:
+            bl, = plt.gca().plot([], [])
+        color = bl.get_color()
+    if plot_data:
+        splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color,fmt=data_fmt, **kwargs)
+    if interpolate:
+        kargs = {}
+        if not plot_data:
+            kargs = {&#39;xaxis&#39;:xaxis, &#39;yaxis&#39;:yaxis,&#39;label&#39;:label}
+        print(&#39;computed AUC using sklearn.metrics.auc: {}&#39;.format(auc(xnew,power_smooth*yscale)))
+        splot.data(xnew, power_smooth*yscale, logy=logy, fmt=fmt
+              , init=False, data_color=color,  **kargs,**kwargs)
+    if fill:
+        plt.fill_between(xnew,power_up_smooth*yscale,power_down_smooth*yscale,alpha=0.3,color=color)
+    if((np.any(np.less(vy,0)) or ( interpolate and np.any(np.less(power_smooth, 0)))) and logy):
+        if plot_data:
+            splot.data(vx, -vy*yscale,label=&quot;-&quot;+label,xaxis=xaxis, yaxis=yaxis, logy=logy, data_color=color,fmt=data_fmt, **kwargs)
+        if interpolate:
+            if not plot_data:
+                kargs = {&#39;xaxis&#39;:xaxis, &#39;yaxis&#39;:yaxis,&#39;label&#39;:&quot;-&quot;+label}
+            splot.data(xnew, -power_smooth*yscale, logy=logy, fmt=None,linestyle=(0, (3, 1, 3, 1, 1, 1)),
+                    init=False, data_color=color, **kargs,**kwargs)</div>
+
+
+<div class="viewcode-block" id="mass_mapplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mass_mapplot">[docs]</a>def mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis=&quot;$\\sigma$ [pb]&quot;, zscale=1., label=None):
+    mapplot(dict_list, &quot;mass_&quot; + str(part1), &quot;mass_&quot; + str(part2), z,
+            xaxis=&quot;$M_{&quot;+get_name(part1) + &quot;}$ [GeV]&quot;, yaxis=&quot;$M_{&quot;+get_name(part2) + &quot;}$ [GeV]&quot;, zaxis=zaxis, logz=logz, zscale=zscale)</div>
+
+
+<div class="viewcode-block" id="mapplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mapplot">[docs]</a>def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None,**kwargs):
+    if xaxis is None:
+        xaxis = x
+    if yaxis is None:
+        yaxis = y
+    if zaxis is None:
+        zaxis = z
+    vx = dict_list[x]
+    vy = dict_list[y]
+    vz = dict_list[z]
+    map_vplot(vx,vy,vz,xaxis=xaxis,yaxis=yaxis,zaxis=zaxis,**kwargs)</div>
+
+<div class="viewcode-block" id="map_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.map_vplot">[docs]</a>def map_vplot(vx,vy,vz, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.):
+    s = 1
+    while vy[s] == vy[s-1]:
+        s = s+1
+    if s == 1:
+        #print(&quot;flipped x y &quot;)
+        while vx[s] == vx[s-1]:
+            s = s+1
+        if s == 1:
+            print(&quot;error too small map&quot;)
+            return
+        #x, y = y, x
+        xaxis ,yaxis = yaxis,xaxis
+        vx, vy = vy, vx
+
+    grid = splot.unv(vz).reshape((int(np.rint(np.size(vx)/s)), s))*zscale
+    if(logz):
+        plt.imshow(grid, origin=&quot;lower&quot;, extent=(vx.min(), vx.max(),
+                                                 vy.min(), vy.max()), cmap=cm.gist_heat, interpolation=&#39;nearest&#39;, norm=colors.LogNorm())
+    else:
+        plt.imshow(grid, origin=&quot;lower&quot;, extent=(vx.min(), vx.max(),
+                                                 vy.min(), vy.max()), cmap=cm.gist_heat, interpolation=&#39;nearest&#39;)
+    cb = plt.colorbar()
+    cb.set_label(zaxis)
+    plt.xlabel(xaxis)
+    plt.ylabel(yaxis)
+    plt.show()</div>
+
+
+<div class="viewcode-block" id="fig"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.fig">[docs]</a>fig = None</div>
+<div class="viewcode-block" id="axs"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.axs">[docs]</a>axs = None</div>
+<div class="viewcode-block" id="lines"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.lines">[docs]</a>lines = []</div>
+<div class="viewcode-block" id="labels"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.labels">[docs]</a>labels = []</div>
+
+
+<div class="viewcode-block" id="err_plt"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.err_plt">[docs]</a>def err_plt(axes,x,y,label=None,error=False):
+    v= label
+    ind = np.argsort(splot.unv(x))
+    if error:
+        l, _, _ = axes.errorbar(x[ind], splot.unv(y)[ind], yerr=splot.usd(y), capsize=5, label=v)
+        return l
+    else:
+        l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
+        return l[0]</div>
+
+<div class="viewcode-block" id="scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scale_plot">[docs]</a>def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit=&quot;pb&quot;,**kwargs):
+    global fig, axs,lines,labels
+    cycle_safe = mpl.rcParams[&#39;axes.prop_cycle&#39;] 
+    if plehn_color:
+        mpl.rcParams[&#39;axes.prop_cycle&#39;] = mpl.cycler(color=[&quot;b&quot;, &quot;r&quot;, &quot;g&quot;]) 
+    if not cont:
+        fig, axs = plt.subplots(1, 5, figsize=(12, 3), sharey=True)
+        # Remove horizontal space between axes
+        fig.subplots_adjust(wspace=0)
+        if li is not None:
+            title(axs[2],li[0],**kwargs)
+   
+
+    mr = dict_list[&quot;mu_r&quot;]
+    mf = dict_list[&quot;mu_f&quot;]
+
+
+
+
+
+    if not cont:
+        lines = []
+        labels = []
+        axs[0].plot([], [], &#39; &#39;, color=&#39;k&#39;,label=&quot;$\mu_R=&quot; + &quot;\mu_F$&quot;)
+        axs[1].plot([], [], &#39; &#39;, color=&#39;k&#39;,label=&quot;$\mu_R=&quot; + str(np.max(mr)) + &quot;\mu_0$&quot;)
+        axs[2].plot([], [], &#39; &#39;, color=&#39;k&#39;,label=&quot;$\mu_F=&quot; + str(np.min(mf)) + &quot;\mu_0$&quot;)
+        axs[3].plot([], [], &#39; &#39;, color=&#39;k&#39;,label=&quot;$\mu_R=&quot; + str(np.min(mr)) + &quot;\mu_0$&quot;)
+        axs[4].plot([], [], &#39; &#39;, color=&#39;k&#39;,label=&quot;$\mu_F=&quot; + str(np.max(mf)) + &quot;\mu_0$&quot;)
+
+    for v in vl:
+        mv = dict_list[v]*yscale
+        if seven_point_band:
+            #mask = (mf/mr &lt; 4.) &amp; (mf/mr &gt; 1./4.) &amp; (mf &lt;= 2) &amp; (mf &gt;= 1./2.) &amp; (mr &lt;= 2) &amp; (mr &gt;= 1./2.)
+            mask =  (
+                ((mf == 2.) &amp; (mr == 2.)) | 
+                 (   (mf == 2.) &amp; (mr == 1.))  |            
+                 (   (mf == 1.) &amp; (mr == 1.))  |            
+                 (   (mf == 1.) &amp; (mr == 2.) ) |            
+                (    (mf == 1/2.) &amp; (mr == 1/2.)) | 
+                (    (mf == 1/2.) &amp; (mr == 1.)  )|            
+                (    (mf == 1.) &amp; (mr == 1/2.) ) 
+            )
+            mvmax = np.max(splot.unv(mv[mask]))
+            mvmin = np.min(splot.unv(mv[mask]))
+
+        mask = mf == mr
+        l = err_plt(axs[0],mf[mask],mv[mask],error=error)
+        #l, _, _ = axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5, label=v)
+        if seven_point_band:
+            axs[0].fill_between(mf[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
+
+        mask = mr == np.max(mr)
+        l = err_plt(axs[1],mf[mask],mv[mask],error=error)
+        lines.append(l)
+        labels.append(&quot;$\\sigma_{\\mathrm{&quot;+v.replace(&quot;NLO_PLUS_NLL&quot;,&quot;NLO+NLL&quot;).replace(&quot; &quot;,&quot;\\ &quot;)+&quot;} }$&quot;)
+        #l, _, _ = axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5)
+        if seven_point_band:
+            axs[1].fill_between(mf[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
+
+        mask = mf == np.min(mf)
+        l = err_plt(axs[2],mr[mask],mv[mask],error=error)
+        #l, _, _ = axs[2].errorbar(mr[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5)
+        if seven_point_band:
+            axs[2].fill_between(mr[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
+
+        mask = mr == np.min(mr)
+        l = err_plt(axs[3],mf[mask],mv[mask],error=error)
+        #l, _, _ = axs[3].errorbar(mf[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5)
+        if seven_point_band:
+            axs[3].fill_between(mf[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
+
+        mask = mf == np.max(mf)
+        l = err_plt(axs[4],mr[mask],mv[mask],error=error)
+        #l, _, _ = axs[4].errorbar(mr[mask], splot.unv(mv[mask]),
+        #                          yerr=splot.usd(mv[mask]), capsize=5)
+        if seven_point_band:
+            f = axs[4].fill_between(mr[mask], mvmax, mvmin,
+                                facecolor=l.get_color(), alpha=0.3)
+            lines.append(f)
+            labels.append(&quot;$\\Delta \\sigma_{\\mathrm{&quot; + v.replace(&quot;NLO_PLUS_NLL&quot;,&quot;NLO+NLL&quot;).replace(&quot; &quot;,&quot;\\&lt;space&gt;&quot;) + &quot;} }$&quot;)
+
+
+    axs[0].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot;)
+
+    axs[0].set_xscale(&quot;log&quot;)
+    axs[0].set_xlim(np.min(mf), np.max(mf))
+    axs[0].set_xlabel(&quot;$\mu_{R,F}/\mu_0$&quot;)
+
+    # axs[1].plot(t, s2)
+    axs[1].set_xscale(&quot;log&quot;)
+    axs[1].set_xlim(np.max(mf), np.min(mf))
+    axs[1].set_xticks([1.])
+    axs[1].xaxis.set_minor_formatter(NullFormatter())
+    axs[1].set_xlabel(&quot;$\mu_{F}/\mu_0$&quot;)
+
+    # axs[2].plot(t, s3)
+    axs[2].set_xscale(&quot;log&quot;)
+    axs[2].set_xlim(np.max(mf), np.min(mf))
+    axs[2].set_xticks([1.])
+    axs[2].xaxis.set_minor_formatter(NullFormatter())
+    axs[2].set_xlabel(&quot;$\mu_{R}/\mu_0$&quot;)
+
+    # axs[3].plot(t, s3)
+    axs[3].set_xscale(&quot;log&quot;)
+    axs[3].set_xlim(np.min(mf), np.max(mf))
+    axs[3].set_xticks([1.])
+    axs[3].xaxis.set_minor_formatter(NullFormatter())
+    axs[3].set_xlabel(&quot;$\mu_{F}/\mu_0$&quot;)
+
+    # axs[4].plot(t, s3)
+    axs[4].set_xscale(&quot;log&quot;)
+    axs[4].set_xlim(np.min(mf), np.max(mf))
+    axs[4].set_xticks([1.])
+    axs[4].xaxis.set_minor_formatter(NullFormatter())
+    axs[4].set_xlabel(&quot;$\mu_{R}/\mu_0$&quot;)
+
+    axs[0].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    axs[1].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    axs[2].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    axs[3].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    axs[4].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    fig.legend()
+    fig.legends = []
+    fig.legend(handles=lines,    labels=labels,   loc=&quot;center right&quot;)
+    plt.subplots_adjust(right=0.84)
+    # plt.show()
+    mpl.rcParams[&#39;axes.prop_cycle&#39;] = cycle_safe</div>
+
+    
+
+<div class="viewcode-block" id="central_scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.central_scale_plot">[docs]</a>def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit=&quot;pb&quot;):
+    global fig, axs
+    if not cont:
+        fig, axs = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
+        # Remove horizontal space between axes
+        fig.subplots_adjust(hspace=0)
+
+    mr = dict_list[&quot;mu_r&quot;]
+    mf = dict_list[&quot;mu_f&quot;]
+
+    for v in vl:
+        mv = dict_list[v]*yscale
+
+        mask = mf == mr
+        l = err_plt(axs[0],mf[mask],mv[mask],label=v,error=error)
+  
+
+        mask = mf == 1.0
+        l = err_plt(axs[1],mr[mask],mv[mask],error=error)
+
+
+        mask = mr == 1.0
+        l = err_plt(axs[2],mf[mask],mv[mask],error=error)
+
+
+
+    if not cont:
+        axs[0].plot([], [], &#39; &#39;, label=&quot;$\mu_R=\mu_F=\mu$&quot;)
+        axs[1].plot([], [], &#39; &#39;, label=&quot;$\mu_F=\mu_0$, $\mu_R=\mu$&quot;)
+        axs[2].plot([], [], &#39; &#39;, label=&quot;$\mu_R=\mu_0$, $\mu_F=\mu$&quot;)
+
+    axs[1].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot;)
+
+    axs[0].set_xscale(&quot;log&quot;)
+    #axs[0].set_xlim(np.min(mf), np.max(mf))
+    axs[2].set_xlabel(&quot;$\mu/\mu_0$&quot;)
+
+    # axs[1].plot(t, s2)
+    #axs[1].set_xscale(&quot;log&quot;)
+    #axs[1].set_xlim(np.max(mf), np.min(mf))
+    #axs[1].set_xticks([1.])
+    #axs[1].xaxis.set_minor_formatter(NullFormatter())
+    #axs[1].set_xlabel(&quot;$\mu_{F}/\mu_0$&quot;)
+
+    # axs[2].plot(t, s3)
+    #axs[2].set_xscale(&quot;log&quot;)
+    #axs[2].set_xlim(np.max(mf), np.min(mf))
+    #axs[2].set_xticks([1.])
+    #axs[2].xaxis.set_minor_formatter(NullFormatter())
+    #axs[2].set_xlabel(&quot;$\mu_{R}/\mu_0$&quot;)
+
+    axs[0].legend()
+    axs[1].legend()
+    axs[2].legend()</div>
+    # plt.show()
+
+
+<div class="viewcode-block" id="mass_and_K_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mass_and_K_plot">[docs]</a>def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont = False,figsize=(6,8),**kwargs):
+    global fig, axs
+    if not cont:
+        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True, gridspec_kw={&#39;height_ratios&#39;: [3, 1]})
+        # Remove horizontal space between axes
+        fig.subplots_adjust(hspace=0)
+        title(axs[0],li[0],**kwargs)
+    if combined:
+        for i in [0,1]:
+            kargs = {&#39;logy&#39; : [True,False][i], &#39;interpolate&#39; : False,&#39;axes&#39;:axs[i],&#39;K&#39;:[False,True][i],&#39;tight&#39;:False}
+            combined_plot(mass_plot,dl,&quot;LO&quot;,p,**kargs,**kwargs)
+            combined_plot(mass_plot,dl,&quot;NLO&quot;,p,**kargs,**kwargs)
+            combined_plot(mass_plot,dl,&quot;NLO_PLUS_NLL&quot;,p,**kargs,**kwargs)
+    elif scale:
+        for i in [0,1]:
+            kargs = {&#39;logy&#39;:[True,False][i],&#39;mask&#39;:dl[&quot;LO_SCALE&quot;]!=np.array(None), &#39;axes&#39;:axs[i],&#39;K&#39;:[False,True][i],&#39;tight&#39;:False}
+            mass_plot(dl,  &quot;LO_SCALE&quot;,p,           **kargs,**kwargs,label=&quot;LO&quot;)
+            mass_plot(dl,  &quot;NLO_SCALE&quot;,p,          **kargs,**kwargs,label=&quot;NLO&quot;)
+            mass_plot(dl,  &quot;NLO_PLUS_NLL_SCALE&quot;,p, **kargs,**kwargs,label=&quot;NLO+NLL&quot;)
+    elif pdf:
+        for i in [0,1]:
+            kargs = {&#39;logy&#39;:[True,False][i],&#39;mask&#39;:dl[&quot;LO_PDF&quot;]!=np.array(None), &#39;axes&#39;:axs[i],&#39;K&#39;:[False,True][i],&#39;tight&#39;:False}
+            mass_plot(dl,  &quot;LO_PDF&quot;,p,           **kargs,**kwargs,label=&quot;LO&quot;)
+            mass_plot(dl,  &quot;NLO_PDF&quot;,p,          **kargs,**kwargs,label=&quot;NLO&quot;)
+            mass_plot(dl,  &quot;NLO_PLUS_NLL_PDF&quot;,p, **kargs,**kwargs,label=&quot;NLO+NLL&quot;)
+    elif plehn:
+        axs[0].set_ylim([0.2*10**-2,10**3])
+        axs[1].set_ylim([0.9,1.85])
+        for i in [0,1]:
+            kargs = {&#39;yscale&#39;:1000, &#39;yaxis&#39;:&quot;$\\sigma$ [fb]&quot;,&#39;logy&#39;:[True,False][i],&#39;axes&#39;:axs[i],&#39;K&#39;:[False,True][i],&#39;tight&#39;:False,&#39;error&#39;:False}
+            if i == 0:
+                mass_plot(dl,  &quot;LO&quot;,p,           **kargs,**kwargs,data_color=&#39;b&#39;,fmt=&#39;-&#39;,label=&quot;LO&quot;if i==0 else &quot;&quot;)
+            mass_plot(dl,  &quot;RNLO&quot;,p,          **kargs,**kwargs,data_color=&#39;k&#39;,K_plus_1=True,fmt=&#39;-.&#39;,label=&quot;Real&quot;if i==0 else &quot;&quot;)
+            if i == 0:
+                mass_plot(dl,  &quot;NLO&quot;,p,          **kargs,**kwargs,data_color=&#39;r&#39;,fmt=&#39;-&#39;,label=&quot;NLO&quot;if i==0 else &quot;&quot;)
+            mass_plot(dl,  &quot;VNLO_PLUS_P_PLUS_K&quot;,p,          **kargs,**kwargs,K_plus_1=True,data_color=&#39;k&#39;,fmt=&#39;:&#39;,label=&quot;Virtual&quot;if i==0 else &quot;&quot;)
+            if i == 1:
+                mass_plot(dl,  &quot;RNLO_PLUS_VNLO_PLUS_P_PLUS_K&quot;,p,K_plus_1=True,          **kargs,**kwargs,data_color=&#39;r&#39;,label=&quot;NLO&quot;if i==0 else &quot;&quot;)</div>
+            #mass_plot(dl,  &quot;NLO_PLUS_NLL&quot;,p, **kargs,**kwargs,label=&quot;NLO+NLL&quot;)
+
+
+#TODO unit and yscale for each case and mass_and_plot!
+<div class="viewcode-block" id="mass_and_ratio_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mass_and_ratio_plot">[docs]</a>def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,figsize=(6,4),plot_data=True,fill=True,unit=&quot;pb&quot;,yscale=1.0,ylim=None,**kwargs):
+    global fig, axs
+    if not cont:
+        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True, gridspec_kw={&#39;height_ratios&#39;: [2, 1]})
+        # Remove horizontal space between axes
+        fig.subplots_adjust(hspace=0)
+        title(axs[0],li[0],**kwargs)
+    kinv = {&#39;xaxis&#39;:&quot;$M$ [GeV]&quot;,&#39;yaxis&#39;:&quot;$d\\sigma/dM$ [&quot;+unit+&quot;/GeV]&quot;}
+    if ylim is not None:
+        axs[0].set_ylim(ylim)
+    if combined:
+        for i in [0,1]:
+            kargs = {&#39;logy&#39; : [p!=&quot;invariant_mass&quot;,False][i], &#39;axes&#39;:axs[i],&#39;tight&#39;:False}
+            if p == &quot;invariant_mass&quot;:
+                plot(dl,  &quot;invariant_mass&quot;,&quot;LO&quot;,           **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;LO&quot;if i==0 else &quot;&quot;)
+                plot(dl,  &quot;invariant_mass&quot;,&quot;NLO&quot;,          **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO&quot;if i==0 else &quot;&quot;)
+                plot(dl,  &quot;invariant_mass&quot;,&quot;NLO_PLUS_NLL&quot;, **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO+NLL&quot;if i==0 else &quot;&quot;)
+                if i == 1:
+                    plot(dl,  &quot;invariant_mass&quot;,&quot;NLO_PLUS_NLL_OVER_NLO&quot;,**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color=&#39;0&#39;,label=&quot;(NLO+NLL)/NLO&quot;)
+            else:
+                combined_plot(mass_plot,dl,&quot;LO&quot;,p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                combined_plot(mass_plot,dl,&quot;NLO&quot;,p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                combined_plot(mass_plot,dl,&quot;NLO_PLUS_NLL&quot;,p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                if i == 1:
+                    mass_plot(dl,  &quot;NLO_PLUS_NLL_OVER_NLO&quot;,p,interpolate=True,plot_data=False,fill=False,mask=dl[&quot;LO_SCALE&quot;]!=np.array(None), *kargs,**kwargs,data_color=&#39;0&#39;,label=&quot;(NLO+NLL)/NLO&quot;)
+
+    elif scale:
+        for i in [0,1]:
+            kargs = {&#39;logy&#39;:[p!=&quot;invariant_mass&quot;,False][i],&#39;mask&#39;:dl[&quot;LO_SCALE&quot;]!=np.array(None), &#39;axes&#39;:axs[i],&#39;tight&#39;:False}
+            if p == &quot;invariant_mass&quot;:
+                plot(dl,  &quot;invariant_mass&quot;,&quot;LO_SCALE&quot;,         **kinv,  **kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;LO&quot; if i==0 else &quot;&quot;)
+                plot(dl,  &quot;invariant_mass&quot;,&quot;NLO_SCALE&quot;,       **kinv,   **kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO&quot;if i==0 else &quot;&quot;)
+                plot(dl,  &quot;invariant_mass&quot;,&quot;NLO_PLUS_NLL_SCALE&quot;, **kinv,**kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO+NLL&quot;if i==0 else &quot;&quot;)
+                if i == 1:
+                    plot(dl,  &quot;invariant_mass&quot;,&quot;NLO_PLUS_NLL_OVER_NLO&quot;,**kargs, interpolate=True,plot_data=False,fill=False,xaxis=&quot;$M$ [GeV]&quot;,yaxis=&quot;Ratio&quot;,**kwargs,data_color=&#39;0&#39;,label=&quot;(NLO+NLL)/NLO&quot;)
+            else:
+                mass_plot(dl,  &quot;LO_SCALE&quot;,p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;LO&quot;if i==0 else &quot;&quot;)
+                mass_plot(dl,  &quot;NLO_SCALE&quot;,p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO&quot;if i==0 else &quot;&quot;)
+                mass_plot(dl,  &quot;NLO_PLUS_NLL_SCALE&quot;,p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO+NLL&quot;if i==0 else &quot;&quot;)
+                if i == 1:
+                    mass_plot(dl,  &quot;NLO_PLUS_NLL_OVER_NLO&quot;,p, interpolate=True,plot_data=False,fill=False,yaxis=&quot;Ratio&quot;,**kargs,**kwargs,data_color=&#39;0&#39;,label=&quot;(NLO+NLL)/NLO&quot;)
+    elif pdf:
+        for i in [0,1]:
+            kargs = {&#39;logy&#39;:[p!=&quot;invariant_mass&quot;,False][i],&#39;mask&#39;:dl[&quot;LO_PDF&quot;]!=np.array(None), &#39;axes&#39;:axs[i],&#39;tight&#39;:False}
+            if p == &quot;invariant_mass&quot;:
+                plot(dl,  &quot;invariant_mass&quot;,&quot;LO_PDF&quot;,          **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;LO&quot;if i==0 else &quot;&quot;)
+                plot(dl,  &quot;invariant_mass&quot;,&quot;NLO_PDF&quot;,         **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO&quot;if i==0 else &quot;&quot;)
+                plot(dl,  &quot;invariant_mass&quot;,&quot;NLO_PLUS_NLL_PDF&quot;, **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO+NLL&quot;if i==0 else &quot;&quot;)
+                if i == 1:
+                    plot(dl,  &quot;invariant_mass&quot;,&quot;NLO_PLUS_NLL_OVER_NLO&quot;,**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color=&#39;0&#39;,label=&quot;(NLO+NLL)/NLO&quot;)
+            else:
+                mass_plot(dl,  &quot;LO_PDF&quot;,p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;LO&quot;if i==0 else &quot;&quot;)
+                mass_plot(dl,  &quot;NLO_PDF&quot;,p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO&quot;if i==0 else &quot;&quot;)
+                mass_plot(dl,  &quot;NLO_PLUS_NLL_PDF&quot;,p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label=&quot;NLO+NLL&quot;if i==0 else &quot;&quot;)
+                if i == 1:
+                    mass_plot(dl,  &quot;NLO_PLUS_NLL_OVER_NLO&quot;,p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color=&#39;0&#39;,label=&quot;(NLO+NLL)/NLO&quot;)</div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

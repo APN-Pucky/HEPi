@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.madgraph.run &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Test</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/hepi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../hepi.html">hepi</a> &raquo;</li>
+      <li>hepi.madgraph.run</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for hepi.madgraph.run</h1><div class="highlight"><pre>
+<span></span>from typing import List
+import subprocess
+from string import Template
+import numpy as np
+import pkgutil
+from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
+import re
+from uncertainties import ufloat_fromstr
+import os.path
+from pathlib import Path
+from .result import MadgraphResult, is_valid, parse_single
+import enlighten
+import time
+import difflib
+import pyslha
+from smpl.parallel import *
+import hashlib
+
+<div class="viewcode-block" id="madgraph_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.madgraph_path">[docs]</a>madgraph_path = &quot;/opt/MG5_aMC_v2_7_0/&quot;</div>
+
+
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.set_path">[docs]</a>def set_path(p):
+    global madgraph_path
+    madgraph_path = p+ (&quot;/&quot; if p[-1]!=&quot;/&quot; else &quot;&quot;)</div>
+
+
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.get_path">[docs]</a>def get_path():
+    global madgraph_path
+    return madgraph_path</div>
+
+
+<div class="viewcode-block" id="RunParams"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.RunParams">[docs]</a>class RunParams:
+    def __init__(self, dic,  skip=False,madstr=True):
+        self.dic = dic
+        self.skip = skip
+        self.madstr = madstr</div>
+
+
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.run">[docs]</a>def run(params: List[Input], noskip=False,madstr=True,para=True):
+    rps = _queue(params, noskip,madstr)
+    _run(rps,para)
+    outs = LD2DL(rps)[&quot;dic&quot;]
+    results = _parse(outs)
+    rdl = LD2DL(results)
+    pdl = LD2DL(params)
+    return {**rdl, **pdl}</div>
+
+
+<div class="viewcode-block" id="_parse"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph._parse">[docs]</a>def _parse(outputs: List[str]) -&gt; List[MadgraphResult]:
+    rsl = []
+    for r in par(lambda f: parse_single(f[&quot;out&quot;]), outputs):
+        rsl.append(r)
+    return rsl</div>
+<div class="viewcode-block" id="namehash"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.namehash">[docs]</a>def namehash(n):
+    m = hashlib.sha256()
+    m.update(str(n).encode(&#39;utf-8&#39;))
+    return m.hexdigest()</div>
+
+<div class="viewcode-block" id="_queue"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph._queue">[docs]</a>def _queue(params: List[Input], noskip=False,madstr=True,para=True) -&gt; List[RunParams]:
+    Path(&quot;output&quot;).mkdir(parents=True, exist_ok=True)
+    Path(&quot;input&quot;).mkdir(parents=True, exist_ok=True)
+    ret = []
+    for p in params:
+        d = p.__dict__
+        d[&quot;code&quot;] = &quot;MG&quot;
+        # TODO insert defautl if missing in d!
+        name = namehash(&quot;_&quot;.join(&quot;&quot;.join(str(_[0]) + &quot;_&quot; + str(_[1]))
+                        for _ in d.items()).replace(&quot;/&quot;, &quot;-&quot;))
+        skip = False
+        if not noskip and os.path.isfile(get_output_dir() + name + &quot;.out&quot;) and is_valid(get_output_dir() + name + &quot;.out&quot;,p,d):
+            print(&quot;skip&quot;, end=&#39;&#39;)
+            skip = True
+
+        d[&quot;dir&quot;] = get_output_dir() + name + &quot;.dir&quot;
+        d[&quot;bdir&quot;] = get_output_dir() + name + &quot;.bdir&quot;
+
+        data = pkgutil.get_data(__name__, [&quot;lo.mg&quot;, &quot;nlo.mg&quot;][p.order]).decode( &#39;utf-8&#39;)
+        src = Template(data)
+        result = src.substitute(d)
+        open(get_input_dir() + name + &quot;.mg&quot;, &quot;w&quot;).write(result)
+        if not skip:
+            open(get_output_dir() + name + &quot;.out&quot;, &quot;w&quot;).write(result + &quot;\n\n&quot;)
+
+        mgfile = [&quot;run_card_no_madstr.dat&quot;, &quot;run_card_with_madstr.dat&quot;][p.order]
+        if not madstr:
+            mgfile = &quot;run_card_no_madstr.dat&quot;
+        data = pkgutil.get_data(__name__, mgfile).decode( &#39;utf-8&#39;)
+
+        src = Template(data)
+        result = src.substitute(d)
+        open(get_input_dir() + name + &quot;.dat&quot;, &quot;w&quot;).write(result)
+        if not skip:
+            open(get_output_dir() + name + &quot;.out&quot;, &quot;a&quot;).write(result + &quot;\n\n&quot;)
+
+        sname = d[&#39;slha&#39;]
+        with open(get_input_dir() + sname, &#39;r&#39;) as f:
+            #src = Template(f.read())
+            #result = src.substitute(d)
+            #open(get_input_dir() + sname + &quot;.in&quot;, &quot;w&quot;).write(result)
+            if not skip:
+                open(get_output_dir() + name + &quot;.out&quot;,
+                     &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
+
+        ret.append(RunParams({&#39;in&#39;: get_input_dir()+name + &quot;.mg&quot;,
+                              &#39;dir&#39;: d[&quot;dir&quot;],
+                              &#39;bdir&#39;: d[&quot;bdir&quot;],
+                              &#39;run&#39;: get_input_dir() + name + &quot;.dat&quot;,
+                              &#39;slha&#39;: get_input_dir() + sname,
+                              &#39;out&#39;: get_output_dir()+name + &quot;.out&quot;}, skip,madstr))
+
+    return ret</div>
+
+
+<div class="viewcode-block" id="_run"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph._run">[docs]</a>def _run(rps: List[RunParams],para=True):
+    # TODO clean up on exit emergency
+    global madgraph_path
+    # TODO RS build path checks?!?!
+    template =  \
+        &#39;rm -rf {dir} &amp;&amp; cp -r &#39; + rps[0].dic[&quot;bdir&quot;] + \
+        &#39; {dir}  &amp;&amp; cp {slha} {dir}/Cards/param_card.dat &amp;&amp; cp {run} {dir}/Cards/run_card.dat &amp;&amp; echo &quot;nb_core = 1&quot; &gt;&gt; {dir}/Cards/amcatnlo_configuration.txt &amp;&amp; nice -n 5 {dir}/bin/calculate_xsect -f &gt;&gt; {out}&#39;
+    print(rps[0].dic[&quot;out&quot;])
+    if not rps[0].skip:
+        mgcom = &#39;bin/mg5_aMC&#39;
+        if rps[0].madstr:
+            mgcom = &#39;bin/mg5_aMC --mode=&quot;MadSTR&quot;&#39;
+        com = madgraph_path + mgcom + \
+            &#39; --file {in} &gt;&gt; {out} &amp;&amp; cp {slha} {bdir}/Cards/param_card.dat &amp;&amp; cp {run} {bdir}/Cards/run_card.dat &amp;&amp; sed -i \&#39;s/.*= req_acc_FO/ 1 = req_acc_FO/g\&#39; {bdir}/Cards/run_card.dat &amp;&amp; echo &quot;automatic_html_opening = False&quot; &gt;&gt; {bdir}/Cards/amcatnlo_configuration.txt &amp;&amp; nice -n 5 {bdir}/bin/calculate_xsect -f&#39;
+        pp = subprocess.Popen(com.format(**rps[0].dic), shell=True)
+        pp.wait()
+    # Run commands in parallel
+    processes = []
+
+    for rp in rps:
+        if not rp.skip:
+            command = template.format(**rp.dic)
+            # print(command)
+            process = subprocess.Popen(command, shell=True)
+            processes.append(process)
+            if not para:
+                process.wait()
+
+    # Collect statuses
+    output = [p.wait() for p in processes]
+    return output</div>
+
+
+# print(sp)
+# names = queue(sp)
+# run(names)
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
