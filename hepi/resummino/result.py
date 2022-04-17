@@ -5,8 +5,12 @@ from uncertainties import ufloat_fromstr
 from string import Template
 import pkgutil
 import warnings
+import os
 
 class ResumminoResult(Result):
+    """
+    Resummino Result Data.
+    """
     def __init__(self, lo, nlo, nlo_plus_nll, vnlo, p_plus_k, rnlog, rnloq):
         Result.__init__(self, lo, nlo, nlo_plus_nll)
         self.VNLO = vnlo
@@ -27,6 +31,9 @@ class ResumminoResult(Result):
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None
 
 def is_valid(file:str,p:Input,d):
+    """
+    Verifies that an file is a complete output.
+    """
     order = p.order
     data = pkgutil.get_data(__name__, "plot_template.in").decode(
                 'utf-8')
@@ -36,8 +43,11 @@ def is_valid(file:str,p:Input,d):
     with open(file,mode='r') as f:
         with open(get_input_dir() + sname, 'r') as sf:
             if not f.read().startswith(result + "\n\n" + sf.read()):
-                warnings.warn("Possible hash collision in " + file,RuntimeWarning)
-                exit(1)
+                #warnings.warn("Possible hash collision in " + file + " -> deleted",RuntimeWarning)
+                os.remove(file)
+                #exit(1)
+                #return False
+                print("HASH COLLIDED", file)
                 return False
     res = parse_single(file)
     if res.LO is not None and order is Order.LO:
@@ -51,6 +61,9 @@ def is_valid(file:str,p:Input,d):
 
 
 def parse_single(file) -> ResumminoResult:
+    """
+    Extracts LO, NLO and NLO+NLL from resummino output file.
+    """
     # TODO generalize units like RS
     lo_pattern = re.compile(r'^LO = \((.*)\) pb')
     nlo_pattern = re.compile(r'^NLO = \((.*)\) pb')

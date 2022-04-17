@@ -1,0 +1,49 @@
+name: release
+
+on: 
+  push:
+    tags: 
+      - '*'
+jobs:
+    publish:
+      runs-on: ubuntu-latest
+      container:
+        image: apnpucky/ubuntu-pip
+      steps:
+        - name: work around permission issue
+          run: git config --global --add safe.directory /__w/hepi/hepi
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: "0"
+        - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        - name: Build 
+          run: python3 -m build
+        - name: Install 
+          run: python3 -m pip install --user .
+#        - name: Tests
+#          run: make test
+        - name: Build Sphinx
+          working-directory: ./docs
+          run: make html
+#        - name: Report Coveralls
+#          uses: AndreMiras/coveralls-python-action@develop
+#        - name: Report Codacy
+#          uses: codacy/codacy-coverage-reporter-action@v1
+#          with:
+#            project-token: ${{ secrets.CODACY_API_TOKEN }}
+#            # or
+#            #api-token: ${{ secrets.CODACY_API_TOKEN }}
+#            coverage-reports: coverage.xml
+#        - name: Deploy PyPI
+#          if: startsWith(github.ref, 'refs/tags')
+#          uses: pypa/gh-action-pypi-publish@master
+#          with:
+#            password: ${{ secrets.pypi_token }}
+        - name: Deploy Github Pages
+          uses: JamesIves/github-pages-deploy-action@4.1.5
+          with:
+            #ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+            #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            BRANCH: gh-pages # The branch the action should deploy to.
+            FOLDER: docs/build/html # The folder the action should deploy.
+            clean-exclude: test/

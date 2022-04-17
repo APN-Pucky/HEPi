@@ -14,25 +14,37 @@ from .result import ResumminoResult, is_valid, parse_single
 import enlighten
 import time
 import difflib
-from smpl.parallel import *
+from smpl.parallel import par
 import hashlib
 import os 
 import stat
 
+
 resummino_path = "~/resummino/"
+"""resummino folder containing the binary in './build/bin'."""
+
 
 
 def set_path(p):
+    """
+    Set the path to the resummino folder containing the binary in './build/bin'.
+    """
     global resummino_path
     resummino_path = p+ ("/" if p[-1]!="/" else "")
 
 
 def get_path():
+    """
+    Returns the currently set resummino path
+    """
     global resummino_path
     return resummino_path
 
 
 class RunParams:
+    """
+    Parameters for Resummino.
+    """
     def __init__(self, flags: str, in_path: str, out_path: str, skip=False):
         self.skip = skip
         self.flags = flags
@@ -41,6 +53,9 @@ class RunParams:
 
 
 def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True):
+    """
+    Run the passed list of parameters.
+    """
     print("Running: " + str(len(params))  +" jobs" )
     rps = _queue(params, noskip)
     _run(rps, bar, no_parse,para)
@@ -54,6 +69,9 @@ def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True):
 
 
 def _parse(outputs: List[str]) -> List[ResumminoResult]:
+    """
+    Parses Resummino output files and returns List of Results.
+    """
     rsl = []
     for r in par(parse_single, outputs):
         rsl.append(r)
@@ -62,6 +80,9 @@ def _parse(outputs: List[str]) -> List[ResumminoResult]:
 
 
 def _queue(params: List[Input], noskip=False) -> List[RunParams]:
+    """
+    Queues and generates Resummino run files.
+    """
     global resummino_path
     Path("output").mkdir(parents=True, exist_ok=True)
     Path("input").mkdir(parents=True, exist_ok=True)
@@ -72,6 +93,7 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
         # TODO insert defautl if missing in d!
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
                         for _ in d.items()).replace("/", "-"))
+        print(name)
         skip = False
         if not noskip and os.path.isfile(get_output_dir() + name + ".out") and is_valid(get_output_dir() + name + ".out",p,d):
             print("skip", end='')
@@ -106,6 +128,9 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
 
 
 def _run(rps: List[RunParams], bar=True, no_parse=False,para=True):
+    """
+    Runs resummino per RunParam.
+    """
     # TODO clean up on exit emergency
     global resummino_path
     # TODO RS build path checks?!?!

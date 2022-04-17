@@ -1,5 +1,5 @@
-import cluster
-from cluster import *
+import hepi.cluster
+from hepi.cluster import *
 from smpl import plot
 
 for run_plot in [True,False]:

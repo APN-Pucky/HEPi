@@ -1,5 +1,5 @@
-import cluster
-from cluster import *
+import hepi.cluster
+from hepi.cluster import *
 
 plt.rc('legend', fontsize=15)
 

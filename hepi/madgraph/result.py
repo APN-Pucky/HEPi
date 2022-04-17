@@ -5,11 +5,17 @@ from uncertainties import ufloat_fromstr
 
 
 class MadgraphResult(Result):
+    """
+    MadGraph Result Data.
+    """
     def __init__(self, lo, nlo):
         Result.__init__(self, lo, nlo, nlo)
 
 
 def is_valid(file:str,p:Input,d):
+    """
+    Verifies that an file is a complete output.
+    """
     order = p.order
     res = parse_single(file)
     if res.LO is not None and order is Order.LO:

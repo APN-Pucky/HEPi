@@ -92,6 +92,9 @@ def update_slha( i:Input ):
 
 
 def scan(l: List[Input], var: str, range) -> List[Input]:
+    """
+    Scans a variable `var` over `range` in `l`.
+    """
     ret = []
     for s in l:
         for r in range:
