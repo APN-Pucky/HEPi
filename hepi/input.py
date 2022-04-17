@@ -12,48 +12,75 @@ from .util import get_LR_partner, lhapdf_name_to_id, namehash
 import lhapdf
 
 in_dir = "./input/"
+"""input directory"""
 out_dir = "./output/"
+"""output directory"""
 pre = "nice -n 5"
+"""run command prefix."""
 
 
 
 def get_input_dir():
+    """
+    Gets the input directory.
+    """
     global in_dir
     return in_dir
 
 
 def get_output_dir():
+    """
+    Gets the input directory.
+    """
     global out_dir
     return out_dir
 
 
 def set_input_dir(ind):
+    """
+    Sets the input directory.
+    """
     global in_dir
     in_dir = ind
 
 
 def set_output_dir(outd):
+    """
+    Sets the output directory.
+    """
     global out_dir
     out_dir = outd
 
 
 def set_pre(ppre):
+    """
+    Sets the command prefix. 
+    """
     global pre
     pre = ppre
 
 
 def get_pre():
+    """
+    Gets the command prefix. 
+    """
     global pre
     return pre
 
 
 class Order(IntEnum):
+    """
+    Computation orders.
+    """
     LO = 0
     NLO = 1
     NLO_PLUS_NLL = 2
 
 
 class Input:
+    """
+    Input for computation.
+    """
     # TODO allow unspecified input? Maybe with kwargs + defaults
     def __init__(self, order :Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, invariant_mass="auto",result="total",pt="auto",id="",model_path="/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO"):
         self.order = order
@@ -78,7 +105,13 @@ class Input:
         self.id = id
         self.model_path = model_path
         update_slha(self)
+
 def update_slha( i:Input ):
+    """
+    Updates dependent parameters in Input `i`.
+
+    Mainly concerns the `mu` value used by `madgraph`.
+    """
     b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
     try:
         i.mu = (abs(b.blocks["MASS"][abs(i.particle1)]) +
@@ -105,6 +138,11 @@ def scan(l: List[Input], var: str, range) -> List[Input]:
 
 
 def scale_scan(l: List[Input], range=3, distance=2.):
+    """
+    Scans scale by varying `mu_f` and `mu_r`.
+    They take `range` values from 1/`distance` to `distance` in lograthmic spacing.
+    Only points with `mu_f`=`mu_r` or `mu_r/f`=1 or `mu_r/f`=`distance` or `mu_r/f`=1/`distance` are returned.
+    """
     ret = []
     for s in l:
         # not on error pdfs
@@ -123,6 +161,9 @@ def scale_scan(l: List[Input], range=3, distance=2.):
     return ret
 
 def seven_point_scan(l: List[Input]):
+    """
+    Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
+    """
     range=3
     distance=2.
     ret = []
@@ -144,6 +185,11 @@ def seven_point_scan(l: List[Input]):
 
 
 def pdf_scan(l: List[Input]):
+    """
+    Scans NLO PDF sets. 
+
+    The PDF sets are infered from `lhapdf.getPDFSet` with the argument of `pdfset_nlo`.
+    """
     ret = []
     for s in l:
         # only central scale
@@ -158,6 +204,11 @@ def pdf_scan(l: List[Input]):
     return ret
 
 def change_where(l:List[Input], dicts : dict, **kwargs):
+    """
+    Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
+
+    The changes only applied to the matching list members.
+    """
     ret = []
     for s in l:
         ok = True
@@ -175,6 +226,9 @@ def change_where(l:List[Input], dicts : dict, **kwargs):
     return ret
 
 def scan_invariant_mass(l : List[Input],diff,points,low=0.001):
+    """
+    Logarithmic `invariant_mass` scan close to the production threshold.
+    """
     ret = []
     for s in l:
         for r in s.mu*2.+ low+ (np.logspace(np.log10(low),np.log10(1+low),points)-low) *diff:
@@ -185,6 +239,10 @@ def scan_invariant_mass(l : List[Input],diff,points,low=0.001):
     return ret
 
 def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
+    """
+    Scans the PDG identified mass `var` over `range` in the list `l`.
+    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
+    """
     ret = []
     for s in l:
         for r in range:
@@ -209,9 +267,15 @@ def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
     return ret
 
 def slha_scan(l : List[Input],block,var,range : List) -> List[Input]:
+    """
+    Scan a generic 
+    """
     return slha_scan_rel(l,lambda r,: [(block,var,r)],range)
 
 def slha_scan_rel(l : List[Input],lambdas ,range : List) -> List[Input]:
+    """
+    Scan a generic slha variable.
+    """
     ret = []
     for s in l:
         for r in range:
