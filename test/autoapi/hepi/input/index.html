@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.input &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="hepi.plot" href="../plot/index.html" />
+    <link rel="prev" title="hepi.spheno.run" href="../spheno/run/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.0-15-g16547a3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Test</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cluster/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.cluster</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../madgraph/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.madgraph</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.resummino</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.spheno</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plot/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../results/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.results</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.util</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/hepi/input/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-hepi.input">
+<span id="hepi-input"></span><h1><a class="reference internal" href="#module-hepi.input" title="hepi.input"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></a><a class="headerlink" href="#module-hepi.input" title="Permalink to this headline"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.Order" title="hepi.input.Order"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Order</span></code></a></p></td>
+<td><p>Computation orders.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code></a></p></td>
+<td><p>Input for computation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.get_input_dir" title="hepi.input.get_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_dir</span></code></a>()</p></td>
+<td><p>Gets the input directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.get_output_dir" title="hepi.input.get_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_dir</span></code></a>()</p></td>
+<td><p>Gets the input directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.set_input_dir" title="hepi.input.set_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_input_dir</span></code></a>(ind)</p></td>
+<td><p>Sets the input directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.set_output_dir" title="hepi.input.set_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output_dir</span></code></a>(outd)</p></td>
+<td><p>Sets the output directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.set_pre" title="hepi.input.set_pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_pre</span></code></a>(ppre)</p></td>
+<td><p>Sets the command prefix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.get_pre" title="hepi.input.get_pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pre</span></code></a>()</p></td>
+<td><p>Gets the command prefix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.update_slha" title="hepi.input.update_slha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_slha</span></code></a>(i: Input)</p></td>
+<td><p>Updates dependent parameters in Input <cite>i</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan" title="hepi.input.scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan</span></code></a>(l: List[Input], var: str, range) → List[Input]</p></td>
+<td><p>Scans a variable <cite>var</cite> over <cite>range</cite> in <cite>l</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scale_scan" title="hepi.input.scale_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_scan</span></code></a>(l: List[Input], range=3, distance=2.0)</p></td>
+<td><p>Scans scale by varying <cite>mu_f</cite> and <cite>mu_r</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.seven_point_scan" title="hepi.input.seven_point_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seven_point_scan</span></code></a>(l: List[Input])</p></td>
+<td><p>Scans scale by varying <cite>mu_f</cite> and <cite>mu_r</cite> by factors of two excluding relative factors of 4.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.pdf_scan" title="hepi.input.pdf_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_scan</span></code></a>(l: List[Input])</p></td>
+<td><p>Scans NLO PDF sets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.change_where" title="hepi.input.change_where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">change_where</span></code></a>(l: List[Input], dicts: dict, **kwargs)</p></td>
+<td><p>Applies the values of <cite>dicts</cite> if the key value pairs in <cite>kwargs</cite> agree with a member of the list <cite>l</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_invariant_mass" title="hepi.input.scan_invariant_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_invariant_mass</span></code></a>(l: List[Input], diff, points, low=0.001)</p></td>
+<td><p>Logarithmic <cite>invariant_mass</cite> scan close to the production threshold.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.mass_scan" title="hepi.input.mass_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_scan</span></code></a>(l: List[Input], var: int, range, diff_L_R=None) → List[Input]</p></td>
+<td><p>Scans the PDG identified mass <cite>var</cite> over <cite>range</cite> in the list <cite>l</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.slha_scan" title="hepi.input.slha_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan</span></code></a>(l: List[Input], block, var, range: List) → List[Input]</p></td>
+<td><p>Scan a generic</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.slha_scan_rel" title="hepi.input.slha_scan_rel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan_rel</span></code></a>(l: List[Input], lambdas, range: List) → List[Input]</p></td>
+<td><p>Scan a generic slha variable.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.in_dir" title="hepi.input.in_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">in_dir</span></code></a></p></td>
+<td><p>input directory</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.out_dir" title="hepi.input.out_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">out_dir</span></code></a></p></td>
+<td><p>output directory</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.pre" title="hepi.input.pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pre</span></code></a></p></td>
+<td><p>run command prefix.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.input.in_dir">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">in_dir</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">./input/</span></em><a class="reference internal" href="../../../_modules/hepi/input.html#in_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.in_dir" title="Permalink to this definition"></a></dt>
+<dd><p>input directory</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.input.out_dir">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">out_dir</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">./output/</span></em><a class="reference internal" href="../../../_modules/hepi/input.html#out_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.out_dir" title="Permalink to this definition"></a></dt>
+<dd><p>output directory</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.input.pre">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">pre</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">nice</span> <span class="pre">-n</span> <span class="pre">5</span></em><a class="reference internal" href="../../../_modules/hepi/input.html#pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.pre" title="Permalink to this definition"></a></dt>
+<dd><p>run command prefix.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.get_input_dir">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">get_input_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#get_input_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.get_input_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the input directory.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.get_output_dir">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">get_output_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#get_output_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.get_output_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the input directory.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.set_input_dir">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">set_input_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ind</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#set_input_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.set_input_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the input directory.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.set_output_dir">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">set_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#set_output_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.set_output_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the output directory.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.set_pre">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">set_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ppre</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#set_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.set_pre" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the command prefix.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.get_pre">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">get_pre</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#get_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.get_pre" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the command prefix.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hepi.input.Order">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><a class="reference internal" href="../../../_modules/hepi/input.html#Order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.Order" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
+<p>Computation orders.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.input.Order.LO">
+<span class="sig-name descname"><span class="pre">LO</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">0</span></em><a class="reference internal" href="../../../_modules/hepi/input.html#Order.LO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.Order.LO" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.input.Order.NLO">
+<span class="sig-name descname"><span class="pre">NLO</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">1</span></em><a class="reference internal" href="../../../_modules/hepi/input.html#Order.NLO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.Order.NLO" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.input.Order.NLO_PLUS_NLL">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">2</span></em><a class="reference internal" href="../../../_modules/hepi/input.html#Order.NLO_PLUS_NLL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.Order.NLO_PLUS_NLL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hepi.input.Input">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hepi.input.Order" title="hepi.input.Order"><span class="pre">Order</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_lo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_nlo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invariant_mass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'total'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#Input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.Input" title="Permalink to this definition"></a></dt>
+<dd><p>Input for computation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.update_slha">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">update_slha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#update_slha"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.update_slha" title="Permalink to this definition"></a></dt>
+<dd><p>Updates dependent parameters in Input <cite>i</cite>.</p>
+<p>Mainly concerns the <cite>mu</cite> value used by <cite>madgraph</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.scan">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/hepi/input.html#scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.scan" title="Permalink to this definition"></a></dt>
+<dd><p>Scans a variable <cite>var</cite> over <cite>range</cite> in <cite>l</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.scale_scan">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">scale_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#scale_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.scale_scan" title="Permalink to this definition"></a></dt>
+<dd><p>Scans scale by varying <cite>mu_f</cite> and <cite>mu_r</cite>.
+They take <cite>range</cite> values from 1/<cite>distance</cite> to <cite>distance</cite> in lograthmic spacing.
+Only points with <cite>mu_f`=`mu_r</cite> or <cite>mu_r/f`=1 or `mu_r/f`=`distance</cite> or <cite>mu_r/f`=1/`distance</cite> are returned.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.seven_point_scan">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">seven_point_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#seven_point_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.seven_point_scan" title="Permalink to this definition"></a></dt>
+<dd><p>Scans scale by varying <cite>mu_f</cite> and <cite>mu_r</cite> by factors of two excluding relative factors of 4.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.pdf_scan">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">pdf_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#pdf_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.pdf_scan" title="Permalink to this definition"></a></dt>
+<dd><p>Scans NLO PDF sets.</p>
+<p>The PDF sets are infered from <cite>lhapdf.getPDFSet</cite> with the argument of <cite>pdfset_nlo</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.change_where">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">change_where</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#change_where"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.change_where" title="Permalink to this definition"></a></dt>
+<dd><p>Applies the values of <cite>dicts</cite> if the key value pairs in <cite>kwargs</cite> agree with a member of the list <cite>l</cite>.</p>
+<p>The changes only applied to the matching list members.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.scan_invariant_mass">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">scan_invariant_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#scan_invariant_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.scan_invariant_mass" title="Permalink to this definition"></a></dt>
+<dd><p>Logarithmic <cite>invariant_mass</cite> scan close to the production threshold.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.mass_scan">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">mass_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_L_R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/hepi/input.html#mass_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.mass_scan" title="Permalink to this definition"></a></dt>
+<dd><p>Scans the PDG identified mass <cite>var</cite> over <cite>range</cite> in the list <cite>l</cite>.
+<cite>diff_L_R</cite> allows to set a fixed difference between masses of left- and right-handed particles.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.slha_scan">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">slha_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/hepi/input.html#slha_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.slha_scan" title="Permalink to this definition"></a></dt>
+<dd><p>Scan a generic</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.slha_scan_rel">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">slha_scan_rel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambdas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/hepi/input.html#slha_scan_rel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.slha_scan_rel" title="Permalink to this definition"></a></dt>
+<dd><p>Scan a generic slha variable.</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../spheno/run/index.html" class="btn btn-neutral float-left" title="hepi.spheno.run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../plot/index.html" class="btn btn-neutral float-right" title="hepi.plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

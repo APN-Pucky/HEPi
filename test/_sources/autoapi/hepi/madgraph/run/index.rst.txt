@@ -1,0 +1,246 @@
+:py:mod:`hepi.madgraph.run`
+===========================
+
+.. py:module:: hepi.madgraph.run
+
+.. autoapi-nested-parse::
+
+   
+   ..
+       !! processed by numpydoc !!
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   hepi.madgraph.run.RunParams
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.madgraph.run.set_path
+   hepi.madgraph.run.get_path
+   hepi.madgraph.run.run
+   hepi.madgraph.run._parse
+   hepi.madgraph.run.namehash
+   hepi.madgraph.run._queue
+   hepi.madgraph.run._run
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.madgraph.run.madgraph_path
+
+
+.. py:data:: madgraph_path
+   :annotation: = /opt/MG5_aMC_v2_7_0/
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: set_path(p)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_path()
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: RunParams(dic, skip=False, madstr=True)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: run(params: List[hepi.Input], noskip=False, madstr=True, para=True)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: _parse(outputs: List[str]) -> List[hepi.madgraph.result.MadgraphResult]
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: namehash(n)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: _queue(params: List[hepi.Input], noskip=False, madstr=True, para=True) -> List[RunParams]
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: _run(rps: List[RunParams], para=True)
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

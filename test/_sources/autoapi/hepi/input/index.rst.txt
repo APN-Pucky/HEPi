@@ -1,0 +1,622 @@
+:py:mod:`hepi.input`
+====================
+
+.. py:module:: hepi.input
+
+.. autoapi-nested-parse::
+
+   
+   ..
+       !! processed by numpydoc !!
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   hepi.input.Order
+   hepi.input.Input
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.input.get_input_dir
+   hepi.input.get_output_dir
+   hepi.input.set_input_dir
+   hepi.input.set_output_dir
+   hepi.input.set_pre
+   hepi.input.get_pre
+   hepi.input.update_slha
+   hepi.input.scan
+   hepi.input.scale_scan
+   hepi.input.seven_point_scan
+   hepi.input.pdf_scan
+   hepi.input.change_where
+   hepi.input.scan_invariant_mass
+   hepi.input.mass_scan
+   hepi.input.slha_scan
+   hepi.input.slha_scan_rel
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.input.in_dir
+   hepi.input.out_dir
+   hepi.input.pre
+
+
+.. py:data:: in_dir
+   :annotation: = ./input/
+
+   
+   input directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: out_dir
+   :annotation: = ./output/
+
+   
+   output directory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: pre
+   :annotation: = nice -n 5
+
+   
+   run command prefix.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_input_dir()
+
+   
+   Gets the input directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_output_dir()
+
+   
+   Gets the input directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: set_input_dir(ind)
+
+   
+   Sets the input directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: set_output_dir(outd)
+
+   
+   Sets the output directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: set_pre(ppre)
+
+   
+   Sets the command prefix. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_pre()
+
+   
+   Gets the command prefix. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: Order
+
+   Bases: :py:obj:`enum.IntEnum`
+
+   
+   Computation orders.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+   .. py:attribute:: LO
+      :annotation: = 0
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:attribute:: NLO
+      :annotation: = 1
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+   .. py:attribute:: NLO_PLUS_NLL
+      :annotation: = 2
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
+
+   
+   Input for computation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: update_slha(i: Input)
+
+   
+   Updates dependent parameters in Input `i`.
+
+   Mainly concerns the `mu` value used by `madgraph`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: scan(l: List[Input], var: str, range) -> List[Input]
+
+   
+   Scans a variable `var` over `range` in `l`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: scale_scan(l: List[Input], range=3, distance=2.0)
+
+   
+   Scans scale by varying `mu_f` and `mu_r`.
+   They take `range` values from 1/`distance` to `distance` in lograthmic spacing.
+   Only points with `mu_f`=`mu_r` or `mu_r/f`=1 or `mu_r/f`=`distance` or `mu_r/f`=1/`distance` are returned.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: seven_point_scan(l: List[Input])
+
+   
+   Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: pdf_scan(l: List[Input])
+
+   
+   Scans NLO PDF sets. 
+
+   The PDF sets are infered from `lhapdf.getPDFSet` with the argument of `pdfset_nlo`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: change_where(l: List[Input], dicts: dict, **kwargs)
+
+   
+   Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
+
+   The changes only applied to the matching list members.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: scan_invariant_mass(l: List[Input], diff, points, low=0.001)
+
+   
+   Logarithmic `invariant_mass` scan close to the production threshold.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]
+
+   
+   Scans the PDG identified mass `var` over `range` in the list `l`.
+   `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: slha_scan(l: List[Input], block, var, range: List) -> List[Input]
+
+   
+   Scan a generic 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: slha_scan_rel(l: List[Input], lambdas, range: List) -> List[Input]
+
+   
+   Scan a generic slha variable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

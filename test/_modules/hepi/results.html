@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.results &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.0-15-g16547a3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Test</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../hepi.html">hepi</a> &raquo;</li>
+      <li>hepi.results</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for hepi.results</h1><div class="highlight"><pre>
+<span></span>from .util import LD2DL
+import numpy as np
+from typing import List
+from uncertainties import unumpy
+import uncertainties as unc
+from smpl import plot
+import lhapdf
+import warnings
+
+#numerical convergence should be better by a factor of 10 to avoid spoiling the scale/pdf uncertainties
+<div class="viewcode-block" id="required_numerical_uncertainty_factor"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.required_numerical_uncertainty_factor">[docs]</a>required_numerical_uncertainty_factor = 10 </div>
+
+<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result">[docs]</a>class Result:
+    def __init__(self, lo, nlo, nlo_plus_nll):
+        self.LO = lo
+        self.NLO = nlo
+        self.NLO_PLUS_NLL = nlo_plus_nll
+        if lo is not None and lo != 0:
+            self.K_LO = lo/lo
+        else:
+            self.K_LO = None
+        #else:
+        #    print(&quot;lo None or lo=&quot;,lo)
+        if nlo is not None and lo != 0:
+            self.K_NLO = nlo/lo
+        else:
+            self.K_NLO = None
+        #else:
+        #    print(&quot;nlo None or lo=&quot;,lo)
+        if nlo_plus_nll is not None and lo != 0:
+            self.K_NLO_PLUS_NLL = nlo_plus_nll/lo
+        else:
+            self.K_NLO_PLUS_NLL = None
+
+        if nlo_plus_nll is not None and nlo != 0:
+            self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll/nlo
+        else:
+            self.NLO_PLUS_NLL_OVER_NLO  =None</div>
+        #else:
+        #    print(&quot;nlo+nll None or lo=&quot;,lo)
+
+
+
+
+
+<div class="viewcode-block" id="pdf_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error">[docs]</a>def pdf_error(li, dl):
+    global required_numerical_uncertainty_factor
+    example = li[0]
+    members = [attr for attr in dir(example) if not callable(
+        getattr(example, attr)) and not attr.startswith(&quot;__&quot;)]
+    dl[&quot;LO_PDF&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;LO_PDF_CENTRAL&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;LO_PDF_ERRPLUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;LO_PDF_ERRMINUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;LO_PDF_ERRSYM&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PDF&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PDF_CENTRAL&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PDF_ERRPLUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PDF_ERRMINUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PDF_ERRSYM&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_PDF&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_PDF_CENTRAL&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_PDF_ERRSYM&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    for i in range(len(dl[&quot;pdfset_nlo&quot;])):
+        if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][i] == 1.0:
+            set = lhapdf.getPDFSet(dl[&quot;pdf_nlo&quot;][i])
+            pdfs = [0.0] * set.size
+            for j in range(len(dl[&quot;pdfset_nlo&quot;])):
+                same = True
+                for s in members:
+                    if not (dl[s][i] == dl[s][j]) and s != &quot;pdfset_nlo&quot; and s != &quot;precision&quot; and s!=&quot;max_iters&quot;:
+                        same = False
+                if same:
+                    pdfs[dl[&quot;pdfset_nlo&quot;][j]] = j
+
+            dl[&quot;LO_PDF_CENTRAL&quot;][i] = plot.unv(dl[&quot;LO&quot;][i])
+            dl[&quot;LO_PDF_ERRPLUS&quot;][i] = 0.0
+            dl[&quot;LO_PDF_ERRMINUS&quot;][i] = 0.0
+            dl[&quot;LO_PDF_ERRSYM&quot;][i] = 0.0
+            # lo_unc = set.uncertainty(
+            #    [plot.unv(dl[&quot;LO&quot;][k]) for k in pdfs], -1)
+            nlo_unc = set.uncertainty(
+                [plot.unv(dl[&quot;NLO&quot;][k]) for k in pdfs], 90)
+            dl[&quot;NLO_PDF_CENTRAL&quot;][i] = nlo_unc.central
+            dl[&quot;NLO_PDF_ERRPLUS&quot;][i] = nlo_unc.errplus
+            dl[&quot;NLO_PDF_ERRMINUS&quot;][i] = -nlo_unc.errminus
+            dl[&quot;NLO_PDF_ERRSYM&quot;][i] = nlo_unc.errsymm
+            #TODO error sym to minus and plus
+            if(plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_PDF_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_PDF_ERRMINUS&quot;][i]):
+                warnings.warn(&quot;too low numerical nlo precision vs pdf&quot;, RuntimeWarning)
+
+            nlo_plus_nll_unc = set.uncertainty(
+                [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in pdfs], 90)
+            dl[&quot;NLO_PLUS_NLL_PDF_CENTRAL&quot;][i] = nlo_plus_nll_unc.central
+            dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][i] = nlo_plus_nll_unc.errplus
+            dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][i] = -nlo_plus_nll_unc.errminus
+            dl[&quot;NLO_PLUS_NLL_PDF_ERRSYM&quot;][i] = nlo_plus_nll_unc.errsymm
+            #TODO error sym to minus and plus
+            if(plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][i]):
+                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs pdf&quot;, RuntimeWarning)
+
+
+    mask = dl[&quot;LO_PDF_CENTRAL&quot;]!= np.array(None)
+    dl[&quot;LO_PDF&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;LO_PDF_CENTRAL&quot;][mask])+dl[&quot;LO_PDF_ERRPLUS&quot;][mask]/2.+dl[&quot;LO_PDF_ERRMINUS&quot;][mask]/2.,
+        (+dl[&quot;LO_PDF_ERRPLUS&quot;][mask]-dl[&quot;LO_PDF_ERRMINUS&quot;][mask])/2.)
+
+    mask = dl[&quot;NLO_PDF_CENTRAL&quot;]!= np.array(None)
+    dl[&quot;NLO_PDF&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;NLO_PDF_CENTRAL&quot;][mask])+dl[&quot;NLO_PDF_ERRPLUS&quot;][mask]/2.+dl[&quot;NLO_PDF_ERRMINUS&quot;][mask]/2.,
+        (+dl[&quot;NLO_PDF_ERRPLUS&quot;][mask]-dl[&quot;NLO_PDF_ERRMINUS&quot;][mask])/2.)
+
+    mask = dl[&quot;NLO_PLUS_NLL_PDF_CENTRAL&quot;]!= np.array(None)
+    dl[&quot;NLO_PLUS_NLL_PDF&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;NLO_PLUS_NLL_PDF_CENTRAL&quot;][mask])+dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][mask]/2.+dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask]/2.,
+        (+dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][mask]-dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask])/2.)
+    return dl</div>
+
+
+<div class="viewcode-block" id="scale_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_error">[docs]</a>def scale_error(li, dl):
+    global required_numerical_uncertainty_factor
+    example = li[0]
+    members = [attr for attr in dir(example) if not callable(
+        getattr(example, attr)) and not attr.startswith(&quot;__&quot;)]
+    dl[&quot;LO_SCALE&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;LO_SCALE_ERRPLUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;LO_SCALE_ERRMINUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_SCALE&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_SCALE_ERRPLUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_SCALE_ERRMINUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_SCALE&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    for i in range(len(dl[&quot;pdfset_nlo&quot;])):
+        if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][i] == 1.0:
+            scales = []
+            for j in range(len(dl[&quot;pdfset_nlo&quot;])):
+                same = True
+                for s in members:
+                    if not (dl[s][i] == dl[s][j]) and s != &quot;mu_f&quot; and s != &quot;mu_r&quot; and s != &quot;precision&quot; and s!=&quot;max_iters&quot;:
+                        same = False
+                if same:
+                    scales.append(j)
+
+            # lo_unc = set.uncertainty(
+            #    [plot.unv(dl[&quot;LO&quot;][k]) for k in pdfs], -1)
+            dl[&quot;LO_SCALE_ERRPLUS&quot;][i] = np.max(
+                [plot.unv(dl[&quot;LO&quot;][k]) for k in scales])-plot.unv(dl[&quot;LO&quot;][i])
+            dl[&quot;LO_SCALE_ERRMINUS&quot;][i] = np.min(
+                [plot.unv(dl[&quot;LO&quot;][k]) for k in scales])-plot.unv(dl[&quot;LO&quot;][i])
+            if(plot.usd(dl[&quot;LO&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;LO_SCALE_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;LO&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;LO_SCALE_ERRMINUS&quot;][i]):
+                warnings.warn(&quot;too low numerical lo precision vs scale&quot;, RuntimeWarning)
+
+            dl[&quot;NLO_SCALE_ERRPLUS&quot;][i] = np.max(
+                [plot.unv(dl[&quot;NLO&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO&quot;][i])
+            dl[&quot;NLO_SCALE_ERRMINUS&quot;][i] = np.min(
+                [plot.unv(dl[&quot;NLO&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO&quot;][i])
+            if(plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_SCALE_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_SCALE_ERRMINUS&quot;][i]):
+                warnings.warn(&quot;too low numerical nlo precision vs scale&quot;, RuntimeWarning)
+
+            dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][i] = np.max(
+                [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][i])
+            dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][i] = np.min(
+                [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][i])
+            if(plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][i]):
+                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs scale&quot;, RuntimeWarning)
+
+    mask = dl[&quot;LO_SCALE_ERRPLUS&quot;]!= np.array(None)
+    dl[&quot;LO_SCALE&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;LO&quot;][mask])+dl[&quot;LO_SCALE_ERRPLUS&quot;][mask]/2.+dl[&quot;LO_SCALE_ERRMINUS&quot;][mask]/2.,
+        (+dl[&quot;LO_SCALE_ERRPLUS&quot;][mask]-dl[&quot;LO_SCALE_ERRMINUS&quot;][mask])/2.)
+
+    mask = dl[&quot;NLO_SCALE_ERRPLUS&quot;]!= np.array(None)
+    dl[&quot;NLO_SCALE&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;NLO&quot;][mask])+dl[&quot;NLO_SCALE_ERRPLUS&quot;][mask]/2.+dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask]/2.,
+        (+dl[&quot;NLO_SCALE_ERRPLUS&quot;][mask]-dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask])/2.)
+
+    mask = dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;]!= np.array(None)
+    dl[&quot;NLO_PLUS_NLL_SCALE&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])+dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][mask]/2.+dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][mask]/2.,
+        (+dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][mask]-dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][mask])/2.)
+    
+    return dl</div>
+
+<div class="viewcode-block" id="combine_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.combine_errors">[docs]</a>def combine_errors(dl):
+    dl[&quot;LO_NOERR&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;LO_ERRPLUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;LO_ERRMINUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;LO_COMBINED&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_NOERR&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_ERRPLUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_ERRMINUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_COMBINED&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_NOERR&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_ERRPLUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_ERRMINUS&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+    dl[&quot;NLO_PLUS_NLL_COMBINED&quot;] = np.array([None]*len(dl[&quot;pdfset_nlo&quot;]))
+
+
+    mask = dl[&quot;LO_PDF_CENTRAL&quot;]!= np.array(None)
+    dl[&quot;LO_NOERR&quot;][mask]= plot.unv(dl[&quot;LO&quot;][mask]).astype(float)
+    dl[&quot;LO_ERRPLUS&quot;][mask]= np.sqrt(dl[&quot;LO_PDF_ERRPLUS&quot;][mask].astype(float)**2+dl[&quot;LO_SCALE_ERRPLUS&quot;][mask].astype(float)**2)
+    dl[&quot;LO_ERRMINUS&quot;][mask]= -np.sqrt(dl[&quot;LO_PDF_ERRMINUS&quot;][mask].astype(float)**2+dl[&quot;LO_SCALE_ERRMINUS&quot;][mask].astype(float)**2)
+    dl[&quot;LO_COMBINED&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;LO&quot;][mask])+dl[&quot;LO_ERRPLUS&quot;][mask]/2.+dl[&quot;LO_ERRMINUS&quot;][mask]/2.,
+        +dl[&quot;LO_ERRPLUS&quot;][mask]-dl[&quot;LO_ERRMINUS&quot;][mask])
+
+    mask = dl[&quot;NLO_PDF_CENTRAL&quot;]!= np.array(None)
+    dl[&quot;NLO_NOERR&quot;][mask]= plot.unv(dl[&quot;NLO&quot;][mask]).astype(float)
+    dl[&quot;NLO_ERRPLUS&quot;][mask]= np.sqrt(dl[&quot;NLO_PDF_ERRPLUS&quot;][mask].astype(float)**2+dl[&quot;NLO_SCALE_ERRPLUS&quot;][mask].astype(float)**2)
+    dl[&quot;NLO_ERRMINUS&quot;][mask]= -np.sqrt(dl[&quot;NLO_PDF_ERRMINUS&quot;][mask].astype(float)**2+dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask].astype(float)**2)
+    dl[&quot;NLO_COMBINED&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;NLO&quot;][mask])+dl[&quot;NLO_ERRPLUS&quot;][mask]/2.+dl[&quot;NLO_ERRMINUS&quot;][mask]/2.,
+        +dl[&quot;NLO_ERRPLUS&quot;][mask]-dl[&quot;NLO_ERRMINUS&quot;][mask])
+
+    mask = dl[&quot;NLO_PLUS_NLL_PDF_CENTRAL&quot;]!= np.array(None)
+    dl[&quot;NLO_PLUS_NLL_NOERR&quot;][mask]= plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask]).astype(float)
+    dl[&quot;NLO_PLUS_NLL_ERRPLUS&quot;][mask]= np.sqrt(dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][mask].astype(float)**2+dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][mask].astype(float)**2)
+    dl[&quot;NLO_PLUS_NLL_ERRMINUS&quot;][mask]= -np.sqrt(dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask].astype(float)**2+dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][mask].astype(float)**2)
+    dl[&quot;NLO_PLUS_NLL_COMBINED&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])+dl[&quot;NLO_PLUS_NLL_ERRPLUS&quot;][mask]/2.+dl[&quot;NLO_PLUS_NLL_ERRMINUS&quot;][mask]/2.,
+        +dl[&quot;NLO_PLUS_NLL_ERRPLUS&quot;][mask]-dl[&quot;NLO_PLUS_NLL_ERRMINUS&quot;][mask])
+
+    return dl</div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
