@@ -11,7 +11,7 @@ jobs:
         image: apnpucky/ubuntu-pip-lhapdf
       steps:
         - name: work around permission issue
-          run: git config --global --add safe.directory /__w/hepi/hepi
+          run: git config --global --add safe.directory /__w/HEPi/HEPi
         - uses: actions/checkout@v2
           with:
             fetch-depth: "0"
