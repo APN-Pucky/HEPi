@@ -22,7 +22,7 @@ pre = "nice -n 5"
 
 def get_input_dir():
     """
-    Gets the input directory.
+    Get the input directory.
     """
     global in_dir
     return in_dir
@@ -30,7 +30,7 @@ def get_input_dir():
 
 def get_output_dir():
     """
-    Gets the input directory.
+    Get the input directory.
     """
     global out_dir
     return out_dir

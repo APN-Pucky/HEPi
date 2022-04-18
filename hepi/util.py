@@ -1,4 +1,4 @@
-from typing import List
+from typing import List,Tuple
 import numpy as np
 import hashlib
 from particle import Particle
@@ -6,6 +6,31 @@ from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
 
 def LD2DL(l: List):
+    """Convert a list of objects into a dictionary of lists.
+
+    The values of each object are first converted to a `dict` through the `__dict__` attribute.
+    
+    Args:
+        l (List) : list of objects.
+
+    Returns:
+        dict : dictionary of numpy arrays.
+
+    Examples:
+        >>> class Param:
+        ...      def __init__(self,a,b,c):
+        ...         self.a = a
+        ...         self.b = b
+        ...         self.c = c
+        >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+        {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
+    """
+    # Check l[0] keys in all dictionaries.
+    for m in l:
+        md = m.__dict__
+        for k in l[0].__dict__:
+            assert k in md
+    # switch them
     return {k: np.array([dic.__dict__[k] for dic in l]) for k in l[0].__dict__}
 
 
@@ -16,20 +41,20 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
     "PDGName", "PDGID", converters=(str, PDGID))
 
 
-def get_name(id):
+def get_name(id : int) -> str:
     """Get the latex name of a particle.
 
     Args:
         id (int) : PDG Monte Carlo identifier for the particle.
 
     Returns:
-        str: table latex string
+        str: Latex name.
 
     Examples:
-    >>> get_name(21)
-    'g'
-    >>> get_name(1000022)
-    '\\\\tilde{\\\\chi}_{1}^{0}'
+        >>> get_name(21)
+        'g'
+        >>> get_name(1000022)
+        '\\\\tilde{\\\\chi}_{1}^{0}'
     """
     global PDG2LaTeXNameMap
     pdgid = PDG2LaTeXNameMap[id]
@@ -37,7 +62,19 @@ def get_name(id):
 
 
 
-def get_LR_partner(id):
+def get_LR_partner(id : int) -> Tuple[int,int]:
+    """Transforms a PDG id to it's left-right partner.
+
+    Args:
+        id (int) : PDG Monte Carlo identifier for the particle.
+
+    Returns:
+        tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
+
+    Examples:
+        >>> get_LR_partner(1000002)
+        (-1, 2000002)
+    """
     n = PDGID2NameMap[id]
     if "L" in n:
         n = n.replace("L", "R")
