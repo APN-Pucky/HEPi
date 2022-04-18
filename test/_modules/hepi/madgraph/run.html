@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2
+                0.1.2-2-g7da6ce1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -108,14 +108,21 @@ from smpl.parallel import *
 import hashlib
 
 <div class="viewcode-block" id="madgraph_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.madgraph_path">[docs]</a>madgraph_path = &quot;/opt/MG5_aMC_v2_7_0/&quot;</div>
+&quot;&quot;&quot;madgraph folder&quot;&quot;&quot;
 
 
 <div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.set_path">[docs]</a>def set_path(p):
+    &quot;&quot;&quot;
+    Set the path to the MadGraph folder containing the binary in &#39;./bin&#39;.
+    &quot;&quot;&quot;
     global madgraph_path
     madgraph_path = p+ (&quot;/&quot; if p[-1]!=&quot;/&quot; else &quot;&quot;)</div>
 
 
 <div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.get_path">[docs]</a>def get_path():
+    &quot;&quot;&quot;
+    Returns the currently set MadGraph path.
+    &quot;&quot;&quot;
     global madgraph_path
     return madgraph_path</div>
 
