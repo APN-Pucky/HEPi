@@ -17,8 +17,7 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
 
 
 def get_name(id):
-    """
-    Get the latex name of a particle.
+    """Get the latex name of a particle.
 
     Args:
         id (int) : PDG Monte Carlo identifier for the particle.
@@ -28,7 +27,9 @@ def get_name(id):
 
     Examples:
     >>> get_name(21)
-    "g"
+    'g'
+    >>> get_name(1000022)
+    '\\\\tilde{\\\\chi}_{1}^{0}'
     """
     global PDG2LaTeXNameMap
     pdgid = PDG2LaTeXNameMap[id]

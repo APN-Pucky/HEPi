@@ -6,7 +6,7 @@ build:
 
 test:
 	rm -f .coverage coverage.xml
-	pytest
+	pytest hepi
 
 commit: 
 	-git add .
