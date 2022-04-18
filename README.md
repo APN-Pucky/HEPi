@@ -30,7 +30,7 @@ Currently slurm is supported for clusters.
 [codacy cover image]: https://app.codacy.com/project/badge/Coverage/ef07b792a0f84f2eb1d7ebe07ae9e639
 [codacy cover link]: https://www.codacy.com/gh/APN-Pucky/HEPi/dashboard?utm_source=github.com&utm_medium=referral&utm_content=APN-Pucky/HEPi&utm_campaign=Badge_Coverage
 
-[c s i]: https://coveralls.io/repos/github/APN-Pucky/smpl/badge.svg?branch=master
-[c s l]: https://coveralls.io/github/APN-Pucky/smpl?branch=stable
-[c t l]: https://coveralls.io/github/APN-Pucky/smpl?branch=test
-[c t i]: https://coveralls.io/repos/github/APN-Pucky/smpl/badge.svg?branch=test
+[c s i]: https://coveralls.io/repos/github/APN-Pucky/HEPi/badge.svg?branch=master
+[c s l]: https://coveralls.io/github/APN-Pucky/HEPi?branch=stable
+[c t l]: https://coveralls.io/github/APN-Pucky/HEPi?branch=test
+[c t i]: https://coveralls.io/repos/github/APN-Pucky/HEPi/badge.svg?branch=test
