@@ -1,14 +1,14 @@
 # HEPi
 Doc: https://apn-pucky.github.io/HEPi/index.html
 
+[![PyPI version][pypi image]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/hepi.svg) 
+
 | [Stable][doc stable]        | [Test][doc test]           |
 | ------------- |:-------------:|
-| [![PyPI version][pypi image]][pypi link]      | - |
 | [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
-| ![downloads](https://img.shields.io/pypi/dm/hepi.svg) | -     |
-| -     |[![Codacy Badge][codacy quality image]][codacy quality link] | 
-| -      |[![Codacy Badge][codacy cover image]][codacy cover link] | 
 | [![Coverage Status][c s i]][c s l] | [![Coverage Status][c t i]][c t l] |
+| -      |[![Codacy Badge][codacy cover image]][codacy cover link] | 
+| -     |[![Codacy Badge][codacy quality image]][codacy quality link] | 
 
 Python interface for gluing together several HEP programs (e.g. from HEP-Forge).
 
