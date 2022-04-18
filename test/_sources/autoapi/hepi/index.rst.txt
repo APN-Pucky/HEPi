@@ -144,10 +144,20 @@ Attributes
    hepi.__version__
 
 
-.. py:function:: get_LR_partner(id)
+.. py:function:: get_LR_partner(id: int) -> Tuple[int, int]
 
    
+   Transforms a PDG id to it's left-right partner.
 
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
+
+   Examples:
+       >>> get_LR_partner(1000002)
+       (-1, 2000002)
 
 
 
@@ -285,7 +295,7 @@ Attributes
 .. py:function:: get_input_dir()
 
    
-   Gets the input directory.
+   Get the input directory.
 
 
 
@@ -308,7 +318,7 @@ Attributes
 .. py:function:: get_output_dir()
 
    
-   Gets the input directory.
+   Get the input directory.
 
 
 
@@ -776,7 +786,24 @@ Attributes
 .. py:function:: LD2DL(l: List)
 
    
+   Convert a list of objects into a dictionary of lists.
 
+   The values of each object are first converted to a `dict` through the `__dict__` attribute.
+
+   Args:
+       l (List) : list of objects.
+
+   Returns:
+       dict : dictionary of numpy arrays.
+
+   Examples:
+       >>> class Param:
+       ...      def __init__(self,a,b,c):
+       ...         self.a = a
+       ...         self.b = b
+       ...         self.c = c
+       >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+       {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
 
@@ -909,7 +936,24 @@ Attributes
 .. py:function:: LD2DL(l: List)
 
    
+   Convert a list of objects into a dictionary of lists.
 
+   The values of each object are first converted to a `dict` through the `__dict__` attribute.
+
+   Args:
+       l (List) : list of objects.
+
+   Returns:
+       dict : dictionary of numpy arrays.
+
+   Examples:
+       >>> class Param:
+       ...      def __init__(self,a,b,c):
+       ...         self.a = a
+       ...         self.b = b
+       ...         self.c = c
+       >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+       {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
 
@@ -928,7 +972,7 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: get_name(id)
+.. py:function:: get_name(id: int) -> str
 
    
    Get the latex name of a particle.
@@ -937,13 +981,13 @@ Attributes
        id (int) : PDG Monte Carlo identifier for the particle.
 
    Returns:
-       str: table latex string
+       str: Latex name.
 
    Examples:
-   >>> get_name(21)
-   'g'
-   >>> get_name(1000022)
-   '\\tilde{\\chi}_{1}^{0}'
+       >>> get_name(21)
+       'g'
+       >>> get_name(1000022)
+       '\\tilde{\\chi}_{1}^{0}'
 
 
 
@@ -962,10 +1006,20 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: get_LR_partner(id)
+.. py:function:: get_LR_partner(id: int) -> Tuple[int, int]
 
    
+   Transforms a PDG id to it's left-right partner.
 
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
+
+   Examples:
+       >>> get_LR_partner(1000002)
+       (-1, 2000002)
 
 
 
@@ -1100,7 +1154,7 @@ Attributes
 .. py:function:: get_input_dir()
 
    
-   Gets the input directory.
+   Get the input directory.
 
 
 
@@ -1120,7 +1174,7 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: get_name(id)
+.. py:function:: get_name(id: int) -> str
 
    
    Get the latex name of a particle.
@@ -1129,13 +1183,13 @@ Attributes
        id (int) : PDG Monte Carlo identifier for the particle.
 
    Returns:
-       str: table latex string
+       str: Latex name.
 
    Examples:
-   >>> get_name(21)
-   'g'
-   >>> get_name(1000022)
-   '\\tilde{\\chi}_{1}^{0}'
+       >>> get_name(21)
+       'g'
+       >>> get_name(1000022)
+       '\\tilde{\\chi}_{1}^{0}'
 
 
 

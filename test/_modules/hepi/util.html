@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2-4-g9031f05
+                0.1.2-6-g5114eb4
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -89,7 +89,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.util</h1><div class="highlight"><pre>
-<span></span>from typing import List
+<span></span>from typing import List,Tuple
 import numpy as np
 import hashlib
 from particle import Particle
@@ -97,6 +97,31 @@ from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
 
 <div class="viewcode-block" id="LD2DL"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.LD2DL">[docs]</a>def LD2DL(l: List):
+    &quot;&quot;&quot;Convert a list of objects into a dictionary of lists.
+
+    The values of each object are first converted to a `dict` through the `__dict__` attribute.
+    
+    Args:
+        l (List) : list of objects.
+
+    Returns:
+        dict : dictionary of numpy arrays.
+
+    Examples:
+        &gt;&gt;&gt; class Param:
+        ...      def __init__(self,a,b,c):
+        ...         self.a = a
+        ...         self.b = b
+        ...         self.c = c
+        &gt;&gt;&gt; LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+        {&#39;a&#39;: array([1, 4, 7]), &#39;b&#39;: array([2, 5, 8]), &#39;c&#39;: array([3, 6, 9])}
+    &quot;&quot;&quot;
+    # Check l[0] keys in all dictionaries.
+    for m in l:
+        md = m.__dict__
+        for k in l[0].__dict__:
+            assert k in md
+    # switch them
     return {k: np.array([dic.__dict__[k] for dic in l]) for k in l[0].__dict__}</div>
 
 
@@ -107,20 +132,20 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
     &quot;PDGName&quot;, &quot;PDGID&quot;, converters=(str, PDGID))
 
 
-<div class="viewcode-block" id="get_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_name">[docs]</a>def get_name(id):
+<div class="viewcode-block" id="get_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_name">[docs]</a>def get_name(id : int) -&gt; str:
     &quot;&quot;&quot;Get the latex name of a particle.
 
     Args:
         id (int) : PDG Monte Carlo identifier for the particle.
 
     Returns:
-        str: table latex string
+        str: Latex name.
 
     Examples:
-    &gt;&gt;&gt; get_name(21)
-    &#39;g&#39;
-    &gt;&gt;&gt; get_name(1000022)
-    &#39;\\\\tilde{\\\\chi}_{1}^{0}&#39;
+        &gt;&gt;&gt; get_name(21)
+        &#39;g&#39;
+        &gt;&gt;&gt; get_name(1000022)
+        &#39;\\\\tilde{\\\\chi}_{1}^{0}&#39;
     &quot;&quot;&quot;
     global PDG2LaTeXNameMap
     pdgid = PDG2LaTeXNameMap[id]
@@ -128,7 +153,19 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
 
 
 
-<div class="viewcode-block" id="get_LR_partner"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_LR_partner">[docs]</a>def get_LR_partner(id):
+<div class="viewcode-block" id="get_LR_partner"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_LR_partner">[docs]</a>def get_LR_partner(id : int) -&gt; Tuple[int,int]:
+    &quot;&quot;&quot;Transforms a PDG id to it&#39;s left-right partner.
+
+    Args:
+        id (int) : PDG Monte Carlo identifier for the particle.
+
+    Returns:
+        tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
+
+    Examples:
+        &gt;&gt;&gt; get_LR_partner(1000002)
+        (-1, 2000002)
+    &quot;&quot;&quot;
     n = PDGID2NameMap[id]
     if &quot;L&quot; in n:
         n = n.replace(&quot;L&quot;, &quot;R&quot;)
