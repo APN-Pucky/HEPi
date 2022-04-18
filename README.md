@@ -14,6 +14,20 @@ Doc: https://apn-pucky.github.io/HEPi/index.html
 | -      |[![Codacy Badge][codacy cover image]][codacy cover link] | 
 | -     |[![Codacy Badge][codacy quality image]][codacy quality link] | 
 
+## Versions
+
+### Stable
+
+```sh
+pip install hepi [--user] [--upgrade]
+```
+
+### Dev
+
+```sh
+pip install --index-url https://test.pypi.org/simple/ hepi
+```
+
 
 [doc stable]: https://apn-pucky.github.io/HEPi/index.html
 [doc test]: https://apn-pucky.github.io/HEPi/test/index.html
