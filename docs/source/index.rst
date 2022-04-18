@@ -10,11 +10,11 @@ Welcome to HEPi's documentation!
 Install
 =======
 
-stable version::
+Stable version::
 
    $ pip install hepi
 
-test version::
+Dev version::
 
    $ pip install --index-url https://test.pypi.org/simple/ hepi
 
