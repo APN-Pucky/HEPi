@@ -25,10 +25,10 @@ Currently slurm is supported for clusters.
 [a t link]: https://github.com/APN-Pucky/HEPi/actions/workflows/test.yml
 [a t image]: https://github.com/APN-Pucky/HEPi/actions/workflows/test.yml/badge.svg?branch=test
 
-[codacy quality image]: https://app.codacy.com/project/badge/Grade/38630d0063814027bd4d0ffaa73790a2
-[codacy quality link]: https://www.codacy.com/gh/APN-Pucky/smpl/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/smpl&amp;utm_campaign=Badge_Grade
-[codacy cover image]: https://app.codacy.com/project/badge/Coverage/38630d0063814027bd4d0ffaa73790a2
-[codacy cover link]: https://www.codacy.com/gh/APN-Pucky/smpl/dashboard?utm_source=github.com&utm_medium=referral&utm_content=APN-Pucky/smpl&utm_campaign=Badge_Coverage
+[codacy quality image]: https://app.codacy.com/project/badge/Grade/ef07b792a0f84f2eb1d7ebe07ae9e639
+[codacy quality link]: https://www.codacy.com/gh/APN-Pucky/HEPi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/HEPi&amp;utm_campaign=Badge_Grade
+[codacy cover image]: https://app.codacy.com/project/badge/Coverage/ef07b792a0f84f2eb1d7ebe07ae9e639
+[codacy cover link]: https://www.codacy.com/gh/APN-Pucky/HEPi/dashboard?utm_source=github.com&utm_medium=referral&utm_content=APN-Pucky/HEPi&utm_campaign=Badge_Coverage
 
 [c s i]: https://coveralls.io/repos/github/APN-Pucky/smpl/badge.svg?branch=master
 [c s l]: https://coveralls.io/github/APN-Pucky/smpl?branch=stable
