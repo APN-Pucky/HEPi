@@ -19,19 +19,20 @@ jobs:
             fetch-depth: "0"
         - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
         - name: Build 
-          run: python3 -m buildmake build
+          run: make build
         - name: Install 
-          run: pip3 install . --user
-#        - name: Tests
-#          run: make test
-#        - name: Build Sphinx
-#          run: rm -rf build && make clean-all && make html
-#        - name: Report Coveralls
-#          uses: AndreMiras/coveralls-python-action@develop
-#        - name: Report Codacy
-#          uses: codacy/codacy-coverage-reporter-action@v1
-#          with:
-#            project-token: ${{ secrets.CODACY_API_TOKEN }}
-#            # or
-#            #api-token: ${{ secrets.CODACY_API_TOKEN }}
-#            coverage-reports: coverage.xml
+          run: make install
+        - name: Tests
+          run: make test
+        - name: Build Sphinx
+          working-directory: ./docs
+          run: make html
+        - name: Report Coveralls
+          uses: AndreMiras/coveralls-python-action@develop
+        - name: Report Codacy
+          uses: codacy/codacy-coverage-reporter-action@v1
+          with:
+            project-token: ${{ secrets.CODACY_API_TOKEN }}
+            # or
+            #api-token: ${{ secrets.CODACY_API_TOKEN }}
+            coverage-reports: coverage.xml

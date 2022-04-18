@@ -20,23 +20,23 @@ jobs:
             fetch-depth: "0"
         - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
         - name: Build hepi
-          run: python3 -m build 
+          run: make build
         - name: Install hepi
-          run: pip3 install . --user 
-#        - name: Tests
-#          run: make test
+          run: make install
+        - name: Tests
+          run: make test
         - name: Build Sphinx
           working-directory: ./docs
           run: make html
-#        - name: Report Coveralls
-#          uses: AndreMiras/coveralls-python-action@develop
-#        - name: Report Codacy
-#          uses: codacy/codacy-coverage-reporter-action@v1
-#          with:
-#            project-token: ${{ secrets.CODACY_API_TOKEN }}
-#            # or
-#            #api-token: ${{ secrets.CODACY_API_TOKEN }}
-#            coverage-reports: coverage.xml
+        - name: Report Coveralls
+          uses: AndreMiras/coveralls-python-action@develop
+        - name: Report Codacy
+          uses: codacy/codacy-coverage-reporter-action@v1
+          with:
+            project-token: ${{ secrets.CODACY_API_TOKEN }}
+            # or
+            #api-token: ${{ secrets.CODACY_API_TOKEN }}
+            coverage-reports: coverage.xml
         - name: Deploy Test PyPI
           if: startsWith(github.ref, 'refs/tags') != true
           uses: pypa/gh-action-pypi-publish@master
@@ -46,8 +46,6 @@ jobs:
         - name: Upload Github Pages
           uses: JamesIves/github-pages-deploy-action@4.1.5
           with:
-            #ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-            #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             BRANCH: gh-pages # The branch the action should deploy to.
             FOLDER: docs/build/html # The folder the action should deploy.
             target-folder: test
