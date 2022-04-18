@@ -17,14 +17,21 @@ from smpl.parallel import *
 import hashlib
 
 madgraph_path = "/opt/MG5_aMC_v2_7_0/"
+"""madgraph folder"""
 
 
 def set_path(p):
+    """
+    Set the path to the MadGraph folder containing the binary in './bin'.
+    """
     global madgraph_path
     madgraph_path = p+ ("/" if p[-1]!="/" else "")
 
 
 def get_path():
+    """
+    Returns the currently set MadGraph path.
+    """
     global madgraph_path
     return madgraph_path
 

@@ -14,7 +14,7 @@ spheno_path = "~/git/SPheno-3.3.8/"
 
 def set_path(p):
     """
-    Set the path to the Spheno folder containing the binary in './bin'.
+    Set the path to the SPheno folder containing the binary in './bin'.
     """
     global spheno_path
     spheno_path = p + ("/" if p[-1]!="/" else "")
@@ -22,7 +22,7 @@ def set_path(p):
 
 def get_path():
     """
-    Returns the currently set resummino path
+    Returns the currently set SPheno path.
     """
     global spheno_path
     return spheno_path

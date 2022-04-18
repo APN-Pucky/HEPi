@@ -3,6 +3,19 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+dev_requirements = [
+    "build",
+    "pytest",
+    "sphinx",
+    "jupyterlab",
+    "sphinx",
+    "nbsphinx",
+    "sphinx-rtd-theme",
+    "pandas",
+    "ipython",
+    "jupyter-sphinx"
+]
+
 setuptools.setup(
     name="hepi",
     setup_requires=['setuptools-git-versioning'],
@@ -34,6 +47,9 @@ setuptools.setup(
         # "tqdm",
         # "pandas",
     ],
+    extra_require={
+        'dev': dev_requirements
+    },
     version_config={
         "template": "{tag}",
         "dev_template": "{tag}.{ccount}",
