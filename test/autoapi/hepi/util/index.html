@@ -37,7 +37,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2-2-g7da6ce1
+                0.1.2-4-g9031f05
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -140,7 +140,7 @@
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.get_name" title="hepi.util.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(id)</p></td>
-<td><p></p></td>
+<td><p>Get the latex name of a particle.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.get_LR_partner" title="hepi.util.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(id)</p></td>
 <td><p></p></td>
@@ -178,7 +178,19 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.util.get_name">
 <span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/util.html#get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.get_name" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Get the latex name of a particle.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>id (int) : PDG Monte Carlo identifier for the particle.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: table latex string</p>
+</dd>
+</dl>
+<p>Examples:
+&gt;&gt;&gt; get_name(21)
+‘g’
+&gt;&gt;&gt; get_name(1000022)
+‘\tilde{\chi}_{1}^{0}’</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.util.get_LR_partner">

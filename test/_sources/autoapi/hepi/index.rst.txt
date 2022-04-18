@@ -931,7 +931,19 @@ Attributes
 .. py:function:: get_name(id)
 
    
+   Get the latex name of a particle.
 
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       str: table latex string
+
+   Examples:
+   >>> get_name(21)
+   'g'
+   >>> get_name(1000022)
+   '\\tilde{\\chi}_{1}^{0}'
 
 
 
@@ -1111,7 +1123,19 @@ Attributes
 .. py:function:: get_name(id)
 
    
+   Get the latex name of a particle.
 
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       str: table latex string
+
+   Examples:
+   >>> get_name(21)
+   'g'
+   >>> get_name(1000022)
+   '\\tilde{\\chi}_{1}^{0}'
 
 
 

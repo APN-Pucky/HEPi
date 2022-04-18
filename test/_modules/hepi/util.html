@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2-2-g7da6ce1
+                0.1.2-4-g9031f05
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -108,6 +108,20 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
 
 
 <div class="viewcode-block" id="get_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_name">[docs]</a>def get_name(id):
+    &quot;&quot;&quot;Get the latex name of a particle.
+
+    Args:
+        id (int) : PDG Monte Carlo identifier for the particle.
+
+    Returns:
+        str: table latex string
+
+    Examples:
+    &gt;&gt;&gt; get_name(21)
+    &#39;g&#39;
+    &gt;&gt;&gt; get_name(1000022)
+    &#39;\\\\tilde{\\\\chi}_{1}^{0}&#39;
+    &quot;&quot;&quot;
     global PDG2LaTeXNameMap
     pdgid = PDG2LaTeXNameMap[id]
     return pdgid</div>
