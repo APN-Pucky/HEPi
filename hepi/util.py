@@ -1,3 +1,4 @@
+"""Collection of utility functions for the hepi package."""
 from typing import List,Tuple
 import numpy as np
 import hashlib
@@ -90,13 +91,30 @@ def get_LR_partner(id : int) -> Tuple[int,int]:
         return 1, int(PDG2Name2IDMap[n])
     return None
 
-def namehash(n):
+def namehash(n : any) -> str:
+    """Creates a sha256 hash from the objects string representation.
+
+    Args:
+        n (any) : object.
+
+    Returns:
+        str: sha256 of object.
+
+    Examples:
+        >>> p = {'a':1,'b':2}
+        >>> str(p)
+        "{'a': 1, 'b': 2}"
+        >>> namehash(str(p))
+        '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+        >>> namehash(p)
+        '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+    """
     m = hashlib.sha256()
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
 
 # TODO rework to work with lhapdf
-id_name = {
+lhapdf_id_name :dict = {
     251:    "GRVPI0",
     252:    "GRVPI1",
     270:    "xFitterPI_NLO_EIG",
@@ -1254,8 +1272,40 @@ id_name = {
     30101150:	"EPPS16_B_d_90CL_Au_hess",
     30101175:	"EPPS16_B_90CL_Au_hess",
 }
-name_id = {v: k for k, v in id_name.items()}
+"""Dict of lhapdf names for given id."""
+lhapdf_name_id :dict = {v: k for k, v in id_name.items()} 
+"""Dict of lhapdf id for given name.
+
+Inversion of `lhapdf_id_name.
+"""
 
 
-def lhapdf_name_to_id(name):
-    return name_id[name]
+def lhapdf_id_to_name(id: int ) -> str:
+    """Converts a LHAPDF id to the sets name.
+
+    Args:
+        id (int) : LHAPDF set id.
+
+    Returns:
+        str: name of the LHAPDF set.
+
+    Examples:
+        >>> lhapdf_id_to_name(30101175)
+        'EPPS16_B_90CL_Au_hess'
+    """
+    return lhapdf_id_name[id]
+
+def lhapdf_name_to_id(name : str) -> int:
+    """Converts a LHAPDF name to the sets id.
+
+    Args:
+        name (str) : LHAPDF set name.
+
+    Returns:
+        int: id of the LHAPDF set.
+
+    Examples:
+        >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
+        30101175
+    """
+    return lhapdf_name_id[name]
