@@ -7,7 +7,7 @@ Doc: https://apn-pucky.github.io/HEPi/index.html
 
 [![PyPI version][pypi image]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/hepi.svg) 
 
-| [Stable][doc stable]        | [Test][doc test]           |
+| [Stable][doc stable]        | [Dev][doc test]           |
 | ------------- |:-------------:|
 | [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
 | [![Coverage Status][c s i]][c s l] | [![Coverage Status][c t i]][c t l] |
