@@ -2,12 +2,12 @@
 from typing import List,Tuple
 import numpy as np
 import hashlib
-from particle import Particle
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
 
 def LD2DL(l: List):
-    """Convert a list of objects into a dictionary of lists.
+    """ 
+    Convert a list of objects into a dictionary of lists.
 
     The values of each object are first converted to a `dict` through the `__dict__` attribute.
     
@@ -43,7 +43,8 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
 
 
 def get_name(id : int) -> str:
-    """Get the latex name of a particle.
+    """
+    Get the latex name of a particle.
 
     Args:
         id (int) : PDG Monte Carlo identifier for the particle.
@@ -92,7 +93,8 @@ def get_LR_partner(id : int) -> Tuple[int,int]:
     return None
 
 def namehash(n : any) -> str:
-    """Creates a sha256 hash from the objects string representation.
+    """
+    Creates a sha256 hash from the objects string representation.
 
     Args:
         n (any) : object.
@@ -1280,11 +1282,12 @@ Inversion of `lhapdf_id_name.
 """
 
 
-def lhapdf_id_to_name(id: int ) -> str:
-    """Converts a LHAPDF id to the sets name.
+def lhapdf_id_to_name(lid: int ) -> str:
+    """
+    Converts a LHAPDF id to the sets name.
 
     Args:
-        id (int) : LHAPDF set id.
+        lid (int) : LHAPDF set id.
 
     Returns:
         str: name of the LHAPDF set.
@@ -1293,10 +1296,11 @@ def lhapdf_id_to_name(id: int ) -> str:
         >>> lhapdf_id_to_name(30101175)
         'EPPS16_B_90CL_Au_hess'
     """
-    return lhapdf_id_name[id]
+    return lhapdf_id_name[lid]
 
 def lhapdf_name_to_id(name : str) -> int:
-    """Converts a LHAPDF name to the sets id.
+    """
+    Converts a LHAPDF name to the sets id.
 
     Args:
         name (str) : LHAPDF set name.
