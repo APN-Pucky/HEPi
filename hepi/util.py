@@ -1,4 +1,4 @@
-"""Collection of utility functions for the hepi package."""
+"""Collection of utility functions for the :mod:`hepi` package."""
 from typing import List,Tuple
 import numpy as np
 import hashlib
@@ -1274,11 +1274,12 @@ lhapdf_id_name :dict = {
     30101150:	"EPPS16_B_d_90CL_Au_hess",
     30101175:	"EPPS16_B_90CL_Au_hess",
 }
-"""Dict of lhapdf names for given id."""
-lhapdf_name_id :dict = {v: k for k, v in id_name.items()} 
-"""Dict of lhapdf id for given name.
+"""Dictionary of lhapdf names for given id."""
+lhapdf_name_id :dict = {v: k for k, v in lhapdf_id_name.items()} 
+"""
+Dictionary of lhapdf id for given name.
 
-Inversion of `lhapdf_id_name.
+Inversion of :attr:`lhapdf_id_name`.
 """
 
 
