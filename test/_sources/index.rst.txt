@@ -31,7 +31,7 @@ test version::
    :maxdepth: 3
 
    Stable <https://apn-pucky.github.io/HEPi/>
-   Test <https://apn-pucky.github.io/HEPi/test/>
+   Dev <https://apn-pucky.github.io/HEPi/test/>
 
 .. toctree::
    :glob:
