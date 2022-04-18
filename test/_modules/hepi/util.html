@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2-6-g5114eb4
+                0.1.2-9-g750dc58
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -89,15 +89,16 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.util</h1><div class="highlight"><pre>
-<span></span>from typing import List,Tuple
+<span></span>&quot;&quot;&quot;Collection of utility functions for the :mod:`hepi` package.&quot;&quot;&quot;
+from typing import List,Tuple
 import numpy as np
 import hashlib
-from particle import Particle
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
 
 <div class="viewcode-block" id="LD2DL"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.LD2DL">[docs]</a>def LD2DL(l: List):
-    &quot;&quot;&quot;Convert a list of objects into a dictionary of lists.
+    &quot;&quot;&quot; 
+    Convert a list of objects into a dictionary of lists.
 
     The values of each object are first converted to a `dict` through the `__dict__` attribute.
     
@@ -133,7 +134,8 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
 
 
 <div class="viewcode-block" id="get_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_name">[docs]</a>def get_name(id : int) -&gt; str:
-    &quot;&quot;&quot;Get the latex name of a particle.
+    &quot;&quot;&quot;
+    Get the latex name of a particle.
 
     Args:
         id (int) : PDG Monte Carlo identifier for the particle.
@@ -181,13 +183,31 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
         return 1, int(PDG2Name2IDMap[n])
     return None</div>
 
-<div class="viewcode-block" id="namehash"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.namehash">[docs]</a>def namehash(n):
+<div class="viewcode-block" id="namehash"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.namehash">[docs]</a>def namehash(n : any) -&gt; str:
+    &quot;&quot;&quot;
+    Creates a sha256 hash from the objects string representation.
+
+    Args:
+        n (any) : object.
+
+    Returns:
+        str: sha256 of object.
+
+    Examples:
+        &gt;&gt;&gt; p = {&#39;a&#39;:1,&#39;b&#39;:2}
+        &gt;&gt;&gt; str(p)
+        &quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;
+        &gt;&gt;&gt; namehash(str(p))
+        &#39;3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8&#39;
+        &gt;&gt;&gt; namehash(p)
+        &#39;3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8&#39;
+    &quot;&quot;&quot;
     m = hashlib.sha256()
     m.update(str(n).encode(&#39;utf-8&#39;))
     return m.hexdigest()</div>
 
 # TODO rework to work with lhapdf
-<div class="viewcode-block" id="id_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.id_name">[docs]</a>id_name = {
+<div class="viewcode-block" id="lhapdf_id_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_id_name">[docs]</a>lhapdf_id_name :dict = {
     251:    &quot;GRVPI0&quot;,
     252:    &quot;GRVPI1&quot;,
     270:    &quot;xFitterPI_NLO_EIG&quot;,
@@ -1345,11 +1365,46 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
     30101150:	&quot;EPPS16_B_d_90CL_Au_hess&quot;,
     30101175:	&quot;EPPS16_B_90CL_Au_hess&quot;,
 }</div>
-<div class="viewcode-block" id="name_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.name_id">[docs]</a>name_id = {v: k for k, v in id_name.items()}</div>
+&quot;&quot;&quot;Dictionary of lhapdf names for given id.&quot;&quot;&quot;
+<div class="viewcode-block" id="lhapdf_name_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_name_id">[docs]</a>lhapdf_name_id :dict = {v: k for k, v in lhapdf_id_name.items()} </div>
+&quot;&quot;&quot;
+Dictionary of lhapdf id for given name.
+
+Inversion of :attr:`lhapdf_id_name`.
+&quot;&quot;&quot;
 
 
-<div class="viewcode-block" id="lhapdf_name_to_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_name_to_id">[docs]</a>def lhapdf_name_to_id(name):
-    return name_id[name]</div>
+<div class="viewcode-block" id="lhapdf_id_to_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_id_to_name">[docs]</a>def lhapdf_id_to_name(lid: int ) -&gt; str:
+    &quot;&quot;&quot;
+    Converts a LHAPDF id to the sets name.
+
+    Args:
+        lid (int) : LHAPDF set id.
+
+    Returns:
+        str: name of the LHAPDF set.
+
+    Examples:
+        &gt;&gt;&gt; lhapdf_id_to_name(30101175)
+        &#39;EPPS16_B_90CL_Au_hess&#39;
+    &quot;&quot;&quot;
+    return lhapdf_id_name[lid]</div>
+
+<div class="viewcode-block" id="lhapdf_name_to_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_name_to_id">[docs]</a>def lhapdf_name_to_id(name : str) -&gt; int:
+    &quot;&quot;&quot;
+    Converts a LHAPDF name to the sets id.
+
+    Args:
+        name (str) : LHAPDF set name.
+
+    Returns:
+        int: id of the LHAPDF set.
+
+    Examples:
+        &gt;&gt;&gt; lhapdf_name_to_id(&quot;EPPS16_B_90CL_Au_hess&quot;)
+        30101175
+    &quot;&quot;&quot;
+    return lhapdf_name_id[name]</div>
 </pre></div>
 
            </div>

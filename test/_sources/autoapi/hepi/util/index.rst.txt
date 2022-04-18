@@ -5,7 +5,8 @@
 
 .. autoapi-nested-parse::
 
-   
+   Collection of utility functions for the :mod:`hepi` package.
+
    ..
        !! processed by numpydoc !!
 
@@ -23,6 +24,7 @@ Functions
    hepi.util.get_name
    hepi.util.get_LR_partner
    hepi.util.namehash
+   hepi.util.lhapdf_id_to_name
    hepi.util.lhapdf_name_to_id
 
 
@@ -32,8 +34,8 @@ Attributes
 
 .. autoapisummary::
 
-   hepi.util.id_name
-   hepi.util.name_id
+   hepi.util.lhapdf_id_name
+   hepi.util.lhapdf_name_id
 
 
 .. py:function:: LD2DL(l: List)
@@ -141,9 +143,48 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: namehash(n)
+.. py:function:: namehash(n: any) -> str
 
    
+   Creates a sha256 hash from the objects string representation.
+
+   Args:
+       n (any) : object.
+
+   Returns:
+       str: sha256 of object.
+
+   Examples:
+       >>> p = {'a':1,'b':2}
+       >>> str(p)
+       "{'a': 1, 'b': 2}"
+       >>> namehash(str(p))
+       '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+       >>> namehash(p)
+       '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: lhapdf_id_name
+   :annotation: :dict
+
+   
+   Dictionary of lhapdf names for given id.
 
 
 
@@ -163,11 +204,13 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:data:: id_name
-   
+.. py:data:: lhapdf_name_id
+   :annotation: :dict
 
    
+   Dictionary of lhapdf id for given name.
 
+   Inversion of :attr:`lhapdf_id_name`.
 
 
 
@@ -186,11 +229,20 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:data:: name_id
-   
+.. py:function:: lhapdf_id_to_name(lid: int) -> str
 
    
+   Converts a LHAPDF id to the sets name.
 
+   Args:
+       lid (int) : LHAPDF set id.
+
+   Returns:
+       str: name of the LHAPDF set.
+
+   Examples:
+       >>> lhapdf_id_to_name(30101175)
+       'EPPS16_B_90CL_Au_hess'
 
 
 
@@ -209,10 +261,20 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: lhapdf_name_to_id(name)
+.. py:function:: lhapdf_name_to_id(name: str) -> int
 
    
+   Converts a LHAPDF name to the sets id.
 
+   Args:
+       name (str) : LHAPDF set name.
+
+   Returns:
+       int: id of the LHAPDF set.
+
+   Examples:
+       >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
+       30101175
 
 
 
