@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-14-gdace0dd
+                0.1.4-16-g5e0d2f8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -99,7 +99,6 @@ import pkgutil
 from hepi.util import namehash
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir, get_pre
 import re
-from uncertainties import ufloat_fromstr
 import os.path
 from pathlib import Path
 from .result import ResumminoResult, is_valid, parse_single
@@ -112,7 +111,7 @@ import os
 import stat
 
 
-<div class="viewcode-block" id="resummino_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.resummino_path">[docs]</a>resummino_path = &quot;~/resummino/&quot;</div>
+<div class="viewcode-block" id="resummino_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.resummino_path">[docs]</a>resummino_path:str = &quot;~/resummino/&quot;</div>
 &quot;&quot;&quot;resummino folder containing the binary in &#39;./build/bin&#39;.&quot;&quot;&quot;
 
 
@@ -128,7 +127,7 @@ import stat
     resummino_path = p+ (&quot;/&quot; if p[-1]!=&quot;/&quot; else &quot;&quot;)</div>
 
 
-<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.get_path">[docs]</a>def get_path():
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.get_path">[docs]</a>def get_path() -&gt; str:
     &quot;&quot;&quot;
     Get Resummino path.
 
@@ -156,7 +155,7 @@ import stat
         self.out_path = out_path</div>
 
 
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.run">[docs]</a>def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True):
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.run">[docs]</a>def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True) -&gt; dict:
     &quot;&quot;&quot;
     Run the passed list of parameters.
 

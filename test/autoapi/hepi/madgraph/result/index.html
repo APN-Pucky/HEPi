@@ -38,7 +38,7 @@
             <a href="../../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-14-gdace0dd
+                0.1.4-16-g5e0d2f8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -156,11 +156,11 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.madgraph.result.is_valid" title="hepi.madgraph.result.is_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid</span></code></a>(file: str, p: hepi.Input, d)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.madgraph.result.is_valid" title="hepi.madgraph.result.is_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid</span></code></a>(file: str, p: hepi.Input, d) → bool</p></td>
 <td><p>Verifies that an file is a complete output.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.madgraph.result.parse_single" title="hepi.madgraph.result.parse_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_single</span></code></a>(file) → MadgraphResult</p></td>
-<td><p></p></td>
+<td><p>Extracts LO, NLO and NLO+NLL from resummino output file.</p></td>
 </tr>
 </tbody>
 </table>
@@ -183,14 +183,41 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.madgraph.result.is_valid">
-<span class="sig-prename descclassname"><span class="pre">hepi.madgraph.result.</span></span><span class="sig-name descname"><span class="pre">is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../index.html#id4" title="hepi.Input"><span class="pre">hepi.Input</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/madgraph/result.html#is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.result.is_valid" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.madgraph.result.</span></span><span class="sig-name descname"><span class="pre">is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../index.html#id4" title="hepi.Input"><span class="pre">hepi.Input</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/hepi/madgraph/result.html#is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.result.is_valid" title="Permalink to this definition"></a></dt>
 <dd><p>Verifies that an file is a complete output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p></li>
+<li><p><strong>p</strong> (<a class="reference internal" href="../../index.html#id4" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Input parameters.</p></li>
+<li><p><strong>d</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Param dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if <cite>file</cite> could be parsed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.madgraph.result.parse_single">
 <span class="sig-prename descclassname"><span class="pre">hepi.madgraph.result.</span></span><span class="sig-name descname"><span class="pre">parse_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hepi.madgraph.result.MadgraphResult" title="hepi.madgraph.result.MadgraphResult"><span class="pre">MadgraphResult</span></a></span></span><a class="reference internal" href="../../../../_modules/hepi/madgraph/result.html#parse_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.result.parse_single" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Extracts LO, NLO and NLO+NLL from resummino output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If a value is not found in the file None is used.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">MadGraphResult</span></code></p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 </section>

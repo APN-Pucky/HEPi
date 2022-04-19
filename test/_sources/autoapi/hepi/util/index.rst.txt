@@ -59,12 +59,12 @@ Attributes
    {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
-.. py:function:: get_name(id: int) -> str
+.. py:function:: get_name(pid: int) -> str
 
    Get the latex name of a particle.
 
-   :param id: PDG Monte Carlo identifier for the particle.
-   :type id: int
+   :param pid: PDG Monte Carlo identifier for the particle.
+   :type pid: int
 
    :returns: Latex name.
    :rtype: str
@@ -77,12 +77,12 @@ Attributes
    '\\tilde{\\chi}_{1}^{0}'
 
 
-.. py:function:: get_LR_partner(id: int) -> Tuple[int, int]
+.. py:function:: get_LR_partner(pid: int) -> Tuple[int, int]
 
    Transforms a PDG id to it's left-right partner.
 
-   :param id: PDG Monte Carlo identifier for the particle.
-   :type id: int
+   :param pid: PDG Monte Carlo identifier for the particle.
+   :type pid: int
 
    :returns: First int is -1 for Left and 1 for Right. Second int is the PDG id.
    :rtype: tuple

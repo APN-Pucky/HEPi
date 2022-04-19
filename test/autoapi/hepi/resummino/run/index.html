@@ -38,7 +38,7 @@
             <a href="../../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-14-gdace0dd
+                0.1.4-16-g5e0d2f8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -160,10 +160,10 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.resummino.run.set_path" title="hepi.resummino.run.set_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_path</span></code></a>(p: str)</p></td>
 <td><p>Set the path to the resummino folder containing the binary in './build/bin'.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.resummino.run.get_path" title="hepi.resummino.run.get_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.resummino.run.get_path" title="hepi.resummino.run.get_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code></a>() → str</p></td>
 <td><p>Get Resummino path.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.resummino.run.run" title="hepi.resummino.run.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(params: List[hepi.Input], noskip=False, bar=True, no_parse=False, para=True)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.resummino.run.run" title="hepi.resummino.run.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(params: List[hepi.Input], noskip=False, bar=True, no_parse=False, para=True) → dict</p></td>
 <td><p>Run the passed list of parameters.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.resummino.run._parse" title="hepi.resummino.run._parse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_parse</span></code></a>(outputs: List[str]) → List[hepi.resummino.result.ResumminoResult]</p></td>
@@ -193,7 +193,7 @@
 </table>
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.resummino.run.resummino_path">
-<span class="sig-prename descclassname"><span class="pre">hepi.resummino.run.</span></span><span class="sig-name descname"><span class="pre">resummino_path</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">~/resummino/</span></em><a class="reference internal" href="../../../../_modules/hepi/resummino/run.html#resummino_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.run.resummino_path" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.resummino.run.</span></span><span class="sig-name descname"><span class="pre">resummino_path</span></span><em class="property"><span class="w"> </span><span class="pre">:str</span> <span class="pre">=</span> <span class="pre">~/resummino/</span></em><a class="reference internal" href="../../../../_modules/hepi/resummino/run.html#resummino_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.run.resummino_path" title="Permalink to this definition"></a></dt>
 <dd><p>resummino folder containing the binary in ‘./build/bin’.</p>
 </dd></dl>
 
@@ -210,7 +210,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.resummino.run.get_path">
-<span class="sig-prename descclassname"><span class="pre">hepi.resummino.run.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/resummino/run.html#get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.run.get_path" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.resummino.run.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../../_modules/hepi/resummino/run.html#get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.run.get_path" title="Permalink to this definition"></a></dt>
 <dd><p>Get Resummino path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -240,7 +240,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.resummino.run.run">
-<span class="sig-prename descclassname"><span class="pre">hepi.resummino.run.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../index.html#id4" title="hepi.Input"><span class="pre">hepi.Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noskip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/resummino/run.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.run.run" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.resummino.run.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../index.html#id4" title="hepi.Input"><span class="pre">hepi.Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noskip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../../_modules/hepi/resummino/run.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.run.run" title="Permalink to this definition"></a></dt>
 <dd><p>Run the passed list of parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-14-gdace0dd
+                0.1.4-16-g5e0d2f8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -167,19 +167,16 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.spheno.get_input_dir" title="hepi.spheno.get_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_dir</span></code></a>()</p></td>
 <td><p>Get the input directory.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.spheno.get_output_dir" title="hepi.spheno.get_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_dir</span></code></a>()</p></td>
-<td><p>Get the input directory.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.spheno.update_slha" title="hepi.spheno.update_slha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_slha</span></code></a>(i: Input)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.spheno.update_slha" title="hepi.spheno.update_slha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_slha</span></code></a>(i: Input)</p></td>
 <td><p>Updates dependent parameters in Input <cite>i</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.spheno.set_path" title="hepi.spheno.set_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_path</span></code></a>(p)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.spheno.set_path" title="hepi.spheno.set_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_path</span></code></a>(p: str)</p></td>
 <td><p>Set the path to the SPheno folder containing the binary in './bin'.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.spheno.get_path" title="hepi.spheno.get_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code></a>()</p></td>
-<td><p>Returns the currently set SPheno path.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.spheno.get_path" title="hepi.spheno.get_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code></a>() → str</p></td>
+<td><p>Get the SPheno path.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="run/index.html#module-hepi.spheno.run" title="hepi.spheno.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="run/index.html#module-hepi.spheno.run" title="hepi.spheno.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -212,20 +209,6 @@
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="hepi.spheno.get_output_dir">
-<span class="sig-prename descclassname"><span class="pre">hepi.spheno.</span></span><span class="sig-name descname"><span class="pre">get_output_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.spheno.get_output_dir" title="Permalink to this definition"></a></dt>
-<dd><p>Get the input directory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">out_dir</span></code></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.spheno.Input">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.spheno.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../index.html#hepi.Order" title="hepi.Order"><span class="pre">Order</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_lo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_nlo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invariant_mass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'total'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.spheno.Input" title="Permalink to this definition"></a></dt>
@@ -247,14 +230,27 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.spheno.set_path">
-<span class="sig-prename descclassname"><span class="pre">hepi.spheno.</span></span><span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/spheno/run.html#set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.spheno.set_path" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.spheno.</span></span><span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/spheno/run.html#set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.spheno.set_path" title="Permalink to this definition"></a></dt>
 <dd><p>Set the path to the SPheno folder containing the binary in ‘./bin’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>str</em>) – new path.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.spheno.get_path">
-<span class="sig-prename descclassname"><span class="pre">hepi.spheno.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/spheno/run.html#get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.spheno.get_path" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the currently set SPheno path.</p>
+<span class="sig-prename descclassname"><span class="pre">hepi.spheno.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/spheno/run.html#get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.spheno.get_path" title="Permalink to this definition"></a></dt>
+<dd><p>Get the SPheno path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current SPheno path.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">

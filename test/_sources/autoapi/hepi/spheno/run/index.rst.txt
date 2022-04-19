@@ -32,14 +32,20 @@ Attributes
 
    spheno folder containing the binary in './bin'.
 
-.. py:function:: set_path(p)
+.. py:function:: set_path(p: str)
 
    Set the path to the SPheno folder containing the binary in './bin'.
 
+   :param p: new path.
+   :type p: str
 
-.. py:function:: get_path()
 
-   Returns the currently set SPheno path.
+.. py:function:: get_path() -> str
+
+   Get the SPheno path.
+
+   :returns: current SPheno path.
+   :rtype: str
 
 
 .. py:function:: run(slhas: List[hepi.input.Input]) -> List[hepi.input.Input]

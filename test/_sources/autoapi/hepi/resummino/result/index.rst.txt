@@ -42,26 +42,26 @@ Functions
    :type nlo_plus_nll: :obj:`double`
 
 
-.. py:function:: is_valid(file: str, p: hepi.Input, d)
+.. py:function:: is_valid(file: str, p: hepi.Input, d) -> bool
 
    Verifies that an file is a complete output.
 
-   :param file: file path to be parsed.
+   :param file: File path to be parsed.
    :type file: str
-   :param p: input parameters.
+   :param p: Onput parameters.
    :type p: :class:`hepi.Input`
-   :param d: param dictionary.
+   :param d: Param dictionary.
    :type d: :obj:`dict`
 
-   Returns:
-
+   :returns: True if `file` could be parsed.
+   :rtype: bool
 
 
 .. py:function:: parse_single(file: str) -> ResumminoResult
 
    Extracts LO, NLO and NLO+NLL from resummino output file.
 
-   :param file: file path to be parsed.
+   :param file: File path to be parsed.
    :type file: str
 
    :returns: If a value is not found in the file None is used.

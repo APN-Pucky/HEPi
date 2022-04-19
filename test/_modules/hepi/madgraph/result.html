@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-14-gdace0dd
+                0.1.4-16-g5e0d2f8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -103,9 +103,17 @@ from uncertainties import ufloat_fromstr
         Result.__init__(self, lo, nlo, nlo)</div>
 
 
-<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d):
+<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d) -&gt; bool :
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
+
+    Args:
+        file (str): File path to be parsed.
+        p (:class:`hepi.Input`): Input parameters.
+        d (:obj:`dict`): Param dictionary.
+
+    Returns:
+        bool : True if `file` could be parsed.
     &quot;&quot;&quot;
     order = p.order
     res = parse_single(file)
@@ -119,6 +127,16 @@ from uncertainties import ufloat_fromstr
     return False</div>
 
 <div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.parse_single">[docs]</a>def parse_single(file) -&gt; MadgraphResult:
+    &quot;&quot;&quot;
+    Extracts LO, NLO and NLO+NLL from resummino output file.
+
+    Args:
+        file (str): File path to be parsed.
+
+    Returns:
+        :class:`MadGraphResult` : If a value is not found in the file None is used.
+
+    &quot;&quot;&quot;
     # TODO generalize units like RS
     lo_pattern = re.compile(r&#39;^\s*Total cross section:\s*(.*) pb&#39;)
 

@@ -36,7 +36,7 @@ Functions
 
 
 
-.. py:function:: run(params: List[hepi.Input], noskip=False, bar=True, no_parse=False, para=True)
+.. py:function:: run(params: List[hepi.Input], noskip=False, bar=True, no_parse=False, para=True) -> dict
 
    Run the passed list of parameters.
 
@@ -66,7 +66,7 @@ Functions
    :param str: new Resummino path.
 
 
-.. py:function:: get_path()
+.. py:function:: get_path() -> str
 
    Get Resummino path.
 

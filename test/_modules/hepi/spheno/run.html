@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-14-gdace0dd
+                0.1.4-16-g5e0d2f8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -89,12 +89,9 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.spheno.run</h1><div class="highlight"><pre>
-<span></span>from distutils import command
-from typing import List
+<span></span>from typing import List
 import warnings
-import pyslha
-from hepi import get_input_dir, get_output_dir
-#from hepi.input import slha_scan
+from hepi import get_input_dir
 import subprocess
 import os
 from hepi.input import Input, update_slha
@@ -103,17 +100,23 @@ from hepi.input import Input, update_slha
 &quot;&quot;&quot;spheno folder containing the binary in &#39;./bin&#39;.&quot;&quot;&quot;
 
 
-<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.set_path">[docs]</a>def set_path(p):
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.set_path">[docs]</a>def set_path(p:str):
     &quot;&quot;&quot;
     Set the path to the SPheno folder containing the binary in &#39;./bin&#39;.
+
+    Args:
+        p (str): new path.
     &quot;&quot;&quot;
     global spheno_path
     spheno_path = p + (&quot;/&quot; if p[-1]!=&quot;/&quot; else &quot;&quot;)</div>
 
 
-<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.get_path">[docs]</a>def get_path():
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.get_path">[docs]</a>def get_path() -&gt;str:
     &quot;&quot;&quot;
-    Returns the currently set SPheno path.
+    Get the SPheno path.
+
+    Returns:
+        str: current SPheno path.
     &quot;&quot;&quot;
     global spheno_path
     return spheno_path</div>

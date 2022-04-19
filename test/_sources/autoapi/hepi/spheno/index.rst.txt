@@ -38,7 +38,6 @@ Functions
 .. autoapisummary::
 
    hepi.spheno.get_input_dir
-   hepi.spheno.get_output_dir
    hepi.spheno.update_slha
    hepi.spheno.set_path
    hepi.spheno.get_path
@@ -62,14 +61,6 @@ Attributes
    :rtype: str
 
 
-.. py:function:: get_output_dir()
-
-   Get the input directory.
-
-   :returns: :attr:`out_dir`
-   :rtype: str
-
-
 .. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
 
    Input for computation.
@@ -89,14 +80,20 @@ Attributes
 
    spheno folder containing the binary in './bin'.
 
-.. py:function:: set_path(p)
+.. py:function:: set_path(p: str)
 
    Set the path to the SPheno folder containing the binary in './bin'.
 
+   :param p: new path.
+   :type p: str
 
-.. py:function:: get_path()
 
-   Returns the currently set SPheno path.
+.. py:function:: get_path() -> str
+
+   Get the SPheno path.
+
+   :returns: current SPheno path.
+   :rtype: str
 
 
 .. py:function:: run(slhas: List[hepi.input.Input]) -> List[hepi.input.Input]

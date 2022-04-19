@@ -37,7 +37,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-14-gdace0dd
+                0.1.4-16-g5e0d2f8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -140,10 +140,10 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.LD2DL" title="hepi.util.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List)</p></td>
 <td><p>Convert a list of objects into a dictionary of lists.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.get_name" title="hepi.util.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(id: int) → str</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.get_name" title="hepi.util.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(pid: int) → str</p></td>
 <td><p>Get the latex name of a particle.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.get_LR_partner" title="hepi.util.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(id: int) → Tuple[int, int]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.get_LR_partner" title="hepi.util.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(pid: int) → Tuple[int, int]</p></td>
 <td><p>Transforms a PDG id to it's left-right partner.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.namehash" title="hepi.util.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n: any) → str</p></td>
@@ -204,11 +204,11 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.util.get_name">
-<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.get_name" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.get_name" title="Permalink to this definition"></a></dt>
 <dd><p>Get the latex name of a particle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – PDG Monte Carlo identifier for the particle.</p>
+<dd class="field-odd"><p><strong>pid</strong> (<em>int</em>) – PDG Monte Carlo identifier for the particle.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Latex name.</p>
@@ -228,11 +228,11 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.util.get_LR_partner">
-<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">get_LR_partner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#get_LR_partner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.get_LR_partner" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">get_LR_partner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#get_LR_partner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.get_LR_partner" title="Permalink to this definition"></a></dt>
 <dd><p>Transforms a PDG id to it’s left-right partner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – PDG Monte Carlo identifier for the particle.</p>
+<dd class="field-odd"><p><strong>pid</strong> (<em>int</em>) – PDG Monte Carlo identifier for the particle.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>First int is -1 for Left and 1 for Right. Second int is the PDG id.</p>
