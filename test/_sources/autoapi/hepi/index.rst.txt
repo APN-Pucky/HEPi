@@ -45,6 +45,7 @@ Classes
    hepi.DictData
    hepi.Order
    hepi.Input
+   hepi.DictData
    hepi.Result
    hepi.DictData
    hepi.Input
@@ -599,12 +600,22 @@ Attributes
    {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
+.. py:class:: DictData
+
+   .. py:method:: __str__(self)
+
+      Returns attributes as dict as string
+
+
+
 .. py:data:: required_numerical_uncertainty_factor
    :annotation: = 10
 
    If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None)
+
+   Bases: :py:obj:`hepi.util.DictData`
 
    General result class.
 

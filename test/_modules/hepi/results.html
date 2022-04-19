@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-20-g3f0f9e7
+                0.1.4-21-ga69a2a8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -90,7 +90,7 @@
              
   <h1>Source code for hepi.results</h1><div class="highlight"><pre>
 <span></span>&quot;&quot;&quot;Results and postprocessing for the :mod:`hepi` package.&quot;&quot;&quot;
-from .util import LD2DL
+from .util import LD2DL, DictData
 import numpy as np
 from typing import List
 from uncertainties import unumpy
@@ -103,7 +103,7 @@ import warnings
 &quot;&quot;&quot;If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.&quot;&quot;&quot;
 
 
-<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result">[docs]</a>class Result:
+<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result">[docs]</a>class Result(DictData):
     &quot;&quot;&quot;
     General result class.
 

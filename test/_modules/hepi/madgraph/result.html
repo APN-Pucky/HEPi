@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-20-g3f0f9e7
+                0.1.4-21-ga69a2a8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -89,18 +89,18 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.madgraph.result</h1><div class="highlight"><pre>
-<span></span>from hepi.input import Order
-from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
+<span></span>import warnings
+from hepi.input import Order
+from .. import Input, Result
 import re
 from uncertainties import ufloat_fromstr
 
 
 <div class="viewcode-block" id="MadgraphResult"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.MadgraphResult">[docs]</a>class MadgraphResult(Result):
-    &quot;&quot;&quot;
-    MadGraph Result Data.
-    &quot;&quot;&quot;
+    &quot;&quot;&quot; MadGraph Result Data.&quot;&quot;&quot;
     def __init__(self, lo, nlo):
-        Result.__init__(self, lo, nlo, nlo)</div>
+        &quot;&quot;&quot;Sets LO and NLO result. NLO+NLL is set to None.&quot;&quot;&quot;
+        Result.__init__(self, lo, nlo, None)</div>
 
 
 <div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d) -&gt; bool :
@@ -117,18 +117,22 @@ from uncertainties import ufloat_fromstr
     &quot;&quot;&quot;
     order = p.order
     res = parse_single(file)
+    if order is Order.NLO_PLUS_NLL:
+        warnings.warn(&quot;MadGraph has no NLO_PLUS_NLL computation.&quot;)
     if res.LO is not None and order is Order.LO:
         return True
     if res.LO is not None and res.NLO is not None and order is Order.NLO:
-        return True
-    if res.LO is not None and res.NLO is not None and res.NLO_PLUS_NLL is not None and order is Order.NLO_PLUS_NLL:
         return True
     print(&quot;RESTART&quot; ,res.LO, res.NLO,res.NLO_PLUS_NLL, file)
     return False</div>
 
 <div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.parse_single">[docs]</a>def parse_single(file) -&gt; MadgraphResult:
     &quot;&quot;&quot;
-    Extracts LO, NLO and NLO+NLL from resummino output file.
+    Extracts Result from MadGraph output file.
+
+    Note:
+        This is only the result of one order. Therefore LO and NLO result in the return value are the same.
+
 
     Args:
         file (str): File path to be parsed.

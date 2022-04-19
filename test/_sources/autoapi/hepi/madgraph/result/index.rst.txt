@@ -32,14 +32,7 @@ Functions
 
    MadGraph Result Data.
 
-   Sets given and computes dependent ``Attributes``.
-
-   :param lo: corresponds to :attr:`LO`.
-   :type lo: :obj:`double`
-   :param nlo: corresponds to :attr:`NLO`.
-   :type nlo: :obj:`double`
-   :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
-   :type nlo_plus_nll: :obj:`double`
+   Sets LO and NLO result. NLO+NLL is set to None.
 
 
 .. py:function:: is_valid(file: str, p: hepi.Input, d) -> bool
@@ -59,7 +52,9 @@ Functions
 
 .. py:function:: parse_single(file) -> MadgraphResult
 
-   Extracts LO, NLO and NLO+NLL from resummino output file.
+   Extracts Result from MadGraph output file.
+
+   .. note:: This is only the result of one order. Therefore LO and NLO result in the return value are the same.
 
    :param file: File path to be parsed.
    :type file: str
