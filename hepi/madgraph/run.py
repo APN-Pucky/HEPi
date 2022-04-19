@@ -6,24 +6,24 @@ import numpy as np
 import pkgutil
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
 import re
-from uncertainties import ufloat_fromstr
 import os.path
 from pathlib import Path
 from .result import MadgraphResult, is_valid, parse_single
-import enlighten
 import time
 import difflib
-import pyslha
-from smpl.parallel import *
+from smpl.parallel import par
 import hashlib
 
 madgraph_path = "/opt/MG5_aMC_v2_7_0/"
 """madgraph folder"""
 
 
-def set_path(p):
+def set_path(p:str):
     """
     Set the path to the MadGraph folder containing the binary in './bin'.
+
+    Args:
+        p (str): New MadGraph path.
     """
     global madgraph_path
     madgraph_path = p+ ("/" if p[-1]!="/" else "")
@@ -31,7 +31,10 @@ def set_path(p):
 
 def get_path():
     """
-    Returns the currently set MadGraph path.
+    Get the current MadGraph path.
+
+    Returns:
+        str: current MadGraph path.
     """
     global madgraph_path
     return madgraph_path
@@ -62,6 +65,7 @@ def _parse(outputs: List[str]) -> List[MadgraphResult]:
     for r in par(lambda f: parse_single(f["out"]), outputs):
         rsl.append(r)
     return rsl
+
 def namehash(n):
     m = hashlib.sha256()
     m.update(str(n).encode('utf-8'))

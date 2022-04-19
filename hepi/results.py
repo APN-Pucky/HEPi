@@ -123,7 +123,7 @@ def pdf_error(li, dl, confidence_level=90):
             dl["NLO_PDF_ERRSYM"][i] = nlo_unc.errsymm
             #TODO error sym to minus and plus
             if(plot.usd(dl["NLO"][i])*required_numerical_uncertainty_factor > dl["NLO_PDF_ERRPLUS"][i] or  plot.usd(dl["NLO"][i])*required_numerical_uncertainty_factor > -dl["NLO_PDF_ERRMINUS"][i]):
-                warnings.warn("too low numerical nlo precision vs pdf", RuntimeWarning)
+                warnings.warn("too low numerical nlo precision vs pdf.", RuntimeWarning)
 
             nlo_plus_nll_unc = set.uncertainty(
                 [plot.unv(dl["NLO_PLUS_NLL"][k]) for k in pdfs], 90)
@@ -133,7 +133,7 @@ def pdf_error(li, dl, confidence_level=90):
             dl["NLO_PLUS_NLL_PDF_ERRSYM"][i] = nlo_plus_nll_unc.errsymm
             #TODO error sym to minus and plus
             if(plot.usd(dl["NLO_PLUS_NLL"][i])*required_numerical_uncertainty_factor > dl["NLO_PLUS_NLL_PDF_ERRPLUS"][i] or  plot.usd(dl["NLO_PLUS_NLL"][i])*required_numerical_uncertainty_factor > -dl["NLO_PLUS_NLL_PDF_ERRMINUS"][i]):
-                warnings.warn("too low numerical nlo_plus_nll precision vs pdf", RuntimeWarning)
+                warnings.warn("too low numerical nlo_plus_nll precision vs pdf.", RuntimeWarning)
 
 
     mask = dl["LO_PDF_CENTRAL"]!= np.array(None)
@@ -193,21 +193,21 @@ def scale_error(li, dl):
             dl["LO_SCALE_ERRMINUS"][i] = np.min(
                 [plot.unv(dl["LO"][k]) for k in scales])-plot.unv(dl["LO"][i])
             if(plot.usd(dl["LO"][i])*required_numerical_uncertainty_factor > dl["LO_SCALE_ERRPLUS"][i] or  plot.usd(dl["LO"][i])*required_numerical_uncertainty_factor > -dl["LO_SCALE_ERRMINUS"][i]):
-                warnings.warn("too low numerical lo precision vs scale", RuntimeWarning)
+                warnings.warn("too low numerical lo precision vs scale.", RuntimeWarning)
 
             dl["NLO_SCALE_ERRPLUS"][i] = np.max(
                 [plot.unv(dl["NLO"][k]) for k in scales])-plot.unv(dl["NLO"][i])
             dl["NLO_SCALE_ERRMINUS"][i] = np.min(
                 [plot.unv(dl["NLO"][k]) for k in scales])-plot.unv(dl["NLO"][i])
             if(plot.usd(dl["NLO"][i])*required_numerical_uncertainty_factor > dl["NLO_SCALE_ERRPLUS"][i] or  plot.usd(dl["NLO"][i])*required_numerical_uncertainty_factor > -dl["NLO_SCALE_ERRMINUS"][i]):
-                warnings.warn("too low numerical nlo precision vs scale", RuntimeWarning)
+                warnings.warn("too low numerical nlo precision vs scale.", RuntimeWarning)
 
             dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][i] = np.max(
                 [plot.unv(dl["NLO_PLUS_NLL"][k]) for k in scales])-plot.unv(dl["NLO_PLUS_NLL"][i])
             dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][i] = np.min(
                 [plot.unv(dl["NLO_PLUS_NLL"][k]) for k in scales])-plot.unv(dl["NLO_PLUS_NLL"][i])
             if(plot.usd(dl["NLO_PLUS_NLL"][i])*required_numerical_uncertainty_factor > dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][i] or  plot.usd(dl["NLO_PLUS_NLL"][i])*required_numerical_uncertainty_factor > -dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][i]):
-                warnings.warn("too low numerical nlo_plus_nll precision vs scale", RuntimeWarning)
+                warnings.warn("too low numerical nlo_plus_nll precision vs scale.", RuntimeWarning)
 
     mask = dl["LO_SCALE_ERRPLUS"]!= np.array(None)
     dl["LO_SCALE"][mask] = unumpy.uarray(plot.unv(dl["LO"][mask])+dl["LO_SCALE_ERRPLUS"][mask]/2.+dl["LO_SCALE_ERRMINUS"][mask]/2.,

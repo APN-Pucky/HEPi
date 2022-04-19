@@ -1,3 +1,9 @@
+livehtml:
+	$(MAKE) -C docs livehtml
+
+html:
+	$(MAKE) -C docs html
+
 install:
 	python3 -m pip install --user .
 

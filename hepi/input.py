@@ -1,8 +1,6 @@
-from distutils.log import warn
 from enum import IntEnum
-#from math import dist
-import copy
 import warnings
+import copy
 import numpy as np
 from typing import List
 
@@ -101,6 +99,18 @@ class Order(IntEnum):
 class Input:
     """
     Input for computation.
+
+    Attributes:
+        order
+        energy
+        energyhalf
+        particle1
+        particle2
+        slha
+        pdf_lo
+        pdfset_lo
+        pdf_nlo
+        pdfset_nlo
     """
     # TODO allow unspecified input? Maybe with kwargs + defaults
     def __init__(self, order :Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, invariant_mass="auto",result="total",pt="auto",id="",model_path="/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO"):
@@ -140,6 +150,7 @@ def update_slha( i:Input ):
         i.mu = (abs(b.blocks["MASS"][abs(i.particle1)]) +
                    abs(b.blocks["MASS"][abs(i.particle2)]))/2.
     except:
+        warnings.warn("Could not set new central scale to average of masses.",RuntimeWarning)
         pass
         
 

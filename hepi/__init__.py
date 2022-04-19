@@ -1,3 +1,6 @@
+"""
+HEPi package aims to automize cluster computations for parameter scans with the option to produce plots.
+"""
 from .input import *
 from .results import *
 from .util import *
