@@ -268,20 +268,62 @@ Attributes
       Next-to-Leading Order plus Next-to-Leading Logarithms
 
 
-.. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
+.. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO', update=True)
 
-   Input for computation.
+   Input for computation and scans.
 
-   :ivar order:
-   :ivar energy:
-   :ivar energyhalf:
-   :ivar particle1:
-   :ivar particle2:
-   :ivar slha:
-   :ivar pdf_lo:
-   :ivar pdfset_lo:
-   :ivar pdf_nlo:
-   :ivar pdfset_nlo:
+   :ivar order: LO, NLO or NLO+NLL computation.
+   :vartype order: :class:`Order`
+   :ivar energy: CMS energy in GeV.
+   :vartype energy: int
+   :ivar energyhalf: Halfed `energy`.
+   :vartype energyhalf: int
+   :ivar particle1: PDG identifier of the first final state particle.
+   :vartype particle1: int
+   :ivar particle2: PDG identifier of the second final state particle.
+   :vartype particle2: int
+   :ivar slha: File path of for the base slha.
+               Modified slha files will be used if a scan requires a change of the input.
+   :vartype slha: str
+   :ivar pdf_lo: LO PDF name.
+   :vartype pdf_lo: str
+   :ivar pdf_nlo: NLO PDF name.
+   :vartype pdf_nlo: str
+   :ivar pdfset_lo: LO PDF member/set id.
+   :vartype pdfset_lo: int
+   :ivar pdfset_nlo: NLO PDF member/set id.
+   :vartype pdfset_nlo: int
+   :ivar pdf_lo_id: LO PDF first member/set id.
+   :vartype pdf_lo_id: int
+   :ivar pdf_nlo_id: NLO PDF first member/set id.
+   :vartype pdf_nlo_id: int
+   :ivar mu: central scale factor.
+   :vartype mu: double
+   :ivar mu_f: Factorization scale factor.
+   :vartype mu_f: double
+   :ivar mu_r: Renormalization scale factor.
+   :vartype mu_r: double
+   :ivar precision: Desired numerical relative precision.
+   :vartype precision: double
+   :ivar max_iters: Upper limit on integration iterations.
+   :vartype max_iters: int
+   :ivar invariant_mass: Invariant mass mode 'auto = sqrt((p1+p2)^2)' else value.
+   :vartype invariant_mass: str
+   :ivar pt: Transverse Momentum mode 'auto' or value.
+   :vartype pt: str
+   :ivar result: Result type 'total'/'pt'/'ptj'/'m'.
+   :vartype result: str
+   :ivar id: Set an id of this run.
+   :vartype id: str
+   :ivar model_path: Path for MadGraph model.
+   :vartype model_path: str
+   :ivar update: Update dependent `mu`.
+
+   :vartype update: bool
+
+   .. py:method:: __str__(self)
+
+      Return str(self).
 
 
 
@@ -294,9 +336,42 @@ Attributes
 
 
 
-.. py:function:: scan(l: List[Input], var: str, range) -> List[Input]
+.. py:function:: scan(l: List[Input], var: str, range: Iterable) -> List[Input]
 
    Scans a variable `var` over `range` in `l`.
+
+   .. note:: This function does not ensure that dependent vairables are updated (see `energyhalf` in Examples).
+
+   :param l: Input parameters that get scanned each.
+   :type l: :obj:`list` of :class:`Input`
+   :param var: Scan variable name.
+   :type var: str
+   :param range: Range of `var` to be scanned.
+   :type range: Iterable
+
+   :returns: Modified list with scan runs added.
+   :rtype: :obj:`list` of :class:`Input`
+
+   .. rubric:: Examples
+
+   >>> li = [Input(Order.LO, 13000,  1000022,1000022, "None", "CT14lo","CT14lo",update=False)]
+   >>> li = scan(li,"energy",range(10000,13000,1000))
+   >>> for e in li:
+   ...     print(e)
+   {'order': <Order.LO: 0>, 'energy': 10000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.LO: 0>, 'energy': 11000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.LO: 0>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   >>> for e in scan(li,"order",[Order.LO,Order.NLO,Order.NLO_PLUS_NLL]):
+   ...     print(e)
+   {'order': <Order.LO: 0>, 'energy': 10000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.NLO: 1>, 'energy': 10000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.NLO_PLUS_NLL: 2>, 'energy': 10000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.LO: 0>, 'energy': 11000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.NLO: 1>, 'energy': 11000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.NLO_PLUS_NLL: 2>, 'energy': 11000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.LO: 0>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.NLO: 1>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
+   {'order': <Order.NLO_PLUS_NLL: 2>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
 
 
 .. py:function:: scale_scan(l: List[Input], range=3, distance=2.0)
@@ -576,20 +651,62 @@ Attributes
    30101175
 
 
-.. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
+.. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO', update=True)
 
-   Input for computation.
+   Input for computation and scans.
 
-   :ivar order:
-   :ivar energy:
-   :ivar energyhalf:
-   :ivar particle1:
-   :ivar particle2:
-   :ivar slha:
-   :ivar pdf_lo:
-   :ivar pdfset_lo:
-   :ivar pdf_nlo:
-   :ivar pdfset_nlo:
+   :ivar order: LO, NLO or NLO+NLL computation.
+   :vartype order: :class:`Order`
+   :ivar energy: CMS energy in GeV.
+   :vartype energy: int
+   :ivar energyhalf: Halfed `energy`.
+   :vartype energyhalf: int
+   :ivar particle1: PDG identifier of the first final state particle.
+   :vartype particle1: int
+   :ivar particle2: PDG identifier of the second final state particle.
+   :vartype particle2: int
+   :ivar slha: File path of for the base slha.
+               Modified slha files will be used if a scan requires a change of the input.
+   :vartype slha: str
+   :ivar pdf_lo: LO PDF name.
+   :vartype pdf_lo: str
+   :ivar pdf_nlo: NLO PDF name.
+   :vartype pdf_nlo: str
+   :ivar pdfset_lo: LO PDF member/set id.
+   :vartype pdfset_lo: int
+   :ivar pdfset_nlo: NLO PDF member/set id.
+   :vartype pdfset_nlo: int
+   :ivar pdf_lo_id: LO PDF first member/set id.
+   :vartype pdf_lo_id: int
+   :ivar pdf_nlo_id: NLO PDF first member/set id.
+   :vartype pdf_nlo_id: int
+   :ivar mu: central scale factor.
+   :vartype mu: double
+   :ivar mu_f: Factorization scale factor.
+   :vartype mu_f: double
+   :ivar mu_r: Renormalization scale factor.
+   :vartype mu_r: double
+   :ivar precision: Desired numerical relative precision.
+   :vartype precision: double
+   :ivar max_iters: Upper limit on integration iterations.
+   :vartype max_iters: int
+   :ivar invariant_mass: Invariant mass mode 'auto = sqrt((p1+p2)^2)' else value.
+   :vartype invariant_mass: str
+   :ivar pt: Transverse Momentum mode 'auto' or value.
+   :vartype pt: str
+   :ivar result: Result type 'total'/'pt'/'ptj'/'m'.
+   :vartype result: str
+   :ivar id: Set an id of this run.
+   :vartype id: str
+   :ivar model_path: Path for MadGraph model.
+   :vartype model_path: str
+   :ivar update: Update dependent `mu`.
+
+   :vartype update: bool
+
+   .. py:method:: __str__(self)
+
+      Return str(self).
 
 
 
