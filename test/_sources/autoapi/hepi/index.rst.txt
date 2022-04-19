@@ -877,14 +877,6 @@ Attributes
    
    General result class.
 
-   Attributes:
-       LO (:obj:`double`): Leading Order result. Defaults to None.
-       NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
-       NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
-       K_LO (:obj:`double`): Leading Order divided by Leading Order.
-       K_NLO (:obj:`double`): Next-to-Leading Order divided by Leading Order result.
-       K_NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Leading Order.
-       NLO_PLUS_NLL_OVER_NLO (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Next-to-Leading Order.
 
 
 
@@ -903,10 +895,18 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: pdf_error(li, dl)
+.. py:function:: pdf_error(li, dl, confidence_level=90)
 
    
+   Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
+   Returns:
+       :obj:`dict`: Modified `dl` with new entries.
+
+   Args:
+       li (:obj:`list` of :obj:`Input`): Input list.
+       dl (:obj:`dict`): `Result` dictionary with lists per entry.
+       confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
 
 
 

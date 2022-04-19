@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2-22-g304aeea
+                0.1.2-23-g83b857e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -151,8 +151,8 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.pdf_error" title="hepi.results.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.pdf_error" title="hepi.results.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl, confidence_level=90)</p></td>
+<td><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.scale_error" title="hepi.results.scale_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error</span></code></a>(li, dl)</p></td>
 <td><p></p></td>
@@ -186,22 +186,21 @@
 <dt class="sig sig-object py" id="hepi.results.Result">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#Result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.Result" title="Permalink to this definition"></a></dt>
 <dd><p>General result class.</p>
-<dl class="simple">
-<dt>Attributes:</dt><dd><p>LO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Leading Order result. Defaults to None.
-NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order result. Defaults to None.
-NLO_PLUS_NLL (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
-K_LO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Leading Order divided by Leading Order.
-K_NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order divided by Leading Order result.
-K_NLO_PLUS_NLL (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Leading Order.
-NLO_PLUS_NLL_OVER_NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Next-to-Leading Order.</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.results.pdf_error">
-<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">pdf_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#pdf_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.pdf_error" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">pdf_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#pdf_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.pdf_error" title="Permalink to this definition"></a></dt>
+<dd><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: Modified <cite>dl</cite> with new entries.</p>
+</dd>
+<dt>Args:</dt><dd><p>li (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code>): Input list.
+dl (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): <cite>Result</cite> dictionary with lists per entry.
+confidence_level (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Confidence Level for PDF uncertainty</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.results.scale_error">
