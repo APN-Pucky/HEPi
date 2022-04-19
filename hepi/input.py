@@ -12,17 +12,20 @@ from .util import get_LR_partner, lhapdf_name_to_id, namehash
 import lhapdf
 
 in_dir = "./input/"
-"""input directory"""
+"""Input directory."""
 out_dir = "./output/"
-"""output directory"""
+"""Output directory."""
 pre = "nice -n 5"
-"""run command prefix."""
+"""Prefix for run commands."""
 
 
 
 def get_input_dir():
     """
     Get the input directory.
+
+    Returns:
+        str: :attr:`in_dir`
     """
     global in_dir
     return in_dir
@@ -31,14 +34,30 @@ def get_input_dir():
 def get_output_dir():
     """
     Get the input directory.
+
+    Returns:
+        str: :attr:`out_dir`
     """
     global out_dir
     return out_dir
 
 
+def get_pre():
+    """
+    Gets the command prefix. 
+
+    Returns:
+        str: :attr:`pre`
+    """
+    global pre
+    return pre
+
 def set_input_dir(ind):
     """
     Sets the input directory.
+
+    Args:
+        ind (str): new input directory.
     """
     global in_dir
     in_dir = ind
@@ -47,6 +66,9 @@ def set_input_dir(ind):
 def set_output_dir(outd):
     """
     Sets the output directory.
+
+    Args:
+        outd (str): new output directory.
     """
     global out_dir
     out_dir = outd
@@ -55,17 +77,13 @@ def set_output_dir(outd):
 def set_pre(ppre):
     """
     Sets the command prefix. 
+
+    Args:
+        ppre (str): new command prefix.
     """
     global pre
     pre = ppre
 
-
-def get_pre():
-    """
-    Gets the command prefix. 
-    """
-    global pre
-    return pre
 
 
 class Order(IntEnum):
