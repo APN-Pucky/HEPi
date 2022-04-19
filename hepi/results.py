@@ -10,18 +10,19 @@ import warnings
 required_numerical_uncertainty_factor = 10 
 """If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown."""
 
+#    Attributes:
+#        LO (:obj:`double`): Leading Order result. Defaults to None.
+#        NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
+#        NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+#        K_LO (:obj:`double`): LO divided by LO.
+#        K_NLO (:obj:`double`): NLO divided by LO result.
+#        K_NLO_PLUS_NLL (:obj:`double`): NLO+NLL divided by LO.
+#        NLO_PLUS_NLL_OVER_NLO (:obj:`double`): NLO+NLL divided by NLO.
+
 class Result:
     """
     General result class.
 
-    Attributes:
-        LO (:obj:`double`): Leading Order result. Defaults to None.
-        NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
-        NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
-        K_LO (:obj:`double`): Leading Order divided by Leading Order.
-        K_NLO (:obj:`double`): Next-to-Leading Order divided by Leading Order result.
-        K_NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Leading Order.
-        NLO_PLUS_NLL_OVER_NLO (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Next-to-Leading Order.
     """
     def __init__(self, lo = None, nlo = None, nlo_plus_nll = None):
         """
@@ -32,7 +33,7 @@ class Result:
             nlo (:obj:`double`): Sets `NLO`.
             nlo_plus_nll (:obj:`double`): Sets `NLO_PLUS_NLL`.
         """
-        self.LO = lo
+        self.LO = lo #:obj:`double`: Leading Order result. Defaults to None.
         self.NLO = nlo
         self.NLO_PLUS_NLL = nlo_plus_nll
         if lo is not None and lo != 0:
@@ -63,7 +64,18 @@ class Result:
 
 
 
-def pdf_error(li, dl):
+def pdf_error(li, dl, confidence_level=90):
+    """
+    Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
+
+    Returns:
+        :obj:`dict`: Modified `dl` with new entries.
+
+    Args:
+        li (:obj:`list` of :obj:`Input`): Input list.
+        dl (:obj:`dict`): `Result` dictionary with lists per entry.
+        confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
+    """
     global required_numerical_uncertainty_factor
     example = li[0]
     members = [attr for attr in dir(example) if not callable(
@@ -102,7 +114,7 @@ def pdf_error(li, dl):
             # lo_unc = set.uncertainty(
             #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
             nlo_unc = set.uncertainty(
-                [plot.unv(dl["NLO"][k]) for k in pdfs], 90)
+                [plot.unv(dl["NLO"][k]) for k in pdfs], confidence_level)
             dl["NLO_PDF_CENTRAL"][i] = nlo_unc.central
             dl["NLO_PDF_ERRPLUS"][i] = nlo_unc.errplus
             dl["NLO_PDF_ERRMINUS"][i] = -nlo_unc.errminus
