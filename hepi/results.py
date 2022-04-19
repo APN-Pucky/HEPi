@@ -7,11 +7,31 @@ from smpl import plot
 import lhapdf
 import warnings
 
-#numerical convergence should be better by a factor of 10 to avoid spoiling the scale/pdf uncertainties
 required_numerical_uncertainty_factor = 10 
+"""If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown."""
 
 class Result:
-    def __init__(self, lo, nlo, nlo_plus_nll):
+    """
+    General result class.
+
+    Attributes:
+        LO (:obj:`double`): Leading Order result. Defaults to None.
+        NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
+        NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+        K_LO (:obj:`double`): Leading Order divided by Leading Order.
+        K_NLO (:obj:`double`): Next-to-Leading Order divided by Leading Order result.
+        K_NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Leading Order.
+        NLO_PLUS_NLL_OVER_NLO (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Next-to-Leading Order.
+    """
+    def __init__(self, lo = None, nlo = None, nlo_plus_nll = None):
+        """
+        Sets and computes dependent ``Attributes``.
+
+        Args:
+            lo (:obj:`double`): Sets `LO`.
+            nlo (:obj:`double`): Sets `NLO`.
+            nlo_plus_nll (:obj:`double`): Sets `NLO_PLUs_NLL`.
+        """
         self.LO = lo
         self.NLO = nlo
         self.NLO_PLUS_NLL = nlo_plus_nll
@@ -59,7 +79,7 @@ def pdf_error(li, dl):
     dl["NLO_PDF_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PDF_ERRSYM"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["NLO_PLUS_NLL_PDF_CENTRAL"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_PDF_CENTRAL"] = np.array([None]*len(dl["pdfset_nlo"])anning on basing your work on an)
     dl["NLO_PLUS_NLL_PDF_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF_ERRSYM"] = np.array([None]*len(dl["pdfset_nlo"]))
