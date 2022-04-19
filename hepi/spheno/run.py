@@ -34,6 +34,11 @@ def get_path() ->str:
 def run(slhas : List[Input]) -> List[Input]:
     """
     Run the passed list of parameters for SPheno.
+
+    Args:
+        slhas (:obj:`list` of :class:`Input`): Input parameters with a SLHA file that can be processed by SPheno.
+    Returns:
+        :obj:`list` of :class:`Input`
     """
     if os.path.exists("Messages.out"):
         os.remove("Messages.out")

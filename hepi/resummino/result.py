@@ -1,17 +1,38 @@
 from hepi.input import Order
-from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
+from .. import Input, Result,   get_input_dir
 import re
 from uncertainties import ufloat_fromstr
 from string import Template
 import pkgutil
-import warnings
 import os
 
 class ResumminoResult(Result):
     """
     Resummino Result Data.
+
+    Attributes:
+        VNLO (double): virtual NLO result.
+        RNLO (double): real NLO result.
+        P_PLUS_K (double): collineare remainders P+K NLO result.
+        RNLOG (double): real NLO gluon result.
+        RNLOQ (double): real NLO quark result.
+        VNLO_PLUS_P_PLUS_K (double): VNLO+P+K result.
+        RNLO_PLUS_VNLO_PLUS_P_PLUS_K (double): RNLO+VNLO+P+K result.
+        
     """
     def __init__(self, lo, nlo, nlo_plus_nll, vnlo, p_plus_k, rnlog, rnloq):
+        """
+        Sets given and computes dependent ``Attributes``.
+
+        Args:
+            lo (:obj:`double`): corresponds to :attr:`LO`.
+            nlo (:obj:`double`): corresponds to :attr:`NLO`.
+            nlo_plus_nll (:obj:`double`): corresponds to :attr:`NLO_PLUS_NLL`.
+            vnlo (:obj:`double`): corresponds to :attr:`VNLO`.
+            p_plus_k (:obj:`double`): corresponds to :attr:`P_PLUS_K`.
+            rnlog (:obj:`double`): corresponds to :attr:`RNLOG`.
+            rnloq (:obj:`double`): corresponds to :attr:`RNLOQ`.
+        """
         Result.__init__(self, lo, nlo, nlo_plus_nll)
         self.VNLO = vnlo
         self.P_PLUS_K = p_plus_k
