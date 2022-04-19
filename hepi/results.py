@@ -1,3 +1,4 @@
+"""Results and postprocessing for the :mod:`hepi` package."""
 from .util import LD2DL
 import numpy as np
 from typing import List
@@ -10,19 +11,20 @@ import warnings
 required_numerical_uncertainty_factor = 10 
 """If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown."""
 
-#    Attributes:
-#        LO (:obj:`double`): Leading Order result. Defaults to None.
-#        NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
-#        NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
-#        K_LO (:obj:`double`): LO divided by LO.
-#        K_NLO (:obj:`double`): NLO divided by LO result.
-#        K_NLO_PLUS_NLL (:obj:`double`): NLO+NLL divided by LO.
-#        NLO_PLUS_NLL_OVER_NLO (:obj:`double`): NLO+NLL divided by NLO.
+
 
 class Result:
     """
     General result class.
 
+    Attributes:
+        LO (:obj:`double`): Leading Order result. Defaults to None.
+        NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
+        NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+        K_LO (:obj:`double`): LO divided by LO.
+        K_NLO (:obj:`double`): NLO divided by LO result.
+        K_NLO_PLUS_NLL (:obj:`double`): NLO+NLL divided by LO.
+        NLO_PLUS_NLL_OVER_NLO (:obj:`double`): NLO+NLL divided by NLO.
     """
     def __init__(self, lo = None, nlo = None, nlo_plus_nll = None):
         """
@@ -75,7 +77,7 @@ def pdf_error(li, dl, confidence_level=90):
 
     Returns:
         :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
-
+            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
     """
     global required_numerical_uncertainty_factor
     example = li[0]
@@ -92,7 +94,7 @@ def pdf_error(li, dl, confidence_level=90):
     dl["NLO_PDF_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PDF_ERRSYM"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["NLO_PLUS_NLL_PDF_CENTRAL"] = np.array([None]*len(dl["pdfset_nlo"]))
+    dl["NLO_PLUS_NLL_PDF_CENTRAL"] = np.array([None"""Collection of utility functions for the :mod:`hepi` package."""]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF_ERRSYM"] = np.array([None]*len(dl["pdfset_nlo"]))
@@ -150,6 +152,17 @@ def pdf_error(li, dl, confidence_level=90):
 
 
 def scale_error(li, dl):
+    """
+    Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :func:`seven_point_scan`).
+
+    Args:
+        li (:obj:`list` of :class:`Input`): Input list.
+        dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+
+    Returns:
+        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
+            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
+    """
     global required_numerical_uncertainty_factor
     example = li[0]
     members = [attr for attr in dir(example) if not callable(
@@ -212,6 +225,19 @@ def scale_error(li, dl):
     return dl
 
 def combine_errors(dl):
+    """
+    Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
+
+    Note:
+        Running :func:`scale_errors` and :func:`pdf_errors` before is necessary.
+
+    Args:
+        dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+
+    Returns:
+        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
+            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
+    """
     dl["LO_NOERR"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["LO_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["LO_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
