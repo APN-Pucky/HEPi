@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-16-g5e0d2f8
+                0.1.4-17-g3d04849
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -155,11 +155,11 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="run/index.html#module-hepi.madgraph.run" title="hepi.madgraph.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
 <td><p>Runs MadGraph</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.madgraph.set_path" title="hepi.madgraph.set_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_path</span></code></a>(p)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.madgraph.set_path" title="hepi.madgraph.set_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_path</span></code></a>(p: str)</p></td>
 <td><p>Set the path to the MadGraph folder containing the binary in './bin'.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.madgraph.get_path" title="hepi.madgraph.get_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code></a>()</p></td>
-<td><p>Returns the currently set MadGraph path.</p></td>
+<td><p>Get the current MadGraph path.</p></td>
 </tr>
 </tbody>
 </table>
@@ -170,14 +170,27 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.madgraph.set_path">
-<span class="sig-prename descclassname"><span class="pre">hepi.madgraph.</span></span><span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/madgraph/run.html#set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.set_path" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.madgraph.</span></span><span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/madgraph/run.html#set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.set_path" title="Permalink to this definition"></a></dt>
 <dd><p>Set the path to the MadGraph folder containing the binary in ‘./bin’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>str</em>) – New MadGraph path.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.madgraph.get_path">
 <span class="sig-prename descclassname"><span class="pre">hepi.madgraph.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/madgraph/run.html#get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.get_path" title="Permalink to this definition"></a></dt>
-<dd><p>Returns the currently set MadGraph path.</p>
+<dd><p>Get the current MadGraph path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current MadGraph path.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

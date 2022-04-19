@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-16-g5e0d2f8
+                0.1.4-17-g3d04849
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -214,7 +214,7 @@ import warnings
             dl[&quot;NLO_PDF_ERRSYM&quot;][i] = nlo_unc.errsymm
             #TODO error sym to minus and plus
             if(plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_PDF_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_PDF_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical nlo precision vs pdf&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical nlo precision vs pdf.&quot;, RuntimeWarning)
 
             nlo_plus_nll_unc = set.uncertainty(
                 [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in pdfs], 90)
@@ -224,7 +224,7 @@ import warnings
             dl[&quot;NLO_PLUS_NLL_PDF_ERRSYM&quot;][i] = nlo_plus_nll_unc.errsymm
             #TODO error sym to minus and plus
             if(plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs pdf&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs pdf.&quot;, RuntimeWarning)
 
 
     mask = dl[&quot;LO_PDF_CENTRAL&quot;]!= np.array(None)
@@ -284,21 +284,21 @@ import warnings
             dl[&quot;LO_SCALE_ERRMINUS&quot;][i] = np.min(
                 [plot.unv(dl[&quot;LO&quot;][k]) for k in scales])-plot.unv(dl[&quot;LO&quot;][i])
             if(plot.usd(dl[&quot;LO&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;LO_SCALE_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;LO&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;LO_SCALE_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical lo precision vs scale&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical lo precision vs scale.&quot;, RuntimeWarning)
 
             dl[&quot;NLO_SCALE_ERRPLUS&quot;][i] = np.max(
                 [plot.unv(dl[&quot;NLO&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO&quot;][i])
             dl[&quot;NLO_SCALE_ERRMINUS&quot;][i] = np.min(
                 [plot.unv(dl[&quot;NLO&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO&quot;][i])
             if(plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_SCALE_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_SCALE_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical nlo precision vs scale&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical nlo precision vs scale.&quot;, RuntimeWarning)
 
             dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][i] = np.max(
                 [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][i])
             dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][i] = np.min(
                 [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][i])
             if(plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs scale&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs scale.&quot;, RuntimeWarning)
 
     mask = dl[&quot;LO_SCALE_ERRPLUS&quot;]!= np.array(None)
     dl[&quot;LO_SCALE&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;LO&quot;][mask])+dl[&quot;LO_SCALE_ERRPLUS&quot;][mask]/2.+dl[&quot;LO_SCALE_ERRMINUS&quot;][mask]/2.,

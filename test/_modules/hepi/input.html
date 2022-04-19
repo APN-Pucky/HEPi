@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-16-g5e0d2f8
+                0.1.4-17-g3d04849
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -89,11 +89,9 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.input</h1><div class="highlight"><pre>
-<span></span>from distutils.log import warn
-from enum import IntEnum
-#from math import dist
-import copy
+<span></span>from enum import IntEnum
 import warnings
+import copy
 import numpy as np
 from typing import List
 
@@ -192,6 +190,18 @@ import lhapdf
 <div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input">[docs]</a>class Input:
     &quot;&quot;&quot;
     Input for computation.
+
+    Attributes:
+        order
+        energy
+        energyhalf
+        particle1
+        particle2
+        slha
+        pdf_lo
+        pdfset_lo
+        pdf_nlo
+        pdfset_nlo
     &quot;&quot;&quot;
     # TODO allow unspecified input? Maybe with kwargs + defaults
     def __init__(self, order :Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, invariant_mass=&quot;auto&quot;,result=&quot;total&quot;,pt=&quot;auto&quot;,id=&quot;&quot;,model_path=&quot;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&quot;):
@@ -231,6 +241,7 @@ import lhapdf
         i.mu = (abs(b.blocks[&quot;MASS&quot;][abs(i.particle1)]) +
                    abs(b.blocks[&quot;MASS&quot;][abs(i.particle2)]))/2.
     except:
+        warnings.warn(&quot;Could not set new central scale to average of masses.&quot;,RuntimeWarning)
         pass</div>
         
 

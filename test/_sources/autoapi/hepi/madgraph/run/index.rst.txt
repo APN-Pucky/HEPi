@@ -49,14 +49,20 @@ Attributes
 
    madgraph folder
 
-.. py:function:: set_path(p)
+.. py:function:: set_path(p: str)
 
    Set the path to the MadGraph folder containing the binary in './bin'.
+
+   :param p: New MadGraph path.
+   :type p: str
 
 
 .. py:function:: get_path()
 
-   Returns the currently set MadGraph path.
+   Get the current MadGraph path.
+
+   :returns: current MadGraph path.
+   :rtype: str
 
 
 .. py:class:: RunParams(dic, skip=False, madstr=True)

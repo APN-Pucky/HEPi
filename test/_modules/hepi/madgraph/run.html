@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-16-g5e0d2f8
+                0.1.4-17-g3d04849
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -97,24 +97,24 @@ import numpy as np
 import pkgutil
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
 import re
-from uncertainties import ufloat_fromstr
 import os.path
 from pathlib import Path
 from .result import MadgraphResult, is_valid, parse_single
-import enlighten
 import time
 import difflib
-import pyslha
-from smpl.parallel import *
+from smpl.parallel import par
 import hashlib
 
 <div class="viewcode-block" id="madgraph_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.madgraph_path">[docs]</a>madgraph_path = &quot;/opt/MG5_aMC_v2_7_0/&quot;</div>
 &quot;&quot;&quot;madgraph folder&quot;&quot;&quot;
 
 
-<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.set_path">[docs]</a>def set_path(p):
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.set_path">[docs]</a>def set_path(p:str):
     &quot;&quot;&quot;
     Set the path to the MadGraph folder containing the binary in &#39;./bin&#39;.
+
+    Args:
+        p (str): New MadGraph path.
     &quot;&quot;&quot;
     global madgraph_path
     madgraph_path = p+ (&quot;/&quot; if p[-1]!=&quot;/&quot; else &quot;&quot;)</div>
@@ -122,7 +122,10 @@ import hashlib
 
 <div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.get_path">[docs]</a>def get_path():
     &quot;&quot;&quot;
-    Returns the currently set MadGraph path.
+    Get the current MadGraph path.
+
+    Returns:
+        str: current MadGraph path.
     &quot;&quot;&quot;
     global madgraph_path
     return madgraph_path</div>
@@ -153,6 +156,7 @@ import hashlib
     for r in par(lambda f: parse_single(f[&quot;out&quot;]), outputs):
         rsl.append(r)
     return rsl</div>
+
 <div class="viewcode-block" id="namehash"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.namehash">[docs]</a>def namehash(n):
     m = hashlib.sha256()
     m.update(str(n).encode(&#39;utf-8&#39;))

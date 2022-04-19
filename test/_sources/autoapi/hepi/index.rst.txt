@@ -3,6 +3,11 @@
 
 .. py:module:: hepi
 
+.. autoapi-nested-parse::
+
+   HEPi package aims to automize cluster computations for parameter scans with the option to produce plots.
+
+
 
 Subpackages
 -----------
@@ -266,6 +271,18 @@ Attributes
 .. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
 
    Input for computation.
+
+   :ivar order:
+   :ivar energy:
+   :ivar energyhalf:
+   :ivar particle1:
+   :ivar particle2:
+   :ivar slha:
+   :ivar pdf_lo:
+   :ivar pdfset_lo:
+   :ivar pdf_nlo:
+   :ivar pdfset_nlo:
+
 
 
 .. py:function:: update_slha(i: Input)
@@ -562,6 +579,18 @@ Attributes
 .. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
 
    Input for computation.
+
+   :ivar order:
+   :ivar energy:
+   :ivar energyhalf:
+   :ivar particle1:
+   :ivar particle2:
+   :ivar slha:
+   :ivar pdf_lo:
+   :ivar pdfset_lo:
+   :ivar pdf_nlo:
+   :ivar pdfset_nlo:
+
 
 
 .. py:function:: get_input_dir()
