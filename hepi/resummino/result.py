@@ -33,6 +33,14 @@ class ResumminoResult(Result):
 def is_valid(file:str,p:Input,d):
     """
     Verifies that an file is a complete output.
+
+    Args:
+        file (str): file path to be parsed.
+        p (:class:`hepi.Input`): input parameters.
+        d (:obj:`dict`): param dictionary.
+
+    Returns:
+
     """
     order = p.order
     data = pkgutil.get_data(__name__, "plot_template.in").decode(
@@ -60,9 +68,16 @@ def is_valid(file:str,p:Input,d):
     return False
 
 
-def parse_single(file) -> ResumminoResult:
+def parse_single(file : str) -> ResumminoResult:
     """
     Extracts LO, NLO and NLO+NLL from resummino output file.
+
+    Args:
+        file (str): file path to be parsed.
+
+    Returns:
+        :class:`ResumminoResult` : If a value is not found in the file None is used.
+
     """
     # TODO generalize units like RS
     lo_pattern = re.compile(r'^LO = \((.*)\) pb')

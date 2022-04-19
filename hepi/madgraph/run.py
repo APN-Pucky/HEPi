@@ -1,3 +1,4 @@
+"""Runs MadGraph"""
 from typing import List
 import subprocess
 from string import Template
@@ -36,7 +37,10 @@ def get_path():
     return madgraph_path
 
 
-class RunParams:
+class RunParams:    
+    """
+    Parameters for MadGraph.
+    """
     def __init__(self, dic,  skip=False,madstr=True):
         self.dic = dic
         self.skip = skip

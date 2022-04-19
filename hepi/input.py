@@ -91,8 +91,11 @@ class Order(IntEnum):
     Computation orders.
     """
     LO = 0
-    NLO = 1
-    NLO_PLUS_NLL = 2
+    """Leading Order"""
+    NLO = 1 
+    """Next-to-Leading Order"""
+    NLO_PLUS_NLL = 2 
+    """Next-to-Leading Order plus Next-to-Leading Logarithms"""
 
 
 class Input:
@@ -129,6 +132,8 @@ def update_slha( i:Input ):
     Updates dependent parameters in Input `i`.
 
     Mainly concerns the `mu` value used by `madgraph`.
+
+    
     """
     b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
     try:

@@ -12,7 +12,6 @@ required_numerical_uncertainty_factor = 10
 """If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown."""
 
 
-
 class Result:
     """
     General result class.
@@ -31,9 +30,9 @@ class Result:
         Sets given and computes dependent ``Attributes``.
 
         Args:
-            lo (:obj:`double`): Sets `LO`.
-            nlo (:obj:`double`): Sets `NLO`.
-            nlo_plus_nll (:obj:`double`): Sets `NLO_PLUS_NLL`.
+            lo (:obj:`double`): corresponds to :attr:`LO`.
+            nlo (:obj:`double`): corresponds to :attr:`NLO`.
+            nlo_plus_nll (:obj:`double`): corresponds to :attr:`NLO_PLUS_NLL`.
         """
         self.LO = lo #:obj:`double`: Leading Order result. Defaults to None.
         self.NLO = nlo

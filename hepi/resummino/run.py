@@ -1,3 +1,4 @@
+"""Runs Resummino"""
 from typing import List
 import subprocess
 from string import Template
@@ -25,9 +26,12 @@ resummino_path = "~/resummino/"
 
 
 
-def set_path(p):
+def set_path(p: str):
     """
     Set the path to the resummino folder containing the binary in './build/bin'.
+
+    Args:
+        str: new Resummino path.
     """
     global resummino_path
     resummino_path = p+ ("/" if p[-1]!="/" else "")
@@ -35,7 +39,10 @@ def set_path(p):
 
 def get_path():
     """
-    Returns the currently set resummino path
+    Get Resummino path.
+
+    Returns: 
+        str: current Resummino path
     """
     global resummino_path
     return resummino_path
@@ -43,7 +50,13 @@ def get_path():
 
 class RunParams:
     """
-    Parameters for Resummino.
+    Parameters for running Resummino.
+
+    Attributes:
+        skip (bool): Skip already performed and stored runs.
+        flags (str): Additional resummino flags. E.g. '--nlo'.
+        in_path (str): File path of the input file.
+        out_path (str): File path of the output file.
     """
     def __init__(self, flags: str, in_path: str, out_path: str, skip=False):
         self.skip = skip
@@ -55,6 +68,19 @@ class RunParams:
 def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True):
     """
     Run the passed list of parameters.
+
+    Args:
+        params (:obj:`list` of :class:`hepi.Input`): All parameters that should be executed/queued.
+        noskip (bool): False means stored runs will be skipped. Else the are overwritten.
+        bar (bool): Display a progressbar.
+        no_parse (bool): Skip parsing the results. 
+            This is the prefered cluster mode, as this function only queues the job.
+        para (bool): Run jobs in parallel.
+
+    Returns:
+        :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
+            The dictionary is empty if `no_parse` is set.
+
     """
     print("Running: " + str(len(params))  +" jobs" )
     rps = _queue(params, noskip)
@@ -71,6 +97,13 @@ def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True):
 def _parse(outputs: List[str]) -> List[ResumminoResult]:
     """
     Parses Resummino output files and returns List of Results.
+
+    Args:
+        outputs (:obj:`list` of `str`): List of the filenames to be parsed.
+
+    Returns:
+        :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+
     """
     rsl = []
     for r in par(parse_single, outputs):
@@ -82,6 +115,16 @@ def _parse(outputs: List[str]) -> List[ResumminoResult]:
 def _queue(params: List[Input], noskip=False) -> List[RunParams]:
     """
     Queues and generates Resummino run files.
+
+    Extends params by input and output files.
+
+    Args:
+        params (:obj:`list` of :class:`hepi.Input`): input parameters
+        noskip (bool): False means stored runs will be skipped. Else the are overwritten.
+
+    Returns:
+        :obj:`list` of :class:`hepi.RunParams`: Run paramters for usage with :meth:`_run`.
+
     """
     global resummino_path
     Path("output").mkdir(parents=True, exist_ok=True)
@@ -129,7 +172,16 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
 
 def _run(rps: List[RunParams], bar=True, no_parse=False,para=True):
     """
-    Runs resummino per RunParam.
+    Runs Resummino per :class:`RunParams`.
+
+    Args:
+        rps (:obj:`list` of :class:`RunParams`):  Extended run parameters.
+        bar (bool): Enable info bar.
+        no_parse (bool): Do not wait for parallel runs to finish.
+        para (bool): Run jobs in parallel.
+
+    Returns:
+        :obj:`list` of int: return codes from jobs if `no_parse` is False.
     """
     # TODO clean up on exit emergency
     global resummino_path

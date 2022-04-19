@@ -14,6 +14,9 @@ import datetime
 import re
 import os
 import sys
+
+from hepi.input import Input
+from hepi.results import Result
 sys.path.insert(0, os.path.abspath('../..'))
 
 
@@ -33,7 +36,7 @@ version = re.sub('^', '', os.popen('git describe --tags').read().strip())
 extensions = [
 	'sphinx.ext.autodoc', 'nbsphinx', 'sphinx.ext.githubpages',
               'sphinx.ext.viewcode', 'sphinx.ext.mathjax', 'sphinx.ext.todo', 'sphinx.ext.doctest',
-              'matplotlib.sphinxext.plot_directive', 'numpydoc', 'sphinx_math_dollar', 'sphinx.ext.autosummary',
+              'matplotlib.sphinxext.plot_directive', 'sphinx.ext.napoleon', 'sphinx_math_dollar', 'sphinx.ext.autosummary',
               'sphinx.ext.coverage','jupyter_sphinx',
 	      #'sphinx_copybutton',
 	      'IPython.sphinxext.ipython_console_highlighting',
@@ -47,10 +50,11 @@ extensions = [
 #'sphinx.ext.autosummary',
 'autoapi.extension',
 ]
+napoleon_use_ivar = True
 autoapi_type = 'python'
 autoapi_dirs = ['../../hepi']
+autoapi_python_class_content = 'both'
 #autosummary_generate = True  # Turn on sphinx.ext.autosummary
-
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
