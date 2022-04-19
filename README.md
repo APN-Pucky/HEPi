@@ -38,7 +38,7 @@ pip install --index-url https://test.pypi.org/simple/ hepi
 [a s image]: https://github.com/APN-Pucky/HEPi/actions/workflows/release.yml/badge.svg
 [a s link]: https://github.com/APN-Pucky/HEPi/actions/workflows/release.yml
 [a t link]: https://github.com/APN-Pucky/HEPi/actions/workflows/test.yml
-[a t image]: https://github.com/APN-Pucky/HEPi/actions/workflows/test.yml/badge.svg?branch=test
+[a t image]: https://github.com/APN-Pucky/HEPi/actions/workflows/test.yml/badge.svg
 
 [codacy quality image]: https://app.codacy.com/project/badge/Grade/ef07b792a0f84f2eb1d7ebe07ae9e639
 [codacy quality link]: https://www.codacy.com/gh/APN-Pucky/HEPi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/HEPi&amp;utm_campaign=Badge_Grade
