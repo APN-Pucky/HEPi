@@ -12,9 +12,17 @@ class MadgraphResult(Result):
         Result.__init__(self, lo, nlo, nlo)
 
 
-def is_valid(file:str,p:Input,d):
+def is_valid(file:str,p:Input,d) -> bool :
     """
     Verifies that an file is a complete output.
+
+    Args:
+        file (str): File path to be parsed.
+        p (:class:`hepi.Input`): Input parameters.
+        d (:obj:`dict`): Param dictionary.
+
+    Returns:
+        bool : True if `file` could be parsed.
     """
     order = p.order
     res = parse_single(file)
@@ -28,6 +36,16 @@ def is_valid(file:str,p:Input,d):
     return False
 
 def parse_single(file) -> MadgraphResult:
+    """
+    Extracts LO, NLO and NLO+NLL from resummino output file.
+
+    Args:
+        file (str): File path to be parsed.
+
+    Returns:
+        :class:`MadGraphResult` : If a value is not found in the file None is used.
+
+    """
     # TODO generalize units like RS
     lo_pattern = re.compile(r'^\s*Total cross section:\s*(.*) pb')
 

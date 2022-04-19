@@ -223,7 +223,7 @@ def scale_error(li, dl):
     
     return dl
 
-def combine_errors(dl):
+def combine_errors(dl : dict):
     """
     Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
 

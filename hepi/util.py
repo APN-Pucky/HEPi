@@ -6,11 +6,11 @@ from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
 
 def LD2DL(l: List):
-    """ 
+    """
     Convert a list of objects into a dictionary of lists.
 
     The values of each object are first converted to a `dict` through the `__dict__` attribute.
-    
+
     Args:
         l (List) : list of objects.
 
@@ -42,12 +42,12 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
     "PDGName", "PDGID", converters=(str, PDGID))
 
 
-def get_name(id : int) -> str:
+def get_name(pid : int) -> str:
     """
     Get the latex name of a particle.
 
     Args:
-        id (int) : PDG Monte Carlo identifier for the particle.
+        pid (int) : PDG Monte Carlo identifier for the particle.
 
     Returns:
         str: Latex name.
@@ -59,16 +59,16 @@ def get_name(id : int) -> str:
         '\\\\tilde{\\\\chi}_{1}^{0}'
     """
     global PDG2LaTeXNameMap
-    pdgid = PDG2LaTeXNameMap[id]
+    pdgid = PDG2LaTeXNameMap[pid]
     return pdgid
 
 
 
-def get_LR_partner(id : int) -> Tuple[int,int]:
+def get_LR_partner(pid : int) -> Tuple[int,int]:
     """Transforms a PDG id to it's left-right partner.
 
     Args:
-        id (int) : PDG Monte Carlo identifier for the particle.
+        pid (int) : PDG Monte Carlo identifier for the particle.
 
     Returns:
         tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
@@ -77,7 +77,7 @@ def get_LR_partner(id : int) -> Tuple[int,int]:
         >>> get_LR_partner(1000002)
         (-1, 2000002)
     """
-    n = PDGID2NameMap[id]
+    n = PDGID2NameMap[pid]
     if "L" in n:
         n = n.replace("L", "R")
         return -1, int(PDG2Name2IDMap[n])

@@ -8,7 +8,6 @@ import pkgutil
 from hepi.util import namehash
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir, get_pre
 import re
-from uncertainties import ufloat_fromstr
 import os.path
 from pathlib import Path
 from .result import ResumminoResult, is_valid, parse_single
@@ -21,7 +20,7 @@ import os
 import stat
 
 
-resummino_path = "~/resummino/"
+resummino_path:str = "~/resummino/"
 """resummino folder containing the binary in './build/bin'."""
 
 
@@ -37,7 +36,7 @@ def set_path(p: str):
     resummino_path = p+ ("/" if p[-1]!="/" else "")
 
 
-def get_path():
+def get_path() -> str:
     """
     Get Resummino path.
 
@@ -65,7 +64,7 @@ class RunParams:
         self.out_path = out_path
 
 
-def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True):
+def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True) -> dict:
     """
     Run the passed list of parameters.
 

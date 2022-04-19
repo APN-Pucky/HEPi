@@ -1,9 +1,6 @@
-from distutils import command
 from typing import List
 import warnings
-import pyslha
-from hepi import get_input_dir, get_output_dir
-#from hepi.input import slha_scan
+from hepi import get_input_dir
 import subprocess
 import os
 from hepi.input import Input, update_slha
@@ -12,17 +9,23 @@ spheno_path = "~/git/SPheno-3.3.8/"
 """spheno folder containing the binary in './bin'."""
 
 
-def set_path(p):
+def set_path(p:str):
     """
     Set the path to the SPheno folder containing the binary in './bin'.
+
+    Args:
+        p (str): new path.
     """
     global spheno_path
     spheno_path = p + ("/" if p[-1]!="/" else "")
 
 
-def get_path():
+def get_path() ->str:
     """
-    Returns the currently set SPheno path.
+    Get the SPheno path.
+
+    Returns:
+        str: current SPheno path.
     """
     global spheno_path
     return spheno_path
