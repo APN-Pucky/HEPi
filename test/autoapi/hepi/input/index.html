@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-19-gdf9c73b
+                0.1.4-20-g3f0f9e7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -179,28 +179,31 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan" title="hepi.input.scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan</span></code></a>(l: List[Input], var: str, range: Iterable) → List[Input]</p></td>
 <td><p>Scans a variable <cite>var</cite> over <cite>range</cite> in <cite>l</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_scale" title="hepi.input.scan_scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_scale</span></code></a>(l: List[Input], range=3, distance=2.0)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_multi" title="hepi.input.scan_multi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_multi</span></code></a>(li: List[Input], **kwargs) → List[Input]</p></td>
+<td><p>Magically scans the variables passed to this function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_scale" title="hepi.input.scan_scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_scale</span></code></a>(l: List[Input], range=3, distance=2.0)</p></td>
 <td><p>Scans scale by varying <cite>mu_f</cite> and <cite>mu_r</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_seven_point" title="hepi.input.scan_seven_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_seven_point</span></code></a>(l: List[Input])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_seven_point" title="hepi.input.scan_seven_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_seven_point</span></code></a>(l: List[Input])</p></td>
 <td><p>Scans scale by varying <cite>mu_f</cite> and <cite>mu_r</cite> by factors of two excluding relative factors of 4.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.change_where" title="hepi.input.change_where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">change_where</span></code></a>(l: List[Input], dicts: dict, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.change_where" title="hepi.input.change_where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">change_where</span></code></a>(l: List[Input], dicts: dict, **kwargs)</p></td>
 <td><p>Applies the values of <cite>dicts</cite> if the key value pairs in <cite>kwargs</cite> agree with a member of the list <cite>l</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_invariant_mass" title="hepi.input.scan_invariant_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_invariant_mass</span></code></a>(l: List[Input], diff, points, low=0.001)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_invariant_mass" title="hepi.input.scan_invariant_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_invariant_mass</span></code></a>(l: List[Input], diff, points, low=0.001)</p></td>
 <td><p>Logarithmic <cite>invariant_mass</cite> scan close to the production threshold.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.mass_scan" title="hepi.input.mass_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_scan</span></code></a>(l: List[Input], var: int, range, diff_L_R=None) → List[Input]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.mass_scan" title="hepi.input.mass_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_scan</span></code></a>(l: List[Input], var: int, range, diff_L_R=None) → List[Input]</p></td>
 <td><p>Scans the PDG identified mass <cite>var</cite> over <cite>range</cite> in the list <cite>l</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.slha_scan" title="hepi.input.slha_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan</span></code></a>(l: List[Input], block, var, range: List) → List[Input]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.slha_scan" title="hepi.input.slha_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan</span></code></a>(l: List[Input], block, var, range: List) → List[Input]</p></td>
 <td><p>Scan a generic</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.slha_scan_rel" title="hepi.input.slha_scan_rel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan_rel</span></code></a>(l: List[Input], lambdas, range: List) → List[Input]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.slha_scan_rel" title="hepi.input.slha_scan_rel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan_rel</span></code></a>(l: List[Input], lambdas, range: List) → List[Input]</p></td>
 <td><p>Scan a generic slha variable.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_pdf" title="hepi.input.scan_pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_pdf</span></code></a>(l: List[Input])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_pdf" title="hepi.input.scan_pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_pdf</span></code></a>(l: List[Input])</p></td>
 <td><p>Scans NLO PDF sets.</p></td>
 </tr>
 </tbody>
@@ -223,13 +226,16 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.pre" title="hepi.input.pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pre</span></code></a></p></td>
 <td><p>Prefix for run commands.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scale_scan" title="hepi.input.scale_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_scan</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.multi_scan" title="hepi.input.multi_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multi_scan</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.seven_point_scan" title="hepi.input.seven_point_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seven_point_scan</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scale_scan" title="hepi.input.scale_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_scan</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.pdf_scan" title="hepi.input.pdf_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_scan</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.seven_point_scan" title="hepi.input.seven_point_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seven_point_scan</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.pdf_scan" title="hepi.input.pdf_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_scan</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -442,6 +448,43 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </pre></div>
 </div>
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.scan_multi">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">scan_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/hepi/input.html#scan_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.scan_multi" title="Permalink to this definition"></a></dt>
+<dd><p>Magically scans the variables passed to this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – </p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oli</span> <span class="o">=</span> <span class="p">[</span><span class="n">Input</span><span class="p">(</span><span class="n">Order</span><span class="o">.</span><span class="n">LO</span><span class="p">,</span> <span class="mi">13000</span><span class="p">,</span>  <span class="mi">1000022</span><span class="p">,</span><span class="mi">1000022</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;CT14lo&quot;</span><span class="p">,</span><span class="s2">&quot;CT14lo&quot;</span><span class="p">,</span><span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">li</span> <span class="o">=</span> <span class="n">scan_multi</span><span class="p">(</span><span class="n">oli</span><span class="p">,</span><span class="n">energy</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">li</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">{&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">scan_multi</span><span class="p">(</span><span class="n">oli</span><span class="p">,</span><span class="n">energy</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="mi">1000</span><span class="p">),</span><span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="n">Order</span><span class="o">.</span><span class="n">LO</span><span class="p">,</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO_PLUS_NLL</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">{&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+<span class="go">{&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.input.multi_scan">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">multi_scan</span></span><a class="reference internal" href="../../../_modules/hepi/input.html#multi_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.multi_scan" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.input.scan_scale">
