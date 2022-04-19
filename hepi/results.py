@@ -25,12 +25,12 @@ class Result:
     """
     def __init__(self, lo = None, nlo = None, nlo_plus_nll = None):
         """
-        Sets and computes dependent ``Attributes``.
+        Sets given and computes dependent ``Attributes``.
 
         Args:
             lo (:obj:`double`): Sets `LO`.
             nlo (:obj:`double`): Sets `NLO`.
-            nlo_plus_nll (:obj:`double`): Sets `NLO_PLUs_NLL`.
+            nlo_plus_nll (:obj:`double`): Sets `NLO_PLUS_NLL`.
         """
         self.LO = lo
         self.NLO = nlo
@@ -79,7 +79,7 @@ def pdf_error(li, dl):
     dl["NLO_PDF_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PDF_ERRSYM"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF"] = np.array([None]*len(dl["pdfset_nlo"]))
-    dl["NLO_PLUS_NLL_PDF_CENTRAL"] = np.array([None]*len(dl["pdfset_nlo"])anning on basing your work on an)
+    dl["NLO_PLUS_NLL_PDF_CENTRAL"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["NLO_PLUS_NLL_PDF_ERRSYM"] = np.array([None]*len(dl["pdfset_nlo"]))
