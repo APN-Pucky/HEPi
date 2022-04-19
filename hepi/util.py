@@ -7,6 +7,7 @@ from particle import PDGID
 
 class DictData:
     def __str__(self):
+        """Returns attributes as dict as string"""
         return str(self.__dict__)
 
 def LD2DL(l: List):
