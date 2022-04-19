@@ -68,13 +68,14 @@ def pdf_error(li, dl, confidence_level=90):
     """
     Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
-    Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL`_`PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
-
     Args:
         li (:obj:`list` of :class:`Input`): Input list.
-        dl (:obj:`dict`): `Result` dictionary with lists per entry.
+        dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
         confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
+
+    Returns:
+        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
+
     """
     global required_numerical_uncertainty_factor
     example = li[0]
