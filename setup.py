@@ -13,7 +13,8 @@ dev_requirements = [
     "sphinx-rtd-theme",
     "pandas",
     "ipython",
-    "jupyter-sphinx"
+    "jupyter-sphinx",
+    "sphinx-autoapi"
 ]
 
 setuptools.setup(

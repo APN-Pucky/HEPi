@@ -1,3 +1,4 @@
+"""Results and postprocessing for the :mod:`hepi` package."""
 from .util import LD2DL
 import numpy as np
 from typing import List
@@ -7,12 +8,34 @@ from smpl import plot
 import lhapdf
 import warnings
 
-#numerical convergence should be better by a factor of 10 to avoid spoiling the scale/pdf uncertainties
 required_numerical_uncertainty_factor = 10 
+"""If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown."""
+
+
 
 class Result:
-    def __init__(self, lo, nlo, nlo_plus_nll):
-        self.LO = lo
+    """
+    General result class.
+
+    Attributes:
+        LO (:obj:`double`): Leading Order result. Defaults to None.
+        NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
+        NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+        K_LO (:obj:`double`): LO divided by LO.
+        K_NLO (:obj:`double`): NLO divided by LO result.
+        K_NLO_PLUS_NLL (:obj:`double`): NLO+NLL divided by LO.
+        NLO_PLUS_NLL_OVER_NLO (:obj:`double`): NLO+NLL divided by NLO.
+    """
+    def __init__(self, lo = None, nlo = None, nlo_plus_nll = None):
+        """
+        Sets given and computes dependent ``Attributes``.
+
+        Args:
+            lo (:obj:`double`): Sets `LO`.
+            nlo (:obj:`double`): Sets `NLO`.
+            nlo_plus_nll (:obj:`double`): Sets `NLO_PLUS_NLL`.
+        """
+        self.LO = lo #:obj:`double`: Leading Order result. Defaults to None.
         self.NLO = nlo
         self.NLO_PLUS_NLL = nlo_plus_nll
         if lo is not None and lo != 0:
@@ -35,7 +58,7 @@ class Result:
         if nlo_plus_nll is not None and nlo != 0:
             self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll/nlo
         else:
-            self.NLO_PLUS_NLL_OVER_NLO  =None
+            self.NLO_PLUS_NLL_OVER_NLO  = None
         #else:
         #    print("nlo+nll None or lo=",lo)
 
@@ -43,7 +66,19 @@ class Result:
 
 
 
-def pdf_error(li, dl):
+def pdf_error(li, dl, confidence_level=90):
+    """
+    Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
+
+    Args:
+        li (:obj:`list` of :class:`Input`): Input list.
+        dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+        confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
+
+    Returns:
+        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
+            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
+    """
     global required_numerical_uncertainty_factor
     example = li[0]
     members = [attr for attr in dir(example) if not callable(
@@ -82,7 +117,7 @@ def pdf_error(li, dl):
             # lo_unc = set.uncertainty(
             #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
             nlo_unc = set.uncertainty(
-                [plot.unv(dl["NLO"][k]) for k in pdfs], 90)
+                [plot.unv(dl["NLO"][k]) for k in pdfs], confidence_level)
             dl["NLO_PDF_CENTRAL"][i] = nlo_unc.central
             dl["NLO_PDF_ERRPLUS"][i] = nlo_unc.errplus
             dl["NLO_PDF_ERRMINUS"][i] = -nlo_unc.errminus
@@ -117,6 +152,17 @@ def pdf_error(li, dl):
 
 
 def scale_error(li, dl):
+    """
+    Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
+
+    Args:
+        li (:obj:`list` of :class:`Input`): Input list.
+        dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+
+    Returns:
+        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
+            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
+    """
     global required_numerical_uncertainty_factor
     example = li[0]
     members = [attr for attr in dir(example) if not callable(
@@ -179,6 +225,19 @@ def scale_error(li, dl):
     return dl
 
 def combine_errors(dl):
+    """
+    Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
+
+    Note:
+        Running :func:`scale_errors` and :func:`pdf_errors` before is necessary.
+
+    Args:
+        dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+
+    Returns:
+        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
+            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
+    """
     dl["LO_NOERR"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["LO_ERRPLUS"] = np.array([None]*len(dl["pdfset_nlo"]))
     dl["LO_ERRMINUS"] = np.array([None]*len(dl["pdfset_nlo"]))
