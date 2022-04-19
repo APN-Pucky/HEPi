@@ -5,6 +5,7 @@ from .input import *
 from .results import *
 from .util import *
 from .plot import *
+from .run import *
 
 import pkg_resources as pkg  # part of setuptools
 #import json

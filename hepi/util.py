@@ -5,6 +5,10 @@ import hashlib
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
 
+class DictData:
+    def __str__(self):
+        return str(self.__dict__)
+
 def LD2DL(l: List):
     """
     Convert a list of objects into a dictionary of lists.

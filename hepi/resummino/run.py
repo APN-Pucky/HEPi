@@ -2,6 +2,7 @@
 from typing import List
 import subprocess
 from string import Template
+from hepi.run import RunParam
 import numpy as np
 import pkgutil
 
@@ -47,7 +48,7 @@ def get_path() -> str:
     return resummino_path
 
 
-class RunParams:
+class ResumminoRunParam(RunParam):
     """
     Parameters for running Resummino.
 
@@ -58,7 +59,8 @@ class RunParams:
         out_path (str): File path of the output file.
     """
     def __init__(self, flags: str, in_path: str, out_path: str, skip=False):
-        self.skip = skip
+        super().__init__(skip)
+        #self.skip = skip
         self.flags = flags
         self.in_path = in_path
         self.out_path = out_path
@@ -111,7 +113,7 @@ def _parse(outputs: List[str]) -> List[ResumminoResult]:
 
 
 
-def _queue(params: List[Input], noskip=False) -> List[RunParams]:
+def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
     """
     Queues and generates Resummino run files.
 
@@ -163,13 +165,13 @@ def _queue(params: List[Input], noskip=False) -> List[RunParams]:
                 open(get_output_dir() + name + ".out",
                      "a").write(f.read() + "\n\n")
 
-        ret.append(RunParams(["--lo", "--nlo", "--nll"]
+        ret.append(ResumminoRunParam(["--lo", "--nlo", "--nll"]
                              [p.order], get_input_dir()+name + ".in", get_output_dir()+name + ".out", skip))
 
     return ret
 
 
-def _run(rps: List[RunParams], bar=True, no_parse=False,para=True):
+def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False,para=True):
     """
     Runs Resummino per :class:`RunParams`.
 

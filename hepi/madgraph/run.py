@@ -2,6 +2,7 @@
 from typing import List
 import subprocess
 from string import Template
+from hepi.run import RunParam
 import numpy as np
 import pkgutil
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
@@ -40,13 +41,14 @@ def get_path():
     return madgraph_path
 
 
-class RunParams:    
+class MadGraphRunParams(RunParam):    
     """
     Parameters for MadGraph.
     """
     def __init__(self, dic,  skip=False,madstr=True):
+        super().__init__(skip)
         self.dic = dic
-        self.skip = skip
+        # self.skip = skip
         self.madstr = madstr
 
 
@@ -71,7 +73,7 @@ def namehash(n):
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
 
-def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[RunParams]:
+def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[MadGraphRunParams]:
     Path("output").mkdir(parents=True, exist_ok=True)
     Path("input").mkdir(parents=True, exist_ok=True)
     ret = []
@@ -116,7 +118,7 @@ def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[RunP
                 open(get_output_dir() + name + ".out",
                      "a").write(f.read() + "\n\n")
 
-        ret.append(RunParams({'in': get_input_dir()+name + ".mg",
+        ret.append(MadGraphRunParams({'in': get_input_dir()+name + ".mg",
                               'dir': d["dir"],
                               'bdir': d["bdir"],
                               'run': get_input_dir() + name + ".dat",
@@ -126,7 +128,7 @@ def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[RunP
     return ret
 
 
-def _run(rps: List[RunParams],para=True):
+def _run(rps: List[MadGraphRunParams],para=True):
     # TODO clean up on exit emergency
     global madgraph_path
     # TODO RS build path checks?!?!
