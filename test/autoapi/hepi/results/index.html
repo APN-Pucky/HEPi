@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2-20-ge16ad04
+                0.1.2-22-g304aeea
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -138,7 +138,7 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Result</span></code></a></p></td>
-<td><p></p></td>
+<td><p>General result class.</p></td>
 </tr>
 </tbody>
 </table>
@@ -172,19 +172,31 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.required_numerical_uncertainty_factor" title="hepi.results.required_numerical_uncertainty_factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_numerical_uncertainty_factor</span></code></a></p></td>
-<td><p></p></td>
+<td><p>If the numerical uncertainty is <a class="reference internal" href="#hepi.results.required_numerical_uncertainty_factor" title="hepi.results.required_numerical_uncertainty_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">required_numerical_uncertainty_factor</span></code></a> times higher than the scale or pdf uncertainty a warning is shown.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.results.required_numerical_uncertainty_factor">
 <span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">required_numerical_uncertainty_factor</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">10</span></em><a class="reference internal" href="../../../_modules/hepi/results.html#required_numerical_uncertainty_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.required_numerical_uncertainty_factor" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>If the numerical uncertainty is <a class="reference internal" href="#hepi.results.required_numerical_uncertainty_factor" title="hepi.results.required_numerical_uncertainty_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">required_numerical_uncertainty_factor</span></code></a> times higher than the scale or pdf uncertainty a warning is shown.</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.results.Result">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#Result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.Result" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#Result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.Result" title="Permalink to this definition"></a></dt>
+<dd><p>General result class.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>LO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Leading Order result. Defaults to None.
+NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order result. Defaults to None.
+NLO_PLUS_NLL (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+K_LO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Leading Order divided by Leading Order.
+K_NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order divided by Leading Order result.
+K_NLO_PLUS_NLL (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Leading Order.
+NLO_PLUS_NLL_OVER_NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Next-to-Leading Order.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.results.pdf_error">

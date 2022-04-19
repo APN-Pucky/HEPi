@@ -45,6 +45,7 @@ Attributes
    :annotation: = 10
 
    
+   If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.
 
 
 
@@ -64,10 +65,19 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:class:: Result(lo, nlo, nlo_plus_nll)
+.. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None)
 
    
+   General result class.
 
+   Attributes:
+       LO (:obj:`double`): Leading Order result. Defaults to None.
+       NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
+       NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+       K_LO (:obj:`double`): Leading Order divided by Leading Order.
+       K_NLO (:obj:`double`): Next-to-Leading Order divided by Leading Order result.
+       K_NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Leading Order.
+       NLO_PLUS_NLL_OVER_NLO (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Next-to-Leading Order.
 
 
 

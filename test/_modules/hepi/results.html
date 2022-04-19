@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2-20-ge16ad04
+                0.1.2-22-g304aeea
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -98,11 +98,31 @@ from smpl import plot
 import lhapdf
 import warnings
 
-#numerical convergence should be better by a factor of 10 to avoid spoiling the scale/pdf uncertainties
 <div class="viewcode-block" id="required_numerical_uncertainty_factor"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.required_numerical_uncertainty_factor">[docs]</a>required_numerical_uncertainty_factor = 10 </div>
+&quot;&quot;&quot;If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.&quot;&quot;&quot;
 
 <div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result">[docs]</a>class Result:
-    def __init__(self, lo, nlo, nlo_plus_nll):
+    &quot;&quot;&quot;
+    General result class.
+
+    Attributes:
+        LO (:obj:`double`): Leading Order result. Defaults to None.
+        NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
+        NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+        K_LO (:obj:`double`): Leading Order divided by Leading Order.
+        K_NLO (:obj:`double`): Next-to-Leading Order divided by Leading Order result.
+        K_NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Leading Order.
+        NLO_PLUS_NLL_OVER_NLO (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm divided by Next-to-Leading Order.
+    &quot;&quot;&quot;
+    def __init__(self, lo = None, nlo = None, nlo_plus_nll = None):
+        &quot;&quot;&quot;
+        Sets given and computes dependent ``Attributes``.
+
+        Args:
+            lo (:obj:`double`): Sets `LO`.
+            nlo (:obj:`double`): Sets `NLO`.
+            nlo_plus_nll (:obj:`double`): Sets `NLO_PLUS_NLL`.
+        &quot;&quot;&quot;
         self.LO = lo
         self.NLO = nlo
         self.NLO_PLUS_NLL = nlo_plus_nll
