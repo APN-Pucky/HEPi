@@ -38,7 +38,7 @@
             <a href="../../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.4-13-g9fd571e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -159,7 +159,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.resummino.result.is_valid" title="hepi.resummino.result.is_valid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid</span></code></a>(file: str, p: hepi.Input, d)</p></td>
 <td><p>Verifies that an file is a complete output.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.resummino.result.parse_single" title="hepi.resummino.result.parse_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_single</span></code></a>(file) → ResumminoResult</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.resummino.result.parse_single" title="hepi.resummino.result.parse_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_single</span></code></a>(file: str) → ResumminoResult</p></td>
 <td><p>Extracts LO, NLO and NLO+NLL from resummino output file.</p></td>
 </tr>
 </tbody>
@@ -169,18 +169,49 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.resummino.result.</span></span><span class="sig-name descname"><span class="pre">ResumminoResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vnlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_plus_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnlog</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnloq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/resummino/result.html#ResumminoResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.result.ResumminoResult" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../index.html#hepi.Result" title="hepi.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.Result</span></code></a></p>
 <p>Resummino Result Data.</p>
+<p>Sets given and computes dependent <code class="docutils literal notranslate"><span class="pre">Attributes</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">LO</span></code>.</p></li>
+<li><p><strong>nlo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO</span></code>.</p></li>
+<li><p><strong>nlo_plus_nll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO_PLUS_NLL</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.resummino.result.is_valid">
 <span class="sig-prename descclassname"><span class="pre">hepi.resummino.result.</span></span><span class="sig-name descname"><span class="pre">is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../index.html#id4" title="hepi.Input"><span class="pre">hepi.Input</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/resummino/result.html#is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.result.is_valid" title="Permalink to this definition"></a></dt>
 <dd><p>Verifies that an file is a complete output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – file path to be parsed.</p></li>
+<li><p><strong>p</strong> (<a class="reference internal" href="../../index.html#id4" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – input parameters.</p></li>
+<li><p><strong>d</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – param dictionary.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.resummino.result.parse_single">
-<span class="sig-prename descclassname"><span class="pre">hepi.resummino.result.</span></span><span class="sig-name descname"><span class="pre">parse_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hepi.resummino.result.ResumminoResult" title="hepi.resummino.result.ResumminoResult"><span class="pre">ResumminoResult</span></a></span></span><a class="reference internal" href="../../../../_modules/hepi/resummino/result.html#parse_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.result.parse_single" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.resummino.result.</span></span><span class="sig-name descname"><span class="pre">parse_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#hepi.resummino.result.ResumminoResult" title="hepi.resummino.result.ResumminoResult"><span class="pre">ResumminoResult</span></a></span></span><a class="reference internal" href="../../../../_modules/hepi/resummino/result.html#parse_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.result.parse_single" title="Permalink to this definition"></a></dt>
 <dd><p>Extracts LO, NLO and NLO+NLL from resummino output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – file path to be parsed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If a value is not found in the file None is used.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#hepi.resummino.result.ResumminoResult" title="hepi.resummino.result.ResumminoResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResumminoResult</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

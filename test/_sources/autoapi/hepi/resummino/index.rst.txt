@@ -5,25 +5,10 @@
 
 .. autoapi-nested-parse::
 
-   
+   :mod:`hepi` interface to Resummino.
 
+   Find it here https://resummino.hepforge.org/.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
 Submodules
@@ -53,70 +38,39 @@ Functions
 
 .. py:function:: run(params: List[hepi.Input], noskip=False, bar=True, no_parse=False, para=True)
 
-   
    Run the passed list of parameters.
 
+   :param params: All parameters that should be executed/queued.
+   :type params: :obj:`list` of :class:`hepi.Input`
+   :param noskip: False means stored runs will be skipped. Else the are overwritten.
+   :type noskip: bool
+   :param bar: Display a progressbar.
+   :type bar: bool
+   :param no_parse: Skip parsing the results.
+                    This is the prefered cluster mode, as this function only queues the job.
+   :type no_parse: bool
+   :param para: Run jobs in parallel.
+   :type para: bool
+
+   :returns:
+
+             combined dictionary of results and parameters. Each member therein is a list.
+                 The dictionary is empty if `no_parse` is set.
+   :rtype: :obj:`dict`
 
 
+.. py:function:: set_path(p: str)
 
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: set_path(p)
-
-   
    Set the path to the resummino folder containing the binary in './build/bin'.
 
+   :param str: new Resummino path.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: get_path()
 
-   
-   Returns the currently set resummino path
+   Get Resummino path.
 
+   :returns: current Resummino path
+   :rtype: str
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 

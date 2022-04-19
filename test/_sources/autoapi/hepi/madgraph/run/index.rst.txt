@@ -5,9 +5,8 @@
 
 .. autoapi-nested-parse::
 
-   
-   ..
-       !! processed by numpydoc !!
+   Runs MadGraph
+
 
 
 Module Contents
@@ -48,202 +47,35 @@ Attributes
 .. py:data:: madgraph_path
    :annotation: = /opt/MG5_aMC_v2_7_0/
 
-   
    madgraph folder
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: set_path(p)
 
-   
    Set the path to the MadGraph folder containing the binary in './bin'.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
 .. py:function:: get_path()
 
-   
    Returns the currently set MadGraph path.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
 .. py:class:: RunParams(dic, skip=False, madstr=True)
 
-   
+   Parameters for MadGraph.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: run(params: List[hepi.Input], noskip=False, madstr=True, para=True)
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: _parse(outputs: List[str]) -> List[hepi.madgraph.result.MadgraphResult]
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: namehash(n)
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: _queue(params: List[hepi.Input], noskip=False, madstr=True, para=True) -> List[RunParams]
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: _run(rps: List[RunParams], para=True)
 
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 

@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.4-13-g9fd571e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -103,17 +103,20 @@ from .util import get_LR_partner, lhapdf_name_to_id, namehash
 import lhapdf
 
 <div class="viewcode-block" id="in_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.in_dir">[docs]</a>in_dir = &quot;./input/&quot;</div>
-&quot;&quot;&quot;input directory&quot;&quot;&quot;
+&quot;&quot;&quot;Input directory.&quot;&quot;&quot;
 <div class="viewcode-block" id="out_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.out_dir">[docs]</a>out_dir = &quot;./output/&quot;</div>
-&quot;&quot;&quot;output directory&quot;&quot;&quot;
+&quot;&quot;&quot;Output directory.&quot;&quot;&quot;
 <div class="viewcode-block" id="pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pre">[docs]</a>pre = &quot;nice -n 5&quot;</div>
-&quot;&quot;&quot;run command prefix.&quot;&quot;&quot;
+&quot;&quot;&quot;Prefix for run commands.&quot;&quot;&quot;
 
 
 
 <div class="viewcode-block" id="get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_input_dir">[docs]</a>def get_input_dir():
     &quot;&quot;&quot;
     Get the input directory.
+
+    Returns:
+        str: :attr:`in_dir`
     &quot;&quot;&quot;
     global in_dir
     return in_dir</div>
@@ -122,14 +125,30 @@ import lhapdf
 <div class="viewcode-block" id="get_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_output_dir">[docs]</a>def get_output_dir():
     &quot;&quot;&quot;
     Get the input directory.
+
+    Returns:
+        str: :attr:`out_dir`
     &quot;&quot;&quot;
     global out_dir
     return out_dir</div>
 
 
+<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_pre">[docs]</a>def get_pre():
+    &quot;&quot;&quot;
+    Gets the command prefix. 
+
+    Returns:
+        str: :attr:`pre`
+    &quot;&quot;&quot;
+    global pre
+    return pre</div>
+
 <div class="viewcode-block" id="set_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_input_dir">[docs]</a>def set_input_dir(ind):
     &quot;&quot;&quot;
     Sets the input directory.
+
+    Args:
+        ind (str): new input directory.
     &quot;&quot;&quot;
     global in_dir
     in_dir = ind</div>
@@ -138,6 +157,9 @@ import lhapdf
 <div class="viewcode-block" id="set_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_output_dir">[docs]</a>def set_output_dir(outd):
     &quot;&quot;&quot;
     Sets the output directory.
+
+    Args:
+        outd (str): new output directory.
     &quot;&quot;&quot;
     global out_dir
     out_dir = outd</div>
@@ -146,17 +168,13 @@ import lhapdf
 <div class="viewcode-block" id="set_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_pre">[docs]</a>def set_pre(ppre):
     &quot;&quot;&quot;
     Sets the command prefix. 
+
+    Args:
+        ppre (str): new command prefix.
     &quot;&quot;&quot;
     global pre
     pre = ppre</div>
 
-
-<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_pre">[docs]</a>def get_pre():
-    &quot;&quot;&quot;
-    Gets the command prefix. 
-    &quot;&quot;&quot;
-    global pre
-    return pre</div>
 
 
 <div class="viewcode-block" id="Order"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order">[docs]</a>class Order(IntEnum):
@@ -164,8 +182,11 @@ import lhapdf
     Computation orders.
     &quot;&quot;&quot;
 <div class="viewcode-block" id="Order.LO"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.LO">[docs]</a>    LO = 0</div>
-<div class="viewcode-block" id="Order.NLO"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.NLO">[docs]</a>    NLO = 1</div>
-<div class="viewcode-block" id="Order.NLO_PLUS_NLL"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.NLO_PLUS_NLL">[docs]</a>    NLO_PLUS_NLL = 2</div></div>
+    &quot;&quot;&quot;Leading Order&quot;&quot;&quot;
+<div class="viewcode-block" id="Order.NLO"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.NLO">[docs]</a>    NLO = 1 </div>
+    &quot;&quot;&quot;Next-to-Leading Order&quot;&quot;&quot;
+<div class="viewcode-block" id="Order.NLO_PLUS_NLL"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.NLO_PLUS_NLL">[docs]</a>    NLO_PLUS_NLL = 2 </div>
+    &quot;&quot;&quot;Next-to-Leading Order plus Next-to-Leading Logarithms&quot;&quot;&quot;</div>
 
 
 <div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input">[docs]</a>class Input:
@@ -202,6 +223,8 @@ import lhapdf
     Updates dependent parameters in Input `i`.
 
     Mainly concerns the `mu` value used by `madgraph`.
+
+    
     &quot;&quot;&quot;
     b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
     try:

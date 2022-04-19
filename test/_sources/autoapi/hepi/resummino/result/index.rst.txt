@@ -3,12 +3,6 @@
 
 .. py:module:: hepi.resummino.result
 
-.. autoapi-nested-parse::
-
-   
-   ..
-       !! processed by numpydoc !!
-
 
 Module Contents
 ---------------
@@ -36,70 +30,41 @@ Functions
 
    Bases: :py:obj:`hepi.Result`
 
-   
    Resummino Result Data.
 
+   Sets given and computes dependent ``Attributes``.
 
+   :param lo: corresponds to :attr:`LO`.
+   :type lo: :obj:`double`
+   :param nlo: corresponds to :attr:`NLO`.
+   :type nlo: :obj:`double`
+   :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
+   :type nlo_plus_nll: :obj:`double`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: is_valid(file: str, p: hepi.Input, d)
 
-   
    Verifies that an file is a complete output.
 
+   :param file: file path to be parsed.
+   :type file: str
+   :param p: input parameters.
+   :type p: :class:`hepi.Input`
+   :param d: param dictionary.
+   :type d: :obj:`dict`
+
+   Returns:
 
 
 
+.. py:function:: parse_single(file: str) -> ResumminoResult
 
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: parse_single(file) -> ResumminoResult
-
-   
    Extracts LO, NLO and NLO+NLL from resummino output file.
 
+   :param file: file path to be parsed.
+   :type file: str
 
+   :returns: If a value is not found in the file None is used.
+   :rtype: :class:`ResumminoResult`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 

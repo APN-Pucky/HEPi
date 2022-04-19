@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.4-13-g9fd571e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -89,7 +89,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.madgraph.run</h1><div class="highlight"><pre>
-<span></span>from typing import List
+<span></span>&quot;&quot;&quot;Runs MadGraph&quot;&quot;&quot;
+from typing import List
 import subprocess
 from string import Template
 import numpy as np
@@ -127,7 +128,10 @@ import hashlib
     return madgraph_path</div>
 
 
-<div class="viewcode-block" id="RunParams"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.RunParams">[docs]</a>class RunParams:
+<div class="viewcode-block" id="RunParams"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.RunParams">[docs]</a>class RunParams:    
+    &quot;&quot;&quot;
+    Parameters for MadGraph.
+    &quot;&quot;&quot;
     def __init__(self, dic,  skip=False,madstr=True):
         self.dic = dic
         self.skip = skip

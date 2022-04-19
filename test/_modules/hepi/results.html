@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.4-13-g9fd571e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -103,7 +103,6 @@ import warnings
 &quot;&quot;&quot;If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.&quot;&quot;&quot;
 
 
-
 <div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result">[docs]</a>class Result:
     &quot;&quot;&quot;
     General result class.
@@ -122,9 +121,9 @@ import warnings
         Sets given and computes dependent ``Attributes``.
 
         Args:
-            lo (:obj:`double`): Sets `LO`.
-            nlo (:obj:`double`): Sets `NLO`.
-            nlo_plus_nll (:obj:`double`): Sets `NLO_PLUS_NLL`.
+            lo (:obj:`double`): corresponds to :attr:`LO`.
+            nlo (:obj:`double`): corresponds to :attr:`NLO`.
+            nlo_plus_nll (:obj:`double`): corresponds to :attr:`NLO_PLUS_NLL`.
         &quot;&quot;&quot;
         self.LO = lo #:obj:`double`: Leading Order result. Defaults to None.
         self.NLO = nlo

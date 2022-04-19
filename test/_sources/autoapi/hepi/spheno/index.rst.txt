@@ -5,25 +5,10 @@
 
 .. autoapi-nested-parse::
 
-   
+   :mod:`hepi` interface to spheno.
 
+   SPheno stands for S(upersymmetric) Pheno(menology) find it here https://spheno.hepforge.org/.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
 Submodules
@@ -71,76 +56,27 @@ Attributes
 
 .. py:function:: get_input_dir()
 
-   
    Get the input directory.
 
+   :returns: :attr:`in_dir`
+   :rtype: str
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: get_output_dir()
 
-   
    Get the input directory.
 
+   :returns: :attr:`out_dir`
+   :rtype: str
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:class:: Input(order: Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO')
 
-   
    Input for computation.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
 .. py:function:: update_slha(i: Input)
 
-   
    Updates dependent parameters in Input `i`.
 
    Mainly concerns the `mu` value used by `madgraph`.
@@ -148,110 +84,23 @@ Attributes
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
 .. py:data:: spheno_path
    :annotation: = ~/git/SPheno-3.3.8/
 
-   
    spheno folder containing the binary in './bin'.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: set_path(p)
 
-   
    Set the path to the SPheno folder containing the binary in './bin'.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
 .. py:function:: get_path()
 
-   
    Returns the currently set SPheno path.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
 .. py:function:: run(slhas: List[hepi.input.Input]) -> List[hepi.input.Input]
 
-   
    Run the passed list of parameters for SPheno.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
