@@ -153,7 +153,7 @@ def pdf_error(li, dl, confidence_level=90):
 
 def scale_error(li, dl):
     """
-    Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :func:`seven_point_scan`).
+    Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
 
     Args:
         li (:obj:`list` of :class:`Input`): Input list.
