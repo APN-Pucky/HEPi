@@ -18,7 +18,6 @@ class ResumminoResult(Result):
         RNLOQ (double): real NLO quark result.
         VNLO_PLUS_P_PLUS_K (double): VNLO+P+K result.
         RNLO_PLUS_VNLO_PLUS_P_PLUS_K (double): RNLO+VNLO+P+K result.
-        
     """
     def __init__(self, lo, nlo, nlo_plus_nll, vnlo, p_plus_k, rnlog, rnloq):
         """
