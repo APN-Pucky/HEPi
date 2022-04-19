@@ -70,7 +70,7 @@ def is_valid(file:str,p:Input,d) -> bool:
 
 def parse_single(file : str) -> ResumminoResult:
     """
-    Extracts LO, NLO and NLO+NLL from resummino output file.
+    Extracts LO, NLO and NLO+NLL from Resummino output file.
 
     Args:
         file (str): File path to be parsed.

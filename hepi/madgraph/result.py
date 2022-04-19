@@ -1,15 +1,15 @@
+import warnings
 from hepi.input import Order
-from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
+from .. import Input, Result
 import re
 from uncertainties import ufloat_fromstr
 
 
 class MadgraphResult(Result):
-    """
-    MadGraph Result Data.
-    """
+    """ MadGraph Result Data."""
     def __init__(self, lo, nlo):
-        Result.__init__(self, lo, nlo, nlo)
+        """Sets LO and NLO result. NLO+NLL is set to None."""
+        Result.__init__(self, lo, nlo, None)
 
 
 def is_valid(file:str,p:Input,d) -> bool :
@@ -26,18 +26,22 @@ def is_valid(file:str,p:Input,d) -> bool :
     """
     order = p.order
     res = parse_single(file)
+    if order is Order.NLO_PLUS_NLL:
+        warnings.warn("MadGraph has no NLO_PLUS_NLL computation.")
     if res.LO is not None and order is Order.LO:
         return True
     if res.LO is not None and res.NLO is not None and order is Order.NLO:
-        return True
-    if res.LO is not None and res.NLO is not None and res.NLO_PLUS_NLL is not None and order is Order.NLO_PLUS_NLL:
         return True
     print("RESTART" ,res.LO, res.NLO,res.NLO_PLUS_NLL, file)
     return False
 
 def parse_single(file) -> MadgraphResult:
     """
-    Extracts LO, NLO and NLO+NLL from resummino output file.
+    Extracts Result from MadGraph output file.
+
+    Note:
+        This is only the result of one order. Therefore LO and NLO result in the return value are the same.
+
 
     Args:
         file (str): File path to be parsed.

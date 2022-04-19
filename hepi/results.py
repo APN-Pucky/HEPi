@@ -1,5 +1,5 @@
 """Results and postprocessing for the :mod:`hepi` package."""
-from .util import LD2DL
+from .util import LD2DL, DictData
 import numpy as np
 from typing import List
 from uncertainties import unumpy
@@ -12,7 +12,7 @@ required_numerical_uncertainty_factor = 10
 """If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown."""
 
 
-class Result:
+class Result(DictData):
     """
     General result class.
 

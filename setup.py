@@ -14,7 +14,9 @@ dev_requirements = [
     "pandas",
     "ipython",
     "jupyter-sphinx",
-    "sphinx-autoapi"
+    "sphinx-autoapi",
+    "sphinxcontrib-napoleon",
+    "sphinx-autobuild",
 ]
 
 setuptools.setup(
