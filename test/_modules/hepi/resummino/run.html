@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-18-geb16984
+                0.1.4-19-gdf9c73b
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -93,6 +93,7 @@
 from typing import List
 import subprocess
 from string import Template
+from hepi.run import RunParam
 import numpy as np
 import pkgutil
 
@@ -138,7 +139,7 @@ import stat
     return resummino_path</div>
 
 
-<div class="viewcode-block" id="RunParams"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.RunParams">[docs]</a>class RunParams:
+<div class="viewcode-block" id="ResumminoRunParam"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunParam">[docs]</a>class ResumminoRunParam(RunParam):
     &quot;&quot;&quot;
     Parameters for running Resummino.
 
@@ -149,7 +150,8 @@ import stat
         out_path (str): File path of the output file.
     &quot;&quot;&quot;
     def __init__(self, flags: str, in_path: str, out_path: str, skip=False):
-        self.skip = skip
+        super().__init__(skip)
+        #self.skip = skip
         self.flags = flags
         self.in_path = in_path
         self.out_path = out_path</div>
@@ -202,7 +204,7 @@ import stat
 
 
 
-<div class="viewcode-block" id="_queue"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._queue">[docs]</a>def _queue(params: List[Input], noskip=False) -&gt; List[RunParams]:
+<div class="viewcode-block" id="_queue"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._queue">[docs]</a>def _queue(params: List[Input], noskip=False) -&gt; List[ResumminoRunParam]:
     &quot;&quot;&quot;
     Queues and generates Resummino run files.
 
@@ -254,13 +256,13 @@ import stat
                 open(get_output_dir() + name + &quot;.out&quot;,
                      &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
 
-        ret.append(RunParams([&quot;--lo&quot;, &quot;--nlo&quot;, &quot;--nll&quot;]
+        ret.append(ResumminoRunParam([&quot;--lo&quot;, &quot;--nlo&quot;, &quot;--nll&quot;]
                              [p.order], get_input_dir()+name + &quot;.in&quot;, get_output_dir()+name + &quot;.out&quot;, skip))
 
     return ret</div>
 
 
-<div class="viewcode-block" id="_run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._run">[docs]</a>def _run(rps: List[RunParams], bar=True, no_parse=False,para=True):
+<div class="viewcode-block" id="_run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._run">[docs]</a>def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False,para=True):
     &quot;&quot;&quot;
     Runs Resummino per :class:`RunParams`.
 

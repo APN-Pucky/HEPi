@@ -17,7 +17,7 @@ Classes
 
 .. autoapisummary::
 
-   hepi.madgraph.run.RunParams
+   hepi.madgraph.run.MadGraphRunParams
 
 
 
@@ -65,7 +65,9 @@ Attributes
    :rtype: str
 
 
-.. py:class:: RunParams(dic, skip=False, madstr=True)
+.. py:class:: MadGraphRunParams(dic, skip=False, madstr=True)
+
+   Bases: :py:obj:`hepi.run.RunParam`
 
    Parameters for MadGraph.
 
@@ -79,9 +81,9 @@ Attributes
 .. py:function:: namehash(n)
 
 
-.. py:function:: _queue(params: List[hepi.Input], noskip=False, madstr=True, para=True) -> List[RunParams]
+.. py:function:: _queue(params: List[hepi.Input], noskip=False, madstr=True, para=True) -> List[MadGraphRunParams]
 
 
-.. py:function:: _run(rps: List[RunParams], para=True)
+.. py:function:: _run(rps: List[MadGraphRunParams], para=True)
 
 

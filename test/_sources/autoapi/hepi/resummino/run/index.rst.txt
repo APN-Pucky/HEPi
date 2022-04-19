@@ -17,7 +17,7 @@ Classes
 
 .. autoapisummary::
 
-   hepi.resummino.run.RunParams
+   hepi.resummino.run.ResumminoRunParam
 
 
 
@@ -63,7 +63,9 @@ Attributes
    :rtype: str
 
 
-.. py:class:: RunParams(flags: str, in_path: str, out_path: str, skip=False)
+.. py:class:: ResumminoRunParam(flags: str, in_path: str, out_path: str, skip=False)
+
+   Bases: :py:obj:`hepi.run.RunParam`
 
    Parameters for running Resummino.
 
@@ -111,7 +113,7 @@ Attributes
    :returns: :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
 
 
-.. py:function:: _queue(params: List[hepi.Input], noskip=False) -> List[RunParams]
+.. py:function:: _queue(params: List[hepi.Input], noskip=False) -> List[ResumminoRunParam]
 
    Queues and generates Resummino run files.
 
@@ -126,7 +128,7 @@ Attributes
    :rtype: :obj:`list` of :class:`hepi.RunParams`
 
 
-.. py:function:: _run(rps: List[RunParams], bar=True, no_parse=False, para=True)
+.. py:function:: _run(rps: List[ResumminoRunParam], bar=True, no_parse=False, para=True)
 
    Runs Resummino per :class:`RunParams`.
 

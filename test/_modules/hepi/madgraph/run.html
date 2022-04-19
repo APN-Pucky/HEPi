@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-18-geb16984
+                0.1.4-19-gdf9c73b
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -93,6 +93,7 @@
 from typing import List
 import subprocess
 from string import Template
+from hepi.run import RunParam
 import numpy as np
 import pkgutil
 from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
@@ -131,13 +132,14 @@ import hashlib
     return madgraph_path</div>
 
 
-<div class="viewcode-block" id="RunParams"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.RunParams">[docs]</a>class RunParams:    
+<div class="viewcode-block" id="MadGraphRunParams"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunParams">[docs]</a>class MadGraphRunParams(RunParam):    
     &quot;&quot;&quot;
     Parameters for MadGraph.
     &quot;&quot;&quot;
     def __init__(self, dic,  skip=False,madstr=True):
+        super().__init__(skip)
         self.dic = dic
-        self.skip = skip
+        # self.skip = skip
         self.madstr = madstr</div>
 
 
@@ -162,7 +164,7 @@ import hashlib
     m.update(str(n).encode(&#39;utf-8&#39;))
     return m.hexdigest()</div>
 
-<div class="viewcode-block" id="_queue"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph._queue">[docs]</a>def _queue(params: List[Input], noskip=False,madstr=True,para=True) -&gt; List[RunParams]:
+<div class="viewcode-block" id="_queue"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph._queue">[docs]</a>def _queue(params: List[Input], noskip=False,madstr=True,para=True) -&gt; List[MadGraphRunParams]:
     Path(&quot;output&quot;).mkdir(parents=True, exist_ok=True)
     Path(&quot;input&quot;).mkdir(parents=True, exist_ok=True)
     ret = []
@@ -207,7 +209,7 @@ import hashlib
                 open(get_output_dir() + name + &quot;.out&quot;,
                      &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
 
-        ret.append(RunParams({&#39;in&#39;: get_input_dir()+name + &quot;.mg&quot;,
+        ret.append(MadGraphRunParams({&#39;in&#39;: get_input_dir()+name + &quot;.mg&quot;,
                               &#39;dir&#39;: d[&quot;dir&quot;],
                               &#39;bdir&#39;: d[&quot;bdir&quot;],
                               &#39;run&#39;: get_input_dir() + name + &quot;.dat&quot;,
@@ -217,7 +219,7 @@ import hashlib
     return ret</div>
 
 
-<div class="viewcode-block" id="_run"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph._run">[docs]</a>def _run(rps: List[RunParams],para=True):
+<div class="viewcode-block" id="_run"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph._run">[docs]</a>def _run(rps: List[MadGraphRunParams],para=True):
     # TODO clean up on exit emergency
     global madgraph_path
     # TODO RS build path checks?!?!

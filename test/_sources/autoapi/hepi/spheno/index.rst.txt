@@ -63,6 +63,8 @@ Attributes
 
 .. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO', update=True)
 
+   Bases: :py:obj:`hepi.util.DictData`
+
    Input for computation and scans.
 
    :ivar order: LO, NLO or NLO+NLL computation.
@@ -113,11 +115,6 @@ Attributes
    :ivar update: Update dependent `mu`.
 
    :vartype update: bool
-
-   .. py:method:: __str__(self)
-
-      Return str(self).
-
 
 
 .. py:function:: update_slha(i: Input)
