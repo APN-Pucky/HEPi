@@ -32,6 +32,22 @@ Functions
 
    Resummino Result Data.
 
+   :ivar VNLO: virtual NLO result.
+   :vartype VNLO: double
+   :ivar RNLO: real NLO result.
+   :vartype RNLO: double
+   :ivar P_PLUS_K: collineare remainders P+K NLO result.
+   :vartype P_PLUS_K: double
+   :ivar RNLOG: real NLO gluon result.
+   :vartype RNLOG: double
+   :ivar RNLOQ: real NLO quark result.
+   :vartype RNLOQ: double
+   :ivar VNLO_PLUS_P_PLUS_K: VNLO+P+K result.
+   :vartype VNLO_PLUS_P_PLUS_K: double
+   :ivar RNLO_PLUS_VNLO_PLUS_P_PLUS_K: RNLO+VNLO+P+K result.
+
+   :vartype RNLO_PLUS_VNLO_PLUS_P_PLUS_K: double
+
    Sets given and computes dependent ``Attributes``.
 
    :param lo: corresponds to :attr:`LO`.
@@ -40,6 +56,14 @@ Functions
    :type nlo: :obj:`double`
    :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
    :type nlo_plus_nll: :obj:`double`
+   :param vnlo: corresponds to :attr:`VNLO`.
+   :type vnlo: :obj:`double`
+   :param p_plus_k: corresponds to :attr:`P_PLUS_K`.
+   :type p_plus_k: :obj:`double`
+   :param rnlog: corresponds to :attr:`RNLOG`.
+   :type rnlog: :obj:`double`
+   :param rnloq: corresponds to :attr:`RNLOQ`.
+   :type rnloq: :obj:`double`
 
 
 .. py:function:: is_valid(file: str, p: hepi.Input, d) -> bool

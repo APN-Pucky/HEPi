@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-21-ga69a2a8
+                0.1.4-23-g053616f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -125,6 +125,11 @@ from hepi.input import Input, update_slha
 <div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.run">[docs]</a>def run(slhas : List[Input]) -&gt; List[Input]:
     &quot;&quot;&quot;
     Run the passed list of parameters for SPheno.
+
+    Args:
+        slhas (:obj:`list` of :class:`Input`): Input parameters with a SLHA file that can be processed by SPheno.
+    Returns:
+        :obj:`list` of :class:`Input`
     &quot;&quot;&quot;
     if os.path.exists(&quot;Messages.out&quot;):
         os.remove(&quot;Messages.out&quot;)

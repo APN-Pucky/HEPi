@@ -38,7 +38,7 @@
             <a href="../../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-21-ga69a2a8
+                0.1.4-23-g053616f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -170,6 +170,19 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.resummino.result.</span></span><span class="sig-name descname"><span class="pre">ResumminoResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vnlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_plus_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnlog</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rnloq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/resummino/result.html#ResumminoResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.resummino.result.ResumminoResult" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../index.html#hepi.Result" title="hepi.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.Result</span></code></a></p>
 <p>Resummino Result Data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>VNLO</strong> (<em>double</em>) – virtual NLO result.</p></li>
+<li><p><strong>RNLO</strong> (<em>double</em>) – real NLO result.</p></li>
+<li><p><strong>P_PLUS_K</strong> (<em>double</em>) – collineare remainders P+K NLO result.</p></li>
+<li><p><strong>RNLOG</strong> (<em>double</em>) – real NLO gluon result.</p></li>
+<li><p><strong>RNLOQ</strong> (<em>double</em>) – real NLO quark result.</p></li>
+<li><p><strong>VNLO_PLUS_P_PLUS_K</strong> (<em>double</em>) – VNLO+P+K result.</p></li>
+<li><p><strong>RNLO_PLUS_VNLO_PLUS_P_PLUS_K</strong> (<em>double</em>) – RNLO+VNLO+P+K result.</p></li>
+</ul>
+</dd>
+</dl>
 <p>Sets given and computes dependent <code class="docutils literal notranslate"><span class="pre">Attributes</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -177,6 +190,10 @@
 <li><p><strong>lo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">LO</span></code>.</p></li>
 <li><p><strong>nlo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO</span></code>.</p></li>
 <li><p><strong>nlo_plus_nll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO_PLUS_NLL</span></code>.</p></li>
+<li><p><strong>vnlo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">VNLO</span></code>.</p></li>
+<li><p><strong>p_plus_k</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">P_PLUS_K</span></code>.</p></li>
+<li><p><strong>rnlog</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">RNLOG</span></code>.</p></li>
+<li><p><strong>rnloq</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">RNLOQ</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
