@@ -38,7 +38,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2
+                0.1.4
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -51,7 +51,7 @@
               <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Test</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Links:</span></p>
 <ul>
@@ -176,7 +176,7 @@
 <td><p>Input for computation.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.Result" title="hepi.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Result</span></code></a></p></td>
-<td><p></p></td>
+<td><p>General result class.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#id4" title="hepi.Input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code></a></p></td>
 <td><p>Input for computation.</p></td>
@@ -192,20 +192,20 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id1" title="hepi.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(id)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id1" title="hepi.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(id: int) → Tuple[int, int]</p></td>
+<td><p>Transforms a PDG id to it's left-right partner.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id3" title="hepi.lhapdf_name_to_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_to_id</span></code></a>(name)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id3" title="hepi.lhapdf_name_to_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_to_id</span></code></a>(name: str) → int</p></td>
+<td><p>Converts a LHAPDF name to the sets id.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id2" title="hepi.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id2" title="hepi.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n: any) → str</p></td>
+<td><p>Creates a sha256 hash from the objects string representation.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#id5" title="hepi.get_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_dir</span></code></a>()</p></td>
-<td><p>Gets the input directory.</p></td>
+<td><p>Get the input directory.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.get_output_dir" title="hepi.get_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_dir</span></code></a>()</p></td>
-<td><p>Gets the input directory.</p></td>
+<td><p>Get the input directory.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.set_input_dir" title="hepi.set_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_input_dir</span></code></a>(ind)</p></td>
 <td><p>Sets the input directory.</p></td>
@@ -250,99 +250,102 @@
 <td><p>Scan a generic slha variable.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#id0" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List)</p></td>
-<td><p></p></td>
+<td><p>Convert a list of objects into a dictionary of lists.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.pdf_error" title="hepi.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.pdf_error" title="hepi.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl, confidence_level=90)</p></td>
+<td><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.scale_error" title="hepi.scale_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error</span></code></a>(li, dl)</p></td>
-<td><p></p></td>
+<td><p>Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. <a class="reference internal" href="#hepi.seven_point_scan" title="hepi.seven_point_scan"><code class="xref py py-meth docutils literal notranslate"><span class="pre">seven_point_scan()</span></code></a>).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.combine_errors" title="hepi.combine_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_errors</span></code></a>(dl)</p></td>
-<td><p></p></td>
+<td><p>Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#id0" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List)</p></td>
+<td><p>Convert a list of objects into a dictionary of lists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id6" title="hepi.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(id: int) → str</p></td>
+<td><p>Get the latex name of a particle.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id1" title="hepi.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(id: int) → Tuple[int, int]</p></td>
+<td><p>Transforms a PDG id to it's left-right partner.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id2" title="hepi.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n: any) → str</p></td>
+<td><p>Creates a sha256 hash from the objects string representation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.lhapdf_id_to_name" title="hepi.lhapdf_id_to_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_id_to_name</span></code></a>(lid: int) → str</p></td>
+<td><p>Converts a LHAPDF id to the sets name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id3" title="hepi.lhapdf_name_to_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_to_id</span></code></a>(name: str) → int</p></td>
+<td><p>Converts a LHAPDF name to the sets id.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id5" title="hepi.get_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_dir</span></code></a>()</p></td>
+<td><p>Get the input directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id6" title="hepi.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(id: int) → str</p></td>
+<td><p>Get the latex name of a particle.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.tex_table" title="hepi.tex_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tex_table</span></code></a>(dict_list, key, fname, scale=True, pdf=True, yscale=1.0)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id6" title="hepi.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(id)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.title" title="hepi.title"><code class="xref py py-obj docutils literal notranslate"><span class="pre">title</span></code></a>(axe, i: hepi.input.Input, scenario='', diff_L_R=None, extra='', **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id1" title="hepi.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(id)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.energy_plot" title="hepi.energy_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_plot</span></code></a>(dict_list, y, yscale=1.0, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', label=None, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id2" title="hepi.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.combined_energy_plot" title="hepi.combined_energy_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_energy_plot</span></code></a>(dict_list, t, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id3" title="hepi.lhapdf_name_to_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_to_id</span></code></a>(name)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.combined_plot" title="hepi.combined_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_plot</span></code></a>(func, dict_list, t, *args, label=None, fill=False, fmt='.', interpolate=True, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id5" title="hepi.get_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_dir</span></code></a>()</p></td>
-<td><p>Gets the input directory.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id6" title="hepi.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(id)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.get_mass" title="hepi.get_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mass</span></code></a>(l, id)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.tex_table" title="hepi.tex_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tex_table</span></code></a>(dict_list, key, fname, scale=True, pdf=True, yscale=1.0)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_plot" title="hepi.mass_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_plot</span></code></a>(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.title" title="hepi.title"><code class="xref py py-obj docutils literal notranslate"><span class="pre">title</span></code></a>(axe, i: hepi.input.Input, scenario='', diff_L_R=None, extra='', **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mass_vplot" title="hepi.mass_vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_vplot</span></code></a>(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.energy_plot" title="hepi.energy_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_plot</span></code></a>(dict_list, y, yscale=1.0, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', label=None, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="plot/index.html#module-hepi.plot" title="hepi.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.combined_energy_plot" title="hepi.combined_energy_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_energy_plot</span></code></a>(dict_list, t, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.index_open" title="hepi.index_open"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_open</span></code></a>(var, idx)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.combined_plot" title="hepi.combined_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_plot</span></code></a>(func, dict_list, t, *args, label=None, fill=False, fmt='.', interpolate=True, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.slha_data" title="hepi.slha_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_data</span></code></a>(li, index_list)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.get_mass" title="hepi.get_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mass</span></code></a>(l, id)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.slha_plot" title="hepi.slha_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_plot</span></code></a>(li, x, y, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mass_plot" title="hepi.mass_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_plot</span></code></a>(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.vplot" title="hepi.vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vplot</span></code></a>(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_vplot" title="hepi.mass_vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_vplot</span></code></a>(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mass_mapplot" title="hepi.mass_mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_mapplot</span></code></a>(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="plot/index.html#module-hepi.plot" title="hepi.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mapplot" title="hepi.mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapplot</span></code></a>(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.index_open" title="hepi.index_open"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_open</span></code></a>(var, idx)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.map_vplot" title="hepi.map_vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_vplot</span></code></a>(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.0)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.slha_data" title="hepi.slha_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_data</span></code></a>(li, index_list)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.err_plt" title="hepi.err_plt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">err_plt</span></code></a>(axes, x, y, label=None, error=False)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.slha_plot" title="hepi.slha_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_plot</span></code></a>(li, x, y, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.scale_plot" title="hepi.scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_plot</span></code></a>(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.vplot" title="hepi.vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vplot</span></code></a>(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.central_scale_plot" title="hepi.central_scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">central_scale_plot</span></code></a>(dict_list, vl, cont=False, error=True, yscale=1.0, unit='pb')</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_mapplot" title="hepi.mass_mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_mapplot</span></code></a>(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mass_and_K_plot" title="hepi.mass_and_K_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_and_K_plot</span></code></a>(dl, li, p, scale=False, pdf=False, plehn=True, combined=False, cont=False, figsize=(6, 8), **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mapplot" title="hepi.mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapplot</span></code></a>(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.map_vplot" title="hepi.map_vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">map_vplot</span></code></a>(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.0)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.err_plt" title="hepi.err_plt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">err_plt</span></code></a>(axes, x, y, label=None, error=False)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.scale_plot" title="hepi.scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_plot</span></code></a>(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', **kwargs)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.central_scale_plot" title="hepi.central_scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">central_scale_plot</span></code></a>(dict_list, vl, cont=False, error=True, yscale=1.0, unit='pb')</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_and_K_plot" title="hepi.mass_and_K_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_and_K_plot</span></code></a>(dl, li, p, scale=False, pdf=False, plehn=True, combined=False, cont=False, figsize=(6, 8), **kwargs)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mass_and_ratio_plot" title="hepi.mass_and_ratio_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_and_ratio_plot</span></code></a>(dl, li, p, scale=False, pdf=False, combined=False, cont=False, figsize=(6, 4), plot_data=True, fill=True, unit='pb', yscale=1.0, ylim=None, **kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_and_ratio_plot" title="hepi.mass_and_ratio_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_and_ratio_plot</span></code></a>(dl, li, p, scale=False, pdf=False, combined=False, cont=False, figsize=(6, 4), plot_data=True, fill=True, unit='pb', yscale=1.0, ylim=None, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -366,13 +369,13 @@
 <td><p>run command prefix.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.required_numerical_uncertainty_factor" title="hepi.required_numerical_uncertainty_factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_numerical_uncertainty_factor</span></code></a></p></td>
-<td><p></p></td>
+<td><p>If the numerical uncertainty is <a class="reference internal" href="#hepi.required_numerical_uncertainty_factor" title="hepi.required_numerical_uncertainty_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">required_numerical_uncertainty_factor</span></code></a> times higher than the scale or pdf uncertainty a warning is shown.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.id_name" title="hepi.id_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id_name</span></code></a></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.lhapdf_id_name" title="hepi.lhapdf_id_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_id_name</span></code></a></p></td>
+<td><p>Dictionary of lhapdf names for given id.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.name_id" title="hepi.name_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name_id</span></code></a></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.lhapdf_name_id" title="hepi.lhapdf_name_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_id</span></code></a></p></td>
+<td><p>Dictionary of lhapdf id for given name.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.fig" title="hepi.fig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fig</span></code></a></p></td>
 <td><p></p></td>
@@ -399,18 +402,59 @@
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.get_LR_partner">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_LR_partner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.get_LR_partner" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_LR_partner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#hepi.get_LR_partner" title="Permalink to this definition"></a></dt>
+<dd><p>Transforms a PDG id to it’s left-right partner.</p>
+<dl>
+<dt>Args:</dt><dd><p>id (int) : PDG Monte Carlo identifier for the particle.</p>
+</dd>
+<dt>Returns:</dt><dd><p>tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_LR_partner</span><span class="p">(</span><span class="mi">1000002</span><span class="p">)</span>
+<span class="go">(-1, 2000002)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.lhapdf_name_to_id">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.lhapdf_name_to_id" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#hepi.lhapdf_name_to_id" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a LHAPDF name to the sets id.</p>
+<dl>
+<dt>Args:</dt><dd><p>name (str) : LHAPDF set name.</p>
+</dd>
+<dt>Returns:</dt><dd><p>int: id of the LHAPDF set.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lhapdf_name_to_id</span><span class="p">(</span><span class="s2">&quot;EPPS16_B_90CL_Au_hess&quot;</span><span class="p">)</span>
+<span class="go">30101175</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.namehash">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">namehash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.namehash" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">namehash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#hepi.namehash" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a sha256 hash from the objects string representation.</p>
+<dl>
+<dt>Args:</dt><dd><p>n (any) : object.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: sha256 of object.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namehash</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="go">&#39;3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namehash</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">&#39;3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.in_dir">
@@ -433,13 +477,13 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.get_input_dir">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_input_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#get_input_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.get_input_dir" title="Permalink to this definition"></a></dt>
-<dd><p>Gets the input directory.</p>
+<dd><p>Get the input directory.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.get_output_dir">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_output_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#get_output_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.get_output_dir" title="Permalink to this definition"></a></dt>
-<dd><p>Gets the input directory.</p>
+<dd><p>Get the input directory.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -563,67 +607,231 @@ Only points with <cite>mu_f`=`mu_r</cite> or <cite>mu_r/f`=1 or `mu_r/f`=`distan
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.LD2DL">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.LD2DL" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Convert a list of objects into a dictionary of lists.</p>
+<p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
+<dl>
+<dt>Args:</dt><dd><p>l (List) : list of objects.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict : dictionary of numpy arrays.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Param</span><span class="p">:</span>
+<span class="gp">... </span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LD2DL</span><span class="p">([</span> <span class="n">Param</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">Param</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="p">,</span> <span class="n">Param</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span> <span class="p">])</span>
+<span class="go">{&#39;a&#39;: array([1, 4, 7]), &#39;b&#39;: array([2, 5, 8]), &#39;c&#39;: array([3, 6, 9])}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.required_numerical_uncertainty_factor">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">required_numerical_uncertainty_factor</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">10</span></em><a class="reference internal" href="../../_modules/hepi/results.html#required_numerical_uncertainty_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.required_numerical_uncertainty_factor" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>If the numerical uncertainty is <a class="reference internal" href="#hepi.required_numerical_uncertainty_factor" title="hepi.required_numerical_uncertainty_factor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">required_numerical_uncertainty_factor</span></code></a> times higher than the scale or pdf uncertainty a warning is shown.</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.Result">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/results.html#Result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Result" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/results.html#Result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Result" title="Permalink to this definition"></a></dt>
+<dd><p>General result class.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>LO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Leading Order result. Defaults to None.
+NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order result. Defaults to None.
+NLO_PLUS_NLL (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+K_LO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): LO divided by LO.
+K_NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): NLO divided by LO result.
+K_NLO_PLUS_NLL (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): NLO+NLL divided by LO.
+NLO_PLUS_NLL_OVER_NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): NLO+NLL divided by NLO.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.pdf_error">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">pdf_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/results.html#pdf_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.pdf_error" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">pdf_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/results.html#pdf_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.pdf_error" title="Permalink to this definition"></a></dt>
+<dd><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>li (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#id4" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code></a>): Input list.
+dl (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): <a class="reference internal" href="#hepi.Result" title="hepi.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> dictionary with lists per entry.
+confidence_level (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Confidence Level for PDF uncertainty</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>PDF</cite>/<cite>PDF_CENTRAL</cite>/<cite>PDF_ERRPLUS</cite>/<cite>PDF_ERRMINUS</cite>/<cite>PDF_ERRSYM</cite> entries.</dt><dd><ul class="simple">
+<li><p><cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>PDF</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.scale_error">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">scale_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/results.html#scale_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.scale_error" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. <a class="reference internal" href="#hepi.seven_point_scan" title="hepi.seven_point_scan"><code class="xref py py-meth docutils literal notranslate"><span class="pre">seven_point_scan()</span></code></a>).</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>li (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#id4" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code></a>): Input list.
+dl (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): <a class="reference internal" href="#hepi.Result" title="hepi.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> dictionary with lists per entry.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>SCALE</cite>/<cite>SCALE_ERRPLUS</cite>/<cite>SCALE_ERRMINUS</cite>/<cite>SCALE_ERRSYM</cite> entries.</dt><dd><ul class="simple">
+<li><p><cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>SCALE</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.combine_errors">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">combine_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/results.html#combine_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.combine_errors" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.</p>
+<dl class="simple">
+<dt>Note:</dt><dd><p>Running <code class="xref py py-func docutils literal notranslate"><span class="pre">scale_errors()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">pdf_errors()</span></code> before is necessary.</p>
+</dd>
+<dt>Args:</dt><dd><p>dl (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): <a class="reference internal" href="#hepi.Result" title="hepi.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> dictionary with lists per entry.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>COMBINED</cite>/<cite>ERRPLUS</cite>/<cite>ERRMINUS</cite> entries.</dt><dd><ul class="simple">
+<li><p><cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>COMBINED</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id0">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Convert a list of objects into a dictionary of lists.</p>
+<p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
+<dl>
+<dt>Args:</dt><dd><p>l (List) : list of objects.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict : dictionary of numpy arrays.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Param</span><span class="p">:</span>
+<span class="gp">... </span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LD2DL</span><span class="p">([</span> <span class="n">Param</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">Param</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="p">,</span> <span class="n">Param</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span> <span class="p">])</span>
+<span class="go">{&#39;a&#39;: array([1, 4, 7]), &#39;b&#39;: array([2, 5, 8]), &#39;c&#39;: array([3, 6, 9])}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.get_name">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.get_name" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/hepi/util.html#get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.get_name" title="Permalink to this definition"></a></dt>
+<dd><p>Get the latex name of a particle.</p>
+<dl>
+<dt>Args:</dt><dd><p>id (int) : PDG Monte Carlo identifier for the particle.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Latex name.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_name</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+<span class="go">&#39;g&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_name</span><span class="p">(</span><span class="mi">1000022</span><span class="p">)</span>
+<span class="go">&#39;\\tilde{\\chi}_{1}^{0}&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id1">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_LR_partner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_LR_partner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#id1" title="Permalink to this definition"></a></dt>
+<dd><p>Transforms a PDG id to it’s left-right partner.</p>
+<dl>
+<dt>Args:</dt><dd><p>id (int) : PDG Monte Carlo identifier for the particle.</p>
+</dd>
+<dt>Returns:</dt><dd><p>tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_LR_partner</span><span class="p">(</span><span class="mi">1000002</span><span class="p">)</span>
+<span class="go">(-1, 2000002)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id2">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">namehash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">namehash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#id2" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a sha256 hash from the objects string representation.</p>
+<dl>
+<dt>Args:</dt><dd><p>n (any) : object.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: sha256 of object.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">&quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namehash</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="go">&#39;3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">namehash</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">&#39;3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="hepi.id_name">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">id_name</span></span><a class="reference internal" href="../../_modules/hepi/util.html#id_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.id_name" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="hepi.lhapdf_id_name">
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_id_name</span></span><em class="property"><span class="w"> </span><span class="pre">:dict</span></em><a class="reference internal" href="../../_modules/hepi/util.html#lhapdf_id_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.lhapdf_id_name" title="Permalink to this definition"></a></dt>
+<dd><p>Dictionary of lhapdf names for given id.</p>
+</dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="hepi.name_id">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">name_id</span></span><a class="reference internal" href="../../_modules/hepi/util.html#name_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.name_id" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="hepi.lhapdf_name_id">
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_id</span></span><em class="property"><span class="w"> </span><span class="pre">:dict</span></em><a class="reference internal" href="../../_modules/hepi/util.html#lhapdf_name_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.lhapdf_name_id" title="Permalink to this definition"></a></dt>
+<dd><p>Dictionary of lhapdf id for given name.</p>
+<p>Inversion of <a class="reference internal" href="#hepi.lhapdf_id_name" title="hepi.lhapdf_id_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">lhapdf_id_name</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.lhapdf_id_to_name">
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_id_to_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/hepi/util.html#lhapdf_id_to_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.lhapdf_id_to_name" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a LHAPDF id to the sets name.</p>
+<dl>
+<dt>Args:</dt><dd><p>lid (int) : LHAPDF set id.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: name of the LHAPDF set.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lhapdf_id_to_name</span><span class="p">(</span><span class="mi">30101175</span><span class="p">)</span>
+<span class="go">&#39;EPPS16_B_90CL_Au_hess&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id3">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#id3" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a LHAPDF name to the sets id.</p>
+<dl>
+<dt>Args:</dt><dd><p>name (str) : LHAPDF set name.</p>
+</dd>
+<dt>Returns:</dt><dd><p>int: id of the LHAPDF set.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lhapdf_name_to_id</span><span class="p">(</span><span class="s2">&quot;EPPS16_B_90CL_Au_hess&quot;</span><span class="p">)</span>
+<span class="go">30101175</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="id4">
@@ -634,13 +842,27 @@ Only points with <cite>mu_f`=`mu_r</cite> or <cite>mu_r/f`=1 or `mu_r/f`=`distan
 <dl class="py function">
 <dt class="sig sig-object py" id="id5">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_input_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#get_input_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Permalink to this definition"></a></dt>
-<dd><p>Gets the input directory.</p>
+<dd><p>Get the input directory.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id6">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/hepi/util.html#get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Permalink to this definition"></a></dt>
+<dd><p>Get the latex name of a particle.</p>
+<dl>
+<dt>Args:</dt><dd><p>id (int) : PDG Monte Carlo identifier for the particle.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Latex name.</p>
+</dd>
+<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_name</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+<span class="go">&#39;g&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_name</span><span class="p">(</span><span class="mi">1000022</span><span class="p">)</span>
+<span class="go">&#39;\\tilde{\\chi}_{1}^{0}&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.tex_table">

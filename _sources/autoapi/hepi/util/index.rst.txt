@@ -5,7 +5,8 @@
 
 .. autoapi-nested-parse::
 
-   
+   Collection of utility functions for the :mod:`hepi` package.
+
    ..
        !! processed by numpydoc !!
 
@@ -23,6 +24,7 @@ Functions
    hepi.util.get_name
    hepi.util.get_LR_partner
    hepi.util.namehash
+   hepi.util.lhapdf_id_to_name
    hepi.util.lhapdf_name_to_id
 
 
@@ -32,13 +34,157 @@ Attributes
 
 .. autoapisummary::
 
-   hepi.util.id_name
-   hepi.util.name_id
+   hepi.util.lhapdf_id_name
+   hepi.util.lhapdf_name_id
 
 
 .. py:function:: LD2DL(l: List)
 
    
+   Convert a list of objects into a dictionary of lists.
+
+   The values of each object are first converted to a `dict` through the `__dict__` attribute.
+
+   Args:
+       l (List) : list of objects.
+
+   Returns:
+       dict : dictionary of numpy arrays.
+
+   Examples:
+       >>> class Param:
+       ...      def __init__(self,a,b,c):
+       ...         self.a = a
+       ...         self.b = b
+       ...         self.c = c
+       >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+       {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_name(id: int) -> str
+
+   
+   Get the latex name of a particle.
+
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       str: Latex name.
+
+   Examples:
+       >>> get_name(21)
+       'g'
+       >>> get_name(1000022)
+       '\\tilde{\\chi}_{1}^{0}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_LR_partner(id: int) -> Tuple[int, int]
+
+   
+   Transforms a PDG id to it's left-right partner.
+
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
+
+   Examples:
+       >>> get_LR_partner(1000002)
+       (-1, 2000002)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: namehash(n: any) -> str
+
+   
+   Creates a sha256 hash from the objects string representation.
+
+   Args:
+       n (any) : object.
+
+   Returns:
+       str: sha256 of object.
+
+   Examples:
+       >>> p = {'a':1,'b':2}
+       >>> str(p)
+       "{'a': 1, 'b': 2}"
+       >>> namehash(str(p))
+       '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+       >>> namehash(p)
+       '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: lhapdf_id_name
+   :annotation: :dict
+
+   
+   Dictionary of lhapdf names for given id.
 
 
 
@@ -58,10 +204,13 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: get_name(id)
+.. py:data:: lhapdf_name_id
+   :annotation: :dict
 
    
+   Dictionary of lhapdf id for given name.
 
+   Inversion of :attr:`lhapdf_id_name`.
 
 
 
@@ -80,10 +229,20 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: get_LR_partner(id)
+.. py:function:: lhapdf_id_to_name(lid: int) -> str
 
    
+   Converts a LHAPDF id to the sets name.
 
+   Args:
+       lid (int) : LHAPDF set id.
+
+   Returns:
+       str: name of the LHAPDF set.
+
+   Examples:
+       >>> lhapdf_id_to_name(30101175)
+       'EPPS16_B_90CL_Au_hess'
 
 
 
@@ -102,78 +261,20 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: namehash(n)
+.. py:function:: lhapdf_name_to_id(name: str) -> int
 
    
+   Converts a LHAPDF name to the sets id.
 
+   Args:
+       name (str) : LHAPDF set name.
 
+   Returns:
+       int: id of the LHAPDF set.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:data:: id_name
-   
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:data:: name_id
-   
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: lhapdf_name_to_id(name)
-
-   
-
+   Examples:
+       >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
+       30101175
 
 
 

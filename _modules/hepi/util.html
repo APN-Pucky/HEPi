@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2
+                0.1.4
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -48,7 +48,7 @@
               <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Test</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Links:</span></p>
 <ul>
@@ -89,14 +89,40 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.util</h1><div class="highlight"><pre>
-<span></span>from typing import List
+<span></span>&quot;&quot;&quot;Collection of utility functions for the :mod:`hepi` package.&quot;&quot;&quot;
+from typing import List,Tuple
 import numpy as np
 import hashlib
-from particle import Particle
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
 
 <div class="viewcode-block" id="LD2DL"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.LD2DL">[docs]</a>def LD2DL(l: List):
+    &quot;&quot;&quot; 
+    Convert a list of objects into a dictionary of lists.
+
+    The values of each object are first converted to a `dict` through the `__dict__` attribute.
+    
+    Args:
+        l (List) : list of objects.
+
+    Returns:
+        dict : dictionary of numpy arrays.
+
+    Examples:
+        &gt;&gt;&gt; class Param:
+        ...      def __init__(self,a,b,c):
+        ...         self.a = a
+        ...         self.b = b
+        ...         self.c = c
+        &gt;&gt;&gt; LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+        {&#39;a&#39;: array([1, 4, 7]), &#39;b&#39;: array([2, 5, 8]), &#39;c&#39;: array([3, 6, 9])}
+    &quot;&quot;&quot;
+    # Check l[0] keys in all dictionaries.
+    for m in l:
+        md = m.__dict__
+        for k in l[0].__dict__:
+            assert k in md
+    # switch them
     return {k: np.array([dic.__dict__[k] for dic in l]) for k in l[0].__dict__}</div>
 
 
@@ -107,14 +133,41 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
     &quot;PDGName&quot;, &quot;PDGID&quot;, converters=(str, PDGID))
 
 
-<div class="viewcode-block" id="get_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_name">[docs]</a>def get_name(id):
+<div class="viewcode-block" id="get_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_name">[docs]</a>def get_name(id : int) -&gt; str:
+    &quot;&quot;&quot;
+    Get the latex name of a particle.
+
+    Args:
+        id (int) : PDG Monte Carlo identifier for the particle.
+
+    Returns:
+        str: Latex name.
+
+    Examples:
+        &gt;&gt;&gt; get_name(21)
+        &#39;g&#39;
+        &gt;&gt;&gt; get_name(1000022)
+        &#39;\\\\tilde{\\\\chi}_{1}^{0}&#39;
+    &quot;&quot;&quot;
     global PDG2LaTeXNameMap
     pdgid = PDG2LaTeXNameMap[id]
     return pdgid</div>
 
 
 
-<div class="viewcode-block" id="get_LR_partner"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_LR_partner">[docs]</a>def get_LR_partner(id):
+<div class="viewcode-block" id="get_LR_partner"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.get_LR_partner">[docs]</a>def get_LR_partner(id : int) -&gt; Tuple[int,int]:
+    &quot;&quot;&quot;Transforms a PDG id to it&#39;s left-right partner.
+
+    Args:
+        id (int) : PDG Monte Carlo identifier for the particle.
+
+    Returns:
+        tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
+
+    Examples:
+        &gt;&gt;&gt; get_LR_partner(1000002)
+        (-1, 2000002)
+    &quot;&quot;&quot;
     n = PDGID2NameMap[id]
     if &quot;L&quot; in n:
         n = n.replace(&quot;L&quot;, &quot;R&quot;)
@@ -130,13 +183,31 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
         return 1, int(PDG2Name2IDMap[n])
     return None</div>
 
-<div class="viewcode-block" id="namehash"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.namehash">[docs]</a>def namehash(n):
+<div class="viewcode-block" id="namehash"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.namehash">[docs]</a>def namehash(n : any) -&gt; str:
+    &quot;&quot;&quot;
+    Creates a sha256 hash from the objects string representation.
+
+    Args:
+        n (any) : object.
+
+    Returns:
+        str: sha256 of object.
+
+    Examples:
+        &gt;&gt;&gt; p = {&#39;a&#39;:1,&#39;b&#39;:2}
+        &gt;&gt;&gt; str(p)
+        &quot;{&#39;a&#39;: 1, &#39;b&#39;: 2}&quot;
+        &gt;&gt;&gt; namehash(str(p))
+        &#39;3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8&#39;
+        &gt;&gt;&gt; namehash(p)
+        &#39;3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8&#39;
+    &quot;&quot;&quot;
     m = hashlib.sha256()
     m.update(str(n).encode(&#39;utf-8&#39;))
     return m.hexdigest()</div>
 
 # TODO rework to work with lhapdf
-<div class="viewcode-block" id="id_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.id_name">[docs]</a>id_name = {
+<div class="viewcode-block" id="lhapdf_id_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_id_name">[docs]</a>lhapdf_id_name :dict = {
     251:    &quot;GRVPI0&quot;,
     252:    &quot;GRVPI1&quot;,
     270:    &quot;xFitterPI_NLO_EIG&quot;,
@@ -1294,11 +1365,46 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
     30101150:	&quot;EPPS16_B_d_90CL_Au_hess&quot;,
     30101175:	&quot;EPPS16_B_90CL_Au_hess&quot;,
 }</div>
-<div class="viewcode-block" id="name_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.name_id">[docs]</a>name_id = {v: k for k, v in id_name.items()}</div>
+&quot;&quot;&quot;Dictionary of lhapdf names for given id.&quot;&quot;&quot;
+<div class="viewcode-block" id="lhapdf_name_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_name_id">[docs]</a>lhapdf_name_id :dict = {v: k for k, v in lhapdf_id_name.items()} </div>
+&quot;&quot;&quot;
+Dictionary of lhapdf id for given name.
+
+Inversion of :attr:`lhapdf_id_name`.
+&quot;&quot;&quot;
 
 
-<div class="viewcode-block" id="lhapdf_name_to_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_name_to_id">[docs]</a>def lhapdf_name_to_id(name):
-    return name_id[name]</div>
+<div class="viewcode-block" id="lhapdf_id_to_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_id_to_name">[docs]</a>def lhapdf_id_to_name(lid: int ) -&gt; str:
+    &quot;&quot;&quot;
+    Converts a LHAPDF id to the sets name.
+
+    Args:
+        lid (int) : LHAPDF set id.
+
+    Returns:
+        str: name of the LHAPDF set.
+
+    Examples:
+        &gt;&gt;&gt; lhapdf_id_to_name(30101175)
+        &#39;EPPS16_B_90CL_Au_hess&#39;
+    &quot;&quot;&quot;
+    return lhapdf_id_name[lid]</div>
+
+<div class="viewcode-block" id="lhapdf_name_to_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_name_to_id">[docs]</a>def lhapdf_name_to_id(name : str) -&gt; int:
+    &quot;&quot;&quot;
+    Converts a LHAPDF name to the sets id.
+
+    Args:
+        name (str) : LHAPDF set name.
+
+    Returns:
+        int: id of the LHAPDF set.
+
+    Examples:
+        &gt;&gt;&gt; lhapdf_name_to_id(&quot;EPPS16_B_90CL_Au_hess&quot;)
+        30101175
+    &quot;&quot;&quot;
+    return lhapdf_name_id[name]</div>
 </pre></div>
 
            </div>

@@ -97,6 +97,7 @@ Functions
    hepi.get_name
    hepi.get_LR_partner
    hepi.namehash
+   hepi.lhapdf_id_to_name
    hepi.lhapdf_name_to_id
    hepi.get_input_dir
    hepi.get_name
@@ -133,8 +134,8 @@ Attributes
    hepi.out_dir
    hepi.pre
    hepi.required_numerical_uncertainty_factor
-   hepi.id_name
-   hepi.name_id
+   hepi.lhapdf_id_name
+   hepi.lhapdf_name_id
    hepi.fig
    hepi.axs
    hepi.lines
@@ -144,10 +145,20 @@ Attributes
    hepi.__version__
 
 
-.. py:function:: get_LR_partner(id)
+.. py:function:: get_LR_partner(id: int) -> Tuple[int, int]
 
    
+   Transforms a PDG id to it's left-right partner.
 
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
+
+   Examples:
+       >>> get_LR_partner(1000002)
+       (-1, 2000002)
 
 
 
@@ -166,10 +177,20 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: lhapdf_name_to_id(name)
+.. py:function:: lhapdf_name_to_id(name: str) -> int
 
    
+   Converts a LHAPDF name to the sets id.
 
+   Args:
+       name (str) : LHAPDF set name.
+
+   Returns:
+       int: id of the LHAPDF set.
+
+   Examples:
+       >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
+       30101175
 
 
 
@@ -188,10 +209,25 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: namehash(n)
+.. py:function:: namehash(n: any) -> str
 
    
+   Creates a sha256 hash from the objects string representation.
 
+   Args:
+       n (any) : object.
+
+   Returns:
+       str: sha256 of object.
+
+   Examples:
+       >>> p = {'a':1,'b':2}
+       >>> str(p)
+       "{'a': 1, 'b': 2}"
+       >>> namehash(str(p))
+       '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+       >>> namehash(p)
+       '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
 
@@ -285,7 +321,7 @@ Attributes
 .. py:function:: get_input_dir()
 
    
-   Gets the input directory.
+   Get the input directory.
 
 
 
@@ -308,7 +344,7 @@ Attributes
 .. py:function:: get_output_dir()
 
    
-   Gets the input directory.
+   Get the input directory.
 
 
 
@@ -776,7 +812,24 @@ Attributes
 .. py:function:: LD2DL(l: List)
 
    
+   Convert a list of objects into a dictionary of lists.
 
+   The values of each object are first converted to a `dict` through the `__dict__` attribute.
+
+   Args:
+       l (List) : list of objects.
+
+   Returns:
+       dict : dictionary of numpy arrays.
+
+   Examples:
+       >>> class Param:
+       ...      def __init__(self,a,b,c):
+       ...         self.a = a
+       ...         self.b = b
+       ...         self.c = c
+       >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+       {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
 
@@ -799,6 +852,7 @@ Attributes
    :annotation: = 10
 
    
+   If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.
 
 
 
@@ -818,10 +872,19 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:class:: Result(lo, nlo, nlo_plus_nll)
+.. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None)
 
    
+   General result class.
 
+   Attributes:
+       LO (:obj:`double`): Leading Order result. Defaults to None.
+       NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
+       NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+       K_LO (:obj:`double`): LO divided by LO.
+       K_NLO (:obj:`double`): NLO divided by LO result.
+       K_NLO_PLUS_NLL (:obj:`double`): NLO+NLL divided by LO.
+       NLO_PLUS_NLL_OVER_NLO (:obj:`double`): NLO+NLL divided by NLO.
 
 
 
@@ -840,10 +903,19 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: pdf_error(li, dl)
+.. py:function:: pdf_error(li, dl, confidence_level=90)
 
    
+   Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
+   Args:
+       li (:obj:`list` of :class:`Input`): Input list.
+       dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+       confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
+
+   Returns:
+       :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
+           - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
 
 
 
@@ -865,7 +937,15 @@ Attributes
 .. py:function:: scale_error(li, dl)
 
    
+   Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
 
+   Args:
+       li (:obj:`list` of :class:`Input`): Input list.
+       dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+
+   Returns:
+       :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
+           - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
 
 
 
@@ -887,7 +967,17 @@ Attributes
 .. py:function:: combine_errors(dl)
 
    
+   Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
 
+   Note:
+       Running :func:`scale_errors` and :func:`pdf_errors` before is necessary.
+
+   Args:
+       dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+
+   Returns:
+       :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
+           - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
 
 
 
@@ -909,6 +999,150 @@ Attributes
 .. py:function:: LD2DL(l: List)
 
    
+   Convert a list of objects into a dictionary of lists.
+
+   The values of each object are first converted to a `dict` through the `__dict__` attribute.
+
+   Args:
+       l (List) : list of objects.
+
+   Returns:
+       dict : dictionary of numpy arrays.
+
+   Examples:
+       >>> class Param:
+       ...      def __init__(self,a,b,c):
+       ...         self.a = a
+       ...         self.b = b
+       ...         self.c = c
+       >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+       {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_name(id: int) -> str
+
+   
+   Get the latex name of a particle.
+
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       str: Latex name.
+
+   Examples:
+       >>> get_name(21)
+       'g'
+       >>> get_name(1000022)
+       '\\tilde{\\chi}_{1}^{0}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: get_LR_partner(id: int) -> Tuple[int, int]
+
+   
+   Transforms a PDG id to it's left-right partner.
+
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
+
+   Examples:
+       >>> get_LR_partner(1000002)
+       (-1, 2000002)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: namehash(n: any) -> str
+
+   
+   Creates a sha256 hash from the objects string representation.
+
+   Args:
+       n (any) : object.
+
+   Returns:
+       str: sha256 of object.
+
+   Examples:
+       >>> p = {'a':1,'b':2}
+       >>> str(p)
+       "{'a': 1, 'b': 2}"
+       >>> namehash(str(p))
+       '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+       >>> namehash(p)
+       '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:data:: lhapdf_id_name
+   :annotation: :dict
+
+   
+   Dictionary of lhapdf names for given id.
 
 
 
@@ -928,10 +1162,13 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: get_name(id)
+.. py:data:: lhapdf_name_id
+   :annotation: :dict
 
    
+   Dictionary of lhapdf id for given name.
 
+   Inversion of :attr:`lhapdf_id_name`.
 
 
 
@@ -950,10 +1187,20 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: get_LR_partner(id)
+.. py:function:: lhapdf_id_to_name(lid: int) -> str
 
    
+   Converts a LHAPDF id to the sets name.
 
+   Args:
+       lid (int) : LHAPDF set id.
+
+   Returns:
+       str: name of the LHAPDF set.
+
+   Examples:
+       >>> lhapdf_id_to_name(30101175)
+       'EPPS16_B_90CL_Au_hess'
 
 
 
@@ -972,78 +1219,20 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: namehash(n)
+.. py:function:: lhapdf_name_to_id(name: str) -> int
 
    
+   Converts a LHAPDF name to the sets id.
 
+   Args:
+       name (str) : LHAPDF set name.
 
+   Returns:
+       int: id of the LHAPDF set.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:data:: id_name
-   
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:data:: name_id
-   
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: lhapdf_name_to_id(name)
-
-   
-
+   Examples:
+       >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
+       30101175
 
 
 
@@ -1088,7 +1277,7 @@ Attributes
 .. py:function:: get_input_dir()
 
    
-   Gets the input directory.
+   Get the input directory.
 
 
 
@@ -1108,10 +1297,22 @@ Attributes
    ..
        !! processed by numpydoc !!
 
-.. py:function:: get_name(id)
+.. py:function:: get_name(id: int) -> str
 
    
+   Get the latex name of a particle.
 
+   Args:
+       id (int) : PDG Monte Carlo identifier for the particle.
+
+   Returns:
+       str: Latex name.
+
+   Examples:
+       >>> get_name(21)
+       'g'
+       >>> get_name(1000022)
+       '\\tilde{\\chi}_{1}^{0}'
 
 
 
