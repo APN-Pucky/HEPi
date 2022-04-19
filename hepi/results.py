@@ -56,7 +56,7 @@ class Result:
         if nlo_plus_nll is not None and nlo != 0:
             self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll/nlo
         else:
-            self.NLO_PLUS_NLL_OVER_NLO  =None
+            self.NLO_PLUS_NLL_OVER_NLO  = None
         #else:
         #    print("nlo+nll None or lo=",lo)
 
@@ -69,10 +69,10 @@ def pdf_error(li, dl, confidence_level=90):
     Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
     Returns:
-        :obj:`dict`: Modified `dl` with new entries.
+        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL`_`PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
 
     Args:
-        li (:obj:`list` of :obj:`Input`): Input list.
+        li (:obj:`list` of :class:`Input`): Input list.
         dl (:obj:`dict`): `Result` dictionary with lists per entry.
         confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
     """
