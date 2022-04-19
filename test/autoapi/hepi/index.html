@@ -38,7 +38,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2-23-g83b857e
+                0.1.2-24-gde3ed7a
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -644,9 +644,9 @@ Only points with <cite>mu_f`=`mu_r</cite> or <cite>mu_r/f`=1 or `mu_r/f`=`distan
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">pdf_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/results.html#pdf_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.pdf_error" title="Permalink to this definition"></a></dt>
 <dd><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p>
 <dl class="simple">
-<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: Modified <cite>dl</cite> with new entries.</p>
+<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL`_`PDF</cite>/<cite>PDF_CENTRAL</cite>/<cite>PDF_ERRPLUS</cite>/<cite>PDF_ERRMINUS</cite>/<cite>PDF_ERRSYM</cite> entries.</p>
 </dd>
-<dt>Args:</dt><dd><p>li (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#id4" title="hepi.Input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code></a>): Input list.
+<dt>Args:</dt><dd><p>li (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#id4" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code></a>): Input list.
 dl (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): <cite>Result</cite> dictionary with lists per entry.
 confidence_level (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Confidence Level for PDF uncertainty</p>
 </dd>

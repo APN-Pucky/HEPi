@@ -94,10 +94,10 @@ Attributes
    Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
    Returns:
-       :obj:`dict`: Modified `dl` with new entries.
+       :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL`_`PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
 
    Args:
-       li (:obj:`list` of :obj:`Input`): Input list.
+       li (:obj:`list` of :class:`Input`): Input list.
        dl (:obj:`dict`): `Result` dictionary with lists per entry.
        confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
 

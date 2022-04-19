@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.2-23-g83b857e
+                0.1.2-24-gde3ed7a
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -147,7 +147,7 @@ import warnings
         if nlo_plus_nll is not None and nlo != 0:
             self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll/nlo
         else:
-            self.NLO_PLUS_NLL_OVER_NLO  =None</div>
+            self.NLO_PLUS_NLL_OVER_NLO  = None</div>
         #else:
         #    print(&quot;nlo+nll None or lo=&quot;,lo)
 
@@ -160,10 +160,10 @@ import warnings
     Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
     Returns:
-        :obj:`dict`: Modified `dl` with new entries.
+        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL`_`PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
 
     Args:
-        li (:obj:`list` of :obj:`Input`): Input list.
+        li (:obj:`list` of :class:`Input`): Input list.
         dl (:obj:`dict`): `Result` dictionary with lists per entry.
         confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
     &quot;&quot;&quot;
