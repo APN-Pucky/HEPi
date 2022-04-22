@@ -1,4 +1,5 @@
 """Runs MadGraph"""
+import shutil
 from typing import List
 import subprocess
 from string import Template
@@ -94,7 +95,7 @@ def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[MadG
         data = pkgutil.get_data(__name__, ["lo.mg", "nlo.mg"][p.order]).decode( 'utf-8')
         src = Template(data)
         result = src.substitute(d)
-        open(get_input_dir() + name + ".mg", "w").write(result)
+        open(get_output_dir() + name + ".mg", "w").write(result)
         if not skip:
             open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
 
@@ -105,12 +106,12 @@ def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[MadG
 
         src = Template(data)
         result = src.substitute(d)
-        open(get_input_dir() + name + ".dat", "w").write(result)
+        open(get_output_dir() + name + ".dat", "w").write(result)
         if not skip:
             open(get_output_dir() + name + ".out", "a").write(result + "\n\n")
 
         sname = d['slha']
-        with open(get_input_dir() + sname, 'r') as f:
+        with open(get_output_dir() + sname, 'r') as f:
             #src = Template(f.read())
             #result = src.substitute(d)
             #open(get_input_dir() + sname + ".in", "w").write(result)
@@ -118,11 +119,11 @@ def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[MadG
                 open(get_output_dir() + name + ".out",
                      "a").write(f.read() + "\n\n")
 
-        ret.append(MadGraphRunParams({'in': get_input_dir()+name + ".mg",
+        ret.append(MadGraphRunParams({'in': get_output_dir()+name + ".mg",
                               'dir': d["dir"],
                               'bdir': d["bdir"],
-                              'run': get_input_dir() + name + ".dat",
-                              'slha': get_input_dir() + sname,
+                              'run': get_output_dir() + name + ".dat",
+                              'slha': get_output_dir() + sname,
                               'out': get_output_dir()+name + ".out"}, skip,madstr))
 
     return ret
@@ -131,10 +132,9 @@ def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[MadG
 def _run(rps: List[MadGraphRunParams],para=True):
     # TODO clean up on exit emergency
     global madgraph_path
-    # TODO RS build path checks?!?!
     template =  \
         'rm -rf {dir} && cp -r ' + rps[0].dic["bdir"] + \
-        ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && echo "nb_core = 1" >> {dir}/Cards/amcatnlo_configuration.txt && nice -n 5 {dir}/bin/calculate_xsect -f >> {out}'
+        ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && echo "nb_core = 1" >> {dir}/Cards/amcatnlo_configuration.txt && nice -n 5 {dir}/bin/calculate_xsect -f >> {out} && rm -rf {dir}'
     print(rps[0].dic["out"])
     if not rps[0].skip:
         mgcom = 'bin/mg5_aMC'

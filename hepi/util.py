@@ -4,6 +4,7 @@ import numpy as np
 import hashlib
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
+import pyslha
 
 class DictData:
     def __str__(self):
@@ -119,7 +120,6 @@ def namehash(n : any) -> str:
     m = hashlib.sha256()
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
-
 # TODO rework to work with lhapdf
 lhapdf_id_name :dict = {
     251:    "GRVPI0",

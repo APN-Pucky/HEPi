@@ -1,10 +1,11 @@
 from hepi.input import Order
-from .. import Input, Result,   get_input_dir
+from .. import Input, Result,   get_output_dir
 import re
 from uncertainties import ufloat_fromstr
 from string import Template
 import pkgutil
 import os
+
 
 class ResumminoResult(Result):
     """
@@ -50,6 +51,8 @@ class ResumminoResult(Result):
         else:
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None
 
+# TODO move functions to results
+
 def is_valid(file:str,p:Input,d) -> bool:
     """
     Verifies that an file is a complete output.
@@ -69,7 +72,7 @@ def is_valid(file:str,p:Input,d) -> bool:
     result = src.substitute(d)
     sname = d['slha']
     with open(file,mode='r') as f:
-        with open(get_input_dir() + sname, 'r') as sf:
+        with open(get_output_dir() + sname, 'r') as sf:
             if not f.read().startswith(result + "\n\n" + sf.read()):
                 #warnings.warn("Possible hash collision in " + file + " -> deleted",RuntimeWarning)
                 os.remove(file)

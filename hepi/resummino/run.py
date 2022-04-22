@@ -1,4 +1,5 @@
 """Runs Resummino"""
+import shutil
 from typing import List
 import subprocess
 from string import Template
@@ -19,6 +20,7 @@ from smpl.parallel import par
 import hashlib
 import os 
 import stat
+from smpl import debug
 
 
 resummino_path:str = "~/resummino/"
@@ -66,7 +68,7 @@ class ResumminoRunParam(RunParam):
         self.out_path = out_path
 
 
-def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True) -> dict:
+def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,skip=True,parse=True) -> dict:
     """
     Run the passed list of parameters.
 
@@ -83,6 +85,10 @@ def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True) -
             The dictionary is empty if `no_parse` is set.
 
     """
+    if noskip == skip:
+        noskip = True
+    if no_parse== parse:
+        no_parse= True
     print("Running: " + str(len(params))  +" jobs" )
     rps = _queue(params, noskip)
     _run(rps, bar, no_parse,para)
@@ -137,7 +143,7 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
         # TODO insert defautl if missing in d!
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
                         for _ in d.items()).replace("/", "-"))
-        print(name)
+        debug.msg(name)
         skip = False
         if not noskip and os.path.isfile(get_output_dir() + name + ".out") and is_valid(get_output_dir() + name + ".out",p,d):
             print("skip", end='')
@@ -148,17 +154,17 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
 
             src = Template(data)
             result = src.substitute(d)
-            open(get_input_dir() + name + ".in", "w").write(result)
-            open(get_input_dir() + name + ".sh", "w").write("#!/bin/sh\n"+
+            open(get_output_dir() + name + ".in", "w").write(result)
+            open(get_output_dir() + name + ".sh", "w").write("#!/bin/sh\n"+
                 resummino_path + 'build/bin/resummino {} {} >> {}'.format(
-                    get_input_dir()+name + ".in",["--lo", "--nlo", "--nll"][p.order],get_output_dir()+name + ".out"
+                    get_output_dir()+name + ".in",["--lo", "--nlo", "--nll"][p.order],get_output_dir()+name + ".out"
                 ))
-            st = os.stat(get_input_dir() + name + ".sh")
-            os.chmod(get_input_dir() + name + ".sh", st.st_mode | stat.S_IEXEC)
+            st = os.stat(get_output_dir() + name + ".sh")
+            os.chmod(get_output_dir() + name + ".sh", st.st_mode | stat.S_IEXEC)
             open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
 
             sname = d['slha']
-            with open(get_input_dir() + sname, 'r') as f:
+            with open(get_output_dir() + sname, 'r') as f:
                 #src = Template(f.read())
                 #result = src.substitute(d)
                 #open(get_input_dir() + sname + ".in", "w").write(result)
@@ -166,7 +172,7 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
                      "a").write(f.read() + "\n\n")
 
         ret.append(ResumminoRunParam(["--lo", "--nlo", "--nll"]
-                             [p.order], get_input_dir()+name + ".in", get_output_dir()+name + ".out", skip))
+                             [p.order], get_output_dir()+name + ".in", get_output_dir()+name + ".out", skip))
 
     return ret
 

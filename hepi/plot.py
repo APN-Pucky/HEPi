@@ -19,8 +19,8 @@ from particle.converters.bimap import DirectionalMaps
 import matplotlib.cm as cm
 from matplotlib import colors
 
-from .input import Input, get_input_dir
-from .util import get_name
+from .input import Input, get_output_dir
+from .util import  get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
 from smpl import io
 from typing import List
@@ -102,12 +102,6 @@ def combined_plot(func,dict_list,t,*args,label=None,fill = False,fmt=".",interpo
 
 
 
-def get_mass(l, id):
-    ret = []
-    for s in l["slha"]:
-        d = pyslha.read(get_input_dir() + s)
-        ret.append(d.blocks["MASS"][abs(id)])
-    return np.array(ret)
 
 def mass_plot(dict_list,  y, part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,**kwargs):
     dict_list["mass_"+ str(part)] = get_mass(dict_list, abs(part))
@@ -121,6 +115,19 @@ def mass_vplot(dict_list,  y,part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1.,
 #    vplot(dict_list["mass_" + str(part)][mask], y[mask], label=label,
 #          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 
+
+def get_mass(l : dict, id : int ):
+    """
+    Get the mass of particle with id `id` out of the list in the "slha" element in the dict.
+
+    Returns
+        :obj:`list` of float : masses of particles in each element of the dict list.
+    """
+    ret = []
+    for s in l["slha"]:
+        d = pyslha.read(get_output_dir() + s)
+        ret.append(d.blocks["MASS"][abs(id)])
+    return np.array(ret)
 
 def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ratio=False,K=False,K_plus_1=False, logy=True, yscale=1.,mask=None,**kwargs):
     # TODO use kwargs
@@ -154,7 +161,7 @@ def index_open(var,idx):
 def slha_data(li,index_list):
     vx = []
     for l in li:
-        b = pyslha.read(get_input_dir() + l.slha)
+        b = pyslha.read(get_output_dir() + l.slha)
         vx.append(index_open(b.blocks,index_list))
     return np.array(vx)
 
@@ -164,7 +171,7 @@ def slha_plot(li,x,y,**kwargs):
 
     vplot(np.array(vx),np.array(vy),**kwargs)
 
-def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,data_fmt=".",fmt="-",**kwargs):
+def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,data_fmt=".",fmt="-",print_area=False,**kwargs):
     color = data_color
     if label is None:
         #label = "??"
@@ -200,7 +207,8 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
         kargs = {}
         if not plot_data:
             kargs = {'xaxis':xaxis, 'yaxis':yaxis,'label':label}
-        print('computed AUC using sklearn.metrics.auc: {}'.format(auc(xnew,power_smooth*yscale)))
+        if print_area:
+            print('computed AUC using sklearn.metrics.auc: {}'.format(auc(xnew,power_smooth*yscale)))
         splot.data(xnew, power_smooth*yscale, logy=logy, fmt=fmt
               , init=False, data_color=color,  **kargs,**kwargs)
     if fill:

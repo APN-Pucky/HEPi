@@ -1,13 +1,19 @@
 from enum import IntEnum
+import os
+import shutil
 import warnings
 import copy
+
 import numpy as np
 from typing import Iterable, List
 
 import pyslha
-from .util import DictData, get_LR_partner, lhapdf_name_to_id, namehash
+from .util import DictData, get_LR_partner, lhapdf_name_to_id
 
 import lhapdf
+
+
+
 
 in_dir = "./input/"
 """Input directory."""
@@ -83,7 +89,6 @@ def set_pre(ppre):
     pre = ppre
 
 
-
 class Order(IntEnum):
     """
     Computation orders.
@@ -149,8 +154,48 @@ class Input(DictData):
         self.result = result
         self.id = id
         self.model_path = model_path
+        if os.path.isfile(get_input_dir() + self.slha):
+                shutil.copy(get_input_dir() + self.slha,get_output_dir() + self.slha)
         if update:
             update_slha(self)
+
+    def has_gluino(self) -> bool:
+        return is_gluino(self.particle1) or is_gluino(self.particle2)
+    def has_neutralino(self) -> bool:
+        return is_neutralino(self.particle1) or is_neutralino(self.particle2) 
+    def has_charginos(self) -> bool:
+        return is_chargino(self.particle1) or is_chargino(self.particle2) 
+    def has_weakino(self) -> bool:
+        return self.has_charginos() or self.has_neutralino()
+    def has_squark(self) -> bool:
+        return is_squark(self.particle1) or is_squark(self.particle2)
+    def has_slepton(self) -> bool:
+        return is_slepton(self.particle1) or is_slepton(self.particle2)
+
+def is_gluino(id:int)->bool:
+    return id == 1000021 
+
+def is_neutralino(id:int) -> bool:
+    neutralinos = [1000022,1000023,1000025,1000035]
+    return abs(id) in neutralinos 
+
+def is_chargino(id:int) -> bool:
+    charginos= [1000024,1000037]
+    return abs(id) in charginos
+
+def is_weakino(id:int) -> bool:
+    return is_chargino(id) or is_neutralino(id)
+
+def is_squark(id:int) -> bool:
+    l_squark= range(1000001,1000007)
+    r_squark= range(2000001,2000007)
+    return abs(id) in l_squark or abs(id) in r_squark
+
+def is_slepton(id:int) -> bool:
+    l_slepton= range(1000011,1000016)
+    r_slepton= range(2000011,2000016)  # TODO remove righthandend snu's
+    return abs(id) in l_slepton or abs(id) in r_slepton
+
 
 def update_slha( i:Input ):
     """
@@ -160,7 +205,7 @@ def update_slha( i:Input ):
 
     
     """
-    b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
+    b = pyslha.read(get_output_dir() + i.slha,ignorenomass=True)
     try:
         i.mu = (abs(b.blocks["MASS"][abs(i.particle1)]) +
                    abs(b.blocks["MASS"][abs(i.particle2)]))/2.
@@ -374,6 +419,18 @@ def scan_invariant_mass(l : List[Input],diff,points,low=0.001):
             ret.append(tmp)
     return ret
 
+def slha_write(newname,d):
+    f = get_output_dir()+newname
+    pyslha.write(f, d)
+    with open(f) as reader, open(f, 'r+') as writer:
+        for line in reader:
+            if line.strip():
+                writer.write(line)
+            else:
+                writer.write("#\n")
+        writer.truncate()
+
+
 def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
     """
     Scans the PDG identified mass `var` over `range` in the list `l`.
@@ -386,14 +443,15 @@ def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
             try:
                 d = pyslha.read(s.slha)
             except:
-                d = pyslha.read(get_input_dir() + s.slha)
+                d = pyslha.read(get_output_dir() + s.slha)
             d.blocks["MASS"][abs(var)] = r
             if not (diff_L_R is None):
                 is_L, v = get_LR_partner(abs(var))
                 d.blocks["MASS"][abs(v)] = r + is_L*diff_L_R
 
             newname = s.slha + "_mass_" + str(var) + "_" + str(r)
-            pyslha.write(get_input_dir()+newname, d)
+            #pyslha.write(get_output_dir()+newname, d)
+            slha_write(newname,d)
 
             tmp = copy.copy(s)
             setattr(tmp, "mass_" + str(var), r)
@@ -421,13 +479,14 @@ def slha_scan_rel(l : List[Input],lambdas ,range : List) -> List[Input]:
             try:
                 d = pyslha.read(s.slha,ignorenomass=True)
             except:
-                d = pyslha.read(get_input_dir() + s.slha,ignorenomass=True)
+                d = pyslha.read(get_output_dir() + s.slha,ignorenomass=True)
             ls = lambdas(r)
             for b,v,res in ls:
                 d.blocks[b][v] = res
                 setattr(tmp, b+ "_" + str(v), res)
                 newname = newname +  "_" +str(b) + "_" + str(v) + "_" + str(res)
-            pyslha.write(get_input_dir()+newname, d)
+            #pyslha.write(get_output_dir()+newname, d)
+            slha_write(newname,d)
 
             setattr(tmp, "slha", newname)
             update_slha(tmp)
