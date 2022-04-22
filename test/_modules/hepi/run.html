@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-25-g0ba9207
+                0.1.4-26-ge9a599f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -89,13 +89,258 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.run</h1><div class="highlight"><pre>
-<span></span>from hepi.util import DictData
+<span></span>import abc
+import os
+import subprocess
+from typing import List
+import warnings
+from hepi.input import Input, get_input_dir, get_output_dir, get_pre
+from hepi.results import Result
+from hepi.util import LD2DL, DictData, namehash
+from smpl.parallel import par
+from smpl import debug
+import time
+import shutil
+
+
 
 
 <div class="viewcode-block" id="RunParam"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.RunParam">[docs]</a>class RunParam(DictData):
 	&quot;&quot;&quot;Abstract class that is similar to a dictionary but with fixed keys.&quot;&quot;&quot;
-	def __init__(self,skip:bool=False):
-		self.skip = skip</div>
+	def __init__(self,skip:bool=False,in_file:str=None,out_file:str=None,execute:str=None,name:str=None):
+		self.name = name
+		self.skip = skip
+		self.in_file = in_file
+		self.out_file = out_file
+		self.execute= execute</div>
+
+<div class="viewcode-block" id="Runner"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner">[docs]</a>class Runner:
+	def __init__(self,path:str, in_dir:str=None,out_dir:str=None,pre=None):
+		self.path = path
+		if in_dir is None:
+			self.in_dir = get_input_dir()
+		else:
+			self.in_dir= in_dir
+		if out_dir is None:
+			self.out_dir = get_output_dir()
+		else:
+			self.out_dir= out_dir
+		if pre is None:
+			self.pre= get_pre()
+		else:
+			self.pre = pre
+
+<div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>	def _prepare(self,p: Input,skip=True,**kwargs) -&gt; RunParam:
+		skip_ = skip
+		d = p.__dict__
+		d[&quot;runner&quot;] = type(self).__name__
+		name = namehash(&quot;_&quot;.join(&quot;&quot;.join(str(_[0]) + &quot;_&quot; + str(_[1]))
+			for _ in d.items()).replace(&quot;/&quot;, &quot;-&quot;))
+		#print(name)
+		skip = False
+		if skip_ and os.path.isfile(self.get_output_dir() + name + &quot;.out&quot;) and self._is_valid(self.get_output_dir() + name + &quot;.out&quot;,p,d):
+			print(&quot;skip&quot;, end=&#39;&#39;)
+			skip = True
+		return RunParam(execute=self.get_output_dir()+name + &quot;.sh&quot;,in_file=self.get_output_dir()+name + &quot;.in&quot;, out_file=self.get_output_dir()+name + &quot;.out&quot;,skip= skip,name=name)</div>
+
+<div class="viewcode-block" id="Runner._check_input"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._check_input">[docs]</a>	def _check_input(self,param: Input,**kwargs) -&gt; bool:
+		return True</div>
+
+
+<div class="viewcode-block" id="Runner._prepare_all"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare_all">[docs]</a>	def _prepare_all(self,params: List[Input],**kwargs) -&gt; List[RunParam]:
+		ret = []
+		for p in params:
+			if not self._check_input(p):
+				warnings.warn(&quot;Check input failed.&quot;)
+				return []
+			ret.append(self._prepare(p,**kwargs))
+		return ret</div>
+
+<div class="viewcode-block" id="Runner.run"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.run">[docs]</a>	def run(self,params: List[Input], parse=True,parallel=True,sleep=0,**kwargs):
+		&quot;&quot;&quot;
+		Run the passed list of parameters.
+
+		Args:
+		    params (:obj:`list` of :class:`hepi.Input`): All parameters that should be executed/queued.
+		    skip (bool): True means stored runs will be skipped. Else the are overwritten.
+		    parse (bool): Parse the results. 
+		        This is not the prefered cluster/parallel mode, as there the function only queues the job.
+		    parallel (bool): Run jobs in parallel.
+		    sleep (int): Sleep seconds after starting job.
+
+		Returns:
+		    :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
+		        The dictionary is empty if `parse` is set to False.
+
+		&quot;&quot;&quot;
+		print(&quot;Running: &quot; + str(len(params))  +&quot; jobs&quot; )
+		rps = self._prepare_all(params,parse=parse,**kwargs )
+		if sleep is None:
+			sleep = 0 if parse else 5
+		self._run(rps, wait=parse,parallel=parallel,sleep=sleep,**kwargs)
+		if parse:
+			outs = LD2DL(rps)[&quot;out_file&quot;]
+			results = self.parse(outs)
+			rdl = LD2DL(results)
+			pdl = LD2DL(params)
+			return {**rdl, **pdl}
+		return {}</div>
+
+<div class="viewcode-block" id="Runner._run"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._run">[docs]</a>	def _run(self,rps: List[RunParam], wait=True,parallel=True,sleep=0,**kwargs):
+		&quot;&quot;&quot;
+		Runs Runner per :class:`RunParams`.
+	
+		Args:
+		    rps (:obj:`list` of :class:`RunParams`): Extended run parameters.
+		    bar (bool): Enable info bar.
+		    wait (bool): Wait for parallel runs to finish.
+		    sleep (int): Sleep seconds after starting subprocess.
+		    parallel (bool): Run jobs in parallel.
+	
+		Returns:
+		    :obj:`list` of int: return codes from jobs if `no_parse` is False.
+		&quot;&quot;&quot;
+		# get cluster or niceness prefix
+		template = self.get_pre() + &quot; &quot; +  &quot;{}&quot;
+	
+		# Run commands in parallel
+		processes = []
+	
+		for rp in rps:
+			if not rp.skip:
+				command = template.format(rp.execute)
+				process = subprocess.Popen(command, shell=True)
+				processes.append(process)
+				if not parallel:
+					process.wait()
+				# Forced delay to prevent overloading clusters when registering jobs
+				time.sleep(sleep)
+	
+		if wait:
+			# Collect statuses
+			output = [p.wait() for p in processes]
+			return output
+		return []</div>
+
+<div class="viewcode-block" id="Runner._is_valid"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._is_valid">[docs]</a>	def _is_valid(self,file:str,p:Input,d) -&gt; bool:
+		&quot;&quot;&quot;
+		Verifies that a file is a complete output.
+	
+		Args:
+		    file (str): File path to be parsed.
+		    p (:class:`hepi.Input`): Onput parameters.
+		    d (:obj:`dict`): Param dictionary.
+	
+		Returns:
+		    bool : True if `file` could be parsed.
+		&quot;&quot;&quot;
+		return True</div>
+
+<div class="viewcode-block" id="Runner.parse"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.parse">[docs]</a>	def parse(self,outputs: List[str]) -&gt; List[Result]:
+		&quot;&quot;&quot;
+		Parses Resummino output files and returns List of Results.
+	
+		Args:
+		    outputs (:obj:`list` of `str`): List of the filenames to be parsed.
+	
+		Returns:
+		    :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+	
+		&quot;&quot;&quot;
+		rsl = []
+		for r in par(self._parse_file, outputs):
+			rsl.append(r)
+		return rsl</div>
+
+<div class="viewcode-block" id="Runner._parse_file"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._parse_file">[docs]</a>	def _parse_file(self,file : str) -&gt; Result:
+		&quot;&quot;&quot;
+		Extracts results from an output file.
+
+		Args:
+		    file (str): File path to be parsed.
+
+		Returns:
+		    :class:`Result` : If a value is not found in the file None is used.
+
+		&quot;&quot;&quot;
+		return None</div>
+
+<div class="viewcode-block" id="Runner.get_path"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.get_path">[docs]</a>	def get_path(self) -&gt;str:
+		&quot;&quot;&quot;
+		Get the Runner path.
+
+		Returns:
+		    str: current Runner path.
+		&quot;&quot;&quot;
+		return self.path</div>
+
+<div class="viewcode-block" id="Runner.get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.get_input_dir">[docs]</a>	def get_input_dir(self) -&gt; str:
+		&quot;&quot;&quot;
+		Get the input directory.
+
+		Returns:
+		    str: :attr:`in_dir`
+		&quot;&quot;&quot;
+		return self.in_dir</div>
+
+
+<div class="viewcode-block" id="Runner.get_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.get_output_dir">[docs]</a>	def get_output_dir(self) -&gt; str:
+		&quot;&quot;&quot;
+		Get the input directory.
+
+		Returns:
+		    str: :attr:`out_dir`
+		&quot;&quot;&quot;
+		return self.out_dir</div>
+
+
+<div class="viewcode-block" id="Runner.get_pre"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.get_pre">[docs]</a>	def get_pre(self) -&gt; str:
+		&quot;&quot;&quot;
+		Gets the command prefix. 
+
+		Returns:
+		    str: :attr:`pre`
+		&quot;&quot;&quot;
+		return self.pre</div>
+
+<div class="viewcode-block" id="Runner.set_path"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.set_path">[docs]</a>	def set_path(self,p:str):
+		&quot;&quot;&quot;
+		Set the path to the Runner folder containing the binary in &#39;./bin&#39;.
+
+		Args:
+		    p (str): new path.
+		&quot;&quot;&quot;
+		self.path = p + (&quot;/&quot; if p[-1]!=&quot;/&quot; else &quot;&quot;)</div>
+
+<div class="viewcode-block" id="Runner.set_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.set_input_dir">[docs]</a>	def set_input_dir(self,ind:str):
+		&quot;&quot;&quot;
+		Sets the input directory.
+
+		Args:
+		    ind (str): new input directory.
+		&quot;&quot;&quot;
+		self.in_dir = ind</div>
+
+
+<div class="viewcode-block" id="Runner.set_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.set_output_dir">[docs]</a>	def set_output_dir(self,outd:str):
+		&quot;&quot;&quot;
+		Sets the output directory.
+
+		Args:
+		    outd (str): new output directory.
+		&quot;&quot;&quot;
+		self.out_dir = outd</div>
+
+
+<div class="viewcode-block" id="Runner.set_pre"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.set_pre">[docs]</a>	def set_pre(self,ppre:str):
+		&quot;&quot;&quot;
+		Sets the command prefix. 
+
+		Args:
+		    ppre (str): new command prefix.
+		&quot;&quot;&quot;
+		self.pre = ppre</div></div>
+
 </pre></div>
 
            </div>

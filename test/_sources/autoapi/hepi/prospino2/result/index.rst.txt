@@ -1,0 +1,35 @@
+:py:mod:`hepi.prospino2.result`
+===============================
+
+.. py:module:: hepi.prospino2.result
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   hepi.prospino2.result.ProspinoResult
+
+
+
+
+.. py:class:: ProspinoResult(lo=None, nlo=None, nlo_plus_nll=None)
+
+   Bases: :py:obj:`hepi.results.Result`
+
+   Prospino Result Data.
+
+   Sets given and computes dependent ``Attributes``.
+
+   :param lo: corresponds to :attr:`LO`.
+   :type lo: :obj:`double`
+   :param nlo: corresponds to :attr:`NLO`.
+   :type nlo: :obj:`double`
+   :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
+   :type nlo_plus_nll: :obj:`double`
+
+

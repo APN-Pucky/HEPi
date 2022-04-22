@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-25-g0ba9207
+                0.1.4-26-ge9a599f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -90,15 +90,21 @@
              
   <h1>Source code for hepi.input</h1><div class="highlight"><pre>
 <span></span>from enum import IntEnum
+import os
+import shutil
 import warnings
 import copy
+
 import numpy as np
 from typing import Iterable, List
 
 import pyslha
-from .util import DictData, get_LR_partner, lhapdf_name_to_id, namehash
+from .util import DictData, get_LR_partner, lhapdf_name_to_id
 
 import lhapdf
+
+
+
 
 <div class="viewcode-block" id="in_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.in_dir">[docs]</a>in_dir = &quot;./input/&quot;</div>
 &quot;&quot;&quot;Input directory.&quot;&quot;&quot;
@@ -174,7 +180,6 @@ import lhapdf
     pre = ppre</div>
 
 
-
 <div class="viewcode-block" id="Order"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order">[docs]</a>class Order(IntEnum):
     &quot;&quot;&quot;
     Computation orders.
@@ -240,8 +245,48 @@ import lhapdf
         self.result = result
         self.id = id
         self.model_path = model_path
+        if os.path.isfile(get_input_dir() + self.slha):
+                shutil.copy(get_input_dir() + self.slha,get_output_dir() + self.slha)
         if update:
-            update_slha(self)</div>
+            update_slha(self)
+
+<div class="viewcode-block" id="Input.has_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_gluino">[docs]</a>    def has_gluino(self) -&gt; bool:
+        return is_gluino(self.particle1) or is_gluino(self.particle2)</div>
+<div class="viewcode-block" id="Input.has_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_neutralino">[docs]</a>    def has_neutralino(self) -&gt; bool:
+        return is_neutralino(self.particle1) or is_neutralino(self.particle2) </div>
+<div class="viewcode-block" id="Input.has_charginos"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_charginos">[docs]</a>    def has_charginos(self) -&gt; bool:
+        return is_chargino(self.particle1) or is_chargino(self.particle2) </div>
+<div class="viewcode-block" id="Input.has_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_weakino">[docs]</a>    def has_weakino(self) -&gt; bool:
+        return self.has_charginos() or self.has_neutralino()</div>
+<div class="viewcode-block" id="Input.has_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_squark">[docs]</a>    def has_squark(self) -&gt; bool:
+        return is_squark(self.particle1) or is_squark(self.particle2)</div>
+<div class="viewcode-block" id="Input.has_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_slepton">[docs]</a>    def has_slepton(self) -&gt; bool:
+        return is_slepton(self.particle1) or is_slepton(self.particle2)</div></div>
+
+<div class="viewcode-block" id="is_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_gluino">[docs]</a>def is_gluino(id:int)-&gt;bool:
+    return id == 1000021 </div>
+
+<div class="viewcode-block" id="is_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_neutralino">[docs]</a>def is_neutralino(id:int) -&gt; bool:
+    neutralinos = [1000022,1000023,1000025,1000035]
+    return abs(id) in neutralinos </div>
+
+<div class="viewcode-block" id="is_chargino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_chargino">[docs]</a>def is_chargino(id:int) -&gt; bool:
+    charginos= [1000024,1000037]
+    return abs(id) in charginos</div>
+
+<div class="viewcode-block" id="is_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_weakino">[docs]</a>def is_weakino(id:int) -&gt; bool:
+    return is_chargino(id) or is_neutralino(id)</div>
+
+<div class="viewcode-block" id="is_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_squark">[docs]</a>def is_squark(id:int) -&gt; bool:
+    l_squark= range(1000001,1000007)
+    r_squark= range(2000001,2000007)
+    return abs(id) in l_squark or abs(id) in r_squark</div>
+
+<div class="viewcode-block" id="is_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_slepton">[docs]</a>def is_slepton(id:int) -&gt; bool:
+    l_slepton= range(1000011,1000016)
+    r_slepton= range(2000011,2000016)  # TODO remove righthandend snu&#39;s
+    return abs(id) in l_slepton or abs(id) in r_slepton</div>
+
 
 <div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.update_slha">[docs]</a>def update_slha( i:Input ):
     &quot;&quot;&quot;
@@ -251,7 +296,7 @@ import lhapdf
 
     
     &quot;&quot;&quot;
-    b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
+    b = pyslha.read(get_output_dir() + i.slha,ignorenomass=True)
     try:
         i.mu = (abs(b.blocks[&quot;MASS&quot;][abs(i.particle1)]) +
                    abs(b.blocks[&quot;MASS&quot;][abs(i.particle2)]))/2.
@@ -465,6 +510,18 @@ import lhapdf
             ret.append(tmp)
     return ret</div>
 
+<div class="viewcode-block" id="slha_write"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_write">[docs]</a>def slha_write(newname,d):
+    f = get_output_dir()+newname
+    pyslha.write(f, d)
+    with open(f) as reader, open(f, &#39;r+&#39;) as writer:
+        for line in reader:
+            if line.strip():
+                writer.write(line)
+            else:
+                writer.write(&quot;#\n&quot;)
+        writer.truncate()</div>
+
+
 <div class="viewcode-block" id="mass_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.mass_scan">[docs]</a>def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scans the PDG identified mass `var` over `range` in the list `l`.
@@ -477,14 +534,15 @@ import lhapdf
             try:
                 d = pyslha.read(s.slha)
             except:
-                d = pyslha.read(get_input_dir() + s.slha)
+                d = pyslha.read(get_output_dir() + s.slha)
             d.blocks[&quot;MASS&quot;][abs(var)] = r
             if not (diff_L_R is None):
                 is_L, v = get_LR_partner(abs(var))
                 d.blocks[&quot;MASS&quot;][abs(v)] = r + is_L*diff_L_R
 
             newname = s.slha + &quot;_mass_&quot; + str(var) + &quot;_&quot; + str(r)
-            pyslha.write(get_input_dir()+newname, d)
+            #pyslha.write(get_output_dir()+newname, d)
+            slha_write(newname,d)
 
             tmp = copy.copy(s)
             setattr(tmp, &quot;mass_&quot; + str(var), r)
@@ -512,13 +570,14 @@ import lhapdf
             try:
                 d = pyslha.read(s.slha,ignorenomass=True)
             except:
-                d = pyslha.read(get_input_dir() + s.slha,ignorenomass=True)
+                d = pyslha.read(get_output_dir() + s.slha,ignorenomass=True)
             ls = lambdas(r)
             for b,v,res in ls:
                 d.blocks[b][v] = res
                 setattr(tmp, b+ &quot;_&quot; + str(v), res)
                 newname = newname +  &quot;_&quot; +str(b) + &quot;_&quot; + str(v) + &quot;_&quot; + str(res)
-            pyslha.write(get_input_dir()+newname, d)
+            #pyslha.write(get_output_dir()+newname, d)
+            slha_write(newname,d)
 
             setattr(tmp, &quot;slha&quot;, newname)
             update_slha(tmp)

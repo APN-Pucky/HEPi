@@ -29,6 +29,8 @@ Classes
 .. autoapisummary::
 
    hepi.spheno.Input
+   hepi.spheno.Runner
+   hepi.spheno.SPhenoRunner
 
 
 
@@ -39,9 +41,6 @@ Functions
 
    hepi.spheno.get_input_dir
    hepi.spheno.update_slha
-   hepi.spheno.set_path
-   hepi.spheno.get_path
-   hepi.spheno.run
 
 
 
@@ -50,7 +49,10 @@ Attributes
 
 .. autoapisummary::
 
-   hepi.spheno.spheno_path
+   hepi.spheno.spheno_default_runner
+   hepi.spheno.run
+   hepi.spheno.set_path
+   hepi.spheno.get_path
 
 
 .. py:function:: get_input_dir()
@@ -116,6 +118,24 @@ Attributes
 
    :vartype update: bool
 
+   .. py:method:: has_gluino(self) -> bool
+
+
+   .. py:method:: has_neutralino(self) -> bool
+
+
+   .. py:method:: has_charginos(self) -> bool
+
+
+   .. py:method:: has_weakino(self) -> bool
+
+
+   .. py:method:: has_squark(self) -> bool
+
+
+   .. py:method:: has_slepton(self) -> bool
+
+
 
 .. py:function:: update_slha(i: Input)
 
@@ -126,34 +146,192 @@ Attributes
 
 
 
-.. py:data:: spheno_path
-   :annotation: = ~/git/SPheno-3.3.8/
+.. py:class:: Runner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
 
-   spheno folder containing the binary in './bin'.
-
-.. py:function:: set_path(p: str)
-
-   Set the path to the SPheno folder containing the binary in './bin'.
-
-   :param p: new path.
-   :type p: str
+   .. py:method:: _prepare(self, p: hepi.input.Input, skip=True, **kwargs) -> RunParam
 
 
-.. py:function:: get_path() -> str
-
-   Get the SPheno path.
-
-   :returns: current SPheno path.
-   :rtype: str
+   .. py:method:: _check_input(self, param: hepi.input.Input, **kwargs) -> bool
 
 
-.. py:function:: run(slhas: List[hepi.input.Input]) -> List[hepi.input.Input]
+   .. py:method:: _prepare_all(self, params: List[hepi.input.Input], **kwargs) -> List[RunParam]
 
-   Run the passed list of parameters for SPheno.
 
-   :param slhas: Input parameters with a SLHA file that can be processed by SPheno.
-   :type slhas: :obj:`list` of :class:`Input`
+   .. py:method:: run(self, params: List[hepi.input.Input], parse=True, parallel=True, sleep=0, **kwargs)
 
-   :returns: :obj:`list` of :class:`Input`
+      Run the passed list of parameters.
 
+      :param params: All parameters that should be executed/queued.
+      :type params: :obj:`list` of :class:`hepi.Input`
+      :param skip: True means stored runs will be skipped. Else the are overwritten.
+      :type skip: bool
+      :param parse: Parse the results.
+                    This is not the prefered cluster/parallel mode, as there the function only queues the job.
+      :type parse: bool
+      :param parallel: Run jobs in parallel.
+      :type parallel: bool
+      :param sleep: Sleep seconds after starting job.
+      :type sleep: int
+
+      :returns:
+
+                combined dictionary of results and parameters. Each member therein is a list.
+                    The dictionary is empty if `parse` is set to False.
+      :rtype: :obj:`dict`
+
+
+   .. py:method:: _run(self, rps: List[RunParam], wait=True, parallel=True, sleep=0, **kwargs)
+
+      Runs Runner per :class:`RunParams`.
+
+      :param rps: Extended run parameters.
+      :type rps: :obj:`list` of :class:`RunParams`
+      :param bar: Enable info bar.
+      :type bar: bool
+      :param wait: Wait for parallel runs to finish.
+      :type wait: bool
+      :param sleep: Sleep seconds after starting subprocess.
+      :type sleep: int
+      :param parallel: Run jobs in parallel.
+      :type parallel: bool
+
+      :returns: return codes from jobs if `no_parse` is False.
+      :rtype: :obj:`list` of int
+
+
+   .. py:method:: _is_valid(self, file: str, p: hepi.input.Input, d) -> bool
+
+      Verifies that a file is a complete output.
+
+      :param file: File path to be parsed.
+      :type file: str
+      :param p: Onput parameters.
+      :type p: :class:`hepi.Input`
+      :param d: Param dictionary.
+      :type d: :obj:`dict`
+
+      :returns: True if `file` could be parsed.
+      :rtype: bool
+
+
+   .. py:method:: parse(self, outputs: List[str]) -> List[hepi.results.Result]
+
+      Parses Resummino output files and returns List of Results.
+
+      :param outputs: List of the filenames to be parsed.
+      :type outputs: :obj:`list` of `str`
+
+      :returns: :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+
+
+   .. py:method:: _parse_file(self, file: str) -> hepi.results.Result
+
+      Extracts results from an output file.
+
+      :param file: File path to be parsed.
+      :type file: str
+
+      :returns: If a value is not found in the file None is used.
+      :rtype: :class:`Result`
+
+
+   .. py:method:: get_path(self) -> str
+
+      Get the Runner path.
+
+      :returns: current Runner path.
+      :rtype: str
+
+
+   .. py:method:: get_input_dir(self) -> str
+
+      Get the input directory.
+
+      :returns: :attr:`in_dir`
+      :rtype: str
+
+
+   .. py:method:: get_output_dir(self) -> str
+
+      Get the input directory.
+
+      :returns: :attr:`out_dir`
+      :rtype: str
+
+
+   .. py:method:: get_pre(self) -> str
+
+      Gets the command prefix.
+
+      :returns: :attr:`pre`
+      :rtype: str
+
+
+   .. py:method:: set_path(self, p: str)
+
+      Set the path to the Runner folder containing the binary in './bin'.
+
+      :param p: new path.
+      :type p: str
+
+
+   .. py:method:: set_input_dir(self, ind: str)
+
+      Sets the input directory.
+
+      :param ind: new input directory.
+      :type ind: str
+
+
+   .. py:method:: set_output_dir(self, outd: str)
+
+      Sets the output directory.
+
+      :param outd: new output directory.
+      :type outd: str
+
+
+   .. py:method:: set_pre(self, ppre: str)
+
+      Sets the command prefix.
+
+      :param ppre: new command prefix.
+      :type ppre: str
+
+
+
+.. py:class:: SPhenoRunner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
+
+   Bases: :py:obj:`hepi.run.Runner`
+
+   .. py:method:: run(self, slhas: List[hepi.input.Input], **kwargs) -> List[hepi.input.Input]
+
+      Run the passed list of parameters for SPheno.
+
+      :param slhas: Input parameters with a SLHA file that can be processed by SPheno.
+      :type slhas: :obj:`list` of :class:`Input`
+
+      :returns: :obj:`list` of :class:`Input`
+
+
+
+.. py:data:: spheno_default_runner
+   
+
+   Default SPheno Runner to provide backward compatibility
+
+.. py:data:: run
+   
+
+   
+
+.. py:data:: set_path
+   
+
+   
+
+.. py:data:: get_path
+   
+
+   
 

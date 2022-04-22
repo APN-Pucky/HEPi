@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-25-g0ba9207
+                0.1.4-26-ge9a599f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -95,6 +95,7 @@ import numpy as np
 import hashlib
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
+import pyslha
 
 <div class="viewcode-block" id="DictData"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DictData">[docs]</a>class DictData:
 <div class="viewcode-block" id="DictData.__str__"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DictData.__str__">[docs]</a>    def __str__(self):
@@ -210,7 +211,6 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
     m = hashlib.sha256()
     m.update(str(n).encode(&#39;utf-8&#39;))
     return m.hexdigest()</div>
-
 # TODO rework to work with lhapdf
 <div class="viewcode-block" id="lhapdf_id_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_id_name">[docs]</a>lhapdf_id_name :dict = {
     251:    &quot;GRVPI0&quot;,

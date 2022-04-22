@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-25-g0ba9207
+                0.1.4-26-ge9a599f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -90,6 +90,7 @@
              
   <h1>Source code for hepi.resummino.run</h1><div class="highlight"><pre>
 <span></span>&quot;&quot;&quot;Runs Resummino&quot;&quot;&quot;
+import shutil
 from typing import List
 import subprocess
 from string import Template
@@ -110,6 +111,7 @@ from smpl.parallel import par
 import hashlib
 import os 
 import stat
+from smpl import debug
 
 
 <div class="viewcode-block" id="resummino_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.resummino_path">[docs]</a>resummino_path:str = &quot;~/resummino/&quot;</div>
@@ -157,7 +159,7 @@ import stat
         self.out_path = out_path</div>
 
 
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.run">[docs]</a>def run(params: List[Input], noskip=False, bar=True, no_parse=False,para=True) -&gt; dict:
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.run">[docs]</a>def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,skip=True,parse=True) -&gt; dict:
     &quot;&quot;&quot;
     Run the passed list of parameters.
 
@@ -174,6 +176,10 @@ import stat
             The dictionary is empty if `no_parse` is set.
 
     &quot;&quot;&quot;
+    if noskip == skip:
+        noskip = True
+    if no_parse== parse:
+        no_parse= True
     print(&quot;Running: &quot; + str(len(params))  +&quot; jobs&quot; )
     rps = _queue(params, noskip)
     _run(rps, bar, no_parse,para)
@@ -228,7 +234,7 @@ import stat
         # TODO insert defautl if missing in d!
         name = namehash(&quot;_&quot;.join(&quot;&quot;.join(str(_[0]) + &quot;_&quot; + str(_[1]))
                         for _ in d.items()).replace(&quot;/&quot;, &quot;-&quot;))
-        print(name)
+        debug.msg(name)
         skip = False
         if not noskip and os.path.isfile(get_output_dir() + name + &quot;.out&quot;) and is_valid(get_output_dir() + name + &quot;.out&quot;,p,d):
             print(&quot;skip&quot;, end=&#39;&#39;)
@@ -239,17 +245,17 @@ import stat
 
             src = Template(data)
             result = src.substitute(d)
-            open(get_input_dir() + name + &quot;.in&quot;, &quot;w&quot;).write(result)
-            open(get_input_dir() + name + &quot;.sh&quot;, &quot;w&quot;).write(&quot;#!/bin/sh\n&quot;+
+            open(get_output_dir() + name + &quot;.in&quot;, &quot;w&quot;).write(result)
+            open(get_output_dir() + name + &quot;.sh&quot;, &quot;w&quot;).write(&quot;#!/bin/sh\n&quot;+
                 resummino_path + &#39;build/bin/resummino {} {} &gt;&gt; {}&#39;.format(
-                    get_input_dir()+name + &quot;.in&quot;,[&quot;--lo&quot;, &quot;--nlo&quot;, &quot;--nll&quot;][p.order],get_output_dir()+name + &quot;.out&quot;
+                    get_output_dir()+name + &quot;.in&quot;,[&quot;--lo&quot;, &quot;--nlo&quot;, &quot;--nll&quot;][p.order],get_output_dir()+name + &quot;.out&quot;
                 ))
-            st = os.stat(get_input_dir() + name + &quot;.sh&quot;)
-            os.chmod(get_input_dir() + name + &quot;.sh&quot;, st.st_mode | stat.S_IEXEC)
+            st = os.stat(get_output_dir() + name + &quot;.sh&quot;)
+            os.chmod(get_output_dir() + name + &quot;.sh&quot;, st.st_mode | stat.S_IEXEC)
             open(get_output_dir() + name + &quot;.out&quot;, &quot;w&quot;).write(result + &quot;\n\n&quot;)
 
             sname = d[&#39;slha&#39;]
-            with open(get_input_dir() + sname, &#39;r&#39;) as f:
+            with open(get_output_dir() + sname, &#39;r&#39;) as f:
                 #src = Template(f.read())
                 #result = src.substitute(d)
                 #open(get_input_dir() + sname + &quot;.in&quot;, &quot;w&quot;).write(result)
@@ -257,7 +263,7 @@ import stat
                      &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
 
         ret.append(ResumminoRunParam([&quot;--lo&quot;, &quot;--nlo&quot;, &quot;--nll&quot;]
-                             [p.order], get_input_dir()+name + &quot;.in&quot;, get_output_dir()+name + &quot;.out&quot;, skip))
+                             [p.order], get_output_dir()+name + &quot;.in&quot;, get_output_dir()+name + &quot;.out&quot;, skip))
 
     return ret</div>
 

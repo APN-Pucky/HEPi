@@ -28,6 +28,12 @@ Functions
    hepi.input.set_input_dir
    hepi.input.set_output_dir
    hepi.input.set_pre
+   hepi.input.is_gluino
+   hepi.input.is_neutralino
+   hepi.input.is_chargino
+   hepi.input.is_weakino
+   hepi.input.is_squark
+   hepi.input.is_slepton
    hepi.input.update_slha
    hepi.input.scan
    hepi.input.scan_multi
@@ -35,6 +41,7 @@ Functions
    hepi.input.scan_seven_point
    hepi.input.change_where
    hepi.input.scan_invariant_mass
+   hepi.input.slha_write
    hepi.input.mass_scan
    hepi.input.slha_scan
    hepi.input.slha_scan_rel
@@ -198,6 +205,42 @@ Attributes
 
    :vartype update: bool
 
+   .. py:method:: has_gluino(self) -> bool
+
+
+   .. py:method:: has_neutralino(self) -> bool
+
+
+   .. py:method:: has_charginos(self) -> bool
+
+
+   .. py:method:: has_weakino(self) -> bool
+
+
+   .. py:method:: has_squark(self) -> bool
+
+
+   .. py:method:: has_slepton(self) -> bool
+
+
+
+.. py:function:: is_gluino(id: int) -> bool
+
+
+.. py:function:: is_neutralino(id: int) -> bool
+
+
+.. py:function:: is_chargino(id: int) -> bool
+
+
+.. py:function:: is_weakino(id: int) -> bool
+
+
+.. py:function:: is_squark(id: int) -> bool
+
+
+.. py:function:: is_slepton(id: int) -> bool
+
 
 .. py:function:: update_slha(i: Input)
 
@@ -356,6 +399,9 @@ Attributes
 .. py:function:: scan_invariant_mass(l: List[Input], diff, points, low=0.001)
 
    Logarithmic `invariant_mass` scan close to the production threshold.
+
+
+.. py:function:: slha_write(newname, d)
 
 
 .. py:function:: mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]

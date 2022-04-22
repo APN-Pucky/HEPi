@@ -17,6 +17,7 @@ Subpackages
 
    cluster/index.rst
    madgraph/index.rst
+   prospino2/index.rst
    resummino/index.rst
    spheno/index.rst
 
@@ -45,12 +46,16 @@ Classes
    hepi.DictData
    hepi.Order
    hepi.Input
+   hepi.Input
    hepi.DictData
    hepi.Result
    hepi.DictData
    hepi.Input
+   hepi.Input
+   hepi.Result
    hepi.DictData
    hepi.RunParam
+   hepi.Runner
 
 
 
@@ -61,13 +66,18 @@ Functions
 
    hepi.get_LR_partner
    hepi.lhapdf_name_to_id
-   hepi.namehash
    hepi.get_input_dir
    hepi.get_output_dir
    hepi.get_pre
    hepi.set_input_dir
    hepi.set_output_dir
    hepi.set_pre
+   hepi.is_gluino
+   hepi.is_neutralino
+   hepi.is_chargino
+   hepi.is_weakino
+   hepi.is_squark
+   hepi.is_slepton
    hepi.update_slha
    hepi.scan
    hepi.scan_multi
@@ -75,6 +85,7 @@ Functions
    hepi.scan_seven_point
    hepi.change_where
    hepi.scan_invariant_mass
+   hepi.slha_write
    hepi.mass_scan
    hepi.slha_scan
    hepi.slha_scan_rel
@@ -89,16 +100,16 @@ Functions
    hepi.namehash
    hepi.lhapdf_id_to_name
    hepi.lhapdf_name_to_id
-   hepi.get_input_dir
+   hepi.get_output_dir
    hepi.get_name
    hepi.tex_table
    hepi.title
    hepi.energy_plot
    hepi.combined_energy_plot
    hepi.combined_plot
-   hepi.get_mass
    hepi.mass_plot
    hepi.mass_vplot
+   hepi.get_mass
    hepi.plot
    hepi.index_open
    hepi.slha_data
@@ -112,6 +123,11 @@ Functions
    hepi.central_scale_plot
    hepi.mass_and_K_plot
    hepi.mass_and_ratio_plot
+   hepi.get_input_dir
+   hepi.get_output_dir
+   hepi.get_pre
+   hepi.LD2DL
+   hepi.namehash
 
 
 
@@ -177,27 +193,6 @@ Attributes
 
    >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
    30101175
-
-
-.. py:function:: namehash(n: any) -> str
-
-   Creates a sha256 hash from the objects string representation.
-
-   :param n: object.
-   :type n: any
-
-   :returns: sha256 of object.
-   :rtype: str
-
-   .. rubric:: Examples
-
-   >>> p = {'a':1,'b':2}
-   >>> str(p)
-   "{'a': 1, 'b': 2}"
-   >>> namehash(str(p))
-   '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
-   >>> namehash(p)
-   '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
 .. py:data:: in_dir
@@ -341,6 +336,42 @@ Attributes
    :ivar update: Update dependent `mu`.
 
    :vartype update: bool
+
+   .. py:method:: has_gluino(self) -> bool
+
+
+   .. py:method:: has_neutralino(self) -> bool
+
+
+   .. py:method:: has_charginos(self) -> bool
+
+
+   .. py:method:: has_weakino(self) -> bool
+
+
+   .. py:method:: has_squark(self) -> bool
+
+
+   .. py:method:: has_slepton(self) -> bool
+
+
+
+.. py:function:: is_gluino(id: int) -> bool
+
+
+.. py:function:: is_neutralino(id: int) -> bool
+
+
+.. py:function:: is_chargino(id: int) -> bool
+
+
+.. py:function:: is_weakino(id: int) -> bool
+
+
+.. py:function:: is_squark(id: int) -> bool
+
+
+.. py:function:: is_slepton(id: int) -> bool
 
 
 .. py:function:: update_slha(i: Input)
@@ -502,6 +533,9 @@ Attributes
    Logarithmic `invariant_mass` scan close to the production threshold.
 
 
+.. py:function:: slha_write(newname, d)
+
+
 .. py:function:: mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]
 
    Scans the PDG identified mass `var` over `range` in the list `l`.
@@ -592,6 +626,80 @@ Attributes
    
 
    
+
+.. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO', update=True)
+
+   Bases: :py:obj:`hepi.util.DictData`
+
+   Input for computation and scans.
+
+   :ivar order: LO, NLO or NLO+NLL computation.
+   :vartype order: :class:`Order`
+   :ivar energy: CMS energy in GeV.
+   :vartype energy: int
+   :ivar energyhalf: Halfed `energy`.
+   :vartype energyhalf: int
+   :ivar particle1: PDG identifier of the first final state particle.
+   :vartype particle1: int
+   :ivar particle2: PDG identifier of the second final state particle.
+   :vartype particle2: int
+   :ivar slha: File path of for the base slha.
+               Modified slha files will be used if a scan requires a change of the input.
+   :vartype slha: str
+   :ivar pdf_lo: LO PDF name.
+   :vartype pdf_lo: str
+   :ivar pdf_nlo: NLO PDF name.
+   :vartype pdf_nlo: str
+   :ivar pdfset_lo: LO PDF member/set id.
+   :vartype pdfset_lo: int
+   :ivar pdfset_nlo: NLO PDF member/set id.
+   :vartype pdfset_nlo: int
+   :ivar pdf_lo_id: LO PDF first member/set id.
+   :vartype pdf_lo_id: int
+   :ivar pdf_nlo_id: NLO PDF first member/set id.
+   :vartype pdf_nlo_id: int
+   :ivar mu: central scale factor.
+   :vartype mu: double
+   :ivar mu_f: Factorization scale factor.
+   :vartype mu_f: double
+   :ivar mu_r: Renormalization scale factor.
+   :vartype mu_r: double
+   :ivar precision: Desired numerical relative precision.
+   :vartype precision: double
+   :ivar max_iters: Upper limit on integration iterations.
+   :vartype max_iters: int
+   :ivar invariant_mass: Invariant mass mode 'auto = sqrt((p1+p2)^2)' else value.
+   :vartype invariant_mass: str
+   :ivar pt: Transverse Momentum mode 'auto' or value.
+   :vartype pt: str
+   :ivar result: Result type 'total'/'pt'/'ptj'/'m'.
+   :vartype result: str
+   :ivar id: Set an id of this run.
+   :vartype id: str
+   :ivar model_path: Path for MadGraph model.
+   :vartype model_path: str
+   :ivar update: Update dependent `mu`.
+
+   :vartype update: bool
+
+   .. py:method:: has_gluino(self) -> bool
+
+
+   .. py:method:: has_neutralino(self) -> bool
+
+
+   .. py:method:: has_charginos(self) -> bool
+
+
+   .. py:method:: has_weakino(self) -> bool
+
+
+   .. py:method:: has_squark(self) -> bool
+
+
+   .. py:method:: has_slepton(self) -> bool
+
+
 
 .. py:function:: LD2DL(l: List)
 
@@ -896,12 +1004,30 @@ Attributes
 
    :vartype update: bool
 
+   .. py:method:: has_gluino(self) -> bool
 
-.. py:function:: get_input_dir()
+
+   .. py:method:: has_neutralino(self) -> bool
+
+
+   .. py:method:: has_charginos(self) -> bool
+
+
+   .. py:method:: has_weakino(self) -> bool
+
+
+   .. py:method:: has_squark(self) -> bool
+
+
+   .. py:method:: has_slepton(self) -> bool
+
+
+
+.. py:function:: get_output_dir()
 
    Get the input directory.
 
-   :returns: :attr:`in_dir`
+   :returns: :attr:`out_dir`
    :rtype: str
 
 
@@ -938,13 +1064,18 @@ Attributes
 .. py:function:: combined_plot(func, dict_list, t, *args, label=None, fill=False, fmt='.', interpolate=True, **kwargs)
 
 
-.. py:function:: get_mass(l, id)
-
-
 .. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, **kwargs)
 
 
 .. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)
+
+
+.. py:function:: get_mass(l: dict, id: int)
+
+   Get the mass of particle with id `id` out of the list in the "slha" element in the dict.
+
+   Returns
+       :obj:`list` of float : masses of particles in each element of the dict list.
 
 
 .. py:function:: plot(dict_list, x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs)
@@ -959,7 +1090,7 @@ Attributes
 .. py:function:: slha_plot(li, x, y, **kwargs)
 
 
-.. py:function:: vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', **kwargs)
+.. py:function:: vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', print_area=False, **kwargs)
 
 
 .. py:function:: mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)
@@ -1006,6 +1137,159 @@ Attributes
 .. py:function:: mass_and_ratio_plot(dl, li, p, scale=False, pdf=False, combined=False, cont=False, figsize=(6, 4), plot_data=True, fill=True, unit='pb', yscale=1.0, ylim=None, **kwargs)
 
 
+.. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO', update=True)
+
+   Bases: :py:obj:`hepi.util.DictData`
+
+   Input for computation and scans.
+
+   :ivar order: LO, NLO or NLO+NLL computation.
+   :vartype order: :class:`Order`
+   :ivar energy: CMS energy in GeV.
+   :vartype energy: int
+   :ivar energyhalf: Halfed `energy`.
+   :vartype energyhalf: int
+   :ivar particle1: PDG identifier of the first final state particle.
+   :vartype particle1: int
+   :ivar particle2: PDG identifier of the second final state particle.
+   :vartype particle2: int
+   :ivar slha: File path of for the base slha.
+               Modified slha files will be used if a scan requires a change of the input.
+   :vartype slha: str
+   :ivar pdf_lo: LO PDF name.
+   :vartype pdf_lo: str
+   :ivar pdf_nlo: NLO PDF name.
+   :vartype pdf_nlo: str
+   :ivar pdfset_lo: LO PDF member/set id.
+   :vartype pdfset_lo: int
+   :ivar pdfset_nlo: NLO PDF member/set id.
+   :vartype pdfset_nlo: int
+   :ivar pdf_lo_id: LO PDF first member/set id.
+   :vartype pdf_lo_id: int
+   :ivar pdf_nlo_id: NLO PDF first member/set id.
+   :vartype pdf_nlo_id: int
+   :ivar mu: central scale factor.
+   :vartype mu: double
+   :ivar mu_f: Factorization scale factor.
+   :vartype mu_f: double
+   :ivar mu_r: Renormalization scale factor.
+   :vartype mu_r: double
+   :ivar precision: Desired numerical relative precision.
+   :vartype precision: double
+   :ivar max_iters: Upper limit on integration iterations.
+   :vartype max_iters: int
+   :ivar invariant_mass: Invariant mass mode 'auto = sqrt((p1+p2)^2)' else value.
+   :vartype invariant_mass: str
+   :ivar pt: Transverse Momentum mode 'auto' or value.
+   :vartype pt: str
+   :ivar result: Result type 'total'/'pt'/'ptj'/'m'.
+   :vartype result: str
+   :ivar id: Set an id of this run.
+   :vartype id: str
+   :ivar model_path: Path for MadGraph model.
+   :vartype model_path: str
+   :ivar update: Update dependent `mu`.
+
+   :vartype update: bool
+
+   .. py:method:: has_gluino(self) -> bool
+
+
+   .. py:method:: has_neutralino(self) -> bool
+
+
+   .. py:method:: has_charginos(self) -> bool
+
+
+   .. py:method:: has_weakino(self) -> bool
+
+
+   .. py:method:: has_squark(self) -> bool
+
+
+   .. py:method:: has_slepton(self) -> bool
+
+
+
+.. py:function:: get_input_dir()
+
+   Get the input directory.
+
+   :returns: :attr:`in_dir`
+   :rtype: str
+
+
+.. py:function:: get_output_dir()
+
+   Get the input directory.
+
+   :returns: :attr:`out_dir`
+   :rtype: str
+
+
+.. py:function:: get_pre()
+
+   Gets the command prefix.
+
+   :returns: :attr:`pre`
+   :rtype: str
+
+
+.. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None)
+
+   Bases: :py:obj:`hepi.util.DictData`
+
+   General result class.
+
+   :ivar LO: Leading Order result. Defaults to None.
+   :vartype LO: :obj:`double`
+   :ivar NLO: Next-to-Leading Order result. Defaults to None.
+   :vartype NLO: :obj:`double`
+   :ivar NLO_PLUS_NLL: Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+   :vartype NLO_PLUS_NLL: :obj:`double`
+   :ivar K_LO: LO divided by LO.
+   :vartype K_LO: :obj:`double`
+   :ivar K_NLO: NLO divided by LO result.
+   :vartype K_NLO: :obj:`double`
+   :ivar K_NLO_PLUS_NLL: NLO+NLL divided by LO.
+   :vartype K_NLO_PLUS_NLL: :obj:`double`
+   :ivar NLO_PLUS_NLL_OVER_NLO: NLO+NLL divided by NLO.
+
+   :vartype NLO_PLUS_NLL_OVER_NLO: :obj:`double`
+
+   Sets given and computes dependent ``Attributes``.
+
+   :param lo: corresponds to :attr:`LO`.
+   :type lo: :obj:`double`
+   :param nlo: corresponds to :attr:`NLO`.
+   :type nlo: :obj:`double`
+   :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
+   :type nlo_plus_nll: :obj:`double`
+
+
+.. py:function:: LD2DL(l: List)
+
+   Convert a list of objects into a dictionary of lists.
+
+   The values of each object are first converted to a `dict` through the `__dict__` attribute.
+
+   :param l: list of objects.
+   :type l: List
+
+   :returns: dictionary of numpy arrays.
+   :rtype: dict
+
+   .. rubric:: Examples
+
+   >>> class Param:
+   ...      def __init__(self,a,b,c):
+   ...         self.a = a
+   ...         self.b = b
+   ...         self.c = c
+   >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+   {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
+
+
 .. py:class:: DictData
 
    .. py:method:: __str__(self)
@@ -1014,11 +1298,186 @@ Attributes
 
 
 
-.. py:class:: RunParam(skip: bool = False)
+.. py:function:: namehash(n: any) -> str
+
+   Creates a sha256 hash from the objects string representation.
+
+   :param n: object.
+   :type n: any
+
+   :returns: sha256 of object.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> p = {'a':1,'b':2}
+   >>> str(p)
+   "{'a': 1, 'b': 2}"
+   >>> namehash(str(p))
+   '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+   >>> namehash(p)
+   '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
+
+
+.. py:class:: RunParam(skip: bool = False, in_file: str = None, out_file: str = None, execute: str = None, name: str = None)
 
    Bases: :py:obj:`hepi.util.DictData`
 
    Abstract class that is similar to a dictionary but with fixed keys.
+
+
+.. py:class:: Runner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
+
+   .. py:method:: _prepare(self, p: hepi.input.Input, skip=True, **kwargs) -> RunParam
+
+
+   .. py:method:: _check_input(self, param: hepi.input.Input, **kwargs) -> bool
+
+
+   .. py:method:: _prepare_all(self, params: List[hepi.input.Input], **kwargs) -> List[RunParam]
+
+
+   .. py:method:: run(self, params: List[hepi.input.Input], parse=True, parallel=True, sleep=0, **kwargs)
+
+      Run the passed list of parameters.
+
+      :param params: All parameters that should be executed/queued.
+      :type params: :obj:`list` of :class:`hepi.Input`
+      :param skip: True means stored runs will be skipped. Else the are overwritten.
+      :type skip: bool
+      :param parse: Parse the results.
+                    This is not the prefered cluster/parallel mode, as there the function only queues the job.
+      :type parse: bool
+      :param parallel: Run jobs in parallel.
+      :type parallel: bool
+      :param sleep: Sleep seconds after starting job.
+      :type sleep: int
+
+      :returns:
+
+                combined dictionary of results and parameters. Each member therein is a list.
+                    The dictionary is empty if `parse` is set to False.
+      :rtype: :obj:`dict`
+
+
+   .. py:method:: _run(self, rps: List[RunParam], wait=True, parallel=True, sleep=0, **kwargs)
+
+      Runs Runner per :class:`RunParams`.
+
+      :param rps: Extended run parameters.
+      :type rps: :obj:`list` of :class:`RunParams`
+      :param bar: Enable info bar.
+      :type bar: bool
+      :param wait: Wait for parallel runs to finish.
+      :type wait: bool
+      :param sleep: Sleep seconds after starting subprocess.
+      :type sleep: int
+      :param parallel: Run jobs in parallel.
+      :type parallel: bool
+
+      :returns: return codes from jobs if `no_parse` is False.
+      :rtype: :obj:`list` of int
+
+
+   .. py:method:: _is_valid(self, file: str, p: hepi.input.Input, d) -> bool
+
+      Verifies that a file is a complete output.
+
+      :param file: File path to be parsed.
+      :type file: str
+      :param p: Onput parameters.
+      :type p: :class:`hepi.Input`
+      :param d: Param dictionary.
+      :type d: :obj:`dict`
+
+      :returns: True if `file` could be parsed.
+      :rtype: bool
+
+
+   .. py:method:: parse(self, outputs: List[str]) -> List[hepi.results.Result]
+
+      Parses Resummino output files and returns List of Results.
+
+      :param outputs: List of the filenames to be parsed.
+      :type outputs: :obj:`list` of `str`
+
+      :returns: :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+
+
+   .. py:method:: _parse_file(self, file: str) -> hepi.results.Result
+
+      Extracts results from an output file.
+
+      :param file: File path to be parsed.
+      :type file: str
+
+      :returns: If a value is not found in the file None is used.
+      :rtype: :class:`Result`
+
+
+   .. py:method:: get_path(self) -> str
+
+      Get the Runner path.
+
+      :returns: current Runner path.
+      :rtype: str
+
+
+   .. py:method:: get_input_dir(self) -> str
+
+      Get the input directory.
+
+      :returns: :attr:`in_dir`
+      :rtype: str
+
+
+   .. py:method:: get_output_dir(self) -> str
+
+      Get the input directory.
+
+      :returns: :attr:`out_dir`
+      :rtype: str
+
+
+   .. py:method:: get_pre(self) -> str
+
+      Gets the command prefix.
+
+      :returns: :attr:`pre`
+      :rtype: str
+
+
+   .. py:method:: set_path(self, p: str)
+
+      Set the path to the Runner folder containing the binary in './bin'.
+
+      :param p: new path.
+      :type p: str
+
+
+   .. py:method:: set_input_dir(self, ind: str)
+
+      Sets the input directory.
+
+      :param ind: new input directory.
+      :type ind: str
+
+
+   .. py:method:: set_output_dir(self, outd: str)
+
+      Sets the output directory.
+
+      :param outd: new output directory.
+      :type outd: str
+
+
+   .. py:method:: set_pre(self, ppre: str)
+
+      Sets the command prefix.
+
+      :param ppre: new command prefix.
+      :type ppre: str
+
 
 
 .. py:data:: package

@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-25-g0ba9207
+                0.1.4-26-ge9a599f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -90,12 +90,13 @@
              
   <h1>Source code for hepi.resummino.result</h1><div class="highlight"><pre>
 <span></span>from hepi.input import Order
-from .. import Input, Result,   get_input_dir
+from .. import Input, Result,   get_output_dir
 import re
 from uncertainties import ufloat_fromstr
 from string import Template
 import pkgutil
 import os
+
 
 <div class="viewcode-block" id="ResumminoResult"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.ResumminoResult">[docs]</a>class ResumminoResult(Result):
     &quot;&quot;&quot;
@@ -141,6 +142,8 @@ import os
         else:
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None</div>
 
+# TODO move functions to results
+
 <div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d) -&gt; bool:
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
@@ -160,7 +163,7 @@ import os
     result = src.substitute(d)
     sname = d[&#39;slha&#39;]
     with open(file,mode=&#39;r&#39;) as f:
-        with open(get_input_dir() + sname, &#39;r&#39;) as sf:
+        with open(get_output_dir() + sname, &#39;r&#39;) as sf:
             if not f.read().startswith(result + &quot;\n\n&quot; + sf.read()):
                 #warnings.warn(&quot;Possible hash collision in &quot; + file + &quot; -&gt; deleted&quot;,RuntimeWarning)
                 os.remove(file)

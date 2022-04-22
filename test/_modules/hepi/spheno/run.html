@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-25-g0ba9207
+                0.1.4-26-ge9a599f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -95,56 +95,40 @@ from hepi import get_input_dir
 import subprocess
 import os
 from hepi.input import Input, update_slha
+from hepi.run import Runner
 
-<div class="viewcode-block" id="spheno_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.spheno_path">[docs]</a>spheno_path = &quot;~/git/SPheno-3.3.8/&quot;</div>
-&quot;&quot;&quot;spheno folder containing the binary in &#39;./bin&#39;.&quot;&quot;&quot;
+<div class="viewcode-block" id="SPhenoRunner"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.SPhenoRunner">[docs]</a>class SPhenoRunner(Runner):
+<div class="viewcode-block" id="SPhenoRunner.run"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.SPhenoRunner.run">[docs]</a>    def run(self,slhas : List[Input],**kwargs) -&gt; List[Input]:
+        &quot;&quot;&quot;
+        Run the passed list of parameters for SPheno.
+    
+        Args:
+            slhas (:obj:`list` of :class:`Input`): Input parameters with a SLHA file that can be processed by SPheno.
+        Returns:
+            :obj:`list` of :class:`Input`
+        &quot;&quot;&quot;
+        if os.path.exists(&quot;Messages.out&quot;):
+            os.remove(&quot;Messages.out&quot;)
+        for s in slhas:
+            # Remove Creation time for hash-/caching
+            comm= &quot;cp &quot; +  self.get_output_dir() + s.slha  + &quot; spheno_tmp.in &amp;&amp; &quot; +get_path() + &quot;bin/SPheno spheno_tmp.in &amp;&amp; mv &quot;  + &quot;SPheno.spc &quot; + self.get_output_dir() + s.slha  + &quot; &amp;&amp; sed -i &#39;/Created/d&#39; &quot; + self.get_output_dir() + s.slha
+            proc = subprocess.Popen(comm, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            proc.wait()
+            update_slha(s)
+        if os.path.exists(&quot;Messages.out&quot;):
+            with open(&quot;Messages.out&quot;,&#39;r&#39;) as r:
+                t = r.read()
+                if t != &quot;&quot;:
+                    warnings.warn(r.read())
+        return slhas</div></div>
 
+# Backward compatibility
+<div class="viewcode-block" id="spheno_default_runner"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.spheno_default_runner">[docs]</a>spheno_default_runner=SPhenoRunner(&quot;~/git/SPheno-3.3.8/&quot;)</div>
+&quot;&quot;&quot;Default SPheno Runner to provide backward compatibility&quot;&quot;&quot;
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.run">[docs]</a>run = spheno_default_runner.run</div>
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.set_path">[docs]</a>set_path = spheno_default_runner.set_path</div>
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.get_path">[docs]</a>get_path = spheno_default_runner.get_path</div>
 
-<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.set_path">[docs]</a>def set_path(p:str):
-    &quot;&quot;&quot;
-    Set the path to the SPheno folder containing the binary in &#39;./bin&#39;.
-
-    Args:
-        p (str): new path.
-    &quot;&quot;&quot;
-    global spheno_path
-    spheno_path = p + (&quot;/&quot; if p[-1]!=&quot;/&quot; else &quot;&quot;)</div>
-
-
-<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.get_path">[docs]</a>def get_path() -&gt;str:
-    &quot;&quot;&quot;
-    Get the SPheno path.
-
-    Returns:
-        str: current SPheno path.
-    &quot;&quot;&quot;
-    global spheno_path
-    return spheno_path</div>
-
-
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.run">[docs]</a>def run(slhas : List[Input]) -&gt; List[Input]:
-    &quot;&quot;&quot;
-    Run the passed list of parameters for SPheno.
-
-    Args:
-        slhas (:obj:`list` of :class:`Input`): Input parameters with a SLHA file that can be processed by SPheno.
-    Returns:
-        :obj:`list` of :class:`Input`
-    &quot;&quot;&quot;
-    if os.path.exists(&quot;Messages.out&quot;):
-        os.remove(&quot;Messages.out&quot;)
-    for s in slhas:
-        #print(s.slha)
-        comm= &quot;cp &quot; +  get_input_dir() + s.slha  + &quot; spheno_tmp.in &amp;&amp; &quot; +get_path() + &quot;bin/SPheno spheno_tmp.in &amp;&amp; mv &quot;  + &quot;SPheno.spc &quot; + get_input_dir() + s.slha  + &quot; &amp;&amp; sed -i &#39;/Created/d&#39; &quot; + get_input_dir() + s.slha
-        proc = subprocess.Popen(comm, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        proc.wait()
-        update_slha(s)
-    if os.path.exists(&quot;Messages.out&quot;):
-        with open(&quot;Messages.out&quot;,&#39;r&#39;) as r:
-            t = r.read()
-            if t != &quot;&quot;:
-                warnings.warn(r.read())
-    return slhas</div>
 </pre></div>
 
            </div>

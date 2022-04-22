@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.prospino2.run &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.4-26-ge9a599f
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/hepi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../hepi.html">hepi</a> &raquo;</li>
+      <li>hepi.prospino2.run</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for hepi.prospino2.run</h1><div class="highlight"><pre>
+<span></span>import os
+import pkgutil
+import re
+import shutil
+import stat
+from string import Template
+import subprocess
+from typing import List
+import warnings
+from hepi.input import Input, is_gluino, is_slepton, is_squark, is_weakino
+from hepi.results import Result
+from hepi.run import RunParam, Runner
+from hepi.util import namehash
+from smpl import debug
+from uncertainties import ufloat
+
+
+<div class="viewcode-block" id="ProspinoRunner"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner">[docs]</a>class ProspinoRunner(Runner):
+	# TODO add leptowaurk, stop and sbottom cases
+<div class="viewcode-block" id="ProspinoRunner.weakino_map"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner.weakino_map">[docs]</a>	weakino_map = {
+		1000022 : 1,
+		1000023 : 2,
+		1000025 : 3,
+		1000035 : 4,
+		1000024 : 5,
+		1000037 : 6,
+		-1000024 : 7,
+		-1000037 : 8,
+	}</div>
+<div class="viewcode-block" id="ProspinoRunner.squark_map"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner.squark_map">[docs]</a>	squark_map = {
+		1000005 : -5,
+		1000004 : -4,
+		1000004 : -4,
+		1000003 : -3,
+		1000001 : -2,
+		1000002 : -1,
+		2000002 : 1,
+		2000001 : 2,
+		2000003 : 3,
+		2000004 : 4,
+		2000005 : 5,
+	}</div>
+<div class="viewcode-block" id="ProspinoRunner.slepton_map"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner.slepton_map">[docs]</a>	slepton_map = {
+		( 1000011, 1000011) :  1,
+		( 2000011, 2000011) :  2,
+		( 1000012, 1000012) :  3,
+		(-1000011, 1000012) :  4,
+		( 1000011, 1000012) :  5,
+		( 1000015, 1000015) :  6,
+		( 2000015, 2000015) :  7,
+		( 1000015, 2000015) :  8,
+		( 1000016, 1000016) :  9,
+		(-1000015, 1000016) : 10,
+		( 1000015, 1000016) : 11,
+		(-2000015, 1000016) : 12,
+		( 2000015, 1000016) : 13,
+	}</div>
+
+<div class="viewcode-block" id="ProspinoRunner._get_ps_proc"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._get_ps_proc">[docs]</a>	def _get_ps_proc(self,p:Input):
+		if p.has_squark() and p.has_weakino():
+			sq = p.particle1 if is_squark(p.particle1) else p.particle2
+			weakino = p.particle2 if is_squark(p.particle1) else p.particle1
+			return &#39;ns&#39;,self.weakino_map[weakino],1,self.squark_map[abs(sq)],1
+		if p.has_gluino() and p.has_weakino():
+			return &#39;ng&#39;,self.weakino_map[p.particle1 if is_gluino(p.particle2) else p.particle2],1,1,1
+		if p.has_gluino() and p.has_squark():
+			return &#39;sg&#39;,1,1,self.squark_map[abs(p.particle1 if is_gluino(p.particle2) else p.particle2)],1
+		if is_weakino(p.particle1) and is_weakino(p.particle2):
+			return &#39;nn&#39;,self.weakino_map[p.particle1],self.weakino_map[p.particle2],1,1
+		if is_slepton(p.particle1) and is_slepton(p.particle2):
+			return &#39;ll&#39;,self.slepton_map[(p.particle1,p.particle2)],1,1,1
+		if is_gluino(p.particle1) and is_gluino(p.particle2):
+			return &#39;gg&#39;,1,1,1,1
+		if is_squark(p.particle1) and is_squark(p.particle2):
+			if p.particle1 &gt; 0 and p.particle2 &gt;0:
+				return &#39;ss&#39;,1,1,self.squark_map[abs(p.particle1)],self.squark_map[abs(p.particle2)]
+			elif (p.particle1 &gt; 0 and p.particle2 &lt;0 )or(p.particle1 &lt; 0 and p.particle2 &gt;0 ) :
+				s = p.particle1 if p.particle1 &gt; p.particle2 else p.particle2
+				b = p.particle2 if p.particle1 &gt; p.particle2 else p.particle1
+				return &#39;sb&#39;,1,1,self.squark_map[abs(s)],self.squark_map[abs(b)]
+		return &quot;UNKNOWN_PROCESS_OR_UNIMPLEMENTED_PROCESS&quot;</div>
+
+<div class="viewcode-block" id="ProspinoRunner._get_ps_input"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._get_ps_input">[docs]</a>	def _get_ps_input(self, p:Input) -&gt; dict:
+		d = {}
+		d[&quot;ps_inlo&quot;] = int(p.order)
+		d[&quot;ps_final_state_in&quot;],d[&quot;ps_ipart1_in&quot;],d[&quot;ps_ipart2_in&quot;],d[&quot;ps_isquark1_in&quot;],d[&quot;ps_isquark2_in&quot;] = self._get_ps_proc(p)
+		return d</div>
+			
+<div class="viewcode-block" id="ProspinoRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._check_input">[docs]</a>	def _check_input(self,p: Input)-&gt; bool:
+		&quot;&quot;&quot;Checks input parameter for compatibility with Prospino&quot;&quot;&quot;
+		if p.mu_f != 1. or  p.mu_r != 1.:
+			warnings.warn(&quot;Prospino2 does not support varying the scales manually.&quot;)
+			return False
+		return True</div>
+<div class="viewcode-block" id="ProspinoRunner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._is_valid">[docs]</a>	def _is_valid(self, file: str, p: Input, d) -&gt; bool:
+		return super()._is_valid(file, p, d)</div>
+<div class="viewcode-block" id="ProspinoRunner._parse_file"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._parse_file">[docs]</a>	def _parse_file(self, file: str) -&gt; Result:
+		ret=[]
+		with open(file) as output:
+			for line in output:
+				if line.startswith(&quot;nn&quot;): # TODO generalize
+					for s in line[2:].split():
+						ret.append(float(s))
+		return ProspinoResult(ufloat(ret[8],ret[8]*ret[9]),ufloat(ret[10],ret[10]*ret[11]) if ret[10]!= 0. else None,None)	</div>
+<div class="viewcode-block" id="ProspinoRunner._prepare"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._prepare">[docs]</a>	def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
+		rp = super()._prepare(p,**kwargs)
+		if not rp.skip:
+			d = p.__dict__
+			data = pkgutil.get_data(__name__, &quot;prospino_main.f90_template&quot;).decode(&#39;utf-8&#39;)
+			src = Template(data)
+			#compute dependent pieces for template
+			d[&quot;ps_inlo&quot;] = int(p.order)
+			for k,v in self._get_ps_input(p).items():
+				d[k]=v
+			result = src.substitute(d)
+			#open(rp.in_file, &quot;w&quot;).write(result)
+			open(rp.out_file, &quot;w&quot;).write(result + &quot;\n\n&quot;)
+			rdir = self.get_output_dir() + rp.name + &quot;.rdir&quot;
+			if os.path.exists(rdir) and os.path.isdir(rdir):
+				shutil.rmtree(rdir)
+			shutil.copytree(self.get_path(),rdir)
+			open(rdir  +&quot;/prospino_main.f90&quot;, &quot;w&quot;).write(result)
+			# compile
+			subprocess.Popen(&quot;cd &quot; + rdir + &quot; &amp;&amp; make&quot;, shell=True).wait()
+
+			open(rp.execute, &quot;w&quot;).write(&quot;#!/bin/sh\n&quot;+
+				&quot;H=$PWD &amp;&amp; cd {rdir}&amp;&amp; ./prospino_2.run &gt; tmp.out &amp;&amp; cd $H  &amp;&amp; cat {rdir}/tmp.out  &gt;&gt; {out} &amp;&amp; cat {rdir}/prospino.dat&gt;&gt; {out}&amp;&amp; rm -rf {rdir}&quot;.format(
+				rdir=rdir,out=rp.out_file))
+			st = os.stat(rp.execute)
+			os.chmod(rp.execute, st.st_mode | stat.S_IEXEC)
+
+
+			sname = d[&#39;slha&#39;]
+			shutil.copy(self.get_output_dir() + sname,rdir  +&quot;/prospino.in.les_houches&quot;)
+			with open(self.get_output_dir() + sname, &#39;r&#39;) as f:
+				open(rp.out_file, &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
+		return rp</div></div>
+
+
+
+<div class="viewcode-block" id="ProspinoResult"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoResult">[docs]</a>class ProspinoResult(Result):
+    &quot;&quot;&quot;
+    Prospino Result Data.
+    &quot;&quot;&quot;</div>
+
+# Legacy 
+<div class="viewcode-block" id="default_prospino_runner"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.default_prospino_runner">[docs]</a>default_prospino_runner = ProspinoRunner(&quot;~/git/Prospino2/&quot;)</div>
+&quot;&quot;&quot;Default Prospino Runner to provide backward compatibility&quot;&quot;&quot;
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.run">[docs]</a>run = default_prospino_runner.run</div>
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.set_path">[docs]</a>set_path = default_prospino_runner.set_path</div>
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.get_path">[docs]</a>get_path = default_prospino_runner.get_path</div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
