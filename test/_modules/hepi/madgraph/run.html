@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-26-ge9a599f
+                0.1.4-27-g836a0ea
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -94,6 +94,7 @@ import shutil
 from typing import List
 import subprocess
 from string import Template
+from hepi.input import Order
 from hepi.run import RunParam
 import numpy as np
 import pkgutil
@@ -215,7 +216,8 @@ import hashlib
                               &#39;bdir&#39;: d[&quot;bdir&quot;],
                               &#39;run&#39;: get_output_dir() + name + &quot;.dat&quot;,
                               &#39;slha&#39;: get_output_dir() + sname,
-                              &#39;out&#39;: get_output_dir()+name + &quot;.out&quot;}, skip,madstr))
+                              &#39;out&#39;: get_output_dir()+name + &quot;.out&quot;,
+                              &#39;order&#39; : p.order}, skip,madstr))
 
     return ret</div>
 
@@ -223,9 +225,10 @@ import hashlib
 <div class="viewcode-block" id="_run"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph._run">[docs]</a>def _run(rps: List[MadGraphRunParams],para=True):
     # TODO clean up on exit emergency
     global madgraph_path
+    lo = &quot;&amp;&amp; nice -n 5 {dir}/bin/calculate_xsect LO -f &gt;&gt; {out} &quot; if rps[0].dic[&quot;order&quot;] == Order.NLO else &quot;&quot;
     template =  \
         &#39;rm -rf {dir} &amp;&amp; cp -r &#39; + rps[0].dic[&quot;bdir&quot;] + \
-        &#39; {dir}  &amp;&amp; cp {slha} {dir}/Cards/param_card.dat &amp;&amp; cp {run} {dir}/Cards/run_card.dat &amp;&amp; echo &quot;nb_core = 1&quot; &gt;&gt; {dir}/Cards/amcatnlo_configuration.txt &amp;&amp; nice -n 5 {dir}/bin/calculate_xsect -f &gt;&gt; {out} &amp;&amp; rm -rf {dir}&#39;
+        &#39; {dir}  &amp;&amp; cp {slha} {dir}/Cards/param_card.dat &amp;&amp; cp {run} {dir}/Cards/run_card.dat &amp;&amp; echo &quot;nb_core = 1&quot; &gt;&gt; {dir}/Cards/amcatnlo_configuration.txt &#39; + lo+ &#39;&amp;&amp; nice -n 5 {dir}/bin/calculate_xsect -f &gt;&gt; {out}  &amp;&amp; rm -rf {dir}&#39;
     print(rps[0].dic[&quot;out&quot;])
     if not rps[0].skip:
         mgcom = &#39;bin/mg5_aMC&#39;

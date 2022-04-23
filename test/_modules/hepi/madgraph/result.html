@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-26-ge9a599f
+                0.1.4-27-g836a0ea
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -142,16 +142,20 @@ from uncertainties import ufloat_fromstr
 
     &quot;&quot;&quot;
     # TODO generalize units like RS
-    lo_pattern = re.compile(r&#39;^\s*Total cross section:\s*(.*) pb&#39;)
+    lo_pattern = re.compile(r&#39;^\s*Total cross section:\s(\S+.*) pb&#39;)
 
     lo_result = None
+    nlo_result = None
     with open(file) as output:
         for line in output:
             tmp = lo_pattern.search(line)
             if tmp is not None:
-                lo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
+                if lo_result is None:
+                    lo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
+                elif nlo_result is None:
+                    nlo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
 
-    return MadgraphResult(lo_result, lo_result)</div>
+    return MadgraphResult(lo_result, nlo_result)</div>
 </pre></div>
 
            </div>

@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-26-ge9a599f
+                0.1.4-27-g836a0ea
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -182,6 +182,9 @@ from uncertainties import ufloat
 		if p.mu_f != 1. or  p.mu_r != 1.:
 			warnings.warn(&quot;Prospino2 does not support varying the scales manually.&quot;)
 			return False
+		if p.pdf_lo != &quot;cteq6l1&quot;  or  p.pdf_nlo != &quot;cteq66&quot;:
+			warnings.warn(&quot;Prospino2 does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).&quot;)
+			return False
 		return True</div>
 <div class="viewcode-block" id="ProspinoRunner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._is_valid">[docs]</a>	def _is_valid(self, file: str, p: Input, d) -&gt; bool:
 		return super()._is_valid(file, p, d)</div>
@@ -212,10 +215,10 @@ from uncertainties import ufloat
 			shutil.copytree(self.get_path(),rdir)
 			open(rdir  +&quot;/prospino_main.f90&quot;, &quot;w&quot;).write(result)
 			# compile
-			subprocess.Popen(&quot;cd &quot; + rdir + &quot; &amp;&amp; make&quot;, shell=True).wait()
+			subprocess.Popen(&quot;cd &quot; + rdir + &quot; &amp;&amp; make&quot;, shell=True,stdout=subprocess.DEVNULL).wait()
 
 			open(rp.execute, &quot;w&quot;).write(&quot;#!/bin/sh\n&quot;+
-				&quot;H=$PWD &amp;&amp; cd {rdir}&amp;&amp; ./prospino_2.run &gt; tmp.out &amp;&amp; cd $H  &amp;&amp; cat {rdir}/tmp.out  &gt;&gt; {out} &amp;&amp; cat {rdir}/prospino.dat&gt;&gt; {out}&amp;&amp; rm -rf {rdir}&quot;.format(
+				&quot;H=$PWD &amp;&amp; cd {rdir}&amp;&amp; ./prospino_2.run &gt; tmp.out &amp;&amp; cd $H  &amp;&amp; cat {rdir}/tmp.out  &gt;&gt; {out} &amp;&amp; cat {rdir}/prospino.dat&gt;&gt; {out} &amp;&amp; rm -rf {rdir}&quot;.format(
 				rdir=rdir,out=rp.out_file))
 			st = os.stat(rp.execute)
 			os.chmod(rp.execute, st.st_mode | stat.S_IEXEC)
