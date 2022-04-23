@@ -51,13 +51,17 @@ def parse_single(file) -> MadgraphResult:
 
     """
     # TODO generalize units like RS
-    lo_pattern = re.compile(r'^\s*Total cross section:\s*(.*) pb')
+    lo_pattern = re.compile(r'^\s*Total cross section:\s(\S+.*) pb')
 
     lo_result = None
+    nlo_result = None
     with open(file) as output:
         for line in output:
             tmp = lo_pattern.search(line)
             if tmp is not None:
-                lo_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
+                if lo_result is None:
+                    lo_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
+                elif nlo_result is None:
+                    nlo_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
 
-    return MadgraphResult(lo_result, lo_result)
+    return MadgraphResult(lo_result, nlo_result)

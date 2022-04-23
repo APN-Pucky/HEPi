@@ -91,6 +91,9 @@ class ProspinoRunner(Runner):
 		if p.mu_f != 1. or  p.mu_r != 1.:
 			warnings.warn("Prospino2 does not support varying the scales manually.")
 			return False
+		if p.pdf_lo != "cteq6l1"  or  p.pdf_nlo != "cteq66":
+			warnings.warn("Prospino2 does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).")
+			return False
 		return True
 	def _is_valid(self, file: str, p: Input, d) -> bool:
 		return super()._is_valid(file, p, d)
@@ -121,10 +124,10 @@ class ProspinoRunner(Runner):
 			shutil.copytree(self.get_path(),rdir)
 			open(rdir  +"/prospino_main.f90", "w").write(result)
 			# compile
-			subprocess.Popen("cd " + rdir + " && make", shell=True).wait()
+			subprocess.Popen("cd " + rdir + " && make", shell=True,stdout=subprocess.DEVNULL).wait()
 
 			open(rp.execute, "w").write("#!/bin/sh\n"+
-				"H=$PWD && cd {rdir}&& ./prospino_2.run > tmp.out && cd $H  && cat {rdir}/tmp.out  >> {out} && cat {rdir}/prospino.dat>> {out}&& rm -rf {rdir}".format(
+				"H=$PWD && cd {rdir}&& ./prospino_2.run > tmp.out && cd $H  && cat {rdir}/tmp.out  >> {out} && cat {rdir}/prospino.dat>> {out} && rm -rf {rdir}".format(
 				rdir=rdir,out=rp.out_file))
 			st = os.stat(rp.execute)
 			os.chmod(rp.execute, st.st_mode | stat.S_IEXEC)

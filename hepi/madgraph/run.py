@@ -3,6 +3,7 @@ import shutil
 from typing import List
 import subprocess
 from string import Template
+from hepi.input import Order
 from hepi.run import RunParam
 import numpy as np
 import pkgutil
@@ -124,7 +125,8 @@ def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[MadG
                               'bdir': d["bdir"],
                               'run': get_output_dir() + name + ".dat",
                               'slha': get_output_dir() + sname,
-                              'out': get_output_dir()+name + ".out"}, skip,madstr))
+                              'out': get_output_dir()+name + ".out",
+                              'order' : p.order}, skip,madstr))
 
     return ret
 
@@ -132,9 +134,10 @@ def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[MadG
 def _run(rps: List[MadGraphRunParams],para=True):
     # TODO clean up on exit emergency
     global madgraph_path
+    lo = "&& nice -n 5 {dir}/bin/calculate_xsect LO -f >> {out} " if rps[0].dic["order"] == Order.NLO else ""
     template =  \
         'rm -rf {dir} && cp -r ' + rps[0].dic["bdir"] + \
-        ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && echo "nb_core = 1" >> {dir}/Cards/amcatnlo_configuration.txt && nice -n 5 {dir}/bin/calculate_xsect -f >> {out} && rm -rf {dir}'
+        ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && echo "nb_core = 1" >> {dir}/Cards/amcatnlo_configuration.txt ' + lo+ '&& nice -n 5 {dir}/bin/calculate_xsect -f >> {out}  && rm -rf {dir}'
     print(rps[0].dic["out"])
     if not rps[0].skip:
         mgcom = 'bin/mg5_aMC'
