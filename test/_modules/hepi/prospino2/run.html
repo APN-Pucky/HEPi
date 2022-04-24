@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-27-g836a0ea
+                0.1.4-28-g8632ce6
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -192,7 +192,7 @@ from uncertainties import ufloat
 		ret=[]
 		with open(file) as output:
 			for line in output:
-				if line.startswith(&quot;nn&quot;): # TODO generalize
+				if line.startswith(&quot;nn&quot;) or line.startswith(&quot;ng&quot;) or line.startswith(&quot;ns&quot;) or line.startswith(&quot;sg&quot;) or line.startswith(&quot;ll&quot;) or line.startswith(&quot;gg&quot;) or line.startswith(&quot;ss&quot;) or line.startswith(&quot;sb&quot;): # TODO generalize
 					for s in line[2:].split():
 						ret.append(float(s))
 		return ProspinoResult(ufloat(ret[8],ret[8]*ret[9]),ufloat(ret[10],ret[10]*ret[11]) if ret[10]!= 0. else None,None)	</div>
