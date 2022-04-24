@@ -15,6 +15,12 @@ from smpl import debug
 from uncertainties import ufloat
 
 
+
+class ProspinoResult(Result):
+    """
+    Prospino Result Data.
+    """
+
 class ProspinoRunner(Runner):
 	# TODO add leptowaurk, stop and sbottom cases
 	weakino_map = {
@@ -140,11 +146,6 @@ class ProspinoRunner(Runner):
 		return rp
 
 
-
-class ProspinoResult(Result):
-    """
-    Prospino Result Data.
-    """
 
 # Legacy 
 default_prospino_runner = ProspinoRunner("~/git/Prospino2/")
