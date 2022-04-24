@@ -101,7 +101,7 @@ class ProspinoRunner(Runner):
 		ret=[]
 		with open(file) as output:
 			for line in output:
-				if line.startswith("nn"): # TODO generalize
+				if line.startswith("nn") or line.startswith("ng") or line.startswith("ns") or line.startswith("sg") or line.startswith("ll") or line.startswith("gg") or line.startswith("ss") or line.startswith("sb"): # TODO generalize
 					for s in line[2:].split():
 						ret.append(float(s))
 		return ProspinoResult(ufloat(ret[8],ret[8]*ret[9]),ufloat(ret[10],ret[10]*ret[11]) if ret[10]!= 0. else None,None)	
