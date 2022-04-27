@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hepi.prospino2.result &mdash; HEPi  documentation</title>
+  <title>hepi.nllfast.result &mdash; HEPi  documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-28-g8632ce6
+                0.1.4-30-g2875364
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -79,7 +79,7 @@
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../../index.html">Module code</a> &raquo;</li>
           <li><a href="../../hepi.html">hepi</a> &raquo;</li>
-      <li>hepi.prospino2.result</li>
+      <li>hepi.nllfast.result</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -88,14 +88,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for hepi.prospino2.result</h1><div class="highlight"><pre>
+  <h1>Source code for hepi.nllfast.result</h1><div class="highlight"><pre>
 <span></span>from hepi.results import Result
 
 
-<div class="viewcode-block" id="ProspinoResult"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/result/index.html#hepi.prospino2.result.ProspinoResult">[docs]</a>class ProspinoResult(Result):
+<div class="viewcode-block" id="ProspinoResult"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/result/index.html#hepi.nllfast.result.ProspinoResult">[docs]</a>class ProspinoResult(Result):
     &quot;&quot;&quot;
-    Prospino Result Data.
-    &quot;&quot;&quot;</div>
+    (N)NLL-fast Result Data.
+    &quot;&quot;&quot;
+    def __init__(self,lo,nlo,nlo_plus_nll,scale_err_up,scale_err_down,pdf_err_up,pdf_err_down):
+      Result.__init__(self, lo, nlo, nlo_plus_nll)
+      self.scale_err_up=scale_err_up
+      self.scale_err_down=scale_err_down
+      self.pdf_err_up=pdf_err_up
+      self.pdf_err_down=pdf_err_down</div>
 </pre></div>
 
            </div>

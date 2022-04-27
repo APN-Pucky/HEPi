@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hepi.prospino2.run &mdash; HEPi  documentation</title>
+  <title>hepi.nllfast.run &mdash; HEPi  documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -79,7 +79,7 @@
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../../index.html">Module code</a> &raquo;</li>
           <li><a href="../../hepi.html">hepi</a> &raquo;</li>
-      <li>hepi.prospino2.run</li>
+      <li>hepi.nllfast.run</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -88,7 +88,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for hepi.prospino2.run</h1><div class="highlight"><pre>
+  <h1>Source code for hepi.nllfast.run</h1><div class="highlight"><pre>
 <span></span>import os
 import pkgutil
 import re
@@ -103,98 +103,55 @@ from hepi.results import Result
 from hepi.run import RunParam, Runner
 from hepi.util import namehash
 from smpl import debug
+import pyslha
 from uncertainties import ufloat
 
 
 
-<div class="viewcode-block" id="ProspinoResult"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoResult">[docs]</a>class ProspinoResult(Result):
-    &quot;&quot;&quot;
-    Prospino Result Data.
-    &quot;&quot;&quot;</div>
+<div class="viewcode-block" id="NLLfastRunner"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.NLLfastRunner">[docs]</a>class NLLfastRunner(Runner):
+	#TODO treat stop sbot separately
 
-<div class="viewcode-block" id="ProspinoRunner"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner">[docs]</a>class ProspinoRunner(Runner):
-	# TODO add leptowaurk, stop and sbottom cases
-<div class="viewcode-block" id="ProspinoRunner.weakino_map"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner.weakino_map">[docs]</a>	weakino_map = {
-		1000022 : 1,
-		1000023 : 2,
-		1000025 : 3,
-		1000035 : 4,
-		1000024 : 5,
-		1000037 : 6,
-		-1000024 : 7,
-		-1000037 : 8,
-	}</div>
-<div class="viewcode-block" id="ProspinoRunner.squark_map"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner.squark_map">[docs]</a>	squark_map = {
-		1000005 : -5,
-		1000004 : -4,
-		1000004 : -4,
-		1000003 : -3,
-		1000001 : -2,
-		1000002 : -1,
-		2000002 : 1,
-		2000001 : 2,
-		2000003 : 3,
-		2000004 : 4,
-		2000005 : 5,
-	}</div>
-<div class="viewcode-block" id="ProspinoRunner.slepton_map"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner.slepton_map">[docs]</a>	slepton_map = {
-		( 1000011, 1000011) :  1,
-		( 2000011, 2000011) :  2,
-		( 1000012, 1000012) :  3,
-		(-1000011, 1000012) :  4,
-		( 1000011, 1000012) :  5,
-		( 1000015, 1000015) :  6,
-		( 2000015, 2000015) :  7,
-		( 1000015, 2000015) :  8,
-		( 1000016, 1000016) :  9,
-		(-1000015, 1000016) : 10,
-		( 1000015, 1000016) : 11,
-		(-2000015, 1000016) : 12,
-		( 2000015, 1000016) : 13,
-	}</div>
-
-<div class="viewcode-block" id="ProspinoRunner._get_ps_proc"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._get_ps_proc">[docs]</a>	def _get_ps_proc(self,p:Input):
-		if p.has_squark() and p.has_weakino():
-			sq = p.particle1 if is_squark(p.particle1) else p.particle2
-			weakino = p.particle2 if is_squark(p.particle1) else p.particle1
-			return &#39;ns&#39;,self.weakino_map[weakino],1,self.squark_map[abs(sq)],1
-		if p.has_gluino() and p.has_weakino():
-			return &#39;ng&#39;,self.weakino_map[p.particle1 if is_gluino(p.particle2) else p.particle2],1,1,1
+<div class="viewcode-block" id="NLLfastRunner._get_nf_proc"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.NLLfastRunner._get_nf_proc">[docs]</a>	def _get_nf_proc(self,p:Input):
+		d = pyslha.read(self.get_output_dir() + p.slha)
+		mg = d.blocks[&quot;MASS&quot;][1000021]
+		ms = 0.
+		for r in range(1000001,1000007):
+			ms += d.blocks[&quot;MASS&quot;][r]
+		for r in range(2000001,2000007):
+			ms += d.blocks[&quot;MASS&quot;][r]
+		ms /= 12
 		if p.has_gluino() and p.has_squark():
-			return &#39;sg&#39;,1,1,self.squark_map[abs(p.particle1 if is_gluino(p.particle2) else p.particle2)],1
-		if is_weakino(p.particle1) and is_weakino(p.particle2):
-			return &#39;nn&#39;,self.weakino_map[p.particle1],self.weakino_map[p.particle2],1,1
-		if is_slepton(p.particle1) and is_slepton(p.particle2):
-			return &#39;ll&#39;,self.slepton_map[(p.particle1,p.particle2)],1,1,1
+			return &#39;sg&#39;,&#39;cteq&#39;,ms,mg
 		if is_gluino(p.particle1) and is_gluino(p.particle2):
-			return &#39;gg&#39;,1,1,1,1
+			return &#39;gg&#39;,&#39;cteq&#39;,ms,mg
 		if is_squark(p.particle1) and is_squark(p.particle2):
 			if p.particle1 &gt; 0 and p.particle2 &gt;0:
-				return &#39;ss&#39;,1,1,self.squark_map[abs(p.particle1)],self.squark_map[abs(p.particle2)]
+				return &#39;ss&#39;,&#39;cteq&#39;,ms,mg
 			elif (p.particle1 &gt; 0 and p.particle2 &lt;0 )or(p.particle1 &lt; 0 and p.particle2 &gt;0 ) :
 				s = p.particle1 if p.particle1 &gt; p.particle2 else p.particle2
 				b = p.particle2 if p.particle1 &gt; p.particle2 else p.particle1
-				return &#39;sb&#39;,1,1,self.squark_map[abs(s)],self.squark_map[abs(b)]
+				return &#39;sb&#39;,&#39;cteq&#39;,ms,mg
 		return &quot;UNKNOWN_PROCESS_OR_UNIMPLEMENTED_PROCESS&quot;</div>
-
-<div class="viewcode-block" id="ProspinoRunner._get_ps_input"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._get_ps_input">[docs]</a>	def _get_ps_input(self, p:Input) -&gt; dict:
+<div class="viewcode-block" id="NLLfastRunner._get_nf_input"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.NLLfastRunner._get_nf_input">[docs]</a>	def _get_nf_input(self, p:Input) -&gt; dict:
+		# TODO return masses of squark and gluino
 		d = {}
-		d[&quot;ps_inlo&quot;] = int(p.order)
-		d[&quot;ps_final_state_in&quot;],d[&quot;ps_ipart1_in&quot;],d[&quot;ps_ipart2_in&quot;],d[&quot;ps_isquark1_in&quot;],d[&quot;ps_isquark2_in&quot;] = self._get_ps_proc(p)
+		#d[&quot;ps_inlo&quot;] = int(p.order)
+		d[&quot;nf_final_state_in&quot;],d[&quot;nf_pdf&quot;],d[&quot;nf_squark_mass&quot;],d[&quot;nf_gluino_mass&quot;] = self._get_ps_proc(p)
 		return d</div>
-			
-<div class="viewcode-block" id="ProspinoRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._check_input">[docs]</a>	def _check_input(self,p: Input)-&gt; bool:
+<div class="viewcode-block" id="NLLfastRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.NLLfastRunner._check_input">[docs]</a>	def _check_input(self,p: Input)-&gt; bool:
 		&quot;&quot;&quot;Checks input parameter for compatibility with Prospino&quot;&quot;&quot;
 		if p.mu_f != 1. or  p.mu_r != 1.:
-			warnings.warn(&quot;Prospino2 does not support varying the scales manually.&quot;)
+			warnings.warn(&quot;NLL-fast does not support varying the scales manually.&quot;)
 			return False
 		if p.pdf_lo != &quot;cteq6l1&quot;  or  p.pdf_nlo != &quot;cteq66&quot;:
-			warnings.warn(&quot;Prospino2 does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).&quot;)
+			warnings.warn(&quot;NLL-fast does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).&quot;)
 			return False
 		return True</div>
-<div class="viewcode-block" id="ProspinoRunner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._is_valid">[docs]</a>	def _is_valid(self, file: str, p: Input, d) -&gt; bool:
+<div class="viewcode-block" id="NLLfastRunner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.NLLfastRunner._is_valid">[docs]</a>	def _is_valid(self, file: str, p: Input, d) -&gt; bool:
 		return super()._is_valid(file, p, d)</div>
-<div class="viewcode-block" id="ProspinoRunner._parse_file"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._parse_file">[docs]</a>	def _parse_file(self, file: str) -&gt; Result:
+<div class="viewcode-block" id="NLLfastRunner._parse_file"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.NLLfastRunner._parse_file">[docs]</a>	def _parse_file(self, file: str) -&gt; Result:
+		#TODO parse result
+		pass
 		ret=[]
 		with open(file) as output:
 			for line in output:
@@ -202,36 +159,34 @@ from uncertainties import ufloat
 					for s in line[2:].split():
 						ret.append(float(s))
 		return ProspinoResult(ufloat(ret[8],ret[8]*ret[9]),ufloat(ret[10],ret[10]*ret[11]) if ret[10]!= 0. else None,None)	</div>
-<div class="viewcode-block" id="ProspinoRunner._prepare"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._prepare">[docs]</a>	def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
+<div class="viewcode-block" id="NLLfastRunner._prepare"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.NLLfastRunner._prepare">[docs]</a>	def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
 		rp = super()._prepare(p,**kwargs)
 		if not rp.skip:
 			d = p.__dict__
 			data = pkgutil.get_data(__name__, &quot;prospino_main.f90_template&quot;).decode(&#39;utf-8&#39;)
 			src = Template(data)
 			#compute dependent pieces for template
-			d[&quot;ps_inlo&quot;] = int(p.order)
-			for k,v in self._get_ps_input(p).items():
+			for k,v in self._get_nf_input(p).items():
 				d[k]=v
 			result = src.substitute(d)
 			#open(rp.in_file, &quot;w&quot;).write(result)
 			open(rp.out_file, &quot;w&quot;).write(result + &quot;\n\n&quot;)
-			rdir = self.get_output_dir() + rp.name + &quot;.rdir&quot;
-			if os.path.exists(rdir) and os.path.isdir(rdir):
-				shutil.rmtree(rdir)
-			shutil.copytree(self.get_path(),rdir)
-			open(rdir  +&quot;/prospino_main.f90&quot;, &quot;w&quot;).write(result)
-			# compile
-			subprocess.Popen(&quot;cd &quot; + rdir + &quot; &amp;&amp; make&quot;, shell=True,stdout=subprocess.DEVNULL).wait()
+			#rdir = self.get_output_dir() + rp.name + &quot;.rdir&quot;
+			#if os.path.exists(rdir) and os.path.isdir(rdir):
+			#	shutil.rmtree(rdir)
+			#shutil.copytree(self.get_path(),rdir)
+			#open(rdir  +&quot;/prospino_main.f90&quot;, &quot;w&quot;).write(result)
+			## compile
+			#subprocess.Popen(&quot;cd &quot; + rdir + &quot; &amp;&amp; make&quot;, shell=True,stdout=subprocess.DEVNULL).wait()
 
 			open(rp.execute, &quot;w&quot;).write(&quot;#!/bin/sh\n&quot;+
-				&quot;H=$PWD &amp;&amp; cd {rdir}&amp;&amp; ./prospino_2.run &gt; tmp.out &amp;&amp; cd $H  &amp;&amp; cat {rdir}/tmp.out  &gt;&gt; {out} &amp;&amp; cat {rdir}/prospino.dat&gt;&gt; {out} &amp;&amp; rm -rf {rdir}&quot;.format(
-				rdir=rdir,out=rp.out_file))
+				&quot;{path}/nll-fast {proc} {pdf} {sq} {gl}&gt; {out}&quot;.format(
+				path=self.get_path(),out=rp.out_file , proc = d[&quot;nf_final_state_in&quot;], sq = d[&quot;nf_squark_mass&quot;], gl = d[&quot;nf_gluino_mass&quot;], pdf = d[&quot;nf_pdf&quot;]))
 			st = os.stat(rp.execute)
 			os.chmod(rp.execute, st.st_mode | stat.S_IEXEC)
 
 
 			sname = d[&#39;slha&#39;]
-			shutil.copy(self.get_output_dir() + sname,rdir  +&quot;/prospino.in.les_houches&quot;)
 			with open(self.get_output_dir() + sname, &#39;r&#39;) as f:
 				open(rp.out_file, &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
 		return rp</div></div>
@@ -239,11 +194,11 @@ from uncertainties import ufloat
 
 
 # Legacy 
-<div class="viewcode-block" id="default_prospino_runner"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.default_prospino_runner">[docs]</a>default_prospino_runner = ProspinoRunner(&quot;~/git/Prospino2/&quot;)</div>
+<div class="viewcode-block" id="default_nllfast_runner"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.default_nllfast_runner">[docs]</a>default_nllfast_runner = NLLfastRunner(&quot;~/git/nll-fast/&quot;)</div>
 &quot;&quot;&quot;Default Prospino Runner to provide backward compatibility&quot;&quot;&quot;
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.run">[docs]</a>run = default_prospino_runner.run</div>
-<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.set_path">[docs]</a>set_path = default_prospino_runner.set_path</div>
-<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.get_path">[docs]</a>get_path = default_prospino_runner.get_path</div>
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.run">[docs]</a>run = default_nllfast_runner.run</div>
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.set_path">[docs]</a>set_path = default_nllfast_runner.set_path</div>
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/nllfast/run/index.html#hepi.nllfast.get_path">[docs]</a>get_path = default_nllfast_runner.get_path</div>
 </pre></div>
 
            </div>

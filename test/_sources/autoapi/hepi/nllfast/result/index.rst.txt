@@ -1,7 +1,7 @@
-:py:mod:`hepi.prospino2.result`
-===============================
+:py:mod:`hepi.nllfast.result`
+=============================
 
-.. py:module:: hepi.prospino2.result
+.. py:module:: hepi.nllfast.result
 
 
 Module Contents
@@ -12,16 +12,16 @@ Classes
 
 .. autoapisummary::
 
-   hepi.prospino2.result.ProspinoResult
+   hepi.nllfast.result.ProspinoResult
 
 
 
 
-.. py:class:: ProspinoResult(lo=None, nlo=None, nlo_plus_nll=None)
+.. py:class:: ProspinoResult(lo, nlo, nlo_plus_nll, scale_err_up, scale_err_down, pdf_err_up, pdf_err_down)
 
    Bases: :py:obj:`hepi.results.Result`
 
-   Prospino Result Data.
+   (N)NLL-fast Result Data.
 
    Sets given and computes dependent ``Attributes``.
 

@@ -1,7 +1,7 @@
-:py:mod:`hepi.prospino2.run`
-============================
+:py:mod:`hepi.nllfast.run`
+==========================
 
-.. py:module:: hepi.prospino2.run
+.. py:module:: hepi.nllfast.run
 
 
 Module Contents
@@ -12,8 +12,7 @@ Classes
 
 .. autoapisummary::
 
-   hepi.prospino2.run.ProspinoResult
-   hepi.prospino2.run.ProspinoRunner
+   hepi.nllfast.run.NLLfastRunner
 
 
 
@@ -23,51 +22,20 @@ Attributes
 
 .. autoapisummary::
 
-   hepi.prospino2.run.default_prospino_runner
-   hepi.prospino2.run.run
-   hepi.prospino2.run.set_path
-   hepi.prospino2.run.get_path
+   hepi.nllfast.run.default_nllfast_runner
+   hepi.nllfast.run.run
+   hepi.nllfast.run.set_path
+   hepi.nllfast.run.get_path
 
 
-.. py:class:: ProspinoResult(lo=None, nlo=None, nlo_plus_nll=None)
-
-   Bases: :py:obj:`hepi.results.Result`
-
-   Prospino Result Data.
-
-   Sets given and computes dependent ``Attributes``.
-
-   :param lo: corresponds to :attr:`LO`.
-   :type lo: :obj:`double`
-   :param nlo: corresponds to :attr:`NLO`.
-   :type nlo: :obj:`double`
-   :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
-   :type nlo_plus_nll: :obj:`double`
-
-
-.. py:class:: ProspinoRunner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
+.. py:class:: NLLfastRunner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
 
    Bases: :py:obj:`hepi.run.Runner`
 
-   .. py:attribute:: weakino_map
-      
-
-      
-
-   .. py:attribute:: squark_map
-      
-
-      
-
-   .. py:attribute:: slepton_map
-      
-
-      
-
-   .. py:method:: _get_ps_proc(self, p: hepi.input.Input)
+   .. py:method:: _get_nf_proc(self, p: hepi.input.Input)
 
 
-   .. py:method:: _get_ps_input(self, p: hepi.input.Input) -> dict
+   .. py:method:: _get_nf_input(self, p: hepi.input.Input) -> dict
 
 
    .. py:method:: _check_input(self, p: hepi.input.Input) -> bool
@@ -105,7 +73,7 @@ Attributes
 
 
 
-.. py:data:: default_prospino_runner
+.. py:data:: default_nllfast_runner
    
 
    Default Prospino Runner to provide backward compatibility
