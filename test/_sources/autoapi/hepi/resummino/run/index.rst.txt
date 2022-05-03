@@ -80,7 +80,7 @@ Attributes
    :vartype out_path: str
 
 
-.. py:function:: run(params: List[hepi.Input], noskip=False, bar=False, no_parse=False, para=True, skip=True, parse=True) -> dict
+.. py:function:: run(params: List[hepi.Input], noskip=False, bar=False, no_parse=False, para=True, skip=True, parse=True, run=True) -> dict
 
    Run the passed list of parameters.
 
@@ -95,6 +95,8 @@ Attributes
    :type no_parse: bool
    :param para: Run jobs in parallel.
    :type para: bool
+   :param run: Actually start/queue resummino.
+   :type run: bool
 
    :returns:
 

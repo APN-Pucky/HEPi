@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-33-g0a830e2
+                0.1.4-35-g638afe0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -159,7 +159,7 @@ from smpl import debug
         self.out_path = out_path</div>
 
 
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.run">[docs]</a>def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,skip=True,parse=True) -&gt; dict:
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.run">[docs]</a>def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,skip=True,parse=True,run=True) -&gt; dict:
     &quot;&quot;&quot;
     Run the passed list of parameters.
 
@@ -170,6 +170,7 @@ from smpl import debug
         no_parse (bool): Skip parsing the results. 
             This is the prefered cluster mode, as this function only queues the job.
         para (bool): Run jobs in parallel.
+        run (bool): Actually start/queue resummino.
 
     Returns:
         :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
@@ -182,7 +183,8 @@ from smpl import debug
         no_parse= True
     print(&quot;Running: &quot; + str(len(params))  +&quot; jobs&quot; )
     rps = _queue(params, noskip)
-    _run(rps, bar, no_parse,para)
+    if run:
+        _run(rps, bar, no_parse,para)
     if not no_parse:
         outs = LD2DL(rps)[&quot;out_path&quot;]
         results = _parse(outs)
