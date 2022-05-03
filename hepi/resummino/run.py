@@ -68,7 +68,7 @@ class ResumminoRunParam(RunParam):
         self.out_path = out_path
 
 
-def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,skip=True,parse=True) -> dict:
+def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,skip=True,parse=True,run=True) -> dict:
     """
     Run the passed list of parameters.
 
@@ -79,6 +79,7 @@ def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,s
         no_parse (bool): Skip parsing the results. 
             This is the prefered cluster mode, as this function only queues the job.
         para (bool): Run jobs in parallel.
+        run (bool): Actually start/queue resummino.
 
     Returns:
         :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
@@ -91,7 +92,8 @@ def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,s
         no_parse= True
     print("Running: " + str(len(params))  +" jobs" )
     rps = _queue(params, noskip)
-    _run(rps, bar, no_parse,para)
+    if run:
+        _run(rps, bar, no_parse,para)
     if not no_parse:
         outs = LD2DL(rps)["out_path"]
         results = _parse(outs)
