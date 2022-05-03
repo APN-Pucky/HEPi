@@ -1,2 +1,0 @@
-#!/bin/sh
-~/git/resummino/build/bin/resummino ./output/4c777ee170c0b52a2bf259c2f5456f3995a1fbfcbef7ec8a6c02561266411afb.in --nll >> ./output/4c777ee170c0b52a2bf259c2f5456f3995a1fbfcbef7ec8a6c02561266411afb.out
