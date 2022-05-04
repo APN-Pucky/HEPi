@@ -140,8 +140,7 @@ def lhapdf_name_to_id(name : str) -> int:
         int: id of the LHAPDF set.
 
     Examples:
-        >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
-        30101175
+        >>> lhapdf_name_to_id("CT14lo")
+        13200
     """
     return lhapdf.getPDFSet(name).lhapdfID
-    return lhapdf_name_id[name]
