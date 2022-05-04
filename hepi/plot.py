@@ -257,7 +257,7 @@ def err_plt(axes,x,y,label=None,error=False):
         l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
         return l[0]
 
-def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit="pb",**kwargs):
+def scale_plot(dict_list, vl, seven_point_band=False,cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit="pb", yaxis=None,**kwargs):
     global fig, axs,lines,labels
     cycle_safe = mpl.rcParams['axes.prop_cycle'] 
     if plehn_color:
@@ -347,7 +347,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
             labels.append("$\\Delta \\sigma_{\\mathrm{" + v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\<space>") + "} }$")
 
 
-    axs[0].set_ylabel("$\sigma$ ["+unit+"]")
+    axs[0].set_ylabel("$\sigma$ ["+unit+"]" if yaxis is None else yaxis)
 
     axs[0].set_xscale("log")
     axs[0].set_xlim(np.min(mf), np.max(mf))
@@ -395,7 +395,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
 
     
 
-def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb"):
+def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb",yaxis=None):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
@@ -426,7 +426,7 @@ def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb")
         axs[1].plot([], [], ' ', label="$\mu_F=\mu_0$, $\mu_R=\mu$")
         axs[2].plot([], [], ' ', label="$\mu_R=\mu_0$, $\mu_F=\mu$")
 
-    axs[1].set_ylabel("$\sigma$ ["+unit+"]")
+    axs[1].set_ylabel("$\sigma$ ["+unit+"]" if yaxis is None else yaxis)
 
     axs[0].set_xscale("log")
     #axs[0].set_xlim(np.min(mf), np.max(mf))
