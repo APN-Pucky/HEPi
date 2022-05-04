@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hepi.cluster &mdash; HEPi  documentation</title>
+  <title>hepi.output &mdash; HEPi  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
@@ -80,7 +80,7 @@
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
           <li><a href="../hepi.html">hepi</a> &raquo;</li>
-      <li>hepi.cluster</li>
+      <li>hepi.output</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -89,50 +89,74 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for hepi.cluster</h1><div class="highlight"><pre>
-<span></span>import hepi
+  <h1>Source code for hepi.output</h1><div class="highlight"><pre>
+<span></span>from scipy import interpolate
+
+from sklearn.metrics import auc
+import matplotlib as mpl
+from smpl import plot as splot
 import smpl
-import hepi.resummino as rs
-import hepi.input as input
-#import hepi
 import numpy as np
+import uncertainties as unc
+from scipy.interpolate import make_interp_spline, BSpline
+
+from uncertainties import unumpy
 import matplotlib.pyplot as plt
-import subprocess
-import time
-import os
-import sys
-from smpl import plot
 
-<div class="viewcode-block" id="user"><a class="viewcode-back" href="../../autoapi/hepi/cluster/index.html#hepi.cluster.user">[docs]</a>user = &quot;a_neuw01&quot;</div>
-plt.rcParams.update({&#39;font.size&#39;: 15})
-plt.rc(&#39;legend&#39;, fontsize=12)
+from particle import PDGID
+import pyslha
+from particle import Particle
+from particle.converters.bimap import DirectionalMaps
 
+import matplotlib.cm as cm
+from matplotlib import colors
 
-<div class="viewcode-block" id="get_job_name"><a class="viewcode-back" href="../../autoapi/hepi/cluster/index.html#hepi.cluster.get_job_name">[docs]</a>def get_job_name() -&gt; str:
-    return os.path.basename(sys.argv[0])</div>
+from .input import Input, get_output_dir
+from .util import  LD2DF, get_name
+from matplotlib.ticker import ScalarFormatter, NullFormatter
+from smpl import io
+from typing import List
 
-<div class="viewcode-block" id="wait"><a class="viewcode-back" href="../../autoapi/hepi/cluster/index.html#hepi.cluster.wait">[docs]</a>def wait():
-    output = &quot;\n\n\n&quot;
-    while(len(output.split(&#39;\n&#39;)) &gt; 2):
-        bashCommand = &quot;squeue -u &quot; + user + &quot; --name=&quot; + get_job_name() 
-        if output != &quot;\n\n\n&quot;:
-            #print(bashCommand , &quot; -&gt; &quot;, output)
-            time.sleep(60)
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-        output, error = process.communicate()
-        output=output.decode()</div>
+<div class="viewcode-block" id="write_latex"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex">[docs]</a>def write_latex(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
+ &quot;&quot;&quot;
+ Saves a `dict` of `list`s to `filename` as latex table.
+ &quot;&quot;&quot;
+ dl = dict_list
+ mask = dl[&quot;NLO_SCALE&quot;]!= np.array(None)
+ lo = splot.unv(dl[&quot;LO&quot;][mask])
+ nlo = splot.unv(dl[&quot;NLO&quot;][mask])
+ nlo_plus_nll = splot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])
+ with open(fname,&#39;w+&#39;) as f:
+     for i in range(len(dl[&quot;LO&quot;][mask])):
+        f.write(
+            &quot;$&quot; + io.gf(4).format(dl[key][mask][i]) + &quot;$ \t&amp;\t $&quot;+
+            &quot;{:.3f}&quot;.format(lo[i]*yscale) 
+                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRPLUS&quot;][mask][i]/lo[i]*100.)
+                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRMINUS&quot;][mask][i]/lo[i]*100.)
+                +  &quot;\%}$ \t&amp;\t $&quot;+
+            &quot;{:.3f}&quot;.format(nlo[i]*yscale) 
+                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRPLUS&quot;][mask][i]/nlo[i]*100.)
+                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRPLUS&quot;][mask][i] /nlo[i]*100.) if pdf else &quot;&quot;)
+                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask][i]/nlo[i]*100.)
+                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRMINUS&quot;][mask][i]/nlo[i]*100.) if pdf else &quot;&quot;)
+                +  &quot;\%}$ \t&amp;\t $&quot;+
+            &quot;{:.3f}&quot;.format(nlo_plus_nll[i]*yscale) 
+                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
+                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
+                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
+                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
+                +  &quot;\%}$ &quot;+
+            &quot;\\\\\n&quot;
+        )</div>
 
+<div class="viewcode-block" id="tex_table"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.tex_table">[docs]</a>tex_table= write_latex</div>
 
-rs.set_path(&quot;/home/a/&quot;+user+&quot;/git/resummino/&quot;)
-input.set_output_dir(&quot;/scratch/tmp/&quot;+user+&quot;/hepi/&quot;)
-input.set_input_dir(&quot;/home/a/&quot;+user+&quot;/input/&quot;)
-input.set_pre(&quot;while [[ $(squeue -u &quot; + user+ &quot; | wc -l) -gt 1990 ]]; do sleep 60; done &amp;&amp; sbatch --job-name=&quot; +get_job_name() +
-&quot; --ntasks-per-node 1 --cpus-per-task 1  --time=3-00:00:00 --mem=100M --partition normal&quot; +
-&quot; --mail-type=FAIL --mail-user=&quot;+user+&quot;@uni-muenster.de&quot;)
-print(rs.get_path())
-
-
-
+<div class="viewcode-block" id="write_csv"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_csv">[docs]</a>def write_csv(dict_list:list,filename:str):
+ &quot;&quot;&quot;
+ Saves a `dict` of `list`s to `filename` as csv table.
+ &quot;&quot;&quot;
+ df = LD2DF(dict_list)
+ df.to_csv(filename,index=False)</div>
 </pre></div>
 
            </div>

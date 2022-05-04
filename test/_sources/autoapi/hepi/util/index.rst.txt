@@ -27,21 +27,12 @@ Functions
 .. autoapisummary::
 
    hepi.util.LD2DL
+   hepi.util.LD2DF
    hepi.util.get_name
    hepi.util.get_LR_partner
    hepi.util.namehash
-   hepi.util.lhapdf_id_to_name
    hepi.util.lhapdf_name_to_id
 
-
-
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.util.lhapdf_id_name
-   hepi.util.lhapdf_name_id
 
 
 .. py:class:: DictData
@@ -52,7 +43,7 @@ Attributes
 
 
 
-.. py:function:: LD2DL(l: List)
+.. py:function:: LD2DL(l: List) -> dict
 
    Convert a list of objects into a dictionary of lists.
 
@@ -73,6 +64,11 @@ Attributes
    ...         self.c = c
    >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
    {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
+
+
+.. py:function:: LD2DF(ld: dict) -> pandas.DataFrame
+
+   Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
 
 .. py:function:: get_name(pid: int) -> str
@@ -130,34 +126,6 @@ Attributes
    '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
-.. py:data:: lhapdf_id_name
-   :annotation: :dict
-
-   Dictionary of lhapdf names for given id.
-
-.. py:data:: lhapdf_name_id
-   :annotation: :dict
-
-   Dictionary of lhapdf id for given name.
-
-   Inversion of :attr:`lhapdf_id_name`.
-
-.. py:function:: lhapdf_id_to_name(lid: int) -> str
-
-   Converts a LHAPDF id to the sets name.
-
-   :param lid: LHAPDF set id.
-   :type lid: int
-
-   :returns: name of the LHAPDF set.
-   :rtype: str
-
-   .. rubric:: Examples
-
-   >>> lhapdf_id_to_name(30101175)
-   'EPPS16_B_90CL_Au_hess'
-
-
 .. py:function:: lhapdf_name_to_id(name: str) -> int
 
    Converts a LHAPDF name to the sets id.
@@ -170,7 +138,7 @@ Attributes
 
    .. rubric:: Examples
 
-   >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
-   30101175
+   >>> lhapdf_name_to_id("CT14lo")
+   13200
 
 

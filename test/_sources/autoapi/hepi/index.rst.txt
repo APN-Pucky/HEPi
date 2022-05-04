@@ -30,6 +30,7 @@ Submodules
    :maxdepth: 1
 
    input/index.rst
+   output/index.rst
    plot/index.rst
    results/index.rst
    run/index.rst
@@ -44,6 +45,7 @@ Classes
 
 .. autoapisummary::
 
+   hepi.Input
    hepi.DictData
    hepi.Order
    hepi.Input
@@ -65,6 +67,11 @@ Functions
 
 .. autoapisummary::
 
+   hepi.get_output_dir
+   hepi.LD2DF
+   hepi.get_name
+   hepi.write_latex
+   hepi.write_csv
    hepi.get_LR_partner
    hepi.lhapdf_name_to_id
    hepi.get_input_dir
@@ -96,14 +103,13 @@ Functions
    hepi.scale_error
    hepi.combine_errors
    hepi.LD2DL
+   hepi.LD2DF
    hepi.get_name
    hepi.get_LR_partner
    hepi.namehash
-   hepi.lhapdf_id_to_name
    hepi.lhapdf_name_to_id
    hepi.get_output_dir
    hepi.get_name
-   hepi.tex_table
    hepi.title
    hepi.energy_plot
    hepi.combined_energy_plot
@@ -137,6 +143,7 @@ Attributes
 
 .. autoapisummary::
 
+   hepi.tex_table
    hepi.in_dir
    hepi.out_dir
    hepi.pre
@@ -145,8 +152,6 @@ Attributes
    hepi.seven_point_scan
    hepi.pdf_scan
    hepi.required_numerical_uncertainty_factor
-   hepi.lhapdf_id_name
-   hepi.lhapdf_name_id
    hepi.fig
    hepi.axs
    hepi.lines
@@ -154,6 +159,126 @@ Attributes
    hepi.package
    hepi.version
    hepi.__version__
+
+
+.. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO', update=True)
+
+   Bases: :py:obj:`hepi.util.DictData`
+
+   Input for computation and scans.
+
+   :ivar order: LO, NLO or NLO+NLL computation.
+   :vartype order: :class:`Order`
+   :ivar energy: CMS energy in GeV.
+   :vartype energy: int
+   :ivar energyhalf: Halfed `energy`.
+   :vartype energyhalf: int
+   :ivar particle1: PDG identifier of the first final state particle.
+   :vartype particle1: int
+   :ivar particle2: PDG identifier of the second final state particle.
+   :vartype particle2: int
+   :ivar slha: File path of for the base slha.
+               Modified slha files will be used if a scan requires a change of the input.
+   :vartype slha: str
+   :ivar pdf_lo: LO PDF name.
+   :vartype pdf_lo: str
+   :ivar pdf_nlo: NLO PDF name.
+   :vartype pdf_nlo: str
+   :ivar pdfset_lo: LO PDF member/set id.
+   :vartype pdfset_lo: int
+   :ivar pdfset_nlo: NLO PDF member/set id.
+   :vartype pdfset_nlo: int
+   :ivar pdf_lo_id: LO PDF first member/set id.
+   :vartype pdf_lo_id: int
+   :ivar pdf_nlo_id: NLO PDF first member/set id.
+   :vartype pdf_nlo_id: int
+   :ivar mu: central scale factor.
+   :vartype mu: double
+   :ivar mu_f: Factorization scale factor.
+   :vartype mu_f: double
+   :ivar mu_r: Renormalization scale factor.
+   :vartype mu_r: double
+   :ivar precision: Desired numerical relative precision.
+   :vartype precision: double
+   :ivar max_iters: Upper limit on integration iterations.
+   :vartype max_iters: int
+   :ivar invariant_mass: Invariant mass mode 'auto = sqrt((p1+p2)^2)' else value.
+   :vartype invariant_mass: str
+   :ivar pt: Transverse Momentum mode 'auto' or value.
+   :vartype pt: str
+   :ivar result: Result type 'total'/'pt'/'ptj'/'m'.
+   :vartype result: str
+   :ivar id: Set an id of this run.
+   :vartype id: str
+   :ivar model_path: Path for MadGraph model.
+   :vartype model_path: str
+   :ivar update: Update dependent `mu`.
+
+   :vartype update: bool
+
+   .. py:method:: has_gluino(self) -> bool
+
+
+   .. py:method:: has_neutralino(self) -> bool
+
+
+   .. py:method:: has_charginos(self) -> bool
+
+
+   .. py:method:: has_weakino(self) -> bool
+
+
+   .. py:method:: has_squark(self) -> bool
+
+
+   .. py:method:: has_slepton(self) -> bool
+
+
+
+.. py:function:: get_output_dir()
+
+   Get the input directory.
+
+   :returns: :attr:`out_dir`
+   :rtype: str
+
+
+.. py:function:: LD2DF(ld: dict) -> pandas.DataFrame
+
+   Convert a `dict` of `list`s to a `pandas.DataFrame`.
+
+
+.. py:function:: get_name(pid: int) -> str
+
+   Get the latex name of a particle.
+
+   :param pid: PDG Monte Carlo identifier for the particle.
+   :type pid: int
+
+   :returns: Latex name.
+   :rtype: str
+
+   .. rubric:: Examples
+
+   >>> get_name(21)
+   'g'
+   >>> get_name(1000022)
+   '\\tilde{\\chi}_{1}^{0}'
+
+
+.. py:function:: write_latex(dict_list, key, fname, scale=True, pdf=True, yscale=1.0)
+
+   Saves a `dict` of `list`s to `filename` as latex table.
+
+
+.. py:data:: tex_table
+   
+
+   
+
+.. py:function:: write_csv(dict_list: list, filename: str)
+
+   Saves a `dict` of `list`s to `filename` as csv table.
 
 
 .. py:class:: DictData
@@ -192,8 +317,8 @@ Attributes
 
    .. rubric:: Examples
 
-   >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
-   30101175
+   >>> lhapdf_name_to_id("CT14lo")
+   13200
 
 
 .. py:data:: in_dir
@@ -702,7 +827,7 @@ Attributes
 
 
 
-.. py:function:: LD2DL(l: List)
+.. py:function:: LD2DL(l: List) -> dict
 
    Convert a list of objects into a dictionary of lists.
 
@@ -828,7 +953,7 @@ Attributes
 
 
 
-.. py:function:: LD2DL(l: List)
+.. py:function:: LD2DL(l: List) -> dict
 
    Convert a list of objects into a dictionary of lists.
 
@@ -849,6 +974,11 @@ Attributes
    ...         self.c = c
    >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
    {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
+
+
+.. py:function:: LD2DF(ld: dict) -> pandas.DataFrame
+
+   Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
 
 .. py:function:: get_name(pid: int) -> str
@@ -906,34 +1036,6 @@ Attributes
    '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
-.. py:data:: lhapdf_id_name
-   :annotation: :dict
-
-   Dictionary of lhapdf names for given id.
-
-.. py:data:: lhapdf_name_id
-   :annotation: :dict
-
-   Dictionary of lhapdf id for given name.
-
-   Inversion of :attr:`lhapdf_id_name`.
-
-.. py:function:: lhapdf_id_to_name(lid: int) -> str
-
-   Converts a LHAPDF id to the sets name.
-
-   :param lid: LHAPDF set id.
-   :type lid: int
-
-   :returns: name of the LHAPDF set.
-   :rtype: str
-
-   .. rubric:: Examples
-
-   >>> lhapdf_id_to_name(30101175)
-   'EPPS16_B_90CL_Au_hess'
-
-
 .. py:function:: lhapdf_name_to_id(name: str) -> int
 
    Converts a LHAPDF name to the sets id.
@@ -946,8 +1048,8 @@ Attributes
 
    .. rubric:: Examples
 
-   >>> lhapdf_name_to_id("EPPS16_B_90CL_Au_hess")
-   30101175
+   >>> lhapdf_name_to_id("CT14lo")
+   13200
 
 
 .. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO', update=True)
@@ -1050,9 +1152,6 @@ Attributes
    '\\tilde{\\chi}_{1}^{0}'
 
 
-.. py:function:: tex_table(dict_list, key, fname, scale=True, pdf=True, yscale=1.0)
-
-
 .. py:function:: title(axe, i: hepi.input.Input, scenario='', diff_L_R=None, extra='', **kwargs)
 
 
@@ -1126,10 +1225,10 @@ Attributes
 .. py:function:: err_plt(axes, x, y, label=None, error=False)
 
 
-.. py:function:: scale_plot(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', **kwargs)
+.. py:function:: scale_plot(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', yaxis=None, **kwargs)
 
 
-.. py:function:: central_scale_plot(dict_list, vl, cont=False, error=True, yscale=1.0, unit='pb')
+.. py:function:: central_scale_plot(dict_list, vl, cont=False, error=True, yscale=1.0, unit='pb', yaxis=None)
 
 
 .. py:function:: mass_and_K_plot(dl, li, p, scale=False, pdf=False, plehn=True, combined=False, cont=False, figsize=(6, 8), **kwargs)
@@ -1268,7 +1367,7 @@ Attributes
    :type nlo_plus_nll: :obj:`double`
 
 
-.. py:function:: LD2DL(l: List)
+.. py:function:: LD2DL(l: List) -> dict
 
    Convert a list of objects into a dictionary of lists.
 

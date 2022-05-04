@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-36-g6abdf7f
+                0.1.4-43-g0550395
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -117,34 +117,6 @@ from matplotlib.ticker import ScalarFormatter, NullFormatter
 from smpl import io
 from typing import List
 
-<div class="viewcode-block" id="tex_table"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.tex_table">[docs]</a>def tex_table(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
- dl = dict_list
- mask = dl[&quot;NLO_SCALE&quot;]!= np.array(None)
- lo = splot.unv(dl[&quot;LO&quot;][mask])
- nlo = splot.unv(dl[&quot;NLO&quot;][mask])
- nlo_plus_nll = splot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])
- with open(fname,&#39;w+&#39;) as f:
-     for i in range(len(dl[&quot;LO&quot;][mask])):
-        f.write(
-            &quot;$&quot; + io.gf(4).format(dl[key][mask][i]) + &quot;$ \t&amp;\t $&quot;+
-            &quot;{:.3f}&quot;.format(lo[i]*yscale) 
-                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRPLUS&quot;][mask][i]/lo[i]*100.)
-                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRMINUS&quot;][mask][i]/lo[i]*100.)
-                +  &quot;\%}$ \t&amp;\t $&quot;+
-            &quot;{:.3f}&quot;.format(nlo[i]*yscale) 
-                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRPLUS&quot;][mask][i]/nlo[i]*100.)
-                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRPLUS&quot;][mask][i] /nlo[i]*100.) if pdf else &quot;&quot;)
-                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask][i]/nlo[i]*100.)
-                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRMINUS&quot;][mask][i]/nlo[i]*100.) if pdf else &quot;&quot;)
-                +  &quot;\%}$ \t&amp;\t $&quot;+
-            &quot;{:.3f}&quot;.format(nlo_plus_nll[i]*yscale) 
-                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
-                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
-                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
-                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
-                +  &quot;\%}$ &quot;+
-            &quot;\\\\\n&quot;
-        )</div>
 
 <div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(axe,i:Input,scenario=&quot;&quot;,diff_L_R=None,extra=&quot;&quot;,**kwargs):
     axe.set_title(
@@ -377,7 +349,7 @@ from typing import List
         l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
         return l[0]</div>
 
-<div class="viewcode-block" id="scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scale_plot">[docs]</a>def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit=&quot;pb&quot;,**kwargs):
+<div class="viewcode-block" id="scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scale_plot">[docs]</a>def scale_plot(dict_list, vl, seven_point_band=False,cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit=&quot;pb&quot;, yaxis=None,**kwargs):
     global fig, axs,lines,labels
     cycle_safe = mpl.rcParams[&#39;axes.prop_cycle&#39;] 
     if plehn_color:
@@ -467,7 +439,7 @@ from typing import List
             labels.append(&quot;$\\Delta \\sigma_{\\mathrm{&quot; + v.replace(&quot;NLO_PLUS_NLL&quot;,&quot;NLO+NLL&quot;).replace(&quot; &quot;,&quot;\\&lt;space&gt;&quot;) + &quot;} }$&quot;)
 
 
-    axs[0].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot;)
+    axs[0].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot; if yaxis is None else yaxis)
 
     axs[0].set_xscale(&quot;log&quot;)
     axs[0].set_xlim(np.min(mf), np.max(mf))
@@ -515,7 +487,7 @@ from typing import List
 
     
 
-<div class="viewcode-block" id="central_scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.central_scale_plot">[docs]</a>def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit=&quot;pb&quot;):
+<div class="viewcode-block" id="central_scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.central_scale_plot">[docs]</a>def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit=&quot;pb&quot;,yaxis=None):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
@@ -546,7 +518,7 @@ from typing import List
         axs[1].plot([], [], &#39; &#39;, label=&quot;$\mu_F=\mu_0$, $\mu_R=\mu$&quot;)
         axs[2].plot([], [], &#39; &#39;, label=&quot;$\mu_R=\mu_0$, $\mu_F=\mu$&quot;)
 
-    axs[1].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot;)
+    axs[1].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot; if yaxis is None else yaxis)
 
     axs[0].set_xscale(&quot;log&quot;)
     #axs[0].set_xlim(np.min(mf), np.max(mf))

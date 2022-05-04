@@ -37,7 +37,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-36-g6abdf7f
+                0.1.4-43-g0550395
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -71,6 +71,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.resummino</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.spheno</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../input/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../output/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.output</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plot/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../results/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.results</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../run/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a></li>
@@ -155,40 +156,23 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.LD2DL" title="hepi.util.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.LD2DL" title="hepi.util.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List) → dict</p></td>
 <td><p>Convert a list of objects into a dictionary of lists.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.get_name" title="hepi.util.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(pid: int) → str</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.LD2DF" title="hepi.util.LD2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DF</span></code></a>(ld: dict) → pandas.DataFrame</p></td>
+<td><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.get_name" title="hepi.util.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(pid: int) → str</p></td>
 <td><p>Get the latex name of a particle.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.get_LR_partner" title="hepi.util.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(pid: int) → Tuple[int, int]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.get_LR_partner" title="hepi.util.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(pid: int) → Tuple[int, int]</p></td>
 <td><p>Transforms a PDG id to it's left-right partner.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.namehash" title="hepi.util.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n: any) → str</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.namehash" title="hepi.util.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n: any) → str</p></td>
 <td><p>Creates a sha256 hash from the objects string representation.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.lhapdf_id_to_name" title="hepi.util.lhapdf_id_to_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_id_to_name</span></code></a>(lid: int) → str</p></td>
-<td><p>Converts a LHAPDF id to the sets name.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.lhapdf_name_to_id" title="hepi.util.lhapdf_name_to_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_to_id</span></code></a>(name: str) → int</p></td>
 <td><p>Converts a LHAPDF name to the sets id.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="attributes">
-<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline"></a></h3>
-<table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.lhapdf_id_name" title="hepi.util.lhapdf_id_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_id_name</span></code></a></p></td>
-<td><p>Dictionary of lhapdf names for given id.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.lhapdf_name_id" title="hepi.util.lhapdf_name_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_id</span></code></a></p></td>
-<td><p>Dictionary of lhapdf id for given name.</p></td>
 </tr>
 </tbody>
 </table>
@@ -205,7 +189,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.util.LD2DL">
-<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.LD2DL" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.LD2DL" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a list of objects into a dictionary of lists.</p>
 <p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
 <dl class="field-list simple">
@@ -229,6 +213,12 @@
 <span class="go">{&#39;a&#39;: array([1, 4, 7]), &#39;b&#39;: array([2, 5, 8]), &#39;c&#39;: array([3, 6, 9])}</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.util.LD2DF">
+<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">LD2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#LD2DF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.LD2DF" title="Permalink to this definition"></a></dt>
+<dd><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -304,41 +294,6 @@
 </div>
 </dd></dl>
 
-<dl class="py data">
-<dt class="sig sig-object py" id="hepi.util.lhapdf_id_name">
-<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">lhapdf_id_name</span></span><em class="property"><span class="w"> </span><span class="pre">:dict</span></em><a class="reference internal" href="../../../_modules/hepi/util.html#lhapdf_id_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.lhapdf_id_name" title="Permalink to this definition"></a></dt>
-<dd><p>Dictionary of lhapdf names for given id.</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="hepi.util.lhapdf_name_id">
-<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_id</span></span><em class="property"><span class="w"> </span><span class="pre">:dict</span></em><a class="reference internal" href="../../../_modules/hepi/util.html#lhapdf_name_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.lhapdf_name_id" title="Permalink to this definition"></a></dt>
-<dd><p>Dictionary of lhapdf id for given name.</p>
-<p>Inversion of <a class="reference internal" href="#hepi.util.lhapdf_id_name" title="hepi.util.lhapdf_id_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">lhapdf_id_name</span></code></a>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="hepi.util.lhapdf_id_to_name">
-<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">lhapdf_id_to_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#lhapdf_id_to_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.lhapdf_id_to_name" title="Permalink to this definition"></a></dt>
-<dd><p>Converts a LHAPDF id to the sets name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lid</strong> (<em>int</em>) – LHAPDF set id.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>name of the LHAPDF set.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lhapdf_id_to_name</span><span class="p">(</span><span class="mi">30101175</span><span class="p">)</span>
-<span class="go">&#39;EPPS16_B_90CL_Au_hess&#39;</span>
-</pre></div>
-</div>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.util.lhapdf_name_to_id">
 <span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#lhapdf_name_to_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.lhapdf_name_to_id" title="Permalink to this definition"></a></dt>
@@ -355,8 +310,8 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lhapdf_name_to_id</span><span class="p">(</span><span class="s2">&quot;EPPS16_B_90CL_Au_hess&quot;</span><span class="p">)</span>
-<span class="go">30101175</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lhapdf_name_to_id</span><span class="p">(</span><span class="s2">&quot;CT14lo&quot;</span><span class="p">)</span>
+<span class="go">13200</span>
 </pre></div>
 </div>
 </dd></dl>
