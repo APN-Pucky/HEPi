@@ -1,18 +1,19 @@
 """Collection of utility functions for the :mod:`hepi` package."""
-from typing import List,Tuple
+from typing import Dict, List,Tuple
 import numpy as np
 import hashlib
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
 import pyslha
 import lhapdf
+import pandas as pd
 
 class DictData:
     def __str__(self):
         """Returns attributes as dict as string"""
         return str(self.__dict__)
 
-def LD2DL(l: List):
+def LD2DL(l: List) -> dict:
     """
     Convert a list of objects into a dictionary of lists.
 
@@ -40,6 +41,12 @@ def LD2DL(l: List):
             assert k in md
     # switch them
     return {k: np.array([dic.__dict__[k] for dic in l]) for k in l[0].__dict__}
+
+def LD2DF(ld :dict) -> pd.DataFrame:
+    """
+    Convert a `dict` of `list`s to a `pandas.DataFrame`.
+    """
+    return pd.DataFrame.from_dict(ld)
 
 
 PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps(
