@@ -7,6 +7,7 @@ from particle import PDGID
 import pyslha
 import lhapdf
 import pandas as pd
+import warnings
 
 class DictData:
     def __str__(self):
@@ -143,4 +144,7 @@ def lhapdf_name_to_id(name : str) -> int:
         >>> lhapdf_name_to_id("CT14lo")
         13200
     """
+    if not name in lhapdf.availablePDFSets():
+        warnings.warn("PDF set '" + name + "' not installed!")
+        return 0
     return lhapdf.getPDFSet(name).lhapdfID
