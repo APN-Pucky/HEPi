@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-43-g0550395
+                0.1.4-44-g245efca
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -99,6 +99,7 @@ from particle import PDGID
 import pyslha
 import lhapdf
 import pandas as pd
+import warnings
 
 <div class="viewcode-block" id="DictData"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DictData">[docs]</a>class DictData:
 <div class="viewcode-block" id="DictData.__str__"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DictData.__str__">[docs]</a>    def __str__(self):
@@ -235,6 +236,9 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
         &gt;&gt;&gt; lhapdf_name_to_id(&quot;CT14lo&quot;)
         13200
     &quot;&quot;&quot;
+    if not name in lhapdf.availablePDFSets():
+        warnings.warn(&quot;PDF set &#39;&quot; + name + &quot;&#39; not installed!&quot;)
+        return 0
     return lhapdf.getPDFSet(name).lhapdfID</div>
 </pre></div>
 
