@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-47-gc0dc2a3
+                0.1.4-48-g9e79645
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -99,7 +99,7 @@ from string import Template
 import subprocess
 from typing import List
 import warnings
-from hepi.input import Input, is_gluino, is_slepton, is_squark, is_weakino
+from hepi.input import Input, Order, is_gluino, is_slepton, is_squark, is_weakino
 from hepi.results import Result
 from hepi.run import RunParam, Runner
 from hepi.util import namehash
@@ -191,6 +191,9 @@ from uncertainties import ufloat
 			return False
 		if p.pdf_lo != &quot;cteq6l1&quot;  or  p.pdf_nlo != &quot;cteq66&quot;:
 			warnings.warn(&quot;Prospino2 does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).&quot;)
+			return False
+		if p.order != Order.LO and  p.order != Order.NLO:
+			warnings.warn(&quot;Order must be one of LO/NLO in Prospino2.&quot;)
 			return False
 		return True</div>
 

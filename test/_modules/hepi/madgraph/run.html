@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-47-gc0dc2a3
+                0.1.4-48-g9e79645
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -192,7 +192,14 @@ import hashlib
         if not skip:
             open(get_output_dir() + name + &quot;.out&quot;, &quot;w&quot;).write(result + &quot;\n\n&quot;)
 
-        mgfile = [&quot;run_card_no_madstr.dat&quot;, &quot;run_card_with_madstr.dat&quot;][p.order]
+        if p.order == Order.LO:
+            mgfile = &quot;run_card_no_madstr.dat&quot;
+        elif p.order == Order.NLO:
+            mgfile = &quot;run_card_with_madstr.dat&quot;
+        else:
+            raise ValueError(&quot;Order must be one of LO/NLO in MadGraph.&quot;)
+
+
         if not madstr:
             mgfile = &quot;run_card_no_madstr.dat&quot;
         data = pkgutil.get_data(__name__, mgfile).decode( &#39;utf-8&#39;)

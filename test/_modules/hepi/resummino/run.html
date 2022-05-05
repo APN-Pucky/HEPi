@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-47-gc0dc2a3
+                0.1.4-48-g9e79645
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -258,7 +258,7 @@ from smpl import debug
             elif p.order == Order.aNNLO_PLUS_NNLL:
                 flags = flags + &quot;--nnll&quot;
             else:
-                warnings.warn(&quot;Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.&quot;)
+                raise ValueError(&quot;Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.&quot;)
 
             src = Template(data)
             result = src.substitute(d)
