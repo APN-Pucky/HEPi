@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-45-g284f028
+                0.1.4-47-gc0dc2a3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -95,6 +95,8 @@ import shutil
 from typing import List
 import subprocess
 from string import Template
+import warnings
+from hepi.input import Order
 from hepi.run import RunParam
 import numpy as np
 import pkgutil
@@ -245,13 +247,25 @@ from smpl import debug
         if not skip:
             data = pkgutil.get_data(__name__, &quot;plot_template.in&quot;).decode(
                 &#39;utf-8&#39;)
+            
+            flags = &quot;&quot;
+            if p.order == Order.LO:
+                flags = flags + &quot;--lo&quot;
+            elif p.order == Order.NLO:
+                flags = flags + &quot;--nlo&quot;
+            elif p.order == Order.NLO_PLUS_NLL:
+                flags = flags + &quot;--nll&quot;
+            elif p.order == Order.aNNLO_PLUS_NNLL:
+                flags = flags + &quot;--nnll&quot;
+            else:
+                warnings.warn(&quot;Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.&quot;)
 
             src = Template(data)
             result = src.substitute(d)
             open(get_output_dir() + name + &quot;.in&quot;, &quot;w&quot;).write(result)
             open(get_output_dir() + name + &quot;.sh&quot;, &quot;w&quot;).write(&quot;#!/bin/sh\n&quot;+
                 resummino_path + &#39;build/bin/resummino {} {} &gt;&gt; {}&#39;.format(
-                    get_output_dir()+name + &quot;.in&quot;,[&quot;--lo&quot;, &quot;--nlo&quot;, &quot;--nll&quot;][p.order],get_output_dir()+name + &quot;.out&quot;
+                    get_output_dir()+name + &quot;.in&quot;,flags,get_output_dir()+name + &quot;.out&quot;
                 ))
             st = os.stat(get_output_dir() + name + &quot;.sh&quot;)
             os.chmod(get_output_dir() + name + &quot;.sh&quot;, st.st_mode | stat.S_IEXEC)
@@ -265,8 +279,7 @@ from smpl import debug
                 open(get_output_dir() + name + &quot;.out&quot;,
                      &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
 
-        ret.append(ResumminoRunParam([&quot;--lo&quot;, &quot;--nlo&quot;, &quot;--nll&quot;]
-                             [p.order], get_output_dir()+name + &quot;.in&quot;, get_output_dir()+name + &quot;.out&quot;, skip))
+        ret.append(ResumminoRunParam(flags, get_output_dir()+name + &quot;.in&quot;, get_output_dir()+name + &quot;.out&quot;, skip))
 
     return ret</div>
 

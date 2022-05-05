@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-45-g284f028
+                0.1.4-47-gc0dc2a3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -193,8 +193,10 @@ from uncertainties import ufloat
 			warnings.warn(&quot;Prospino2 does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).&quot;)
 			return False
 		return True</div>
+
 <div class="viewcode-block" id="ProspinoRunner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._is_valid">[docs]</a>	def _is_valid(self, file: str, p: Input, d) -&gt; bool:
 		return super()._is_valid(file, p, d)</div>
+
 <div class="viewcode-block" id="ProspinoRunner._parse_file"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._parse_file">[docs]</a>	def _parse_file(self, file: str) -&gt; Result:
 		ret=[]
 		with open(file) as output:
@@ -203,6 +205,7 @@ from uncertainties import ufloat
 					for s in line[2:].split():
 						ret.append(float(s))
 		return ProspinoResult(ufloat(ret[8],ret[8]*ret[9]),ufloat(ret[10],ret[10]*ret[11]) if ret[10]!= 0. else None,None)	</div>
+
 <div class="viewcode-block" id="ProspinoRunner._prepare"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._prepare">[docs]</a>	def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
 		rp = super()._prepare(p,**kwargs)
 		if not rp.skip:
