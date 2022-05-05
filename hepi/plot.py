@@ -25,34 +25,6 @@ from matplotlib.ticker import ScalarFormatter, NullFormatter
 from smpl import io
 from typing import List
 
-def tex_table(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
- dl = dict_list
- mask = dl["NLO_SCALE"]!= np.array(None)
- lo = splot.unv(dl["LO"][mask])
- nlo = splot.unv(dl["NLO"][mask])
- nlo_plus_nll = splot.unv(dl["NLO_PLUS_NLL"][mask])
- with open(fname,'w+') as f:
-     for i in range(len(dl["LO"][mask])):
-        f.write(
-            "$" + io.gf(4).format(dl[key][mask][i]) + "$ \t&\t $"+
-            "{:.3f}".format(lo[i]*yscale) 
-                + "^{+"+"{:.1f}".format(dl["LO_SCALE_ERRPLUS"][mask][i]/lo[i]*100.)
-                + "\%}_{" +"{:.1f}".format(dl["LO_SCALE_ERRMINUS"][mask][i]/lo[i]*100.)
-                +  "\%}$ \t&\t $"+
-            "{:.3f}".format(nlo[i]*yscale) 
-                + "^{+"+"{:.1f}".format(dl["NLO_SCALE_ERRPLUS"][mask][i]/nlo[i]*100.)
-                + ("\%+"+"{:.1f}".format(dl["NLO_PDF_ERRPLUS"][mask][i] /nlo[i]*100.) if pdf else "")
-                + "\%}_{" +"{:.1f}".format(dl["NLO_SCALE_ERRMINUS"][mask][i]/nlo[i]*100.)
-                + ("\%"+"{:.1f}".format(dl["NLO_PDF_ERRMINUS"][mask][i]/nlo[i]*100.) if pdf else "")
-                +  "\%}$ \t&\t $"+
-            "{:.3f}".format(nlo_plus_nll[i]*yscale) 
-                + "^{+"+"{:.1f}".format(dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask][i]/nlo_plus_nll[i]*100.)
-                + ("\%+"+"{:.1f}".format(dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
-                + "\%}_{" +"{:.1f}".format(dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.)
-                + ("\%"+"{:.1f}".format(dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask][i]/nlo_plus_nll[i]*100.) if pdf else "")
-                +  "\%}$ "+
-            "\\\\\n"
-        )
 
 def title(axe,i:Input,scenario="",diff_L_R=None,extra="",**kwargs):
     axe.set_title(
@@ -285,7 +257,7 @@ def err_plt(axes,x,y,label=None,error=False):
         l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
         return l[0]
 
-def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit="pb",**kwargs):
+def scale_plot(dict_list, vl, seven_point_band=False,cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit="pb", yaxis=None,**kwargs):
     global fig, axs,lines,labels
     cycle_safe = mpl.rcParams['axes.prop_cycle'] 
     if plehn_color:
@@ -375,7 +347,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
             labels.append("$\\Delta \\sigma_{\\mathrm{" + v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\<space>") + "} }$")
 
 
-    axs[0].set_ylabel("$\sigma$ ["+unit+"]")
+    axs[0].set_ylabel("$\sigma$ ["+unit+"]" if yaxis is None else yaxis)
 
     axs[0].set_xscale("log")
     axs[0].set_xlim(np.min(mf), np.max(mf))
@@ -423,7 +395,7 @@ def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=N
 
     
 
-def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb"):
+def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb",yaxis=None):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
@@ -454,7 +426,7 @@ def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb")
         axs[1].plot([], [], ' ', label="$\mu_F=\mu_0$, $\mu_R=\mu$")
         axs[2].plot([], [], ' ', label="$\mu_R=\mu_0$, $\mu_F=\mu$")
 
-    axs[1].set_ylabel("$\sigma$ ["+unit+"]")
+    axs[1].set_ylabel("$\sigma$ ["+unit+"]" if yaxis is None else yaxis)
 
     axs[0].set_xscale("log")
     #axs[0].set_xlim(np.min(mf), np.max(mf))
