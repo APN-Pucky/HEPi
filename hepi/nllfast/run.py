@@ -19,6 +19,7 @@ from uncertainties import ufloat
 
 class NLLfastRunner(Runner):
 	#TODO treat stop sbot separately
+	#TODO separate nll and nnll
 
 	def _get_nf_proc(self,p:Input):
 		d = pyslha.read(self.get_output_dir() + p.slha)
@@ -41,12 +42,14 @@ class NLLfastRunner(Runner):
 				b = p.particle2 if p.particle1 > p.particle2 else p.particle1
 				return 'sb','cteq',ms,mg
 		return "UNKNOWN_PROCESS_OR_UNIMPLEMENTED_PROCESS"
+
 	def _get_nf_input(self, p:Input) -> dict:
 		# TODO return masses of squark and gluino
 		d = {}
 		#d["ps_inlo"] = int(p.order)
 		d["nf_final_state_in"],d["nf_pdf"],d["nf_squark_mass"],d["nf_gluino_mass"] = self._get_ps_proc(p)
 		return d
+
 	def _check_input(self,p: Input)-> bool:
 		"""Checks input parameter for compatibility with Prospino"""
 		if p.mu_f != 1. or  p.mu_r != 1.:
@@ -56,8 +59,10 @@ class NLLfastRunner(Runner):
 			warnings.warn("NLL-fast does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).")
 			return False
 		return True
+
 	def _is_valid(self, file: str, p: Input, d) -> bool:
 		return super()._is_valid(file, p, d)
+
 	def _parse_file(self, file: str) -> Result:
 		#TODO parse result
 		pass
@@ -67,7 +72,8 @@ class NLLfastRunner(Runner):
 				if line.startswith("nn") or line.startswith("ng") or line.startswith("ns") or line.startswith("sg") or line.startswith("ll") or line.startswith("gg") or line.startswith("ss") or line.startswith("sb"): # TODO generalize
 					for s in line[2:].split():
 						ret.append(float(s))
-		return ProspinoResult(ufloat(ret[8],ret[8]*ret[9]),ufloat(ret[10],ret[10]*ret[11]) if ret[10]!= 0. else None,None)	
+		return Result(ufloat(ret[8],ret[8]*ret[9]),ufloat(ret[10],ret[10]*ret[11]) if ret[10]!= 0. else None,None)	
+
 	def _prepare(self, p: Input, **kwargs) -> RunParam:
 		rp = super()._prepare(p,**kwargs)
 		if not rp.skip:

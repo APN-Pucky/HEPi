@@ -166,7 +166,7 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
             elif p.order == Order.aNNLO_PLUS_NNLL:
                 flags = flags + "--nnll"
             else:
-                warnings.warn("Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.")
+                raise ValueError("Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.")
 
             src = Template(data)
             result = src.substitute(d)

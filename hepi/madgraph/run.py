@@ -100,7 +100,14 @@ def _queue(params: List[Input], noskip=False,madstr=True,para=True) -> List[MadG
         if not skip:
             open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
 
-        mgfile = ["run_card_no_madstr.dat", "run_card_with_madstr.dat"][p.order]
+        if p.order == Order.LO:
+            mgfile = "run_card_no_madstr.dat"
+        elif p.order == Order.NLO:
+            mgfile = "run_card_with_madstr.dat"
+        else:
+            raise ValueError("Order must be one of LO/NLO in MadGraph.")
+
+
         if not madstr:
             mgfile = "run_card_no_madstr.dat"
         data = pkgutil.get_data(__name__, mgfile).decode( 'utf-8')

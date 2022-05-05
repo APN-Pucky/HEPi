@@ -7,7 +7,7 @@ from string import Template
 import subprocess
 from typing import List
 import warnings
-from hepi.input import Input, is_gluino, is_slepton, is_squark, is_weakino
+from hepi.input import Input, Order, is_gluino, is_slepton, is_squark, is_weakino
 from hepi.results import Result
 from hepi.run import RunParam, Runner
 from hepi.util import namehash
@@ -99,6 +99,9 @@ class ProspinoRunner(Runner):
 			return False
 		if p.pdf_lo != "cteq6l1"  or  p.pdf_nlo != "cteq66":
 			warnings.warn("Prospino2 does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).")
+			return False
+		if p.order != Order.LO and  p.order != Order.NLO:
+			warnings.warn("Order must be one of LO/NLO in Prospino2.")
 			return False
 		return True
 
