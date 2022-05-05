@@ -101,8 +101,10 @@ class ProspinoRunner(Runner):
 			warnings.warn("Prospino2 does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).")
 			return False
 		return True
+
 	def _is_valid(self, file: str, p: Input, d) -> bool:
 		return super()._is_valid(file, p, d)
+
 	def _parse_file(self, file: str) -> Result:
 		ret=[]
 		with open(file) as output:
@@ -111,6 +113,7 @@ class ProspinoRunner(Runner):
 					for s in line[2:].split():
 						ret.append(float(s))
 		return ProspinoResult(ufloat(ret[8],ret[8]*ret[9]),ufloat(ret[10],ret[10]*ret[11]) if ret[10]!= 0. else None,None)	
+
 	def _prepare(self, p: Input, **kwargs) -> RunParam:
 		rp = super()._prepare(p,**kwargs)
 		if not rp.skip:

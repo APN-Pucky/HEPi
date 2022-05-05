@@ -3,6 +3,8 @@ import shutil
 from typing import List
 import subprocess
 from string import Template
+import warnings
+from hepi.input import Order
 from hepi.run import RunParam
 import numpy as np
 import pkgutil
@@ -153,13 +155,25 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
         if not skip:
             data = pkgutil.get_data(__name__, "plot_template.in").decode(
                 'utf-8')
+            
+            flags = ""
+            if p.order == Order.LO:
+                flags = flags + "--lo"
+            elif p.order == Order.NLO:
+                flags = flags + "--nlo"
+            elif p.order == Order.NLO_PLUS_NLL:
+                flags = flags + "--nll"
+            elif p.order == Order.aNNLO_PLUS_NNLL:
+                flags = flags + "--nnll"
+            else:
+                warnings.warn("Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.")
 
             src = Template(data)
             result = src.substitute(d)
             open(get_output_dir() + name + ".in", "w").write(result)
             open(get_output_dir() + name + ".sh", "w").write("#!/bin/sh\n"+
                 resummino_path + 'build/bin/resummino {} {} >> {}'.format(
-                    get_output_dir()+name + ".in",["--lo", "--nlo", "--nll"][p.order],get_output_dir()+name + ".out"
+                    get_output_dir()+name + ".in",flags,get_output_dir()+name + ".out"
                 ))
             st = os.stat(get_output_dir() + name + ".sh")
             os.chmod(get_output_dir() + name + ".sh", st.st_mode | stat.S_IEXEC)
@@ -173,8 +187,7 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
                 open(get_output_dir() + name + ".out",
                      "a").write(f.read() + "\n\n")
 
-        ret.append(ResumminoRunParam(["--lo", "--nlo", "--nll"]
-                             [p.order], get_output_dir()+name + ".in", get_output_dir()+name + ".out", skip))
+        ret.append(ResumminoRunParam(flags, get_output_dir()+name + ".in", get_output_dir()+name + ".out", skip))
 
     return ret
 

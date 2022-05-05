@@ -95,10 +95,12 @@ class Order(IntEnum):
     """
     LO = 0
     """Leading Order"""
-    NLO = 1 
+    NLO = 1
     """Next-to-Leading Order"""
-    NLO_PLUS_NLL = 2 
+    NLO_PLUS_NLL = 2
     """Next-to-Leading Order plus Next-to-Leading Logarithms"""
+    aNNLO_PLUS_NNLL = 3
+    """Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms"""
 
 
 class Input(DictData):
