@@ -47,8 +47,8 @@ setuptools.setup(
         "enlighten",
         "particle",
         "lhapdf",
+        "pandas",
         # "tqdm",
-        # "pandas",
     ],
     extra_require={
         'dev': dev_requirements
