@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-48-g9e79645
+                0.1.4-49-g81eafb1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -244,11 +244,11 @@ from smpl import debug
         if not noskip and os.path.isfile(get_output_dir() + name + &quot;.out&quot;) and is_valid(get_output_dir() + name + &quot;.out&quot;,p,d):
             print(&quot;skip&quot;, end=&#39;&#39;)
             skip = True
+        flags = &quot;&quot;
         if not skip:
             data = pkgutil.get_data(__name__, &quot;plot_template.in&quot;).decode(
                 &#39;utf-8&#39;)
             
-            flags = &quot;&quot;
             if p.order == Order.LO:
                 flags = flags + &quot;--lo&quot;
             elif p.order == Order.NLO:

@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-48-g9e79645
+                0.1.4-49-g81eafb1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -90,7 +90,9 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.output</h1><div class="highlight"><pre>
-<span></span>from scipy import interpolate
+<span></span>import json
+from scipy import interpolate
+from smpl import plot
 
 from sklearn.metrics import auc
 import matplotlib as mpl
@@ -111,8 +113,8 @@ from particle.converters.bimap import DirectionalMaps
 import matplotlib.cm as cm
 from matplotlib import colors
 
-from .input import Input, get_output_dir
-from .util import  LD2DF, get_name
+from .input import Input, Order, get_output_dir, order_to_string
+from .util import  LD2DF, DictData, get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
 from smpl import io
 from typing import List
@@ -157,6 +159,49 @@ from typing import List
  &quot;&quot;&quot;
  df = LD2DF(dict_list)
  df.to_csv(filename,index=False)</div>
+
+
+<div class="viewcode-block" id="write_json"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_json">[docs]</a>def write_json(dict_list:list,o:Order,parameter:str,filename:str,error_sym=False,error_asym=False):
+ &quot;&quot;&quot;
+ Saves a `dict` of `list`s to `filename` as json.
+
+ Cf. https://github.com/fuenfundachtzig/xsec
+ &quot;&quot;&quot;
+ jd = {}
+ jd[&quot;initial state&quot;] = &quot;pp&quot; # TODO add more such cases + filters
+ if o == Order.LO:
+    jd[&quot;order&quot;] = &quot;LO&quot;
+ elif o == Order.NLO:
+    jd[&quot;order&quot;] = &quot;NLO&quot;
+ elif o == Order.NLO_PLUS_NLL:
+    jd[&quot;order&quot;] = &quot;NLO+NLL&quot;
+ elif o == Order.aNNLO_PLUS_NNLL:
+    jd[&quot;order&quot;] = &quot;NNLOapprox+NNLL&quot;
+ else:
+    raise ValueError(&quot;Order not supported by write_json.&quot;)
+ jd[&quot;source&quot;] = &quot;HEPi&quot;
+ jd[&quot;contact&quot;] = &quot;?&quot;
+ jd[&quot;tool&quot;] = dict_list[&quot;code&quot;][0]
+ jd[&quot;process_latex&quot;] = &quot;$&quot;+get_name(dict_list[&quot;particle1&quot;][0])+get_name(dict_list[&quot;particle2&quot;][0]) + &quot;$&quot;
+ jd[&quot;comment&quot;] = &quot;?&quot;
+ jd[&quot;reference&quot;] = &quot;?&quot;
+ jd[&quot;Ecom [GeV]&quot;] = str(dict_list[&quot;energy&quot;][0])
+ jd[&quot;process_id&quot;] = &quot;pp_&quot;+ str(dict_list[&quot;energy&quot;][0]) + &quot;_&quot;+ str(dict_list[&quot;particle1&quot;][0]) +&quot;_&quot;+ str(dict_list[&quot;particle2&quot;][0])
+ jd[&quot;PDF set&quot;] = dict_list[&quot;pdf_nlo&quot;][0]
+ dat = {}
+ for j in range(len(dict_list[parameter])):
+    if error_asym:
+        raise ValueError(&quot;asymmetric errors not supported by write_json.&quot;)
+    elif error_sym:
+        dat[str(dict_list[parameter][j])] = {&quot;xsec_pb&quot; : float(plot.unv(dict_list[order_to_string(o)][j])),&quot;unc_pb&quot; : float(plot.usd(dict_list[order_to_string(o)][j]))}
+    else:
+        dat[str(dict_list[parameter][j])] = {&quot;xsec_pb&quot; : float(plot.unv(dict_list[order_to_string(o)][j]))}
+ jd[&quot;data&quot;] = dat
+ jd[&quot;parameters&quot;] = &quot;?&quot;
+ with open(filename,&#39;w+&#39;) as f:
+    f.write(json.dumps(jd))</div>
+
+
 </pre></div>
 
            </div>

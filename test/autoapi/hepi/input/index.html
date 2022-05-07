@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-48-g9e79645
+                0.1.4-49-g81eafb1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -177,58 +177,61 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.set_pre" title="hepi.input.set_pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_pre</span></code></a>(ppre)</p></td>
 <td><p>Sets the command prefix.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.is_gluino" title="hepi.input.is_gluino"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_gluino</span></code></a>(id: int) → bool</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.order_to_string" title="hepi.input.order_to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">order_to_string</span></code></a>(o: Order)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.is_neutralino" title="hepi.input.is_neutralino"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_neutralino</span></code></a>(id: int) → bool</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.is_gluino" title="hepi.input.is_gluino"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_gluino</span></code></a>(id: int) → bool</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.is_chargino" title="hepi.input.is_chargino"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_chargino</span></code></a>(id: int) → bool</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.is_neutralino" title="hepi.input.is_neutralino"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_neutralino</span></code></a>(id: int) → bool</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.is_weakino" title="hepi.input.is_weakino"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_weakino</span></code></a>(id: int) → bool</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.is_chargino" title="hepi.input.is_chargino"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_chargino</span></code></a>(id: int) → bool</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.is_squark" title="hepi.input.is_squark"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_squark</span></code></a>(id: int) → bool</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.is_weakino" title="hepi.input.is_weakino"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_weakino</span></code></a>(id: int) → bool</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.is_slepton" title="hepi.input.is_slepton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_slepton</span></code></a>(id: int) → bool</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.is_squark" title="hepi.input.is_squark"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_squark</span></code></a>(id: int) → bool</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.update_slha" title="hepi.input.update_slha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_slha</span></code></a>(i: Input)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.is_slepton" title="hepi.input.is_slepton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_slepton</span></code></a>(id: int) → bool</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.update_slha" title="hepi.input.update_slha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_slha</span></code></a>(i: Input)</p></td>
 <td><p>Updates dependent parameters in Input <cite>i</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan" title="hepi.input.scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan</span></code></a>(l: List[Input], var: str, range: Iterable) → List[Input]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan" title="hepi.input.scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan</span></code></a>(l: List[Input], var: str, range: Iterable) → List[Input]</p></td>
 <td><p>Scans a variable <cite>var</cite> over <cite>range</cite> in <cite>l</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_multi" title="hepi.input.scan_multi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_multi</span></code></a>(li: List[Input], **kwargs) → List[Input]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_multi" title="hepi.input.scan_multi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_multi</span></code></a>(li: List[Input], **kwargs) → List[Input]</p></td>
 <td><p>Magically scans the variables passed to this function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_scale" title="hepi.input.scan_scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_scale</span></code></a>(l: List[Input], range=3, distance=2.0)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_scale" title="hepi.input.scan_scale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_scale</span></code></a>(l: List[Input], range=3, distance=2.0)</p></td>
 <td><p>Scans scale by varying <cite>mu_f</cite> and <cite>mu_r</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_seven_point" title="hepi.input.scan_seven_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_seven_point</span></code></a>(l: List[Input])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_seven_point" title="hepi.input.scan_seven_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_seven_point</span></code></a>(l: List[Input])</p></td>
 <td><p>Scans scale by varying <cite>mu_f</cite> and <cite>mu_r</cite> by factors of two excluding relative factors of 4.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.change_where" title="hepi.input.change_where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">change_where</span></code></a>(l: List[Input], dicts: dict, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.change_where" title="hepi.input.change_where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">change_where</span></code></a>(l: List[Input], dicts: dict, **kwargs)</p></td>
 <td><p>Applies the values of <cite>dicts</cite> if the key value pairs in <cite>kwargs</cite> agree with a member of the list <cite>l</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_invariant_mass" title="hepi.input.scan_invariant_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_invariant_mass</span></code></a>(l: List[Input], diff, points, low=0.001)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_invariant_mass" title="hepi.input.scan_invariant_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_invariant_mass</span></code></a>(l: List[Input], diff, points, low=0.001)</p></td>
 <td><p>Logarithmic <cite>invariant_mass</cite> scan close to the production threshold.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.slha_write" title="hepi.input.slha_write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_write</span></code></a>(newname, d)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.slha_write" title="hepi.input.slha_write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_write</span></code></a>(newname, d)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.mass_scan" title="hepi.input.mass_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_scan</span></code></a>(l: List[Input], var: int, range, diff_L_R=None) → List[Input]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.mass_scan" title="hepi.input.mass_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_scan</span></code></a>(l: List[Input], var: int, range, diff_L_R=None) → List[Input]</p></td>
 <td><p>Scans the PDG identified mass <cite>var</cite> over <cite>range</cite> in the list <cite>l</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.slha_scan" title="hepi.input.slha_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan</span></code></a>(l: List[Input], block, var, range: List) → List[Input]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.slha_scan" title="hepi.input.slha_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan</span></code></a>(l: List[Input], block, var, range: List) → List[Input]</p></td>
 <td><p>Scan a generic</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.slha_scan_rel" title="hepi.input.slha_scan_rel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan_rel</span></code></a>(l: List[Input], lambdas, range: List) → List[Input]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.slha_scan_rel" title="hepi.input.slha_scan_rel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan_rel</span></code></a>(l: List[Input], lambdas, range: List) → List[Input]</p></td>
 <td><p>Scan a generic slha variable.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_pdf" title="hepi.input.scan_pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_pdf</span></code></a>(l: List[Input])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_pdf" title="hepi.input.scan_pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_pdf</span></code></a>(l: List[Input])</p></td>
 <td><p>Scans NLO PDF sets.</p></td>
 </tr>
 </tbody>
@@ -389,6 +392,11 @@
 </dd></dl>
 
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.order_to_string">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hepi.input.Order" title="hepi.input.Order"><span class="pre">Order</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#order_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.order_to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.input.Input">

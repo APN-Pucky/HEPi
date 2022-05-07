@@ -46,6 +46,8 @@ Classes
 .. autoapisummary::
 
    hepi.Input
+   hepi.Order
+   hepi.DictData
    hepi.DictData
    hepi.Order
    hepi.Input
@@ -68,10 +70,12 @@ Functions
 .. autoapisummary::
 
    hepi.get_output_dir
+   hepi.order_to_string
    hepi.LD2DF
    hepi.get_name
    hepi.write_latex
    hepi.write_csv
+   hepi.write_json
    hepi.get_LR_partner
    hepi.lhapdf_name_to_id
    hepi.get_input_dir
@@ -80,6 +84,7 @@ Functions
    hepi.set_input_dir
    hepi.set_output_dir
    hepi.set_pre
+   hepi.order_to_string
    hepi.is_gluino
    hepi.is_neutralino
    hepi.is_chargino
@@ -235,6 +240,35 @@ Attributes
 
 
 
+.. py:class:: Order
+
+   Bases: :py:obj:`enum.IntEnum`
+
+   Computation orders.
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+   .. py:attribute:: LO
+      :annotation: = 0
+
+      Leading Order
+
+   .. py:attribute:: NLO
+      :annotation: = 1
+
+      Next-to-Leading Order
+
+   .. py:attribute:: NLO_PLUS_NLL
+      :annotation: = 2
+
+      Next-to-Leading Order plus Next-to-Leading Logarithms
+
+   .. py:attribute:: aNNLO_PLUS_NNLL
+      :annotation: = 3
+
+      Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
+
+
 .. py:function:: get_output_dir()
 
    Get the input directory.
@@ -243,9 +277,20 @@ Attributes
    :rtype: str
 
 
+.. py:function:: order_to_string(o: Order)
+
+
 .. py:function:: LD2DF(ld: dict) -> pandas.DataFrame
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
+
+
+.. py:class:: DictData
+
+   .. py:method:: __str__(self)
+
+      Returns attributes as dict as string
+
 
 
 .. py:function:: get_name(pid: int) -> str
@@ -279,6 +324,13 @@ Attributes
 .. py:function:: write_csv(dict_list: list, filename: str)
 
    Saves a `dict` of `list`s to `filename` as csv table.
+
+
+.. py:function:: write_json(dict_list: list, o: hepi.input.Order, parameter: str, filename: str, error_sym=False, error_asym=False)
+
+   Saves a `dict` of `list`s to `filename` as json.
+
+   Cf. https://github.com/fuenfundachtzig/xsec
 
 
 .. py:class:: DictData
@@ -411,6 +463,9 @@ Attributes
       :annotation: = 3
 
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
+
+
+.. py:function:: order_to_string(o: Order)
 
 
 .. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO', update=True)
