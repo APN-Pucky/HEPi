@@ -102,6 +102,8 @@ class Order(IntEnum):
     aNNLO_PLUS_NNLL = 3
     """Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms"""
 
+def order_to_string(o:Order):
+    return ["LO","NLO","NLO_PLUS_NLL","aNNLO_PLUS_NNLL"][o]
 
 class Input(DictData):
     """

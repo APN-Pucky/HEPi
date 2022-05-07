@@ -152,11 +152,11 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
         if not noskip and os.path.isfile(get_output_dir() + name + ".out") and is_valid(get_output_dir() + name + ".out",p,d):
             print("skip", end='')
             skip = True
+        flags = ""
         if not skip:
             data = pkgutil.get_data(__name__, "plot_template.in").decode(
                 'utf-8')
             
-            flags = ""
             if p.order == Order.LO:
                 flags = flags + "--lo"
             elif p.order == Order.NLO:
