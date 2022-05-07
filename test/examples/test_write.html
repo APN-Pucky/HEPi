@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyslha comparison &mdash; HEPi  documentation</title>
+  <title>Result writing example &mdash; HEPi  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-51-g5c1d96d
+                0.1.4-52-gdadd38f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -63,7 +63,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_spheno.html">SPheno example</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">pyslha comparison</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Result writing example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Print">Print</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Pandas">Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#CSV">CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#JSON">JSON</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -84,7 +90,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>pyslha comparison</li>
+      <li>Result writing example</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/examples/test_write.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -364,8 +370,8 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="pyslha-comparison">
-<h1>pyslha comparison<a class="headerlink" href="#pyslha-comparison" title="Permalink to this headline"></a></h1>
+<section id="Result-writing-example">
+<h1>Result writing example<a class="headerlink" href="#Result-writing-example" title="Permalink to this headline"></a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -404,6 +410,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<section id="Print">
+<h2>Print<a class="headerlink" href="#Print" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -510,6 +518,264 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
         614.28571429,  742.85714286,  871.42857143, 1000.        ]), &#39;code&#39;: array([&#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;], dtype=&#39;&lt;U2&#39;)}
 </pre></div></div>
 </div>
+</section>
+<section id="Pandas">
+<h2>Pandas<a class="headerlink" href="#Pandas" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hepi</span><span class="o">.</span><span class="n">LD2DF</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>LO</th>
+      <th>NLO</th>
+      <th>NLO_PLUS_NLL</th>
+      <th>K_LO</th>
+      <th>K_NLO</th>
+      <th>K_NLO_PLUS_NLL</th>
+      <th>NLO_PLUS_NLL_OVER_NLO</th>
+      <th>VNLO</th>
+      <th>P_PLUS_K</th>
+      <th>RNLOG</th>
+      <th>...</th>
+      <th>precision</th>
+      <th>max_iters</th>
+      <th>invariant_mass</th>
+      <th>pt</th>
+      <th>result</th>
+      <th>id</th>
+      <th>model_path</th>
+      <th>mu</th>
+      <th>mass_1000011</th>
+      <th>code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.19828+/-0.00029</td>
+      <td>0.26266+/-0.00035</td>
+      <td>0.0+/-0</td>
+      <td>1.0+/-0</td>
+      <td>1.3247+/-0.0026</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>0.01041+/-0.00008</td>
+      <td>0.02941+/-0.00017</td>
+      <td>-0.002174+/-0.000031</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td>100.000000</td>
+      <td>100.000000</td>
+      <td>RS</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.010273+/-0.000013</td>
+      <td>0.012686+/-0.000015</td>
+      <td>0.0+/-0</td>
+      <td>1.0+/-0</td>
+      <td>1.2348+/-0.0021</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>0.0004728+/-0.0000034</td>
+      <td>0.001117+/-0.000004</td>
+      <td>(-7.77+/-0.19)e-05</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td>228.571429</td>
+      <td>228.571429</td>
+      <td>RS</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0017420+/-0.0000021</td>
+      <td>0.0020719+/-0.0000023</td>
+      <td>0.0+/-0</td>
+      <td>1.00000000000000000000+/-0.00000000000000000023</td>
+      <td>1.1894+/-0.0019</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>(7.41+/-0.05)e-05</td>
+      <td>0.0001738+/-0.0000007</td>
+      <td>(-9.95+/-0.20)e-06</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td>357.142857</td>
+      <td>357.142857</td>
+      <td>RS</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0004518+/-0.0000005</td>
+      <td>0.0005239+/-0.0000005</td>
+      <td>0.0+/-0</td>
+      <td>1.0+/-0</td>
+      <td>1.1596+/-0.0018</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>(1.815+/-0.012)e-05</td>
+      <td>(4.493+/-0.015)e-05</td>
+      <td>(-2.01+/-0.04)e-06</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td>485.714286</td>
+      <td>485.714286</td>
+      <td>RS</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.00014601+/-0.00000016</td>
+      <td>0.00016620+/-0.00000016</td>
+      <td>0.0+/-0</td>
+      <td>1.00000000000000000000+/-0.00000000000000000014</td>
+      <td>1.1383+/-0.0017</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>(5.610+/-0.035)e-06</td>
+      <td>(1.493+/-0.004)e-05</td>
+      <td>(-5.21+/-0.09)e-07</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td>614.285714</td>
+      <td>614.285714</td>
+      <td>RS</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>(5.395+/-0.006)e-05</td>
+      <td>(6.060+/-0.006)e-05</td>
+      <td>0.0+/-0</td>
+      <td>1.0+/-0</td>
+      <td>1.1233+/-0.0016</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>(2.001+/-0.012)e-06</td>
+      <td>(5.767+/-0.016)e-06</td>
+      <td>(-1.621+/-0.020)e-07</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td>742.857143</td>
+      <td>742.857143</td>
+      <td>RS</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>(2.1798+/-0.0022)e-05</td>
+      <td>(2.4274+/-0.0022)e-05</td>
+      <td>0.0+/-0</td>
+      <td>1.0+/-0</td>
+      <td>1.1136+/-0.0015</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>(7.86+/-0.05)e-07</td>
+      <td>(2.453+/-0.006)e-06</td>
+      <td>(-5.55+/-0.09)e-08</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td>871.428571</td>
+      <td>871.428571</td>
+      <td>RS</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>(9.381+/-0.009)e-06</td>
+      <td>(1.0401+/-0.0009)e-05</td>
+      <td>0.0+/-0</td>
+      <td>1.0+/-0</td>
+      <td>1.1088+/-0.0015</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>(3.315+/-0.019)e-07</td>
+      <td>(1.1158+/-0.0027)e-06</td>
+      <td>(-2.02+/-0.04)e-08</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>RS</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 38 columns</p>
+</div></div>
+</div>
+</section>
+<section id="CSV">
+<h2>CSV<a class="headerlink" href="#CSV" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -536,6 +802,9 @@ LO,NLO,NLO_PLUS_NLL,K_LO,K_NLO,K_NLO_PLUS_NLL,NLO_PLUS_NLL_OVER_NLO,VNLO,P_PLUS_
 
 </pre></div></div>
 </div>
+</section>
+<section id="JSON">
+<h2>JSON<a class="headerlink" href="#JSON" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -569,6 +838,7 @@ LO,NLO,NLO_PLUS_NLL,K_LO,K_NLO,K_NLO_PLUS_NLL,NLO_PLUS_NLL_OVER_NLO,VNLO,P_PLUS_
 </pre></div>
 </div>
 </div>
+</section>
 </section>
 
 
