@@ -26,12 +26,12 @@ from smpl import io
 from typing import List
 
 
-def title(axe,i:Input,scenario="",diff_L_R=None,extra="",**kwargs):
+def title(axe,i:Input,scenario="",diff_L_R=None,extra="",cms_energy=True,pdf_info=True,**kwargs):
     axe.set_title(
         "$pp\\to"+get_name(i.particle1)+get_name(i.particle2) + "$"
-        #+" at $\\sqrt{S} = " +str(i.energy/1000) + "$ TeV"
+        +(" at $\\sqrt{S} = " +str(i.energy/1000) + "$ TeV" if cms_energy else "")
         +" for " +(i.slha.split(".")[0] if scenario =="" else scenario)
-        #+" with " + i.pdf_nlo
+        +(" with " + i.pdf_nlo if pdf_info else "")
         + " " + extra
     )
 

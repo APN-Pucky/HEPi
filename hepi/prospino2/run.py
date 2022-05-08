@@ -22,7 +22,7 @@ class ProspinoResult(Result):
     """
 
 class ProspinoRunner(Runner):
-	# TODO add leptowaurk, stop and sbottom cases
+	# TODO add leptoqaurk, stop and sbottom cases
 	weakino_map = {
 		1000022 : 1,
 		1000023 : 2,

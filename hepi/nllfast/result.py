@@ -1,7 +1,7 @@
 from hepi.results import Result
 
 
-class ProspinoResult(Result):
+class NLLFastResult(Result):
     """
     (N)NLL-fast Result Data.
     """

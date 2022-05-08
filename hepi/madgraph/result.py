@@ -26,8 +26,8 @@ def is_valid(file:str,p:Input,d) -> bool :
     """
     order = p.order
     res = parse_single(file)
-    if order is Order.NLO_PLUS_NLL:
-        warnings.warn("MadGraph has no NLO_PLUS_NLL computation.")
+    if order is not Order.NLO and order is not Order.LO :
+        warnings.warn("MadGraph has only NLO and LO computation.")
     if res.LO is not None and order is Order.LO:
         return True
     if res.LO is not None and res.NLO is not None and order is Order.NLO:
