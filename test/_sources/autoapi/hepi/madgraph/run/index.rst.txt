@@ -18,21 +18,8 @@ Classes
 .. autoapisummary::
 
    hepi.madgraph.run.MadGraphRunParams
+   hepi.madgraph.run.MadGraphRunner
 
-
-
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.madgraph.run.set_path
-   hepi.madgraph.run.get_path
-   hepi.madgraph.run.run
-   hepi.madgraph.run._parse
-   hepi.madgraph.run.namehash
-   hepi.madgraph.run._queue
-   hepi.madgraph.run._run
 
 
 
@@ -41,28 +28,10 @@ Attributes
 
 .. autoapisummary::
 
-   hepi.madgraph.run.madgraph_path
-
-
-.. py:data:: madgraph_path
-   :annotation: = /opt/MG5_aMC_v2_7_0/
-
-   madgraph folder
-
-.. py:function:: set_path(p: str)
-
-   Set the path to the MadGraph folder containing the binary in './bin'.
-
-   :param p: New MadGraph path.
-   :type p: str
-
-
-.. py:function:: get_path()
-
-   Get the current MadGraph path.
-
-   :returns: current MadGraph path.
-   :rtype: str
+   hepi.madgraph.run.default_madgraph_runner
+   hepi.madgraph.run.run
+   hepi.madgraph.run.set_path
+   hepi.madgraph.run.get_path
 
 
 .. py:class:: MadGraphRunParams(dic, skip=False, madstr=True)
@@ -72,18 +41,81 @@ Attributes
    Parameters for MadGraph.
 
 
-.. py:function:: run(params: List[hepi.Input], noskip=False, madstr=True, para=True)
+.. py:class:: MadGraphRunner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
+
+   Bases: :py:obj:`hepi.run.Runner`
+
+   .. py:method:: _check_input(self, p: hepi.Input) -> bool
+
+      Checks input parameter for compatibility with Prospino
 
 
-.. py:function:: _parse(outputs: List[str]) -> List[hepi.madgraph.result.MadgraphResult]
+   .. py:method:: _is_valid(self, file: str, p: hepi.Input, d) -> bool
+
+      Verifies that a file is a complete output.
+
+      :param file: File path to be parsed.
+      :type file: str
+      :param p: Onput parameters.
+      :type p: :class:`hepi.Input`
+      :param d: Param dictionary.
+      :type d: :obj:`dict`
+
+      :returns: True if `file` could be parsed.
+      :rtype: bool
 
 
-.. py:function:: namehash(n)
+   .. py:method:: _parse_file(self, file: str) -> hepi.Result
+
+      Extracts results from an output file.
+
+      :param file: File path to be parsed.
+      :type file: str
+
+      :returns: If a value is not found in the file None is used.
+      :rtype: :class:`Result`
 
 
-.. py:function:: _queue(params: List[hepi.Input], noskip=False, madstr=True, para=True) -> List[MadGraphRunParams]
+   .. py:method:: _run(self, rps: List[hepi.run.RunParam], wait=True, parallel=True, sleep=0, **kwargs)
+
+      Runs Runner per :class:`RunParams`.
+
+      :param rps: Extended run parameters.
+      :type rps: :obj:`list` of :class:`RunParams`
+      :param bar: Enable info bar.
+      :type bar: bool
+      :param wait: Wait for parallel runs to finish.
+      :type wait: bool
+      :param sleep: Sleep seconds after starting subprocess.
+      :type sleep: int
+      :param parallel: Run jobs in parallel.
+      :type parallel: bool
+
+      :returns: return codes from jobs if `no_parse` is False.
+      :rtype: :obj:`list` of int
 
 
-.. py:function:: _run(rps: List[MadGraphRunParams], para=True)
+   .. py:method:: _prepare(self, p: hepi.Input, **kwargs) -> hepi.run.RunParam
 
+
+
+.. py:data:: default_madgraph_runner
+   
+
+   Default MadGraph Runner to provide backward compatibility
+
+.. py:data:: run
+   
+
+   
+
+.. py:data:: set_path
+   
+
+   
+
+.. py:data:: get_path
+   
+
+   
 

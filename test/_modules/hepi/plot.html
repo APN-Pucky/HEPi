@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-52-gdadd38f
+                0.1.4-53-g5b9ad78
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -56,6 +56,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
@@ -119,12 +120,12 @@ from smpl import io
 from typing import List
 
 
-<div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(axe,i:Input,scenario=&quot;&quot;,diff_L_R=None,extra=&quot;&quot;,**kwargs):
+<div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(axe,i:Input,scenario=&quot;&quot;,diff_L_R=None,extra=&quot;&quot;,cms_energy=True,pdf_info=True,**kwargs):
     axe.set_title(
         &quot;$pp\\to&quot;+get_name(i.particle1)+get_name(i.particle2) + &quot;$&quot;
-        #+&quot; at $\\sqrt{S} = &quot; +str(i.energy/1000) + &quot;$ TeV&quot;
+        +(&quot; at $\\sqrt{S} = &quot; +str(i.energy/1000) + &quot;$ TeV&quot; if cms_energy else &quot;&quot;)
         +&quot; for &quot; +(i.slha.split(&quot;.&quot;)[0] if scenario ==&quot;&quot; else scenario)
-        #+&quot; with &quot; + i.pdf_nlo
+        +(&quot; with &quot; + i.pdf_nlo if pdf_info else &quot;&quot;)
         + &quot; &quot; + extra
     )</div>
 

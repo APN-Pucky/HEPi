@@ -40,7 +40,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-52-gdadd38f
+                0.1.4-53-g5b9ad78
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -61,6 +61,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_spheno.html">SPheno example</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Result writing example</a><ul>
@@ -413,7 +414,7 @@ div.rendered_html tbody tr:hover {
 <section id="Print">
 <h2>Print<a class="headerlink" href="#Print" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
@@ -421,7 +422,7 @@ div.rendered_html tbody tr:hover {
         <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;cteq6l1&quot;</span><span class="p">,</span><span class="s2">&quot;cteq66&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
         <span class="c1">#i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,&quot;CT14lo&quot;,&quot;CT14lo&quot;,1., 1.,model_path=model_path,id=&quot;5&quot;)</span>
         <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">([</span><span class="n">i</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">([</span><span class="n">i</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
         <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">noskip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">)</span>
 </pre></div>
@@ -432,97 +433,107 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running: 8 jobs
-RESTART None None None ./output/1ae08df7442cd61d93fad544813d2e60e103232bd2bb6e421f19672f8a944a32.out
-RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243de093d39b474e4f75.out
-{&#39;LO&#39;: array([0.19827892+/-0.00028789131, 0.01027317+/-1.3097878e-05,
-       0.0017420349+/-2.0549253e-06, 0.00045177946+/-5.0512563e-07,
-       0.00014600929+/-1.5697746e-07, 5.3950657e-05+/-5.6279928e-08,
-       2.1797802e-05+/-2.2197746e-08, 9.3808373e-06+/-9.3677641e-09],
-      dtype=object), &#39;NLO&#39;: array([0.26266219+/-0.00035483454, 0.012685717+/-1.4738104e-05,
-       0.0020719289+/-2.2534652e-06, 0.00052389967+/-5.389595e-07,
-       0.00016619981+/-1.6377336e-07, 6.0600809e-05+/-5.7603335e-08,
-       2.427351e-05+/-2.2387002e-08, 1.0401314e-05+/-9.3348503e-09],
-      dtype=object), &#39;NLO_PLUS_NLL&#39;: array([0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0,
-       0.0+/-0], dtype=object), &#39;K_LO&#39;: array([1.0+/-0, 1.0+/-0, 1.0+/-2.336179591111431e-19, 1.0+/-0,
-       1.0+/-1.4277016816777176e-19, 1.0+/-0, 1.0+/-0, 1.0+/-0],
-      dtype=object), &#39;K_NLO&#39;: array([1.3247106147239456+/-0.0026271840746797293,
-       1.2348395870018698+/-0.002129971888538812,
-       1.1893727846669433+/-0.0019083394068543829,
-       1.1596358763189456+/-0.0017618913585157765,
-       1.1382824339464974+/-0.0016600577186290635,
-       1.1232635962153343+/-0.0015852483215957802,
-       1.1135760385381976+/-0.001529955842518204,
+Running: 9 jobs
+skipRESTART None None None ./output/63c20af315a0b83edd39d21c3f06b2187b0b692d66bdcd1ce2ae2e16198666a5.out
+RESTART None None None ./output/ca04855db906183d80c2d4fd4b13111163b3bcad0ab46329b245654a03957af6.out
+RESTART None None None ./output/ccf140c56e3c9d05bdbfe705a842af550f6b2c7437edb5d25b76b9c716738805.out
+RESTART None None None ./output/181cba7fdbdaf24f99cd5aa1a01e3231910ce4ffe46dfc815ba2e6b5b21d0765.out
+RESTART None None None ./output/98262bf7beaf5b8c27bb7caf1e1ba5d36e9a1b630a5a6ce107ecc738994c84ad.out
+RESTART None None None ./output/8c9890bc4fc87b5f95d2a02ea92732e501cbdd9bc86a00b9c3813b0347f61899.out
+RESTART None None None ./output/ad88413ece0f8ad871ebd9b876c1da88b92cf416ca935200c3fc5f5cc44e7267.out
+skip{&#39;LO&#39;: array([0.19827892+/-0.00028789131, 0.013518169+/-1.7450437e-05,
+       0.002574602+/-3.0875529e-06, 0.00072526924+/-8.2560628e-07,
+       0.00025157404+/-2.7543847e-07, 9.9243804e-05+/-1.0541245e-07,
+       4.2707337e-05+/-4.4261184e-08, 1.9557864e-05+/-1.9863726e-08,
+       9.3808373e-06+/-9.3677641e-09], dtype=object), &#39;NLO&#39;: array([0.26266219+/-0.00035483454, 0.016796404+/-1.9662724e-05,
+       0.0030864231+/-3.409076e-06, 0.00084837761+/-8.8924337e-07,
+       0.00028882589+/-2.9046289e-07, 0.00011233356+/-1.0906148e-07,
+       4.7848073e-05+/-4.5120962e-08, 2.1762029e-05+/-2.0001873e-08,
+       1.0401314e-05+/-9.3348503e-09], dtype=object), &#39;NLO_PLUS_NLL&#39;: array([0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0,
+       0.0+/-0, 0.0+/-0], dtype=object), &#39;K_LO&#39;: array([1.0+/-0, 1.0+/-0, 1.0+/-0, 1.0+/-0, 1.0+/-0, 1.0+/-0, 1.0+/-0,
+       1.0+/-0, 1.0+/-0], dtype=object), &#39;K_NLO&#39;: array([1.3247106147239456+/-0.0026271840746797293,
+       1.2425058452812656+/-0.002165247517208387,
+       1.1987962022868+/-0.0019545055030903086,
+       1.1697416120942894+/-0.0018100734503036571,
+       1.1480750955066747+/-0.0017067699647146154,
+       1.1318949442929456+/-0.0016288154485290425,
+       1.120371260797647+/-0.00156985924333877,
+       1.1126996792696788+/-0.0015241549475239749,
        1.1087831147012859+/-0.0014886891411263526], dtype=object), &#39;K_NLO_PLUS_NLL&#39;: array([0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0,
-       0.0+/-0], dtype=object), &#39;NLO_PLUS_NLL_OVER_NLO&#39;: array([0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0,
-       0.0+/-0], dtype=object), &#39;VNLO&#39;: array([0.01041012+/-8.2978566e-05, 0.00047278892+/-3.391944e-06,
-       7.4065143e-05+/-4.9588442e-07, 1.8149926e-05+/-1.1663387e-07,
-       5.6104445e-06+/-3.4817007e-08, 2.0008648e-06+/-1.2049935e-08,
-       7.8639375e-07+/-4.6203322e-09, 3.3146904e-07+/-1.9062864e-09],
-      dtype=object), &#39;P_PLUS_K&#39;: array([0.029414681+/-0.00016576186, 0.0011170681+/-4.2910112e-06,
-       0.00017377771+/-6.5157433e-07, 4.4930904e-05+/-1.4775241e-07,
-       1.4930485e-05+/-4.4496754e-08, 5.767099e-06+/-1.5919381e-08,
-       2.4531312e-06+/-6.3706045e-09, 1.1157919e-06+/-2.7409542e-09],
-      dtype=object), &#39;RNLOG&#39;: array([-0.002174362+/-3.1345446e-05, -7.7689646e-05+/-1.9432754e-06,
-       -9.9472127e-06+/-2.0311267e-07, -2.0116495e-06+/-3.5696284e-08,
-       -5.2072331e-07+/-8.7746246e-09, -1.6210965e-07+/-1.9971823e-09,
-       -5.5458201e-08+/-9.4045928e-10, -2.0154761e-08+/-3.9732887e-10],
-      dtype=object), &#39;RNLOQ&#39;: array([0.0097501419+/-2.4417777e-05, 0.00026621965+/-6.1568973e-07,
-       2.9919662e-05+/-6.5509652e-08, 5.6986393e-06+/-1.187522e-08,
-       1.4389141e-06+/-2.8871619e-09, 4.3330739e-07+/-8.3701255e-10,
-       1.4707696e-07+/-2.7656597e-10, 5.4399032e-08+/-9.9166043e-11],
-      dtype=object), &#39;VNLO_PLUS_P_PLUS_K&#39;: array([0.039824801+/-0.00018537107823518736,
-       0.00158985702+/-5.469740507342322e-06,
-       0.000247842853+/-8.188103965593532e-07,
-       6.308083e-05+/-1.8823983184221398e-07,
-       2.05409295e-05+/-5.6499425598625026e-08,
-       7.767963799999999e-06+/-1.9965661144259312e-08,
-       3.23952495e-06+/-7.869693217259304e-09,
+       0.0+/-0, 0.0+/-0], dtype=object), &#39;NLO_PLUS_NLL_OVER_NLO&#39;: array([0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0,
+       0.0+/-0, 0.0+/-0], dtype=object), &#39;VNLO&#39;: array([0.01041012+/-8.2978566e-05, 0.00062999549+/-4.5708582e-06,
+       0.00011133857+/-7.5493641e-07, 2.9713222e-05+/-1.9382607e-07,
+       9.8719518e-06+/-6.2280043e-08, 3.7594719e-06+/-2.3051296e-08,
+       1.5719088e-06+/-9.405684e-09, 7.0350544e-07+/-4.1220062e-09,
+       3.3146904e-07+/-1.9062864e-09], dtype=object), &#39;P_PLUS_K&#39;: array([0.029414681+/-0.00016576186, 0.0015021708+/-5.9227147e-06,
+       0.00025936996+/-1.0100834e-06, 7.1877866e-05+/-2.4698419e-07,
+       2.5296996e-05+/-7.8987327e-08, 1.0305499e-05+/-2.976772e-08,
+       4.6222384e-06+/-1.2553489e-08, 2.2159232e-06+/-5.7139357e-09,
+       1.1157919e-06+/-2.7409542e-09], dtype=object), &#39;RNLOG&#39;: array([-0.002174362+/-3.1345446e-05, -0.00010599703+/-1.9269272e-06,
+       -1.5475813e-05+/-2.916778e-07, -3.4678567e-06+/-6.3252752e-08,
+       -9.9356556e-07+/-1.7022619e-08, -3.3961422e-07+/-3.235463e-09,
+       -1.2291711e-07+/-1.5537485e-09, -4.9023553e-08+/-8.929878e-10,
+       -2.0154761e-08+/-3.9732887e-10], dtype=object), &#39;RNLOQ&#39;: array([0.0097501419+/-2.4417777e-05, 0.00037294223+/-8.6995618e-07,
+       4.8418188e-05+/-1.0758592e-07, 1.0181537e-05+/-2.1571128e-08,
+       2.7874734e-06+/-5.7017162e-09, 9.0199296e-07+/-1.7835078e-09,
+       3.2755533e-07+/-6.274804e-10, 1.29343e-07+/-2.4269614e-10,
+       5.4399032e-08+/-9.9166043e-11], dtype=object), &#39;VNLO_PLUS_P_PLUS_K&#39;: array([0.039824801+/-0.00018537107823518736,
+       0.00213216629+/-7.48139653421093e-06,
+       0.00037070852999999997+/-1.2610303160904768e-06,
+       0.000101591088+/-3.139581747965818e-07,
+       3.51689478e-05+/-1.005872834044482e-07,
+       1.40649709e-05+/-3.7649427635463674e-08,
+       6.1941472e-06+/-1.568620341513449e-08,
+       2.91942864e-06+/-7.0455657187037104e-09,
        1.44726094e-06+/-3.3386760497722146e-09], dtype=object), &#39;RNLO&#39;: array([0.0075757799+/-3.973367361018416e-05,
-       0.000188530004+/-2.038478139169668e-06,
-       1.99724493e-05+/-2.1341572392794774e-07,
-       3.6869898e-06+/-3.761974935399033e-08,
-       9.1819079e-07+/-9.237409848422703e-09,
-       2.7119774e-07+/-2.1654854301728264e-09,
-       9.1618759e-08+/-9.802817927005271e-10,
+       0.00026694520000000005+/-2.114207224758262e-06,
+       3.2942374999999996e-05+/-3.1088690740377987e-07,
+       6.7136803e-06+/-6.682981519326452e-08,
+       1.7939078400000002e-06+/-1.795213428104033e-08,
+       5.6237874e-07+/-3.6944716668327343e-09,
+       2.0463822e-07+/-1.6756688376992663e-09,
+       8.0319447e-08+/-9.253802609304672e-10,
        3.4244271e-08+/-4.095169532751419e-10], dtype=object), &#39;RNLO_PLUS_VNLO_PLUS_P_PLUS_K&#39;: array([0.0474005809+/-0.00018958164854393633,
-       0.001778387024+/-5.837247154398559e-06,
-       0.00026781530230000005+/-8.461659037880073e-07,
-       6.67678198e-05+/-1.919621833420376e-07,
-       2.145912029e-05+/-5.724958369876851e-08,
-       8.03916154e-06+/-2.0082752602063216e-08,
-       3.3311437090000002e-06+/-7.930512198267981e-09,
-       1.481505211e-06+/-3.3636976529323134e-09], dtype=object), &#39;order&#39;: array([1, 1, 1, 1, 1, 1, 1, 1]), &#39;energy&#39;: array([13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000]), &#39;energyhalf&#39;: array([6500., 6500., 6500., 6500., 6500., 6500., 6500., 6500.]), &#39;particle1&#39;: array([1000011, 1000011, 1000011, 1000011, 1000011, 1000011, 1000011,
-       1000011]), &#39;particle2&#39;: array([-1000011, -1000011, -1000011, -1000011, -1000011, -1000011,
-       -1000011, -1000011]), &#39;slha&#39;: array([&#39;mastercode_with_gm2.in_mass_1000011_100.0&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_228.57142857142858&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_357.14285714285717&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_485.7142857142858&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_614.2857142857143&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_742.8571428571429&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_871.4285714285716&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_1000.0&#39;], dtype=&#39;&lt;U54&#39;), &#39;pdf_lo&#39;: array([&#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;,
-       &#39;cteq6l1&#39;, &#39;cteq6l1&#39;], dtype=&#39;&lt;U7&#39;), &#39;pdfset_lo&#39;: array([0, 0, 0, 0, 0, 0, 0, 0]), &#39;pdf_nlo&#39;: array([&#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;,
-       &#39;cteq66&#39;, &#39;cteq66&#39;], dtype=&#39;&lt;U6&#39;), &#39;pdfset_nlo&#39;: array([0, 0, 0, 0, 0, 0, 0, 0]), &#39;pdf_lo_id&#39;: array([10042, 10042, 10042, 10042, 10042, 10042, 10042, 10042]), &#39;pdf_nlo_id&#39;: array([10550, 10550, 10550, 10550, 10550, 10550, 10550, 10550]), &#39;mu_f&#39;: array([1., 1., 1., 1., 1., 1., 1., 1.]), &#39;mu_r&#39;: array([1., 1., 1., 1., 1., 1., 1., 1.]), &#39;precision&#39;: array([0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]), &#39;max_iters&#39;: array([50, 50, 50, 50, 50, 50, 50, 50]), &#39;invariant_mass&#39;: array([&#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;],
-      dtype=&#39;&lt;U4&#39;), &#39;pt&#39;: array([&#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;],
-      dtype=&#39;&lt;U4&#39;), &#39;result&#39;: array([&#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;,
-       &#39;total&#39;], dtype=&#39;&lt;U5&#39;), &#39;id&#39;: array([&#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;], dtype=&#39;&lt;U1&#39;), &#39;model_path&#39;: array([&#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
+       0.0023991114900000004+/-7.774391699118547e-06,
+       0.000403650905+/-1.2987871755196593e-06,
+       0.0001083047683+/-3.2099214900113506e-07,
+       3.6962855640000004e-05+/-1.0217671313920449e-07,
+       1.4627349640000001e-05+/-3.783025934586024e-08,
+       6.39878542e-06+/-1.577545066343949e-08,
+       2.999748087e-06+/-7.10607661961878e-09,
+       1.481505211e-06+/-3.3636976529323134e-09], dtype=object), &#39;order&#39;: array([1, 1, 1, 1, 1, 1, 1, 1, 1]), &#39;energy&#39;: array([13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000]), &#39;energyhalf&#39;: array([6500., 6500., 6500., 6500., 6500., 6500., 6500., 6500., 6500.]), &#39;particle1&#39;: array([1000011, 1000011, 1000011, 1000011, 1000011, 1000011, 1000011,
+       1000011, 1000011]), &#39;particle2&#39;: array([-1000011, -1000011, -1000011, -1000011, -1000011, -1000011,
+       -1000011, -1000011, -1000011]), &#39;slha&#39;: array([&#39;mastercode_with_gm2.in_mass_1000011_100.0&#39;,
+       &#39;mastercode_with_gm2.in_mass_1000011_212.5&#39;,
+       &#39;mastercode_with_gm2.in_mass_1000011_325.0&#39;,
+       &#39;mastercode_with_gm2.in_mass_1000011_437.5&#39;,
+       &#39;mastercode_with_gm2.in_mass_1000011_550.0&#39;,
+       &#39;mastercode_with_gm2.in_mass_1000011_662.5&#39;,
+       &#39;mastercode_with_gm2.in_mass_1000011_775.0&#39;,
+       &#39;mastercode_with_gm2.in_mass_1000011_887.5&#39;,
+       &#39;mastercode_with_gm2.in_mass_1000011_1000.0&#39;], dtype=&#39;&lt;U42&#39;), &#39;pdf_lo&#39;: array([&#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;,
+       &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;], dtype=&#39;&lt;U7&#39;), &#39;pdfset_lo&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0]), &#39;pdf_nlo&#39;: array([&#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;,
+       &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;], dtype=&#39;&lt;U6&#39;), &#39;pdfset_nlo&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0]), &#39;pdf_lo_id&#39;: array([10042, 10042, 10042, 10042, 10042, 10042, 10042, 10042, 10042]), &#39;pdf_nlo_id&#39;: array([10550, 10550, 10550, 10550, 10550, 10550, 10550, 10550, 10550]), &#39;mu_f&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1.]), &#39;mu_r&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1.]), &#39;precision&#39;: array([0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]), &#39;max_iters&#39;: array([50, 50, 50, 50, 50, 50, 50, 50, 50]), &#39;invariant_mass&#39;: array([&#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;,
+       &#39;auto&#39;], dtype=&#39;&lt;U4&#39;), &#39;pt&#39;: array([&#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;,
+       &#39;auto&#39;], dtype=&#39;&lt;U4&#39;), &#39;result&#39;: array([&#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;,
+       &#39;total&#39;, &#39;total&#39;], dtype=&#39;&lt;U5&#39;), &#39;id&#39;: array([&#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;], dtype=&#39;&lt;U1&#39;), &#39;model_path&#39;: array([&#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
        &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
        &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
        &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
        &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
        &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
        &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
-       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;], dtype=&#39;&lt;U40&#39;), &#39;mu&#39;: array([ 100.        ,  228.57142857,  357.14285714,  485.71428571,
-        614.28571429,  742.85714286,  871.42857143, 1000.        ]), &#39;mass_1000011&#39;: array([ 100.        ,  228.57142857,  357.14285714,  485.71428571,
-        614.28571429,  742.85714286,  871.42857143, 1000.        ]), &#39;code&#39;: array([&#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;], dtype=&#39;&lt;U2&#39;)}
+       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
+       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;], dtype=&#39;&lt;U40&#39;), &#39;mu&#39;: array([ 100. ,  212.5,  325. ,  437.5,  550. ,  662.5,  775. ,  887.5,
+       1000. ]), &#39;mass_1000011&#39;: array([ 100. ,  212.5,  325. ,  437.5,  550. ,  662.5,  775. ,  887.5,
+       1000. ]), &#39;code&#39;: array([&#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;, &#39;RS&#39;], dtype=&#39;&lt;U2&#39;)}
 </pre></div></div>
 </div>
 </section>
 <section id="Pandas">
 <h2>Pandas<a class="headerlink" href="#Pandas" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hepi</span><span class="o">.</span><span class="n">LD2DF</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">)</span>
@@ -530,7 +541,7 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -596,22 +607,22 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
       <td>total</td>
       <td>5</td>
       <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
-      <td>100.000000</td>
-      <td>100.000000</td>
+      <td>100.0</td>
+      <td>100.0</td>
       <td>RS</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.010273+/-0.000013</td>
-      <td>0.012686+/-0.000015</td>
+      <td>0.013518+/-0.000017</td>
+      <td>0.016796+/-0.000020</td>
       <td>0.0+/-0</td>
       <td>1.0+/-0</td>
-      <td>1.2348+/-0.0021</td>
+      <td>1.2425+/-0.0022</td>
       <td>0.0+/-0</td>
       <td>0.0+/-0</td>
-      <td>0.0004728+/-0.0000034</td>
-      <td>0.001117+/-0.000004</td>
-      <td>(-7.77+/-0.19)e-05</td>
+      <td>0.000630+/-0.000005</td>
+      <td>0.001502+/-0.000006</td>
+      <td>-0.0001060+/-0.0000019</td>
       <td>...</td>
       <td>0.01</td>
       <td>50</td>
@@ -620,22 +631,22 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
       <td>total</td>
       <td>5</td>
       <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
-      <td>228.571429</td>
-      <td>228.571429</td>
+      <td>212.5</td>
+      <td>212.5</td>
       <td>RS</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.0017420+/-0.0000021</td>
-      <td>0.0020719+/-0.0000023</td>
+      <td>0.0025746+/-0.0000031</td>
+      <td>0.0030864+/-0.0000034</td>
       <td>0.0+/-0</td>
-      <td>1.00000000000000000000+/-0.00000000000000000023</td>
-      <td>1.1894+/-0.0019</td>
+      <td>1.0+/-0</td>
+      <td>1.1988+/-0.0020</td>
       <td>0.0+/-0</td>
       <td>0.0+/-0</td>
-      <td>(7.41+/-0.05)e-05</td>
-      <td>0.0001738+/-0.0000007</td>
-      <td>(-9.95+/-0.20)e-06</td>
+      <td>0.0001113+/-0.0000008</td>
+      <td>0.0002594+/-0.0000010</td>
+      <td>(-1.548+/-0.029)e-05</td>
       <td>...</td>
       <td>0.01</td>
       <td>50</td>
@@ -644,22 +655,22 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
       <td>total</td>
       <td>5</td>
       <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
-      <td>357.142857</td>
-      <td>357.142857</td>
+      <td>325.0</td>
+      <td>325.0</td>
       <td>RS</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.0004518+/-0.0000005</td>
-      <td>0.0005239+/-0.0000005</td>
+      <td>0.0007253+/-0.0000008</td>
+      <td>0.0008484+/-0.0000009</td>
       <td>0.0+/-0</td>
       <td>1.0+/-0</td>
-      <td>1.1596+/-0.0018</td>
+      <td>1.1697+/-0.0018</td>
       <td>0.0+/-0</td>
       <td>0.0+/-0</td>
-      <td>(1.815+/-0.012)e-05</td>
-      <td>(4.493+/-0.015)e-05</td>
-      <td>(-2.01+/-0.04)e-06</td>
+      <td>(2.971+/-0.019)e-05</td>
+      <td>(7.188+/-0.025)e-05</td>
+      <td>(-3.47+/-0.06)e-06</td>
       <td>...</td>
       <td>0.01</td>
       <td>50</td>
@@ -668,22 +679,22 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
       <td>total</td>
       <td>5</td>
       <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
-      <td>485.714286</td>
-      <td>485.714286</td>
+      <td>437.5</td>
+      <td>437.5</td>
       <td>RS</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.00014601+/-0.00000016</td>
-      <td>0.00016620+/-0.00000016</td>
+      <td>0.00025157+/-0.00000028</td>
+      <td>0.00028883+/-0.00000029</td>
       <td>0.0+/-0</td>
-      <td>1.00000000000000000000+/-0.00000000000000000014</td>
-      <td>1.1383+/-0.0017</td>
+      <td>1.0+/-0</td>
+      <td>1.1481+/-0.0017</td>
       <td>0.0+/-0</td>
       <td>0.0+/-0</td>
-      <td>(5.610+/-0.035)e-06</td>
-      <td>(1.493+/-0.004)e-05</td>
-      <td>(-5.21+/-0.09)e-07</td>
+      <td>(9.87+/-0.06)e-06</td>
+      <td>(2.530+/-0.008)e-05</td>
+      <td>(-9.94+/-0.17)e-07</td>
       <td>...</td>
       <td>0.01</td>
       <td>50</td>
@@ -692,22 +703,22 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
       <td>total</td>
       <td>5</td>
       <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
-      <td>614.285714</td>
-      <td>614.285714</td>
+      <td>550.0</td>
+      <td>550.0</td>
       <td>RS</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>(5.395+/-0.006)e-05</td>
-      <td>(6.060+/-0.006)e-05</td>
+      <td>(9.924+/-0.011)e-05</td>
+      <td>0.00011233+/-0.00000011</td>
       <td>0.0+/-0</td>
       <td>1.0+/-0</td>
-      <td>1.1233+/-0.0016</td>
+      <td>1.1319+/-0.0016</td>
       <td>0.0+/-0</td>
       <td>0.0+/-0</td>
-      <td>(2.001+/-0.012)e-06</td>
-      <td>(5.767+/-0.016)e-06</td>
-      <td>(-1.621+/-0.020)e-07</td>
+      <td>(3.759+/-0.023)e-06</td>
+      <td>(1.0305+/-0.0030)e-05</td>
+      <td>(-3.396+/-0.032)e-07</td>
       <td>...</td>
       <td>0.01</td>
       <td>50</td>
@@ -716,22 +727,22 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
       <td>total</td>
       <td>5</td>
       <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
-      <td>742.857143</td>
-      <td>742.857143</td>
+      <td>662.5</td>
+      <td>662.5</td>
       <td>RS</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>(2.1798+/-0.0022)e-05</td>
-      <td>(2.4274+/-0.0022)e-05</td>
+      <td>(4.271+/-0.004)e-05</td>
+      <td>(4.785+/-0.005)e-05</td>
       <td>0.0+/-0</td>
       <td>1.0+/-0</td>
-      <td>1.1136+/-0.0015</td>
+      <td>1.1204+/-0.0016</td>
       <td>0.0+/-0</td>
       <td>0.0+/-0</td>
-      <td>(7.86+/-0.05)e-07</td>
-      <td>(2.453+/-0.006)e-06</td>
-      <td>(-5.55+/-0.09)e-08</td>
+      <td>(1.572+/-0.009)e-06</td>
+      <td>(4.622+/-0.013)e-06</td>
+      <td>(-1.229+/-0.016)e-07</td>
       <td>...</td>
       <td>0.01</td>
       <td>50</td>
@@ -740,12 +751,36 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
       <td>total</td>
       <td>5</td>
       <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
-      <td>871.428571</td>
-      <td>871.428571</td>
+      <td>775.0</td>
+      <td>775.0</td>
       <td>RS</td>
     </tr>
     <tr>
       <th>7</th>
+      <td>(1.9558+/-0.0020)e-05</td>
+      <td>(2.1762+/-0.0020)e-05</td>
+      <td>0.0+/-0</td>
+      <td>1.0+/-0</td>
+      <td>1.1127+/-0.0015</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>(7.04+/-0.04)e-07</td>
+      <td>(2.216+/-0.006)e-06</td>
+      <td>(-4.90+/-0.09)e-08</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td>887.5</td>
+      <td>887.5</td>
+      <td>RS</td>
+    </tr>
+    <tr>
+      <th>8</th>
       <td>(9.381+/-0.009)e-06</td>
       <td>(1.0401+/-0.0009)e-05</td>
       <td>0.0+/-0</td>
@@ -764,20 +799,20 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
       <td>total</td>
       <td>5</td>
       <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
-      <td>1000.000000</td>
-      <td>1000.000000</td>
+      <td>1000.0</td>
+      <td>1000.0</td>
       <td>RS</td>
     </tr>
   </tbody>
 </table>
-<p>8 rows × 38 columns</p>
+<p>9 rows × 38 columns</p>
 </div></div>
 </div>
 </section>
 <section id="CSV">
 <h2>CSV<a class="headerlink" href="#CSV" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hepi</span><span class="o">.</span><span class="n">write_csv</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,</span><span class="s2">&quot;out.csv&quot;</span><span class="p">)</span>
@@ -792,12 +827,13 @@ RESTART None None None ./output/ecabbd21c33198dead14d14469f2fd5e7eb46a473426243d
 <div class="highlight"><pre>
 LO,NLO,NLO_PLUS_NLL,K_LO,K_NLO,K_NLO_PLUS_NLL,NLO_PLUS_NLL_OVER_NLO,VNLO,P_PLUS_K,RNLOG,RNLOQ,VNLO_PLUS_P_PLUS_K,RNLO,RNLO_PLUS_VNLO_PLUS_P_PLUS_K,order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model_path,mu,mass_1000011,code
 0.19828+/-0.00029,0.26266+/-0.00035,0.0+/-0,1.0+/-0,1.3247+/-0.0026,0.0+/-0,0.0+/-0,0.01041+/-0.00008,0.02941+/-0.00017,-0.002174+/-0.000031,0.009750+/-0.000024,0.03982+/-0.00019,0.00758+/-0.00004,0.04740+/-0.00019,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_100.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,100.0,100.0,RS
-0.010273+/-0.000013,0.012686+/-0.000015,0.0+/-0,1.0+/-0,1.2348+/-0.0021,0.0+/-0,0.0+/-0,0.0004728+/-0.0000034,0.001117+/-0.000004,(-7.77+/-0.19)e-05,0.0002662+/-0.0000006,0.001590+/-0.000005,0.0001885+/-0.0000020,0.001778+/-0.000006,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_228.57142857142858,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,228.57142857142858,228.57142857142858,RS
-0.0017420+/-0.0000021,0.0020719+/-0.0000023,0.0+/-0,1.00000000000000000000+/-0.00000000000000000023,1.1894+/-0.0019,0.0+/-0,0.0+/-0,(7.41+/-0.05)e-05,0.0001738+/-0.0000007,(-9.95+/-0.20)e-06,(2.992+/-0.007)e-05,0.0002478+/-0.0000008,(1.997+/-0.021)e-05,0.0002678+/-0.0000008,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_357.14285714285717,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,357.14285714285717,357.14285714285717,RS
-0.0004518+/-0.0000005,0.0005239+/-0.0000005,0.0+/-0,1.0+/-0,1.1596+/-0.0018,0.0+/-0,0.0+/-0,(1.815+/-0.012)e-05,(4.493+/-0.015)e-05,(-2.01+/-0.04)e-06,(5.699+/-0.012)e-06,(6.308+/-0.019)e-05,(3.69+/-0.04)e-06,(6.677+/-0.019)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_485.7142857142858,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,485.7142857142858,485.7142857142858,RS
-0.00014601+/-0.00000016,0.00016620+/-0.00000016,0.0+/-0,1.00000000000000000000+/-0.00000000000000000014,1.1383+/-0.0017,0.0+/-0,0.0+/-0,(5.610+/-0.035)e-06,(1.493+/-0.004)e-05,(-5.21+/-0.09)e-07,(1.4389+/-0.0029)e-06,(2.054+/-0.006)e-05,(9.18+/-0.09)e-07,(2.146+/-0.006)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_614.2857142857143,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,614.2857142857143,614.2857142857143,RS
-(5.395+/-0.006)e-05,(6.060+/-0.006)e-05,0.0+/-0,1.0+/-0,1.1233+/-0.0016,0.0+/-0,0.0+/-0,(2.001+/-0.012)e-06,(5.767+/-0.016)e-06,(-1.621+/-0.020)e-07,(4.333+/-0.008)e-07,(7.768+/-0.020)e-06,(2.712+/-0.022)e-07,(8.039+/-0.020)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_742.8571428571429,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,742.8571428571429,742.8571428571429,RS
-(2.1798+/-0.0022)e-05,(2.4274+/-0.0022)e-05,0.0+/-0,1.0+/-0,1.1136+/-0.0015,0.0+/-0,0.0+/-0,(7.86+/-0.05)e-07,(2.453+/-0.006)e-06,(-5.55+/-0.09)e-08,(1.4708+/-0.0028)e-07,(3.240+/-0.008)e-06,(9.16+/-0.10)e-08,(3.331+/-0.008)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_871.4285714285716,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,871.4285714285716,871.4285714285716,RS
+0.013518+/-0.000017,0.016796+/-0.000020,0.0+/-0,1.0+/-0,1.2425+/-0.0022,0.0+/-0,0.0+/-0,0.000630+/-0.000005,0.001502+/-0.000006,-0.0001060+/-0.0000019,0.0003729+/-0.0000009,0.002132+/-0.000007,0.0002669+/-0.0000021,0.002399+/-0.000008,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_212.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,212.5,212.5,RS
+0.0025746+/-0.0000031,0.0030864+/-0.0000034,0.0+/-0,1.0+/-0,1.1988+/-0.0020,0.0+/-0,0.0+/-0,0.0001113+/-0.0000008,0.0002594+/-0.0000010,(-1.548+/-0.029)e-05,(4.842+/-0.011)e-05,0.0003707+/-0.0000013,(3.294+/-0.031)e-05,0.0004037+/-0.0000013,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_325.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,325.0,325.0,RS
+0.0007253+/-0.0000008,0.0008484+/-0.0000009,0.0+/-0,1.0+/-0,1.1697+/-0.0018,0.0+/-0,0.0+/-0,(2.971+/-0.019)e-05,(7.188+/-0.025)e-05,(-3.47+/-0.06)e-06,(1.0182+/-0.0022)e-05,0.00010159+/-0.00000031,(6.71+/-0.07)e-06,0.00010830+/-0.00000032,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_437.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,437.5,437.5,RS
+0.00025157+/-0.00000028,0.00028883+/-0.00000029,0.0+/-0,1.0+/-0,1.1481+/-0.0017,0.0+/-0,0.0+/-0,(9.87+/-0.06)e-06,(2.530+/-0.008)e-05,(-9.94+/-0.17)e-07,(2.787+/-0.006)e-06,(3.517+/-0.010)e-05,(1.794+/-0.018)e-06,(3.696+/-0.010)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_550.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,550.0,550.0,RS
+(9.924+/-0.011)e-05,0.00011233+/-0.00000011,0.0+/-0,1.0+/-0,1.1319+/-0.0016,0.0+/-0,0.0+/-0,(3.759+/-0.023)e-06,(1.0305+/-0.0030)e-05,(-3.396+/-0.032)e-07,(9.020+/-0.018)e-07,(1.406+/-0.004)e-05,(5.62+/-0.04)e-07,(1.463+/-0.004)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_662.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,662.5,662.5,RS
+(4.271+/-0.004)e-05,(4.785+/-0.005)e-05,0.0+/-0,1.0+/-0,1.1204+/-0.0016,0.0+/-0,0.0+/-0,(1.572+/-0.009)e-06,(4.622+/-0.013)e-06,(-1.229+/-0.016)e-07,(3.276+/-0.006)e-07,(6.194+/-0.016)e-06,(2.046+/-0.017)e-07,(6.399+/-0.016)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_775.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,775.0,775.0,RS
+(1.9558+/-0.0020)e-05,(2.1762+/-0.0020)e-05,0.0+/-0,1.0+/-0,1.1127+/-0.0015,0.0+/-0,0.0+/-0,(7.04+/-0.04)e-07,(2.216+/-0.006)e-06,(-4.90+/-0.09)e-08,(1.2934+/-0.0024)e-07,(2.919+/-0.007)e-06,(8.03+/-0.09)e-08,(3.000+/-0.007)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_887.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,887.5,887.5,RS
 (9.381+/-0.009)e-06,(1.0401+/-0.0009)e-05,0.0+/-0,1.0+/-0,1.1088+/-0.0015,0.0+/-0,0.0+/-0,(3.315+/-0.019)e-07,(1.1158+/-0.0027)e-06,(-2.02+/-0.04)e-08,(5.440+/-0.010)e-08,(1.4473+/-0.0033)e-06,(3.42+/-0.04)e-08,(1.4815+/-0.0034)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_1000.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,1000.0,1000.0,RS
 
 </pre></div></div>
@@ -806,7 +842,7 @@ LO,NLO,NLO_PLUS_NLL,K_LO,K_NLO,K_NLO_PLUS_NLL,NLO_PLUS_NLL_OVER_NLO,VNLO,P_PLUS_
 <section id="JSON">
 <h2>JSON<a class="headerlink" href="#JSON" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hepi</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="s2">&quot;mass_1000011&quot;</span><span class="p">,</span><span class="s2">&quot;out.json&quot;</span><span class="p">,</span><span class="n">error_sym</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -819,7 +855,7 @@ LO,NLO,NLO_PLUS_NLL,K_LO,K_NLO,K_NLO_PLUS_NLL,NLO_PLUS_NLL_OVER_NLO,VNLO,P_PLUS_
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#34;initial state&#34;: &#34;pp&#34;, &#34;order&#34;: &#34;NLO&#34;, &#34;source&#34;: &#34;HEPi&#34;, &#34;contact&#34;: &#34;?&#34;, &#34;tool&#34;: &#34;RS&#34;, &#34;process_latex&#34;: &#34;$\\tilde{e}_{L}^{-}\\tilde{e}_{L}^{+}$&#34;, &#34;comment&#34;: &#34;?&#34;, &#34;reference&#34;: &#34;?&#34;, &#34;Ecom [GeV]&#34;: &#34;13000&#34;, &#34;process_id&#34;: &#34;pp_13000_1000011_-1000011&#34;, &#34;PDF set&#34;: &#34;cteq66&#34;, &#34;data&#34;: {&#34;100.0&#34;: {&#34;xsec_pb&#34;: 0.26266219, &#34;unc_pb&#34;: 0.00035483454}, &#34;228.57142857142858&#34;: {&#34;xsec_pb&#34;: 0.012685717, &#34;unc_pb&#34;: 1.4738104e-05}, &#34;357.14285714285717&#34;: {&#34;xsec_pb&#34;: 0.0020719289, &#34;unc_pb&#34;: 2.2534652e-06}, &#34;485.7142857142858&#34;: {&#34;xsec_pb&#34;: 0.00052389967, &#34;unc_pb&#34;: 5.389595e-07}, &#34;614.2857142857143&#34;: {&#34;xsec_pb&#34;: 0.00016619981, &#34;unc_pb&#34;: 1.6377336e-07}, &#34;742.8571428571429&#34;: {&#34;xsec_pb&#34;: 6.0600809e-05, &#34;unc_pb&#34;: 5.7603335e-08}, &#34;871.4285714285716&#34;: {&#34;xsec_pb&#34;: 2.427351e-05, &#34;unc_pb&#34;: 2.2387002e-08}, &#34;1000.0&#34;: {&#34;xsec_pb&#34;: 1.0401314e-05, &#34;unc_pb&#34;: 9.3348503e-09}}, &#34;parameters&#34;: &#34;?&#34;}
+{&#34;initial state&#34;: &#34;pp&#34;, &#34;order&#34;: &#34;NLO&#34;, &#34;source&#34;: &#34;HEPi&#34;, &#34;contact&#34;: &#34;?&#34;, &#34;tool&#34;: &#34;RS&#34;, &#34;process_latex&#34;: &#34;$\\tilde{e}_{L}^{-}\\tilde{e}_{L}^{+}$&#34;, &#34;comment&#34;: &#34;?&#34;, &#34;reference&#34;: &#34;?&#34;, &#34;Ecom [GeV]&#34;: &#34;13000&#34;, &#34;process_id&#34;: &#34;pp_13000_1000011_-1000011&#34;, &#34;PDF set&#34;: &#34;cteq66&#34;, &#34;data&#34;: {&#34;100.0&#34;: {&#34;xsec_pb&#34;: 0.26266219, &#34;unc_pb&#34;: 0.00035483454}, &#34;212.5&#34;: {&#34;xsec_pb&#34;: 0.016796404, &#34;unc_pb&#34;: 1.9662724e-05}, &#34;325.0&#34;: {&#34;xsec_pb&#34;: 0.0030864231, &#34;unc_pb&#34;: 3.409076e-06}, &#34;437.5&#34;: {&#34;xsec_pb&#34;: 0.00084837761, &#34;unc_pb&#34;: 8.8924337e-07}, &#34;550.0&#34;: {&#34;xsec_pb&#34;: 0.00028882589, &#34;unc_pb&#34;: 2.9046289e-07}, &#34;662.5&#34;: {&#34;xsec_pb&#34;: 0.00011233356, &#34;unc_pb&#34;: 1.0906148e-07}, &#34;775.0&#34;: {&#34;xsec_pb&#34;: 4.7848073e-05, &#34;unc_pb&#34;: 4.5120962e-08}, &#34;887.5&#34;: {&#34;xsec_pb&#34;: 2.1762029e-05, &#34;unc_pb&#34;: 2.0001873e-08}, &#34;1000.0&#34;: {&#34;xsec_pb&#34;: 1.0401314e-05, &#34;unc_pb&#34;: 9.3348503e-09}}, &#34;parameters&#34;: &#34;?&#34;}
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">

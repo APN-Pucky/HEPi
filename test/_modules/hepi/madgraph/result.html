@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-52-gdadd38f
+                0.1.4-53-g5b9ad78
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,6 +56,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_write.html">Result writing example</a></li>
@@ -119,8 +120,8 @@ from uncertainties import ufloat_fromstr
     &quot;&quot;&quot;
     order = p.order
     res = parse_single(file)
-    if order is Order.NLO_PLUS_NLL:
-        warnings.warn(&quot;MadGraph has no NLO_PLUS_NLL computation.&quot;)
+    if order is not Order.NLO and order is not Order.LO :
+        warnings.warn(&quot;MadGraph has only NLO and LO computation.&quot;)
     if res.LO is not None and order is Order.LO:
         return True
     if res.LO is not None and res.NLO is not None and order is Order.NLO:

@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-52-gdadd38f
+                0.1.4-53-g5b9ad78
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -56,6 +56,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
@@ -127,6 +128,7 @@ plt.rc(&#39;legend&#39;, fontsize=12)
 rs.set_path(&quot;/home/a/&quot;+user+&quot;/git/resummino/&quot;)
 input.set_output_dir(&quot;/scratch/tmp/&quot;+user+&quot;/hepi/&quot;)
 input.set_input_dir(&quot;/home/a/&quot;+user+&quot;/input/&quot;)
+# Only mail on fail by default
 input.set_pre(&quot;while [[ $(squeue -u &quot; + user+ &quot; | wc -l) -gt 1990 ]]; do sleep 60; done &amp;&amp; sbatch --job-name=&quot; +get_job_name() +
 &quot; --ntasks-per-node 1 --cpus-per-task 1  --time=3-00:00:00 --mem=100M --partition normal&quot; +
 &quot; --mail-type=FAIL --mail-user=&quot;+user+&quot;@uni-muenster.de&quot;)
