@@ -221,24 +221,27 @@ class Runner:
 		"""
 		self.path = p + ("/" if p[-1]!="/" else "")
 
-	def set_input_dir(self,ind:str):
+	def set_input_dir(self,indir:str):
 		"""
 		Sets the input directory.
 
 		Args:
-		    ind (str): new input directory.
+		    indir (str): new input directory.
 		"""
-		self.in_dir = ind
+		self.in_dir = indir
 
 
-	def set_output_dir(self,outd:str):
+	def set_output_dir(self, outdir:str ,create : bool = True):
 		"""
 		Sets the output directory.
 
 		Args:
-		    outd (str): new output directory.
+		    outdir (str): new output directory.
+			create (bool): create directory if not existing
 		"""
-		self.out_dir = outd
+		if create and not os.path.exists(outdir):
+			os.makedirs(outdir)
+		self.out_dir = outdir
 
 
 	def set_pre(self,ppre:str):
