@@ -1615,20 +1615,21 @@ Attributes
       :type p: str
 
 
-   .. py:method:: set_input_dir(self, ind: str)
+   .. py:method:: set_input_dir(self, indir: str)
 
       Sets the input directory.
 
-      :param ind: new input directory.
-      :type ind: str
+      :param indir: new input directory.
+      :type indir: str
 
 
-   .. py:method:: set_output_dir(self, outd: str)
+   .. py:method:: set_output_dir(self, outdir: str, create: bool = True)
 
       Sets the output directory.
 
-      :param outd: new output directory.
-      :type outd: str
+      :param outdir: new output directory.
+                     create (bool): create directory if not existing
+      :type outdir: str
 
 
    .. py:method:: set_pre(self, ppre: str)
