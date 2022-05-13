@@ -15,8 +15,6 @@ import re
 import os
 import sys
 
-from hepi.input import Input
-from hepi.results import Result
 sys.path.insert(0, os.path.abspath('../..'))
 
 
