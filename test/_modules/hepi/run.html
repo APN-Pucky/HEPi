@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4-54-g8fb530c
+                0.1.4-55-gc051218
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -104,9 +104,6 @@ from smpl.parallel import par
 from smpl import debug
 import time
 import shutil
-
-
-
 
 <div class="viewcode-block" id="RunParam"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.RunParam">[docs]</a>class RunParam(DictData):
 	&quot;&quot;&quot;Abstract class that is similar to a dictionary but with fixed keys.&quot;&quot;&quot;
@@ -333,8 +330,8 @@ import shutil
 		    outdir (str): new output directory.
 			create (bool): create directory if not existing
 		&quot;&quot;&quot;
-		if create and not os.path.exists(outdir):
-			os.makedirs(outdir)
+		if create:
+			os.makedirs(outdir,exist_ok=True)
 		self.out_dir = outdir</div>
 
 
