@@ -26,7 +26,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="hepi.util" href="../util/index.html" />
+    <link rel="next" title="hepi.run" href="../run/index.html" />
     <link rel="prev" title="hepi.plot" href="../plot/index.html" /> 
 </head>
 
@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -59,18 +59,25 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../cluster/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.cluster</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../madgraph/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.madgraph</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nllfast/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.nllfast</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prospino2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.prospino2</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.resummino</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.spheno</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../input/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../output/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.output</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plot/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.results</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../run/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.util</span></code></a></li>
 </ul>
 </li>
@@ -158,7 +165,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.scale_error" title="hepi.results.scale_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error</span></code></a>(li, dl)</p></td>
 <td><p>Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. <code class="xref py py-meth docutils literal notranslate"><span class="pre">seven_point_scan()</span></code>).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.combine_errors" title="hepi.results.combine_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_errors</span></code></a>(dl)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.combine_errors" title="hepi.results.combine_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_errors</span></code></a>(dl: dict)</p></td>
 <td><p>Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.</p></td>
 </tr>
 </tbody>
@@ -186,15 +193,29 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.results.Result">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#Result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.Result" title="Permalink to this definition"></a></dt>
-<dd><p>General result class.</p>
-<dl class="simple">
-<dt>Attributes:</dt><dd><p>LO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Leading Order result. Defaults to None.
-NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order result. Defaults to None.
-NLO_PLUS_NLL (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
-K_LO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): LO divided by LO.
-K_NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): NLO divided by LO result.
-K_NLO_PLUS_NLL (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): NLO+NLL divided by LO.
-NLO_PLUS_NLL_OVER_NLO (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): NLO+NLL divided by NLO.</p>
+<dd><p>Bases: <a class="reference internal" href="../util/index.html#hepi.util.DictData" title="hepi.util.DictData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.util.DictData</span></code></a></p>
+<p>General result class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>LO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Leading Order result. Defaults to None.</p></li>
+<li><p><strong>NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Next-to-Leading Order result. Defaults to None.</p></li>
+<li><p><strong>NLO_PLUS_NLL</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.</p></li>
+<li><p><strong>K_LO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – LO divided by LO.</p></li>
+<li><p><strong>K_NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – NLO divided by LO result.</p></li>
+<li><p><strong>K_NLO_PLUS_NLL</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – NLO+NLL divided by LO.</p></li>
+<li><p><strong>NLO_PLUS_NLL_OVER_NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – NLO+NLL divided by NLO.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Sets given and computes dependent <code class="docutils literal notranslate"><span class="pre">Attributes</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">LO</span></code>.</p></li>
+<li><p><strong>nlo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO</span></code>.</p></li>
+<li><p><strong>nlo_plus_nll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO_PLUS_NLL</span></code>.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -203,17 +224,25 @@ NLO_PLUS_NLL_OVER_NLO (<code class="xref py py-obj docutils literal notranslate"
 <dt class="sig sig-object py" id="hepi.results.pdf_error">
 <span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">pdf_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#pdf_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.pdf_error" title="Permalink to this definition"></a></dt>
 <dd><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>li (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code>): Input list.
-dl (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): <a class="reference internal" href="#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> dictionary with lists per entry.
-confidence_level (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>): Confidence Level for PDF uncertainty</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>li</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code>) – Input list.</p></li>
+<li><p><strong>dl</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – <a class="reference internal" href="#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> dictionary with lists per entry.</p></li>
+<li><p><strong>confidence_level</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Confidence Level for PDF uncertainty</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>PDF</cite>/<cite>PDF_CENTRAL</cite>/<cite>PDF_ERRPLUS</cite>/<cite>PDF_ERRMINUS</cite>/<cite>PDF_ERRSYM</cite> entries.</dt><dd><ul class="simple">
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>PDF</cite>/<cite>PDF_CENTRAL</cite>/<cite>PDF_ERRPLUS</cite>/<cite>PDF_ERRMINUS</cite>/<cite>PDF_ERRSYM</cite> entries.</dt><dd><ul class="simple">
 <li><p><cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>PDF</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
 </ul>
 </dd>
 </dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -222,35 +251,51 @@ confidence_level (<code class="xref py py-obj docutils literal notranslate"><spa
 <dt class="sig sig-object py" id="hepi.results.scale_error">
 <span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">scale_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#scale_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.scale_error" title="Permalink to this definition"></a></dt>
 <dd><p>Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. <code class="xref py py-meth docutils literal notranslate"><span class="pre">seven_point_scan()</span></code>).</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>li (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code>): Input list.
-dl (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): <a class="reference internal" href="#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> dictionary with lists per entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>li</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code>) – Input list.</p></li>
+<li><p><strong>dl</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – <a class="reference internal" href="#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> dictionary with lists per entry.</p></li>
+</ul>
 </dd>
-<dt>Returns:</dt><dd><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>SCALE</cite>/<cite>SCALE_ERRPLUS</cite>/<cite>SCALE_ERRMINUS</cite>/<cite>SCALE_ERRSYM</cite> entries.</dt><dd><ul class="simple">
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>SCALE</cite>/<cite>SCALE_ERRPLUS</cite>/<cite>SCALE_ERRMINUS</cite>/<cite>SCALE_ERRSYM</cite> entries.</dt><dd><ul class="simple">
 <li><p><cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>SCALE</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
 </ul>
 </dd>
 </dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.results.combine_errors">
-<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">combine_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#combine_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.combine_errors" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">combine_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#combine_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.combine_errors" title="Permalink to this definition"></a></dt>
 <dd><p>Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.</p>
-<dl class="simple">
-<dt>Note:</dt><dd><p>Running <code class="xref py py-func docutils literal notranslate"><span class="pre">scale_errors()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">pdf_errors()</span></code> before is necessary.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Running <code class="xref py py-func docutils literal notranslate"><span class="pre">scale_errors()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">pdf_errors()</span></code> before is necessary.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dl</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – <a class="reference internal" href="#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> dictionary with lists per entry.</p>
 </dd>
-<dt>Args:</dt><dd><p>dl (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>): <a class="reference internal" href="#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> dictionary with lists per entry.</p>
-</dd>
-<dt>Returns:</dt><dd><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>COMBINED</cite>/<cite>ERRPLUS</cite>/<cite>ERRMINUS</cite> entries.</dt><dd><ul class="simple">
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>COMBINED</cite>/<cite>ERRPLUS</cite>/<cite>ERRMINUS</cite> entries.</dt><dd><ul class="simple">
 <li><p><cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>COMBINED</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
 </ul>
 </dd>
 </dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -264,7 +309,7 @@ dl (<code class="xref py py-obj docutils literal notranslate"><span class="pre">
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../plot/index.html" class="btn btn-neutral float-left" title="hepi.plot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../util/index.html" class="btn btn-neutral float-right" title="hepi.util" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../run/index.html" class="btn btn-neutral float-right" title="hepi.run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,7 +56,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -90,19 +93,40 @@
              
   <h1>Source code for hepi.resummino.result</h1><div class="highlight"><pre>
 <span></span>from hepi.input import Order
-from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
+from .. import Input, Result,   get_output_dir
 import re
 from uncertainties import ufloat_fromstr
 from string import Template
 import pkgutil
-import warnings
 import os
+
 
 <div class="viewcode-block" id="ResumminoResult"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.ResumminoResult">[docs]</a>class ResumminoResult(Result):
     &quot;&quot;&quot;
     Resummino Result Data.
+
+    Attributes:
+        VNLO (double): virtual NLO result.
+        RNLO (double): real NLO result.
+        P_PLUS_K (double): collineare remainders P+K NLO result.
+        RNLOG (double): real NLO gluon result.
+        RNLOQ (double): real NLO quark result.
+        VNLO_PLUS_P_PLUS_K (double): VNLO+P+K result.
+        RNLO_PLUS_VNLO_PLUS_P_PLUS_K (double): RNLO+VNLO+P+K result.
     &quot;&quot;&quot;
     def __init__(self, lo, nlo, nlo_plus_nll, vnlo, p_plus_k, rnlog, rnloq):
+        &quot;&quot;&quot;
+        Sets given and computes dependent ``Attributes``.
+
+        Args:
+            lo (:obj:`double`): corresponds to :attr:`LO`.
+            nlo (:obj:`double`): corresponds to :attr:`NLO`.
+            nlo_plus_nll (:obj:`double`): corresponds to :attr:`NLO_PLUS_NLL`.
+            vnlo (:obj:`double`): corresponds to :attr:`VNLO`.
+            p_plus_k (:obj:`double`): corresponds to :attr:`P_PLUS_K`.
+            rnlog (:obj:`double`): corresponds to :attr:`RNLOG`.
+            rnloq (:obj:`double`): corresponds to :attr:`RNLOQ`.
+        &quot;&quot;&quot;
         Result.__init__(self, lo, nlo, nlo_plus_nll)
         self.VNLO = vnlo
         self.P_PLUS_K = p_plus_k
@@ -121,9 +145,19 @@ import os
         else:
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None</div>
 
-<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d):
+# TODO move functions to results
+
+<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d) -&gt; bool:
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
+
+    Args:
+        file (str): File path to be parsed.
+        p (:class:`hepi.Input`): Onput parameters.
+        d (:obj:`dict`): Param dictionary.
+
+    Returns:
+        bool : True if `file` could be parsed.
     &quot;&quot;&quot;
     order = p.order
     data = pkgutil.get_data(__name__, &quot;plot_template.in&quot;).decode(
@@ -132,7 +166,7 @@ import os
     result = src.substitute(d)
     sname = d[&#39;slha&#39;]
     with open(file,mode=&#39;r&#39;) as f:
-        with open(get_input_dir() + sname, &#39;r&#39;) as sf:
+        with open(get_output_dir() + sname, &#39;r&#39;) as sf:
             if not f.read().startswith(result + &quot;\n\n&quot; + sf.read()):
                 #warnings.warn(&quot;Possible hash collision in &quot; + file + &quot; -&gt; deleted&quot;,RuntimeWarning)
                 os.remove(file)
@@ -151,9 +185,16 @@ import os
     return False</div>
 
 
-<div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.parse_single">[docs]</a>def parse_single(file) -&gt; ResumminoResult:
+<div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.parse_single">[docs]</a>def parse_single(file : str) -&gt; ResumminoResult:
     &quot;&quot;&quot;
-    Extracts LO, NLO and NLO+NLL from resummino output file.
+    Extracts LO, NLO and NLO+NLL from Resummino output file.
+
+    Args:
+        file (str): File path to be parsed.
+
+    Returns:
+        :class:`ResumminoResult` : If a value is not found in the file None is used.
+
     &quot;&quot;&quot;
     # TODO generalize units like RS
     lo_pattern = re.compile(r&#39;^LO = \((.*)\) pb&#39;)

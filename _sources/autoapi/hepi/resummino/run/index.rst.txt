@@ -5,9 +5,8 @@
 
 .. autoapi-nested-parse::
 
-   
-   ..
-       !! processed by numpydoc !!
+   Runs Resummino
+
 
 
 Module Contents
@@ -18,7 +17,7 @@ Classes
 
 .. autoapisummary::
 
-   hepi.resummino.run.RunParams
+   hepi.resummino.run.ResumminoRunParam
 
 
 
@@ -45,187 +44,106 @@ Attributes
 
 
 .. py:data:: resummino_path
-   :annotation: = ~/resummino/
+   :annotation: :str = ~/resummino/
 
-   
    resummino folder containing the binary in './build/bin'.
 
+.. py:function:: set_path(p: str)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: set_path(p)
-
-   
    Set the path to the resummino folder containing the binary in './build/bin'.
 
+   :param str: new Resummino path.
 
 
+.. py:function:: get_path() -> str
+
+   Get Resummino path.
+
+   :returns: current Resummino path
+   :rtype: str
 
 
+.. py:class:: ResumminoRunParam(flags: str, in_path: str, out_path: str, skip=False)
+
+   Bases: :py:obj:`hepi.run.RunParam`
+
+   Parameters for running Resummino.
+
+   :ivar skip: Skip already performed and stored runs.
+   :vartype skip: bool
+   :ivar flags: Additional resummino flags. E.g. '--nlo'.
+   :vartype flags: str
+   :ivar in_path: File path of the input file.
+   :vartype in_path: str
+   :ivar out_path: File path of the output file.
+
+   :vartype out_path: str
 
 
+.. py:function:: run(params: List[hepi.Input], noskip=False, bar=False, no_parse=False, para=True, skip=True, parse=True, run=True) -> dict
 
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: get_path()
-
-   
-   Returns the currently set resummino path
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:class:: RunParams(flags: str, in_path: str, out_path: str, skip=False)
-
-   
-   Parameters for Resummino.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: run(params: List[hepi.Input], noskip=False, bar=True, no_parse=False, para=True)
-
-   
    Run the passed list of parameters.
 
+   :param params: All parameters that should be executed/queued.
+   :type params: :obj:`list` of :class:`hepi.Input`
+   :param noskip: False means stored runs will be skipped. Else the are overwritten.
+   :type noskip: bool
+   :param bar: Display a progressbar.
+   :type bar: bool
+   :param no_parse: Skip parsing the results.
+                    This is the prefered cluster mode, as this function only queues the job.
+   :type no_parse: bool
+   :param para: Run jobs in parallel.
+   :type para: bool
+   :param run: Actually start/queue resummino.
+   :type run: bool
 
+   :returns:
 
+             combined dictionary of results and parameters. Each member therein is a list.
+                 The dictionary is empty if `no_parse` is set.
+   :rtype: :obj:`dict`
 
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: _parse(outputs: List[str]) -> List[hepi.resummino.result.ResumminoResult]
 
-   
    Parses Resummino output files and returns List of Results.
 
+   :param outputs: List of the filenames to be parsed.
+   :type outputs: :obj:`list` of `str`
+
+   :returns: :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
 
 
+.. py:function:: _queue(params: List[hepi.Input], noskip=False) -> List[ResumminoRunParam]
 
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: _queue(params: List[hepi.Input], noskip=False) -> List[RunParams]
-
-   
    Queues and generates Resummino run files.
 
+   Extends params by input and output files.
+
+   :param params: input parameters
+   :type params: :obj:`list` of :class:`hepi.Input`
+   :param noskip: False means stored runs will be skipped. Else the are overwritten.
+   :type noskip: bool
+
+   :returns: Run paramters for usage with :meth:`_run`.
+   :rtype: :obj:`list` of :class:`hepi.RunParams`
 
 
+.. py:function:: _run(rps: List[ResumminoRunParam], bar=True, no_parse=False, para=True)
 
+   Runs Resummino per :class:`RunParams`.
 
+   :param rps: Extended run parameters.
+   :type rps: :obj:`list` of :class:`RunParams`
+   :param bar: Enable info bar.
+   :type bar: bool
+   :param no_parse: Do not wait for parallel runs to finish.
+   :type no_parse: bool
+   :param para: Run jobs in parallel.
+   :type para: bool
 
+   :returns: return codes from jobs if `no_parse` is False.
+   :rtype: :obj:`list` of int
 
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: _run(rps: List[RunParams], bar=True, no_parse=False, para=True)
-
-   
-   Runs resummino per RunParam.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 

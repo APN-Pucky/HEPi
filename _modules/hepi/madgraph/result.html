@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,7 +56,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -89,47 +92,73 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.madgraph.result</h1><div class="highlight"><pre>
-<span></span>from hepi.input import Order
-from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
+<span></span>import warnings
+from hepi.input import Order
+from .. import Input, Result
 import re
 from uncertainties import ufloat_fromstr
 
 
 <div class="viewcode-block" id="MadgraphResult"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.MadgraphResult">[docs]</a>class MadgraphResult(Result):
-    &quot;&quot;&quot;
-    MadGraph Result Data.
-    &quot;&quot;&quot;
+    &quot;&quot;&quot; MadGraph Result Data.&quot;&quot;&quot;
     def __init__(self, lo, nlo):
-        Result.__init__(self, lo, nlo, nlo)</div>
+        &quot;&quot;&quot;Sets LO and NLO result. NLO+NLL is set to None.&quot;&quot;&quot;
+        Result.__init__(self, lo, nlo, None)</div>
 
 
-<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d):
+<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d) -&gt; bool :
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
+
+    Args:
+        file (str): File path to be parsed.
+        p (:class:`hepi.Input`): Input parameters.
+        d (:obj:`dict`): Param dictionary.
+
+    Returns:
+        bool : True if `file` could be parsed.
     &quot;&quot;&quot;
     order = p.order
     res = parse_single(file)
+    if order is not Order.NLO and order is not Order.LO :
+        warnings.warn(&quot;MadGraph has only NLO and LO computation.&quot;)
     if res.LO is not None and order is Order.LO:
         return True
     if res.LO is not None and res.NLO is not None and order is Order.NLO:
-        return True
-    if res.LO is not None and res.NLO is not None and res.NLO_PLUS_NLL is not None and order is Order.NLO_PLUS_NLL:
         return True
     print(&quot;RESTART&quot; ,res.LO, res.NLO,res.NLO_PLUS_NLL, file)
     return False</div>
 
 <div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.parse_single">[docs]</a>def parse_single(file) -&gt; MadgraphResult:
+    &quot;&quot;&quot;
+    Extracts Result from MadGraph output file.
+
+    Note:
+        This is only the result of one order. Therefore LO and NLO result in the return value are the same.
+
+
+    Args:
+        file (str): File path to be parsed.
+
+    Returns:
+        :class:`MadGraphResult` : If a value is not found in the file None is used.
+
+    &quot;&quot;&quot;
     # TODO generalize units like RS
-    lo_pattern = re.compile(r&#39;^\s*Total cross section:\s*(.*) pb&#39;)
+    lo_pattern = re.compile(r&#39;^\s*Total cross section:\s(\S+.*) pb&#39;)
 
     lo_result = None
+    nlo_result = None
     with open(file) as output:
         for line in output:
             tmp = lo_pattern.search(line)
             if tmp is not None:
-                lo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
+                if lo_result is None:
+                    lo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
+                elif nlo_result is None:
+                    nlo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
 
-    return MadgraphResult(lo_result, lo_result)</div>
+    return MadgraphResult(lo_result, nlo_result)</div>
 </pre></div>
 
            </div>

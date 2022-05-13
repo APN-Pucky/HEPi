@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -56,7 +56,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -90,7 +93,8 @@
              
   <h1>Source code for hepi.results</h1><div class="highlight"><pre>
 <span></span>&quot;&quot;&quot;Results and postprocessing for the :mod:`hepi` package.&quot;&quot;&quot;
-from .util import LD2DL
+from hepi.input import Input
+from .util import LD2DL, DictData
 import numpy as np
 from typing import List
 from uncertainties import unumpy
@@ -103,8 +107,7 @@ import warnings
 &quot;&quot;&quot;If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.&quot;&quot;&quot;
 
 
-
-<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result">[docs]</a>class Result:
+<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result">[docs]</a>class Result(DictData):
     &quot;&quot;&quot;
     General result class.
 
@@ -122,9 +125,9 @@ import warnings
         Sets given and computes dependent ``Attributes``.
 
         Args:
-            lo (:obj:`double`): Sets `LO`.
-            nlo (:obj:`double`): Sets `NLO`.
-            nlo_plus_nll (:obj:`double`): Sets `NLO_PLUS_NLL`.
+            lo (:obj:`double`): corresponds to :attr:`LO`.
+            nlo (:obj:`double`): corresponds to :attr:`NLO`.
+            nlo_plus_nll (:obj:`double`): corresponds to :attr:`NLO_PLUS_NLL`.
         &quot;&quot;&quot;
         self.LO = lo #:obj:`double`: Leading Order result. Defaults to None.
         self.NLO = nlo
@@ -215,7 +218,7 @@ import warnings
             dl[&quot;NLO_PDF_ERRSYM&quot;][i] = nlo_unc.errsymm
             #TODO error sym to minus and plus
             if(plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_PDF_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_PDF_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical nlo precision vs pdf&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical nlo precision vs pdf.&quot;, RuntimeWarning)
 
             nlo_plus_nll_unc = set.uncertainty(
                 [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in pdfs], 90)
@@ -225,7 +228,7 @@ import warnings
             dl[&quot;NLO_PLUS_NLL_PDF_ERRSYM&quot;][i] = nlo_plus_nll_unc.errsymm
             #TODO error sym to minus and plus
             if(plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs pdf&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs pdf.&quot;, RuntimeWarning)
 
 
     mask = dl[&quot;LO_PDF_CENTRAL&quot;]!= np.array(None)
@@ -285,21 +288,21 @@ import warnings
             dl[&quot;LO_SCALE_ERRMINUS&quot;][i] = np.min(
                 [plot.unv(dl[&quot;LO&quot;][k]) for k in scales])-plot.unv(dl[&quot;LO&quot;][i])
             if(plot.usd(dl[&quot;LO&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;LO_SCALE_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;LO&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;LO_SCALE_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical lo precision vs scale&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical lo precision vs scale.&quot;, RuntimeWarning)
 
             dl[&quot;NLO_SCALE_ERRPLUS&quot;][i] = np.max(
                 [plot.unv(dl[&quot;NLO&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO&quot;][i])
             dl[&quot;NLO_SCALE_ERRMINUS&quot;][i] = np.min(
                 [plot.unv(dl[&quot;NLO&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO&quot;][i])
             if(plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_SCALE_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_SCALE_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical nlo precision vs scale&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical nlo precision vs scale.&quot;, RuntimeWarning)
 
             dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][i] = np.max(
                 [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][i])
             dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][i] = np.min(
                 [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in scales])-plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][i])
             if(plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][i] or  plot.usd(dl[&quot;NLO_PLUS_NLL&quot;][i])*required_numerical_uncertainty_factor &gt; -dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][i]):
-                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs scale&quot;, RuntimeWarning)
+                warnings.warn(&quot;too low numerical nlo_plus_nll precision vs scale.&quot;, RuntimeWarning)
 
     mask = dl[&quot;LO_SCALE_ERRPLUS&quot;]!= np.array(None)
     dl[&quot;LO_SCALE&quot;][mask] = unumpy.uarray(plot.unv(dl[&quot;LO&quot;][mask])+dl[&quot;LO_SCALE_ERRPLUS&quot;][mask]/2.+dl[&quot;LO_SCALE_ERRMINUS&quot;][mask]/2.,
@@ -315,7 +318,7 @@ import warnings
     
     return dl</div>
 
-<div class="viewcode-block" id="combine_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.combine_errors">[docs]</a>def combine_errors(dl):
+<div class="viewcode-block" id="combine_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.combine_errors">[docs]</a>def combine_errors(dl : dict):
     &quot;&quot;&quot;
     Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
 

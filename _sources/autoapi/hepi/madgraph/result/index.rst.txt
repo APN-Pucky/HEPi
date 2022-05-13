@@ -3,12 +3,6 @@
 
 .. py:module:: hepi.madgraph.result
 
-.. autoapi-nested-parse::
-
-   
-   ..
-       !! processed by numpydoc !!
-
 
 Module Contents
 ---------------
@@ -36,69 +30,36 @@ Functions
 
    Bases: :py:obj:`hepi.Result`
 
-   
    MadGraph Result Data.
 
+   Sets LO and NLO result. NLO+NLL is set to None.
 
 
+.. py:function:: is_valid(file: str, p: hepi.Input, d) -> bool
 
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: is_valid(file: str, p: hepi.Input, d)
-
-   
    Verifies that an file is a complete output.
 
+   :param file: File path to be parsed.
+   :type file: str
+   :param p: Input parameters.
+   :type p: :class:`hepi.Input`
+   :param d: Param dictionary.
+   :type d: :obj:`dict`
 
+   :returns: True if `file` could be parsed.
+   :rtype: bool
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: parse_single(file) -> MadgraphResult
 
-   
+   Extracts Result from MadGraph output file.
 
+   .. note:: This is only the result of one order. Therefore LO and NLO result in the return value are the same.
 
+   :param file: File path to be parsed.
+   :type file: str
 
+   :returns: If a value is not found in the file None is used.
+   :rtype: :class:`MadGraphResult`
 
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 

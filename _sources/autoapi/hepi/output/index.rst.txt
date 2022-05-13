@@ -1,0 +1,51 @@
+:py:mod:`hepi.output`
+=====================
+
+.. py:module:: hepi.output
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.output.write_latex
+   hepi.output.write_csv
+   hepi.output.write_json
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.output.tex_table
+
+
+.. py:function:: write_latex(dict_list, key, fname, scale=True, pdf=True, yscale=1.0)
+
+   Saves a `dict` of `list`s to `filename` as latex table.
+
+
+.. py:data:: tex_table
+   
+
+   
+
+.. py:function:: write_csv(dict_list: list, filename: str)
+
+   Saves a `dict` of `list`s to `filename` as csv table.
+
+
+.. py:function:: write_json(dict_list: list, o: hepi.input.Order, parameter: str, filename: str, error_sym=False, error_asym=False)
+
+   Saves a `dict` of `list`s to `filename` as json.
+
+   Cf. https://github.com/fuenfundachtzig/xsec
+
+

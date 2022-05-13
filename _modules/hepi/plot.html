@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -56,7 +56,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -110,47 +113,19 @@ from particle.converters.bimap import DirectionalMaps
 import matplotlib.cm as cm
 from matplotlib import colors
 
-from .input import Input, get_input_dir
-from .util import get_name
+from .input import Input, get_output_dir
+from .util import  get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
 from smpl import io
 from typing import List
 
-<div class="viewcode-block" id="tex_table"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.tex_table">[docs]</a>def tex_table(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
- dl = dict_list
- mask = dl[&quot;NLO_SCALE&quot;]!= np.array(None)
- lo = splot.unv(dl[&quot;LO&quot;][mask])
- nlo = splot.unv(dl[&quot;NLO&quot;][mask])
- nlo_plus_nll = splot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])
- with open(fname,&#39;w+&#39;) as f:
-     for i in range(len(dl[&quot;LO&quot;][mask])):
-        f.write(
-            &quot;$&quot; + io.gf(4).format(dl[key][mask][i]) + &quot;$ \t&amp;\t $&quot;+
-            &quot;{:.3f}&quot;.format(lo[i]*yscale) 
-                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRPLUS&quot;][mask][i]/lo[i]*100.)
-                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRMINUS&quot;][mask][i]/lo[i]*100.)
-                +  &quot;\%}$ \t&amp;\t $&quot;+
-            &quot;{:.3f}&quot;.format(nlo[i]*yscale) 
-                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRPLUS&quot;][mask][i]/nlo[i]*100.)
-                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRPLUS&quot;][mask][i] /nlo[i]*100.) if pdf else &quot;&quot;)
-                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask][i]/nlo[i]*100.)
-                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRMINUS&quot;][mask][i]/nlo[i]*100.) if pdf else &quot;&quot;)
-                +  &quot;\%}$ \t&amp;\t $&quot;+
-            &quot;{:.3f}&quot;.format(nlo_plus_nll[i]*yscale) 
-                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
-                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
-                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
-                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
-                +  &quot;\%}$ &quot;+
-            &quot;\\\\\n&quot;
-        )</div>
 
-<div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(axe,i:Input,scenario=&quot;&quot;,diff_L_R=None,extra=&quot;&quot;,**kwargs):
+<div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(axe,i:Input,scenario=&quot;&quot;,diff_L_R=None,extra=&quot;&quot;,cms_energy=True,pdf_info=True,**kwargs):
     axe.set_title(
         &quot;$pp\\to&quot;+get_name(i.particle1)+get_name(i.particle2) + &quot;$&quot;
-        #+&quot; at $\\sqrt{S} = &quot; +str(i.energy/1000) + &quot;$ TeV&quot;
+        +(&quot; at $\\sqrt{S} = &quot; +str(i.energy/1000) + &quot;$ TeV&quot; if cms_energy else &quot;&quot;)
         +&quot; for &quot; +(i.slha.split(&quot;.&quot;)[0] if scenario ==&quot;&quot; else scenario)
-        #+&quot; with &quot; + i.pdf_nlo
+        +(&quot; with &quot; + i.pdf_nlo if pdf_info else &quot;&quot;)
         + &quot; &quot; + extra
     )</div>
 
@@ -193,12 +168,6 @@ from typing import List
 
 
 
-<div class="viewcode-block" id="get_mass"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.get_mass">[docs]</a>def get_mass(l, id):
-    ret = []
-    for s in l[&quot;slha&quot;]:
-        d = pyslha.read(get_input_dir() + s)
-        ret.append(d.blocks[&quot;MASS&quot;][abs(id)])
-    return np.array(ret)</div>
 
 <div class="viewcode-block" id="mass_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mass_plot">[docs]</a>def mass_plot(dict_list,  y, part, logy=True, yaxis=&quot;$\\sigma$ [pb]&quot;, yscale=1., label=None,**kwargs):
     dict_list[&quot;mass_&quot;+ str(part)] = get_mass(dict_list, abs(part))
@@ -212,6 +181,19 @@ from typing import List
 #    vplot(dict_list[&quot;mass_&quot; + str(part)][mask], y[mask], label=label,
 #          xaxis=&quot;$M_{&quot;+get_name(part) + &quot;}$ [GeV]&quot;, yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 
+
+<div class="viewcode-block" id="get_mass"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.get_mass">[docs]</a>def get_mass(l : dict, id : int ):
+    &quot;&quot;&quot;
+    Get the mass of particle with id `id` out of the list in the &quot;slha&quot; element in the dict.
+
+    Returns
+        :obj:`list` of float : masses of particles in each element of the dict list.
+    &quot;&quot;&quot;
+    ret = []
+    for s in l[&quot;slha&quot;]:
+        d = pyslha.read(get_output_dir() + s)
+        ret.append(d.blocks[&quot;MASS&quot;][abs(id)])
+    return np.array(ret)</div>
 
 <div class="viewcode-block" id="plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.plot">[docs]</a>def plot(dict_list, x, y, label=None, xaxis=&quot;E [GeV]&quot;, yaxis=&quot;$\\sigma$ [pb]&quot;,ratio=False,K=False,K_plus_1=False, logy=True, yscale=1.,mask=None,**kwargs):
     # TODO use kwargs
@@ -245,7 +227,7 @@ from typing import List
 <div class="viewcode-block" id="slha_data"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.slha_data">[docs]</a>def slha_data(li,index_list):
     vx = []
     for l in li:
-        b = pyslha.read(get_input_dir() + l.slha)
+        b = pyslha.read(get_output_dir() + l.slha)
         vx.append(index_open(b.blocks,index_list))
     return np.array(vx)</div>
 
@@ -255,7 +237,7 @@ from typing import List
 
     vplot(np.array(vx),np.array(vy),**kwargs)</div>
 
-<div class="viewcode-block" id="vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.vplot">[docs]</a>def vplot(x, y, label=None, xaxis=&quot;E [GeV]&quot;, yaxis=&quot;$\\sigma$ [pb]&quot;, logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,data_fmt=&quot;.&quot;,fmt=&quot;-&quot;,**kwargs):
+<div class="viewcode-block" id="vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.vplot">[docs]</a>def vplot(x, y, label=None, xaxis=&quot;E [GeV]&quot;, yaxis=&quot;$\\sigma$ [pb]&quot;, logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,data_fmt=&quot;.&quot;,fmt=&quot;-&quot;,print_area=False,**kwargs):
     color = data_color
     if label is None:
         #label = &quot;??&quot;
@@ -291,7 +273,8 @@ from typing import List
         kargs = {}
         if not plot_data:
             kargs = {&#39;xaxis&#39;:xaxis, &#39;yaxis&#39;:yaxis,&#39;label&#39;:label}
-        print(&#39;computed AUC using sklearn.metrics.auc: {}&#39;.format(auc(xnew,power_smooth*yscale)))
+        if print_area:
+            print(&#39;computed AUC using sklearn.metrics.auc: {}&#39;.format(auc(xnew,power_smooth*yscale)))
         splot.data(xnew, power_smooth*yscale, logy=logy, fmt=fmt
               , init=False, data_color=color,  **kargs,**kwargs)
     if fill:
@@ -368,7 +351,7 @@ from typing import List
         l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
         return l[0]</div>
 
-<div class="viewcode-block" id="scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scale_plot">[docs]</a>def scale_plot(dict_list, vl, seven_point_band=False, cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit=&quot;pb&quot;,**kwargs):
+<div class="viewcode-block" id="scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scale_plot">[docs]</a>def scale_plot(dict_list, vl, seven_point_band=False,cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit=&quot;pb&quot;, yaxis=None,**kwargs):
     global fig, axs,lines,labels
     cycle_safe = mpl.rcParams[&#39;axes.prop_cycle&#39;] 
     if plehn_color:
@@ -458,7 +441,7 @@ from typing import List
             labels.append(&quot;$\\Delta \\sigma_{\\mathrm{&quot; + v.replace(&quot;NLO_PLUS_NLL&quot;,&quot;NLO+NLL&quot;).replace(&quot; &quot;,&quot;\\&lt;space&gt;&quot;) + &quot;} }$&quot;)
 
 
-    axs[0].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot;)
+    axs[0].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot; if yaxis is None else yaxis)
 
     axs[0].set_xscale(&quot;log&quot;)
     axs[0].set_xlim(np.min(mf), np.max(mf))
@@ -506,7 +489,7 @@ from typing import List
 
     
 
-<div class="viewcode-block" id="central_scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.central_scale_plot">[docs]</a>def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit=&quot;pb&quot;):
+<div class="viewcode-block" id="central_scale_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.central_scale_plot">[docs]</a>def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit=&quot;pb&quot;,yaxis=None):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
@@ -537,7 +520,7 @@ from typing import List
         axs[1].plot([], [], &#39; &#39;, label=&quot;$\mu_F=\mu_0$, $\mu_R=\mu$&quot;)
         axs[2].plot([], [], &#39; &#39;, label=&quot;$\mu_R=\mu_0$, $\mu_F=\mu$&quot;)
 
-    axs[1].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot;)
+    axs[1].set_ylabel(&quot;$\sigma$ [&quot;+unit+&quot;]&quot; if yaxis is None else yaxis)
 
     axs[0].set_xscale(&quot;log&quot;)
     #axs[0].set_xlim(np.min(mf), np.max(mf))

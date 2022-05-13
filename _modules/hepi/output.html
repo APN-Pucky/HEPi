@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.output &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../hepi.html">hepi</a> &raquo;</li>
+      <li>hepi.output</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for hepi.output</h1><div class="highlight"><pre>
+<span></span>import json
+from scipy import interpolate
+from smpl import plot
+
+from sklearn.metrics import auc
+import matplotlib as mpl
+from smpl import plot as splot
+import smpl
+import numpy as np
+import uncertainties as unc
+from scipy.interpolate import make_interp_spline, BSpline
+
+from uncertainties import unumpy
+import matplotlib.pyplot as plt
+
+from particle import PDGID
+import pyslha
+from particle import Particle
+from particle.converters.bimap import DirectionalMaps
+
+import matplotlib.cm as cm
+from matplotlib import colors
+
+from .input import Input, Order, get_output_dir, order_to_string
+from .util import  LD2DF, DictData, get_name
+from matplotlib.ticker import ScalarFormatter, NullFormatter
+from smpl import io
+from typing import List
+
+<div class="viewcode-block" id="write_latex"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex">[docs]</a>def write_latex(dict_list,key,fname,scale=True,pdf=True,yscale=1.):
+ &quot;&quot;&quot;
+ Saves a `dict` of `list`s to `filename` as latex table.
+ &quot;&quot;&quot;
+ dl = dict_list
+ mask = dl[&quot;NLO_SCALE&quot;]!= np.array(None)
+ lo = splot.unv(dl[&quot;LO&quot;][mask])
+ nlo = splot.unv(dl[&quot;NLO&quot;][mask])
+ nlo_plus_nll = splot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])
+ with open(fname,&#39;w+&#39;) as f:
+     for i in range(len(dl[&quot;LO&quot;][mask])):
+        f.write(
+            &quot;$&quot; + io.gf(4).format(dl[key][mask][i]) + &quot;$ \t&amp;\t $&quot;+
+            &quot;{:.3f}&quot;.format(lo[i]*yscale) 
+                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRPLUS&quot;][mask][i]/lo[i]*100.)
+                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRMINUS&quot;][mask][i]/lo[i]*100.)
+                +  &quot;\%}$ \t&amp;\t $&quot;+
+            &quot;{:.3f}&quot;.format(nlo[i]*yscale) 
+                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRPLUS&quot;][mask][i]/nlo[i]*100.)
+                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRPLUS&quot;][mask][i] /nlo[i]*100.) if pdf else &quot;&quot;)
+                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask][i]/nlo[i]*100.)
+                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRMINUS&quot;][mask][i]/nlo[i]*100.) if pdf else &quot;&quot;)
+                +  &quot;\%}$ \t&amp;\t $&quot;+
+            &quot;{:.3f}&quot;.format(nlo_plus_nll[i]*yscale) 
+                + &quot;^{+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
+                + (&quot;\%+&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
+                + &quot;\%}_{&quot; +&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.)
+                + (&quot;\%&quot;+&quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask][i]/nlo_plus_nll[i]*100.) if pdf else &quot;&quot;)
+                +  &quot;\%}$ &quot;+
+            &quot;\\\\\n&quot;
+        )</div>
+
+<div class="viewcode-block" id="tex_table"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.tex_table">[docs]</a>tex_table= write_latex</div>
+
+<div class="viewcode-block" id="write_csv"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_csv">[docs]</a>def write_csv(dict_list:list,filename:str):
+ &quot;&quot;&quot;
+ Saves a `dict` of `list`s to `filename` as csv table.
+ &quot;&quot;&quot;
+ df = LD2DF(dict_list)
+ df.to_csv(filename,index=False)</div>
+
+
+<div class="viewcode-block" id="write_json"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_json">[docs]</a>def write_json(dict_list:list,o:Order,parameter:str,filename:str,error_sym=False,error_asym=False):
+ &quot;&quot;&quot;
+ Saves a `dict` of `list`s to `filename` as json.
+
+ Cf. https://github.com/fuenfundachtzig/xsec
+ &quot;&quot;&quot;
+ jd = {}
+ jd[&quot;initial state&quot;] = &quot;pp&quot; # TODO add more such cases + filters
+ if o == Order.LO:
+    jd[&quot;order&quot;] = &quot;LO&quot;
+ elif o == Order.NLO:
+    jd[&quot;order&quot;] = &quot;NLO&quot;
+ elif o == Order.NLO_PLUS_NLL:
+    jd[&quot;order&quot;] = &quot;NLO+NLL&quot;
+ elif o == Order.aNNLO_PLUS_NNLL:
+    jd[&quot;order&quot;] = &quot;NNLOapprox+NNLL&quot;
+ else:
+    raise ValueError(&quot;Order not supported by write_json.&quot;)
+ jd[&quot;source&quot;] = &quot;HEPi&quot;
+ jd[&quot;contact&quot;] = &quot;?&quot;
+ jd[&quot;tool&quot;] = dict_list[&quot;code&quot;][0]
+ jd[&quot;process_latex&quot;] = &quot;$&quot;+get_name(dict_list[&quot;particle1&quot;][0])+get_name(dict_list[&quot;particle2&quot;][0]) + &quot;$&quot;
+ jd[&quot;comment&quot;] = &quot;?&quot;
+ jd[&quot;reference&quot;] = &quot;?&quot;
+ jd[&quot;Ecom [GeV]&quot;] = str(dict_list[&quot;energy&quot;][0])
+ jd[&quot;process_id&quot;] = &quot;pp_&quot;+ str(dict_list[&quot;energy&quot;][0]) + &quot;_&quot;+ str(dict_list[&quot;particle1&quot;][0]) +&quot;_&quot;+ str(dict_list[&quot;particle2&quot;][0])
+ jd[&quot;PDF set&quot;] = dict_list[&quot;pdf_nlo&quot;][0]
+ dat = {}
+ for j in range(len(dict_list[parameter])):
+    if error_asym:
+        raise ValueError(&quot;asymmetric errors not supported by write_json.&quot;)
+    elif error_sym:
+        dat[str(dict_list[parameter][j])] = {&quot;xsec_pb&quot; : float(plot.unv(dict_list[order_to_string(o)][j])),&quot;unc_pb&quot; : float(plot.usd(dict_list[order_to_string(o)][j]))}
+    else:
+        dat[str(dict_list[parameter][j])] = {&quot;xsec_pb&quot; : float(plot.unv(dict_list[order_to_string(o)][j]))}
+ jd[&quot;data&quot;] = dat
+ jd[&quot;parameters&quot;] = &quot;?&quot;
+ with open(filename,&#39;w+&#39;) as f:
+    f.write(json.dumps(jd))</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

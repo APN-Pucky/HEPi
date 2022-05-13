@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MadGraph example &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyslha comparison" href="test_pyslha.html" />
+    <link rel="prev" title="Welcome to HEPi’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.5
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MadGraph example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#No-on-shell-subtraction-through-madstr">No on-shell subtraction through madstr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#On-shell-subtraction-through-madstr">On-shell subtraction through madstr</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_pyslha.html">pyslha comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_write.html">Result writing example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/hepi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>MadGraph example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/test_madgraph.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="MadGraph-example">
+<h1>MadGraph example<a class="headerlink" href="#MadGraph-example" title="Permalink to this headline"></a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hepi</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">smpl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">hepi.madgraph</span> <span class="k">as</span> <span class="nn">mg</span>
+<span class="kn">import</span> <span class="nn">hepi.util</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">mg</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;/opt/MG5_aMC_v2_7_0/&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">mg</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.1.4.42+dirty
+/opt/MG5_aMC_v2_7_0/
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<section id="No-on-shell-subtraction-through-madstr">
+<h2>No on-shell subtraction through madstr<a class="headerlink" href="#No-on-shell-subtraction-through-madstr" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mastercode_with_gm2.in&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">pss</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">(</span><span class="mi">1000011</span><span class="p">,</span><span class="o">-</span><span class="mi">1000011</span><span class="p">),</span>
+     <span class="p">]</span>
+<span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;cteq6l1&quot;</span><span class="p">,</span><span class="s2">&quot;cteq66&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">([</span><span class="n">i</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">7</span><span class="o">+</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">mg_dl</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">skip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">madstr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">mg_dl</span><span class="p">,</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">mg_dl</span><span class="p">,</span><span class="s2">&quot;NLO&quot;</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">scenario</span><span class="o">=</span><span class="s2">&quot;mastercode&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running: 15 jobs
+./output/4bec207f684440baa1701f222feffd61ef9ed63a626da77e10441653c9a42084.out
+No module named madgraph
+INFO: ************************************************************
+*                                                          *
+*           W E L C O M E  to  M A D G R A P H 5           *
+*                       a M C @ N L O                      *
+*                                                          *
+*                 *                       *                *
+*                   *        * *        *                  *
+*                     * * * * 5 * * * *                    *
+*                   *        * *        *                  *
+*                 *                       *                *
+*                                                          *
+*         VERSION 5.2.7.3               20xx-xx-xx         *
+*                                                          *
+*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+*                 http://amcatnlo.cern.ch                  *
+*                                                          *
+*               Type &#39;help&#39; for in-line help.              *
+*                                                          *
+************************************************************
+INFO: load configuration from /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/4bec207f684440baa1701f222feffd61ef9ed63a626da77e10441653c9a42084.bdir/Cards/amcatnlo_configuration.txt
+INFO: load configuration from /opt/MG5_aMC_v2_7_0/input/mg5_configuration.txt
+INFO: load configuration from /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/4bec207f684440baa1701f222feffd61ef9ed63a626da77e10441653c9a42084.bdir/Cards/amcatnlo_configuration.txt
+Using default eps viewer &#34;gv&#34;. Set another one in ./input/mg5_configuration.txt
+Using default web browser &#34;firefox&#34;. Set another one in ./input/mg5_configuration.txt
+calculate_xsect -f
+INFO: will run in mode: NLO
+INFO: Starting run
+INFO: Compiling the code
+write ./param_card.dat
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+INFO: Using LHAPDF v6.3.0 interface for PDFs
+INFO: Compiling source...
+INFO:           ...done, continuing with P* directories
+<span class="ansi-blue-intense-fg ansi-bold">WARNING: Could not compile StdHEP because its source directory could not be found in the SOURCE folder.
+ Check the MG5_aMC option &#39;output_dependencies&#39;.
+ This will prevent the use of HERWIG6/Pythia6 shower. </span>
+INFO: Compiling directories...
+INFO: Compiling on 16 cores
+INFO:  Compiling P0_uux_elmelp...
+INFO:  Compiling P0_ddx_elmelp...
+INFO:  Compiling P0_uxu_elmelp...
+INFO:  Compiling P0_dxd_elmelp...
+INFO:     P0_dxd_elmelp done.
+INFO:     P0_uux_elmelp done.
+INFO:     P0_ddx_elmelp done.
+INFO:     P0_uxu_elmelp done.
+INFO: Checking test output:
+INFO: P0_uux_elmelp
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_ddx_elmelp
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_uxu_elmelp
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_dxd_elmelp
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: Starting run
+INFO: Using 16 cores
+INFO: Cleaning previous results
+INFO: Doing fixed order NLO
+INFO: Setting up grids
+INFO:  Idle: 0,  Running: 0,  Completed: 4 [ current time: 02h24 ]
+INFO:
+      Results after grid setup:
+      Total cross section:      2.708e-01 +- 1.6e-03 pb
+
+INFO: Refining results, step 1
+INFO:  Idle: 0,  Running: 0,  Completed: 4 [ current time: 02h24 ]
+INFO:
+   --------------------------------------------------------------
+      Final results and run summary:
+      Process p p &gt; 1000011 -1000011 [QCD]
+      Run at p-p collider (6500.0 + 6500.0 GeV)
+      Total cross section: 2.692e-01 +- 9.7e-04 pb
+   --------------------------------------------------------------
+
+INFO: The results of this run and the HwU and GnuPlot files with the plots have been saved in /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/4bec207f684440baa1701f222feffd61ef9ed63a626da77e10441653c9a42084.bdir/Events/run_01
+INFO: Run complete
+INFO:
+quit
+INFO:
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_madgraph_4_4.png" src="../_images/examples_test_madgraph_4_4.png" />
+</div>
+</div>
+</section>
+<section id="On-shell-subtraction-through-madstr">
+<h2>On-shell subtraction through madstr<a class="headerlink" href="#On-shell-subtraction-through-madstr" title="Permalink to this headline"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mastercode_with_gm2.in&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">pss</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">(</span><span class="mi">1000022</span><span class="p">,</span><span class="mi">1000022</span><span class="p">),</span>
+     <span class="p">]</span>
+<span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;cteq6l1&quot;</span><span class="p">,</span><span class="s2">&quot;cteq66&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;/opt/MG5_aMC_v2_7_0/models/EWKino_NLO_UFO_py3&quot;</span><span class="p">)</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">([</span><span class="n">i</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">7</span><span class="o">+</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">mg_dl</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">skip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">madstr</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">mg_dl</span><span class="p">,</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">mg_dl</span><span class="p">,</span><span class="s2">&quot;NLO&quot;</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">scenario</span><span class="o">=</span><span class="s2">&quot;mastercode&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running: 15 jobs
+./output/bc70cb3af5e83ab35b937bca29b2536487b5662454482b4f2315ada2001d6774.out
+No module named madgraph
+INFO: ************************************************************
+*                                                          *
+*           W E L C O M E  to  M A D G R A P H 5           *
+*                       a M C @ N L O                      *
+*                                                          *
+*                 *                       *                *
+*                   *        * *        *                  *
+*                     * * * * 5 * * * *                    *
+*                   *        * *        *                  *
+*                 *                       *                *
+*                                                          *
+*         VERSION 5.2.7.3               20xx-xx-xx         *
+*                                                          *
+*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+*                 http://amcatnlo.cern.ch                  *
+*                                                          *
+*               Type &#39;help&#39; for in-line help.              *
+*                                                          *
+************************************************************
+INFO: load configuration from /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/bc70cb3af5e83ab35b937bca29b2536487b5662454482b4f2315ada2001d6774.bdir/Cards/amcatnlo_configuration.txt
+INFO: load configuration from /opt/MG5_aMC_v2_7_0/input/mg5_configuration.txt
+INFO: load configuration from /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/bc70cb3af5e83ab35b937bca29b2536487b5662454482b4f2315ada2001d6774.bdir/Cards/amcatnlo_configuration.txt
+Using default eps viewer &#34;gv&#34;. Set another one in ./input/mg5_configuration.txt
+Using default web browser &#34;firefox&#34;. Set another one in ./input/mg5_configuration.txt
+calculate_xsect -f
+INFO: will run in mode: NLO
+INFO: Starting run
+INFO: Compiling the code
+write ./param_card.dat
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+INFO: MadSTR: Forcing width MDL_WSUL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSUL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSCL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSCL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSUR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSUR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSCR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSCR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSDL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSDL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSSL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSSL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSBL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSBL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSDR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSDR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSSR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSSR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSBR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSBR to zero inside param_card.inc
+<span class="ansi-blue-intense-fg ansi-bold">WARNING: The replacements above ensure poles cancelation, and affect all widths
+   EXCEPT those which enter the resonance-treatment counterterms, which
+   are taken from the param_card.
+   Do NOT set these widths to zero in the param_card. </span>
+INFO: Using LHAPDF v6.3.0 interface for PDFs
+INFO: Compiling source...
+INFO:           ...done, continuing with P* directories
+<span class="ansi-blue-intense-fg ansi-bold">WARNING: Could not compile StdHEP because its source directory could not be found in the SOURCE folder.
+ Check the MG5_aMC option &#39;output_dependencies&#39;.
+ This will prevent the use of HERWIG6/Pythia6 shower. </span>
+INFO: Compiling directories...
+INFO: Compiling on 16 cores
+INFO:  Compiling P0_uux_n1n1...
+INFO:  Compiling P0_ccx_n1n1...
+INFO:  Compiling P0_ddx_n1n1...
+INFO:  Compiling P0_uxu_n1n1...
+INFO:  Compiling P0_cxc_n1n1...
+INFO:  Compiling P0_ssx_n1n1...
+INFO:  Compiling P0_dxd_n1n1...
+INFO:  Compiling P0_sxs_n1n1...
+INFO:  Compiling P0_bbx_n1n1...
+INFO:  Compiling P0_bxb_n1n1...
+INFO:     P0_bxb_n1n1 done.
+INFO:     P0_uxu_n1n1 done.
+INFO:     P0_ccx_n1n1 done.
+INFO:     P0_dxd_n1n1 done.
+INFO:     P0_bbx_n1n1 done.
+INFO:     P0_cxc_n1n1 done.
+INFO:     P0_sxs_n1n1 done.
+INFO:     P0_ddx_n1n1 done.
+INFO:     P0_uux_n1n1 done.
+INFO:     P0_ssx_n1n1 done.
+INFO: Checking test output:
+INFO: P0_uux_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_ccx_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_ddx_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_ssx_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_uxu_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_cxc_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_dxd_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_sxs_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_bbx_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_bxb_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: Starting run
+INFO: Using 16 cores
+INFO: Cleaning previous results
+INFO: Doing fixed order NLO
+INFO: Setting up grids
+INFO:  Idle: 0,  Running: 10,  Completed: 0 [ current time: 02h31 ]
+INFO:  Idle: 0,  Running: 9,  Completed: 1 [  5.1s  ]
+INFO:  Idle: 0,  Running: 8,  Completed: 2 [  5.5s  ]
+INFO:  Idle: 0,  Running: 7,  Completed: 3 [  6s  ]
+INFO:  Idle: 0,  Running: 6,  Completed: 4 [  6.2s  ]
+INFO:  Idle: 0,  Running: 5,  Completed: 5 [  7.6s  ]
+INFO:  Idle: 0,  Running: 4,  Completed: 6 [  7.6s  ]
+INFO:  Idle: 0,  Running: 3,  Completed: 7 [  7.8s  ]
+INFO:  Idle: 0,  Running: 2,  Completed: 8 [  9.5s  ]
+INFO:  Idle: 0,  Running: 1,  Completed: 9 [  10.8s  ]
+INFO:  Idle: 0,  Running: 0,  Completed: 10 [  11.2s  ]
+INFO:
+      Results after grid setup:
+      Total cross section:      7.307e-06 +- 2.4e-07 pb
+
+INFO: Refining results, step 1
+INFO:  Idle: 0,  Running: 10,  Completed: 0 [ current time: 02h31 ]
+INFO:  Idle: 0,  Running: 9,  Completed: 1 [  4.7s  ]
+INFO:  Idle: 0,  Running: 8,  Completed: 2 [  4.9s  ]
+INFO:  Idle: 0,  Running: 7,  Completed: 3 [  5s  ]
+INFO:  Idle: 0,  Running: 6,  Completed: 4 [  5.9s  ]
+INFO:  Idle: 0,  Running: 5,  Completed: 5 [  6.4s  ]
+INFO:  Idle: 0,  Running: 4,  Completed: 6 [  6.5s  ]
+INFO:  Idle: 0,  Running: 3,  Completed: 7 [  7.6s  ]
+INFO:  Idle: 0,  Running: 2,  Completed: 8 [  8s  ]
+INFO:  Idle: 0,  Running: 1,  Completed: 9 [  9.1s  ]
+INFO:  Idle: 0,  Running: 0,  Completed: 10 [  9.9s  ]
+INFO:
+   --------------------------------------------------------------
+      Final results and run summary:
+      Process p p &gt; 1000022 1000022 [QCD]
+      Run at p-p collider (6500.0 + 6500.0 GeV)
+      Total cross section: 7.402e-06 +- 1.2e-07 pb
+   --------------------------------------------------------------
+
+INFO: The results of this run and the HwU and GnuPlot files with the plots have been saved in /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/bc70cb3af5e83ab35b937bca29b2536487b5662454482b4f2315ada2001d6774.bdir/Events/run_01
+INFO: Run complete
+INFO:
+quit
+INFO:
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+stty: &#39;standard input&#39;stty: &#39;standard input&#39;: Inappropriate ioctl for device
+: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: stty: &#39;standard input&#39;: Inappropriate ioctl for device
+&#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_madgraph_6_4.png" src="../_images/examples_test_madgraph_6_4.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to HEPi’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_pyslha.html" class="btn btn-neutral float-right" title="pyslha comparison" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

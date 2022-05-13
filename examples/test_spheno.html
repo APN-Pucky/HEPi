@@ -28,8 +28,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="hepi" href="../autoapi/hepi/index.html" />
-    <link rel="prev" title="Welcome to HEPi’s documentation!" href="../index.html" /> 
+    <link rel="next" title="Result writing example" href="test_write.html" />
+    <link rel="prev" title="pyslha comparison" href="test_pyslha.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,7 +40,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -61,7 +61,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -365,7 +368,7 @@ div.rendered_html tbody tr:hover {
 <section id="SPheno-example">
 <h1>SPheno example<a class="headerlink" href="#SPheno-example" title="Permalink to this headline"></a></h1>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hepi</span>
@@ -389,13 +392,13 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.0.2.60+dirty
+0.1.4.15+dirty
 ~/git/resummino_ug_to_UX_vNLO/
 ~/git/SPheno-3.3.8/
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sq</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2000002</span><span class="p">,</span><span class="mi">1000002</span><span class="p">]:</span>
@@ -420,26 +423,55 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running: 16 jobs
-Running: 16 jobs
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">/tmp/ipykernel_12727/649120515.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span>     fig<span class="ansi-blue-fg">.</span>subplots_adjust<span class="ansi-blue-fg">(</span>hspace<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span>     <span class="ansi-green-fg">for</span> pdf<span class="ansi-blue-fg">,</span>nlopdf <span class="ansi-green-fg">in</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;CT14lo&#34;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#34;CT14lo&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg">         </span>li <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>hepi<span class="ansi-blue-fg">.</span>Input<span class="ansi-blue-fg">(</span>hepi<span class="ansi-blue-fg">.</span>Order<span class="ansi-blue-fg">.</span>LO<span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">13000</span><span class="ansi-blue-fg">,</span>sq<span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">1000022</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#34;LesHouches.in&#34;</span><span class="ansi-blue-fg">,</span>pdf<span class="ansi-blue-fg">,</span>nlopdf<span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">1.</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1.</span><span class="ansi-blue-fg">,</span>id<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;test&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span>         li<span class="ansi-blue-fg">=</span>hepi<span class="ansi-blue-fg">.</span>slha_scan_rel<span class="ansi-blue-fg">(</span>li<span class="ansi-blue-fg">,</span><span class="ansi-green-fg">lambda</span> r <span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;EXTPAR&#34;</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">510</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;EXTPAR&#34;</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span>r<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>np<span class="ansi-blue-fg">.</span>linspace<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">470.</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">530.</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">16</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span>         sp<span class="ansi-blue-fg">.</span>run<span class="ansi-blue-fg">(</span>li<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/input.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f, mu_r, pdfset_lo, pdfset_nlo, precision, max_iters, invariant_mass, result, pt, id, model_path, update)</span>
+<span class="ansi-green-intense-fg ansi-bold">    151</span>         self<span class="ansi-blue-fg">.</span>model_path <span class="ansi-blue-fg">=</span> model_path
+<span class="ansi-green-intense-fg ansi-bold">    152</span>         <span class="ansi-green-fg">if</span> update<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 153</span><span class="ansi-red-fg">             </span>update_slha<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    154</span>
+<span class="ansi-green-intense-fg ansi-bold">    155</span> <span class="ansi-green-fg">def</span> update_slha<span class="ansi-blue-fg">(</span> i<span class="ansi-blue-fg">:</span>Input <span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/input.py</span> in <span class="ansi-cyan-fg">update_slha</span><span class="ansi-blue-fg">(i)</span>
+<span class="ansi-green-intense-fg ansi-bold">    161</span>
+<span class="ansi-green-intense-fg ansi-bold">    162</span>     &#34;&#34;&#34;
+<span class="ansi-green-fg">--&gt; 163</span><span class="ansi-red-fg">     </span>b <span class="ansi-blue-fg">=</span> pyslha<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span>get_input_dir<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> i<span class="ansi-blue-fg">.</span>slha<span class="ansi-blue-fg">,</span>ignorenomass<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    164</span>     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    165</span>         i.mu = (abs(b.blocks[&#34;MASS&#34;][abs(i.particle1)]) +
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pyslha.py</span> in <span class="ansi-cyan-fg">read</span><span class="ansi-blue-fg">(spcfile, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1546</span>     Other keyword parameters are passed to readSLHA<span class="ansi-blue-fg">/</span>readISAWIG<span class="ansi-blue-fg">.</span>
+<span class="ansi-green-intense-fg ansi-bold">   1547</span>     &#34;&#34;&#34;
+<span class="ansi-green-fg">-&gt; 1548</span><span class="ansi-red-fg">     </span>txt <span class="ansi-blue-fg">=</span> _read<span class="ansi-blue-fg">(</span>spcfile<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1549</span>     <span class="ansi-green-fg">if</span> type<span class="ansi-blue-fg">(</span>spcfile<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">is</span> str <span class="ansi-green-fg">and</span> spcfile<span class="ansi-blue-fg">.</span>endswith<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;.isa&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1550</span>         <span class="ansi-green-fg">return</span> readISAWIG<span class="ansi-blue-fg">(</span>txt<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pyslha.py</span> in <span class="ansi-cyan-fg">_read</span><span class="ansi-blue-fg">(f)</span>
+<span class="ansi-green-intense-fg ansi-bold">    235</span>             <span class="ansi-green-fg">return</span> sys<span class="ansi-blue-fg">.</span>stdin<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    236</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 237</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">with</span> open<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;r&#34;</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> ff<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    238</span>                 <span class="ansi-green-fg">return</span> ff<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    239</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;./input/LesHouches.in&#39;
 </pre></div></div>
 </div>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <img alt="../_images/examples_test_spheno_2_1.png" src="../_images/examples_test_spheno_2_1.png" />
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_2_2.png" src="../_images/examples_test_spheno_2_2.png" />
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sq</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2000002</span><span class="p">,</span><span class="mi">1000002</span><span class="p">]:</span>
@@ -461,104 +493,8 @@ Running: 16 jobs
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Running: 256 jobs
-skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskip1
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_3_1.png" src="../_images/examples_test_spheno_3_1.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_3_3.png" src="../_images/examples_test_spheno_3_3.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_3_5.png" src="../_images/examples_test_spheno_3_5.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Running: 256 jobs
-skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskip1
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_3_7.png" src="../_images/examples_test_spheno_3_7.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_3_9.png" src="../_images/examples_test_spheno_3_9.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_3_11.png" src="../_images/examples_test_spheno_3_11.png" />
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dll</span> <span class="o">=</span> <span class="p">{}</span>
@@ -589,147 +525,6 @@ flipped x y
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Running: 121 jobs
-skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskip1
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_4_1.png" src="../_images/examples_test_spheno_4_1.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_4_3.png" src="../_images/examples_test_spheno_4_3.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_4_5.png" src="../_images/examples_test_spheno_4_5.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_4_7.png" src="../_images/examples_test_spheno_4_7.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Running: 121 jobs
-skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskip1
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_4_9.png" src="../_images/examples_test_spheno_4_9.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-2
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_4_11.png" src="../_images/examples_test_spheno_4_11.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_4_13.png" src="../_images/examples_test_spheno_4_13.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_4_15.png" src="../_images/examples_test_spheno_4_15.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-flipped x y
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_4_17.png" src="../_images/examples_test_spheno_4_17.png" />
-</div>
-</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -744,8 +539,8 @@ flipped x y
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to HEPi’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../autoapi/hepi/index.html" class="btn btn-neutral float-right" title="hepi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="test_pyslha.html" class="btn btn-neutral float-left" title="pyslha comparison" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_write.html" class="btn btn-neutral float-right" title="Result writing example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

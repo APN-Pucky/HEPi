@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.4
+                0.1.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -56,7 +56,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -89,31 +92,38 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.input</h1><div class="highlight"><pre>
-<span></span>from distutils.log import warn
-from enum import IntEnum
-#from math import dist
-import copy
+<span></span>from enum import IntEnum
+import os
+import shutil
 import warnings
+import copy
+
 import numpy as np
-from typing import List
+from typing import Iterable, List
 
 import pyslha
-from .util import get_LR_partner, lhapdf_name_to_id, namehash
+from .util import DictData, get_LR_partner, lhapdf_name_to_id
 
 import lhapdf
 
+
+
+
 <div class="viewcode-block" id="in_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.in_dir">[docs]</a>in_dir = &quot;./input/&quot;</div>
-&quot;&quot;&quot;input directory&quot;&quot;&quot;
+&quot;&quot;&quot;Input directory.&quot;&quot;&quot;
 <div class="viewcode-block" id="out_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.out_dir">[docs]</a>out_dir = &quot;./output/&quot;</div>
-&quot;&quot;&quot;output directory&quot;&quot;&quot;
+&quot;&quot;&quot;Output directory.&quot;&quot;&quot;
 <div class="viewcode-block" id="pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pre">[docs]</a>pre = &quot;nice -n 5&quot;</div>
-&quot;&quot;&quot;run command prefix.&quot;&quot;&quot;
+&quot;&quot;&quot;Prefix for run commands.&quot;&quot;&quot;
 
 
 
 <div class="viewcode-block" id="get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_input_dir">[docs]</a>def get_input_dir():
     &quot;&quot;&quot;
     Get the input directory.
+
+    Returns:
+        str: :attr:`in_dir`
     &quot;&quot;&quot;
     global in_dir
     return in_dir</div>
@@ -122,14 +132,30 @@ import lhapdf
 <div class="viewcode-block" id="get_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_output_dir">[docs]</a>def get_output_dir():
     &quot;&quot;&quot;
     Get the input directory.
+
+    Returns:
+        str: :attr:`out_dir`
     &quot;&quot;&quot;
     global out_dir
     return out_dir</div>
 
 
+<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_pre">[docs]</a>def get_pre():
+    &quot;&quot;&quot;
+    Gets the command prefix. 
+
+    Returns:
+        str: :attr:`pre`
+    &quot;&quot;&quot;
+    global pre
+    return pre</div>
+
 <div class="viewcode-block" id="set_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_input_dir">[docs]</a>def set_input_dir(ind):
     &quot;&quot;&quot;
     Sets the input directory.
+
+    Args:
+        ind (str): new input directory.
     &quot;&quot;&quot;
     global in_dir
     in_dir = ind</div>
@@ -138,6 +164,9 @@ import lhapdf
 <div class="viewcode-block" id="set_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_output_dir">[docs]</a>def set_output_dir(outd):
     &quot;&quot;&quot;
     Sets the output directory.
+
+    Args:
+        outd (str): new output directory.
     &quot;&quot;&quot;
     global out_dir
     out_dir = outd</div>
@@ -146,17 +175,12 @@ import lhapdf
 <div class="viewcode-block" id="set_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_pre">[docs]</a>def set_pre(ppre):
     &quot;&quot;&quot;
     Sets the command prefix. 
+
+    Args:
+        ppre (str): new command prefix.
     &quot;&quot;&quot;
     global pre
     pre = ppre</div>
-
-
-<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_pre">[docs]</a>def get_pre():
-    &quot;&quot;&quot;
-    Gets the command prefix. 
-    &quot;&quot;&quot;
-    global pre
-    return pre</div>
 
 
 <div class="viewcode-block" id="Order"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order">[docs]</a>class Order(IntEnum):
@@ -164,16 +188,49 @@ import lhapdf
     Computation orders.
     &quot;&quot;&quot;
 <div class="viewcode-block" id="Order.LO"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.LO">[docs]</a>    LO = 0</div>
+    &quot;&quot;&quot;Leading Order&quot;&quot;&quot;
 <div class="viewcode-block" id="Order.NLO"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.NLO">[docs]</a>    NLO = 1</div>
-<div class="viewcode-block" id="Order.NLO_PLUS_NLL"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.NLO_PLUS_NLL">[docs]</a>    NLO_PLUS_NLL = 2</div></div>
+    &quot;&quot;&quot;Next-to-Leading Order&quot;&quot;&quot;
+<div class="viewcode-block" id="Order.NLO_PLUS_NLL"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.NLO_PLUS_NLL">[docs]</a>    NLO_PLUS_NLL = 2</div>
+    &quot;&quot;&quot;Next-to-Leading Order plus Next-to-Leading Logarithms&quot;&quot;&quot;
+<div class="viewcode-block" id="Order.aNNLO_PLUS_NNLL"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.aNNLO_PLUS_NNLL">[docs]</a>    aNNLO_PLUS_NNLL = 3</div>
+    &quot;&quot;&quot;Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms&quot;&quot;&quot;</div>
 
+<div class="viewcode-block" id="order_to_string"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.order_to_string">[docs]</a>def order_to_string(o:Order):
+    return [&quot;LO&quot;,&quot;NLO&quot;,&quot;NLO_PLUS_NLL&quot;,&quot;aNNLO_PLUS_NNLL&quot;][o]</div>
 
-<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input">[docs]</a>class Input:
+<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input">[docs]</a>class Input(DictData):
     &quot;&quot;&quot;
-    Input for computation.
+    Input for computation and scans.
+
+    Attributes:
+        order (:class:`Order`): LO, NLO or NLO+NLL computation.
+        energy (int): CMS energy in GeV.
+        energyhalf (int): Halfed `energy`.
+        particle1 (int): PDG identifier of the first final state particle.
+        particle2 (int): PDG identifier of the second final state particle.
+        slha (str): File path of for the base slha.
+            Modified slha files will be used if a scan requires a change of the input.
+        pdf_lo (str): LO PDF name.
+        pdf_nlo (str): NLO PDF name.
+        pdfset_lo (int): LO PDF member/set id.
+        pdfset_nlo (int): NLO PDF member/set id.
+        pdf_lo_id (int):  LO PDF first member/set id.
+        pdf_nlo_id (int): NLO PDF first member/set id.
+        mu (double): central scale factor.
+        mu_f (double): Factorization scale factor.
+        mu_r (double): Renormalization scale factor.
+        precision (double): Desired numerical relative precision.
+        max_iters (int): Upper limit on integration iterations.
+        invariant_mass (str): Invariant mass mode &#39;auto = sqrt((p1+p2)^2)&#39; else value.
+        pt (str): Transverse Momentum mode &#39;auto&#39; or value.
+        result (str): Result type &#39;total&#39;/&#39;pt&#39;/&#39;ptj&#39;/&#39;m&#39;.
+        id (str): Set an id of this run. 
+        model_path (str): Path for MadGraph model.
+        update (bool): Update dependent `mu`.
     &quot;&quot;&quot;
     # TODO allow unspecified input? Maybe with kwargs + defaults
-    def __init__(self, order :Order, energy, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, invariant_mass=&quot;auto&quot;,result=&quot;total&quot;,pt=&quot;auto&quot;,id=&quot;&quot;,model_path=&quot;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&quot;):
+    def __init__(self, order :Order, energy:float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, invariant_mass=&quot;auto&quot;,result=&quot;total&quot;,pt=&quot;auto&quot;,id=&quot;&quot;,model_path=&quot;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&quot;, update=True):
         self.order = order
         self.energy = energy
         self.energyhalf = energy/2.
@@ -195,29 +252,102 @@ import lhapdf
         self.result = result
         self.id = id
         self.model_path = model_path
-        update_slha(self)</div>
+        if os.path.isfile(get_input_dir() + self.slha):
+                shutil.copy(get_input_dir() + self.slha,get_output_dir() + self.slha)
+        if update:
+            update_slha(self)
+
+<div class="viewcode-block" id="Input.has_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_gluino">[docs]</a>    def has_gluino(self) -&gt; bool:
+        return is_gluino(self.particle1) or is_gluino(self.particle2)</div>
+<div class="viewcode-block" id="Input.has_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_neutralino">[docs]</a>    def has_neutralino(self) -&gt; bool:
+        return is_neutralino(self.particle1) or is_neutralino(self.particle2) </div>
+<div class="viewcode-block" id="Input.has_charginos"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_charginos">[docs]</a>    def has_charginos(self) -&gt; bool:
+        return is_chargino(self.particle1) or is_chargino(self.particle2) </div>
+<div class="viewcode-block" id="Input.has_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_weakino">[docs]</a>    def has_weakino(self) -&gt; bool:
+        return self.has_charginos() or self.has_neutralino()</div>
+<div class="viewcode-block" id="Input.has_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_squark">[docs]</a>    def has_squark(self) -&gt; bool:
+        return is_squark(self.particle1) or is_squark(self.particle2)</div>
+<div class="viewcode-block" id="Input.has_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_slepton">[docs]</a>    def has_slepton(self) -&gt; bool:
+        return is_slepton(self.particle1) or is_slepton(self.particle2)</div></div>
+
+<div class="viewcode-block" id="is_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_gluino">[docs]</a>def is_gluino(id:int)-&gt;bool:
+    return id == 1000021 </div>
+
+<div class="viewcode-block" id="is_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_neutralino">[docs]</a>def is_neutralino(id:int) -&gt; bool:
+    neutralinos = [1000022,1000023,1000025,1000035]
+    return abs(id) in neutralinos </div>
+
+<div class="viewcode-block" id="is_chargino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_chargino">[docs]</a>def is_chargino(id:int) -&gt; bool:
+    charginos= [1000024,1000037]
+    return abs(id) in charginos</div>
+
+<div class="viewcode-block" id="is_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_weakino">[docs]</a>def is_weakino(id:int) -&gt; bool:
+    return is_chargino(id) or is_neutralino(id)</div>
+
+<div class="viewcode-block" id="is_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_squark">[docs]</a>def is_squark(id:int) -&gt; bool:
+    l_squark= range(1000001,1000007)
+    r_squark= range(2000001,2000007)
+    return abs(id) in l_squark or abs(id) in r_squark</div>
+
+<div class="viewcode-block" id="is_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_slepton">[docs]</a>def is_slepton(id:int) -&gt; bool:
+    l_slepton= range(1000011,1000016)
+    r_slepton= range(2000011,2000016)  # TODO remove righthandend snu&#39;s
+    return abs(id) in l_slepton or abs(id) in r_slepton</div>
+
 
 <div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.update_slha">[docs]</a>def update_slha( i:Input ):
     &quot;&quot;&quot;
     Updates dependent parameters in Input `i`.
 
     Mainly concerns the `mu` value used by `madgraph`.
+
+    
     &quot;&quot;&quot;
-    b = pyslha.read(get_input_dir() + i.slha,ignorenomass=True)
+    b = pyslha.read(get_output_dir() + i.slha,ignorenomass=True)
     try:
         i.mu = (abs(b.blocks[&quot;MASS&quot;][abs(i.particle1)]) +
                    abs(b.blocks[&quot;MASS&quot;][abs(i.particle2)]))/2.
     except:
+        warnings.warn(&quot;Could not set new central scale to average of masses.&quot;,RuntimeWarning)
         pass</div>
-        
 
 
 
-
-
-<div class="viewcode-block" id="scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan">[docs]</a>def scan(l: List[Input], var: str, range) -&gt; List[Input]:
+<div class="viewcode-block" id="scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan">[docs]</a>def scan(l: List[Input], var: str , range :Iterable )  -&gt; List[Input]:
     &quot;&quot;&quot;
     Scans a variable `var` over `range` in `l`.
+
+    Note:
+        This function does not ensure that dependent vairables are updated (see `energyhalf` in Examples).
+
+    Args:
+        l (:obj:`list` of :class:`Input`): Input parameters that get scanned each.
+        var (str): Scan variable name.
+        range (Iterable): Range of `var` to be scanned.
+
+    Returns:
+        :obj:`list` of :class:`Input`: Modified list with scan runs added.
+
+    Examples:
+        &gt;&gt;&gt; li = [Input(Order.LO, 13000,  1000022,1000022, &quot;None&quot;, &quot;CT14lo&quot;,&quot;CT14lo&quot;,update=False)]
+        &gt;&gt;&gt; li = scan(li,&quot;energy&quot;,range(10000,13000,1000))
+        &gt;&gt;&gt; for e in li:
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        &gt;&gt;&gt; for e in scan(li,&quot;order&quot;,[Order.LO,Order.NLO,Order.NLO_PLUS_NLL]):
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+ 
     &quot;&quot;&quot;
     ret = []
     for s in l:
@@ -227,12 +357,59 @@ import lhapdf
             ret.append(tmp)
     return ret</div>
 
+<div class="viewcode-block" id="scan_multi"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_multi">[docs]</a>def scan_multi(li: List[Input], **kwargs)  -&gt; List[Input]:
+    &quot;&quot;&quot;
+    Magically scans the variables passed to this function.
 
-<div class="viewcode-block" id="scale_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scale_scan">[docs]</a>def scale_scan(l: List[Input], range=3, distance=2.):
+    Args:
+        **kwargs: 
+
+    Examples:
+        &gt;&gt;&gt; oli = [Input(Order.LO, 13000,  1000022,1000022, &quot;None&quot;, &quot;CT14lo&quot;,&quot;CT14lo&quot;,update=False)]
+        &gt;&gt;&gt; li = scan_multi(oli,energy=range(10000,13000,1000))
+        &gt;&gt;&gt; for e in li:
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        &gt;&gt;&gt; for e in scan_multi(oli,energy=range(10000,13000,1000),order=[Order.LO,Order.NLO,Order.NLO_PLUS_NLL]):
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+ 
+    &quot;&quot;&quot;
+    for k,v in kwargs.items():
+        li = scan(li,var=k,range=v)
+    return li</div>
+<div class="viewcode-block" id="multi_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.multi_scan">[docs]</a>multi_scan=scan_multi</div>
+
+<div class="viewcode-block" id="scan_scale"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_scale">[docs]</a>def scan_scale(l: List[Input], range=3, distance=2.):
     &quot;&quot;&quot;
     Scans scale by varying `mu_f` and `mu_r`.
+
     They take `range` values from 1/`distance` to `distance` in lograthmic spacing.
     Only points with `mu_f`=`mu_r` or `mu_r/f`=1 or `mu_r/f`=`distance` or `mu_r/f`=1/`distance` are returned.
+
+    Examples:
+        &gt;&gt;&gt; li = [Input(Order.LO, 13000,  1000022,1000022, &quot;None&quot;, &quot;CT14lo&quot;,&quot;CT14lo&quot;,update=False)]
+        &gt;&gt;&gt; for e in scan_scale(li):
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 0.5, &#39;mu_r&#39;: 0.5, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 0.5, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 0.5, &#39;mu_r&#39;: 2.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 0.5, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 2.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2.0, &#39;mu_r&#39;: 0.5, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2.0, &#39;mu_r&#39;: 2.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
     &quot;&quot;&quot;
     ret = []
     for s in l:
@@ -250,10 +427,23 @@ import lhapdf
             ret.append(s)
 
     return ret</div>
+<div class="viewcode-block" id="scale_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scale_scan">[docs]</a>scale_scan=scan_scale</div>
 
-<div class="viewcode-block" id="seven_point_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.seven_point_scan">[docs]</a>def seven_point_scan(l: List[Input]):
+<div class="viewcode-block" id="scan_seven_point"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_seven_point">[docs]</a>def scan_seven_point(l: List[Input]):
     &quot;&quot;&quot;
     Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
+
+    Examples:
+        &gt;&gt;&gt; li = [Input(Order.LO, 13000,  1000022,1000022, &quot;None&quot;, &quot;CT14lo&quot;,&quot;CT14lo&quot;,update=False)]
+        &gt;&gt;&gt; for e in scan_seven_point(li):
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 0.5, &#39;mu_r&#39;: 0.5, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 0.5, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 0.5, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 2.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2.0, &#39;mu_r&#39;: 2.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
     &quot;&quot;&quot;
     range=3
     distance=2.
@@ -273,32 +463,30 @@ import lhapdf
             ret.append(s)
 
     return ret</div>
+<div class="viewcode-block" id="seven_point_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.seven_point_scan">[docs]</a>seven_point_scan=scan_seven_point</div>
 
 
-<div class="viewcode-block" id="pdf_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pdf_scan">[docs]</a>def pdf_scan(l: List[Input]):
-    &quot;&quot;&quot;
-    Scans NLO PDF sets. 
-
-    The PDF sets are infered from `lhapdf.getPDFSet` with the argument of `pdfset_nlo`.
-    &quot;&quot;&quot;
-    ret = []
-    for s in l:
-        # only central scale
-        if s.mu_f == 1.0 and s.mu_r == 1.0:
-            set = lhapdf.getPDFSet(s.pdf_nlo)
-            for r in range(set.size):
-                tmp = copy.copy(s)
-                setattr(tmp, &quot;pdfset_nlo&quot;, r)
-                ret.append(tmp)
-        else:
-            ret.append(s)
-    return ret</div>
 
 <div class="viewcode-block" id="change_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.change_where">[docs]</a>def change_where(l:List[Input], dicts : dict, **kwargs):
     &quot;&quot;&quot;
     Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
 
     The changes only applied to the matching list members.
+
+    Examples:
+        &gt;&gt;&gt; li = scan_multi([Input(Order.LO, 13000,  1000022,1000022, &quot;None&quot;, &quot;CT14lo&quot;,&quot;CT14lo&quot;,update=False)],energy=range(10000,13000,1000))
+        &gt;&gt;&gt; for e in change_where(li,{&#39;order&#39;:Order.NLO},energy=11000):
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        &gt;&gt;&gt; li = scan_multi([Input(Order.LO, 13000,  1000022,1000022, &quot;None&quot;, &quot;CT14lo&quot;,&quot;CT14lo&quot;,update=False)],energy=range(10000,12000,1000),mu_f=range(1,3))
+        &gt;&gt;&gt; for e in change_where(li,{&#39;order&#39;:Order.NLO},energy=11000,mu_f=1):
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 10000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
     &quot;&quot;&quot;
     ret = []
     for s in l:
@@ -329,6 +517,18 @@ import lhapdf
             ret.append(tmp)
     return ret</div>
 
+<div class="viewcode-block" id="slha_write"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_write">[docs]</a>def slha_write(newname,d):
+    f = get_output_dir()+newname
+    pyslha.write(f, d)
+    with open(f) as reader, open(f, &#39;r+&#39;) as writer:
+        for line in reader:
+            if line.strip():
+                writer.write(line)
+            else:
+                writer.write(&quot;#\n&quot;)
+        writer.truncate()</div>
+
+
 <div class="viewcode-block" id="mass_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.mass_scan">[docs]</a>def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scans the PDG identified mass `var` over `range` in the list `l`.
@@ -341,14 +541,15 @@ import lhapdf
             try:
                 d = pyslha.read(s.slha)
             except:
-                d = pyslha.read(get_input_dir() + s.slha)
+                d = pyslha.read(get_output_dir() + s.slha)
             d.blocks[&quot;MASS&quot;][abs(var)] = r
             if not (diff_L_R is None):
                 is_L, v = get_LR_partner(abs(var))
                 d.blocks[&quot;MASS&quot;][abs(v)] = r + is_L*diff_L_R
 
             newname = s.slha + &quot;_mass_&quot; + str(var) + &quot;_&quot; + str(r)
-            pyslha.write(get_input_dir()+newname, d)
+            #pyslha.write(get_output_dir()+newname, d)
+            slha_write(newname,d)
 
             tmp = copy.copy(s)
             setattr(tmp, &quot;mass_&quot; + str(var), r)
@@ -376,18 +577,101 @@ import lhapdf
             try:
                 d = pyslha.read(s.slha,ignorenomass=True)
             except:
-                d = pyslha.read(get_input_dir() + s.slha,ignorenomass=True)
+                d = pyslha.read(get_output_dir() + s.slha,ignorenomass=True)
             ls = lambdas(r)
             for b,v,res in ls:
                 d.blocks[b][v] = res
                 setattr(tmp, b+ &quot;_&quot; + str(v), res)
                 newname = newname +  &quot;_&quot; +str(b) + &quot;_&quot; + str(v) + &quot;_&quot; + str(res)
-            pyslha.write(get_input_dir()+newname, d)
+            #pyslha.write(get_output_dir()+newname, d)
+            slha_write(newname,d)
 
             setattr(tmp, &quot;slha&quot;, newname)
             update_slha(tmp)
             ret.append(tmp)
     return ret</div>
+
+<div class="viewcode-block" id="scan_pdf"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_pdf">[docs]</a>def scan_pdf(l: List[Input]):
+    &quot;&quot;&quot;
+    Scans NLO PDF sets. 
+
+    The PDF sets are infered from `lhapdf.getPDFSet` with the argument of `pdfset_nlo`.
+
+    Examples:
+        &gt;&gt;&gt; li = [Input(Order.NLO, 13000,  1000022,1000022, &quot;None&quot;, &quot;CT14lo&quot;,&quot;CT14nlo&quot;,update=False)]
+        &gt;&gt;&gt; for e in scan_pdf(li):
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 1, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 2, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 3, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 4, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 5, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 6, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 7, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 8, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 9, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 10, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 11, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 12, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 13, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 14, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 15, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 16, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 17, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 18, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 19, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 20, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 21, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 22, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 23, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 24, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 25, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 26, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 27, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 28, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 29, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 30, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 31, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 32, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 33, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 34, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 35, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 36, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 37, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 38, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 39, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 40, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 41, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 42, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 43, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 44, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 45, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 46, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 47, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 48, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 49, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 50, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 51, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 52, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 53, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 54, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 55, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+        {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 56, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
+    &quot;&quot;&quot;
+    ret = []
+    for s in l:
+        # only central scale
+        if s.mu_f == 1.0 and s.mu_r == 1.0:
+            set = lhapdf.getPDFSet(s.pdf_nlo)
+            for r in range(set.size):
+                tmp = copy.copy(s)
+                setattr(tmp, &quot;pdfset_nlo&quot;, r)
+                ret.append(tmp)
+        else:
+            ret.append(s)
+    return ret</div>
+<div class="viewcode-block" id="pdf_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pdf_scan">[docs]</a>pdf_scan=scan_pdf</div>
 </pre></div>
 
            </div>

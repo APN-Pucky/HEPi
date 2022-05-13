@@ -7,8 +7,6 @@
 
    Results and postprocessing for the :mod:`hepi` package.
 
-   ..
-       !! processed by numpydoc !!
 
 
 Module Contents
@@ -45,148 +43,87 @@ Attributes
 .. py:data:: required_numerical_uncertainty_factor
    :annotation: = 10
 
-   
    If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None)
 
-   
+   Bases: :py:obj:`hepi.util.DictData`
+
    General result class.
 
-   Attributes:
-       LO (:obj:`double`): Leading Order result. Defaults to None.
-       NLO (:obj:`double`): Next-to-Leading Order result. Defaults to None.
-       NLO_PLUS_NLL (:obj:`double`): Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
-       K_LO (:obj:`double`): LO divided by LO.
-       K_NLO (:obj:`double`): NLO divided by LO result.
-       K_NLO_PLUS_NLL (:obj:`double`): NLO+NLL divided by LO.
-       NLO_PLUS_NLL_OVER_NLO (:obj:`double`): NLO+NLL divided by NLO.
+   :ivar LO: Leading Order result. Defaults to None.
+   :vartype LO: :obj:`double`
+   :ivar NLO: Next-to-Leading Order result. Defaults to None.
+   :vartype NLO: :obj:`double`
+   :ivar NLO_PLUS_NLL: Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+   :vartype NLO_PLUS_NLL: :obj:`double`
+   :ivar K_LO: LO divided by LO.
+   :vartype K_LO: :obj:`double`
+   :ivar K_NLO: NLO divided by LO result.
+   :vartype K_NLO: :obj:`double`
+   :ivar K_NLO_PLUS_NLL: NLO+NLL divided by LO.
+   :vartype K_NLO_PLUS_NLL: :obj:`double`
+   :ivar NLO_PLUS_NLL_OVER_NLO: NLO+NLL divided by NLO.
 
+   :vartype NLO_PLUS_NLL_OVER_NLO: :obj:`double`
 
+   Sets given and computes dependent ``Attributes``.
 
+   :param lo: corresponds to :attr:`LO`.
+   :type lo: :obj:`double`
+   :param nlo: corresponds to :attr:`NLO`.
+   :type nlo: :obj:`double`
+   :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
+   :type nlo_plus_nll: :obj:`double`
 
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: pdf_error(li, dl, confidence_level=90)
 
-   
    Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
-   Args:
-       li (:obj:`list` of :class:`Input`): Input list.
-       dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
-       confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
+   :param li: Input list.
+   :type li: :obj:`list` of :class:`Input`
+   :param dl: :class:`Result` dictionary with lists per entry.
+   :type dl: :obj:`dict`
+   :param confidence_level: Confidence Level for PDF uncertainty
+   :type confidence_level: :obj:`double`
 
-   Returns:
-       :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
-           - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
+   :returns:
 
+             Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
+                 - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
+   :rtype: :obj:`dict`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: scale_error(li, dl)
 
-   
    Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
 
-   Args:
-       li (:obj:`list` of :class:`Input`): Input list.
-       dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+   :param li: Input list.
+   :type li: :obj:`list` of :class:`Input`
+   :param dl: :class:`Result` dictionary with lists per entry.
+   :type dl: :obj:`dict`
 
-   Returns:
-       :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
-           - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
+   :returns:
 
-
-
-
-
+             Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
+                 - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
+   :rtype: :obj:`dict`
 
 
+.. py:function:: combine_errors(dl: dict)
 
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: combine_errors(dl)
-
-   
    Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
 
-   Note:
-       Running :func:`scale_errors` and :func:`pdf_errors` before is necessary.
+   .. note:: Running :func:`scale_errors` and :func:`pdf_errors` before is necessary.
 
-   Args:
-       dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
+   :param dl: :class:`Result` dictionary with lists per entry.
+   :type dl: :obj:`dict`
 
-   Returns:
-       :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
-           - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
+   :returns:
 
+             Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
+                 - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
+   :rtype: :obj:`dict`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
