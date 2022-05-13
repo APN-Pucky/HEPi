@@ -48,7 +48,7 @@ setuptools.setup(
             "nbsphinx",
             "jupyter-sphinx",
             "sphinx-autoapi",
-            "sphinx_math_dollar"
+            "sphinx_math_dollar",
             "sphinxcontrib-napoleon",
             "sphinx-autobuild",
         ],
