@@ -11,9 +11,6 @@ from smpl import debug
 import time
 import shutil
 
-
-
-
 class RunParam(DictData):
 	"""Abstract class that is similar to a dictionary but with fixed keys."""
 	def __init__(self,skip:bool=False,in_file:str=None,out_file:str=None,execute:str=None,name:str=None):
@@ -239,8 +236,8 @@ class Runner:
 		    outdir (str): new output directory.
 			create (bool): create directory if not existing
 		"""
-		if create and not os.path.exists(outdir):
-			os.makedirs(outdir)
+		if create:
+			os.makedirs(outdir,exist_ok=True)
 		self.out_dir = outdir
 
 
