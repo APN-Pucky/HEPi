@@ -3,21 +3,6 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-dev_requirements = [
-    "build",
-    "pytest",
-    "sphinx",
-    "jupyterlab",
-    "sphinx",
-    "nbsphinx",
-    "sphinx-rtd-theme",
-    "pandas",
-    "ipython",
-    "jupyter-sphinx",
-    "sphinx-autoapi",
-    "sphinxcontrib-napoleon",
-    "sphinx-autobuild",
-]
 
 setuptools.setup(
     name="hepi",
@@ -48,10 +33,24 @@ setuptools.setup(
         "particle",
         "lhapdf",
         "pandas",
-        # "tqdm",
+        "tqdm",
     ],
-    extra_require={
-        'dev': dev_requirements
+    extras_require={
+        "dev": [
+            "build",
+            "pytest",
+            "jupyterlab",
+            "ipython",
+        ],
+        "docs": [
+            "sphinx-rtd-theme",
+            "sphinx",
+            "nbsphinx",
+            "jupyter-sphinx",
+            "sphinx-autoapi",
+            "sphinxcontrib-napoleon",
+            "sphinx-autobuild",
+        ],
     },
     version_config={
         "template": "{tag}",
@@ -63,11 +62,5 @@ setuptools.setup(
         "count_commits_from_version_file": False
     },
     include_package_data=True,
-    #packages=['hepi'],
-    # https://setuptools.pypa.io/en/latest/userguide/datafiles.html
-    #package_data={
-    #    # If any package contains *.txt or *.rst files, include them:
-    #    "hepi": ["*.mg", "*.in", "*.dat"],
-    #},
     python_requires='>=3.6',
 )
