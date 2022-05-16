@@ -101,8 +101,8 @@ def pdf_error(li, dl, confidence_level=90):
     for i in range(len(dl["pdfset_nlo"])):
         if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
                 i] == 1.0:
-            set = lhapdf.getPDFSet(dl["pdf_nlo"][i])
-            pdfs = [0.0] * set.size
+            pdfset = lhapdf.getPDFSet(dl["pdf_nlo"][i])
+            pdfs = [0.0] * pdfset.size
             for j in range(len(dl["pdfset_nlo"])):
                 same = True
                 for s in members:
@@ -117,10 +117,10 @@ def pdf_error(li, dl, confidence_level=90):
             dl["LO_PDF_ERRPLUS"][i] = 0.0
             dl["LO_PDF_ERRMINUS"][i] = 0.0
             dl["LO_PDF_ERRSYM"][i] = 0.0
-            # lo_unc = set.uncertainty(
+            # lo_unc = pdfset.uncertainty(
             #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
-            nlo_unc = set.uncertainty([plot.unv(dl["NLO"][k]) for k in pdfs],
-                                      confidence_level)
+            nlo_unc = pdfset.uncertainty(
+                [plot.unv(dl["NLO"][k]) for k in pdfs], confidence_level)
             dl["NLO_PDF_CENTRAL"][i] = nlo_unc.central
             dl["NLO_PDF_ERRPLUS"][i] = nlo_unc.errplus
             dl["NLO_PDF_ERRMINUS"][i] = -nlo_unc.errminus
@@ -133,7 +133,7 @@ def pdf_error(li, dl, confidence_level=90):
                 warnings.warn("too low numerical nlo precision vs pdf.",
                               RuntimeWarning)
 
-            nlo_plus_nll_unc = set.uncertainty(
+            nlo_plus_nll_unc = pdfset.uncertainty(
                 [plot.unv(dl["NLO_PLUS_NLL"][k]) for k in pdfs], 90)
             dl["NLO_PLUS_NLL_PDF_CENTRAL"][i] = nlo_plus_nll_unc.central
             dl["NLO_PLUS_NLL_PDF_ERRPLUS"][i] = nlo_plus_nll_unc.errplus
@@ -214,7 +214,7 @@ def scale_error(li, dl):
                 if same:
                     scales.append(j)
 
-            # lo_unc = set.uncertainty(
+            # lo_unc = pdfset.uncertainty(
             #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
             dl["LO_SCALE_ERRPLUS"][i] = np.max(
                 [plot.unv(dl["LO"][k])

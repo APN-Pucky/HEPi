@@ -1,10 +1,9 @@
 """Collection of utility functions for the :mod:`hepi` package."""
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 import numpy as np
 import hashlib
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
-import pyslha
 import lhapdf
 import pandas as pd
 import warnings
