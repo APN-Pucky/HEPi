@@ -1,4 +1,4 @@
-"""The HEPi package aims to automize cluster computations for parameter scans with the option to produce plots. """
+"""The HEPi package aims to automize cluster computations for parameter scans with the option to produce plots."""
 from .output import *
 from .input import *
 from .results import *

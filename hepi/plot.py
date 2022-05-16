@@ -20,77 +20,171 @@ import matplotlib.cm as cm
 from matplotlib import colors
 
 from .input import Input, get_output_dir
-from .util import  get_name
+from .util import get_name
 from matplotlib.ticker import ScalarFormatter, NullFormatter
-from smpl import io
-from typing import List
 
 
-def title(axe,i:Input,scenario="",diff_L_R=None,extra="",cms_energy=True,pdf_info=True,**kwargs):
-    axe.set_title(
-        "$pp\\to"+get_name(i.particle1)+get_name(i.particle2) + "$"
-        +(" at $\\sqrt{S} = " +str(i.energy/1000) + "$ TeV" if cms_energy else "")
-        +" for " +(i.slha.split(".")[0] if scenario =="" else scenario)
-        +(" with " + i.pdf_nlo if pdf_info else "")
-        + " " + extra
-    )
+def title(axe,
+          i: Input,
+          scenario="",
+          diff_L_R=None,
+          extra="",
+          cms_energy=True,
+          pdf_info=True,
+          **kwargs):
+    axe.set_title("$pp\\to" + get_name(i.particle1) + get_name(i.particle2) +
+                  "$" + (" at $\\sqrt{S} = " + str(i.energy / 1000) +
+                         "$ TeV" if cms_energy else "") + " for " +
+                  (i.slha.split(".")[0] if scenario == "" else scenario) +
+                  (" with " + i.pdf_nlo if pdf_info else "") + " " + extra)
 
 
+def energy_plot(dict_list,
+                y,
+                yscale=1.,
+                xaxis="E [GeV]",
+                yaxis="$\\sigma$ [pb]",
+                label=None,
+                **kwargs):
+    plot(dict_list,
+         "energy",
+         y,
+         label=label,
+         xaxis=xaxis,
+         yaxis=yaxis,
+         logy=True,
+         yscale=yscale,
+         **kwargs)
 
-def energy_plot(dict_list, y, yscale=1.,xaxis="E [GeV]",yaxis="$\\sigma$ [pb]",label=None,**kwargs):
-    plot(dict_list, "energy", y, label=label,
-         xaxis=xaxis, yaxis=yaxis, logy=True, yscale=yscale,**kwargs)
 
-
-def combined_energy_plot(dict_list,t,**kwargs):
+def combined_energy_plot(dict_list, t, **kwargs):
     dl = dict_list
-    mask = dl[t+"_pdf_central"]!= np.array(None)
+    mask = dl[t + "_pdf_central"] != np.array(None)
     if 'axes' in kwargs and kwargs['axes'] is not None:
         color = next(kwargs['axes']._get_lines.prop_cycler)['color']
     else:
         color = next(plt.gca()._get_lines.prop_cycler)['color']
- 
-    splot.data(dict_list["energy"][mask],splot.unv(dict_list[t][mask]),
-        xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=".",logy=True, label=t,data_color=color)
-    splot.data(dict_list["energy"][mask],dict_list[t+ "_scale"][mask],
-        xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=" ",logy=True,data_color=color)
-    splot.data(dict_list["energy"][mask],dict_list[t+ "_combined"][mask],
-        xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", fmt=" ",logy=True,data_color=color,capsize=None)
 
-def combined_plot(func,dict_list,t,*args,label=None,fill = False,fmt=".",interpolate=True,**kwargs):
+    splot.data(dict_list["energy"][mask],
+               splot.unv(dict_list[t][mask]),
+               xaxis="E [GeV]",
+               yaxis="$\\sigma$ [pb]",
+               fmt=".",
+               logy=True,
+               label=t,
+               data_color=color)
+    splot.data(dict_list["energy"][mask],
+               dict_list[t + "_scale"][mask],
+               xaxis="E [GeV]",
+               yaxis="$\\sigma$ [pb]",
+               fmt=" ",
+               logy=True,
+               data_color=color)
+    splot.data(dict_list["energy"][mask],
+               dict_list[t + "_combined"][mask],
+               xaxis="E [GeV]",
+               yaxis="$\\sigma$ [pb]",
+               fmt=" ",
+               logy=True,
+               data_color=color,
+               capsize=None)
+
+
+def combined_plot(func,
+                  dict_list,
+                  t,
+                  *args,
+                  label=None,
+                  fill=False,
+                  fmt=".",
+                  interpolate=True,
+                  **kwargs):
     dl = dict_list
-    mask = dl[t+"_pdf_central"]!= np.array(None)
+    mask = dl[t + "_pdf_central"] != np.array(None)
 
     if 'axes' in kwargs and kwargs['axes'] is not None:
         color = next(kwargs['axes']._get_lines.prop_cycler)['color']
     else:
         color = next(plt.gca()._get_lines.prop_cycler)['color']
-    func(dict_list,t+ "_noerr",*args,
-         label=t if label is None else label,data_color=color,fill=False,interpolate=interpolate,mask = mask,**kwargs)
-    func(dict_list,t+ "_scale",*args,
-        fmt=" ",interpolate=False,data_color=color,mask = mask,label="",fill=False,**kwargs)
-    func(dict_list,t+ "_combined",*args,
-         fmt=" ",interpolate=False,data_color=color,capsize=None,label="",mask = mask,fill=fill,**kwargs)
+    func(dict_list,
+         t + "_noerr",
+         *args,
+         label=t if label is None else label,
+         data_color=color,
+         fill=False,
+         interpolate=interpolate,
+         mask=mask,
+         **kwargs)
+    func(dict_list,
+         t + "_scale",
+         *args,
+         fmt=" ",
+         interpolate=False,
+         data_color=color,
+         mask=mask,
+         label="",
+         fill=False,
+         **kwargs)
+    func(dict_list,
+         t + "_combined",
+         *args,
+         fmt=" ",
+         interpolate=False,
+         data_color=color,
+         capsize=None,
+         label="",
+         mask=mask,
+         fill=fill,
+         **kwargs)
 
 
+def mass_plot(dict_list,
+              y,
+              part,
+              logy=True,
+              yaxis="$\\sigma$ [pb]",
+              yscale=1.,
+              label=None,
+              **kwargs):
+    dict_list["mass_" + str(part)] = get_mass(dict_list, abs(part))
+    plot(dict_list,
+         "mass_" + str(part),
+         y,
+         label=label,
+         xaxis="$m_{" + get_name(part) + "}$ [GeV]",
+         yaxis=yaxis,
+         logy=logy,
+         yscale=yscale,
+         **kwargs)
 
 
-def mass_plot(dict_list,  y, part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,**kwargs):
-    dict_list["mass_"+ str(part)] = get_mass(dict_list, abs(part))
-    plot(dict_list, "mass_" + str(part), y, label=label,
-         xaxis="$m_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,**kwargs)
+def mass_vplot(dict_list,
+               y,
+               part,
+               logy=True,
+               yaxis="$\\sigma$ [pb]",
+               yscale=1.,
+               label=None,
+               mask=None,
+               **kwargs):
+    vplot(get_mass(dict_list, part)[mask],
+          y[mask],
+          label=label,
+          xaxis="$m_{" + get_name(part) + "}$ [GeV]",
+          yaxis=yaxis,
+          logy=logy,
+          yscale=yscale,
+          mask=mask,
+          **kwargs)
 
 
-def mass_vplot(dict_list,  y,part, logy=True, yaxis="$\\sigma$ [pb]", yscale=1., label=None,mask=None,**kwargs):
-  vplot(get_mass(dict_list,part)[mask], y[mask], label=label,
-          xaxis="$m_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 #    vplot(dict_list["mass_" + str(part)][mask], y[mask], label=label,
 #          xaxis="$M_{"+get_name(part) + "}$ [GeV]", yaxis=yaxis, logy=logy, yscale=yscale,mask=mask,**kwargs)
 
 
-def get_mass(l : dict, id : int ):
+def get_mass(l: dict, iid: int):
     """
-    Get the mass of particle with id `id` out of the list in the "slha" element in the dict.
+    Get the mass of particle with id `iid` out of the list in the "slha" element in the dict.
 
     Returns
         :obj:`list` of float : masses of particles in each element of the dict list.
@@ -98,10 +192,23 @@ def get_mass(l : dict, id : int ):
     ret = []
     for s in l["slha"]:
         d = pyslha.read(get_output_dir() + s)
-        ret.append(d.blocks["MASS"][abs(id)])
+        ret.append(d.blocks["MASS"][abs(iid)])
     return np.array(ret)
 
-def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ratio=False,K=False,K_plus_1=False, logy=True, yscale=1.,mask=None,**kwargs):
+
+def plot(dict_list,
+         x,
+         y,
+         label=None,
+         xaxis="E [GeV]",
+         yaxis="$\\sigma$ [pb]",
+         ratio=False,
+         K=False,
+         K_plus_1=False,
+         logy=True,
+         yscale=1.,
+         mask=None,
+         **kwargs):
     # TODO use kwargs
     if label is None:
         label = y
@@ -116,34 +223,52 @@ def plot(dict_list, x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]",ra
         yscale = 1.0
         vy = vy / splot.unv(dict_list["LO"][mask])
         if K_plus_1:
-            vy = vy + vy/vy
+            vy = vy + vy / vy
     if ratio:
         yaxis = "Ratio"
         yscale = 1.0
         vy = vy / splot.unv(vy)
 
+    vplot(vx, vy, label, xaxis, yaxis, logy, yscale, mask=mask, **kwargs)
 
-    vplot(vx, vy, label, xaxis, yaxis, logy, yscale,mask=mask,**kwargs)
 
-def index_open(var,idx):
+def index_open(var, idx):
     if len(idx) == 1:
         return var[idx]
-    return index_open(var[idx[0]],idx[1:])
+    return index_open(var[idx[0]], idx[1:])
 
-def slha_data(li,index_list):
+
+def slha_data(li, index_list):
     vx = []
     for l in li:
         b = pyslha.read(get_output_dir() + l.slha)
-        vx.append(index_open(b.blocks,index_list))
+        vx.append(index_open(b.blocks, index_list))
     return np.array(vx)
 
-def slha_plot(li,x,y,**kwargs):
-    vx = slha_data(li,x)
-    vy = slha_data(li,y)
 
-    vplot(np.array(vx),np.array(vy),**kwargs)
+def slha_plot(li, x, y, **kwargs):
+    vx = slha_data(li, x)
+    vy = slha_data(li, y)
 
-def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, yscale=1.,interpolate=True,plot_data=True,data_color=None,mask=-1,fill =False,data_fmt=".",fmt="-",print_area=False,**kwargs):
+    vplot(np.array(vx), np.array(vy), **kwargs)
+
+
+def vplot(x,
+          y,
+          label=None,
+          xaxis="E [GeV]",
+          yaxis="$\\sigma$ [pb]",
+          logy=True,
+          yscale=1.,
+          interpolate=True,
+          plot_data=True,
+          data_color=None,
+          mask=-1,
+          fill=False,
+          data_fmt=".",
+          fmt="-",
+          print_area=False,
+          **kwargs):
     color = data_color
     if label is None:
         #label = "??"
@@ -154,18 +279,21 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
     vx = x
     vy = y
 
-    xnew = np.linspace(vx[0], vx[-1], 300,)
+    xnew = np.linspace(
+        vx[0],
+        vx[-1],
+        300,
+    )
     if interpolate:
         #print(vx,vy)
-        spl = make_interp_spline(
-            vx, splot.unv(vy), k=3)  # type: BSpline
+        spl = make_interp_spline(vx, splot.unv(vy), k=3)  # type: BSpline
         power_smooth = spl(xnew)
     if fill:
-        spl_up = make_interp_spline(
-                vx, splot.unv(vy)+splot.usd(vy), k=3)  # type: BSpline
+        spl_up = make_interp_spline(vx, splot.unv(vy) + splot.usd(vy),
+                                    k=3)  # type: BSpline
         power_up_smooth = spl_up(xnew)
-        spl_down = make_interp_spline(
-                vx, splot.unv(vy)-splot.usd(vy), k=3)  # type: BSpline
+        spl_down = make_interp_spline(vx, splot.unv(vy) - splot.usd(vy),
+                                      k=3)  # type: BSpline
         power_down_smooth = spl_down(xnew)
     if data_color is None:
         if 'axes' in kwargs and kwargs['axes'] is not None:
@@ -174,33 +302,82 @@ def vplot(x, y, label=None, xaxis="E [GeV]", yaxis="$\\sigma$ [pb]", logy=True, 
             bl, = plt.gca().plot([], [])
         color = bl.get_color()
     if plot_data:
-        splot.data(vx, vy*yscale, label=label, xaxis=xaxis, yaxis=yaxis,logy=logy, data_color=color,fmt=data_fmt, **kwargs)
+        splot.data(vx,
+                   vy * yscale,
+                   label=label,
+                   xaxis=xaxis,
+                   yaxis=yaxis,
+                   logy=logy,
+                   data_color=color,
+                   fmt=data_fmt,
+                   **kwargs)
     if interpolate:
         kargs = {}
         if not plot_data:
-            kargs = {'xaxis':xaxis, 'yaxis':yaxis,'label':label}
+            kargs = {'xaxis': xaxis, 'yaxis': yaxis, 'label': label}
         if print_area:
-            print('computed AUC using sklearn.metrics.auc: {}'.format(auc(xnew,power_smooth*yscale)))
-        splot.data(xnew, power_smooth*yscale, logy=logy, fmt=fmt
-              , init=False, data_color=color,  **kargs,**kwargs)
+            print('computed AUC using sklearn.metrics.auc: {}'.format(
+                auc(xnew, power_smooth * yscale)))
+        splot.data(xnew,
+                   power_smooth * yscale,
+                   logy=logy,
+                   fmt=fmt,
+                   init=False,
+                   data_color=color,
+                   **kargs,
+                   **kwargs)
     if fill:
-        plt.fill_between(xnew,power_up_smooth*yscale,power_down_smooth*yscale,alpha=0.3,color=color)
-    if((np.any(np.less(vy,0)) or ( interpolate and np.any(np.less(power_smooth, 0)))) and logy):
+        plt.fill_between(xnew,
+                         power_up_smooth * yscale,
+                         power_down_smooth * yscale,
+                         alpha=0.3,
+                         color=color)
+    if ((np.any(np.less(vy, 0)) or
+         (interpolate and np.any(np.less(power_smooth, 0)))) and logy):
         if plot_data:
-            splot.data(vx, -vy*yscale,label="-"+label,xaxis=xaxis, yaxis=yaxis, logy=logy, data_color=color,fmt=data_fmt, **kwargs)
+            splot.data(vx,
+                       -vy * yscale,
+                       label="-" + label,
+                       xaxis=xaxis,
+                       yaxis=yaxis,
+                       logy=logy,
+                       data_color=color,
+                       fmt=data_fmt,
+                       **kwargs)
         if interpolate:
             if not plot_data:
-                kargs = {'xaxis':xaxis, 'yaxis':yaxis,'label':"-"+label}
-            splot.data(xnew, -power_smooth*yscale, logy=logy, fmt=None,linestyle=(0, (3, 1, 3, 1, 1, 1)),
-                    init=False, data_color=color, **kargs,**kwargs)
+                kargs = {'xaxis': xaxis, 'yaxis': yaxis, 'label': "-" + label}
+            splot.data(xnew,
+                       -power_smooth * yscale,
+                       logy=logy,
+                       fmt=None,
+                       linestyle=(0, (3, 1, 3, 1, 1, 1)),
+                       init=False,
+                       data_color=color,
+                       **kargs,
+                       **kwargs)
 
 
-def mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis="$\\sigma$ [pb]", zscale=1., label=None):
-    mapplot(dict_list, "mass_" + str(part1), "mass_" + str(part2), z,
-            xaxis="$M_{"+get_name(part1) + "}$ [GeV]", yaxis="$M_{"+get_name(part2) + "}$ [GeV]", zaxis=zaxis, logz=logz, zscale=zscale)
+def mass_mapplot(dict_list,
+                 part1,
+                 part2,
+                 z,
+                 logz=True,
+                 zaxis="$\\sigma$ [pb]",
+                 zscale=1.,
+                 label=None):
+    mapplot(dict_list,
+            "mass_" + str(part1),
+            "mass_" + str(part2),
+            z,
+            xaxis="$M_{" + get_name(part1) + "}$ [GeV]",
+            yaxis="$M_{" + get_name(part2) + "}$ [GeV]",
+            zaxis=zaxis,
+            logz=logz,
+            zscale=zscale)
 
 
-def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None,**kwargs):
+def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
     if xaxis is None:
         xaxis = x
     if yaxis is None:
@@ -210,30 +387,45 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None,**kwargs):
     vx = dict_list[x]
     vy = dict_list[y]
     vz = dict_list[z]
-    map_vplot(vx,vy,vz,xaxis=xaxis,yaxis=yaxis,zaxis=zaxis,**kwargs)
+    map_vplot(vx, vy, vz, xaxis=xaxis, yaxis=yaxis, zaxis=zaxis, **kwargs)
 
-def map_vplot(vx,vy,vz, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.):
+
+def map_vplot(vx,
+              vy,
+              vz,
+              xaxis=None,
+              yaxis=None,
+              zaxis=None,
+              logz=True,
+              zscale=1.):
     s = 1
-    while vy[s] == vy[s-1]:
-        s = s+1
+    while vy[s] == vy[s - 1]:
+        s = s + 1
     if s == 1:
         #print("flipped x y ")
-        while vx[s] == vx[s-1]:
-            s = s+1
+        while vx[s] == vx[s - 1]:
+            s = s + 1
         if s == 1:
             print("error too small map")
             return
         #x, y = y, x
-        xaxis ,yaxis = yaxis,xaxis
+        xaxis, yaxis = yaxis, xaxis
         vx, vy = vy, vx
 
-    grid = splot.unv(vz).reshape((int(np.rint(np.size(vx)/s)), s))*zscale
-    if(logz):
-        plt.imshow(grid, origin="lower", extent=(vx.min(), vx.max(),
-                                                 vy.min(), vy.max()), cmap=cm.gist_heat, interpolation='nearest', norm=colors.LogNorm())
+    grid = splot.unv(vz).reshape((int(np.rint(np.size(vx) / s)), s)) * zscale
+    if (logz):
+        plt.imshow(grid,
+                   origin="lower",
+                   extent=(vx.min(), vx.max(), vy.min(), vy.max()),
+                   cmap=cm.gist_heat,
+                   interpolation='nearest',
+                   norm=colors.LogNorm())
     else:
-        plt.imshow(grid, origin="lower", extent=(vx.min(), vx.max(),
-                                                 vy.min(), vy.max()), cmap=cm.gist_heat, interpolation='nearest')
+        plt.imshow(grid,
+                   origin="lower",
+                   extent=(vx.min(), vx.max(), vy.min(), vy.max()),
+                   cmap=cm.gist_heat,
+                   interpolation='nearest')
     cb = plt.colorbar()
     cb.set_label(zaxis)
     plt.xlabel(xaxis)
@@ -247,107 +439,142 @@ lines = []
 labels = []
 
 
-def err_plt(axes,x,y,label=None,error=False):
-    v= label
+def err_plt(axes, x, y, label=None, error=False):
+    v = label
     ind = np.argsort(splot.unv(x))
     if error:
-        l, _, _ = axes.errorbar(x[ind], splot.unv(y)[ind], yerr=splot.usd(y), capsize=5, label=v)
+        l, _, _ = axes.errorbar(x[ind],
+                                splot.unv(y)[ind],
+                                yerr=splot.usd(y),
+                                capsize=5,
+                                label=v)
         return l
     else:
         l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
         return l[0]
 
-def scale_plot(dict_list, vl, seven_point_band=False,cont=False,error=True,li=None,plehn_color=False,yscale=1.,unit="pb", yaxis=None,**kwargs):
-    global fig, axs,lines,labels
-    cycle_safe = mpl.rcParams['axes.prop_cycle'] 
+
+def scale_plot(dict_list,
+               vl,
+               seven_point_band=False,
+               cont=False,
+               error=True,
+               li=None,
+               plehn_color=False,
+               yscale=1.,
+               unit="pb",
+               yaxis=None,
+               **kwargs):
+    global fig, axs, lines, labels
+    cycle_safe = mpl.rcParams['axes.prop_cycle']
     if plehn_color:
-        mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=["b", "r", "g"]) 
+        mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=["b", "r", "g"])
     if not cont:
         fig, axs = plt.subplots(1, 5, figsize=(12, 3), sharey=True)
         # Remove horizontal space between axes
         fig.subplots_adjust(wspace=0)
         if li is not None:
-            title(axs[2],li[0],**kwargs)
-   
+            title(axs[2], li[0], **kwargs)
 
     mr = dict_list["mu_r"]
     mf = dict_list["mu_f"]
 
-
-
-
-
     if not cont:
         lines = []
         labels = []
-        axs[0].plot([], [], ' ', color='k',label="$\mu_R=" + "\mu_F$")
-        axs[1].plot([], [], ' ', color='k',label="$\mu_R=" + str(np.max(mr)) + "\mu_0$")
-        axs[2].plot([], [], ' ', color='k',label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
-        axs[3].plot([], [], ' ', color='k',label="$\mu_R=" + str(np.min(mr)) + "\mu_0$")
-        axs[4].plot([], [], ' ', color='k',label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
+        axs[0].plot([], [], ' ', color='k', label="$\mu_R=" + "\mu_F$")
+        axs[1].plot([], [],
+                    ' ',
+                    color='k',
+                    label="$\mu_R=" + str(np.max(mr)) + "\mu_0$")
+        axs[2].plot([], [],
+                    ' ',
+                    color='k',
+                    label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
+        axs[3].plot([], [],
+                    ' ',
+                    color='k',
+                    label="$\mu_R=" + str(np.min(mr)) + "\mu_0$")
+        axs[4].plot([], [],
+                    ' ',
+                    color='k',
+                    label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
 
     for v in vl:
-        mv = dict_list[v]*yscale
+        mv = dict_list[v] * yscale
         if seven_point_band:
             #mask = (mf/mr < 4.) & (mf/mr > 1./4.) & (mf <= 2) & (mf >= 1./2.) & (mr <= 2) & (mr >= 1./2.)
-            mask =  (
-                ((mf == 2.) & (mr == 2.)) | 
-                 (   (mf == 2.) & (mr == 1.))  |            
-                 (   (mf == 1.) & (mr == 1.))  |            
-                 (   (mf == 1.) & (mr == 2.) ) |            
-                (    (mf == 1/2.) & (mr == 1/2.)) | 
-                (    (mf == 1/2.) & (mr == 1.)  )|            
-                (    (mf == 1.) & (mr == 1/2.) ) 
-            )
+            mask = (((mf == 2.) & (mr == 2.)) | ((mf == 2.) & (mr == 1.)) |
+                    ((mf == 1.) & (mr == 1.)) | ((mf == 1.) & (mr == 2.)) |
+                    ((mf == 1 / 2.) & (mr == 1 / 2.)) |
+                    ((mf == 1 / 2.) & (mr == 1.)) | ((mf == 1.) &
+                                                     (mr == 1 / 2.)))
             mvmax = np.max(splot.unv(mv[mask]))
             mvmin = np.min(splot.unv(mv[mask]))
 
         mask = mf == mr
-        l = err_plt(axs[0],mf[mask],mv[mask],error=error)
+        l = err_plt(axs[0], mf[mask], mv[mask], error=error)
         #l, _, _ = axs[0].errorbar(mf[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5, label=v)
         if seven_point_band:
-            axs[0].fill_between(mf[mask], mvmax, mvmin,
-                                facecolor=l.get_color(), alpha=0.3)
+            axs[0].fill_between(mf[mask],
+                                mvmax,
+                                mvmin,
+                                facecolor=l.get_color(),
+                                alpha=0.3)
 
         mask = mr == np.max(mr)
-        l = err_plt(axs[1],mf[mask],mv[mask],error=error)
+        l = err_plt(axs[1], mf[mask], mv[mask], error=error)
         lines.append(l)
-        labels.append("$\\sigma_{\\mathrm{"+v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\ ")+"} }$")
+        labels.append(
+            "$\\sigma_{\\mathrm{" +
+            v.replace("NLO_PLUS_NLL", "NLO+NLL").replace(" ", "\\ ") + "} }$")
         #l, _, _ = axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
-            axs[1].fill_between(mf[mask], mvmax, mvmin,
-                                facecolor=l.get_color(), alpha=0.3)
+            axs[1].fill_between(mf[mask],
+                                mvmax,
+                                mvmin,
+                                facecolor=l.get_color(),
+                                alpha=0.3)
 
         mask = mf == np.min(mf)
-        l = err_plt(axs[2],mr[mask],mv[mask],error=error)
+        l = err_plt(axs[2], mr[mask], mv[mask], error=error)
         #l, _, _ = axs[2].errorbar(mr[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
-            axs[2].fill_between(mr[mask], mvmax, mvmin,
-                                facecolor=l.get_color(), alpha=0.3)
+            axs[2].fill_between(mr[mask],
+                                mvmax,
+                                mvmin,
+                                facecolor=l.get_color(),
+                                alpha=0.3)
 
         mask = mr == np.min(mr)
-        l = err_plt(axs[3],mf[mask],mv[mask],error=error)
+        l = err_plt(axs[3], mf[mask], mv[mask], error=error)
         #l, _, _ = axs[3].errorbar(mf[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
-            axs[3].fill_between(mf[mask], mvmax, mvmin,
-                                facecolor=l.get_color(), alpha=0.3)
+            axs[3].fill_between(mf[mask],
+                                mvmax,
+                                mvmin,
+                                facecolor=l.get_color(),
+                                alpha=0.3)
 
         mask = mf == np.max(mf)
-        l = err_plt(axs[4],mr[mask],mv[mask],error=error)
+        l = err_plt(axs[4], mr[mask], mv[mask], error=error)
         #l, _, _ = axs[4].errorbar(mr[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
-            f = axs[4].fill_between(mr[mask], mvmax, mvmin,
-                                facecolor=l.get_color(), alpha=0.3)
+            f = axs[4].fill_between(mr[mask],
+                                    mvmax,
+                                    mvmin,
+                                    facecolor=l.get_color(),
+                                    alpha=0.3)
             lines.append(f)
-            labels.append("$\\Delta \\sigma_{\\mathrm{" + v.replace("NLO_PLUS_NLL","NLO+NLL").replace(" ","\\<space>") + "} }$")
+            labels.append("$\\Delta \\sigma_{\\mathrm{" + v.replace(
+                "NLO_PLUS_NLL", "NLO+NLL").replace(" ", "\\<space>") + "} }$")
 
-
-    axs[0].set_ylabel("$\sigma$ ["+unit+"]" if yaxis is None else yaxis)
+    axs[0].set_ylabel("$\sigma$ [" + unit + "]" if yaxis is None else yaxis)
 
     axs[0].set_xscale("log")
     axs[0].set_xlim(np.min(mf), np.max(mf))
@@ -381,21 +608,26 @@ def scale_plot(dict_list, vl, seven_point_band=False,cont=False,error=True,li=No
     axs[4].xaxis.set_minor_formatter(NullFormatter())
     axs[4].set_xlabel("$\mu_{R}/\mu_0$")
 
-    axs[0].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
-    axs[1].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
-    axs[2].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
-    axs[3].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
-    axs[4].legend(handletextpad=-0.0, handlelength=0,fancybox=False)
+    axs[0].legend(handletextpad=-0.0, handlelength=0, fancybox=False)
+    axs[1].legend(handletextpad=-0.0, handlelength=0, fancybox=False)
+    axs[2].legend(handletextpad=-0.0, handlelength=0, fancybox=False)
+    axs[3].legend(handletextpad=-0.0, handlelength=0, fancybox=False)
+    axs[4].legend(handletextpad=-0.0, handlelength=0, fancybox=False)
     fig.legend()
     fig.legends = []
-    fig.legend(handles=lines,    labels=labels,   loc="center right")
+    fig.legend(handles=lines, labels=labels, loc="center right")
     plt.subplots_adjust(right=0.84)
     # plt.show()
     mpl.rcParams['axes.prop_cycle'] = cycle_safe
 
-    
 
-def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb",yaxis=None):
+def central_scale_plot(dict_list,
+                       vl,
+                       cont=False,
+                       error=True,
+                       yscale=1.,
+                       unit="pb",
+                       yaxis=None):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
@@ -406,27 +638,23 @@ def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb",
     mf = dict_list["mu_f"]
 
     for v in vl:
-        mv = dict_list[v]*yscale
+        mv = dict_list[v] * yscale
 
         mask = mf == mr
-        l = err_plt(axs[0],mf[mask],mv[mask],label=v,error=error)
-  
+        l = err_plt(axs[0], mf[mask], mv[mask], label=v, error=error)
 
         mask = mf == 1.0
-        l = err_plt(axs[1],mr[mask],mv[mask],error=error)
-
+        l = err_plt(axs[1], mr[mask], mv[mask], error=error)
 
         mask = mr == 1.0
-        l = err_plt(axs[2],mf[mask],mv[mask],error=error)
-
-
+        l = err_plt(axs[2], mf[mask], mv[mask], error=error)
 
     if not cont:
         axs[0].plot([], [], ' ', label="$\mu_R=\mu_F=\mu$")
         axs[1].plot([], [], ' ', label="$\mu_F=\mu_0$, $\mu_R=\mu$")
         axs[2].plot([], [], ' ', label="$\mu_R=\mu_0$, $\mu_F=\mu$")
 
-    axs[1].set_ylabel("$\sigma$ ["+unit+"]" if yaxis is None else yaxis)
+    axs[1].set_ylabel("$\sigma$ [" + unit + "]" if yaxis is None else yaxis)
 
     axs[0].set_xscale("log")
     #axs[0].set_xlim(np.min(mf), np.max(mf))
@@ -452,101 +680,434 @@ def central_scale_plot(dict_list, vl, cont=False,error=True,yscale=1.,unit="pb",
     # plt.show()
 
 
-def mass_and_K_plot(dl,li,p,scale=False,pdf=False,plehn=True,combined=False,cont = False,figsize=(6,8),**kwargs):
+def mass_and_K_plot(dl,
+                    li,
+                    p,
+                    scale=False,
+                    pdf=False,
+                    plehn=True,
+                    combined=False,
+                    cont=False,
+                    figsize=(6, 8),
+                    **kwargs):
     global fig, axs
     if not cont:
-        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True, gridspec_kw={'height_ratios': [3, 1]})
+        fig, axs = plt.subplots(2,
+                                1,
+                                figsize=figsize,
+                                sharex=True,
+                                gridspec_kw={'height_ratios': [3, 1]})
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
-        title(axs[0],li[0],**kwargs)
+        title(axs[0], li[0], **kwargs)
     if combined:
-        for i in [0,1]:
-            kargs = {'logy' : [True,False][i], 'interpolate' : False,'axes':axs[i],'K':[False,True][i],'tight':False}
-            combined_plot(mass_plot,dl,"LO",p,**kargs,**kwargs)
-            combined_plot(mass_plot,dl,"NLO",p,**kargs,**kwargs)
-            combined_plot(mass_plot,dl,"NLO_PLUS_NLL",p,**kargs,**kwargs)
+        for i in [0, 1]:
+            kargs = {
+                'logy': [True, False][i],
+                'interpolate': False,
+                'axes': axs[i],
+                'K': [False, True][i],
+                'tight': False
+            }
+            combined_plot(mass_plot, dl, "LO", p, **kargs, **kwargs)
+            combined_plot(mass_plot, dl, "NLO", p, **kargs, **kwargs)
+            combined_plot(mass_plot, dl, "NLO_PLUS_NLL", p, **kargs, **kwargs)
     elif scale:
-        for i in [0,1]:
-            kargs = {'logy':[True,False][i],'mask':dl["LO_SCALE"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
-            mass_plot(dl,  "LO_SCALE",p,           **kargs,**kwargs,label="LO")
-            mass_plot(dl,  "NLO_SCALE",p,          **kargs,**kwargs,label="NLO")
-            mass_plot(dl,  "NLO_PLUS_NLL_SCALE",p, **kargs,**kwargs,label="NLO+NLL")
+        for i in [0, 1]:
+            kargs = {
+                'logy': [True, False][i],
+                'mask': dl["LO_SCALE"] != np.array(None),
+                'axes': axs[i],
+                'K': [False, True][i],
+                'tight': False
+            }
+            mass_plot(dl, "LO_SCALE", p, **kargs, **kwargs, label="LO")
+            mass_plot(dl, "NLO_SCALE", p, **kargs, **kwargs, label="NLO")
+            mass_plot(dl,
+                      "NLO_PLUS_NLL_SCALE",
+                      p,
+                      **kargs,
+                      **kwargs,
+                      label="NLO+NLL")
     elif pdf:
-        for i in [0,1]:
-            kargs = {'logy':[True,False][i],'mask':dl["LO_PDF"]!=np.array(None), 'axes':axs[i],'K':[False,True][i],'tight':False}
-            mass_plot(dl,  "LO_PDF",p,           **kargs,**kwargs,label="LO")
-            mass_plot(dl,  "NLO_PDF",p,          **kargs,**kwargs,label="NLO")
-            mass_plot(dl,  "NLO_PLUS_NLL_PDF",p, **kargs,**kwargs,label="NLO+NLL")
+        for i in [0, 1]:
+            kargs = {
+                'logy': [True, False][i],
+                'mask': dl["LO_PDF"] != np.array(None),
+                'axes': axs[i],
+                'K': [False, True][i],
+                'tight': False
+            }
+            mass_plot(dl, "LO_PDF", p, **kargs, **kwargs, label="LO")
+            mass_plot(dl, "NLO_PDF", p, **kargs, **kwargs, label="NLO")
+            mass_plot(dl,
+                      "NLO_PLUS_NLL_PDF",
+                      p,
+                      **kargs,
+                      **kwargs,
+                      label="NLO+NLL")
     elif plehn:
-        axs[0].set_ylim([0.2*10**-2,10**3])
-        axs[1].set_ylim([0.9,1.85])
-        for i in [0,1]:
-            kargs = {'yscale':1000, 'yaxis':"$\\sigma$ [fb]",'logy':[True,False][i],'axes':axs[i],'K':[False,True][i],'tight':False,'error':False}
+        axs[0].set_ylim([0.2 * 10**-2, 10**3])
+        axs[1].set_ylim([0.9, 1.85])
+        for i in [0, 1]:
+            kargs = {
+                'yscale': 1000,
+                'yaxis': "$\\sigma$ [fb]",
+                'logy': [True, False][i],
+                'axes': axs[i],
+                'K': [False, True][i],
+                'tight': False,
+                'error': False
+            }
             if i == 0:
-                mass_plot(dl,  "LO",p,           **kargs,**kwargs,data_color='b',fmt='-',label="LO"if i==0 else "")
-            mass_plot(dl,  "RNLO",p,          **kargs,**kwargs,data_color='k',K_plus_1=True,fmt='-.',label="Real"if i==0 else "")
+                mass_plot(dl,
+                          "LO",
+                          p,
+                          **kargs,
+                          **kwargs,
+                          data_color='b',
+                          fmt='-',
+                          label="LO" if i == 0 else "")
+            mass_plot(dl,
+                      "RNLO",
+                      p,
+                      **kargs,
+                      **kwargs,
+                      data_color='k',
+                      K_plus_1=True,
+                      fmt='-.',
+                      label="Real" if i == 0 else "")
             if i == 0:
-                mass_plot(dl,  "NLO",p,          **kargs,**kwargs,data_color='r',fmt='-',label="NLO"if i==0 else "")
-            mass_plot(dl,  "VNLO_PLUS_P_PLUS_K",p,          **kargs,**kwargs,K_plus_1=True,data_color='k',fmt=':',label="Virtual"if i==0 else "")
+                mass_plot(dl,
+                          "NLO",
+                          p,
+                          **kargs,
+                          **kwargs,
+                          data_color='r',
+                          fmt='-',
+                          label="NLO" if i == 0 else "")
+            mass_plot(dl,
+                      "VNLO_PLUS_P_PLUS_K",
+                      p,
+                      **kargs,
+                      **kwargs,
+                      K_plus_1=True,
+                      data_color='k',
+                      fmt=':',
+                      label="Virtual" if i == 0 else "")
             if i == 1:
-                mass_plot(dl,  "RNLO_PLUS_VNLO_PLUS_P_PLUS_K",p,K_plus_1=True,          **kargs,**kwargs,data_color='r',label="NLO"if i==0 else "")
+                mass_plot(dl,
+                          "RNLO_PLUS_VNLO_PLUS_P_PLUS_K",
+                          p,
+                          K_plus_1=True,
+                          **kargs,
+                          **kwargs,
+                          data_color='r',
+                          label="NLO" if i == 0 else "")
             #mass_plot(dl,  "NLO_PLUS_NLL",p, **kargs,**kwargs,label="NLO+NLL")
 
 
 #TODO unit and yscale for each case and mass_and_plot!
-def mass_and_ratio_plot(dl,li,p,scale=False,pdf=False,combined=False,cont = False,figsize=(6,4),plot_data=True,fill=True,unit="pb",yscale=1.0,ylim=None,**kwargs):
+def mass_and_ratio_plot(dl,
+                        li,
+                        p,
+                        scale=False,
+                        pdf=False,
+                        combined=False,
+                        cont=False,
+                        figsize=(6, 4),
+                        plot_data=True,
+                        fill=True,
+                        unit="pb",
+                        yscale=1.0,
+                        ylim=None,
+                        **kwargs):
     global fig, axs
     if not cont:
-        fig, axs = plt.subplots(2, 1, figsize=figsize, sharex=True, gridspec_kw={'height_ratios': [2, 1]})
+        fig, axs = plt.subplots(2,
+                                1,
+                                figsize=figsize,
+                                sharex=True,
+                                gridspec_kw={'height_ratios': [2, 1]})
         # Remove horizontal space between axes
         fig.subplots_adjust(hspace=0)
-        title(axs[0],li[0],**kwargs)
-    kinv = {'xaxis':"$M$ [GeV]",'yaxis':"$d\\sigma/dM$ ["+unit+"/GeV]"}
+        title(axs[0], li[0], **kwargs)
+    kinv = {'xaxis': "$M$ [GeV]", 'yaxis': "$d\\sigma/dM$ [" + unit + "/GeV]"}
     if ylim is not None:
         axs[0].set_ylim(ylim)
     if combined:
-        for i in [0,1]:
-            kargs = {'logy' : [p!="invariant_mass",False][i], 'axes':axs[i],'tight':False}
+        for i in [0, 1]:
+            kargs = {
+                'logy': [p != "invariant_mass", False][i],
+                'axes': axs[i],
+                'tight': False
+            }
             if p == "invariant_mass":
-                plot(dl,  "invariant_mass","LO",           **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else "")
-                plot(dl,  "invariant_mass","NLO",          **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
-                plot(dl,  "invariant_mass","NLO_PLUS_NLL", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
+                plot(dl,
+                     "invariant_mass",
+                     "LO",
+                     **kinv,
+                     **kargs,
+                     **kwargs,
+                     plot_data=plot_data,
+                     fill=fill,
+                     ratio=[False, True][i],
+                     label="LO" if i == 0 else "")
+                plot(dl,
+                     "invariant_mass",
+                     "NLO",
+                     **kinv,
+                     **kargs,
+                     **kwargs,
+                     plot_data=plot_data,
+                     fill=fill,
+                     ratio=[False, True][i],
+                     label="NLO" if i == 0 else "")
+                plot(dl,
+                     "invariant_mass",
+                     "NLO_PLUS_NLL",
+                     **kinv,
+                     **kargs,
+                     **kwargs,
+                     plot_data=plot_data,
+                     fill=fill,
+                     ratio=[False, True][i],
+                     label="NLO+NLL" if i == 0 else "")
                 if i == 1:
-                    plot(dl,  "invariant_mass","NLO_PLUS_NLL_OVER_NLO",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
+                    plot(dl,
+                         "invariant_mass",
+                         "NLO_PLUS_NLL_OVER_NLO",
+                         **kinv,
+                         interpolate=True,
+                         plot_data=False,
+                         fill=False,
+                         **kargs,
+                         **kwargs,
+                         data_color='0',
+                         label="(NLO+NLL)/NLO")
             else:
-                combined_plot(mass_plot,dl,"LO",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
-                combined_plot(mass_plot,dl,"NLO",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
-                combined_plot(mass_plot,dl,"NLO_PLUS_NLL",p,plot_data=plot_data,fill=fill,ratio=[False,True][i],**kargs,**kwargs)
+                combined_plot(mass_plot,
+                              dl,
+                              "LO",
+                              p,
+                              plot_data=plot_data,
+                              fill=fill,
+                              ratio=[False, True][i],
+                              **kargs,
+                              **kwargs)
+                combined_plot(mass_plot,
+                              dl,
+                              "NLO",
+                              p,
+                              plot_data=plot_data,
+                              fill=fill,
+                              ratio=[False, True][i],
+                              **kargs,
+                              **kwargs)
+                combined_plot(mass_plot,
+                              dl,
+                              "NLO_PLUS_NLL",
+                              p,
+                              plot_data=plot_data,
+                              fill=fill,
+                              ratio=[False, True][i],
+                              **kargs,
+                              **kwargs)
                 if i == 1:
-                    mass_plot(dl,  "NLO_PLUS_NLL_OVER_NLO",p,interpolate=True,plot_data=False,fill=False,mask=dl["LO_SCALE"]!=np.array(None), *kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
+                    mass_plot(dl,
+                              "NLO_PLUS_NLL_OVER_NLO",
+                              p,
+                              interpolate=True,
+                              plot_data=False,
+                              fill=False,
+                              mask=dl["LO_SCALE"] != np.array(None),
+                              *kargs,
+                              **kwargs,
+                              data_color='0',
+                              label="(NLO+NLL)/NLO")
 
     elif scale:
-        for i in [0,1]:
-            kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["LO_SCALE"]!=np.array(None), 'axes':axs[i],'tight':False}
+        for i in [0, 1]:
+            kargs = {
+                'logy': [p != "invariant_mass", False][i],
+                'mask': dl["LO_SCALE"] != np.array(None),
+                'axes': axs[i],
+                'tight': False
+            }
             if p == "invariant_mass":
-                plot(dl,  "invariant_mass","LO_SCALE",         **kinv,  **kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO" if i==0 else "")
-                plot(dl,  "invariant_mass","NLO_SCALE",       **kinv,   **kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
-                plot(dl,  "invariant_mass","NLO_PLUS_NLL_SCALE", **kinv,**kargs,**kwargs,yscale=yscale,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
+                plot(dl,
+                     "invariant_mass",
+                     "LO_SCALE",
+                     **kinv,
+                     **kargs,
+                     **kwargs,
+                     yscale=yscale,
+                     plot_data=plot_data,
+                     fill=fill,
+                     ratio=[False, True][i],
+                     label="LO" if i == 0 else "")
+                plot(dl,
+                     "invariant_mass",
+                     "NLO_SCALE",
+                     **kinv,
+                     **kargs,
+                     **kwargs,
+                     yscale=yscale,
+                     plot_data=plot_data,
+                     fill=fill,
+                     ratio=[False, True][i],
+                     label="NLO" if i == 0 else "")
+                plot(dl,
+                     "invariant_mass",
+                     "NLO_PLUS_NLL_SCALE",
+                     **kinv,
+                     **kargs,
+                     **kwargs,
+                     yscale=yscale,
+                     plot_data=plot_data,
+                     fill=fill,
+                     ratio=[False, True][i],
+                     label="NLO+NLL" if i == 0 else "")
                 if i == 1:
-                    plot(dl,  "invariant_mass","NLO_PLUS_NLL_OVER_NLO",**kargs, interpolate=True,plot_data=False,fill=False,xaxis="$M$ [GeV]",yaxis="Ratio",**kwargs,data_color='0',label="(NLO+NLL)/NLO")
+                    plot(dl,
+                         "invariant_mass",
+                         "NLO_PLUS_NLL_OVER_NLO",
+                         **kargs,
+                         interpolate=True,
+                         plot_data=False,
+                         fill=False,
+                         xaxis="$M$ [GeV]",
+                         yaxis="Ratio",
+                         **kwargs,
+                         data_color='0',
+                         label="(NLO+NLL)/NLO")
             else:
-                mass_plot(dl,  "LO_SCALE",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else "")
-                mass_plot(dl,  "NLO_SCALE",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
-                mass_plot(dl,  "NLO_PLUS_NLL_SCALE",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
+                mass_plot(dl,
+                          "LO_SCALE",
+                          p,
+                          **kargs,
+                          **kwargs,
+                          plot_data=plot_data,
+                          fill=fill,
+                          ratio=[False, True][i],
+                          label="LO" if i == 0 else "")
+                mass_plot(dl,
+                          "NLO_SCALE",
+                          p,
+                          **kargs,
+                          **kwargs,
+                          plot_data=plot_data,
+                          fill=fill,
+                          ratio=[False, True][i],
+                          label="NLO" if i == 0 else "")
+                mass_plot(dl,
+                          "NLO_PLUS_NLL_SCALE",
+                          p,
+                          **kargs,
+                          **kwargs,
+                          plot_data=plot_data,
+                          fill=fill,
+                          ratio=[False, True][i],
+                          label="NLO+NLL" if i == 0 else "")
                 if i == 1:
-                    mass_plot(dl,  "NLO_PLUS_NLL_OVER_NLO",p, interpolate=True,plot_data=False,fill=False,yaxis="Ratio",**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
+                    mass_plot(dl,
+                              "NLO_PLUS_NLL_OVER_NLO",
+                              p,
+                              interpolate=True,
+                              plot_data=False,
+                              fill=False,
+                              yaxis="Ratio",
+                              **kargs,
+                              **kwargs,
+                              data_color='0',
+                              label="(NLO+NLL)/NLO")
     elif pdf:
-        for i in [0,1]:
-            kargs = {'logy':[p!="invariant_mass",False][i],'mask':dl["LO_PDF"]!=np.array(None), 'axes':axs[i],'tight':False}
+        for i in [0, 1]:
+            kargs = {
+                'logy': [p != "invariant_mass", False][i],
+                'mask': dl["LO_PDF"] != np.array(None),
+                'axes': axs[i],
+                'tight': False
+            }
             if p == "invariant_mass":
-                plot(dl,  "invariant_mass","LO_PDF",          **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else "")
-                plot(dl,  "invariant_mass","NLO_PDF",         **kinv, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
-                plot(dl,  "invariant_mass","NLO_PLUS_NLL_PDF", **kinv,**kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
+                plot(dl,
+                     "invariant_mass",
+                     "LO_PDF",
+                     **kinv,
+                     **kargs,
+                     **kwargs,
+                     plot_data=plot_data,
+                     fill=fill,
+                     ratio=[False, True][i],
+                     label="LO" if i == 0 else "")
+                plot(dl,
+                     "invariant_mass",
+                     "NLO_PDF",
+                     **kinv,
+                     **kargs,
+                     **kwargs,
+                     plot_data=plot_data,
+                     fill=fill,
+                     ratio=[False, True][i],
+                     label="NLO" if i == 0 else "")
+                plot(dl,
+                     "invariant_mass",
+                     "NLO_PLUS_NLL_PDF",
+                     **kinv,
+                     **kargs,
+                     **kwargs,
+                     plot_data=plot_data,
+                     fill=fill,
+                     ratio=[False, True][i],
+                     label="NLO+NLL" if i == 0 else "")
                 if i == 1:
-                    plot(dl,  "invariant_mass","NLO_PLUS_NLL_OVER_NLO",**kinv, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
+                    plot(dl,
+                         "invariant_mass",
+                         "NLO_PLUS_NLL_OVER_NLO",
+                         **kinv,
+                         interpolate=True,
+                         plot_data=False,
+                         fill=False,
+                         **kargs,
+                         **kwargs,
+                         data_color='0',
+                         label="(NLO+NLL)/NLO")
             else:
-                mass_plot(dl,  "LO_PDF",p,           **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="LO"if i==0 else "")
-                mass_plot(dl,  "NLO_PDF",p,          **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO"if i==0 else "")
-                mass_plot(dl,  "NLO_PLUS_NLL_PDF",p, **kargs,**kwargs,plot_data=plot_data,fill=fill,ratio=[False,True][i],label="NLO+NLL"if i==0 else "")
+                mass_plot(dl,
+                          "LO_PDF",
+                          p,
+                          **kargs,
+                          **kwargs,
+                          plot_data=plot_data,
+                          fill=fill,
+                          ratio=[False, True][i],
+                          label="LO" if i == 0 else "")
+                mass_plot(dl,
+                          "NLO_PDF",
+                          p,
+                          **kargs,
+                          **kwargs,
+                          plot_data=plot_data,
+                          fill=fill,
+                          ratio=[False, True][i],
+                          label="NLO" if i == 0 else "")
+                mass_plot(dl,
+                          "NLO_PLUS_NLL_PDF",
+                          p,
+                          **kargs,
+                          **kwargs,
+                          plot_data=plot_data,
+                          fill=fill,
+                          ratio=[False, True][i],
+                          label="NLO+NLL" if i == 0 else "")
                 if i == 1:
-                    mass_plot(dl,  "NLO_PLUS_NLL_OVER_NLO",p, interpolate=True,plot_data=False,fill=False,**kargs,**kwargs,data_color='0',label="(NLO+NLL)/NLO")
+                    mass_plot(dl,
+                              "NLO_PLUS_NLL_OVER_NLO",
+                              p,
+                              interpolate=True,
+                              plot_data=False,
+                              fill=False,
+                              **kargs,
+                              **kwargs,
+                              data_color='0',
+                              label="(NLO+NLL)/NLO")

@@ -3,7 +3,6 @@
 Python interface for gluing together several HEP programs (e.g. from HEP-Forge).
 Currently slurm is supported for clusters.
 
-
 [![PyPI version][pypi image]][pypi link]  ![downloads](https://img.shields.io/pypi/dm/hepi.svg) 
 
 | [Stable][doc stable]        | [Dev][doc test]           |
@@ -15,8 +14,9 @@ Currently slurm is supported for clusters.
 | [![Documentation Status][rtd s i]][rtd s l] | [![Documentation Status][rtd t i]][rtd t l]  | 
 
 ## Documentation
-- https://hepi.readthedocs.io/en/stable/
-- https://apn-pucky.github.io/HEPi/index.html
+
+  - https://hepi.readthedocs.io/en/stable/
+  - https://apn-pucky.github.io/HEPi/index.html
 
 ## Versions
 
