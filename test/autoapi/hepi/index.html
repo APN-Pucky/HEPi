@@ -38,7 +38,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-6-g1babd3d
+                0.1.6-7-gf126434
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -403,8 +403,8 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_vplot" title="hepi.mass_vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_vplot</span></code></a>(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.get_mass" title="hepi.get_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mass</span></code></a>(l: dict, id: int)</p></td>
-<td><p>Get the mass of particle with id <cite>id</cite> out of the list in the &quot;slha&quot; element in the dict.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.get_mass" title="hepi.get_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mass</span></code></a>(l: dict, iid: int)</p></td>
+<td><p>Get the mass of particle with id <cite>iid</cite> out of the list in the &quot;slha&quot; element in the dict.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="plot/index.html#module-hepi.plot" title="hepi.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(dict_list, x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs)</p></td>
 <td><p></p></td>
@@ -1755,8 +1755,8 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.get_mass">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot.html#get_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.get_mass" title="Permalink to this definition"></a></dt>
-<dd><p>Get the mass of particle with id <cite>id</cite> out of the list in the “slha” element in the dict.</p>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot.html#get_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.get_mass" title="Permalink to this definition"></a></dt>
+<dd><p>Get the mass of particle with id <cite>iid</cite> out of the list in the “slha” element in the dict.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of float : masses of particles in each element of the dict list.</p>
 </dd>
