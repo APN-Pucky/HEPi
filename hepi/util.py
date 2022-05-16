@@ -1,5 +1,5 @@
 """Collection of utility functions for the :mod:`hepi` package."""
-from typing import Dict, List,Tuple
+from typing import Dict, List, Tuple
 import numpy as np
 import hashlib
 from particle.converters.bimap import DirectionalMaps
@@ -9,10 +9,13 @@ import lhapdf
 import pandas as pd
 import warnings
 
+
 class DictData:
+
     def __str__(self):
         """Returns attributes as dict as string"""
         return str(self.__dict__)
+
 
 def LD2DL(l: List) -> dict:
     """
@@ -43,21 +46,24 @@ def LD2DL(l: List) -> dict:
     # switch them
     return {k: np.array([dic.__dict__[k] for dic in l]) for k in l[0].__dict__}
 
-def LD2DF(ld :dict) -> pd.DataFrame:
+
+def LD2DF(ld: dict) -> pd.DataFrame:
     """
     Convert a `dict` of `list`s to a `pandas.DataFrame`.
     """
     return pd.DataFrame.from_dict(ld)
 
 
-PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps(
-    "PDGID", "LaTexName", converters=(PDGID, str))
+PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps("PDGID",
+                                                     "LaTexName",
+                                                     converters=(PDGID, str))
 
-PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
-    "PDGName", "PDGID", converters=(str, PDGID))
+PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps("PDGName",
+                                                "PDGID",
+                                                converters=(str, PDGID))
 
 
-def get_name(pid : int) -> str:
+def get_name(pid: int) -> str:
     """
     Get the latex name of a particle.
 
@@ -78,8 +84,7 @@ def get_name(pid : int) -> str:
     return pdgid
 
 
-
-def get_LR_partner(pid : int) -> Tuple[int,int]:
+def get_LR_partner(pid: int) -> Tuple[int, int]:
     """Transforms a PDG id to it's left-right partner.
 
     Args:
@@ -107,7 +112,8 @@ def get_LR_partner(pid : int) -> Tuple[int,int]:
         return 1, int(PDG2Name2IDMap[n])
     return None
 
-def namehash(n : any) -> str:
+
+def namehash(n: any) -> str:
     """
     Creates a sha256 hash from the objects string representation.
 
@@ -130,7 +136,8 @@ def namehash(n : any) -> str:
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
 
-def lhapdf_name_to_id(name : str) -> int:
+
+def lhapdf_name_to_id(name: str) -> int:
     """
     Converts a LHAPDF name to the sets id.
 
