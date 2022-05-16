@@ -20,14 +20,12 @@ import time
 import difflib
 from smpl.parallel import par
 import hashlib
-import os 
+import os
 import stat
 from smpl import debug
 
-
-resummino_path:str = "~/resummino/"
+resummino_path: str = "~/resummino/"
 """resummino folder containing the binary in './build/bin'."""
-
 
 
 def set_path(p: str):
@@ -38,7 +36,7 @@ def set_path(p: str):
         str: new Resummino path.
     """
     global resummino_path
-    resummino_path = p+ ("/" if p[-1]!="/" else "")
+    resummino_path = p + ("/" if p[-1] != "/" else "")
 
 
 def get_path() -> str:
@@ -62,6 +60,7 @@ class ResumminoRunParam(RunParam):
         in_path (str): File path of the input file.
         out_path (str): File path of the output file.
     """
+
     def __init__(self, flags: str, in_path: str, out_path: str, skip=False):
         super().__init__(skip)
         #self.skip = skip
@@ -70,7 +69,14 @@ class ResumminoRunParam(RunParam):
         self.out_path = out_path
 
 
-def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,skip=True,parse=True,run=True) -> dict:
+def run(params: List[Input],
+        noskip=False,
+        bar=False,
+        no_parse=False,
+        para=True,
+        skip=True,
+        parse=True,
+        run=True) -> dict:
     """
     Run the passed list of parameters.
 
@@ -90,12 +96,12 @@ def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,s
     """
     if noskip == skip:
         noskip = True
-    if no_parse== parse:
-        no_parse= True
-    print("Running: " + str(len(params))  +" jobs" )
+    if no_parse == parse:
+        no_parse = True
+    print("Running: " + str(len(params)) + " jobs")
     rps = _queue(params, noskip)
     if run:
-        _run(rps, bar, no_parse,para)
+        _run(rps, bar, no_parse, para)
     if not no_parse:
         outs = LD2DL(rps)["out_path"]
         results = _parse(outs)
@@ -122,7 +128,6 @@ def _parse(outputs: List[str]) -> List[ResumminoResult]:
     return rsl
 
 
-
 def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
     """
     Queues and generates Resummino run files.
@@ -146,17 +151,20 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
         d["code"] = "RS"
         # TODO insert defautl if missing in d!
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
-                        for _ in d.items()).replace("/", "-"))
+                                 for _ in d.items()).replace("/", "-"))
         debug.msg(name)
         skip = False
-        if not noskip and os.path.isfile(get_output_dir() + name + ".out") and is_valid(get_output_dir() + name + ".out",p,d):
+        if not noskip and os.path.isfile(get_output_dir() + name +
+                                         ".out") and is_valid(
+                                             get_output_dir() + name + ".out",
+                                             p, d):
             print("skip", end='')
             skip = True
         flags = ""
         if not skip:
-            data = pkgutil.get_data(__name__, "plot_template.in").decode(
-                'utf-8')
-            
+            data = pkgutil.get_data(__name__,
+                                    "plot_template.in").decode('utf-8')
+
             if p.order == Order.LO:
                 flags = flags + "--lo"
             elif p.order == Order.NLO:
@@ -166,17 +174,21 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
             elif p.order == Order.aNNLO_PLUS_NNLL:
                 flags = flags + "--nnll"
             else:
-                raise ValueError("Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.")
+                raise ValueError(
+                    "Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL."
+                )
 
             src = Template(data)
             result = src.substitute(d)
             open(get_output_dir() + name + ".in", "w").write(result)
-            open(get_output_dir() + name + ".sh", "w").write("#!/bin/sh\n"+
-                resummino_path + 'build/bin/resummino {} {} >> {}'.format(
-                    get_output_dir()+name + ".in",flags,get_output_dir()+name + ".out"
-                ))
+            open(get_output_dir() + name + ".sh",
+                 "w").write("#!/bin/sh\n" + resummino_path +
+                            'build/bin/resummino {} {} >> {}'.format(
+                                get_output_dir() + name + ".in", flags,
+                                get_output_dir() + name + ".out"))
             st = os.stat(get_output_dir() + name + ".sh")
-            os.chmod(get_output_dir() + name + ".sh", st.st_mode | stat.S_IEXEC)
+            os.chmod(get_output_dir() + name + ".sh",
+                     st.st_mode | stat.S_IEXEC)
             open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
 
             sname = d['slha']
@@ -187,12 +199,15 @@ def _queue(params: List[Input], noskip=False) -> List[ResumminoRunParam]:
                 open(get_output_dir() + name + ".out",
                      "a").write(f.read() + "\n\n")
 
-        ret.append(ResumminoRunParam(flags, get_output_dir()+name + ".in", get_output_dir()+name + ".out", skip))
+        ret.append(
+            ResumminoRunParam(flags,
+                              get_output_dir() + name + ".in",
+                              get_output_dir() + name + ".out", skip))
 
     return ret
 
 
-def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False,para=True):
+def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False, para=True):
     """
     Runs Resummino per :class:`RunParams`.
 
@@ -208,7 +223,7 @@ def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False,para=True):
     # TODO clean up on exit emergency
     global resummino_path
     # TODO RS build path checks?!?!
-    template = get_pre() + " " +  "{}"
+    template = get_pre() + " " + "{}"
 
     # Run commands in parallel
     processes = []
@@ -220,13 +235,12 @@ def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False,para=True):
     mp = ""
     if bar:
         mp = rps[0].out_path
-        main_bar = manager.status_bar(status_format=main_format,
-                                      program=mp)
+        main_bar = manager.status_bar(status_format=main_format, program=mp)
         mp = rps[1].out_path
 
     for rp in rps:
         if not rp.skip:
-            command = template.format(rp.in_path.replace(".in",".sh"))
+            command = template.format(rp.in_path.replace(".in", ".sh"))
             process = subprocess.Popen(command, shell=True)
             processes.append(process)
             processesrpo[process] = rp.out_path
@@ -238,7 +252,8 @@ def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False,para=True):
                 nnn = ""
                 nn = ""
                 ch = False
-                for i, s in enumerate(difflib.ndiff(mp+"_", rp.out_path+"_")):
+                for i, s in enumerate(
+                        difflib.ndiff(mp + "_", rp.out_path + "_")):
                     if s[-1] == "_":
                         if ch:
                             nnn = nnn + " ... " + nn
@@ -248,11 +263,12 @@ def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False,para=True):
                         ch = True
                     if (s[0] == '+' or s[0] == ' ') and s[-1] != "_":
                         nn = nn + s[-1]
-                processesbar[process] = manager.status_bar(status_format=status_format,
-                                                           program=nnn,
-                                                           stage='INIT',
-                                                           status='OKAY',
-                                                           lastline="0")
+                processesbar[process] = manager.status_bar(
+                    status_format=status_format,
+                    program=nnn,
+                    stage='INIT',
+                    status='OKAY',
+                    lastline="0")
         mp = rps[0].out_path
     if bar:
         c = True
@@ -269,16 +285,18 @@ def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False,para=True):
                     with open(processesrpo[p], mode="r") as f:
                         for l in f:
                             tmp = pat.search(l)
-                            if(tmp is not None):
+                            if (tmp is not None):
                                 n = tmp.group(1)
                                 cl = 0
-                            cl = cl+1
+                            cl = cl + 1
 
-                    processesbar[p].update(
-                        stage=n, status=cl, lastline=l[int(len(l)/2)::])
+                    processesbar[p].update(stage=n,
+                                           status=cl,
+                                           lastline=l[int(len(l) / 2)::])
                 else:
-                    processesbar[p].update(
-                        stage="DONE", status='DONE', lastline="")
+                    processesbar[p].update(stage="DONE",
+                                           status='DONE',
+                                           lastline="")
         for p in processes:
             processesbar[p].close()
         main_bar.close()
