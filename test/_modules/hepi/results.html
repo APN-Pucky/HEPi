@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-7-gf126434
+                0.1.6-8-gbd11b2b
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -195,8 +195,8 @@ import warnings
     for i in range(len(dl[&quot;pdfset_nlo&quot;])):
         if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][
                 i] == 1.0:
-            set = lhapdf.getPDFSet(dl[&quot;pdf_nlo&quot;][i])
-            pdfs = [0.0] * set.size
+            pdfset = lhapdf.getPDFSet(dl[&quot;pdf_nlo&quot;][i])
+            pdfs = [0.0] * pdfset.size
             for j in range(len(dl[&quot;pdfset_nlo&quot;])):
                 same = True
                 for s in members:
@@ -211,10 +211,10 @@ import warnings
             dl[&quot;LO_PDF_ERRPLUS&quot;][i] = 0.0
             dl[&quot;LO_PDF_ERRMINUS&quot;][i] = 0.0
             dl[&quot;LO_PDF_ERRSYM&quot;][i] = 0.0
-            # lo_unc = set.uncertainty(
+            # lo_unc = pdfset.uncertainty(
             #    [plot.unv(dl[&quot;LO&quot;][k]) for k in pdfs], -1)
-            nlo_unc = set.uncertainty([plot.unv(dl[&quot;NLO&quot;][k]) for k in pdfs],
-                                      confidence_level)
+            nlo_unc = pdfset.uncertainty(
+                [plot.unv(dl[&quot;NLO&quot;][k]) for k in pdfs], confidence_level)
             dl[&quot;NLO_PDF_CENTRAL&quot;][i] = nlo_unc.central
             dl[&quot;NLO_PDF_ERRPLUS&quot;][i] = nlo_unc.errplus
             dl[&quot;NLO_PDF_ERRMINUS&quot;][i] = -nlo_unc.errminus
@@ -227,7 +227,7 @@ import warnings
                 warnings.warn(&quot;too low numerical nlo precision vs pdf.&quot;,
                               RuntimeWarning)
 
-            nlo_plus_nll_unc = set.uncertainty(
+            nlo_plus_nll_unc = pdfset.uncertainty(
                 [plot.unv(dl[&quot;NLO_PLUS_NLL&quot;][k]) for k in pdfs], 90)
             dl[&quot;NLO_PLUS_NLL_PDF_CENTRAL&quot;][i] = nlo_plus_nll_unc.central
             dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][i] = nlo_plus_nll_unc.errplus
@@ -308,7 +308,7 @@ import warnings
                 if same:
                     scales.append(j)
 
-            # lo_unc = set.uncertainty(
+            # lo_unc = pdfset.uncertainty(
             #    [plot.unv(dl[&quot;LO&quot;][k]) for k in pdfs], -1)
             dl[&quot;LO_SCALE_ERRPLUS&quot;][i] = np.max(
                 [plot.unv(dl[&quot;LO&quot;][k])
