@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.5-1-g663b813
+                0.1.6-6-g1babd3d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -93,7 +93,7 @@
              
   <h1>Source code for hepi.resummino.result</h1><div class="highlight"><pre>
 <span></span>from hepi.input import Order
-from .. import Input, Result,   get_output_dir
+from .. import Input, Result, get_output_dir
 import re
 from uncertainties import ufloat_fromstr
 from string import Template
@@ -114,6 +114,7 @@ import os
         VNLO_PLUS_P_PLUS_K (double): VNLO+P+K result.
         RNLO_PLUS_VNLO_PLUS_P_PLUS_K (double): RNLO+VNLO+P+K result.
     &quot;&quot;&quot;
+
     def __init__(self, lo, nlo, nlo_plus_nll, vnlo, p_plus_k, rnlog, rnloq):
         &quot;&quot;&quot;
         Sets given and computes dependent ``Attributes``.
@@ -137,17 +138,19 @@ import os
         else:
             self.VNLO_PLUS_P_PLUS_K = None
         if not (rnlog is None or rnloq is None):
-            self.RNLO = rnlog+rnloq
+            self.RNLO = rnlog + rnloq
         else:
             self.RNLO = None
-        if not ( self.RNLO is None or self.VNLO_PLUS_P_PLUS_K is None):
+        if not (self.RNLO is None or self.VNLO_PLUS_P_PLUS_K is None):
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = self.RNLO + self.VNLO_PLUS_P_PLUS_K
         else:
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None</div>
 
+
 # TODO move functions to results
 
-<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d) -&gt; bool:
+
+<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.is_valid">[docs]</a>def is_valid(file: str, p: Input, d) -&gt; bool:
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
 
@@ -160,12 +163,11 @@ import os
         bool : True if `file` could be parsed.
     &quot;&quot;&quot;
     order = p.order
-    data = pkgutil.get_data(__name__, &quot;plot_template.in&quot;).decode(
-                &#39;utf-8&#39;)
+    data = pkgutil.get_data(__name__, &quot;plot_template.in&quot;).decode(&#39;utf-8&#39;)
     src = Template(data)
     result = src.substitute(d)
     sname = d[&#39;slha&#39;]
-    with open(file,mode=&#39;r&#39;) as f:
+    with open(file, mode=&#39;r&#39;) as f:
         with open(get_output_dir() + sname, &#39;r&#39;) as sf:
             if not f.read().startswith(result + &quot;\n\n&quot; + sf.read()):
                 #warnings.warn(&quot;Possible hash collision in &quot; + file + &quot; -&gt; deleted&quot;,RuntimeWarning)
@@ -181,11 +183,11 @@ import os
         return True
     if res.LO is not None and res.NLO is not None and res.NLO_PLUS_NLL is not None and order is Order.NLO_PLUS_NLL:
         return True
-    print(&quot;RESTART&quot; ,res.LO, res.NLO,res.NLO_PLUS_NLL, file)
+    print(&quot;RESTART&quot;, res.LO, res.NLO, res.NLO_PLUS_NLL, file)
     return False</div>
 
 
-<div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.parse_single">[docs]</a>def parse_single(file : str) -&gt; ResumminoResult:
+<div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.parse_single">[docs]</a>def parse_single(file: str) -&gt; ResumminoResult:
     &quot;&quot;&quot;
     Extracts LO, NLO and NLO+NLL from Resummino output file.
 
@@ -239,7 +241,8 @@ import os
             if tmp is not None:
                 rnloq_result = ufloat_fromstr(
                     tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
-    return ResumminoResult(lo_result, nlo_result, nll_result, vnlo_result, ppk_result, rnlog_result, rnloq_result)</div>
+    return ResumminoResult(lo_result, nlo_result, nll_result, vnlo_result,
+                           ppk_result, rnlog_result, rnloq_result)</div>
 </pre></div>
 
            </div>

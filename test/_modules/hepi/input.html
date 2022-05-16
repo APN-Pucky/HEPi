@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.5-1-g663b813
+                0.1.6-6-g1babd3d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -106,16 +106,12 @@ from .util import DictData, get_LR_partner, lhapdf_name_to_id
 
 import lhapdf
 
-
-
-
 <div class="viewcode-block" id="in_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.in_dir">[docs]</a>in_dir = &quot;./input/&quot;</div>
 &quot;&quot;&quot;Input directory.&quot;&quot;&quot;
 <div class="viewcode-block" id="out_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.out_dir">[docs]</a>out_dir = &quot;./output/&quot;</div>
 &quot;&quot;&quot;Output directory.&quot;&quot;&quot;
 <div class="viewcode-block" id="pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pre">[docs]</a>pre = &quot;nice -n 5&quot;</div>
 &quot;&quot;&quot;Prefix for run commands.&quot;&quot;&quot;
-
 
 
 <div class="viewcode-block" id="get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_input_dir">[docs]</a>def get_input_dir():
@@ -149,6 +145,7 @@ import lhapdf
     &quot;&quot;&quot;
     global pre
     return pre</div>
+
 
 <div class="viewcode-block" id="set_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_input_dir">[docs]</a>def set_input_dir(ind):
     &quot;&quot;&quot;
@@ -196,8 +193,10 @@ import lhapdf
 <div class="viewcode-block" id="Order.aNNLO_PLUS_NNLL"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Order.aNNLO_PLUS_NNLL">[docs]</a>    aNNLO_PLUS_NNLL = 3</div>
     &quot;&quot;&quot;Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms&quot;&quot;&quot;</div>
 
-<div class="viewcode-block" id="order_to_string"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.order_to_string">[docs]</a>def order_to_string(o:Order):
-    return [&quot;LO&quot;,&quot;NLO&quot;,&quot;NLO_PLUS_NLL&quot;,&quot;aNNLO_PLUS_NNLL&quot;][o]</div>
+
+<div class="viewcode-block" id="order_to_string"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.order_to_string">[docs]</a>def order_to_string(o: Order):
+    return [&quot;LO&quot;, &quot;NLO&quot;, &quot;NLO_PLUS_NLL&quot;, &quot;aNNLO_PLUS_NNLL&quot;][o]</div>
+
 
 <div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input">[docs]</a>class Input(DictData):
     &quot;&quot;&quot;
@@ -229,11 +228,31 @@ import lhapdf
         model_path (str): Path for MadGraph model.
         update (bool): Update dependent `mu`.
     &quot;&quot;&quot;
+
     # TODO allow unspecified input? Maybe with kwargs + defaults
-    def __init__(self, order :Order, energy:float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0,precision=0.01,max_iters=50, invariant_mass=&quot;auto&quot;,result=&quot;total&quot;,pt=&quot;auto&quot;,id=&quot;&quot;,model_path=&quot;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&quot;, update=True):
+    def __init__(self,
+                 order: Order,
+                 energy: float,
+                 particle1: int,
+                 particle2: int,
+                 slha: str,
+                 pdf_lo: str,
+                 pdf_nlo: str,
+                 mu_f=1.0,
+                 mu_r=1.0,
+                 pdfset_lo=0,
+                 pdfset_nlo=0,
+                 precision=0.01,
+                 max_iters=50,
+                 invariant_mass=&quot;auto&quot;,
+                 result=&quot;total&quot;,
+                 pt=&quot;auto&quot;,
+                 id=&quot;&quot;,
+                 model_path=&quot;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&quot;,
+                 update=True):
         self.order = order
         self.energy = energy
-        self.energyhalf = energy/2.
+        self.energyhalf = energy / 2.
         self.particle1 = particle1
         self.particle2 = particle2
         self.slha = slha
@@ -253,49 +272,61 @@ import lhapdf
         self.id = id
         self.model_path = model_path
         if os.path.isfile(get_input_dir() + self.slha):
-                shutil.copy(get_input_dir() + self.slha,get_output_dir() + self.slha)
+            shutil.copy(get_input_dir() + self.slha,
+                        get_output_dir() + self.slha)
         if update:
             update_slha(self)
 
 <div class="viewcode-block" id="Input.has_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_gluino">[docs]</a>    def has_gluino(self) -&gt; bool:
         return is_gluino(self.particle1) or is_gluino(self.particle2)</div>
+
 <div class="viewcode-block" id="Input.has_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_neutralino">[docs]</a>    def has_neutralino(self) -&gt; bool:
-        return is_neutralino(self.particle1) or is_neutralino(self.particle2) </div>
+        return is_neutralino(self.particle1) or is_neutralino(self.particle2)</div>
+
 <div class="viewcode-block" id="Input.has_charginos"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_charginos">[docs]</a>    def has_charginos(self) -&gt; bool:
-        return is_chargino(self.particle1) or is_chargino(self.particle2) </div>
+        return is_chargino(self.particle1) or is_chargino(self.particle2)</div>
+
 <div class="viewcode-block" id="Input.has_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_weakino">[docs]</a>    def has_weakino(self) -&gt; bool:
         return self.has_charginos() or self.has_neutralino()</div>
+
 <div class="viewcode-block" id="Input.has_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_squark">[docs]</a>    def has_squark(self) -&gt; bool:
         return is_squark(self.particle1) or is_squark(self.particle2)</div>
+
 <div class="viewcode-block" id="Input.has_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_slepton">[docs]</a>    def has_slepton(self) -&gt; bool:
         return is_slepton(self.particle1) or is_slepton(self.particle2)</div></div>
 
-<div class="viewcode-block" id="is_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_gluino">[docs]</a>def is_gluino(id:int)-&gt;bool:
-    return id == 1000021 </div>
 
-<div class="viewcode-block" id="is_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_neutralino">[docs]</a>def is_neutralino(id:int) -&gt; bool:
-    neutralinos = [1000022,1000023,1000025,1000035]
-    return abs(id) in neutralinos </div>
+<div class="viewcode-block" id="is_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_gluino">[docs]</a>def is_gluino(id: int) -&gt; bool:
+    return id == 1000021</div>
 
-<div class="viewcode-block" id="is_chargino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_chargino">[docs]</a>def is_chargino(id:int) -&gt; bool:
-    charginos= [1000024,1000037]
+
+<div class="viewcode-block" id="is_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_neutralino">[docs]</a>def is_neutralino(id: int) -&gt; bool:
+    neutralinos = [1000022, 1000023, 1000025, 1000035]
+    return abs(id) in neutralinos</div>
+
+
+<div class="viewcode-block" id="is_chargino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_chargino">[docs]</a>def is_chargino(id: int) -&gt; bool:
+    charginos = [1000024, 1000037]
     return abs(id) in charginos</div>
 
-<div class="viewcode-block" id="is_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_weakino">[docs]</a>def is_weakino(id:int) -&gt; bool:
+
+<div class="viewcode-block" id="is_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_weakino">[docs]</a>def is_weakino(id: int) -&gt; bool:
     return is_chargino(id) or is_neutralino(id)</div>
 
-<div class="viewcode-block" id="is_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_squark">[docs]</a>def is_squark(id:int) -&gt; bool:
-    l_squark= range(1000001,1000007)
-    r_squark= range(2000001,2000007)
+
+<div class="viewcode-block" id="is_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_squark">[docs]</a>def is_squark(id: int) -&gt; bool:
+    l_squark = range(1000001, 1000007)
+    r_squark = range(2000001, 2000007)
     return abs(id) in l_squark or abs(id) in r_squark</div>
 
-<div class="viewcode-block" id="is_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_slepton">[docs]</a>def is_slepton(id:int) -&gt; bool:
-    l_slepton= range(1000011,1000016)
-    r_slepton= range(2000011,2000016)  # TODO remove righthandend snu&#39;s
+
+<div class="viewcode-block" id="is_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_slepton">[docs]</a>def is_slepton(id: int) -&gt; bool:
+    l_slepton = range(1000011, 1000016)
+    r_slepton = range(2000011, 2000016)  # TODO remove righthandend snu&#39;s
     return abs(id) in l_slepton or abs(id) in r_slepton</div>
 
 
-<div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.update_slha">[docs]</a>def update_slha( i:Input ):
+<div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.update_slha">[docs]</a>def update_slha(i: Input):
     &quot;&quot;&quot;
     Updates dependent parameters in Input `i`.
 
@@ -303,17 +334,17 @@ import lhapdf
 
     
     &quot;&quot;&quot;
-    b = pyslha.read(get_output_dir() + i.slha,ignorenomass=True)
+    b = pyslha.read(get_output_dir() + i.slha, ignorenomass=True)
     try:
         i.mu = (abs(b.blocks[&quot;MASS&quot;][abs(i.particle1)]) +
-                   abs(b.blocks[&quot;MASS&quot;][abs(i.particle2)]))/2.
+                abs(b.blocks[&quot;MASS&quot;][abs(i.particle2)])) / 2.
     except:
-        warnings.warn(&quot;Could not set new central scale to average of masses.&quot;,RuntimeWarning)
+        warnings.warn(&quot;Could not set new central scale to average of masses.&quot;,
+                      RuntimeWarning)
         pass</div>
 
 
-
-<div class="viewcode-block" id="scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan">[docs]</a>def scan(l: List[Input], var: str , range :Iterable )  -&gt; List[Input]:
+<div class="viewcode-block" id="scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan">[docs]</a>def scan(l: List[Input], var: str, range: Iterable) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scans a variable `var` over `range` in `l`.
 
@@ -357,7 +388,8 @@ import lhapdf
             ret.append(tmp)
     return ret</div>
 
-<div class="viewcode-block" id="scan_multi"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_multi">[docs]</a>def scan_multi(li: List[Input], **kwargs)  -&gt; List[Input]:
+
+<div class="viewcode-block" id="scan_multi"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_multi">[docs]</a>def scan_multi(li: List[Input], **kwargs) -&gt; List[Input]:
     &quot;&quot;&quot;
     Magically scans the variables passed to this function.
 
@@ -385,10 +417,13 @@ import lhapdf
         {&#39;order&#39;: &lt;Order.NLO_PLUS_NLL: 2&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
  
     &quot;&quot;&quot;
-    for k,v in kwargs.items():
-        li = scan(li,var=k,range=v)
+    for k, v in kwargs.items():
+        li = scan(li, var=k, range=v)
     return li</div>
-<div class="viewcode-block" id="multi_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.multi_scan">[docs]</a>multi_scan=scan_multi</div>
+
+
+<div class="viewcode-block" id="multi_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.multi_scan">[docs]</a>multi_scan = scan_multi</div>
+
 
 <div class="viewcode-block" id="scan_scale"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_scale">[docs]</a>def scan_scale(l: List[Input], range=3, distance=2.):
     &quot;&quot;&quot;
@@ -415,19 +450,25 @@ import lhapdf
     for s in l:
         # not on error pdfs
         if s.pdfset_nlo == 0:
-            tmp = scan([s], &quot;mu_f&quot;, np.logspace(np.log10(1. /
-                        distance), np.log10(distance), range))
-            tmp = scan(tmp, &quot;mu_r&quot;, np.logspace(np.log10(1. /
-                        distance), np.log10(distance), range))
+            tmp = scan([s], &quot;mu_f&quot;,
+                       np.logspace(np.log10(1. / distance), np.log10(distance),
+                                   range))
+            tmp = scan(
+                tmp, &quot;mu_r&quot;,
+                np.logspace(np.log10(1. / distance), np.log10(distance),
+                            range))
             for t in tmp:
-                if t.mu_f == 1.0 or t.mu_r == 1.0 or t.mu_f == t.mu_r or t.mu_f == distance or t.mu_f == 1./distance or t.mu_r == distance or t.mu_r == 1./distance:
+                if t.mu_f == 1.0 or t.mu_r == 1.0 or t.mu_f == t.mu_r or t.mu_f == distance or t.mu_f == 1. / distance or t.mu_r == distance or t.mu_r == 1. / distance:
                     ret.append(t)
 
         else:
             ret.append(s)
 
     return ret</div>
-<div class="viewcode-block" id="scale_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scale_scan">[docs]</a>scale_scan=scan_scale</div>
+
+
+<div class="viewcode-block" id="scale_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scale_scan">[docs]</a>scale_scan = scan_scale</div>
+
 
 <div class="viewcode-block" id="scan_seven_point"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_seven_point">[docs]</a>def scan_seven_point(l: List[Input]):
     &quot;&quot;&quot;
@@ -445,29 +486,34 @@ import lhapdf
         {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
         {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2.0, &#39;mu_r&#39;: 2.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model_path&#39;: &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;}
     &quot;&quot;&quot;
-    range=3
-    distance=2.
+    range = 3
+    distance = 2.
     ret = []
     for s in l:
         # not on error pdfs
         if s.pdfset_nlo == 0 and s.mu_f == 1.0 and s.mu_r == 1.0:
-            tmp = scan([s], &quot;mu_f&quot;, np.logspace(np.log10(1. /
-                        distance), np.log10(distance), range))
-            tmp = scan(tmp, &quot;mu_r&quot;, np.logspace(np.log10(1. /
-                        distance), np.log10(distance), range))
+            tmp = scan([s], &quot;mu_f&quot;,
+                       np.logspace(np.log10(1. / distance), np.log10(distance),
+                                   range))
+            tmp = scan(
+                tmp, &quot;mu_r&quot;,
+                np.logspace(np.log10(1. / distance), np.log10(distance),
+                            range))
             for t in tmp:
-                if not ((t.mu_f == distance and  t.mu_r == 1./distance) or (t.mu_r == distance and  t.mu_f == 1./distance)):
+                if not ((t.mu_f == distance and t.mu_r == 1. / distance) or
+                        (t.mu_r == distance and t.mu_f == 1. / distance)):
                     ret.append(t)
 
         else:
             ret.append(s)
 
     return ret</div>
-<div class="viewcode-block" id="seven_point_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.seven_point_scan">[docs]</a>seven_point_scan=scan_seven_point</div>
 
 
+<div class="viewcode-block" id="seven_point_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.seven_point_scan">[docs]</a>seven_point_scan = scan_seven_point</div>
 
-<div class="viewcode-block" id="change_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.change_where">[docs]</a>def change_where(l:List[Input], dicts : dict, **kwargs):
+
+<div class="viewcode-block" id="change_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.change_where">[docs]</a>def change_where(l: List[Input], dicts: dict, **kwargs):
     &quot;&quot;&quot;
     Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
 
@@ -491,34 +537,37 @@ import lhapdf
     ret = []
     for s in l:
         ok = True
-        for k,v in kwargs.items():
-            if getattr(s,k) != v:
+        for k, v in kwargs.items():
+            if getattr(s, k) != v:
                 ok = False
         if ok:
             tmp = copy.copy(s)
-            for k,v in dicts.items():
+            for k, v in dicts.items():
                 setattr(tmp, k, v)
             ret.append(tmp)
         else:
             ret.append(s)
-            
+
     return ret</div>
 
-<div class="viewcode-block" id="scan_invariant_mass"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_invariant_mass">[docs]</a>def scan_invariant_mass(l : List[Input],diff,points,low=0.001):
+
+<div class="viewcode-block" id="scan_invariant_mass"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_invariant_mass">[docs]</a>def scan_invariant_mass(l: List[Input], diff, points, low=0.001):
     &quot;&quot;&quot;
     Logarithmic `invariant_mass` scan close to the production threshold.
     &quot;&quot;&quot;
     ret = []
     for s in l:
-        for r in s.mu*2.+ low+ (np.logspace(np.log10(low),np.log10(1+low),points)-low) *diff:
+        for r in s.mu * 2. + low + (np.logspace(
+                np.log10(low), np.log10(1 + low), points) - low) * diff:
             tmp = copy.copy(s)
             setattr(tmp, &quot;invariant_mass&quot;, r)
             tmp.result = &quot;m&quot;
             ret.append(tmp)
     return ret</div>
 
-<div class="viewcode-block" id="slha_write"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_write">[docs]</a>def slha_write(newname,d):
-    f = get_output_dir()+newname
+
+<div class="viewcode-block" id="slha_write"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_write">[docs]</a>def slha_write(newname, d):
+    f = get_output_dir() + newname
     pyslha.write(f, d)
     with open(f) as reader, open(f, &#39;r+&#39;) as writer:
         for line in reader:
@@ -545,11 +594,11 @@ import lhapdf
             d.blocks[&quot;MASS&quot;][abs(var)] = r
             if not (diff_L_R is None):
                 is_L, v = get_LR_partner(abs(var))
-                d.blocks[&quot;MASS&quot;][abs(v)] = r + is_L*diff_L_R
+                d.blocks[&quot;MASS&quot;][abs(v)] = r + is_L * diff_L_R
 
             newname = s.slha + &quot;_mass_&quot; + str(var) + &quot;_&quot; + str(r)
             #pyslha.write(get_output_dir()+newname, d)
-            slha_write(newname,d)
+            slha_write(newname, d)
 
             tmp = copy.copy(s)
             setattr(tmp, &quot;mass_&quot; + str(var), r)
@@ -558,13 +607,15 @@ import lhapdf
             ret.append(tmp)
     return ret</div>
 
-<div class="viewcode-block" id="slha_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan">[docs]</a>def slha_scan(l : List[Input],block,var,range : List) -&gt; List[Input]:
+
+<div class="viewcode-block" id="slha_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan">[docs]</a>def slha_scan(l: List[Input], block, var, range: List) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scan a generic 
     &quot;&quot;&quot;
-    return slha_scan_rel(l,lambda r,: [(block,var,r)],range)</div>
+    return slha_scan_rel(l, lambda r, : [(block, var, r)], range)</div>
 
-<div class="viewcode-block" id="slha_scan_rel"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan_rel">[docs]</a>def slha_scan_rel(l : List[Input],lambdas ,range : List) -&gt; List[Input]:
+
+<div class="viewcode-block" id="slha_scan_rel"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan_rel">[docs]</a>def slha_scan_rel(l: List[Input], lambdas, range: List) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scan a generic slha variable.
     &quot;&quot;&quot;
@@ -575,21 +626,23 @@ import lhapdf
             tmp = copy.copy(s)
             newname = s.slha
             try:
-                d = pyslha.read(s.slha,ignorenomass=True)
+                d = pyslha.read(s.slha, ignorenomass=True)
             except:
-                d = pyslha.read(get_output_dir() + s.slha,ignorenomass=True)
+                d = pyslha.read(get_output_dir() + s.slha, ignorenomass=True)
             ls = lambdas(r)
-            for b,v,res in ls:
+            for b, v, res in ls:
                 d.blocks[b][v] = res
-                setattr(tmp, b+ &quot;_&quot; + str(v), res)
-                newname = newname +  &quot;_&quot; +str(b) + &quot;_&quot; + str(v) + &quot;_&quot; + str(res)
+                setattr(tmp, b + &quot;_&quot; + str(v), res)
+                newname = newname + &quot;_&quot; + str(b) + &quot;_&quot; + str(v) + &quot;_&quot; + str(
+                    res)
             #pyslha.write(get_output_dir()+newname, d)
-            slha_write(newname,d)
+            slha_write(newname, d)
 
             setattr(tmp, &quot;slha&quot;, newname)
             update_slha(tmp)
             ret.append(tmp)
     return ret</div>
+
 
 <div class="viewcode-block" id="scan_pdf"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_pdf">[docs]</a>def scan_pdf(l: List[Input]):
     &quot;&quot;&quot;
@@ -671,7 +724,9 @@ import lhapdf
         else:
             ret.append(s)
     return ret</div>
-<div class="viewcode-block" id="pdf_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pdf_scan">[docs]</a>pdf_scan=scan_pdf</div>
+
+
+<div class="viewcode-block" id="pdf_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pdf_scan">[docs]</a>pdf_scan = scan_pdf</div>
 </pre></div>
 
            </div>
