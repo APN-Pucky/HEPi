@@ -33,7 +33,7 @@ class MadGraphRunParams(RunParam):
 
 class MadGraphRunner(Runner):
 
-    def order() -> List[Order]:
+    def orders(self) -> List[Order]:
         return [Order.LO, Order.NLO]
 
     def _check_input(self, p: Input) -> bool:

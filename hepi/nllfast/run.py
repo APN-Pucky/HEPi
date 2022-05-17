@@ -1,17 +1,12 @@
 import os
 import pkgutil
-import re
-import shutil
 import stat
 from string import Template
-import subprocess
 from typing import List
 import warnings
-from hepi.input import Input, is_gluino, is_slepton, is_squark, is_weakino
+from hepi.input import Input, Order, is_gluino, is_squark
 from hepi.results import Result
 from hepi.run import RunParam, Runner
-from hepi.util import namehash
-from smpl import debug
 import pyslha
 from uncertainties import ufloat
 
@@ -19,6 +14,9 @@ from uncertainties import ufloat
 class NLLfastRunner(Runner):
     #TODO treat stop sbot separately
     #TODO separate nll and nnll
+
+    def orders(self) -> List[Order]:
+        return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL]
 
     def _get_nf_proc(self, p: Input):
         d = pyslha.read(self.get_output_dir() + p.slha)
@@ -41,7 +39,7 @@ class NLLfastRunner(Runner):
                                            and p.particle2 > 0):
                 s = p.particle1 if p.particle1 > p.particle2 else p.particle2
                 b = p.particle2 if p.particle1 > p.particle2 else p.particle1
-                return 'sb', 'cteq', ms, mg
+                return 'sb', 'cteq', s, b
         return "UNKNOWN_PROCESS_OR_UNIMPLEMENTED_PROCESS"
 
     def _get_nf_input(self, p: Input) -> dict:
@@ -70,7 +68,6 @@ class NLLfastRunner(Runner):
 
     def _parse_file(self, file: str) -> Result:
         #TODO parse result
-        pass
         ret = []
         with open(file) as output:
             for line in output:

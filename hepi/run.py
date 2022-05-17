@@ -46,12 +46,12 @@ class Runner:
         else:
             self.pre = pre
 
-    def orders() -> List[Order]:
+    def orders(self) -> List[Order]:
         """ List of supported Orders in this runner."""
         return [e.value for e in Order]
 
-    def _prepare(self, p: Input, skip=True, **kwargs) -> RunParam:
-        skip_ = skip
+    def _prepare(self, p: Input, **kwargs) -> RunParam:
+        skip_ = kwargs["skip"]
         d = p.__dict__
         d["runner"] = type(self).__name__
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))

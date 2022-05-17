@@ -98,7 +98,7 @@ class ProspinoRunner(Runner):
             "ps_isquark1_in"], d["ps_isquark2_in"] = self._get_ps_proc(p)
         return d
 
-    def orders() -> Order:
+    def orders(self) -> Order:
         return [Order.LO, Order.NLO]
 
     def _check_input(self, p: Input) -> bool:

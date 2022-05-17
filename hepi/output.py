@@ -1,12 +1,12 @@
 import json
 from smpl import plot
-
-from smpl import plot as splot
 import numpy as np
 
 from .input import Order, order_to_string
 from .util import LD2DF, get_name
 from smpl import io
+
+splot = plot
 
 
 def write_latex(dict_list, key, fname, scale=True, pdf=True, yscale=1.):

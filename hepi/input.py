@@ -232,6 +232,7 @@ def is_slepton(iid: int) -> bool:
     r_slepton = range(2000011, 2000016)  # TODO remove righthandend snu's
     return abs(iid) in l_slepton or abs(iid) in r_slepton
 
+
 def update_slha(i: Input):
     """
     Updates dependent parameters in Input `i`.
@@ -250,9 +251,9 @@ def update_slha(i: Input):
         pass
 
 
-def scan(l: List[Input], var: str, range: Iterable) -> List[Input]:
+def scan(l: List[Input], var: str, rrange: Iterable) -> List[Input]:
     """
-    Scans a variable `var` over `range` in `l`.
+    Scans a variable `var` over `rrange` in `l`.
 
     Note:
         This function does not ensure that dependent vairables are updated (see `energyhalf` in Examples).
@@ -260,7 +261,7 @@ def scan(l: List[Input], var: str, range: Iterable) -> List[Input]:
     Args:
         l (:obj:`list` of :class:`Input`): Input parameters that get scanned each.
         var (str): Scan variable name.
-        range (Iterable): Range of `var` to be scanned.
+        rrange (Iterable): Range of `var` to be scanned.
 
     Returns:
         :obj:`list` of :class:`Input`: Modified list with scan runs added.
@@ -288,7 +289,7 @@ def scan(l: List[Input], var: str, range: Iterable) -> List[Input]:
     """
     ret = []
     for s in l:
-        for r in range:
+        for r in rrange:
             tmp = copy.copy(s)
             setattr(tmp, var, r)
             ret.append(tmp)
@@ -516,7 +517,7 @@ def mass_scan(l: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]:
 
 def slha_scan(l: List[Input], block, var, rrange: List) -> List[Input]:
     """
-    Scan a generic 
+    Scan a generic
     """
     return slha_scan_rel(l, lambda r, : [(block, var, r)], rrange)
 
@@ -552,7 +553,7 @@ def slha_scan_rel(l: List[Input], lambdas, rrange: List) -> List[Input]:
 
 def scan_pdf(l: List[Input]):
     """
-    Scans NLO PDF sets. 
+    Scans NLO PDF sets.
 
     The PDF sets are infered from `lhapdf.getPDFSet` with the argument of `pdfset_nlo`.
 
