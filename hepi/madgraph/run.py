@@ -46,7 +46,6 @@ class MadGraphRunner(Runner):
              sleep=0,
              **kwargs):
         # TODO clean up on exit emergency
-        global madgraph_path
         skipall = True
         for rp in rps:
             if not rp.skip:
@@ -63,7 +62,7 @@ class MadGraphRunner(Runner):
             mgcom = 'bin/mg5_aMC'
             if rps[0].madstr:
                 mgcom = 'bin/mg5_aMC --mode="MadSTR"'
-            com = madgraph_path + mgcom + \
+            com = self.get_path() + mgcom + \
                 ' --file {in} >> {out} && cp {slha} {bdir}/Cards/param_card.dat && cp {run} {bdir}/Cards/run_card.dat && sed -i \'s/.*= req_acc_FO/ 1 = req_acc_FO/g\' {bdir}/Cards/run_card.dat && echo "automatic_html_opening = False" >> {bdir}/Cards/amcatnlo_configuration.txt && nice -n 5 {bdir}/bin/calculate_xsect -f'
             pp = subprocess.Popen(com.format(**rps[0].dic), shell=True)
             pp.wait()

@@ -30,21 +30,21 @@ BLOCK MASS  # Mass Spectrum
    2000005     1.00000000E+05   # ~b_2
    1000006     1.00000000E+05   # ~t_1
    2000006     1.00000000E+05   # ~t_2
-   1000011     500             # ~e_L
-   2000011     500             # ~e_R
-   1000012     500            # ~nu_eL
-   1000013     500             # ~mu_L
-   2000013     500             # ~mu_R
-   1000014     500            # ~nu_muL
-   1000015     500            # ~tau_1
-   2000015     500            # ~tau_2
-   1000016     500            # ~nu_tauL
+   1000011     @a             # ~e_L
+   2000011     @a             # ~e_R
+   1000012     @a            # ~nu_eL
+   1000013     @a             # ~mu_L
+   2000013     @a             # ~mu_R
+   1000014     @a            # ~nu_muL
+   1000015     @a            # ~tau_1
+   2000015     @a            # ~tau_2
+   1000016     @a            # ~nu_tauL
    1000021     1.00000000E+05   # ~g
-   1000022     500              # ~chi_10
-   1000023     500             # ~chi_20
+   1000022     @a              # ~chi_10
+   1000023     @a             # ~chi_20
    1000025     1.00000000E+05   # ~chi_30
    1000035     1.00000000E+05   # ~chi_40
-   1000024     500             # ~chi_1+
+   1000024     @a             # ~chi_1+
    1000037     1.00000000E+05   # ~chi_2+
 #
 BLOCK NMIX  # Neutralino Mixing Matrix
@@ -90,10 +90,10 @@ BLOCK SBOTMIX  # Sbottom Mixing Matrix
   2  2     0.00000000E+00   # cos(theta_b)
 #
 BLOCK STAUMIX  # Stau Mixing Matrix
-  1  1    1.00000000E+00 # cos(theta_tau)
-  1  2    0.00000000E+00 # sin(theta_tau)
-  2  1    0.00000000E+00 # -sin(theta_tau)
-  2  2    1.00000000E+00 # cos(theta_tau)
+  1  1     1.00000000E+00 # cos(theta_tau)
+  1  2     0.00000000E+00 # sin(theta_tau)
+  2  1    -0.00000000E+00 # -sin(theta_tau)
+  2  2     1.00000000E+00 # cos(theta_tau)
 #
 BLOCK ALPHA  # Higgs mixing
            0.00000000E+00   # Mixing angle in the neutral Higgs boson sector
