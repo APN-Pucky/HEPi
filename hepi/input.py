@@ -323,7 +323,7 @@ def scan_multi(li: List[Input], **kwargs) -> List[Input]:
  
     """
     for k, v in kwargs.items():
-        li = scan(li, var=k, range=v)
+        li = scan(li, var=k, rrange=v)
     return li
 
 
