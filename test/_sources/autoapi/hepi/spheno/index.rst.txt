@@ -54,7 +54,7 @@ Attributes
    hepi.spheno.get_path
 
 
-.. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model_path='/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO', update=True)
+.. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -103,8 +103,8 @@ Attributes
    :vartype result: str
    :ivar id: Set an id of this run.
    :vartype id: str
-   :ivar model_path: Path for MadGraph model.
-   :vartype model_path: str
+   :ivar model: Path for MadGraph model.
+   :vartype model: str
    :ivar update: Update dependent `mu` else set to zero.
 
    :vartype update: bool
