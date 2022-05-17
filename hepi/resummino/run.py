@@ -1,6 +1,5 @@
 """Runs Resummino"""
 from typing import List
-import subprocess
 from string import Template
 import warnings
 from hepi.input import Order
@@ -8,19 +7,11 @@ from hepi.results import Result
 from hepi.run import RunParam, Runner
 import pkgutil
 
-from hepi.util import namehash
-from .. import Input, LD2DL, get_output_dir, get_pre
-import re
+from .. import Input, get_output_dir
 import os.path
-from pathlib import Path
-from .result import ResumminoResult, is_valid, parse_single
-import enlighten
-import time
-import difflib
-from smpl.parallel import par
+from .result import is_valid, parse_single
 import os
 import stat
-from smpl import debug
 
 
 class ResumminoRunner(Runner):
