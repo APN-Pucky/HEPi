@@ -95,6 +95,7 @@ class Runner:
             parse=True,
             parallel=True,
             sleep=0,
+            run=True,
             **kwargs):
         """
 		Run the passed list of parameters.
@@ -106,6 +107,7 @@ class Runner:
 		        This is not the prefered cluster/parallel mode, as there the function only queues the job.
 		    parallel (bool): Run jobs in parallel.
 		    sleep (int): Sleep seconds after starting job.
+            run (bool): Actually start/queue runner.
 
 		Returns:
 		    :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
@@ -116,7 +118,12 @@ class Runner:
         rps = self._prepare_all(params, parse=parse, skip=skip, **kwargs)
         if sleep is None:
             sleep = 0 if parse else 5
-        self._run(rps, wait=parse, parallel=parallel, sleep=sleep, **kwargs)
+        if run:
+            self._run(rps,
+                      wait=parse,
+                      parallel=parallel,
+                      sleep=sleep,
+                      **kwargs)
         if parse:
             outs = LD2DL(rps)["out_file"]
             results = self.parse(outs)
@@ -278,7 +285,7 @@ class Runner:
 
 		Args:
 		    outdir (str): new output directory.
-			create (bool): create directory if not existing
+			create (bool): create directory if not existing.
 		"""
         if create:
             os.makedirs(outdir, exist_ok=True)

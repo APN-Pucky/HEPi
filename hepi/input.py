@@ -64,14 +64,17 @@ def set_input_dir(ind):
     in_dir = ind
 
 
-def set_output_dir(outd):
+def set_output_dir(outd, create: bool = True):
     """
     Sets the output directory.
 
     Args:
         outd (str): new output directory.
+		create (bool): create directory if not existing
     """
     global out_dir
+    if create:
+        os.makedirs(outd, exist_ok=True)
     out_dir = outd
 
 
@@ -483,7 +486,10 @@ def slha_write(newname, d):
         writer.truncate()
 
 
-def mass_scan(l: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]:
+def masses_scan(l: List[Input],
+                vars: List[int],
+                rrange,
+                diff_L_R=None) -> List[Input]:
     """
     Scans the PDG identified mass `var` over `rrange` in the list `l`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
@@ -496,21 +502,31 @@ def mass_scan(l: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]:
                 d = pyslha.read(s.slha)
             except:
                 d = pyslha.read(get_output_dir() + s.slha)
-            d.blocks["MASS"][abs(var)] = r
-            if not (diff_L_R is None):
-                is_L, v = get_LR_partner(abs(var))
-                d.blocks["MASS"][abs(v)] = r + is_L * diff_L_R
 
-            newname = s.slha + "_mass_" + str(var) + "_" + str(r)
-            #pyslha.write(get_output_dir()+newname, d)
+            newname = s.slha
+            tmp = copy.copy(s)
+            for var in vars:
+                d.blocks["MASS"][abs(var)] = r
+                if not (diff_L_R is None):
+                    is_L, v = get_LR_partner(abs(var))
+                    d.blocks["MASS"][abs(v)] = r + is_L * diff_L_R
+
+                newname = newname + "_mass_" + str(var) + "_" + str(r)
+                setattr(tmp, "mass_" + str(var), r)
             slha_write(newname, d)
 
-            tmp = copy.copy(s)
-            setattr(tmp, "mass_" + str(var), r)
             setattr(tmp, "slha", newname)
             update_slha(tmp)
             ret.append(tmp)
     return ret
+
+
+def mass_scan(l: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]:
+    """
+    Scans the PDG identified mass `var` over `rrange` in the list `l`.
+    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
+    """
+    return masses_scan(l, [var], rrange, diff_L_R)
 
 
 def slha_scan(l: List[Input], block, var, rrange: List) -> List[Input]:
