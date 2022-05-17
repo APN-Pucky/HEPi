@@ -28,7 +28,7 @@ class ResumminoRunner(Runner):
     def orders(self) -> List[Order]:
         return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL, Order.aNNLO_PLUS_NNLL]
 
-    def _check_input(self, p: Input) -> bool:
+    def _check_input(self, p: Input, **kwargs) -> bool:
 
         if p.order == Order.aNNLO_PLUS_NNLL and (
                 p.has_gluino() and p.has_weakino()) or (p.has_squark()
