@@ -50,7 +50,7 @@ class NLLfastRunner(Runner):
             "nf_gluino_mass"] = self._get_ps_proc(p)
         return d
 
-    def _check_input(self, p: Input) -> bool:
+    def _check_input(self, p: Input,**kwargs) -> bool:
         """Checks input parameter for compatibility with Prospino"""
         if p.mu_f != 1. or p.mu_r != 1.:
             warnings.warn(

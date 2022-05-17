@@ -32,7 +32,6 @@ class ProspinoRunner(Runner):
     squark_map = {
         1000005: -5,
         1000004: -4,
-        1000004: -4,
         1000003: -3,
         1000001: -2,
         1000002: -1,
@@ -101,7 +100,7 @@ class ProspinoRunner(Runner):
     def orders(self) -> Order:
         return [Order.LO, Order.NLO]
 
-    def _check_input(self, p: Input) -> bool:
+    def _check_input(self, p: Input, **kwargs) -> bool:
         """Checks input parameter for compatibility with Prospino"""
         if p.mu_f != 1. or p.mu_r != 1.:
             warnings.warn(
