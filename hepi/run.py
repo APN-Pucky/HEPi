@@ -2,7 +2,7 @@ import os
 import subprocess
 from typing import List
 import warnings
-from hepi.input import Input, get_input_dir, get_output_dir, get_pre
+from hepi.input import Input, Order, get_input_dir, get_output_dir, get_pre
 from hepi.results import Result
 from hepi.util import LD2DL, DictData, namehash
 from smpl.parallel import par
@@ -46,6 +46,10 @@ class Runner:
         else:
             self.pre = pre
 
+    def orders() -> List[Order]:
+        """ List of supported Orders in this runner."""
+        return [e.value for e in Order]
+
     def _prepare(self, p: Input, skip=True, **kwargs) -> RunParam:
         skip_ = skip
         d = p.__dict__
@@ -67,19 +71,27 @@ class Runner:
                         name=name)
 
     def _check_input(self, param: Input, **kwargs) -> bool:
+        if param.order not in self.orders():
+            warnings.warn("Order " + str(param.order) + " not supported in " +
+                          type(self).__name__)
+            return False
         return True
 
-    def _prepare_all(self, params: List[Input], **kwargs) -> List[RunParam]:
+    def _prepare_all(self,
+                     params: List[Input],
+                     skip=True,
+                     **kwargs) -> List[RunParam]:
         ret = []
         for p in params:
             if not self._check_input(p):
                 warnings.warn("Check input failed.")
                 return []
-            ret.append(self._prepare(p, **kwargs))
+            ret.append(self._prepare(p, skip=skip, **kwargs))
         return ret
 
     def run(self,
             params: List[Input],
+            skip=True,
             parse=True,
             parallel=True,
             sleep=0,
@@ -101,7 +113,7 @@ class Runner:
 
 		"""
         print("Running: " + str(len(params)) + " jobs")
-        rps = self._prepare_all(params, parse=parse, **kwargs)
+        rps = self._prepare_all(params, parse=parse, skip=skip, **kwargs)
         if sleep is None:
             sleep = 0 if parse else 5
         self._run(rps, wait=parse, parallel=parallel, sleep=sleep, **kwargs)
@@ -166,6 +178,15 @@ class Runner:
 		Returns:
 		    bool : True if `file` could be parsed.
 		"""
+        res = self._parse_file(file)
+        if res.LO is None and p.order is Order.LO:
+            return False
+        if res.NLO is None and p.order is Order.NLO:
+            return False
+        if res.NLO_PLUS_NLL is None and p.order is Order.NLO_PLUS_NLL:
+            return False
+        if res.aNNLO_PLUS_NNLL is None and p.order is Order.aNNLO_PLUS_NNLL:
+            return False
         return True
 
     def parse(self, outputs: List[str]) -> List[Result]:

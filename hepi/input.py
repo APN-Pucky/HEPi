@@ -232,7 +232,6 @@ def is_slepton(iid: int) -> bool:
     r_slepton = range(2000011, 2000016)  # TODO remove righthandend snu's
     return abs(iid) in l_slepton or abs(iid) in r_slepton
 
-
 def update_slha(i: Input):
     """
     Updates dependent parameters in Input `i`.

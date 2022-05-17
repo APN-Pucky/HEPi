@@ -1,4 +1,3 @@
-
 from sklearn.metrics import auc
 import matplotlib as mpl
 from smpl import plot as splot
@@ -25,6 +24,7 @@ def title(axe,
           cms_energy=True,
           pdf_info=True,
           **kwargs):
+    """Sets the title on axis `axe`."""
     axe.set_title("$pp\\to" + get_name(i.particle1) + get_name(i.particle2) +
                   "$" + (" at $\\sqrt{S} = " + str(i.energy / 1000) +
                          "$ TeV" if cms_energy else "") + " for " +
@@ -39,6 +39,7 @@ def energy_plot(dict_list,
                 yaxis="$\\sigma$ [pb]",
                 label=None,
                 **kwargs):
+    """Plot energy on the x-axis."""
     plot(dict_list,
          "energy",
          y,
@@ -47,87 +48,6 @@ def energy_plot(dict_list,
          yaxis=yaxis,
          logy=True,
          yscale=yscale,
-         **kwargs)
-
-
-def combined_energy_plot(dict_list, t, **kwargs):
-    dl = dict_list
-    mask = dl[t + "_pdf_central"] != np.array(None)
-    if 'axes' in kwargs and kwargs['axes'] is not None:
-        color = next(kwargs['axes']._get_lines.prop_cycler)['color']
-    else:
-        color = next(plt.gca()._get_lines.prop_cycler)['color']
-
-    splot.data(dict_list["energy"][mask],
-               splot.unv(dict_list[t][mask]),
-               xaxis="E [GeV]",
-               yaxis="$\\sigma$ [pb]",
-               fmt=".",
-               logy=True,
-               label=t,
-               data_color=color)
-    splot.data(dict_list["energy"][mask],
-               dict_list[t + "_scale"][mask],
-               xaxis="E [GeV]",
-               yaxis="$\\sigma$ [pb]",
-               fmt=" ",
-               logy=True,
-               data_color=color)
-    splot.data(dict_list["energy"][mask],
-               dict_list[t + "_combined"][mask],
-               xaxis="E [GeV]",
-               yaxis="$\\sigma$ [pb]",
-               fmt=" ",
-               logy=True,
-               data_color=color,
-               capsize=None)
-
-
-def combined_plot(func,
-                  dict_list,
-                  t,
-                  *args,
-                  label=None,
-                  fill=False,
-                  fmt=".",
-                  interpolate=True,
-                  **kwargs):
-    dl = dict_list
-    mask = dl[t + "_pdf_central"] != np.array(None)
-
-    if 'axes' in kwargs and kwargs['axes'] is not None:
-        color = next(kwargs['axes']._get_lines.prop_cycler)['color']
-    else:
-        color = next(plt.gca()._get_lines.prop_cycler)['color']
-    func(dict_list,
-         t + "_noerr",
-         *args,
-         label=t if label is None else label,
-         data_color=color,
-         fill=False,
-         interpolate=interpolate,
-         mask=mask,
-         **kwargs)
-    func(dict_list,
-         t + "_scale",
-         *args,
-         fmt=" ",
-         interpolate=False,
-         data_color=color,
-         mask=mask,
-         label="",
-         fill=False,
-         **kwargs)
-    func(dict_list,
-         t + "_combined",
-         *args,
-         fmt=" ",
-         interpolate=False,
-         data_color=color,
-         capsize=None,
-         label="",
-         mask=mask,
-         fill=fill,
          **kwargs)
 
 
@@ -519,9 +439,8 @@ def scale_plot(dict_list,
         mask = mr == np.max(mr)
         l = err_plt(axs[1], mf[mask], mv[mask], error=error)
         lines.append(l)
-        labels.append(
-            "$\\sigma_{\\mathrm{" +
-            v.replace("NLO_PLUS_NLL", "NLO+NLL").replace(" ", "\\ ") + "} }$")
+        labels.append("$\\sigma_{\\mathrm{" +
+                      v.replace("_PLUS_", "+").replace(" ", "\\ ") + "} }$")
         #l, _, _ = axs[1].errorbar(mf[mask], splot.unv(mv[mask]),
         #                          yerr=splot.usd(mv[mask]), capsize=5)
         if seven_point_band:
@@ -676,13 +595,45 @@ def central_scale_plot(dict_list,
 def mass_and_K_plot(dl,
                     li,
                     p,
+                    data_names=["LO", "NLO"],
                     scale=False,
                     pdf=False,
-                    plehn=True,
                     combined=False,
                     cont=False,
                     figsize=(6, 8),
                     **kwargs):
+    global fig, axs
+    if not cont:
+        fig, axs = plt.subplots(2,
+                                1,
+                                figsize=figsize,
+                                sharex=True,
+                                gridspec_kw={'height_ratios': [3, 1]})
+        # Remove horizontal space between axes
+        fig.subplots_adjust(hspace=0)
+        title(axs[0], li[0], **kwargs)
+    for i in [0, 1]:
+        kargs = {
+            'logy': [True, False][i],
+            'mask': dl[data_names[0]] != np.array(None),
+            'axes': axs[i],
+            'K': [False, True][i],
+            'tight': False
+        }
+        for d in data_names:
+            mass_plot(dl, d, p, **kargs, **kwargs, label=d)
+
+
+def legacy_mass_and_K_plot(dl,
+                           li,
+                           p,
+                           scale=False,
+                           pdf=False,
+                           plehn=True,
+                           combined=False,
+                           cont=False,
+                           figsize=(6, 8),
+                           **kwargs):
     global fig, axs
     if not cont:
         fig, axs = plt.subplots(2,
@@ -1104,3 +1055,84 @@ def mass_and_ratio_plot(dl,
                               **kwargs,
                               data_color='0',
                               label="(NLO+NLL)/NLO")
+
+
+def combined_energy_plot(dict_list, t, **kwargs):
+    dl = dict_list
+    mask = dl[t + "_pdf_central"] != np.array(None)
+    if 'axes' in kwargs and kwargs['axes'] is not None:
+        color = next(kwargs['axes']._get_lines.prop_cycler)['color']
+    else:
+        color = next(plt.gca()._get_lines.prop_cycler)['color']
+
+    splot.data(dict_list["energy"][mask],
+               splot.unv(dict_list[t][mask]),
+               xaxis="E [GeV]",
+               yaxis="$\\sigma$ [pb]",
+               fmt=".",
+               logy=True,
+               label=t,
+               data_color=color)
+    splot.data(dict_list["energy"][mask],
+               dict_list[t + "_scale"][mask],
+               xaxis="E [GeV]",
+               yaxis="$\\sigma$ [pb]",
+               fmt=" ",
+               logy=True,
+               data_color=color)
+    splot.data(dict_list["energy"][mask],
+               dict_list[t + "_combined"][mask],
+               xaxis="E [GeV]",
+               yaxis="$\\sigma$ [pb]",
+               fmt=" ",
+               logy=True,
+               data_color=color,
+               capsize=None)
+
+
+def combined_plot(func,
+                  dict_list,
+                  t,
+                  *args,
+                  label=None,
+                  fill=False,
+                  fmt=".",
+                  interpolate=True,
+                  **kwargs):
+    dl = dict_list
+    mask = dl[t + "_pdf_central"] != np.array(None)
+
+    if 'axes' in kwargs and kwargs['axes'] is not None:
+        color = next(kwargs['axes']._get_lines.prop_cycler)['color']
+    else:
+        color = next(plt.gca()._get_lines.prop_cycler)['color']
+    func(dict_list,
+         t + "_noerr",
+         *args,
+         label=t if label is None else label,
+         data_color=color,
+         fill=False,
+         interpolate=interpolate,
+         mask=mask,
+         **kwargs)
+    func(dict_list,
+         t + "_scale",
+         *args,
+         fmt=" ",
+         interpolate=False,
+         data_color=color,
+         mask=mask,
+         label="",
+         fill=False,
+         **kwargs)
+    func(dict_list,
+         t + "_combined",
+         *args,
+         fmt=" ",
+         interpolate=False,
+         data_color=color,
+         capsize=None,
+         label="",
+         mask=mask,
+         fill=fill,
+         **kwargs)

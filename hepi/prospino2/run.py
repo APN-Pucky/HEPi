@@ -1,17 +1,13 @@
 import os
 import pkgutil
-import re
 import shutil
 import stat
 from string import Template
 import subprocess
-from typing import List
 import warnings
 from hepi.input import Input, Order, is_gluino, is_slepton, is_squark, is_weakino
 from hepi.results import Result
 from hepi.run import RunParam, Runner
-from hepi.util import namehash
-from smpl import debug
 from uncertainties import ufloat
 
 
@@ -102,6 +98,9 @@ class ProspinoRunner(Runner):
             "ps_isquark1_in"], d["ps_isquark2_in"] = self._get_ps_proc(p)
         return d
 
+    def orders() -> Order:
+        return [Order.LO, Order.NLO]
+
     def _check_input(self, p: Input) -> bool:
         """Checks input parameter for compatibility with Prospino"""
         if p.mu_f != 1. or p.mu_r != 1.:
@@ -112,9 +111,6 @@ class ProspinoRunner(Runner):
             warnings.warn(
                 "Prospino2 does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults)."
             )
-            return False
-        if p.order != Order.LO and p.order != Order.NLO:
-            warnings.warn("Order must be one of LO/NLO in Prospino2.")
             return False
         return True
 

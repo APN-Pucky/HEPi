@@ -33,11 +33,11 @@ class MadGraphRunParams(RunParam):
 
 class MadGraphRunner(Runner):
 
+    def order() -> List[Order]:
+        return [Order.LO, Order.NLO]
+
     def _check_input(self, p: Input) -> bool:
         """Checks input parameter for compatibility with Prospino"""
-        if p.order != Order.LO and p.order != Order.NLO:
-            warnings.warn("MadGraph does only support LO/NLO.")
-            return False
         return True
 
     def _is_valid(self, file: str, p: Input, d) -> bool:

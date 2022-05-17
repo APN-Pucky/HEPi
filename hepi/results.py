@@ -21,10 +21,16 @@ class Result(DictData):
         K_LO (:obj:`double`): LO divided by LO.
         K_NLO (:obj:`double`): NLO divided by LO result.
         K_NLO_PLUS_NLL (:obj:`double`): NLO+NLL divided by LO.
+        K_aNNLO_PLUS_NNLL (:obj:`double`): aNNLO+NNLL divided by LO.
         NLO_PLUS_NLL_OVER_NLO (:obj:`double`): NLO+NLL divided by NLO.
+        aNNLO_PLUS_NNLL_OVER_NLO (:obj:`double`): aNNLO+NNLL divided by NLO.
     """
 
-    def __init__(self, lo=None, nlo=None, nlo_plus_nll=None):
+    def __init__(self,
+                 lo=None,
+                 nlo=None,
+                 nlo_plus_nll=None,
+                 annlo_plus_nnll=None):
         """
         Sets given and computes dependent ``Attributes``.
 
@@ -32,22 +38,20 @@ class Result(DictData):
             lo (:obj:`double`): corresponds to :attr:`LO`.
             nlo (:obj:`double`): corresponds to :attr:`NLO`.
             nlo_plus_nll (:obj:`double`): corresponds to :attr:`NLO_PLUS_NLL`.
+            annlo_plus_nnll (:obj:`double`): corresponds to :attr:`aNNLO_PLUS_NNLL`.
         """
-        self.LO = lo  #:obj:`double`: Leading Order result. Defaults to None.
+        self.LO = lo
         self.NLO = nlo
         self.NLO_PLUS_NLL = nlo_plus_nll
+        self.aNNLO_PLUS_NNLL = annlo_plus_nnll
         if lo is not None and lo != 0:
             self.K_LO = lo / lo
         else:
             self.K_LO = None
-        #else:
-        #    print("lo None or lo=",lo)
         if nlo is not None and lo != 0:
             self.K_NLO = nlo / lo
         else:
             self.K_NLO = None
-        #else:
-        #    print("nlo None or lo=",lo)
         if nlo_plus_nll is not None and lo != 0:
             self.K_NLO_PLUS_NLL = nlo_plus_nll / lo
         else:
@@ -57,8 +61,16 @@ class Result(DictData):
             self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll / nlo
         else:
             self.NLO_PLUS_NLL_OVER_NLO = None
-        #else:
-        #    print("nlo+nll None or lo=",lo)
+
+        if annlo_plus_nnll is not None and lo != 0:
+            self.K_aNNLO_PLUS_NNLL = annlo_plus_nnll / lo
+        else:
+            self.K_aNNLO_PLUS_NNLL = None
+
+        if annlo_plus_nnll is not None and nlo != 0:
+            self.aNNLO_PLUS_NNLL_OVER_NLO = annlo_plus_nnll / nlo
+        else:
+            self.aNNLO_PLUS_NNLL_OVER_NLO = None
 
 
 def pdf_error(li, dl, confidence_level=90):
