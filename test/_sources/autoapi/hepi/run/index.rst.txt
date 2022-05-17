@@ -27,16 +27,21 @@ Classes
 
 .. py:class:: Runner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
 
-   .. py:method:: _prepare(self, p: hepi.input.Input, skip=True, **kwargs) -> RunParam
+   .. py:method:: orders(self) -> List[hepi.input.Order]
+
+      List of supported Orders in this runner.
+
+
+   .. py:method:: _prepare(self, p: hepi.input.Input, **kwargs) -> RunParam
 
 
    .. py:method:: _check_input(self, param: hepi.input.Input, **kwargs) -> bool
 
 
-   .. py:method:: _prepare_all(self, params: List[hepi.input.Input], **kwargs) -> List[RunParam]
+   .. py:method:: _prepare_all(self, params: List[hepi.input.Input], skip=True, **kwargs) -> List[RunParam]
 
 
-   .. py:method:: run(self, params: List[hepi.input.Input], parse=True, parallel=True, sleep=0, **kwargs)
+   .. py:method:: run(self, params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, **kwargs)
 
       Run the passed list of parameters.
 

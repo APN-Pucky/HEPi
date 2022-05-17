@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-8-gbd11b2b
+                0.1.6-18-g90ffdee
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -56,6 +56,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
@@ -93,12 +94,9 @@
              
   <h1>Source code for hepi.results</h1><div class="highlight"><pre>
 <span></span>&quot;&quot;&quot;Results and postprocessing for the :mod:`hepi` package.&quot;&quot;&quot;
-from hepi.input import Input
-from .util import LD2DL, DictData
+from .util import DictData
 import numpy as np
-from typing import List
 from uncertainties import unumpy
-import uncertainties as unc
 from smpl import plot
 import lhapdf
 import warnings
@@ -118,10 +116,16 @@ import warnings
         K_LO (:obj:`double`): LO divided by LO.
         K_NLO (:obj:`double`): NLO divided by LO result.
         K_NLO_PLUS_NLL (:obj:`double`): NLO+NLL divided by LO.
+        K_aNNLO_PLUS_NNLL (:obj:`double`): aNNLO+NNLL divided by LO.
         NLO_PLUS_NLL_OVER_NLO (:obj:`double`): NLO+NLL divided by NLO.
+        aNNLO_PLUS_NNLL_OVER_NLO (:obj:`double`): aNNLO+NNLL divided by NLO.
     &quot;&quot;&quot;
 
-    def __init__(self, lo=None, nlo=None, nlo_plus_nll=None):
+    def __init__(self,
+                 lo=None,
+                 nlo=None,
+                 nlo_plus_nll=None,
+                 annlo_plus_nnll=None):
         &quot;&quot;&quot;
         Sets given and computes dependent ``Attributes``.
 
@@ -129,22 +133,20 @@ import warnings
             lo (:obj:`double`): corresponds to :attr:`LO`.
             nlo (:obj:`double`): corresponds to :attr:`NLO`.
             nlo_plus_nll (:obj:`double`): corresponds to :attr:`NLO_PLUS_NLL`.
+            annlo_plus_nnll (:obj:`double`): corresponds to :attr:`aNNLO_PLUS_NNLL`.
         &quot;&quot;&quot;
-        self.LO = lo  #:obj:`double`: Leading Order result. Defaults to None.
+        self.LO = lo
         self.NLO = nlo
         self.NLO_PLUS_NLL = nlo_plus_nll
+        self.aNNLO_PLUS_NNLL = annlo_plus_nnll
         if lo is not None and lo != 0:
             self.K_LO = lo / lo
         else:
             self.K_LO = None
-        #else:
-        #    print(&quot;lo None or lo=&quot;,lo)
         if nlo is not None and lo != 0:
             self.K_NLO = nlo / lo
         else:
             self.K_NLO = None
-        #else:
-        #    print(&quot;nlo None or lo=&quot;,lo)
         if nlo_plus_nll is not None and lo != 0:
             self.K_NLO_PLUS_NLL = nlo_plus_nll / lo
         else:
@@ -153,9 +155,17 @@ import warnings
         if nlo_plus_nll is not None and nlo != 0:
             self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll / nlo
         else:
-            self.NLO_PLUS_NLL_OVER_NLO = None</div>
-        #else:
-        #    print(&quot;nlo+nll None or lo=&quot;,lo)
+            self.NLO_PLUS_NLL_OVER_NLO = None
+
+        if annlo_plus_nnll is not None and lo != 0:
+            self.K_aNNLO_PLUS_NNLL = annlo_plus_nnll / lo
+        else:
+            self.K_aNNLO_PLUS_NNLL = None
+
+        if annlo_plus_nnll is not None and nlo != 0:
+            self.aNNLO_PLUS_NNLL_OVER_NLO = annlo_plus_nnll / nlo
+        else:
+            self.aNNLO_PLUS_NNLL_OVER_NLO = None</div>
 
 
 <div class="viewcode-block" id="pdf_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error">[docs]</a>def pdf_error(li, dl, confidence_level=90):

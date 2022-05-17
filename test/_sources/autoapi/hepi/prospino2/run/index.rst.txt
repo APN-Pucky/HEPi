@@ -29,7 +29,7 @@ Attributes
    hepi.prospino2.run.get_path
 
 
-.. py:class:: ProspinoResult(lo=None, nlo=None, nlo_plus_nll=None)
+.. py:class:: ProspinoResult(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
    Bases: :py:obj:`hepi.results.Result`
 
@@ -43,6 +43,8 @@ Attributes
    :type nlo: :obj:`double`
    :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
    :type nlo_plus_nll: :obj:`double`
+   :param annlo_plus_nnll: corresponds to :attr:`aNNLO_PLUS_NNLL`.
+   :type annlo_plus_nnll: :obj:`double`
 
 
 .. py:class:: ProspinoRunner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
@@ -70,7 +72,12 @@ Attributes
    .. py:method:: _get_ps_input(self, p: hepi.input.Input) -> dict
 
 
-   .. py:method:: _check_input(self, p: hepi.input.Input) -> bool
+   .. py:method:: orders(self) -> hepi.input.Order
+
+      List of supported Orders in this runner.
+
+
+   .. py:method:: _check_input(self, p: hepi.input.Input, **kwargs) -> bool
 
       Checks input parameter for compatibility with Prospino
 

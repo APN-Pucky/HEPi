@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-8-gbd11b2b
+                0.1.6-18-g90ffdee
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,6 +56,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -92,13 +93,15 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.resummino.result</h1><div class="highlight"><pre>
-<span></span>from hepi.input import Order
+<span></span>import warnings
+from hepi.input import Order
 from .. import Input, Result, get_output_dir
 import re
 from uncertainties import ufloat_fromstr
 from string import Template
 import pkgutil
 import os
+import shutil
 
 
 <div class="viewcode-block" id="ResumminoResult"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.ResumminoResult">[docs]</a>class ResumminoResult(Result):
@@ -115,7 +118,8 @@ import os
         RNLO_PLUS_VNLO_PLUS_P_PLUS_K (double): RNLO+VNLO+P+K result.
     &quot;&quot;&quot;
 
-    def __init__(self, lo, nlo, nlo_plus_nll, vnlo, p_plus_k, rnlog, rnloq):
+    def __init__(self, lo, nlo, nlo_plus_nll, annlo_plus_nnll, vnlo, p_plus_k,
+                 rnlog, rnloq):
         &quot;&quot;&quot;
         Sets given and computes dependent ``Attributes``.
 
@@ -128,7 +132,7 @@ import os
             rnlog (:obj:`double`): corresponds to :attr:`RNLOG`.
             rnloq (:obj:`double`): corresponds to :attr:`RNLOQ`.
         &quot;&quot;&quot;
-        Result.__init__(self, lo, nlo, nlo_plus_nll)
+        Result.__init__(self, lo, nlo, nlo_plus_nll, annlo_plus_nnll)
         self.VNLO = vnlo
         self.P_PLUS_K = p_plus_k
         self.RNLOG = rnlog
@@ -145,9 +149,6 @@ import os
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = self.RNLO + self.VNLO_PLUS_P_PLUS_K
         else:
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None</div>
-
-
-# TODO move functions to results
 
 
 <div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.is_valid">[docs]</a>def is_valid(file: str, p: Input, d) -&gt; bool:
@@ -170,11 +171,10 @@ import os
     with open(file, mode=&#39;r&#39;) as f:
         with open(get_output_dir() + sname, &#39;r&#39;) as sf:
             if not f.read().startswith(result + &quot;\n\n&quot; + sf.read()):
-                #warnings.warn(&quot;Possible hash collision in &quot; + file + &quot; -&gt; deleted&quot;,RuntimeWarning)
-                os.remove(file)
-                #exit(1)
-                #return False
-                print(&quot;HASH COLLIDED&quot;, file)
+                warnings.warn(
+                    &quot;Possible hash collision in &quot; + file + &quot; -&gt; moved to &quot; +
+                    file + &quot;.old&quot;, RuntimeWarning)
+                shutil.move(file, file + &quot;.old&quot;)
                 return False
     res = parse_single(file)
     if res.LO is not None and order is Order.LO:
@@ -182,6 +182,8 @@ import os
     if res.LO is not None and res.NLO is not None and order is Order.NLO:
         return True
     if res.LO is not None and res.NLO is not None and res.NLO_PLUS_NLL is not None and order is Order.NLO_PLUS_NLL:
+        return True
+    if res.LO is not None and res.NLO is not None and res.aNNLO_PLUS_NNLL is not None and order is Order.aNNLO_PLUS_NNLL:
         return True
     print(&quot;RESTART&quot;, res.LO, res.NLO, res.NLO_PLUS_NLL, file)
     return False</div>
@@ -198,10 +200,12 @@ import os
         :class:`ResumminoResult` : If a value is not found in the file None is used.
 
     &quot;&quot;&quot;
+    # TODO aNNLO+ NNLL support?
     # TODO generalize units like RS
     lo_pattern = re.compile(r&#39;^LO = \((.*)\) pb&#39;)
     nlo_pattern = re.compile(r&#39;^NLO = \((.*)\) pb&#39;)
     nll_pattern = re.compile(r&#39;^NLO\+NLL = \((.*)\) pb&#39;)
+    nnll_pattern = re.compile(r&#39;^aNNLO\+NNLL = \((.*)\) pb&#39;)
 
     vnlo_pattern = re.compile(r&#39;^vNLO = \((.*)\) pb&#39;)
     ppk_pattern = re.compile(r&#39;^P\+K = \((.*)\) pb&#39;)
@@ -211,6 +215,7 @@ import os
     lo_result = None
     nlo_result = None
     nll_result = None
+    nnll_result = None
 
     vnlo_result = None
     ppk_result = None
@@ -227,6 +232,9 @@ import os
             tmp = nll_pattern.search(line)
             if tmp is not None:
                 nll_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
+            tmp = nnll_pattern.search(line)
+            if tmp is not None:
+                nnll_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
             tmp = vnlo_pattern.search(line)
             if tmp is not None:
                 vnlo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
@@ -241,8 +249,8 @@ import os
             if tmp is not None:
                 rnloq_result = ufloat_fromstr(
                     tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
-    return ResumminoResult(lo_result, nlo_result, nll_result, vnlo_result,
-                           ppk_result, rnlog_result, rnloq_result)</div>
+    return ResumminoResult(lo_result, nlo_result, nll_result, nnll_result,
+                           vnlo_result, ppk_result, rnlog_result, rnloq_result)</div>
 </pre></div>
 
            </div>

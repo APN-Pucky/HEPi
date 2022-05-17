@@ -45,7 +45,12 @@ Attributes
 
    Bases: :py:obj:`hepi.run.Runner`
 
-   .. py:method:: _check_input(self, p: hepi.Input) -> bool
+   .. py:method:: orders(self) -> List[hepi.input.Order]
+
+      List of supported Orders in this runner.
+
+
+   .. py:method:: _check_input(self, p: hepi.Input, **kwargs) -> bool
 
       Checks input parameter for compatibility with Prospino
 

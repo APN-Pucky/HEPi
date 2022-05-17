@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-8-gbd11b2b
+                0.1.6-18-g90ffdee
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -56,6 +56,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
@@ -94,14 +95,13 @@
   <h1>Source code for hepi.output</h1><div class="highlight"><pre>
 <span></span>import json
 from smpl import plot
-
-from smpl import plot as splot
-import smpl
 import numpy as np
 
-from .input import Input, Order, get_output_dir, order_to_string
-from .util import LD2DF, DictData, get_name
+from .input import Order, order_to_string
+from .util import LD2DF, get_name
 from smpl import io
+
+<div class="viewcode-block" id="splot"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.splot">[docs]</a>splot = plot</div>
 
 
 <div class="viewcode-block" id="write_latex"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex">[docs]</a>def write_latex(dict_list, key, fname, scale=True, pdf=True, yscale=1.):

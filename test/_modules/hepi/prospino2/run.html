@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-8-gbd11b2b
+                0.1.6-18-g90ffdee
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,6 +56,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -94,18 +95,14 @@
   <h1>Source code for hepi.prospino2.run</h1><div class="highlight"><pre>
 <span></span>import os
 import pkgutil
-import re
 import shutil
 import stat
 from string import Template
 import subprocess
-from typing import List
 import warnings
 from hepi.input import Input, Order, is_gluino, is_slepton, is_squark, is_weakino
 from hepi.results import Result
 from hepi.run import RunParam, Runner
-from hepi.util import namehash
-from smpl import debug
 from uncertainties import ufloat
 
 
@@ -129,7 +126,6 @@ from uncertainties import ufloat
     }</div>
 <div class="viewcode-block" id="ProspinoRunner.squark_map"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner.squark_map">[docs]</a>    squark_map = {
         1000005: -5,
-        1000004: -4,
         1000004: -4,
         1000003: -3,
         1000001: -2,
@@ -196,7 +192,10 @@ from uncertainties import ufloat
             &quot;ps_isquark1_in&quot;], d[&quot;ps_isquark2_in&quot;] = self._get_ps_proc(p)
         return d</div>
 
-<div class="viewcode-block" id="ProspinoRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._check_input">[docs]</a>    def _check_input(self, p: Input) -&gt; bool:
+<div class="viewcode-block" id="ProspinoRunner.orders"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner.orders">[docs]</a>    def orders(self) -&gt; Order:
+        return [Order.LO, Order.NLO]</div>
+
+<div class="viewcode-block" id="ProspinoRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/prospino2/run/index.html#hepi.prospino2.ProspinoRunner._check_input">[docs]</a>    def _check_input(self, p: Input, **kwargs) -&gt; bool:
         &quot;&quot;&quot;Checks input parameter for compatibility with Prospino&quot;&quot;&quot;
         if p.mu_f != 1. or p.mu_r != 1.:
             warnings.warn(
@@ -206,9 +205,6 @@ from uncertainties import ufloat
             warnings.warn(
                 &quot;Prospino2 does not support all pdfs (CTEQ6L1 and CTEQ66 allowed defaults).&quot;
             )
-            return False
-        if p.order != Order.LO and p.order != Order.NLO:
-            warnings.warn(&quot;Order must be one of LO/NLO in Prospino2.&quot;)
             return False
         return True</div>
 

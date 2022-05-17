@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-8-gbd11b2b
+                0.1.6-18-g90ffdee
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -56,6 +56,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
@@ -92,18 +93,15 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.run</h1><div class="highlight"><pre>
-<span></span>import abc
-import os
+<span></span>import os
 import subprocess
 from typing import List
 import warnings
-from hepi.input import Input, get_input_dir, get_output_dir, get_pre
+from hepi.input import Input, Order, get_input_dir, get_output_dir, get_pre
 from hepi.results import Result
 from hepi.util import LD2DL, DictData, namehash
 from smpl.parallel import par
-from smpl import debug
 import time
-import shutil
 
 
 <div class="viewcode-block" id="RunParam"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.RunParam">[docs]</a>class RunParam(DictData):
@@ -143,8 +141,12 @@ import shutil
         else:
             self.pre = pre
 
-<div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, skip=True, **kwargs) -&gt; RunParam:
-        skip_ = skip
+<div class="viewcode-block" id="Runner.orders"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
+        &quot;&quot;&quot; List of supported Orders in this runner.&quot;&quot;&quot;
+        return [e.value for e in Order]</div>
+
+<div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
+        skip_ = kwargs[&quot;skip&quot;]
         d = p.__dict__
         d[&quot;runner&quot;] = type(self).__name__
         name = namehash(&quot;_&quot;.join(&quot;&quot;.join(str(_[0]) + &quot;_&quot; + str(_[1]))
@@ -164,19 +166,27 @@ import shutil
                         name=name)</div>
 
 <div class="viewcode-block" id="Runner._check_input"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._check_input">[docs]</a>    def _check_input(self, param: Input, **kwargs) -&gt; bool:
+        if param.order not in self.orders():
+            warnings.warn(&quot;Order &quot; + str(param.order) + &quot; not supported in &quot; +
+                          type(self).__name__)
+            return False
         return True</div>
 
-<div class="viewcode-block" id="Runner._prepare_all"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare_all">[docs]</a>    def _prepare_all(self, params: List[Input], **kwargs) -&gt; List[RunParam]:
+<div class="viewcode-block" id="Runner._prepare_all"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare_all">[docs]</a>    def _prepare_all(self,
+                     params: List[Input],
+                     skip=True,
+                     **kwargs) -&gt; List[RunParam]:
         ret = []
         for p in params:
             if not self._check_input(p):
                 warnings.warn(&quot;Check input failed.&quot;)
                 return []
-            ret.append(self._prepare(p, **kwargs))
+            ret.append(self._prepare(p, skip=skip, **kwargs))
         return ret</div>
 
 <div class="viewcode-block" id="Runner.run"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.run">[docs]</a>    def run(self,
             params: List[Input],
+            skip=True,
             parse=True,
             parallel=True,
             sleep=0,
@@ -198,7 +208,7 @@ import shutil
 
 		&quot;&quot;&quot;
         print(&quot;Running: &quot; + str(len(params)) + &quot; jobs&quot;)
-        rps = self._prepare_all(params, parse=parse, **kwargs)
+        rps = self._prepare_all(params, parse=parse, skip=skip, **kwargs)
         if sleep is None:
             sleep = 0 if parse else 5
         self._run(rps, wait=parse, parallel=parallel, sleep=sleep, **kwargs)
@@ -263,6 +273,15 @@ import shutil
 		Returns:
 		    bool : True if `file` could be parsed.
 		&quot;&quot;&quot;
+        res = self._parse_file(file)
+        if res.LO is None and p.order is Order.LO:
+            return False
+        if res.NLO is None and p.order is Order.NLO:
+            return False
+        if res.NLO_PLUS_NLL is None and p.order is Order.NLO_PLUS_NLL:
+            return False
+        if res.aNNLO_PLUS_NNLL is None and p.order is Order.aNNLO_PLUS_NNLL:
+            return False
         return True</div>
 
 <div class="viewcode-block" id="Runner.parse"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.parse">[docs]</a>    def parse(self, outputs: List[str]) -&gt; List[Result]:
