@@ -41,6 +41,8 @@ class MadGraphRunner(Runner):
         return True
 
     def _is_valid(self, file: str, p: Input, d) -> bool:
+        if not super()._is_valid(file, p, d):
+            return False
         return is_valid(file, p, d)
 
     def _parse_file(self, file: str) -> Result:

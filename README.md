@@ -11,12 +11,12 @@ Currently slurm is supported for clusters.
 | [![Coverage Status][c s i]][c s l] | [![Coverage Status][c t i]][c t l] |
 | -      |[![Codacy Badge][codacy cover image]][codacy cover link] | 
 | -     |[![Codacy Badge][codacy quality image]][codacy quality link] | 
-| [![Documentation Status][rtd s i]][rtd s l] | [![Documentation Status][rtd t i]][rtd t l]  | 
+| [![Documentation][rtd s i]][rtd s l] | [![Documentation][rtd t i]][rtd t l]  | 
 
 ## Documentation
 
-  - https://hepi.readthedocs.io/en/stable/
-  - https://apn-pucky.github.io/HEPi/index.html
+- <https://hepi.readthedocs.io/en/stable/>
+- <https://apn-pucky.github.io/HEPi/index.html>
 
 ## Versions
 
