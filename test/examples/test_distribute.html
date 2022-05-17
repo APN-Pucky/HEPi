@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Distribute run files for clusters &mdash; HEPi  documentation</title>
+  <title>Distribute resummino run files to clusters &mdash; HEPi  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-21-g0764e11
+                0.1.6-22-g46d3342
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -62,13 +62,13 @@
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Distribute run files for clusters</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Distribute resummino run files to clusters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Single-point">Single point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Mass-scan">Mass scan</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Scale-scan">Scale scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#PDF-scan">PDF scan</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#PDF-scan">PDF scan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_spheno.html">SPheno example</a></li>
@@ -93,7 +93,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Distribute run files for clusters</li>
+      <li>Distribute resummino run files to clusters</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/examples/test_distribute.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -373,8 +373,8 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="Distribute-run-files-for-clusters">
-<h1>Distribute run files for clusters<a class="headerlink" href="#Distribute-run-files-for-clusters" title="Permalink to this headline"></a></h1>
+<section id="Distribute-resummino-run-files-to-clusters">
+<h1>Distribute resummino run files to clusters<a class="headerlink" href="#Distribute-resummino-run-files-to-clusters" title="Permalink to this headline"></a></h1>
 <p>After running this example one only needs to run the generated output/<a href="#id1"><span class="problematic" id="id2">*</span></a>.sh files or queue them to your favourite cluster:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ ./output/*.sh
 </pre></div>
@@ -531,9 +531,8 @@ RESTART None None None ./output/6929de6ef65f92978e5901fffcdd780b20a7888ccd8198b9
 </pre></div></div>
 </div>
 </section>
-</section>
 <section id="PDF-scan">
-<h1>PDF scan<a class="headerlink" href="#PDF-scan" title="Permalink to this headline"></a></h1>
+<h2>PDF scan<a class="headerlink" href="#PDF-scan" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -570,6 +569,7 @@ Running: 101 jobs
 </pre></div>
 </div>
 </div>
+</section>
 </section>
 
 

@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-21-g0764e11
+                0.1.6-22-g46d3342
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -57,8 +57,7 @@
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute run files for clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html#PDF-scan">PDF scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -143,7 +142,6 @@ import time
              sleep=0,
              **kwargs):
         # TODO clean up on exit emergency
-        global madgraph_path
         skipall = True
         for rp in rps:
             if not rp.skip:
@@ -160,7 +158,7 @@ import time
             mgcom = &#39;bin/mg5_aMC&#39;
             if rps[0].madstr:
                 mgcom = &#39;bin/mg5_aMC --mode=&quot;MadSTR&quot;&#39;
-            com = madgraph_path + mgcom + \
+            com = self.get_path() + mgcom + \
                 &#39; --file {in} &gt;&gt; {out} &amp;&amp; cp {slha} {bdir}/Cards/param_card.dat &amp;&amp; cp {run} {bdir}/Cards/run_card.dat &amp;&amp; sed -i \&#39;s/.*= req_acc_FO/ 1 = req_acc_FO/g\&#39; {bdir}/Cards/run_card.dat &amp;&amp; echo &quot;automatic_html_opening = False&quot; &gt;&gt; {bdir}/Cards/amcatnlo_configuration.txt &amp;&amp; nice -n 5 {bdir}/bin/calculate_xsect -f&#39;
             pp = subprocess.Popen(com.format(**rps[0].dic), shell=True)
             pp.wait()

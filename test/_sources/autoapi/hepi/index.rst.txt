@@ -631,7 +631,7 @@ Attributes
 .. py:function:: slha_write(newname, d)
 
 
-.. py:function:: masses_scan(l: List[Input], vars: List[int], rrange, diff_L_R=None) -> List[Input]
+.. py:function:: masses_scan(l: List[Input], vars: List[int], rrange, diff_L_R=None, negate=[]) -> List[Input]
 
    Scans the PDG identified mass `var` over `rrange` in the list `l`.
    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
