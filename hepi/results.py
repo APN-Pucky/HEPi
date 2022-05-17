@@ -1,10 +1,7 @@
 """Results and postprocessing for the :mod:`hepi` package."""
-from hepi.input import Input
-from .util import LD2DL, DictData
+from .util import DictData
 import numpy as np
-from typing import List
 from uncertainties import unumpy
-import uncertainties as unc
 from smpl import plot
 import lhapdf
 import warnings

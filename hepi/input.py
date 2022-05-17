@@ -77,7 +77,7 @@ def set_output_dir(outd):
 
 def set_pre(ppre):
     """
-    Sets the command prefix. 
+    Sets the command prefix.
 
     Args:
         ppre (str): new command prefix.
@@ -132,7 +132,7 @@ class Input(DictData):
         result (str): Result type 'total'/'pt'/'ptj'/'m'.
         id (str): Set an id of this run. 
         model_path (str): Path for MadGraph model.
-        update (bool): Update dependent `mu`.
+        update (bool): Update dependent `mu` else set to zero.
     """
 
     # TODO allow unspecified input? Maybe with kwargs + defaults
@@ -177,6 +177,7 @@ class Input(DictData):
         self.result = result
         self.id = id
         self.model_path = model_path
+        self.mu = 0.
         if os.path.isfile(get_input_dir() + self.slha):
             shutil.copy(get_input_dir() + self.slha,
                         get_output_dir() + self.slha)
@@ -202,34 +203,34 @@ class Input(DictData):
         return is_slepton(self.particle1) or is_slepton(self.particle2)
 
 
-def is_gluino(id: int) -> bool:
-    return id == 1000021
+def is_gluino(iid: int) -> bool:
+    return iid == 1000021
 
 
-def is_neutralino(id: int) -> bool:
+def is_neutralino(iid: int) -> bool:
     neutralinos = [1000022, 1000023, 1000025, 1000035]
-    return abs(id) in neutralinos
+    return abs(iid) in neutralinos
 
 
-def is_chargino(id: int) -> bool:
+def is_chargino(iid: int) -> bool:
     charginos = [1000024, 1000037]
-    return abs(id) in charginos
+    return abs(iid) in charginos
 
 
-def is_weakino(id: int) -> bool:
-    return is_chargino(id) or is_neutralino(id)
+def is_weakino(iid: int) -> bool:
+    return is_chargino(iid) or is_neutralino(iid)
 
 
-def is_squark(id: int) -> bool:
+def is_squark(iid: int) -> bool:
     l_squark = range(1000001, 1000007)
     r_squark = range(2000001, 2000007)
-    return abs(id) in l_squark or abs(id) in r_squark
+    return abs(iid) in l_squark or abs(iid) in r_squark
 
 
-def is_slepton(id: int) -> bool:
+def is_slepton(iid: int) -> bool:
     l_slepton = range(1000011, 1000016)
     r_slepton = range(2000011, 2000016)  # TODO remove righthandend snu's
-    return abs(id) in l_slepton or abs(id) in r_slepton
+    return abs(iid) in l_slepton or abs(iid) in r_slepton
 
 
 def update_slha(i: Input):
@@ -331,11 +332,11 @@ def scan_multi(li: List[Input], **kwargs) -> List[Input]:
 multi_scan = scan_multi
 
 
-def scan_scale(l: List[Input], range=3, distance=2.):
+def scan_scale(l: List[Input], rrange=3, distance=2.):
     """
     Scans scale by varying `mu_f` and `mu_r`.
 
-    They take `range` values from 1/`distance` to `distance` in lograthmic spacing.
+    They take `rrange` values from 1/`distance` to `distance` in lograthmic spacing.
     Only points with `mu_f`=`mu_r` or `mu_r/f`=1 or `mu_r/f`=`distance` or `mu_r/f`=1/`distance` are returned.
 
     Examples:
@@ -358,11 +359,11 @@ def scan_scale(l: List[Input], range=3, distance=2.):
         if s.pdfset_nlo == 0:
             tmp = scan([s], "mu_f",
                        np.logspace(np.log10(1. / distance), np.log10(distance),
-                                   range))
+                                   rrange))
             tmp = scan(
                 tmp, "mu_r",
                 np.logspace(np.log10(1. / distance), np.log10(distance),
-                            range))
+                            rrange))
             for t in tmp:
                 if t.mu_f == 1.0 or t.mu_r == 1.0 or t.mu_f == t.mu_r or t.mu_f == distance or t.mu_f == 1. / distance or t.mu_r == distance or t.mu_r == 1. / distance:
                     ret.append(t)
@@ -392,7 +393,7 @@ def scan_seven_point(l: List[Input]):
         {'order': <Order.LO: 0>, 'energy': 13000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 2.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
         {'order': <Order.LO: 0>, 'energy': 13000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 2.0, 'mu_r': 2.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model_path': '/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO'}
     """
-    range = 3
+    rrange = 3
     distance = 2.
     ret = []
     for s in l:
@@ -400,11 +401,11 @@ def scan_seven_point(l: List[Input]):
         if s.pdfset_nlo == 0 and s.mu_f == 1.0 and s.mu_r == 1.0:
             tmp = scan([s], "mu_f",
                        np.logspace(np.log10(1. / distance), np.log10(distance),
-                                   range))
+                                   rrange))
             tmp = scan(
                 tmp, "mu_r",
                 np.logspace(np.log10(1. / distance), np.log10(distance),
-                            range))
+                            rrange))
             for t in tmp:
                 if not ((t.mu_f == distance and t.mu_r == 1. / distance) or
                         (t.mu_r == distance and t.mu_f == 1. / distance)):
@@ -484,14 +485,14 @@ def slha_write(newname, d):
         writer.truncate()
 
 
-def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
+def mass_scan(l: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]:
     """
-    Scans the PDG identified mass `var` over `range` in the list `l`.
+    Scans the PDG identified mass `var` over `rrange` in the list `l`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
     """
     ret = []
     for s in l:
-        for r in range:
+        for r in rrange:
             d = None
             try:
                 d = pyslha.read(s.slha)
@@ -514,20 +515,20 @@ def mass_scan(l: List[Input], var: int, range, diff_L_R=None) -> List[Input]:
     return ret
 
 
-def slha_scan(l: List[Input], block, var, range: List) -> List[Input]:
+def slha_scan(l: List[Input], block, var, rrange: List) -> List[Input]:
     """
     Scan a generic 
     """
-    return slha_scan_rel(l, lambda r, : [(block, var, r)], range)
+    return slha_scan_rel(l, lambda r, : [(block, var, r)], rrange)
 
 
-def slha_scan_rel(l: List[Input], lambdas, range: List) -> List[Input]:
+def slha_scan_rel(l: List[Input], lambdas, rrange: List) -> List[Input]:
     """
     Scan a generic slha variable.
     """
     ret = []
     for s in l:
-        for r in range:
+        for r in rrange:
             d = None
             tmp = copy.copy(s)
             newname = s.slha

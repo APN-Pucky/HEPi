@@ -2,11 +2,10 @@ import json
 from smpl import plot
 
 from smpl import plot as splot
-import smpl
 import numpy as np
 
-from .input import Input, Order, get_output_dir, order_to_string
-from .util import LD2DF, DictData, get_name
+from .input import Order, order_to_string
+from .util import LD2DF, get_name
 from smpl import io
 
 

@@ -1,27 +1,20 @@
-from scipy import interpolate
 
 from sklearn.metrics import auc
 import matplotlib as mpl
 from smpl import plot as splot
-import smpl
 import numpy as np
-import uncertainties as unc
 from scipy.interpolate import make_interp_spline, BSpline
 
-from uncertainties import unumpy
 import matplotlib.pyplot as plt
 
-from particle import PDGID
 import pyslha
-from particle import Particle
-from particle.converters.bimap import DirectionalMaps
 
 import matplotlib.cm as cm
 from matplotlib import colors
 
 from .input import Input, get_output_dir
 from .util import get_name
-from matplotlib.ticker import ScalarFormatter, NullFormatter
+from matplotlib.ticker import NullFormatter
 
 
 def title(axe,
