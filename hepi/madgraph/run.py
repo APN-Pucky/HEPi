@@ -1,22 +1,13 @@
 """Runs MadGraph"""
-import shutil
 from typing import List
 import subprocess
 from string import Template
-import warnings
 from hepi.input import Order
 from hepi.run import RunParam, Runner
-import numpy as np
 import pkgutil
-from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
-import re
-import os.path
-from pathlib import Path
-from .result import MadgraphResult, is_valid, parse_single
+from .. import Input, Result, get_output_dir
+from .result import is_valid, parse_single
 import time
-import difflib
-from smpl.parallel import par
-import hashlib
 
 
 class MadGraphRunParams(RunParam):
