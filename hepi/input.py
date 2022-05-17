@@ -238,8 +238,6 @@ def update_slha(i: Input):
     Updates dependent parameters in Input `i`.
 
     Mainly concerns the `mu` value used by `madgraph`.
-
-    
     """
     b = pyslha.read(get_output_dir() + i.slha, ignorenomass=True)
     try:

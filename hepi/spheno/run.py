@@ -1,6 +1,5 @@
 from typing import List
 import warnings
-from hepi import get_input_dir
 import subprocess
 import os
 from hepi.input import Input, update_slha

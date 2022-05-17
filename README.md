@@ -15,8 +15,8 @@ Currently slurm is supported for clusters.
 
 ## Documentation
 
-- <https://hepi.readthedocs.io/en/stable/>
-- <https://apn-pucky.github.io/HEPi/index.html>
+-   <https://hepi.readthedocs.io/en/stable/>
+-   <https://apn-pucky.github.io/HEPi/index.html>
 
 ## Versions
 
@@ -31,7 +31,6 @@ pip install hepi [--user] [--upgrade]
 ```sh
 pip install --index-url https://test.pypi.org/simple/ hepi
 ```
-
 
 [doc stable]: https://apn-pucky.github.io/HEPi/index.html
 [doc test]: https://apn-pucky.github.io/HEPi/test/index.html
