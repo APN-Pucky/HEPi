@@ -28,7 +28,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MadGraph example" href="test_madgraph.html" />
+    <link rel="next" title="Single point" href="test_distribute.html" />
     <link rel="prev" title="Welcome to HEPi’s documentation!" href="../index.html" /> 
 </head>
 
@@ -40,7 +40,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-18-g90ffdee
+                0.1.6-19-gb969e5f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -66,6 +66,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#NLO+NLL-for-squark/gluino+weakino">NLO+NLL for squark/gluino+weakino</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="test_distribute.html">Single point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_distribute.html#Mass-scan">Mass scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_distribute.html#Scale-scan">Scale scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_distribute.html#PDF-scan">PDF scan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="test_spheno.html">SPheno example</a></li>
@@ -446,7 +450,7 @@ Wall time: 1.08 s
 <section id="NLO+NLL-for-squark/gluino+weakino">
 <h2>NLO+NLL for squark/gluino+weakino<a class="headerlink" href="#NLO+NLL-for-squark/gluino+weakino" title="Permalink to this headline"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
@@ -478,7 +482,7 @@ Wall time: 1.08 s
 Running: 15 jobs
 </pre></div></div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
@@ -1730,6 +1734,60 @@ A6 =  -37.75313 # +-923314717544901376.00000
 A7 =  20.62502 # +-204645951056514720.00000
 </pre></div></div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;timed exec&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/run.py</span> in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg">(self, params, skip, parse, parallel, sleep, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    117</span>         <span class="ansi-green-fg">if</span> sleep <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    118</span>             sleep <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span> <span class="ansi-green-fg">if</span> parse <span class="ansi-green-fg">else</span> <span class="ansi-cyan-fg">5</span>
+<span class="ansi-green-fg">--&gt; 119</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_run<span class="ansi-blue-fg">(</span>rps<span class="ansi-blue-fg">,</span> wait<span class="ansi-blue-fg">=</span>parse<span class="ansi-blue-fg">,</span> parallel<span class="ansi-blue-fg">=</span>parallel<span class="ansi-blue-fg">,</span> sleep<span class="ansi-blue-fg">=</span>sleep<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    120</span>         <span class="ansi-green-fg">if</span> parse<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    121</span>             outs <span class="ansi-blue-fg">=</span> LD2DL<span class="ansi-blue-fg">(</span>rps<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;out_file&#34;</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/run.py</span> in <span class="ansi-cyan-fg">_run</span><span class="ansi-blue-fg">(self, rps, wait, parallel, sleep, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    163</span>         <span class="ansi-green-fg">if</span> wait<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    164</span>             <span class="ansi-red-fg"># Collect statuses</span>
+<span class="ansi-green-fg">--&gt; 165</span><span class="ansi-red-fg">             </span>output <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>p<span class="ansi-blue-fg">.</span>wait<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> p <span class="ansi-green-fg">in</span> processes<span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">    166</span>             <span class="ansi-green-fg">return</span> output
+<span class="ansi-green-intense-fg ansi-bold">    167</span>         <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/run.py</span> in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-fg">(.0)</span>
+<span class="ansi-green-intense-fg ansi-bold">    163</span>         <span class="ansi-green-fg">if</span> wait<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    164</span>             <span class="ansi-red-fg"># Collect statuses</span>
+<span class="ansi-green-fg">--&gt; 165</span><span class="ansi-red-fg">             </span>output <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>p<span class="ansi-blue-fg">.</span>wait<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> p <span class="ansi-green-fg">in</span> processes<span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">    166</span>             <span class="ansi-green-fg">return</span> output
+<span class="ansi-green-intense-fg ansi-bold">    167</span>         <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">/usr/lib/python3.8/subprocess.py</span> in <span class="ansi-cyan-fg">wait</span><span class="ansi-blue-fg">(self, timeout)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1081</span>             endtime <span class="ansi-blue-fg">=</span> _time<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> timeout
+<span class="ansi-green-intense-fg ansi-bold">   1082</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1083</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_wait<span class="ansi-blue-fg">(</span>timeout<span class="ansi-blue-fg">=</span>timeout<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1084</span>         <span class="ansi-green-fg">except</span> KeyboardInterrupt<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1085</span>             <span class="ansi-red-fg"># https://bugs.python.org/issue25942</span>
+
+<span class="ansi-green-fg">/usr/lib/python3.8/subprocess.py</span> in <span class="ansi-cyan-fg">_wait</span><span class="ansi-blue-fg">(self, timeout)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1804</span>                         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>returncode <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1805</span>                             <span class="ansi-green-fg">break</span>  <span class="ansi-red-fg"># Another thread waited.</span>
+<span class="ansi-green-fg">-&gt; 1806</span><span class="ansi-red-fg">                         </span><span class="ansi-blue-fg">(</span>pid<span class="ansi-blue-fg">,</span> sts<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_try_wait<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1807</span>                         <span class="ansi-red-fg"># Check the pid and loop as waitpid has been known to</span>
+<span class="ansi-green-intense-fg ansi-bold">   1808</span>                         <span class="ansi-red-fg"># return 0 even without WNOHANG in odd situations.</span>
+
+<span class="ansi-green-fg">/usr/lib/python3.8/subprocess.py</span> in <span class="ansi-cyan-fg">_try_wait</span><span class="ansi-blue-fg">(self, wait_flags)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1762</span>             <span class="ansi-blue-fg">&#34;&#34;&#34;All callers to this function MUST hold self._waitpid_lock.&#34;&#34;&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">   1763</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1764</span><span class="ansi-red-fg">                 </span><span class="ansi-blue-fg">(</span>pid<span class="ansi-blue-fg">,</span> sts<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">=</span> os<span class="ansi-blue-fg">.</span>waitpid<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>pid<span class="ansi-blue-fg">,</span> wait_flags<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1765</span>             <span class="ansi-green-fg">except</span> ChildProcessError<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1766</span>                 <span class="ansi-red-fg"># This happens if SIGCLD is set to be ignored or waiting</span>
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>:
+</pre></div></div>
+</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -1746,7 +1804,7 @@ A7 =  20.62502 # +-204645951056514720.00000
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to HEPi’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="test_madgraph.html" class="btn btn-neutral float-right" title="MadGraph example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="test_distribute.html" class="btn btn-neutral float-right" title="Single point" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

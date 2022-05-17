@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Single point &mdash; HEPi  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MadGraph example" href="test_madgraph.html" />
+    <link rel="prev" title="Resummino example" href="demo_resummino.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> HEPi
+          </a>
+              <div class="version">
+                0.1.6-19-gb969e5f
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Single point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Mass-scan">Mass scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Scale-scan">Scale scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#PDF-scan">PDF scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_pyslha.html">pyslha comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_write.html">Result writing example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/hepi/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HEPi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Single point</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/test_distribute.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hepi</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">smpl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">hepi.resummino</span> <span class="k">as</span> <span class="nn">rs</span>
+<span class="kn">import</span> <span class="nn">hepi.util</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">rs</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;~/git/resummino&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.1.4.28+dirty
+~/git/resummino/
+</pre></div></div>
+</div>
+<section id="Single-point">
+<h1>Single point<a class="headerlink" href="#Single-point" title="Permalink to this headline"></a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;slha.in&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">pss</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1000023</span><span class="p">,</span><span class="mi">1000024</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1000024</span><span class="p">,</span><span class="o">-</span><span class="mi">1000024</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1000023</span><span class="p">,</span><span class="mi">1000022</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1000002</span><span class="p">,</span><span class="mi">1000022</span><span class="p">),</span>
+     <span class="p">]</span>
+<span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO_PLUS_NLL</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;PDF4LHC21_mc&quot;</span><span class="p">,</span><span class="s2">&quot;PDF4LHC21_mc&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="c1">#i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,&quot;CT14lo&quot;,&quot;CT14lo&quot;,1., 1.,model_path=model_path,id=&quot;5&quot;)</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">noskip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">parse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running: 1 jobs
+RESTART None None None ./output/b961f87398318a753d6877b7bc41860014d39418ff8f9103d3ac7299a823e7e5.out
+Running: 1 jobs
+RESTART None None None ./output/3c61d60948d6bb02fc05a4e857e668171c247958624c3c0dbe872e848f2b7000.out
+Running: 1 jobs
+RESTART None None None ./output/31ef23f79e10ff50d0dcd4a71f2df9b409c22bb210869d139952edfe0d3215e9.out
+Running: 1 jobs
+RESTART None None None ./output/086a5e6f74677e9101881b8a9f6b0b8c452310ceb102bf7b941a0369c01ac7bf.out
+</pre></div></div>
+</div>
+</section>
+<section id="Mass-scan">
+<h1>Mass scan<a class="headerlink" href="#Mass-scan" title="Permalink to this headline"></a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;slha.in&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">pss</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1000011</span><span class="p">,</span><span class="o">-</span><span class="mi">1000011</span><span class="p">),</span>
+     <span class="p">]</span>
+<span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO_PLUS_NLL</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;PDF4LHC21_mc&quot;</span><span class="p">,</span><span class="s2">&quot;PDF4LHC21_mc&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="c1">#i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,&quot;CT14lo&quot;,&quot;CT14lo&quot;,1., 1.,model_path=model_path,id=&quot;5&quot;)</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">([</span><span class="n">i</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2000</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+        <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">noskip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">parse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running: 9 jobs
+RESTART None None None ./output/4bb70513d182bfd9166009c7629547997ddb69645082620dd7fef27fd22274d0.out
+RESTART None None None ./output/061cc97365576ff137f4f3c5d1f779f5062296401e7173c779cb5767e9596850.out
+RESTART None None None ./output/063bfb7d7c05793201cb3200ff8c60b1e4d814cf7ce6fc9bd08bde07100c3ebb.out
+RESTART None None None ./output/2a260536e188f13e6d734bce7f0d3a592bf193e40d079627b5a6bf21732e18b5.out
+RESTART None None None ./output/6d436042ce35991fdd665cc1b5052439a78e11ebee862a1c38cb5514ae164347.out
+RESTART None None None ./output/e926d3664adb9d3a9f68c59c9e04ce3040eceb9c31363c47ab78a5cde2031470.out
+RESTART None None None ./output/a35b6d30eb7678eae5f9e09058d8cc7dafbb8879f2dd5a81d3fa10e7ee9b36ba.out
+RESTART None None None ./output/972c523cdf3c4ec63a6635d8ec256666219b288bb500fd281a064da620e4b40a.out
+RESTART None None None ./output/b625f50b5def5c62b99c7c23391b7e64efc1ee5c2375798fe8eb473232c1b6aa.out
+</pre></div></div>
+</div>
+</section>
+<section id="Scale-scan">
+<h1>Scale scan<a class="headerlink" href="#Scale-scan" title="Permalink to this headline"></a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;wino.in&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hino.in&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">pss</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1000022</span><span class="p">,</span><span class="mi">1000022</span><span class="p">),</span>
+     <span class="p">]</span>
+<span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO_PLUS_NLL</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;PDF4LHC21_mc&quot;</span><span class="p">,</span><span class="s2">&quot;PDF4LHC21_mc&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="c1">#i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,&quot;CT14lo&quot;,&quot;CT14lo&quot;,1., 1.,model_path=model_path,id=&quot;5&quot;)</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">seven_point_scan</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+        <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">noskip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">parse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running: 7 jobs
+RESTART None None None ./output/fe497ab2506f42a4ebe99958c56c61764f813a5bd24387f9950ee0e6f77ed390.out
+RESTART None None None ./output/fdba21a290334224592298e06bc8400cc3e7194584c725b84b166555c5c91081.out
+RESTART None None None ./output/974fbefdf05dd9c0b71fa6085561260e4210fc0b5f792a0ada9637ab16c5a891.out
+RESTART None None None ./output/f3a23c0778650618c68e63613ebfb09d72615faf22e6dce50baa8a13fb136002.out
+RESTART None None None ./output/ab2c8aaefc8d24a6d81fb23c7d7fd5f7e8153e0d8ebaeb6b742a65a8da2403e5.out
+RESTART None None None ./output/94dc758487ebb02ac1b37dc6207783de826ce878585a096aec7c5dd0a03ff46e.out
+RESTART None None None ./output/9357abf1f0344236676fa5f45560764a03b380bea63dc64dd375199fc0108037.out
+Running: 7 jobs
+RESTART None None None ./output/a83b4a9ab8796248db0b78c9798b092a22e2f5904390afd8d7bf693859fa447e.out
+RESTART None None None ./output/2ae783fb6a31fcca5d01408bc9fd609354daa7b67a8d7e423ff54d56a1210924.out
+RESTART None None None ./output/8dc1e45faa60c87d5f1937d6152e712c20dbfd3c2bce735216a24fb1d9050b0f.out
+RESTART None None None ./output/a54496c7d0d5e77aee97c2e8e032278a9d1101b4299686824aa80ef3479048a7.out
+RESTART None None None ./output/81240db73da22087f57d379a1998920d58ef3056a71a7d0d82735899e60f9fd7.out
+RESTART None None None ./output/9c62620744db8acb5ce5d92cadb56c8a52963e4c3a40808de8854b350c59aed9.out
+RESTART None None None ./output/6929de6ef65f92978e5901fffcdd780b20a7888ccd8198b9a63a797fa232d0d0.out
+</pre></div></div>
+</div>
+</section>
+<section id="PDF-scan">
+<h1>PDF scan<a class="headerlink" href="#PDF-scan" title="Permalink to this headline"></a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;scenarioB.in&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">pss</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">1000011</span><span class="p">,</span><span class="o">-</span><span class="mi">1000011</span><span class="p">),</span>
+     <span class="p">]</span>
+<span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO_PLUS_NLL</span><span class="p">,</span><span class="mi">13600</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;PDF4LHC21_mc&quot;</span><span class="p">,</span><span class="s2">&quot;PDF4LHC21_mc&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="c1">#i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,&quot;CT14lo&quot;,&quot;CT14lo&quot;,1., 1.,model_path=model_path,id=&quot;5&quot;)</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">pdf_scan</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
+        <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">noskip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">run</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">parse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running: 101 jobs
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="demo_resummino.html" class="btn btn-neutral float-left" title="Resummino example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_madgraph.html" class="btn btn-neutral float-right" title="MadGraph example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, APN-Pucky.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

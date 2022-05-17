@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-18-g90ffdee
+                0.1.6-19-gb969e5f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -57,6 +57,10 @@
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_distribute.html">Single point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_distribute.html#Mass-scan">Mass scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_distribute.html#Scale-scan">Scale scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_distribute.html#PDF-scan">PDF scan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
@@ -190,6 +194,7 @@ import time
             parse=True,
             parallel=True,
             sleep=0,
+            run=True,
             **kwargs):
         &quot;&quot;&quot;
 		Run the passed list of parameters.
@@ -201,6 +206,7 @@ import time
 		        This is not the prefered cluster/parallel mode, as there the function only queues the job.
 		    parallel (bool): Run jobs in parallel.
 		    sleep (int): Sleep seconds after starting job.
+            run (bool): Actually start/queue runner.
 
 		Returns:
 		    :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
@@ -211,7 +217,12 @@ import time
         rps = self._prepare_all(params, parse=parse, skip=skip, **kwargs)
         if sleep is None:
             sleep = 0 if parse else 5
-        self._run(rps, wait=parse, parallel=parallel, sleep=sleep, **kwargs)
+        if run:
+            self._run(rps,
+                      wait=parse,
+                      parallel=parallel,
+                      sleep=sleep,
+                      **kwargs)
         if parse:
             outs = LD2DL(rps)[&quot;out_file&quot;]
             results = self.parse(outs)
@@ -373,7 +384,7 @@ import time
 
 		Args:
 		    outdir (str): new output directory.
-			create (bool): create directory if not existing
+			create (bool): create directory if not existing.
 		&quot;&quot;&quot;
         if create:
             os.makedirs(outdir, exist_ok=True)

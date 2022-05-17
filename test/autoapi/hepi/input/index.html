@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-18-g90ffdee
+                0.1.6-19-gb969e5f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -60,6 +60,10 @@
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Single point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html#Mass-scan">Mass scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html#Scale-scan">Scale scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html#PDF-scan">PDF scan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -174,7 +178,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.set_input_dir" title="hepi.input.set_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_input_dir</span></code></a>(ind)</p></td>
 <td><p>Sets the input directory.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.set_output_dir" title="hepi.input.set_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output_dir</span></code></a>(outd)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.set_output_dir" title="hepi.input.set_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output_dir</span></code></a>(outd, create: bool = True)</p></td>
 <td><p>Sets the output directory.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.set_pre" title="hepi.input.set_pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_pre</span></code></a>(ppre)</p></td>
@@ -225,16 +229,19 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.slha_write" title="hepi.input.slha_write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_write</span></code></a>(newname, d)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.mass_scan" title="hepi.input.mass_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_scan</span></code></a>(l: List[Input], var: int, rrange, diff_L_R=None) → List[Input]</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.masses_scan" title="hepi.input.masses_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">masses_scan</span></code></a>(l: List[Input], vars: List[int], rrange, diff_L_R=None) → List[Input]</p></td>
 <td><p>Scans the PDG identified mass <cite>var</cite> over <cite>rrange</cite> in the list <cite>l</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.slha_scan" title="hepi.input.slha_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan</span></code></a>(l: List[Input], block, var, rrange: List) → List[Input]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.mass_scan" title="hepi.input.mass_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_scan</span></code></a>(l: List[Input], var: int, rrange, diff_L_R=None) → List[Input]</p></td>
+<td><p>Scans the PDG identified mass <cite>var</cite> over <cite>rrange</cite> in the list <cite>l</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.slha_scan" title="hepi.input.slha_scan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan</span></code></a>(l: List[Input], block, var, rrange: List) → List[Input]</p></td>
 <td><p>Scan a generic</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.slha_scan_rel" title="hepi.input.slha_scan_rel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan_rel</span></code></a>(l: List[Input], lambdas, rrange: List) → List[Input]</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.slha_scan_rel" title="hepi.input.slha_scan_rel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_scan_rel</span></code></a>(l: List[Input], lambdas, rrange: List) → List[Input]</p></td>
 <td><p>Scan a generic slha variable.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.scan_pdf" title="hepi.input.scan_pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_pdf</span></code></a>(l: List[Input])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.scan_pdf" title="hepi.input.scan_pdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scan_pdf</span></code></a>(l: List[Input])</p></td>
 <td><p>Scans NLO PDF sets.</p></td>
 </tr>
 </tbody>
@@ -344,11 +351,12 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.input.set_output_dir">
-<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">set_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#set_output_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.set_output_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">set_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#set_output_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.set_output_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the output directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>outd</strong> (<em>str</em>) – new output directory.</p>
+<dd class="field-odd"><p><strong>outd</strong> (<em>str</em>) – new output directory.
+create (bool): create directory if not existing</p>
 </dd>
 </dl>
 </dd></dl>
@@ -673,6 +681,13 @@ Only points with <cite>mu_f`=`mu_r</cite> or <cite>mu_r/f`=1 or `mu_r/f`=`distan
 <dt class="sig sig-object py" id="hepi.input.slha_write">
 <span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">slha_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#slha_write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.slha_write" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.masses_scan">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">masses_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rrange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_L_R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/hepi/input.html#masses_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.masses_scan" title="Permalink to this definition"></a></dt>
+<dd><p>Scans the PDG identified mass <cite>var</cite> over <cite>rrange</cite> in the list <cite>l</cite>.
+<cite>diff_L_R</cite> allows to set a fixed difference between masses of left- and right-handed particles.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.input.mass_scan">

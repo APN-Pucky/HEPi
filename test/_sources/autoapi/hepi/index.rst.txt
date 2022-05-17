@@ -96,6 +96,7 @@ Functions
    hepi.change_where
    hepi.scan_invariant_mass
    hepi.slha_write
+   hepi.masses_scan
    hepi.mass_scan
    hepi.slha_scan
    hepi.slha_scan_rel
@@ -329,11 +330,12 @@ Attributes
    :type ind: str
 
 
-.. py:function:: set_output_dir(outd)
+.. py:function:: set_output_dir(outd, create: bool = True)
 
    Sets the output directory.
 
    :param outd: new output directory.
+                create (bool): create directory if not existing
    :type outd: str
 
 
@@ -627,6 +629,12 @@ Attributes
 
 
 .. py:function:: slha_write(newname, d)
+
+
+.. py:function:: masses_scan(l: List[Input], vars: List[int], rrange, diff_L_R=None) -> List[Input]
+
+   Scans the PDG identified mass `var` over `rrange` in the list `l`.
+   `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
 
 
 .. py:function:: mass_scan(l: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]
@@ -1358,27 +1366,24 @@ Attributes
    .. py:method:: _prepare_all(self, params: List[hepi.input.Input], skip=True, **kwargs) -> List[RunParam]
 
 
-   .. py:method:: run(self, params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, **kwargs)
+   .. py:method:: run(self, params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, **kwargs)
 
-      Run the passed list of parameters.
+          Run the passed list of parameters.
 
-      :param params: All parameters that should be executed/queued.
-      :type params: :obj:`list` of :class:`hepi.Input`
-      :param skip: True means stored runs will be skipped. Else the are overwritten.
-      :type skip: bool
-      :param parse: Parse the results.
-                    This is not the prefered cluster/parallel mode, as there the function only queues the job.
-      :type parse: bool
-      :param parallel: Run jobs in parallel.
-      :type parallel: bool
-      :param sleep: Sleep seconds after starting job.
-      :type sleep: int
+          Args:
+              params (:obj:`list` of :class:`hepi.Input`): All parameters that should be executed/queued.
+              skip (bool): True means stored runs will be skipped. Else the are overwritten.
+              parse (bool): Parse the results.
+                  This is not the prefered cluster/parallel mode, as there the function only queues the job.
+              parallel (bool): Run jobs in parallel.
+              sleep (int): Sleep seconds after starting job.
+      run (bool): Actually start/queue runner.
 
-      :returns:
+          Returns:
+              :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
+                  The dictionary is empty if `parse` is set to False.
 
-                combined dictionary of results and parameters. Each member therein is a list.
-                    The dictionary is empty if `parse` is set to False.
-      :rtype: :obj:`dict`
+
 
 
    .. py:method:: _run(self, rps: List[RunParam], wait=True, parallel=True, sleep=0, **kwargs)
@@ -1489,7 +1494,7 @@ Attributes
       Sets the output directory.
 
       :param outdir: new output directory.
-                     create (bool): create directory if not existing
+                     create (bool): create directory if not existing.
       :type outdir: str
 
 

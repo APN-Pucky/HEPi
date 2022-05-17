@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-18-g90ffdee
+                0.1.6-19-gb969e5f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -60,6 +60,10 @@
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Single point</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html#Mass-scan">Mass scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html#Scale-scan">Scale scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html#PDF-scan">PDF scan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -186,30 +190,31 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.Runner.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../input/index.html#hepi.input.Input" title="hepi.input.Input"><span class="pre">hepi.input.Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/run.html#Runner.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.Runner.run" title="Permalink to this definition"></a></dt>
-<dd><p>Run the passed list of parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>params</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="../index.html#id23" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – All parameters that should be executed/queued.</p></li>
-<li><p><strong>skip</strong> (<em>bool</em>) – True means stored runs will be skipped. Else the are overwritten.</p></li>
-<li><p><strong>parse</strong> (<em>bool</em>) – Parse the results.
-This is not the prefered cluster/parallel mode, as there the function only queues the job.</p></li>
-<li><p><strong>parallel</strong> (<em>bool</em>) – Run jobs in parallel.</p></li>
-<li><p><strong>sleep</strong> (<em>int</em>) – Sleep seconds after starting job.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>combined dictionary of results and parameters. Each member therein is a list.</dt><dd><p>The dictionary is empty if <cite>parse</cite> is set to False.</p>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../input/index.html#hepi.input.Input" title="hepi.input.Input"><span class="pre">hepi.input.Input</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/run.html#Runner.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.Runner.run" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Run the passed list of parameters.</p>
+<dl>
+<dt>Args:</dt><dd><p>params (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="../index.html#id23" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>): All parameters that should be executed/queued.
+skip (bool): True means stored runs will be skipped. Else the are overwritten.
+parse (bool): Parse the results.</p>
+<blockquote>
+<div><p>This is not the prefered cluster/parallel mode, as there the function only queues the job.</p>
+</div></blockquote>
+<p>parallel (bool): Run jobs in parallel.
+sleep (int): Sleep seconds after starting job.</p>
 </dd>
 </dl>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</div></blockquote>
+<p>run (bool): Actually start/queue runner.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code><span class="classifier">combined dictionary of results and parameters. Each member therein is a list.</span></dt><dd><p>The dictionary is empty if <cite>parse</cite> is set to False.</p>
 </dd>
 </dl>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -372,7 +377,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>outdir</strong> (<em>str</em>) – new output directory.
-create (bool): create directory if not existing</p>
+create (bool): create directory if not existing.</p>
 </dd>
 </dl>
 </dd></dl>
