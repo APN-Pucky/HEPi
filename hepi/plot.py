@@ -554,7 +554,7 @@ def scale_plot(dict_list,
             labels.append("$\\Delta \\sigma_{\\mathrm{" + v.replace(
                 "NLO_PLUS_NLL", "NLO+NLL").replace(" ", "\\<space>") + "} }$")
 
-    axs[0].set_ylabel("$\sigma$ [" + unit + "]" if yaxis is None else yaxis)
+    axs[0].set_ylabel("$\\sigma$ [" + unit + "]" if yaxis is None else yaxis)
 
     axs[0].set_xscale("log")
     axs[0].set_xlim(np.min(mf), np.max(mf))
@@ -635,7 +635,7 @@ def central_scale_plot(dict_list,
         axs[1].plot([], [], ' ', label="$\\mu_F=\\mu_0$, $\\mu_R=\\mu$")
         axs[2].plot([], [], ' ', label="$\\mu_R=\\mu_0$, $\\mu_F=\\mu$")
 
-    axs[1].set_ylabel("$\sigma$ [" + unit + "]" if yaxis is None else yaxis)
+    axs[1].set_ylabel("$\\sigma$ [" + unit + "]" if yaxis is None else yaxis)
 
     axs[0].set_xscale("log")
     #axs[0].set_xlim(np.min(mf), np.max(mf))
