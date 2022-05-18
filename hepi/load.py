@@ -51,3 +51,20 @@ def load(f, dimensions=1):
                 dict["data"][k]["xsec_pb"], dict["data"][k]["unc_pb"])
             dat.append(dicd)
     return LD2DL(dat, actual_dict=True)
+
+
+import urllib.request
+import hepi
+
+dl = load(urllib.request.urlopen(
+    "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
+),
+          dimensions=2)
+print(dl)
+hepi.mapplot(dl,
+             "N1",
+             "N2",
+             "NLO_PLUS_NLL",
+             xaxis="$m_{\\tilde \\chi_1^0}$",
+             yaxis="$m_{\\tilde \\chi_2^0}$")
+plot.show()
