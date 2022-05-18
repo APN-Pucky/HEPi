@@ -41,15 +41,15 @@ def energy_plot(dict_list,
                 label=None,
                 **kwargs):
     """Plot energy on the x-axis."""
-    _plot(dict_list,
-          "energy",
-          y,
-          label=label,
-          xaxis=xaxis,
-          yaxis=yaxis,
-          logy=True,
-          yscale=yscale,
-          **kwargs)
+    plot(dict_list,
+         "energy",
+         y,
+         label=label,
+         xaxis=xaxis,
+         yaxis=yaxis,
+         logy=True,
+         yscale=yscale,
+         **kwargs)
 
 
 def mass_plot(dict_list,
@@ -61,15 +61,15 @@ def mass_plot(dict_list,
               label=None,
               **kwargs):
     dict_list["mass_" + str(part)] = get_mass(dict_list, abs(part))
-    _plot(dict_list,
-          "mass_" + str(part),
-          y,
-          label=label,
-          xaxis="$m_{" + get_name(part) + "}$ [GeV]",
-          yaxis=yaxis,
-          logy=logy,
-          yscale=yscale,
-          **kwargs)
+    plot(dict_list,
+         "mass_" + str(part),
+         y,
+         label=label,
+         xaxis="$m_{" + get_name(part) + "}$ [GeV]",
+         yaxis=yaxis,
+         logy=logy,
+         yscale=yscale,
+         **kwargs)
 
 
 def mass_vplot(dict_list,
@@ -81,15 +81,15 @@ def mass_vplot(dict_list,
                label=None,
                mask=None,
                **kwargs):
-    _vplot(get_mass(dict_list, part)[mask],
-           y[mask],
-           label=label,
-           xaxis="$m_{" + get_name(part) + "}$ [GeV]",
-           yaxis=yaxis,
-           logy=logy,
-           yscale=yscale,
-           mask=mask,
-           **kwargs)
+    vplot(get_mass(dict_list, part)[mask],
+          y[mask],
+          label=label,
+          xaxis="$m_{" + get_name(part) + "}$ [GeV]",
+          yaxis=yaxis,
+          logy=logy,
+          yscale=yscale,
+          mask=mask,
+          **kwargs)
 
 
 def get_mass(l: dict, iid: int):
@@ -107,19 +107,19 @@ def get_mass(l: dict, iid: int):
     return np.array(ret)
 
 
-def _plot(dict_list,
-          x,
-          y,
-          label=None,
-          xaxis="E [GeV]",
-          yaxis="$\\sigma$ [pb]",
-          ratio=False,
-          K=False,
-          K_plus_1=False,
-          logy=True,
-          yscale=1.,
-          mask=None,
-          **kwargs) -> None:
+def plot(dict_list,
+         x,
+         y,
+         label=None,
+         xaxis="E [GeV]",
+         yaxis="$\\sigma$ [pb]",
+         ratio=False,
+         K=False,
+         K_plus_1=False,
+         logy=True,
+         yscale=1.,
+         mask=None,
+         **kwargs) -> None:
     """
     Creates a plot based on the entries `x`and `y` in `dict_list`.
     
@@ -133,12 +133,12 @@ def _plot(dict_list,
         >>> dl = hepi.load(urllib.request.urlopen(
         ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
         ... ))
-        >>> hepi._plot(dl,"N1","NLO_PLUS_NLL")
+        >>> hepi.plot(dl,"N1","NLO_PLUS_NLL")
     """
     if isinstance(y, Iterable) and not isinstance(y, str):
         for yi in y:
-            _plot(dict_list, x, yi, label, xaxis, yaxis, ratio, K, K_plus_1,
-                  logy, yscale, mask, **kwargs)
+            plot(dict_list, x, yi, label, xaxis, yaxis, ratio, K, K_plus_1,
+                 logy, yscale, mask, **kwargs)
         return
     # TODO use kwargs
     if label is None:
@@ -160,7 +160,7 @@ def _plot(dict_list,
         yscale = 1.0
         vy = vy / splot.unv(vy)
 
-    _vplot(vx, vy, label, xaxis, yaxis, logy, yscale, mask=mask, **kwargs)
+    vplot(vx, vy, label, xaxis, yaxis, logy, yscale, mask=mask, **kwargs)
 
 
 def index_open(var, idx):
@@ -181,25 +181,25 @@ def slha_plot(li, x, y, **kwargs):
     vx = slha_data(li, x)
     vy = slha_data(li, y)
 
-    _vplot(np.array(vx), np.array(vy), **kwargs)
+    vplot(np.array(vx), np.array(vy), **kwargs)
 
 
-def _vplot(x,
-           y,
-           label=None,
-           xaxis="E [GeV]",
-           yaxis="$\\sigma$ [pb]",
-           logy=True,
-           yscale=1.,
-           interpolate=True,
-           plot_data=True,
-           data_color=None,
-           mask=-1,
-           fill=False,
-           data_fmt=".",
-           fmt="-",
-           print_area=False,
-           **kwargs):
+def vplot(x,
+          y,
+          label=None,
+          xaxis="E [GeV]",
+          yaxis="$\\sigma$ [pb]",
+          logy=True,
+          yscale=1.,
+          interpolate=True,
+          plot_data=True,
+          data_color=None,
+          mask=-1,
+          fill=False,
+          data_fmt=".",
+          fmt="-",
+          print_area=False,
+          **kwargs):
     """
     Creates a plot based on the values in `x`and `y`.
     
