@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-37-gf5c342e
+                0.1.6-47-g03a4f27
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -94,7 +94,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.plot</h1><div class="highlight"><pre>
-<span></span>from sklearn.metrics import auc
+<span></span>from matplotlib.image import NonUniformImage
+from sklearn.metrics import auc
 from collections.abc import Iterable
 import matplotlib as mpl
 from smpl import plot as splot
@@ -108,7 +109,7 @@ import pyslha
 import matplotlib.cm as cm
 from matplotlib import colors
 
-from .input import Input, get_output_dir
+from .input import Input, get_output_dir, replace_macros
 from .util import get_name
 from matplotlib.ticker import NullFormatter
 
@@ -229,7 +230,7 @@ from matplotlib.ticker import NullFormatter
         &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
         ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json&quot;
         ... ))
-        &gt;&gt;&gt; hepi.plot(dl,&quot;N1&quot;,&quot;NLO_PLUS_NLL&quot;)
+        &gt;&gt;&gt; hepi.plot(dl,&quot;N1&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=r&quot;$m_{\tilde{\chi}_1^0}$&quot;)
     &quot;&quot;&quot;
     if isinstance(y, Iterable) and not isinstance(y, str):
         for yi in y:
@@ -309,7 +310,7 @@ from matplotlib.ticker import NullFormatter
         x = x[0]
         y = y[0]
     if sort:
-        permute = x.argsort()
+        permute = x.argsort(kind=&#39;stable&#39;)
         vx = x[permute]
         vy = y[permute]
     else:
@@ -415,12 +416,26 @@ from matplotlib.ticker import NullFormatter
 
 
 <div class="viewcode-block" id="mapplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mapplot">[docs]</a>def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
+    &quot;&quot;&quot;
+
+    Examples
+
+    .. plot::
+        :include-source:
+
+        &gt;&gt;&gt; import urllib.request
+        &gt;&gt;&gt; import hepi 
+        &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
+        ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;
+        ... ),dimensions=2)
+        &gt;&gt;&gt; hepi.mapplot(dl,&quot;N1&quot;,&quot;N2&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=r&#39;$m_{\tilde{\chi}_1^0}$&#39;,yaxis=r&#39;$m_{\tilde{\chi}_2^0}$&#39; , zaxis=&quot;$\sigma_{\mathrm{NLO+NLL}}$&quot;)
+    &quot;&quot;&quot;
     if xaxis is None:
         xaxis = x
     if yaxis is None:
         yaxis = y
     if zaxis is None:
-        zaxis = z
+        zaxis = replace_macros(z)
     vx = dict_list[x]
     vy = dict_list[y]
     vz = dict_list[z]
@@ -434,7 +449,29 @@ from matplotlib.ticker import NullFormatter
               yaxis=None,
               zaxis=None,
               logz=True,
+              sort=True,
+              fill_missing=True,
               zscale=1.):
+    if fill_missing:
+        for x in vx:
+            for y in vy:
+                ex = False
+                for i in range(len(vx)):
+                    if vx[i] == x and vy[i] == y:
+                        ex = True
+                if not ex:
+                    vx = np.append(vx, x)
+                    vy = np.append(vy, y)
+                    vz = np.append(vz, 0)
+    if sort:
+        p1 = vx.argsort(kind=&#39;stable&#39;)
+        tvx = vx[p1]
+        tvy = vy[p1]
+        tvz = vz[p1]
+        p2 = tvy.argsort(kind=&#39;stable&#39;)
+        vx = tvx[p2]
+        vy = tvy[p2]
+        vz = tvz[p2]
     s = 1
     while vy[s] == vy[s - 1]:
         s = s + 1
@@ -451,17 +488,19 @@ from matplotlib.ticker import NullFormatter
 
     grid = splot.unv(vz).reshape((int(np.rint(np.size(vx) / s)), s)) * zscale
     if (logz):
-        plt.imshow(grid,
-                   origin=&quot;lower&quot;,
-                   extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-                   cmap=cm.gist_heat,
-                   interpolation=&#39;nearest&#39;,
-                   norm=colors.LogNorm())
+        plt.imshow(
+            grid,
+            origin=&quot;lower&quot;,
+            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
+            cmap=&#39;viridis&#39;,
+            #cmap=cm.gist_heat,
+            interpolation=&#39;nearest&#39;,
+            norm=colors.LogNorm())
     else:
         plt.imshow(grid,
                    origin=&quot;lower&quot;,
                    extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-                   cmap=cm.gist_heat,
+                   cmap=&#39;viridis&#39;,
                    interpolation=&#39;nearest&#39;)
     cb = plt.colorbar()
     cb.set_label(zaxis)
@@ -478,7 +517,7 @@ from matplotlib.ticker import NullFormatter
 
 <div class="viewcode-block" id="err_plt"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.err_plt">[docs]</a>def err_plt(axes, x, y, label=None, error=False):
     v = label
-    ind = np.argsort(splot.unv(x))
+    ind = np.argsort(splot.unv(x), kind=&#39;stable&#39;)
     if error:
         l, _, _ = axes.errorbar(x[ind],
                                 splot.unv(y)[ind],
@@ -520,23 +559,23 @@ from matplotlib.ticker import NullFormatter
     if not cont:
         lines = []
         labels = []
-        axs[0].plot([], [], &#39; &#39;, color=&#39;k&#39;, label=&quot;$\mu_R=&quot; + &quot;\mu_F$&quot;)
+        axs[0].plot([], [], &#39; &#39;, color=&#39;k&#39;, label=&quot;$\\mu_R=&quot; + &quot;\\mu_F$&quot;)
         axs[1].plot([], [],
                     &#39; &#39;,
                     color=&#39;k&#39;,
-                    label=&quot;$\mu_R=&quot; + str(np.max(mr)) + &quot;\mu_0$&quot;)
+                    label=&quot;$\\mu_R=&quot; + str(np.max(mr)) + &quot;\\mu_0$&quot;)
         axs[2].plot([], [],
                     &#39; &#39;,
                     color=&#39;k&#39;,
-                    label=&quot;$\mu_F=&quot; + str(np.min(mf)) + &quot;\mu_0$&quot;)
+                    label=&quot;$\\mu_F=&quot; + str(np.min(mf)) + &quot;\\mu_0$&quot;)
         axs[3].plot([], [],
                     &#39; &#39;,
                     color=&#39;k&#39;,
-                    label=&quot;$\mu_R=&quot; + str(np.min(mr)) + &quot;\mu_0$&quot;)
+                    label=&quot;$\\mu_R=&quot; + str(np.min(mr)) + &quot;\\mu_0$&quot;)
         axs[4].plot([], [],
                     &#39; &#39;,
                     color=&#39;k&#39;,
-                    label=&quot;$\mu_F=&quot; + str(np.max(mf)) + &quot;\mu_0$&quot;)
+                    label=&quot;$\\mu_F=&quot; + str(np.max(mf)) + &quot;\\mu_0$&quot;)
 
     for v in vl:
         mv = dict_list[v] * yscale
@@ -611,39 +650,39 @@ from matplotlib.ticker import NullFormatter
             labels.append(&quot;$\\Delta \\sigma_{\\mathrm{&quot; + v.replace(
                 &quot;NLO_PLUS_NLL&quot;, &quot;NLO+NLL&quot;).replace(&quot; &quot;, &quot;\\&lt;space&gt;&quot;) + &quot;} }$&quot;)
 
-    axs[0].set_ylabel(&quot;$\sigma$ [&quot; + unit + &quot;]&quot; if yaxis is None else yaxis)
+    axs[0].set_ylabel(&quot;$\\sigma$ [&quot; + unit + &quot;]&quot; if yaxis is None else yaxis)
 
     axs[0].set_xscale(&quot;log&quot;)
     axs[0].set_xlim(np.min(mf), np.max(mf))
-    axs[0].set_xlabel(&quot;$\mu_{R,F}/\mu_0$&quot;)
+    axs[0].set_xlabel(&quot;$\\mu_{R,F}/\\mu_0$&quot;)
 
     # axs[1].plot(t, s2)
     axs[1].set_xscale(&quot;log&quot;)
     axs[1].set_xlim(np.max(mf), np.min(mf))
     axs[1].set_xticks([1.])
     axs[1].xaxis.set_minor_formatter(NullFormatter())
-    axs[1].set_xlabel(&quot;$\mu_{F}/\mu_0$&quot;)
+    axs[1].set_xlabel(&quot;$\\mu_{F}/\\mu_0$&quot;)
 
     # axs[2].plot(t, s3)
     axs[2].set_xscale(&quot;log&quot;)
     axs[2].set_xlim(np.max(mf), np.min(mf))
     axs[2].set_xticks([1.])
     axs[2].xaxis.set_minor_formatter(NullFormatter())
-    axs[2].set_xlabel(&quot;$\mu_{R}/\mu_0$&quot;)
+    axs[2].set_xlabel(&quot;$\\mu_{R}/\\mu_0$&quot;)
 
     # axs[3].plot(t, s3)
     axs[3].set_xscale(&quot;log&quot;)
     axs[3].set_xlim(np.min(mf), np.max(mf))
     axs[3].set_xticks([1.])
     axs[3].xaxis.set_minor_formatter(NullFormatter())
-    axs[3].set_xlabel(&quot;$\mu_{F}/\mu_0$&quot;)
+    axs[3].set_xlabel(&quot;$\\mu_{F}/\\mu_0$&quot;)
 
     # axs[4].plot(t, s3)
     axs[4].set_xscale(&quot;log&quot;)
     axs[4].set_xlim(np.min(mf), np.max(mf))
     axs[4].set_xticks([1.])
     axs[4].xaxis.set_minor_formatter(NullFormatter())
-    axs[4].set_xlabel(&quot;$\mu_{R}/\mu_0$&quot;)
+    axs[4].set_xlabel(&quot;$\\mu_{R}/\\mu_0$&quot;)
 
     axs[0].legend(handletextpad=-0.0, handlelength=0, fancybox=False)
     axs[1].legend(handletextpad=-0.0, handlelength=0, fancybox=False)
@@ -688,15 +727,15 @@ from matplotlib.ticker import NullFormatter
         l = err_plt(axs[2], mf[mask], mv[mask], error=error)
 
     if not cont:
-        axs[0].plot([], [], &#39; &#39;, label=&quot;$\mu_R=\mu_F=\mu$&quot;)
-        axs[1].plot([], [], &#39; &#39;, label=&quot;$\mu_F=\mu_0$, $\mu_R=\mu$&quot;)
-        axs[2].plot([], [], &#39; &#39;, label=&quot;$\mu_R=\mu_0$, $\mu_F=\mu$&quot;)
+        axs[0].plot([], [], &#39; &#39;, label=&quot;$\\mu_R=\\mu_F=\\mu$&quot;)
+        axs[1].plot([], [], &#39; &#39;, label=&quot;$\\mu_F=\\mu_0$, $\\mu_R=\\mu$&quot;)
+        axs[2].plot([], [], &#39; &#39;, label=&quot;$\\mu_R=\\mu_0$, $\\mu_F=\\mu$&quot;)
 
-    axs[1].set_ylabel(&quot;$\sigma$ [&quot; + unit + &quot;]&quot; if yaxis is None else yaxis)
+    axs[1].set_ylabel(&quot;$\\sigma$ [&quot; + unit + &quot;]&quot; if yaxis is None else yaxis)
 
     axs[0].set_xscale(&quot;log&quot;)
     #axs[0].set_xlim(np.min(mf), np.max(mf))
-    axs[2].set_xlabel(&quot;$\mu/\mu_0$&quot;)
+    axs[2].set_xlabel(&quot;$\\mu/\\mu_0$&quot;)
 
     axs[0].legend()
     axs[1].legend()

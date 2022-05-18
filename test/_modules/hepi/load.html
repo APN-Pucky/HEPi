@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-37-gf5c342e
+                0.1.6-47-g03a4f27
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -102,7 +102,7 @@ from hepi.input import Input, order_to_string, xsec_to_order
 from hepi.util import LD2DL
 
 
-<div class="viewcode-block" id="load"><a class="viewcode-back" href="../../autoapi/hepi/load/index.html#hepi.load">[docs]</a>def load(f, dimensions=1):
+<div class="viewcode-block" id="load"><a class="viewcode-back" href="../../autoapi/hepi/load/index.html#hepi.load.load">[docs]</a>def load(f, dimensions=1):
     &quot;&quot;&quot;
     Load xsec data from json in to something that works within hepi&#39;s plotting.
 
@@ -145,24 +145,6 @@ from hepi.util import LD2DL
                 dict[&quot;data&quot;][k][&quot;xsec_pb&quot;], dict[&quot;data&quot;][k][&quot;unc_pb&quot;])
             dat.append(dicd)
     return LD2DL(dat, actual_dict=True)</div>
-
-
-import urllib.request
-import hepi
-
-<div class="viewcode-block" id="dl"><a class="viewcode-back" href="../../autoapi/hepi/load/index.html#hepi.dl">[docs]</a>dl = load(
-    urllib.request.urlopen(
-        &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json&quot;
-    ))</div>
-print(dl)
-hepi.plot(dl, &quot;N1&quot;, &quot;NLO_PLUS_NLL&quot;)
-print(
-    load(
-        urllib.request.urlopen(
-            &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json&quot;
-        )))
-#print(load(open(&quot;/home/apn/git/xsec/json/pp13_hinosplit_N2N1_NLO+NLL.json&quot;), 2))
-#print(load(open(&quot;/home/apn/git/xsec/json/pp13_gluino_NNLO+NNLL.json&quot;), 1))
 </pre></div>
 
            </div>

@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-37-gf5c342e
+                0.1.6-47-g03a4f27
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -120,32 +120,32 @@ from smpl import io
                 &quot;$&quot; + io.gf(4).format(dl[key][mask][i]) + &quot;$ \t&amp;\t $&quot; +
                 &quot;{:.3f}&quot;.format(lo[i] * yscale) + &quot;^{+&quot; +
                 &quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRPLUS&quot;][mask][i] / lo[i] *
-                                100.) + &quot;\%}_{&quot; +
+                                100.) + &quot;\\%}_{&quot; +
                 &quot;{:.1f}&quot;.format(dl[&quot;LO_SCALE_ERRMINUS&quot;][mask][i] / lo[i] *
-                                100.) + &quot;\%}$ \t&amp;\t $&quot; +
+                                100.) + &quot;\\%}$ \t&amp;\t $&quot; +
                 &quot;{:.3f}&quot;.format(nlo[i] * yscale) + &quot;^{+&quot; +
                 &quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRPLUS&quot;][mask][i] / nlo[i] *
                                 100.) +
-                (&quot;\%+&quot; + &quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRPLUS&quot;][mask][i] /
+                (&quot;\\%+&quot; + &quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRPLUS&quot;][mask][i] /
+                                          nlo[i] * 100.) if pdf else &quot;&quot;) +
+                &quot;\\%}_{&quot; + &quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask][i] /
+                                           nlo[i] * 100.) +
+                (&quot;\\%&quot; + &quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRMINUS&quot;][mask][i] /
                                          nlo[i] * 100.) if pdf else &quot;&quot;) +
-                &quot;\%}_{&quot; + &quot;{:.1f}&quot;.format(dl[&quot;NLO_SCALE_ERRMINUS&quot;][mask][i] /
-                                          nlo[i] * 100.) +
-                (&quot;\%&quot; + &quot;{:.1f}&quot;.format(dl[&quot;NLO_PDF_ERRMINUS&quot;][mask][i] /
-                                        nlo[i] * 100.) if pdf else &quot;&quot;) +
-                &quot;\%}$ \t&amp;\t $&quot; + &quot;{:.3f}&quot;.format(nlo_plus_nll[i] * yscale) +
+                &quot;\\%}$ \t&amp;\t $&quot; + &quot;{:.3f}&quot;.format(nlo_plus_nll[i] * yscale) +
                 &quot;^{+&quot; +
                 &quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRPLUS&quot;][mask][i] /
                                 nlo_plus_nll[i] * 100.) +
-                (&quot;\%+&quot; +
+                (&quot;\\%+&quot; +
                  &quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRPLUS&quot;][mask][i] /
                                  nlo_plus_nll[i] * 100.) if pdf else &quot;&quot;) +
-                &quot;\%}_{&quot; +
+                &quot;\\%}_{&quot; +
                 &quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_SCALE_ERRMINUS&quot;][mask][i] /
                                 nlo_plus_nll[i] * 100.) +
-                (&quot;\%&quot; +
+                (&quot;\\%&quot; +
                  &quot;{:.1f}&quot;.format(dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask][i] /
                                  nlo_plus_nll[i] * 100.) if pdf else &quot;&quot;) +
-                &quot;\%}$ &quot; + &quot;\\\\\n&quot;)</div>
+                &quot;\\%}$ &quot; + &quot;\\\\\n&quot;)</div>
 
 
 <div class="viewcode-block" id="tex_table"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.tex_table">[docs]</a>tex_table = write_latex</div>
@@ -207,7 +207,7 @@ from smpl import io
                 &quot;xsec_pb&quot;: float(plot.unv(dict_list[order_to_string(o)][j]))
             }
     jd[&quot;data&quot;] = dat
-    jd[&quot;parameters&quot;] = &quot;?&quot;
+    jd[&quot;parameters&quot;] = [[parameter]]
     with open(filename, &#39;w+&#39;) as f:
         f.write(json.dumps(jd))</div>
 </pre></div>
