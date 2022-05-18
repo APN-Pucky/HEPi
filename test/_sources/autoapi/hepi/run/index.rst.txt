@@ -32,6 +32,16 @@ Classes
       List of supported Orders in this runner.
 
 
+   .. py:method:: get_name(self) -> str
+
+      Returns the name of the runner.
+
+
+   .. py:method:: _check_path(self) -> bool
+
+      Checks if the passed path is valid.
+
+
    .. py:method:: _prepare(self, p: hepi.input.Input, **kwargs) -> RunParam
 
 
