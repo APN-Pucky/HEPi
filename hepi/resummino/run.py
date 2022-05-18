@@ -20,7 +20,14 @@ class ResumminoRunner(Runner):
         return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL, Order.aNNLO_PLUS_NNLL]
 
     def _check_path(self) -> bool:
-        return os.path.exists(get_path() + "build/bin/resummino")
+        if os.path.exists(get_path() + "build/bin/resummino"):
+            self.set_path(get_path() + "build/bin/resummino")
+            return True
+        if os.path.exists(get_path() + "bin/resummino"):
+            self.set_path(get_path() + "bin/resummino")
+            return True
+        else:
+            return os.path.exists(get_path())
 
     def _check_input(self, p: Input, **kwargs) -> bool:
 
@@ -64,7 +71,7 @@ class ResumminoRunner(Runner):
             open(self.get_output_dir() + rp.name + ".in", "w").write(result)
             open(self.get_output_dir() + rp.name + ".sh",
                  "w").write("#!/bin/sh\n" + get_path() +
-                            'build/bin/resummino {} {} >> {}'.format(
+                            ' {} {} >> {}'.format(
                                 self.get_output_dir() + rp.name + ".in", flags,
                                 self.get_output_dir() + rp.name + ".out"))
             st = os.stat(self.get_output_dir() + rp.name + ".sh")

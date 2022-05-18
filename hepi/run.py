@@ -1,3 +1,4 @@
+from logging import warning
 import os
 import subprocess
 from typing import List
@@ -273,12 +274,17 @@ class Runner:
 
     def set_path(self, p: str):
         """
-		Set the path to the Runner folder containing the binary in './bin'.
+		Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
 
 		Args:
 		    p (str): new path.
 		"""
-        self.path = p + ("/" if p[-1] != "/" else "")
+        if os.path.isdir(p):
+            self.path = p + ("/" if p[-1] != "/" else "")
+        elif os.path.file(p):
+            self.path = p
+        else:
+            warnings.warn("Path: '" + p + "' not set since it does not exist")
 
     def set_input_dir(self, indir: str):
         """
