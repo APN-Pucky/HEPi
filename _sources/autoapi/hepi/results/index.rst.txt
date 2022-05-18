@@ -45,7 +45,7 @@ Attributes
 
    If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.
 
-.. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None)
+.. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -63,9 +63,13 @@ Attributes
    :vartype K_NLO: :obj:`double`
    :ivar K_NLO_PLUS_NLL: NLO+NLL divided by LO.
    :vartype K_NLO_PLUS_NLL: :obj:`double`
+   :ivar K_aNNLO_PLUS_NNLL: aNNLO+NNLL divided by LO.
+   :vartype K_aNNLO_PLUS_NNLL: :obj:`double`
    :ivar NLO_PLUS_NLL_OVER_NLO: NLO+NLL divided by NLO.
-
    :vartype NLO_PLUS_NLL_OVER_NLO: :obj:`double`
+   :ivar aNNLO_PLUS_NNLL_OVER_NLO: aNNLO+NNLL divided by NLO.
+
+   :vartype aNNLO_PLUS_NNLL_OVER_NLO: :obj:`double`
 
    Sets given and computes dependent ``Attributes``.
 
@@ -75,6 +79,8 @@ Attributes
    :type nlo: :obj:`double`
    :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
    :type nlo_plus_nll: :obj:`double`
+   :param annlo_plus_nnll: corresponds to :attr:`aNNLO_PLUS_NNLL`.
+   :type annlo_plus_nnll: :obj:`double`
 
 
 .. py:function:: pdf_error(li, dl, confidence_level=90)

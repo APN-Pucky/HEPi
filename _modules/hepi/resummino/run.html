@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6
+                0.1.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,6 +56,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -93,164 +95,59 @@
              
   <h1>Source code for hepi.resummino.run</h1><div class="highlight"><pre>
 <span></span>&quot;&quot;&quot;Runs Resummino&quot;&quot;&quot;
-import shutil
 from typing import List
-import subprocess
 from string import Template
 import warnings
 from hepi.input import Order
-from hepi.run import RunParam
-import numpy as np
+from hepi.results import Result
+from hepi.run import RunParam, Runner
 import pkgutil
 
-from hepi.util import namehash
-from .. import Input, Result, LD2DL, get_output_dir, get_input_dir, get_pre
-import re
+from .. import Input, get_output_dir
 import os.path
-from pathlib import Path
-from .result import ResumminoResult, is_valid, parse_single
-import enlighten
-import time
-import difflib
-from smpl.parallel import par
-import hashlib
-import os 
+from .result import is_valid, parse_single
+import os
 import stat
-from smpl import debug
 
 
-<div class="viewcode-block" id="resummino_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.resummino_path">[docs]</a>resummino_path:str = &quot;~/resummino/&quot;</div>
-&quot;&quot;&quot;resummino folder containing the binary in &#39;./build/bin&#39;.&quot;&quot;&quot;
+<div class="viewcode-block" id="ResumminoRunner"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner">[docs]</a>class ResumminoRunner(Runner):
 
+<div class="viewcode-block" id="ResumminoRunner.orders"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
+        return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL, Order.aNNLO_PLUS_NNLL]</div>
 
+<div class="viewcode-block" id="ResumminoRunner._check_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
+        if os.path.exists(get_path() + &quot;build/bin/resummino&quot;):
+            self.set_path(get_path() + &quot;build/bin/resummino&quot;)
+            return True
+        if os.path.exists(get_path() + &quot;bin/resummino&quot;):
+            self.set_path(get_path() + &quot;bin/resummino&quot;)
+            return True
+        return True</div>
 
-<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.set_path">[docs]</a>def set_path(p: str):
-    &quot;&quot;&quot;
-    Set the path to the resummino folder containing the binary in &#39;./build/bin&#39;.
+<div class="viewcode-block" id="ResumminoRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._check_input">[docs]</a>    def _check_input(self, p: Input, **kwargs) -&gt; bool:
 
-    Args:
-        str: new Resummino path.
-    &quot;&quot;&quot;
-    global resummino_path
-    resummino_path = p+ (&quot;/&quot; if p[-1]!=&quot;/&quot; else &quot;&quot;)</div>
+        if p.order == Order.aNNLO_PLUS_NNLL and (
+                p.has_gluino() and p.has_weakino()) or (p.has_squark()
+                                                        and p.has_weakino()):
+            warnings.warn(
+                &quot;Resummino does not support stong-weak mixed aNNLO+NNLL.&quot;)
+            return False
+        return True</div>
 
+<div class="viewcode-block" id="ResumminoRunner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d) -&gt; bool:
+        if not super()._is_valid(file, p, d):
+            return False
+        return is_valid(file, p, d)</div>
 
-<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.get_path">[docs]</a>def get_path() -&gt; str:
-    &quot;&quot;&quot;
-    Get Resummino path.
+<div class="viewcode-block" id="ResumminoRunner._parse_file"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
+        return parse_single(file)</div>
 
-    Returns: 
-        str: current Resummino path
-    &quot;&quot;&quot;
-    global resummino_path
-    return resummino_path</div>
-
-
-<div class="viewcode-block" id="ResumminoRunParam"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunParam">[docs]</a>class ResumminoRunParam(RunParam):
-    &quot;&quot;&quot;
-    Parameters for running Resummino.
-
-    Attributes:
-        skip (bool): Skip already performed and stored runs.
-        flags (str): Additional resummino flags. E.g. &#39;--nlo&#39;.
-        in_path (str): File path of the input file.
-        out_path (str): File path of the output file.
-    &quot;&quot;&quot;
-    def __init__(self, flags: str, in_path: str, out_path: str, skip=False):
-        super().__init__(skip)
-        #self.skip = skip
-        self.flags = flags
-        self.in_path = in_path
-        self.out_path = out_path</div>
-
-
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.run">[docs]</a>def run(params: List[Input], noskip=False, bar=False, no_parse=False,para=True,skip=True,parse=True,run=True) -&gt; dict:
-    &quot;&quot;&quot;
-    Run the passed list of parameters.
-
-    Args:
-        params (:obj:`list` of :class:`hepi.Input`): All parameters that should be executed/queued.
-        noskip (bool): False means stored runs will be skipped. Else the are overwritten.
-        bar (bool): Display a progressbar.
-        no_parse (bool): Skip parsing the results. 
-            This is the prefered cluster mode, as this function only queues the job.
-        para (bool): Run jobs in parallel.
-        run (bool): Actually start/queue resummino.
-
-    Returns:
-        :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
-            The dictionary is empty if `no_parse` is set.
-
-    &quot;&quot;&quot;
-    if noskip == skip:
-        noskip = True
-    if no_parse== parse:
-        no_parse= True
-    print(&quot;Running: &quot; + str(len(params))  +&quot; jobs&quot; )
-    rps = _queue(params, noskip)
-    if run:
-        _run(rps, bar, no_parse,para)
-    if not no_parse:
-        outs = LD2DL(rps)[&quot;out_path&quot;]
-        results = _parse(outs)
-        rdl = LD2DL(results)
-        pdl = LD2DL(params)
-        return {**rdl, **pdl}
-    return {}</div>
-
-
-<div class="viewcode-block" id="_parse"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._parse">[docs]</a>def _parse(outputs: List[str]) -&gt; List[ResumminoResult]:
-    &quot;&quot;&quot;
-    Parses Resummino output files and returns List of Results.
-
-    Args:
-        outputs (:obj:`list` of `str`): List of the filenames to be parsed.
-
-    Returns:
-        :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
-
-    &quot;&quot;&quot;
-    rsl = []
-    for r in par(parse_single, outputs):
-        rsl.append(r)
-    return rsl</div>
-
-
-
-<div class="viewcode-block" id="_queue"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._queue">[docs]</a>def _queue(params: List[Input], noskip=False) -&gt; List[ResumminoRunParam]:
-    &quot;&quot;&quot;
-    Queues and generates Resummino run files.
-
-    Extends params by input and output files.
-
-    Args:
-        params (:obj:`list` of :class:`hepi.Input`): input parameters
-        noskip (bool): False means stored runs will be skipped. Else the are overwritten.
-
-    Returns:
-        :obj:`list` of :class:`hepi.RunParams`: Run paramters for usage with :meth:`_run`.
-
-    &quot;&quot;&quot;
-    global resummino_path
-    Path(&quot;output&quot;).mkdir(parents=True, exist_ok=True)
-    Path(&quot;input&quot;).mkdir(parents=True, exist_ok=True)
-    ret = []
-    for p in params:
-        d = p.__dict__
-        d[&quot;code&quot;] = &quot;RS&quot;
-        # TODO insert defautl if missing in d!
-        name = namehash(&quot;_&quot;.join(&quot;&quot;.join(str(_[0]) + &quot;_&quot; + str(_[1]))
-                        for _ in d.items()).replace(&quot;/&quot;, &quot;-&quot;))
-        debug.msg(name)
-        skip = False
-        if not noskip and os.path.isfile(get_output_dir() + name + &quot;.out&quot;) and is_valid(get_output_dir() + name + &quot;.out&quot;,p,d):
-            print(&quot;skip&quot;, end=&#39;&#39;)
-            skip = True
-        flags = &quot;&quot;
-        if not skip:
-            data = pkgutil.get_data(__name__, &quot;plot_template.in&quot;).decode(
-                &#39;utf-8&#39;)
-            
+<div class="viewcode-block" id="ResumminoRunner._prepare"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
+        rp = super()._prepare(p, **kwargs)
+        if not rp.skip:
+            data = pkgutil.get_data(__name__,
+                                    &quot;plot_template.in&quot;).decode(&#39;utf-8&#39;)
+            flags = &quot;&quot;
             if p.order == Order.LO:
                 flags = flags + &quot;--lo&quot;
             elif p.order == Order.NLO:
@@ -260,128 +157,36 @@ from smpl import debug
             elif p.order == Order.aNNLO_PLUS_NNLL:
                 flags = flags + &quot;--nnll&quot;
             else:
-                raise ValueError(&quot;Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.&quot;)
+                raise ValueError(
+                    &quot;Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.&quot;
+                )
 
             src = Template(data)
-            result = src.substitute(d)
-            open(get_output_dir() + name + &quot;.in&quot;, &quot;w&quot;).write(result)
-            open(get_output_dir() + name + &quot;.sh&quot;, &quot;w&quot;).write(&quot;#!/bin/sh\n&quot;+
-                resummino_path + &#39;build/bin/resummino {} {} &gt;&gt; {}&#39;.format(
-                    get_output_dir()+name + &quot;.in&quot;,flags,get_output_dir()+name + &quot;.out&quot;
-                ))
-            st = os.stat(get_output_dir() + name + &quot;.sh&quot;)
-            os.chmod(get_output_dir() + name + &quot;.sh&quot;, st.st_mode | stat.S_IEXEC)
-            open(get_output_dir() + name + &quot;.out&quot;, &quot;w&quot;).write(result + &quot;\n\n&quot;)
+            result = src.substitute(p.__dict__)
+            open(self.get_output_dir() + rp.name + &quot;.in&quot;, &quot;w&quot;).write(result)
+            open(self.get_output_dir() + rp.name + &quot;.sh&quot;,
+                 &quot;w&quot;).write(&quot;#!/bin/sh\n&quot; + get_path() + &#39; {} {} &gt;&gt; {}&#39;.format(
+                     self.get_output_dir() + rp.name + &quot;.in&quot;, flags,
+                     self.get_output_dir() + rp.name + &quot;.out&quot;))
+            st = os.stat(self.get_output_dir() + rp.name + &quot;.sh&quot;)
+            os.chmod(self.get_output_dir() + rp.name + &quot;.sh&quot;,
+                     st.st_mode | stat.S_IEXEC)
+            open(self.get_output_dir() + rp.name + &quot;.out&quot;,
+                 &quot;w&quot;).write(result + &quot;\n\n&quot;)
 
-            sname = d[&#39;slha&#39;]
-            with open(get_output_dir() + sname, &#39;r&#39;) as f:
-                #src = Template(f.read())
-                #result = src.substitute(d)
-                #open(get_input_dir() + sname + &quot;.in&quot;, &quot;w&quot;).write(result)
-                open(get_output_dir() + name + &quot;.out&quot;,
+            sname = p.slha
+            with open(self.get_output_dir() + sname, &#39;r&#39;) as f:
+                open(self.get_output_dir() + rp.name + &quot;.out&quot;,
                      &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
-
-        ret.append(ResumminoRunParam(flags, get_output_dir()+name + &quot;.in&quot;, get_output_dir()+name + &quot;.out&quot;, skip))
-
-    return ret</div>
+        return rp</div></div>
 
 
-<div class="viewcode-block" id="_run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino._run">[docs]</a>def _run(rps: List[ResumminoRunParam], bar=True, no_parse=False,para=True):
-    &quot;&quot;&quot;
-    Runs Resummino per :class:`RunParams`.
-
-    Args:
-        rps (:obj:`list` of :class:`RunParams`):  Extended run parameters.
-        bar (bool): Enable info bar.
-        no_parse (bool): Do not wait for parallel runs to finish.
-        para (bool): Run jobs in parallel.
-
-    Returns:
-        :obj:`list` of int: return codes from jobs if `no_parse` is False.
-    &quot;&quot;&quot;
-    # TODO clean up on exit emergency
-    global resummino_path
-    # TODO RS build path checks?!?!
-    template = get_pre() + &quot; &quot; +  &quot;{}&quot;
-
-    # Run commands in parallel
-    processes = []
-    processesrpo = {}
-    processesbar = {}
-    manager = enlighten.get_manager()
-    status_format = &#39;{program}{fill} Stage: {stage}{fill} Status {status}:{fill}{lastline}&#39;
-    main_format = &#39;{program}&#39;
-    mp = &quot;&quot;
-    if bar:
-        mp = rps[0].out_path
-        main_bar = manager.status_bar(status_format=main_format,
-                                      program=mp)
-        mp = rps[1].out_path
-
-    for rp in rps:
-        if not rp.skip:
-            command = template.format(rp.in_path.replace(&quot;.in&quot;,&quot;.sh&quot;))
-            process = subprocess.Popen(command, shell=True)
-            processes.append(process)
-            processesrpo[process] = rp.out_path
-            if not para:
-                process.wait()
-            if no_parse:
-                time.sleep(5)
-            if bar:
-                nnn = &quot;&quot;
-                nn = &quot;&quot;
-                ch = False
-                for i, s in enumerate(difflib.ndiff(mp+&quot;_&quot;, rp.out_path+&quot;_&quot;)):
-                    if s[-1] == &quot;_&quot;:
-                        if ch:
-                            nnn = nnn + &quot; ... &quot; + nn
-                        ch = False
-                        nn = &quot;&quot;
-                    if s[0] == &#39;+&#39;:
-                        ch = True
-                    if (s[0] == &#39;+&#39; or s[0] == &#39; &#39;) and s[-1] != &quot;_&quot;:
-                        nn = nn + s[-1]
-                processesbar[process] = manager.status_bar(status_format=status_format,
-                                                           program=nnn,
-                                                           stage=&#39;INIT&#39;,
-                                                           status=&#39;OKAY&#39;,
-                                                           lastline=&quot;0&quot;)
-        mp = rps[0].out_path
-    if bar:
-        c = True
-        while c:
-            if len(processes) &gt; 0:
-                time.sleep(10)
-            c = False
-            for p in processes:
-                if p.poll() is None:
-                    c = True
-                    pat = re.compile(r&#39;^\* (.*) \*&#39;)
-                    n = &quot;&quot;
-                    cl = 0
-                    with open(processesrpo[p], mode=&quot;r&quot;) as f:
-                        for l in f:
-                            tmp = pat.search(l)
-                            if(tmp is not None):
-                                n = tmp.group(1)
-                                cl = 0
-                            cl = cl+1
-
-                    processesbar[p].update(
-                        stage=n, status=cl, lastline=l[int(len(l)/2)::])
-                else:
-                    processesbar[p].update(
-                        stage=&quot;DONE&quot;, status=&#39;DONE&#39;, lastline=&quot;&quot;)
-        for p in processes:
-            processesbar[p].close()
-        main_bar.close()
-
-    if not no_parse:
-        # Collect statuses
-        output = [p.wait() for p in processes]
-        return output
-    return []</div>
+# Legacy
+<div class="viewcode-block" id="default_resummino_runner"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.default_resummino_runner">[docs]</a>default_resummino_runner = ResumminoRunner(&quot;~/resummino/&quot;)</div>
+&quot;&quot;&quot;Default Resummino Runner to provide backward compatibility&quot;&quot;&quot;
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.run">[docs]</a>run = default_resummino_runner.run</div>
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.set_path">[docs]</a>set_path = default_resummino_runner.set_path</div>
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.get_path">[docs]</a>get_path = default_resummino_runner.get_path</div>
 </pre></div>
 
            </div>

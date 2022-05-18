@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6
+                0.1.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -56,6 +56,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
@@ -92,18 +94,14 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.cluster</h1><div class="highlight"><pre>
-<span></span>import hepi
-import smpl
-import hepi.resummino as rs
+<span></span>import hepi.resummino as rs
 import hepi.input as input
 #import hepi
-import numpy as np
 import matplotlib.pyplot as plt
 import subprocess
 import time
 import os
 import sys
-from smpl import plot
 
 <div class="viewcode-block" id="user"><a class="viewcode-back" href="../../autoapi/hepi/cluster/index.html#hepi.cluster.user">[docs]</a>user = &quot;a_neuw01&quot;</div>
 plt.rcParams.update({&#39;font.size&#39;: 15})
@@ -113,29 +111,30 @@ plt.rc(&#39;legend&#39;, fontsize=12)
 <div class="viewcode-block" id="get_job_name"><a class="viewcode-back" href="../../autoapi/hepi/cluster/index.html#hepi.cluster.get_job_name">[docs]</a>def get_job_name() -&gt; str:
     return os.path.basename(sys.argv[0])</div>
 
+
 <div class="viewcode-block" id="wait"><a class="viewcode-back" href="../../autoapi/hepi/cluster/index.html#hepi.cluster.wait">[docs]</a>def wait():
     output = &quot;\n\n\n&quot;
-    while(len(output.split(&#39;\n&#39;)) &gt; 2):
-        bashCommand = &quot;squeue -u &quot; + user + &quot; --name=&quot; + get_job_name() 
+    while (len(output.split(&#39;\n&#39;)) &gt; 2):
+        bashCommand = &quot;squeue -u &quot; + user + &quot; --name=&quot; + get_job_name()
         if output != &quot;\n\n\n&quot;:
             #print(bashCommand , &quot; -&gt; &quot;, output)
             time.sleep(60)
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
-        output=output.decode()</div>
+        output = output.decode()</div>
 
 
-rs.set_path(&quot;/home/a/&quot;+user+&quot;/git/resummino/&quot;)
-input.set_output_dir(&quot;/scratch/tmp/&quot;+user+&quot;/hepi/&quot;)
-input.set_input_dir(&quot;/home/a/&quot;+user+&quot;/input/&quot;)
+rs.set_path(&quot;/home/a/&quot; + user + &quot;/git/resummino/&quot;)
+input.set_output_dir(&quot;/scratch/tmp/&quot; + user + &quot;/hepi/&quot;)
+input.set_input_dir(&quot;/home/a/&quot; + user + &quot;/input/&quot;)
 # Only mail on fail by default
-input.set_pre(&quot;while [[ $(squeue -u &quot; + user+ &quot; | wc -l) -gt 1990 ]]; do sleep 60; done &amp;&amp; sbatch --job-name=&quot; +get_job_name() +
-&quot; --ntasks-per-node 1 --cpus-per-task 1  --time=3-00:00:00 --mem=100M --partition normal&quot; +
-&quot; --mail-type=FAIL --mail-user=&quot;+user+&quot;@uni-muenster.de&quot;)
+input.set_pre(
+    &quot;while [[ $(squeue -u &quot; + user +
+    &quot; | wc -l) -gt 1990 ]]; do sleep 60; done &amp;&amp; sbatch --job-name=&quot; +
+    get_job_name() +
+    &quot; --ntasks-per-node 1 --cpus-per-task 1  --time=3-00:00:00 --mem=100M --partition normal&quot;
+    + &quot; --mail-type=FAIL --mail-user=&quot; + user + &quot;@uni-muenster.de&quot;)
 print(rs.get_path())
-
-
-
 </pre></div>
 
            </div>

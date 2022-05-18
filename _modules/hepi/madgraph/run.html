@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6
+                0.1.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,6 +56,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -93,56 +95,61 @@
              
   <h1>Source code for hepi.madgraph.run</h1><div class="highlight"><pre>
 <span></span>&quot;&quot;&quot;Runs MadGraph&quot;&quot;&quot;
-import shutil
 from typing import List
 import subprocess
 from string import Template
-import warnings
 from hepi.input import Order
 from hepi.run import RunParam, Runner
-import numpy as np
 import pkgutil
-from .. import Input, Result, LD2DL, get_output_dir, get_input_dir
-import re
-import os.path
-from pathlib import Path
-from .result import MadgraphResult, is_valid, parse_single
+from .. import Input, Result, get_output_dir
+from .result import is_valid, parse_single
 import time
-import difflib
-from smpl.parallel import par
-import hashlib
 
-<div class="viewcode-block" id="MadGraphRunParams"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunParams">[docs]</a>class MadGraphRunParams(RunParam):    
+
+<div class="viewcode-block" id="MadGraphRunParams"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunParams">[docs]</a>class MadGraphRunParams(RunParam):
     &quot;&quot;&quot;
     Parameters for MadGraph.
     &quot;&quot;&quot;
-    def __init__(self, dic,  skip=False,madstr=True):
+
+    def __init__(self, dic, skip=False, madstr=True):
         super().__init__(skip)
         self.dic = dic
         # self.skip = skip
         self.madstr = madstr</div>
 
+
 <div class="viewcode-block" id="MadGraphRunner"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner">[docs]</a>class MadGraphRunner(Runner):
-<div class="viewcode-block" id="MadGraphRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._check_input">[docs]</a>    def _check_input(self,p: Input)-&gt; bool:
+
+<div class="viewcode-block" id="MadGraphRunner.orders"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
+        return [Order.LO, Order.NLO]</div>
+
+<div class="viewcode-block" id="MadGraphRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._check_input">[docs]</a>    def _check_input(self, p: Input, **kwargs) -&gt; bool:
         &quot;&quot;&quot;Checks input parameter for compatibility with Prospino&quot;&quot;&quot;
-        if p.order != Order.LO and p.order != Order.NLO:
-            warnings.warn(&quot;MadGraph does only support LO/NLO.&quot;)
-            return False
         return True</div>
+
 <div class="viewcode-block" id="MadGraphRunner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d) -&gt; bool:
-        return is_valid(file,p,d)</div>
+        if not super()._is_valid(file, p, d):
+            return False
+        return is_valid(file, p, d)</div>
+
 <div class="viewcode-block" id="MadGraphRunner._parse_file"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
         return parse_single(file)</div>
-<div class="viewcode-block" id="MadGraphRunner._run"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._run">[docs]</a>    def _run(self,rps: List[RunParam], wait=True,parallel=True,sleep=0,**kwargs):
+
+<div class="viewcode-block" id="MadGraphRunner._run"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._run">[docs]</a>    def _run(self,
+             rps: List[RunParam],
+             wait=True,
+             parallel=True,
+             sleep=0,
+             **kwargs):
         # TODO clean up on exit emergency
-        global madgraph_path
         skipall = True
         for rp in rps:
             if not rp.skip:
                 skipall = False
         template = &quot;&quot;
         if not skipall:
-            lo = &quot;&amp;&amp; nice -n 5 {dir}/bin/calculate_xsect LO -f &gt;&gt; {out} &quot; if rps[0].dic[&quot;order&quot;] == Order.NLO else &quot;&quot;
+            lo = &quot;&amp;&amp; nice -n 5 {dir}/bin/calculate_xsect LO -f &gt;&gt; {out} &quot; if rps[
+                0].dic[&quot;order&quot;] == Order.NLO else &quot;&quot;
             template =  \
                 &#39;rm -rf {dir} &amp;&amp; cp -r &#39; + rps[0].dic[&quot;bdir&quot;] + \
                 &#39; {dir}  &amp;&amp; cp {slha} {dir}/Cards/param_card.dat &amp;&amp; cp {run} {dir}/Cards/run_card.dat &amp;&amp; echo &quot;nb_core = 1&quot; &gt;&gt; {dir}/Cards/amcatnlo_configuration.txt &#39; + lo+ &#39;&amp;&amp; nice -n 5 {dir}/bin/calculate_xsect -f &gt;&gt; {out}  &amp;&amp; rm -rf {dir}&#39;
@@ -151,7 +158,7 @@ import hashlib
             mgcom = &#39;bin/mg5_aMC&#39;
             if rps[0].madstr:
                 mgcom = &#39;bin/mg5_aMC --mode=&quot;MadSTR&quot;&#39;
-            com = madgraph_path + mgcom + \
+            com = self.get_path() + mgcom + \
                 &#39; --file {in} &gt;&gt; {out} &amp;&amp; cp {slha} {bdir}/Cards/param_card.dat &amp;&amp; cp {run} {bdir}/Cards/run_card.dat &amp;&amp; sed -i \&#39;s/.*= req_acc_FO/ 1 = req_acc_FO/g\&#39; {bdir}/Cards/run_card.dat &amp;&amp; echo &quot;automatic_html_opening = False&quot; &gt;&gt; {bdir}/Cards/amcatnlo_configuration.txt &amp;&amp; nice -n 5 {bdir}/bin/calculate_xsect -f&#39;
             pp = subprocess.Popen(com.format(**rps[0].dic), shell=True)
             pp.wait()
@@ -175,27 +182,28 @@ import hashlib
         return []</div>
 
 <div class="viewcode-block" id="MadGraphRunner._prepare"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
-        rp = super()._prepare(p,**kwargs)
+        rp = super()._prepare(p, **kwargs)
         name = rp.name
         if not rp.skip:
-            d= p.__dict__
+            d = p.__dict__
             d[&quot;dir&quot;] = get_output_dir() + name + &quot;.dir&quot;
             d[&quot;bdir&quot;] = get_output_dir() + name + &quot;.bdir&quot;
 
             infile = &quot;&quot;
             if p.order is Order.LO:
-                infile =&quot;lo.mg&quot;
+                infile = &quot;lo.mg&quot;
             elif p.order is Order.NLO:
-                infile =&quot;nlo.mg&quot;
+                infile = &quot;nlo.mg&quot;
             else:
                 raise ValueError(&quot;Madgraph only supported for LO/NLO.&quot;)
 
-            data = pkgutil.get_data(__name__, infile).decode( &#39;utf-8&#39;)
+            data = pkgutil.get_data(__name__, infile).decode(&#39;utf-8&#39;)
             src = Template(data)
             result = src.substitute(d)
             open(get_output_dir() + name + &quot;.mg&quot;, &quot;w&quot;).write(result)
             if not rp.skip:
-                open(get_output_dir() + name + &quot;.out&quot;, &quot;w&quot;).write(result + &quot;\n\n&quot;)
+                open(get_output_dir() + name + &quot;.out&quot;,
+                     &quot;w&quot;).write(result + &quot;\n\n&quot;)
 
             if p.order == Order.LO:
                 mgfile = &quot;run_card_no_madstr.dat&quot;
@@ -204,19 +212,19 @@ import hashlib
             else:
                 raise ValueError(&quot;Order must be one of LO/NLO in MadGraph.&quot;)
 
-
             if &quot;madstr&quot; in kwargs and not kwargs[&quot;madstr&quot;]:
                 mgfile = &quot;run_card_no_madstr.dat&quot;
                 rp.madstr = False
             else:
                 rp.madstr = True
-            data = pkgutil.get_data(__name__, mgfile).decode( &#39;utf-8&#39;)
+            data = pkgutil.get_data(__name__, mgfile).decode(&#39;utf-8&#39;)
 
             src = Template(data)
             result = src.substitute(d)
             open(get_output_dir() + name + &quot;.dat&quot;, &quot;w&quot;).write(result)
             if not rp.skip:
-                open(get_output_dir() + name + &quot;.out&quot;, &quot;a&quot;).write(result + &quot;\n\n&quot;)
+                open(get_output_dir() + name + &quot;.out&quot;,
+                     &quot;a&quot;).write(result + &quot;\n\n&quot;)
 
             sname = d[&#39;slha&#39;]
             with open(get_output_dir() + sname, &#39;r&#39;) as f:
@@ -226,18 +234,20 @@ import hashlib
                 if not rp.skip:
                     open(get_output_dir() + name + &quot;.out&quot;,
                          &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
-            rp.dic = {&#39;in&#39;: get_output_dir()+name + &quot;.mg&quot;,
-                              &#39;dir&#39;: d[&quot;dir&quot;],
-                              &#39;bdir&#39;: d[&quot;bdir&quot;],
-                              &#39;run&#39;: get_output_dir() + name + &quot;.dat&quot;,
-                              &#39;slha&#39;: get_output_dir() + sname,
-                              &#39;out&#39;: get_output_dir()+name + &quot;.out&quot;,
-                              &#39;order&#39; : p.order}
+            rp.dic = {
+                &#39;in&#39;: get_output_dir() + name + &quot;.mg&quot;,
+                &#39;dir&#39;: d[&quot;dir&quot;],
+                &#39;bdir&#39;: d[&quot;bdir&quot;],
+                &#39;run&#39;: get_output_dir() + name + &quot;.dat&quot;,
+                &#39;slha&#39;: get_output_dir() + sname,
+                &#39;out&#39;: get_output_dir() + name + &quot;.out&quot;,
+                &#39;order&#39;: p.order
+            }
             rp.out_file = rp.dic[&#39;out&#39;]
         return rp</div></div>
 
 
-# Legacy 
+# Legacy
 <div class="viewcode-block" id="default_madgraph_runner"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.default_madgraph_runner">[docs]</a>default_madgraph_runner = MadGraphRunner(&quot;/opt/MG5_aMC_v2_7_0/&quot;)</div>
 &quot;&quot;&quot;Default MadGraph Runner to provide backward compatibility&quot;&quot;&quot;
 <div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.run">[docs]</a>run = default_madgraph_runner.run</div>

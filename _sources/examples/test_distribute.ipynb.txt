@@ -1,0 +1,263 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "6bf5b861",
+   "metadata": {},
+   "source": [
+    "# Distribute resummino run files to clusters\n",
+    "\n",
+    "After running this example one only needs to run the generated output/\\*.sh files or queue them to your favourite cluster:\n",
+    "\n",
+    "```sh\n",
+    "$ ./output/*.sh\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "6c1a697f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0.1.4.28+dirty\n",
+      "~/git/resummino/\n"
+     ]
+    }
+   ],
+   "source": [
+    "import hepi\n",
+    "print(hepi.__version__)\n",
+    "import smpl\n",
+    "import numpy as np\n",
+    "import hepi.resummino as rs\n",
+    "import hepi.util as util\n",
+    "import matplotlib.pyplot as plt\n",
+    "rs.set_path(\"~/git/resummino\")\n",
+    "print (rs.get_path())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "35928a1a",
+   "metadata": {},
+   "source": [
+    "## Single point"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "f8611906",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Running: 1 jobs\n",
+      "RESTART None None None ./output/b961f87398318a753d6877b7bc41860014d39418ff8f9103d3ac7299a823e7e5.out\n",
+      "Running: 1 jobs\n",
+      "RESTART None None None ./output/3c61d60948d6bb02fc05a4e857e668171c247958624c3c0dbe872e848f2b7000.out\n",
+      "Running: 1 jobs\n",
+      "RESTART None None None ./output/31ef23f79e10ff50d0dcd4a71f2df9b409c22bb210869d139952edfe0d3215e9.out\n",
+      "Running: 1 jobs\n",
+      "RESTART None None None ./output/086a5e6f74677e9101881b8a9f6b0b8c452310ceb102bf7b941a0369c01ac7bf.out\n"
+     ]
+    }
+   ],
+   "source": [
+    "params = [\n",
+    "    \"slha.in\",\n",
+    "]\n",
+    "pss = [\n",
+    "    (1000023,1000024),\n",
+    "    (1000024,-1000024),\n",
+    "    (1000023,1000022),\n",
+    "    (1000002,1000022),\n",
+    "     ]\n",
+    "for pa,pb in pss:\n",
+    "    for param in params:\n",
+    "        i = hepi.Input(hepi.Order.NLO_PLUS_NLL,13000,pa,pb,param,\"PDF4LHC21_mc\",\"PDF4LHC21_mc\",1., 1.,id=\"0\")\n",
+    "        #i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,\"CT14lo\",\"CT14lo\",1., 1.,model_path=model_path,id=\"5\")\n",
+    "        li = [i]\n",
+    "        rs_dl = rs.run(li,noskip=False,run=False,parse=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "234755a8",
+   "metadata": {},
+   "source": [
+    "## Mass scan"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "e423f880",
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Running: 9 jobs\n",
+      "RESTART None None None ./output/4bb70513d182bfd9166009c7629547997ddb69645082620dd7fef27fd22274d0.out\n",
+      "RESTART None None None ./output/061cc97365576ff137f4f3c5d1f779f5062296401e7173c779cb5767e9596850.out\n",
+      "RESTART None None None ./output/063bfb7d7c05793201cb3200ff8c60b1e4d814cf7ce6fc9bd08bde07100c3ebb.out\n",
+      "RESTART None None None ./output/2a260536e188f13e6d734bce7f0d3a592bf193e40d079627b5a6bf21732e18b5.out\n",
+      "RESTART None None None ./output/6d436042ce35991fdd665cc1b5052439a78e11ebee862a1c38cb5514ae164347.out\n",
+      "RESTART None None None ./output/e926d3664adb9d3a9f68c59c9e04ce3040eceb9c31363c47ab78a5cde2031470.out\n",
+      "RESTART None None None ./output/a35b6d30eb7678eae5f9e09058d8cc7dafbb8879f2dd5a81d3fa10e7ee9b36ba.out\n",
+      "RESTART None None None ./output/972c523cdf3c4ec63a6635d8ec256666219b288bb500fd281a064da620e4b40a.out\n",
+      "RESTART None None None ./output/b625f50b5def5c62b99c7c23391b7e64efc1ee5c2375798fe8eb473232c1b6aa.out\n"
+     ]
+    }
+   ],
+   "source": [
+    "params = [\n",
+    "    \"slha.in\",\n",
+    "]\n",
+    "pss = [\n",
+    "    (1000011,-1000011),\n",
+    "     ]\n",
+    "for pa,pb in pss:\n",
+    "    for param in params:\n",
+    "        i = hepi.Input(hepi.Order.NLO_PLUS_NLL,13000,pa,pb,param,\"PDF4LHC21_mc\",\"PDF4LHC21_mc\",1., 1.,id=\"0\")\n",
+    "        #i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,\"CT14lo\",\"CT14lo\",1., 1.,model_path=model_path,id=\"5\")\n",
+    "        li = [i]\n",
+    "        li = hepi.mass_scan([i],pa, np.linspace(1000,2000,9))\n",
+    "        rs_dl = rs.run(li,noskip=False,run=False,parse=False)\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1ab31979",
+   "metadata": {},
+   "source": [
+    "## Scale scan"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "de19c4fa",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Running: 7 jobs\n",
+      "RESTART None None None ./output/fe497ab2506f42a4ebe99958c56c61764f813a5bd24387f9950ee0e6f77ed390.out\n",
+      "RESTART None None None ./output/fdba21a290334224592298e06bc8400cc3e7194584c725b84b166555c5c91081.out\n",
+      "RESTART None None None ./output/974fbefdf05dd9c0b71fa6085561260e4210fc0b5f792a0ada9637ab16c5a891.out\n",
+      "RESTART None None None ./output/f3a23c0778650618c68e63613ebfb09d72615faf22e6dce50baa8a13fb136002.out\n",
+      "RESTART None None None ./output/ab2c8aaefc8d24a6d81fb23c7d7fd5f7e8153e0d8ebaeb6b742a65a8da2403e5.out\n",
+      "RESTART None None None ./output/94dc758487ebb02ac1b37dc6207783de826ce878585a096aec7c5dd0a03ff46e.out\n",
+      "RESTART None None None ./output/9357abf1f0344236676fa5f45560764a03b380bea63dc64dd375199fc0108037.out\n",
+      "Running: 7 jobs\n",
+      "RESTART None None None ./output/a83b4a9ab8796248db0b78c9798b092a22e2f5904390afd8d7bf693859fa447e.out\n",
+      "RESTART None None None ./output/2ae783fb6a31fcca5d01408bc9fd609354daa7b67a8d7e423ff54d56a1210924.out\n",
+      "RESTART None None None ./output/8dc1e45faa60c87d5f1937d6152e712c20dbfd3c2bce735216a24fb1d9050b0f.out\n",
+      "RESTART None None None ./output/a54496c7d0d5e77aee97c2e8e032278a9d1101b4299686824aa80ef3479048a7.out\n",
+      "RESTART None None None ./output/81240db73da22087f57d379a1998920d58ef3056a71a7d0d82735899e60f9fd7.out\n",
+      "RESTART None None None ./output/9c62620744db8acb5ce5d92cadb56c8a52963e4c3a40808de8854b350c59aed9.out\n",
+      "RESTART None None None ./output/6929de6ef65f92978e5901fffcdd780b20a7888ccd8198b9a63a797fa232d0d0.out\n"
+     ]
+    }
+   ],
+   "source": [
+    "params = [\n",
+    "    \"wino.in\",\n",
+    "    \"hino.in\",\n",
+    "]\n",
+    "pss = [\n",
+    "    (1000022,1000022),\n",
+    "     ]\n",
+    "for pa,pb in pss:\n",
+    "    for param in params:\n",
+    "        i = hepi.Input(hepi.Order.NLO_PLUS_NLL,13000,pa,pb,param,\"PDF4LHC21_mc\",\"PDF4LHC21_mc\",1., 1.,id=\"0\")\n",
+    "        #i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,\"CT14lo\",\"CT14lo\",1., 1.,model_path=model_path,id=\"5\")\n",
+    "        li = [i]\n",
+    "        li = hepi.seven_point_scan(li)\n",
+    "        rs_dl = rs.run(li,noskip=False,run=False,parse=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7a3ef80d",
+   "metadata": {},
+   "source": [
+    "## PDF scan"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "484741b8",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Running: 101 jobs\n"
+     ]
+    }
+   ],
+   "source": [
+    "params = [\n",
+    "    \"scenarioB.in\",\n",
+    "]\n",
+    "pss = [\n",
+    "    (1000011,-1000011),\n",
+    "     ]\n",
+    "for pa,pb in pss:\n",
+    "    for param in params:\n",
+    "        i = hepi.Input(hepi.Order.NLO_PLUS_NLL,13600,pa,pb,param,\"PDF4LHC21_mc\",\"PDF4LHC21_mc\",1., 1.,id=\"0\")\n",
+    "        #i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,\"CT14lo\",\"CT14lo\",1., 1.,model_path=model_path,id=\"5\")\n",
+    "        li = [i]\n",
+    "        li = hepi.pdf_scan(li)\n",
+    "        rs_dl = rs.run(li,noskip=False,run=False,parse=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "8cec298e",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

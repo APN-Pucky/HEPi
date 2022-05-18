@@ -37,7 +37,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6
+                0.1.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -58,6 +58,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -73,6 +75,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.resummino</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.spheno</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../input/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../load/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.load</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../output/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.output</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plot/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../results/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.results</span></code></a></li>
@@ -158,7 +161,7 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.LD2DL" title="hepi.util.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List) → dict</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.LD2DL" title="hepi.util.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List, actual_dict=False) → dict</p></td>
 <td><p>Convert a list of objects into a dictionary of lists.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.LD2DF" title="hepi.util.LD2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DF</span></code></a>(ld: dict) → pandas.DataFrame</p></td>
@@ -191,12 +194,15 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.util.LD2DL">
-<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.LD2DL" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.LD2DL" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a list of objects into a dictionary of lists.</p>
 <p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>l</strong> (<em>List</em>) – list of objects.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> (<em>List</em>) – list of objects.</p></li>
+<li><p><strong>actual_dict</strong> (<em>bool</em>) – objects are already dicts</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>dictionary of numpy arrays.</p>

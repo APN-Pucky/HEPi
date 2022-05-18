@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6
+                0.1.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,6 +56,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -99,12 +101,14 @@
     &quot;&quot;&quot;
     (N)NLL-fast Result Data.
     &quot;&quot;&quot;
-    def __init__(self,lo,nlo,nlo_plus_nll,scale_err_up,scale_err_down,pdf_err_up,pdf_err_down):
-      Result.__init__(self, lo, nlo, nlo_plus_nll)
-      self.scale_err_up=scale_err_up
-      self.scale_err_down=scale_err_down
-      self.pdf_err_up=pdf_err_up
-      self.pdf_err_down=pdf_err_down</div>
+
+    def __init__(self, lo, nlo, nlo_plus_nll, scale_err_up, scale_err_down,
+                 pdf_err_up, pdf_err_down):
+        Result.__init__(self, lo, nlo, nlo_plus_nll)
+        self.scale_err_up = scale_err_up
+        self.scale_err_down = scale_err_down
+        self.pdf_err_up = pdf_err_up
+        self.pdf_err_down = pdf_err_down</div>
 </pre></div>
 
            </div>

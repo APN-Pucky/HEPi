@@ -27,7 +27,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="hepi.plot" href="../plot/index.html" />
-    <link rel="prev" title="hepi.input" href="../input/index.html" /> 
+    <link rel="prev" title="hepi.load" href="../load/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6
+                0.1.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -59,6 +59,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -74,6 +76,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.resummino</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.spheno</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../input/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../load/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.load</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.output</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plot/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../results/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.results</span></code></a></li>
@@ -164,11 +167,19 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.output.tex_table" title="hepi.output.tex_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tex_table</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.output.splot" title="hepi.output.splot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">splot</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.output.tex_table" title="hepi.output.tex_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tex_table</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
 </table>
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.output.splot">
+<span class="sig-prename descclassname"><span class="pre">hepi.output.</span></span><span class="sig-name descname"><span class="pre">splot</span></span><a class="reference internal" href="../../../_modules/hepi/output.html#splot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.output.splot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.output.write_latex">
 <span class="sig-prename descclassname"><span class="pre">hepi.output.</span></span><span class="sig-name descname"><span class="pre">write_latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/output.html#write_latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.output.write_latex" title="Permalink to this definition"></a></dt>
@@ -201,7 +212,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../input/index.html" class="btn btn-neutral float-left" title="hepi.input" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../load/index.html" class="btn btn-neutral float-left" title="hepi.load" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../plot/index.html" class="btn btn-neutral float-right" title="hepi.plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

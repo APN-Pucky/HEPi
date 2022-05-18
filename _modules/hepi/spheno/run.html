@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6
+                0.1.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,6 +56,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -94,14 +96,15 @@
   <h1>Source code for hepi.spheno.run</h1><div class="highlight"><pre>
 <span></span>from typing import List
 import warnings
-from hepi import get_input_dir
 import subprocess
 import os
 from hepi.input import Input, update_slha
 from hepi.run import Runner
 
+
 <div class="viewcode-block" id="SPhenoRunner"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.SPhenoRunner">[docs]</a>class SPhenoRunner(Runner):
-<div class="viewcode-block" id="SPhenoRunner.run"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.SPhenoRunner.run">[docs]</a>    def run(self,slhas : List[Input],**kwargs) -&gt; List[Input]:
+
+<div class="viewcode-block" id="SPhenoRunner.run"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.SPhenoRunner.run">[docs]</a>    def run(self, slhas: List[Input], **kwargs) -&gt; List[Input]:
         &quot;&quot;&quot;
         Run the passed list of parameters for SPheno.
     
@@ -114,24 +117,31 @@ from hepi.run import Runner
             os.remove(&quot;Messages.out&quot;)
         for s in slhas:
             # Remove Creation time for hash-/caching
-            comm= &quot;cp &quot; +  self.get_output_dir() + s.slha  + &quot; spheno_tmp.in &amp;&amp; &quot; +get_path() + &quot;bin/SPheno spheno_tmp.in &amp;&amp; mv &quot;  + &quot;SPheno.spc &quot; + self.get_output_dir() + s.slha  + &quot; &amp;&amp; sed -i &#39;/Created/d&#39; &quot; + self.get_output_dir() + s.slha
-            proc = subprocess.Popen(comm, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            comm = &quot;cp &quot; + self.get_output_dir(
+            ) + s.slha + &quot; spheno_tmp.in &amp;&amp; &quot; + get_path(
+            ) + &quot;bin/SPheno spheno_tmp.in &amp;&amp; mv &quot; + &quot;SPheno.spc &quot; + self.get_output_dir(
+            ) + s.slha + &quot; &amp;&amp; sed -i &#39;/Created/d&#39; &quot; + self.get_output_dir(
+            ) + s.slha
+            proc = subprocess.Popen(comm,
+                                    shell=True,
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE)
             proc.wait()
             update_slha(s)
         if os.path.exists(&quot;Messages.out&quot;):
-            with open(&quot;Messages.out&quot;,&#39;r&#39;) as r:
+            with open(&quot;Messages.out&quot;, &#39;r&#39;) as r:
                 t = r.read()
                 if t != &quot;&quot;:
                     warnings.warn(r.read())
         return slhas</div></div>
 
+
 # Backward compatibility
-<div class="viewcode-block" id="spheno_default_runner"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.spheno_default_runner">[docs]</a>spheno_default_runner=SPhenoRunner(&quot;~/git/SPheno-3.3.8/&quot;)</div>
+<div class="viewcode-block" id="spheno_default_runner"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.spheno_default_runner">[docs]</a>spheno_default_runner = SPhenoRunner(&quot;~/git/SPheno-3.3.8/&quot;)</div>
 &quot;&quot;&quot;Default SPheno Runner to provide backward compatibility&quot;&quot;&quot;
 <div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.run">[docs]</a>run = spheno_default_runner.run</div>
 <div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.set_path">[docs]</a>set_path = spheno_default_runner.set_path</div>
 <div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.get_path">[docs]</a>get_path = spheno_default_runner.get_path</div>
-
 </pre></div>
 
            </div>

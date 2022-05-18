@@ -15,8 +15,6 @@ Functions
 
    hepi.plot.title
    hepi.plot.energy_plot
-   hepi.plot.combined_energy_plot
-   hepi.plot.combined_plot
    hepi.plot.mass_plot
    hepi.plot.mass_vplot
    hepi.plot.get_mass
@@ -31,8 +29,7 @@ Functions
    hepi.plot.err_plt
    hepi.plot.scale_plot
    hepi.plot.central_scale_plot
-   hepi.plot.mass_and_K_plot
-   hepi.plot.mass_and_ratio_plot
+   hepi.plot.init_double_plot
 
 
 
@@ -49,14 +46,12 @@ Attributes
 
 .. py:function:: title(axe, i: hepi.input.Input, scenario='', diff_L_R=None, extra='', cms_energy=True, pdf_info=True, **kwargs)
 
+   Sets the title on axis `axe`.
+
 
 .. py:function:: energy_plot(dict_list, y, yscale=1.0, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', label=None, **kwargs)
 
-
-.. py:function:: combined_energy_plot(dict_list, t, **kwargs)
-
-
-.. py:function:: combined_plot(func, dict_list, t, *args, label=None, fill=False, fmt='.', interpolate=True, **kwargs)
+   Plot energy on the x-axis.
 
 
 .. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, **kwargs)
@@ -65,15 +60,30 @@ Attributes
 .. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)
 
 
-.. py:function:: get_mass(l: dict, id: int)
+.. py:function:: get_mass(l: dict, iid: int)
 
-   Get the mass of particle with id `id` out of the list in the "slha" element in the dict.
+   Get the mass of particle with id `iid` out of the list in the "slha" element in the dict.
 
    Returns
        :obj:`list` of float : masses of particles in each element of the dict list.
 
 
-.. py:function:: plot(dict_list, x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs)
+
+.. py:function:: plot(dict_list, x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs) -> None
+
+   Creates a plot based on the entries `x`and `y` in `dict_list`.
+
+   Examples
+
+   .. plot::
+       :include-source:
+
+       >>> import urllib.request
+       >>> import hepi
+       >>> dl = hepi.load(urllib.request.urlopen(
+       ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
+       ... ))
+       >>> hepi.plot(dl,"N1","NLO_PLUS_NLL",xaxis=r"$m_{       ilde{\chi}_1^0}$")
 
 
 .. py:function:: index_open(var, idx)
@@ -85,7 +95,10 @@ Attributes
 .. py:function:: slha_plot(li, x, y, **kwargs)
 
 
-.. py:function:: vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', print_area=False, **kwargs)
+.. py:function:: vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', print_area=False, sort=True, **kwargs)
+
+   Creates a plot based on the values in `x`and `y`.
+
 
 
 .. py:function:: mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)
@@ -93,8 +106,20 @@ Attributes
 
 .. py:function:: mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
 
+   Examples
 
-.. py:function:: map_vplot(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, zscale=1.0)
+   .. plot::
+       :include-source:
+
+       >>> import urllib.request
+       >>> import hepi
+       >>> dl = hepi.load(urllib.request.urlopen(
+       ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
+       ... ),dimensions=2)
+       >>> hepi.mapplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis=r'$m_{       ilde{\chi}_1^0}$',yaxis=r'$m_{  ilde{\chi}_2^0}$' , zaxis="$\sigma_{\mathrm{NLO+NLL}}$")
+
+
+.. py:function:: map_vplot(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, sort=True, fill_missing=True, zscale=1.0)
 
 
 .. py:data:: fig
@@ -122,13 +147,16 @@ Attributes
 
 .. py:function:: scale_plot(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', yaxis=None, **kwargs)
 
+   Creates a scale variance plot with 5 panels (xline).
+
 
 .. py:function:: central_scale_plot(dict_list, vl, cont=False, error=True, yscale=1.0, unit='pb', yaxis=None)
 
+   Creates a scale variance plot with 3 panels (ystacked).
 
-.. py:function:: mass_and_K_plot(dl, li, p, scale=False, pdf=False, plehn=True, combined=False, cont=False, figsize=(6, 8), **kwargs)
 
+.. py:function:: init_double_plot(figsize=(6, 8), sharex=True, sharey=False, gridspec_kw={'height_ratios': [3, 1]})
 
-.. py:function:: mass_and_ratio_plot(dl, li, p, scale=False, pdf=False, combined=False, cont=False, figsize=(6, 4), plot_data=True, fill=True, unit='pb', yscale=1.0, ylim=None, **kwargs)
+   Initialze subplot for Ratio/K plots with another figure below.
 
 

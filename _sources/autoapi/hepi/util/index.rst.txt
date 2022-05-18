@@ -43,7 +43,7 @@ Functions
 
 
 
-.. py:function:: LD2DL(l: List) -> dict
+.. py:function:: LD2DL(l: List, actual_dict=False) -> dict
 
    Convert a list of objects into a dictionary of lists.
 
@@ -51,6 +51,8 @@ Functions
 
    :param l: list of objects.
    :type l: List
+   :param actual_dict: objects are already dicts
+   :type actual_dict: bool
 
    :returns: dictionary of numpy arrays.
    :rtype: dict

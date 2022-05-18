@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6
+                0.1.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -56,6 +56,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -101,12 +103,13 @@ from uncertainties import ufloat_fromstr
 
 <div class="viewcode-block" id="MadgraphResult"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.MadgraphResult">[docs]</a>class MadgraphResult(Result):
     &quot;&quot;&quot; MadGraph Result Data.&quot;&quot;&quot;
+
     def __init__(self, lo, nlo):
         &quot;&quot;&quot;Sets LO and NLO result. NLO+NLL is set to None.&quot;&quot;&quot;
         Result.__init__(self, lo, nlo, None)</div>
 
 
-<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.is_valid">[docs]</a>def is_valid(file:str,p:Input,d) -&gt; bool :
+<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.is_valid">[docs]</a>def is_valid(file: str, p: Input, d) -&gt; bool:
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
 
@@ -120,14 +123,15 @@ from uncertainties import ufloat_fromstr
     &quot;&quot;&quot;
     order = p.order
     res = parse_single(file)
-    if order is not Order.NLO and order is not Order.LO :
+    if order is not Order.NLO and order is not Order.LO:
         warnings.warn(&quot;MadGraph has only NLO and LO computation.&quot;)
     if res.LO is not None and order is Order.LO:
         return True
     if res.LO is not None and res.NLO is not None and order is Order.NLO:
         return True
-    print(&quot;RESTART&quot; ,res.LO, res.NLO,res.NLO_PLUS_NLL, file)
+    print(&quot;RESTART&quot;, res.LO, res.NLO, res.NLO_PLUS_NLL, file)
     return False</div>
+
 
 <div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/result/index.html#hepi.madgraph.result.parse_single">[docs]</a>def parse_single(file) -&gt; MadgraphResult:
     &quot;&quot;&quot;
@@ -154,9 +158,11 @@ from uncertainties import ufloat_fromstr
             tmp = lo_pattern.search(line)
             if tmp is not None:
                 if lo_result is None:
-                    lo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
+                    lo_result = ufloat_fromstr(
+                        tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
                 elif nlo_result is None:
-                    nlo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
+                    nlo_result = ufloat_fromstr(
+                        tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
 
     return MadgraphResult(lo_result, nlo_result)</div>
 </pre></div>
