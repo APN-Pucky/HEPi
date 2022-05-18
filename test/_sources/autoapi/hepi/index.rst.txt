@@ -30,6 +30,7 @@ Submodules
    :maxdepth: 1
 
    input/index.rst
+   load/index.rst
    output/index.rst
    plot/index.rst
    results/index.rst
@@ -59,6 +60,7 @@ Classes
    hepi.DictData
    hepi.RunParam
    hepi.Runner
+   hepi.Input
 
 
 
@@ -81,7 +83,9 @@ Functions
    hepi.set_input_dir
    hepi.set_output_dir
    hepi.set_pre
+   hepi.replace_macros
    hepi.order_to_string
+   hepi.xsec_to_order
    hepi.is_gluino
    hepi.is_neutralino
    hepi.is_chargino
@@ -134,6 +138,9 @@ Functions
    hepi.get_pre
    hepi.LD2DL
    hepi.namehash
+   hepi.order_to_string
+   hepi.xsec_to_order
+   hepi.load
 
 
 
@@ -190,7 +197,7 @@ Attributes
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
 
 
-.. py:function:: order_to_string(o: Order)
+.. py:function:: order_to_string(o: Order, json_style=False, no_macros=False) -> str
 
 
 .. py:function:: LD2DF(ld: dict) -> pandas.DataFrame
@@ -376,7 +383,13 @@ Attributes
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
 
 
-.. py:function:: order_to_string(o: Order)
+.. py:function:: replace_macros(s: str) -> str
+
+
+.. py:function:: order_to_string(o: Order, json_style=False, no_macros=False) -> str
+
+
+.. py:function:: xsec_to_order(s: str)
 
 
 .. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
@@ -1515,6 +1528,94 @@ Attributes
       :param ppre: new command prefix.
       :type ppre: str
 
+
+
+.. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
+
+   Bases: :py:obj:`hepi.util.DictData`
+
+   Input for computation and scans.
+
+   :ivar order: LO, NLO or NLO+NLL computation.
+   :vartype order: :class:`Order`
+   :ivar energy: CMS energy in GeV.
+   :vartype energy: int
+   :ivar energyhalf: Halfed `energy`.
+   :vartype energyhalf: int
+   :ivar particle1: PDG identifier of the first final state particle.
+   :vartype particle1: int
+   :ivar particle2: PDG identifier of the second final state particle.
+   :vartype particle2: int
+   :ivar slha: File path of for the base slha.
+               Modified slha files will be used if a scan requires a change of the input.
+   :vartype slha: str
+   :ivar pdf_lo: LO PDF name.
+   :vartype pdf_lo: str
+   :ivar pdf_nlo: NLO PDF name.
+   :vartype pdf_nlo: str
+   :ivar pdfset_lo: LO PDF member/set id.
+   :vartype pdfset_lo: int
+   :ivar pdfset_nlo: NLO PDF member/set id.
+   :vartype pdfset_nlo: int
+   :ivar pdf_lo_id: LO PDF first member/set id.
+   :vartype pdf_lo_id: int
+   :ivar pdf_nlo_id: NLO PDF first member/set id.
+   :vartype pdf_nlo_id: int
+   :ivar mu: central scale factor.
+   :vartype mu: double
+   :ivar mu_f: Factorization scale factor.
+   :vartype mu_f: double
+   :ivar mu_r: Renormalization scale factor.
+   :vartype mu_r: double
+   :ivar precision: Desired numerical relative precision.
+   :vartype precision: double
+   :ivar max_iters: Upper limit on integration iterations.
+   :vartype max_iters: int
+   :ivar invariant_mass: Invariant mass mode 'auto = sqrt((p1+p2)^2)' else value.
+   :vartype invariant_mass: str
+   :ivar pt: Transverse Momentum mode 'auto' or value.
+   :vartype pt: str
+   :ivar result: Result type 'total'/'pt'/'ptj'/'m'.
+   :vartype result: str
+   :ivar id: Set an id of this run.
+   :vartype id: str
+   :ivar model: Path for MadGraph model.
+   :vartype model: str
+   :ivar update: Update dependent `mu` else set to zero.
+
+   :vartype update: bool
+
+   .. py:method:: has_gluino(self) -> bool
+
+
+   .. py:method:: has_neutralino(self) -> bool
+
+
+   .. py:method:: has_charginos(self) -> bool
+
+
+   .. py:method:: has_weakino(self) -> bool
+
+
+   .. py:method:: has_squark(self) -> bool
+
+
+   .. py:method:: has_slepton(self) -> bool
+
+
+
+.. py:function:: order_to_string(o: Order, json_style=False, no_macros=False) -> str
+
+
+.. py:function:: xsec_to_order(s: str)
+
+
+.. py:function:: load(f: str, dimensions=1)
+
+   Load xsec data from json in to something that works within hepi's plotting.
+
+   :param dimensions: 1 or 2 currently supported.
+   :type dimensions: int
 
 
 .. py:data:: package

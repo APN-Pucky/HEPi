@@ -28,7 +28,9 @@ Functions
    hepi.input.set_input_dir
    hepi.input.set_output_dir
    hepi.input.set_pre
+   hepi.input.replace_macros
    hepi.input.order_to_string
+   hepi.input.xsec_to_order
    hepi.input.is_gluino
    hepi.input.is_neutralino
    hepi.input.is_chargino
@@ -158,7 +160,13 @@ Attributes
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
 
 
-.. py:function:: order_to_string(o: Order)
+.. py:function:: replace_macros(s: str) -> str
+
+
+.. py:function:: order_to_string(o: Order, json_style=False, no_macros=False) -> str
+
+
+.. py:function:: xsec_to_order(s: str)
 
 
 .. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hepi.cluster &mdash; HEPi  documentation</title>
+  <title>hepi.load &mdash; HEPi  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
@@ -84,7 +84,7 @@
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
           <li><a href="../hepi.html">hepi</a> &raquo;</li>
-      <li>hepi.cluster</li>
+      <li>hepi.load</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -93,48 +93,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for hepi.cluster</h1><div class="highlight"><pre>
-<span></span>import hepi.resummino as rs
-import hepi.input as input
-#import hepi
-import matplotlib.pyplot as plt
-import subprocess
-import time
-import os
-import sys
-
-<div class="viewcode-block" id="user"><a class="viewcode-back" href="../../autoapi/hepi/cluster/index.html#hepi.cluster.user">[docs]</a>user = &quot;a_neuw01&quot;</div>
-plt.rcParams.update({&#39;font.size&#39;: 15})
-plt.rc(&#39;legend&#39;, fontsize=12)
+  <h1>Source code for hepi.load</h1><div class="highlight"><pre>
+<span></span>import copy
+import json
+from re import I
+from uncertainties import ufloat
+from hepi.input import Input, order_to_string, xsec_to_order
 
 
-<div class="viewcode-block" id="get_job_name"><a class="viewcode-back" href="../../autoapi/hepi/cluster/index.html#hepi.cluster.get_job_name">[docs]</a>def get_job_name() -&gt; str:
-    return os.path.basename(sys.argv[0])</div>
+<div class="viewcode-block" id="load"><a class="viewcode-back" href="../../autoapi/hepi/load/index.html#hepi.load.load">[docs]</a>def load(f: str, dimensions=1):
+    &quot;&quot;&quot;
+    Load xsec data from json in to something that works within hepi&#39;s plotting.
+
+    Args:
+        dimensions (int) : 1 or 2 currently supported.
+    &quot;&quot;&quot;
+    dict = json.load(open(f))
+
+    inpu = Input(
+        xsec_to_order(dict[&quot;order&quot;]),
+        float(dict[&quot;Ecom [GeV]&quot;]),
+        -1,
+        -1,
+        slha=dict[&quot;process_latex&quot;],
+        pdf_lo=dict[&quot;PDF set&quot;],
+        pdf_nlo=dict[&quot;PDF set&quot;],
+        update=False,
+    )
+    dat = []
+    params = dict[&quot;parameters&quot;]
+    if dimensions == 2:
+        for k in dict[&quot;data&quot;]:
+            for l in dict[&quot;data&quot;][k]:
+                dicd = copy.copy(inpu.__dict__)
+                for p1 in params[0]:
+                    dicd[p1] = k
+                for p2 in params[1]:
+                    dicd[p2] = l
+                dicd[order_to_string(inpu.order)] = ufloat(
+                    dict[&quot;data&quot;][k][l][&quot;xsec_pb&quot;],
+                    dict[&quot;data&quot;][k][l][&quot;unc_pb&quot;])
+                print(dicd)
+                dat.append(dicd)
+
+            print(params[0], k, params[1], l, dict[&quot;data&quot;][k][l])</div>
 
 
-<div class="viewcode-block" id="wait"><a class="viewcode-back" href="../../autoapi/hepi/cluster/index.html#hepi.cluster.wait">[docs]</a>def wait():
-    output = &quot;\n\n\n&quot;
-    while (len(output.split(&#39;\n&#39;)) &gt; 2):
-        bashCommand = &quot;squeue -u &quot; + user + &quot; --name=&quot; + get_job_name()
-        if output != &quot;\n\n\n&quot;:
-            #print(bashCommand , &quot; -&gt; &quot;, output)
-            time.sleep(60)
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-        output, error = process.communicate()
-        output = output.decode()</div>
-
-
-rs.set_path(&quot;/home/a/&quot; + user + &quot;/git/resummino/&quot;)
-input.set_output_dir(&quot;/scratch/tmp/&quot; + user + &quot;/hepi/&quot;)
-input.set_input_dir(&quot;/home/a/&quot; + user + &quot;/input/&quot;)
-# Only mail on fail by default
-input.set_pre(
-    &quot;while [[ $(squeue -u &quot; + user +
-    &quot; | wc -l) -gt 1990 ]]; do sleep 60; done &amp;&amp; sbatch --job-name=&quot; +
-    get_job_name() +
-    &quot; --ntasks-per-node 1 --cpus-per-task 1  --time=3-00:00:00 --mem=100M --partition normal&quot;
-    + &quot; --mail-type=FAIL --mail-user=&quot; + user + &quot;@uni-muenster.de&quot;)
-print(rs.get_path())
+#load(&quot;/home/apn/git/xsec/json/pp13_hinosplit_N2N1_NLO+NLL.json&quot;, 2)
 </pre></div>
 
            </div>

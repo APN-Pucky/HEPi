@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-28-g12fe89d
+                0.1.6-30-gc50bcf8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -199,8 +199,41 @@ import lhapdf
     &quot;&quot;&quot;Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms&quot;&quot;&quot;</div>
 
 
-<div class="viewcode-block" id="order_to_string"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.order_to_string">[docs]</a>def order_to_string(o: Order):
-    return [&quot;LO&quot;, &quot;NLO&quot;, &quot;NLO_PLUS_NLL&quot;, &quot;aNNLO_PLUS_NNLL&quot;][o]</div>
+<div class="viewcode-block" id="replace_macros"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.replace_macros">[docs]</a>def replace_macros(s: str) -&gt; str:
+    return s.replace(&quot;_PLUS_&quot;, &quot;+&quot;).replace(&quot; &quot;, &quot;\\ &quot;)</div>
+
+
+<div class="viewcode-block" id="order_to_string"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.order_to_string">[docs]</a>def order_to_string(o: Order, json_style=False, no_macros=False) -&gt; str:
+    ret = &quot;&quot;
+    if o == Order.LO:
+        ret = &quot;LO&quot;
+    elif o == Order.NLO:
+        ret = &quot;NLO&quot;
+    elif o == Order.NLO_PLUS_NLL:
+        ret = &quot;NLO_PLUS_NLL&quot;
+    elif o == Order.aNNLO_PLUS_NNLL:
+        if json_style:
+            ret = &quot;NNLOapprox+NNLL&quot;
+        else:
+            ret = &quot;aNNLO_PLUS_NNLL&quot;
+    else:
+        raise ValueError(&quot;Order &#39;&quot; + o + &quot;&#39; not supported by HEPi.&quot;)
+    if replace_macros:
+        return replace_macros(ret)
+    return ret</div>
+
+
+<div class="viewcode-block" id="xsec_to_order"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.xsec_to_order">[docs]</a>def xsec_to_order(s: str):
+    if s == &quot;NNLOapprox+NNLL&quot;:
+        return Order.aNNLO_PLUS_NNLL
+    elif s == &quot;NLO+NLL&quot;:
+        return Order.NLO_PLUS_NLL
+    elif s == &quot;NLO&quot;:
+        return Order.NLO
+    elif s == &quot;LO&quot;:
+        return Order.LO
+    else:
+        raise ValueError(&quot;Unknown Order &#39;&quot; + s + &quot;&#39;, not supported by HEPi.&quot;)</div>
 
 
 <div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input">[docs]</a>class Input(DictData):

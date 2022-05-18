@@ -26,7 +26,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="hepi.output" href="../output/index.html" />
+    <link rel="next" title="hepi.load" href="../load/index.html" />
     <link rel="prev" title="hepi.spheno.run" href="../spheno/run/index.html" /> 
 </head>
 
@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-28-g12fe89d
+                0.1.6-30-gc50bcf8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -76,6 +76,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.resummino</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.spheno</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../load/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.load</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../output/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.output</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plot/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../results/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.results</span></code></a></li>
@@ -181,7 +182,13 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.set_pre" title="hepi.input.set_pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_pre</span></code></a>(ppre)</p></td>
 <td><p>Sets the command prefix.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.order_to_string" title="hepi.input.order_to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">order_to_string</span></code></a>(o: Order)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.replace_macros" title="hepi.input.replace_macros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_macros</span></code></a>(s: str) → str</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.order_to_string" title="hepi.input.order_to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">order_to_string</span></code></a>(o: Order, json_style=False, no_macros=False) → str</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.input.xsec_to_order" title="hepi.input.xsec_to_order"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xsec_to_order</span></code></a>(s: str)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.input.is_gluino" title="hepi.input.is_gluino"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_gluino</span></code></a>(iid: int) → bool</p></td>
@@ -402,8 +409,18 @@ create (bool): create directory if not existing</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.replace_macros">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">replace_macros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/input.html#replace_macros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.replace_macros" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="hepi.input.order_to_string">
-<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hepi.input.Order" title="hepi.input.Order"><span class="pre">Order</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#order_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.order_to_string" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#hepi.input.Order" title="hepi.input.Order"><span class="pre">Order</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/input.html#order_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.order_to_string" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.input.xsec_to_order">
+<span class="sig-prename descclassname"><span class="pre">hepi.input.</span></span><span class="sig-name descname"><span class="pre">xsec_to_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/input.html#xsec_to_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.input.xsec_to_order" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
@@ -789,7 +806,7 @@ Only points with <cite>mu_f`=`mu_r</cite> or <cite>mu_r/f`=1 or `mu_r/f`=`distan
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../spheno/run/index.html" class="btn btn-neutral float-left" title="hepi.spheno.run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../output/index.html" class="btn btn-neutral float-right" title="hepi.output" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../load/index.html" class="btn btn-neutral float-right" title="hepi.load" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

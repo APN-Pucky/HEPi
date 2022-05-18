@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-28-g12fe89d
+                0.1.6-30-gc50bcf8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -171,7 +171,7 @@ from smpl import io
  Cf. https://github.com/fuenfundachtzig/xsec
  &quot;&quot;&quot;
     jd = {}
-    jd[&quot;initial state&quot;] = &quot;pp&quot;  # TODO add more such cases + filters
+    jd[&quot;initial state&quot;] = &quot;pp&quot;  # TODO add more such cases + filters, also in resummino
     if o == Order.LO:
         jd[&quot;order&quot;] = &quot;LO&quot;
     elif o == Order.NLO:
@@ -187,7 +187,7 @@ from smpl import io
     jd[&quot;tool&quot;] = dict_list[&quot;code&quot;][0]
     jd[&quot;process_latex&quot;] = &quot;$&quot; + get_name(dict_list[&quot;particle1&quot;][0]) + get_name(
         dict_list[&quot;particle2&quot;][0]) + &quot;$&quot;
-    jd[&quot;comment&quot;] = &quot;?&quot;
+    jd[&quot;comment&quot;] = dict_list[&quot;id&quot;][0]
     jd[&quot;reference&quot;] = &quot;?&quot;
     jd[&quot;Ecom [GeV]&quot;] = str(dict_list[&quot;energy&quot;][0])
     jd[&quot;process_id&quot;] = &quot;pp_&quot; + str(dict_list[&quot;energy&quot;][0]) + &quot;_&quot; + str(
