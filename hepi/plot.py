@@ -1,3 +1,4 @@
+from matplotlib.image import NonUniformImage
 from sklearn.metrics import auc
 from collections.abc import Iterable
 import matplotlib as mpl
@@ -12,7 +13,7 @@ import pyslha
 import matplotlib.cm as cm
 from matplotlib import colors
 
-from .input import Input, get_output_dir
+from .input import Input, get_output_dir, replace_macros
 from .util import get_name
 from matplotlib.ticker import NullFormatter
 
@@ -133,7 +134,7 @@ def plot(dict_list,
         >>> dl = hepi.load(urllib.request.urlopen(
         ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
         ... ))
-        >>> hepi.plot(dl,"N1","NLO_PLUS_NLL",xaxis="$m_{\\chi_1^0}")
+        >>> hepi.plot(dl,"N1","NLO_PLUS_NLL",xaxis=r"$m_{\tilde{\chi}_1^0}$")
     """
     if isinstance(y, Iterable) and not isinstance(y, str):
         for yi in y:
@@ -213,7 +214,7 @@ def vplot(x,
         x = x[0]
         y = y[0]
     if sort:
-        permute = x.argsort()
+        permute = x.argsort(kind='stable')
         vx = x[permute]
         vy = y[permute]
     else:
@@ -331,14 +332,14 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
         >>> dl = hepi.load(urllib.request.urlopen(
         ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
         ... ),dimensions=2)
-        >>> hepi.mapplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\chi_1^0}",yaxis="$m_{\\chi_2^0}")
+        >>> hepi.mapplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis=r"$m_{\tilde{\chi}_1^0}$",yaxis=r"$m_{\tilde{\chi}_2^0}$" , yaxis="$\\sigma_{NLO+NLL}$")
     """
     if xaxis is None:
         xaxis = x
     if yaxis is None:
         yaxis = y
     if zaxis is None:
-        zaxis = z
+        zaxis = replace_macros(z)
     vx = dict_list[x]
     vy = dict_list[y]
     vz = dict_list[z]
@@ -352,7 +353,29 @@ def map_vplot(vx,
               yaxis=None,
               zaxis=None,
               logz=True,
+              sort=True,
+              fill_missing=True,
               zscale=1.):
+    if fill_missing:
+        for x in vx:
+            for y in vy:
+                ex = False
+                for i in range(len(vx)):
+                    if vx[i] == x and vy[i] == y:
+                        ex = True
+                if not ex:
+                    vx = np.append(vx, x)
+                    vy = np.append(vy, y)
+                    vz = np.append(vz, 0)
+    if sort:
+        p1 = vx.argsort(kind='stable')
+        tvx = vx[p1]
+        tvy = vy[p1]
+        tvz = vz[p1]
+        p2 = tvy.argsort(kind='stable')
+        vx = tvx[p2]
+        vy = tvy[p2]
+        vz = tvz[p2]
     s = 1
     while vy[s] == vy[s - 1]:
         s = s + 1
@@ -369,17 +392,19 @@ def map_vplot(vx,
 
     grid = splot.unv(vz).reshape((int(np.rint(np.size(vx) / s)), s)) * zscale
     if (logz):
-        plt.imshow(grid,
-                   origin="lower",
-                   extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-                   cmap=cm.gist_heat,
-                   interpolation='nearest',
-                   norm=colors.LogNorm())
+        plt.imshow(
+            grid,
+            origin="lower",
+            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
+            cmap='viridis',
+            #cmap=cm.gist_heat,
+            interpolation='nearest',
+            norm=colors.LogNorm())
     else:
         plt.imshow(grid,
                    origin="lower",
                    extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-                   cmap=cm.gist_heat,
+                   cmap='viridis',
                    interpolation='nearest')
     cb = plt.colorbar()
     cb.set_label(zaxis)
@@ -396,7 +421,7 @@ labels = []
 
 def err_plt(axes, x, y, label=None, error=False):
     v = label
-    ind = np.argsort(splot.unv(x))
+    ind = np.argsort(splot.unv(x), kind='stable')
     if error:
         l, _, _ = axes.errorbar(x[ind],
                                 splot.unv(y)[ind],
