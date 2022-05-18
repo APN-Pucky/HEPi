@@ -330,7 +330,7 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
         >>> import hepi 
         >>> dl = hepi.load(urllib.request.urlopen(
         ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
-        ... ))
+        ... ),dimensions=2)
         >>> hepi.mapplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\chi_1^0}",yaxis="$m_{\\chi_2^0}")
     """
     if xaxis is None:
