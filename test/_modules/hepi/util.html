@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-30-gc50bcf8
+                0.1.6-31-g0793314
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -113,7 +113,7 @@ import warnings
         return str(self.__dict__)</div></div>
 
 
-<div class="viewcode-block" id="LD2DL"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.LD2DL">[docs]</a>def LD2DL(l: List) -&gt; dict:
+<div class="viewcode-block" id="LD2DL"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.LD2DL">[docs]</a>def LD2DL(l: List, actual_dict=False) -&gt; dict:
     &quot;&quot;&quot;
     Convert a list of objects into a dictionary of lists.
 
@@ -121,6 +121,7 @@ import warnings
 
     Args:
         l (List) : list of objects.
+        actual_dict (bool) : objects are already dicts
 
     Returns:
         dict : dictionary of numpy arrays.
@@ -136,11 +137,14 @@ import warnings
     &quot;&quot;&quot;
     # Check l[0] keys in all dictionaries.
     for m in l:
-        md = m.__dict__
-        for k in l[0].__dict__:
+        md = m if actual_dict else m.__dict__
+        for k in l[0] if actual_dict else l[0].__dict__:
             assert k in md
     # switch them
-    return {k: np.array([dic.__dict__[k] for dic in l]) for k in l[0].__dict__}</div>
+    return {
+        k: np.array([dic[k] if actual_dict else dic.__dict__[k] for dic in l])
+        for k in (l[0] if actual_dict else l[0].__dict__)
+    }</div>
 
 
 <div class="viewcode-block" id="LD2DF"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.LD2DF">[docs]</a>def LD2DF(ld: dict) -&gt; pd.DataFrame:

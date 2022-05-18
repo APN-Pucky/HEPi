@@ -38,7 +38,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-30-gc50bcf8
+                0.1.6-31-g0793314
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -365,7 +365,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.combine_errors" title="hepi.combine_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_errors</span></code></a>(dl: dict)</p></td>
 <td><p>Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id39" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List) → dict</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id52" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List, actual_dict=False) → dict</p></td>
 <td><p>Convert a list of objects into a dictionary of lists.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#id10" title="hepi.LD2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DF</span></code></a>(ld: dict) → pandas.DataFrame</p></td>
@@ -449,7 +449,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#id37" title="hepi.get_pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pre</span></code></a>()</p></td>
 <td><p>Gets the command prefix.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id39" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List) → dict</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id52" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List, actual_dict=False) → dict</p></td>
 <td><p>Convert a list of objects into a dictionary of lists.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#id42" title="hepi.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n: any) → str</p></td>
@@ -461,7 +461,10 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#id51" title="hepi.xsec_to_order"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xsec_to_order</span></code></a>(s: str)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="load/index.html#module-hepi.load" title="hepi.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id52" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List, actual_dict=False) → dict</p></td>
+<td><p>Convert a list of objects into a dictionary of lists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="load/index.html#module-hepi.load" title="hepi.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -1337,12 +1340,15 @@ Only points with <cite>mu_f`=`mu_r</cite> or <cite>mu_r/f`=1 or `mu_r/f`=`distan
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.LD2DL">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.LD2DL" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.LD2DL" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a list of objects into a dictionary of lists.</p>
 <p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>l</strong> (<em>List</em>) – list of objects.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> (<em>List</em>) – list of objects.</p></li>
+<li><p><strong>actual_dict</strong> (<em>bool</em>) – objects are already dicts</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>dictionary of numpy arrays.</p>
@@ -1862,12 +1868,15 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id39">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id39" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id39" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a list of objects into a dictionary of lists.</p>
 <p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>l</strong> (<em>List</em>) – list of objects.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> (<em>List</em>) – list of objects.</p></li>
+<li><p><strong>actual_dict</strong> (<em>bool</em>) – objects are already dicts</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>dictionary of numpy arrays.</p>
@@ -2252,6 +2261,37 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <dt class="sig sig-object py" id="id51">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">xsec_to_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#xsec_to_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id51" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id52">
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id52" title="Permalink to this definition"></a></dt>
+<dd><p>Convert a list of objects into a dictionary of lists.</p>
+<p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> (<em>List</em>) – list of objects.</p></li>
+<li><p><strong>actual_dict</strong> (<em>bool</em>) – objects are already dicts</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary of numpy arrays.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Param</span><span class="p">:</span>
+<span class="gp">... </span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LD2DL</span><span class="p">([</span> <span class="n">Param</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">Param</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="p">,</span> <span class="n">Param</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span> <span class="p">])</span>
+<span class="go">{&#39;a&#39;: array([1, 4, 7]), &#39;b&#39;: array([2, 5, 8]), &#39;c&#39;: array([3, 6, 9])}</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.load">
