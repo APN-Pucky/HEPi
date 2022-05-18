@@ -133,7 +133,7 @@ def plot(dict_list,
         >>> dl = hepi.load(urllib.request.urlopen(
         ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
         ... ))
-        >>> hepi.plot(dl,"N1","NLO_PLUS_NLL")
+        >>> hepi.plot(dl,"N1","NLO_PLUS_NLL",xaxis="$m_{\\chi_1^0}")
     """
     if isinstance(y, Iterable) and not isinstance(y, str):
         for yi in y:
@@ -319,6 +319,20 @@ def mass_mapplot(dict_list,
 
 
 def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
+    """
+
+    Examples
+
+    .. plot::
+        :include-source:
+
+        >>> import urllib.request
+        >>> import hepi 
+        >>> dl = hepi.load(urllib.request.urlopen(
+        ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
+        ... ))
+        >>> hepi.mapplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\chi_1^0}",yaxis="$m_{\\chi_2^0}")
+    """
     if xaxis is None:
         xaxis = x
     if yaxis is None:
