@@ -122,7 +122,7 @@ def order_to_string(o: Order, json_style=False, no_macros=False) -> str:
             ret = "aNNLO_PLUS_NNLL"
     else:
         raise ValueError("Order '" + o + "' not supported by HEPi.")
-    if replace_macros:
+    if no_macros:
         return replace_macros(ret)
     return ret
 
