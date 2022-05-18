@@ -463,23 +463,23 @@ def scale_plot(dict_list,
     if not cont:
         lines = []
         labels = []
-        axs[0].plot([], [], ' ', color='k', label="$\mu_R=" + "\mu_F$")
+        axs[0].plot([], [], ' ', color='k', label="$\\mu_R=" + "\\mu_F$")
         axs[1].plot([], [],
                     ' ',
                     color='k',
-                    label="$\mu_R=" + str(np.max(mr)) + "\mu_0$")
+                    label="$\\mu_R=" + str(np.max(mr)) + "\\mu_0$")
         axs[2].plot([], [],
                     ' ',
                     color='k',
-                    label="$\mu_F=" + str(np.min(mf)) + "\mu_0$")
+                    label="$\\mu_F=" + str(np.min(mf)) + "\\mu_0$")
         axs[3].plot([], [],
                     ' ',
                     color='k',
-                    label="$\mu_R=" + str(np.min(mr)) + "\mu_0$")
+                    label="$\\mu_R=" + str(np.min(mr)) + "\\mu_0$")
         axs[4].plot([], [],
                     ' ',
                     color='k',
-                    label="$\mu_F=" + str(np.max(mf)) + "\mu_0$")
+                    label="$\\mu_F=" + str(np.max(mf)) + "\\mu_0$")
 
     for v in vl:
         mv = dict_list[v] * yscale
@@ -558,35 +558,35 @@ def scale_plot(dict_list,
 
     axs[0].set_xscale("log")
     axs[0].set_xlim(np.min(mf), np.max(mf))
-    axs[0].set_xlabel("$\mu_{R,F}/\mu_0$")
+    axs[0].set_xlabel("$\\mu_{R,F}/\\mu_0$")
 
     # axs[1].plot(t, s2)
     axs[1].set_xscale("log")
     axs[1].set_xlim(np.max(mf), np.min(mf))
     axs[1].set_xticks([1.])
     axs[1].xaxis.set_minor_formatter(NullFormatter())
-    axs[1].set_xlabel("$\mu_{F}/\mu_0$")
+    axs[1].set_xlabel("$\\mu_{F}/\\mu_0$")
 
     # axs[2].plot(t, s3)
     axs[2].set_xscale("log")
     axs[2].set_xlim(np.max(mf), np.min(mf))
     axs[2].set_xticks([1.])
     axs[2].xaxis.set_minor_formatter(NullFormatter())
-    axs[2].set_xlabel("$\mu_{R}/\mu_0$")
+    axs[2].set_xlabel("$\\mu_{R}/\\mu_0$")
 
     # axs[3].plot(t, s3)
     axs[3].set_xscale("log")
     axs[3].set_xlim(np.min(mf), np.max(mf))
     axs[3].set_xticks([1.])
     axs[3].xaxis.set_minor_formatter(NullFormatter())
-    axs[3].set_xlabel("$\mu_{F}/\mu_0$")
+    axs[3].set_xlabel("$\\mu_{F}/\\mu_0$")
 
     # axs[4].plot(t, s3)
     axs[4].set_xscale("log")
     axs[4].set_xlim(np.min(mf), np.max(mf))
     axs[4].set_xticks([1.])
     axs[4].xaxis.set_minor_formatter(NullFormatter())
-    axs[4].set_xlabel("$\mu_{R}/\mu_0$")
+    axs[4].set_xlabel("$\\mu_{R}/\\mu_0$")
 
     axs[0].legend(handletextpad=-0.0, handlelength=0, fancybox=False)
     axs[1].legend(handletextpad=-0.0, handlelength=0, fancybox=False)
@@ -631,15 +631,15 @@ def central_scale_plot(dict_list,
         l = err_plt(axs[2], mf[mask], mv[mask], error=error)
 
     if not cont:
-        axs[0].plot([], [], ' ', label="$\mu_R=\mu_F=\mu$")
-        axs[1].plot([], [], ' ', label="$\mu_F=\mu_0$, $\mu_R=\mu$")
-        axs[2].plot([], [], ' ', label="$\mu_R=\mu_0$, $\mu_F=\mu$")
+        axs[0].plot([], [], ' ', label="$\\mu_R=\\mu_F=\\mu$")
+        axs[1].plot([], [], ' ', label="$\\mu_F=\\mu_0$, $\\mu_R=\\mu$")
+        axs[2].plot([], [], ' ', label="$\\mu_R=\\mu_0$, $\\mu_F=\\mu$")
 
     axs[1].set_ylabel("$\sigma$ [" + unit + "]" if yaxis is None else yaxis)
 
     axs[0].set_xscale("log")
     #axs[0].set_xlim(np.min(mf), np.max(mf))
-    axs[2].set_xlabel("$\mu/\mu_0$")
+    axs[2].set_xlabel("$\\mu/\\mu_0$")
 
     axs[0].legend()
     axs[1].legend()

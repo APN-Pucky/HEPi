@@ -24,32 +24,32 @@ def write_latex(dict_list, key, fname, scale=True, pdf=True, yscale=1.):
                 "$" + io.gf(4).format(dl[key][mask][i]) + "$ \t&\t $" +
                 "{:.3f}".format(lo[i] * yscale) + "^{+" +
                 "{:.1f}".format(dl["LO_SCALE_ERRPLUS"][mask][i] / lo[i] *
-                                100.) + "\%}_{" +
+                                100.) + "\\%}_{" +
                 "{:.1f}".format(dl["LO_SCALE_ERRMINUS"][mask][i] / lo[i] *
-                                100.) + "\%}$ \t&\t $" +
+                                100.) + "\\%}$ \t&\t $" +
                 "{:.3f}".format(nlo[i] * yscale) + "^{+" +
                 "{:.1f}".format(dl["NLO_SCALE_ERRPLUS"][mask][i] / nlo[i] *
                                 100.) +
-                ("\%+" + "{:.1f}".format(dl["NLO_PDF_ERRPLUS"][mask][i] /
+                ("\\%+" + "{:.1f}".format(dl["NLO_PDF_ERRPLUS"][mask][i] /
+                                          nlo[i] * 100.) if pdf else "") +
+                "\\%}_{" + "{:.1f}".format(dl["NLO_SCALE_ERRMINUS"][mask][i] /
+                                           nlo[i] * 100.) +
+                ("\\%" + "{:.1f}".format(dl["NLO_PDF_ERRMINUS"][mask][i] /
                                          nlo[i] * 100.) if pdf else "") +
-                "\%}_{" + "{:.1f}".format(dl["NLO_SCALE_ERRMINUS"][mask][i] /
-                                          nlo[i] * 100.) +
-                ("\%" + "{:.1f}".format(dl["NLO_PDF_ERRMINUS"][mask][i] /
-                                        nlo[i] * 100.) if pdf else "") +
-                "\%}$ \t&\t $" + "{:.3f}".format(nlo_plus_nll[i] * yscale) +
+                "\\%}$ \t&\t $" + "{:.3f}".format(nlo_plus_nll[i] * yscale) +
                 "^{+" +
                 "{:.1f}".format(dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask][i] /
                                 nlo_plus_nll[i] * 100.) +
-                ("\%+" +
+                ("\\%+" +
                  "{:.1f}".format(dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask][i] /
                                  nlo_plus_nll[i] * 100.) if pdf else "") +
-                "\%}_{" +
+                "\\%}_{" +
                 "{:.1f}".format(dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask][i] /
                                 nlo_plus_nll[i] * 100.) +
-                ("\%" +
+                ("\\%" +
                  "{:.1f}".format(dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask][i] /
                                  nlo_plus_nll[i] * 100.) if pdf else "") +
-                "\%}$ " + "\\\\\n")
+                "\\%}$ " + "\\\\\n")
 
 
 tex_table = write_latex
