@@ -124,14 +124,15 @@ def _plot(dict_list,
     Creates a plot based on the entries `x`and `y` in `dict_list`.
     
     Examples
+
     .. plot::
         :include-source:
 
         >>> import urllib.request
-        >>> dl = load(urllib.request.urlopen(
+        >>> import hepi 
+        >>> dl = hepi.load(urllib.request.urlopen(
         ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
         ... ))
-        >>> import hepi 
         >>> hepi._plot(dl,"N1","NLO_PLUS_NLL")
     """
     if isinstance(y, Iterable) and not isinstance(y, str):
