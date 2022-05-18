@@ -17,7 +17,7 @@ class DictData:
         return str(self.__dict__)
 
 
-def LD2DL(l: List) -> dict:
+def LD2DL(l: List, actual_dict=False) -> dict:
     """
     Convert a list of objects into a dictionary of lists.
 
@@ -25,6 +25,7 @@ def LD2DL(l: List) -> dict:
 
     Args:
         l (List) : list of objects.
+        actual_dict (bool) : objects are already dicts
 
     Returns:
         dict : dictionary of numpy arrays.
@@ -40,11 +41,14 @@ def LD2DL(l: List) -> dict:
     """
     # Check l[0] keys in all dictionaries.
     for m in l:
-        md = m.__dict__
-        for k in l[0].__dict__:
+        md = m if actual_dict else m.__dict__
+        for k in l[0] if actual_dict else l[0].__dict__:
             assert k in md
     # switch them
-    return {k: np.array([dic.__dict__[k] for dic in l]) for k in l[0].__dict__}
+    return {
+        k: np.array([dic[k] if actual_dict else dic.__dict__[k] for dic in l])
+        for k in (l[0] if actual_dict else l[0].__dict__)
+    }
 
 
 def LD2DF(ld: dict) -> pd.DataFrame:
