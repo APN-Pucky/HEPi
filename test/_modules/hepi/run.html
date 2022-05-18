@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-26-gd6452c5
+                0.1.6-28-g12fe89d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -94,7 +94,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.run</h1><div class="highlight"><pre>
-<span></span>import os
+<span></span>from logging import warning
+import os
 import subprocess
 from typing import List
 import warnings
@@ -369,12 +370,14 @@ import time
 
 <div class="viewcode-block" id="Runner.set_path"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.set_path">[docs]</a>    def set_path(self, p: str):
         &quot;&quot;&quot;
-		Set the path to the Runner folder containing the binary in &#39;./bin&#39;.
+		Set the path to the Runner folder containing the binary in &#39;./bin&#39; or &#39;./build/bin&#39;.
 
 		Args:
 		    p (str): new path.
 		&quot;&quot;&quot;
-        self.path = p + (&quot;/&quot; if p[-1] != &quot;/&quot; else &quot;&quot;)</div>
+        if os.path.isdir(p):
+            self.path = p + (&quot;/&quot; if p[-1] != &quot;/&quot; else &quot;&quot;)
+        self.path = p</div>
 
 <div class="viewcode-block" id="Runner.set_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.set_input_dir">[docs]</a>    def set_input_dir(self, indir: str):
         &quot;&quot;&quot;

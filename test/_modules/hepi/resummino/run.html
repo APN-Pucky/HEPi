@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-26-gd6452c5
+                0.1.6-28-g12fe89d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -116,7 +116,13 @@ import stat
         return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL, Order.aNNLO_PLUS_NNLL]</div>
 
 <div class="viewcode-block" id="ResumminoRunner._check_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
-        return os.path.exists(get_path() + &quot;build/bin/resummino&quot;)</div>
+        if os.path.exists(get_path() + &quot;build/bin/resummino&quot;):
+            self.set_path(get_path() + &quot;build/bin/resummino&quot;)
+            return True
+        if os.path.exists(get_path() + &quot;bin/resummino&quot;):
+            self.set_path(get_path() + &quot;bin/resummino&quot;)
+            return True
+        return True</div>
 
 <div class="viewcode-block" id="ResumminoRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._check_input">[docs]</a>    def _check_input(self, p: Input, **kwargs) -&gt; bool:
 
@@ -159,10 +165,9 @@ import stat
             result = src.substitute(p.__dict__)
             open(self.get_output_dir() + rp.name + &quot;.in&quot;, &quot;w&quot;).write(result)
             open(self.get_output_dir() + rp.name + &quot;.sh&quot;,
-                 &quot;w&quot;).write(&quot;#!/bin/sh\n&quot; + get_path() +
-                            &#39;build/bin/resummino {} {} &gt;&gt; {}&#39;.format(
-                                self.get_output_dir() + rp.name + &quot;.in&quot;, flags,
-                                self.get_output_dir() + rp.name + &quot;.out&quot;))
+                 &quot;w&quot;).write(&quot;#!/bin/sh\n&quot; + get_path() + &#39; {} {} &gt;&gt; {}&#39;.format(
+                     self.get_output_dir() + rp.name + &quot;.in&quot;, flags,
+                     self.get_output_dir() + rp.name + &quot;.out&quot;))
             st = os.stat(self.get_output_dir() + rp.name + &quot;.sh&quot;)
             os.chmod(self.get_output_dir() + rp.name + &quot;.sh&quot;,
                      st.st_mode | stat.S_IEXEC)
