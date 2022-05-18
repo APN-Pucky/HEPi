@@ -1640,10 +1640,11 @@ Attributes
    {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
-.. py:function:: load(f: str, dimensions=1)
+.. py:function:: load(f, dimensions=1)
 
    Load xsec data from json in to something that works within hepi's plotting.
 
+   :param f: readable object, e.g. `open(filepath:str)`.
    :param dimensions: 1 or 2 currently supported.
    :type dimensions: int
 

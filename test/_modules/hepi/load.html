@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-31-g0793314
+                0.1.6-32-g256e97d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -102,14 +102,15 @@ from hepi.input import Input, order_to_string, xsec_to_order
 from hepi.util import LD2DL
 
 
-<div class="viewcode-block" id="load"><a class="viewcode-back" href="../../autoapi/hepi/load/index.html#hepi.load.load">[docs]</a>def load(f: str, dimensions=1):
+<div class="viewcode-block" id="load"><a class="viewcode-back" href="../../autoapi/hepi/load/index.html#hepi.load.load">[docs]</a>def load(f, dimensions=1):
     &quot;&quot;&quot;
     Load xsec data from json in to something that works within hepi&#39;s plotting.
 
     Args:
+        f : readable object, e.g. `open(filepath:str)`.
         dimensions (int) : 1 or 2 currently supported.
     &quot;&quot;&quot;
-    dict = json.load(open(f))
+    dict = json.load(f)
 
     inpu = Input(
         xsec_to_order(dict[&quot;order&quot;]),
@@ -146,8 +147,8 @@ from hepi.util import LD2DL
     return LD2DL(dat, actual_dict=True)</div>
 
 
-#print(load(&quot;/home/apn/git/xsec/json/pp13_hinosplit_N2N1_NLO+NLL.json&quot;, 2))
-#print(load(&quot;/home/apn/git/xsec/json/pp13_gluino_NNLO+NNLL.json&quot;, 1))
+#print(load(open(&quot;/home/apn/git/xsec/json/pp13_hinosplit_N2N1_NLO+NLL.json&quot;), 2))
+#print(load(open(&quot;/home/apn/git/xsec/json/pp13_gluino_NNLO+NNLL.json&quot;), 1))
 </pre></div>
 
            </div>
