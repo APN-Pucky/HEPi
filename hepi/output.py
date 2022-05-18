@@ -111,6 +111,6 @@ def write_json(dict_list: list,
                 "xsec_pb": float(plot.unv(dict_list[order_to_string(o)][j]))
             }
     jd["data"] = dat
-    jd["parameters"] = "?"
+    jd["parameters"] = [[parameter]]
     with open(filename, 'w+') as f:
         f.write(json.dumps(jd))
