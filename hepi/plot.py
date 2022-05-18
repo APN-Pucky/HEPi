@@ -199,6 +199,7 @@ def vplot(x,
           data_fmt=".",
           fmt="-",
           print_area=False,
+          sort=True,
           **kwargs):
     """
     Creates a plot based on the values in `x`and `y`.
@@ -211,8 +212,13 @@ def vplot(x,
     if mask is None:
         x = x[0]
         y = y[0]
-    vx = x
-    vy = y
+    if sort:
+        permute = x.argsort()
+        vx = x[permute]
+        vy = y[permute]
+    else:
+        vx = x
+        vy = y
 
     xnew = np.linspace(
         vx[0],

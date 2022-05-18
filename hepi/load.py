@@ -52,7 +52,14 @@ def load(f, dimensions=1):
 
 
 import urllib.request
+import hepi
 
+dl = load(
+    urllib.request.urlopen(
+        "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
+    ))
+print(dl)
+hepi.plot(dl, "N1", "NLO_PLUS_NLL")
 print(
     load(
         urllib.request.urlopen(
