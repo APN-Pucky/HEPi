@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-23-g2146851
+                0.1.6-24-g48428c6
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -154,21 +154,21 @@ import stat
 
             src = Template(data)
             result = src.substitute(p.__dict__)
-            open(get_output_dir() + rp.name + &quot;.in&quot;, &quot;w&quot;).write(result)
-            open(get_output_dir() + rp.name + &quot;.sh&quot;,
+            open(self.get_output_dir() + rp.name + &quot;.in&quot;, &quot;w&quot;).write(result)
+            open(self.get_output_dir() + rp.name + &quot;.sh&quot;,
                  &quot;w&quot;).write(&quot;#!/bin/sh\n&quot; + get_path() +
                             &#39;build/bin/resummino {} {} &gt;&gt; {}&#39;.format(
-                                get_output_dir() + rp.name + &quot;.in&quot;, flags,
-                                get_output_dir() + rp.name + &quot;.out&quot;))
-            st = os.stat(get_output_dir() + rp.name + &quot;.sh&quot;)
-            os.chmod(get_output_dir() + rp.name + &quot;.sh&quot;,
+                                self.get_output_dir() + rp.name + &quot;.in&quot;, flags,
+                                self.get_output_dir() + rp.name + &quot;.out&quot;))
+            st = os.stat(self.get_output_dir() + rp.name + &quot;.sh&quot;)
+            os.chmod(self.get_output_dir() + rp.name + &quot;.sh&quot;,
                      st.st_mode | stat.S_IEXEC)
-            open(get_output_dir() + rp.name + &quot;.out&quot;,
+            open(self.get_output_dir() + rp.name + &quot;.out&quot;,
                  &quot;w&quot;).write(result + &quot;\n\n&quot;)
 
             sname = p.slha
-            with open(get_output_dir() + sname, &#39;r&#39;) as f:
-                open(get_output_dir() + rp.name + &quot;.out&quot;,
+            with open(self.get_output_dir() + sname, &#39;r&#39;) as f:
+                open(self.get_output_dir() + rp.name + &quot;.out&quot;,
                      &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
         return rp</div></div>
 
