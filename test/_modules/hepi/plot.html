@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-47-g03a4f27
+                0.1.7-1-gd5db0bf
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -230,7 +230,7 @@ from matplotlib.ticker import NullFormatter
         &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
         ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json&quot;
         ... ))
-        &gt;&gt;&gt; hepi.plot(dl,&quot;N1&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=r&quot;$m_{\tilde{\chi}_1^0}$&quot;)
+        &gt;&gt;&gt; hepi.plot(dl,&quot;N1&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=&quot;$m_{\\tilde{\\chi}_1^0}$&quot;)
     &quot;&quot;&quot;
     if isinstance(y, Iterable) and not isinstance(y, str):
         for yi in y:
@@ -428,7 +428,7 @@ from matplotlib.ticker import NullFormatter
         &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
         ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;
         ... ),dimensions=2)
-        &gt;&gt;&gt; hepi.mapplot(dl,&quot;N1&quot;,&quot;N2&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=r&#39;$m_{\tilde{\chi}_1^0}$&#39;,yaxis=r&#39;$m_{\tilde{\chi}_2^0}$&#39; , zaxis=&quot;$\sigma_{\mathrm{NLO+NLL}}$&quot;)
+        &gt;&gt;&gt; hepi.mapplot(dl,&quot;N1&quot;,&quot;N2&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=&quot;$m_{\\tilde{\\chi}_1^0}$&quot;,yaxis=&quot;$m_{\\tilde{\\chi}_2^0}$&quot; , zaxis=&quot;$\\sigma_{\\mathrm{NLO+NLL}}$&quot;)
     &quot;&quot;&quot;
     if xaxis is None:
         xaxis = x
