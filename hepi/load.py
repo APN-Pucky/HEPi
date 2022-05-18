@@ -6,14 +6,15 @@ from hepi.input import Input, order_to_string, xsec_to_order
 from hepi.util import LD2DL
 
 
-def load(f: str, dimensions=1):
+def load(f, dimensions=1):
     """
     Load xsec data from json in to something that works within hepi's plotting.
 
     Args:
+        f : readable object, e.g. `open(filepath:str)`.
         dimensions (int) : 1 or 2 currently supported.
     """
-    dict = json.load(open(f))
+    dict = json.load(f)
 
     inpu = Input(
         xsec_to_order(dict["order"]),
@@ -50,5 +51,5 @@ def load(f: str, dimensions=1):
     return LD2DL(dat, actual_dict=True)
 
 
-#print(load("/home/apn/git/xsec/json/pp13_hinosplit_N2N1_NLO+NLL.json", 2))
-#print(load("/home/apn/git/xsec/json/pp13_gluino_NNLO+NNLL.json", 1))
+#print(load(open("/home/apn/git/xsec/json/pp13_hinosplit_N2N1_NLO+NLL.json"), 2))
+#print(load(open("/home/apn/git/xsec/json/pp13_gluino_NNLO+NNLL.json"), 1))
