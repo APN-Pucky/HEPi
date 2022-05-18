@@ -58,21 +58,21 @@ class ResumminoRunner(Runner):
 
             src = Template(data)
             result = src.substitute(p.__dict__)
-            open(get_output_dir() + rp.name + ".in", "w").write(result)
-            open(get_output_dir() + rp.name + ".sh",
+            open(self.get_output_dir() + rp.name + ".in", "w").write(result)
+            open(self.get_output_dir() + rp.name + ".sh",
                  "w").write("#!/bin/sh\n" + get_path() +
                             'build/bin/resummino {} {} >> {}'.format(
-                                get_output_dir() + rp.name + ".in", flags,
-                                get_output_dir() + rp.name + ".out"))
-            st = os.stat(get_output_dir() + rp.name + ".sh")
-            os.chmod(get_output_dir() + rp.name + ".sh",
+                                self.get_output_dir() + rp.name + ".in", flags,
+                                self.get_output_dir() + rp.name + ".out"))
+            st = os.stat(self.get_output_dir() + rp.name + ".sh")
+            os.chmod(self.get_output_dir() + rp.name + ".sh",
                      st.st_mode | stat.S_IEXEC)
-            open(get_output_dir() + rp.name + ".out",
+            open(self.get_output_dir() + rp.name + ".out",
                  "w").write(result + "\n\n")
 
             sname = p.slha
-            with open(get_output_dir() + sname, 'r') as f:
-                open(get_output_dir() + rp.name + ".out",
+            with open(self.get_output_dir() + sname, 'r') as f:
+                open(self.get_output_dir() + rp.name + ".out",
                      "a").write(f.read() + "\n\n")
         return rp
 
