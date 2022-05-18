@@ -43,4 +43,4 @@ def load(f: str, dimensions=1):
             print(params[0], k, params[1], l, dict["data"][k][l])
 
 
-load("/home/apn/git/xsec/json/pp13_hinosplit_N2N1_NLO+NLL.json", 2)
+#load("/home/apn/git/xsec/json/pp13_hinosplit_N2N1_NLO+NLL.json", 2)
