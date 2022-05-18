@@ -47,8 +47,16 @@ class Runner:
             self.pre = pre
 
     def orders(self) -> List[Order]:
-        """ List of supported Orders in this runner."""
+        """List of supported Orders in this runner."""
         return [e.value for e in Order]
+
+    def get_name(self) -> str:
+        """Returns the name of the runner."""
+        return type(self).__name__
+
+    def _check_path(self) -> bool:
+        """Checks if the passed path is valid."""
+        return True
 
     def _prepare(self, p: Input, **kwargs) -> RunParam:
         skip_ = kwargs["skip"]
@@ -114,8 +122,10 @@ class Runner:
 		        The dictionary is empty if `parse` is set to False.
 
 		"""
-        print("Running: " + str(len(params)) + " jobs")
+        if not self._check_path():
+            warnings.warn("The path is not valid for " + self.get_name())
         rps = self._prepare_all(params, parse=parse, skip=skip, **kwargs)
+        print("Running: " + str(len(params)) + " jobs")
         if sleep is None:
             sleep = 0 if parse else 5
         if run:
