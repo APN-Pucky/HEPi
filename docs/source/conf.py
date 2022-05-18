@@ -17,7 +17,6 @@ import sys
 
 sys.path.insert(0, os.path.abspath('../..'))
 
-
 # -- Project information -----------------------------------------------------
 
 project = 'HEPi'
@@ -25,28 +24,36 @@ copyright = str(datetime.datetime.now().year) + ', APN-Pucky'
 author = 'APN-Pucky'
 version = re.sub('^', '', os.popen('git describe --tags').read().strip())
 
-
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-	'sphinx.ext.autodoc', 'nbsphinx', 'sphinx.ext.githubpages',
-              'sphinx.ext.viewcode', 'sphinx.ext.mathjax', 'sphinx.ext.todo', 'sphinx.ext.doctest',
-              'matplotlib.sphinxext.plot_directive', 'sphinx.ext.napoleon', 'sphinx_math_dollar', 'sphinx.ext.autosummary',
-              'sphinx.ext.coverage','jupyter_sphinx',
-	      #'sphinx_copybutton',
-	      'IPython.sphinxext.ipython_console_highlighting',
-#'sphinx.ext.doctest',
-#'sphinx.ext.autodoc',
-#'sphinx.ext.githubpages',
-#'nbsphinx',
-#'jupyter_sphinx',
-#'sphinx.ext.doctest',
-#'sphinx.ext.viewcode',
-#'sphinx.ext.autosummary',
-'autoapi.extension',
+    'sphinx.ext.autodoc',
+    'nbsphinx',
+    'sphinx.ext.githubpages',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.todo',
+    'sphinx.ext.doctest',
+    'matplotlib.sphinxext.plot_directive',
+    'sphinx.ext.napoleon',
+    'sphinx_math_dollar',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.coverage',
+    'jupyter_sphinx',
+    'IPython.sphinxext.ipython_console_highlighting',
+    #'sphinx_copybutton',
+    #'sphinx.ext.doctest',
+    #'sphinx.ext.autodoc',
+    #'sphinx.ext.githubpages',
+    #'nbsphinx',
+    #'jupyter_sphinx',
+    #'sphinx.ext.doctest',
+    #'sphinx.ext.viewcode',
+    #'sphinx.ext.autosummary',
+    'autoapi.extension',
 ]
 napoleon_use_ivar = True
 autoapi_type = 'python'
@@ -60,7 +67,6 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
-
 
 # -- Options for HTML output -------------------------------------------------
 highlight_language = 'none'

@@ -51,5 +51,12 @@ def load(f, dimensions=1):
     return LD2DL(dat, actual_dict=True)
 
 
+import urllib.request
+
+print(
+    load(
+        urllib.request.urlopen(
+            "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
+        )))
 #print(load(open("/home/apn/git/xsec/json/pp13_hinosplit_N2N1_NLO+NLL.json"), 2))
 #print(load(open("/home/apn/git/xsec/json/pp13_gluino_NNLO+NNLL.json"), 1))

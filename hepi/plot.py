@@ -98,6 +98,7 @@ def get_mass(l: dict, iid: int):
 
     Returns
         :obj:`list` of float : masses of particles in each element of the dict list.
+
     """
     ret = []
     for s in l["slha"]:
@@ -119,7 +120,20 @@ def _plot(dict_list,
           yscale=1.,
           mask=None,
           **kwargs) -> None:
-    """Creates a plot based on the entries `x`and `y` in `dict_list`."""
+    """
+    Creates a plot based on the entries `x`and `y` in `dict_list`.
+    
+    Examples
+    .. plot::
+        :include-source:
+
+        >>> import urllib.request
+        >>> dl = load(urllib.request.urlopen(
+        ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
+        ... ))
+        >>> import hepi 
+        >>> hepi._plot(dl,"N1","NLO_PLUS_NLL")
+    """
     if isinstance(y, Iterable) and not isinstance(y, str):
         for yi in y:
             _plot(dict_list, x, yi, label, xaxis, yaxis, ratio, K, K_plus_1,
@@ -185,7 +199,10 @@ def _vplot(x,
            fmt="-",
            print_area=False,
            **kwargs):
-    """Creates a plot based on the values in `x`and `y`."""
+    """
+    Creates a plot based on the values in `x`and `y`.
+    
+    """
     color = data_color
     if label is None:
         #label = "??"
