@@ -15,7 +15,6 @@ def load(f, dimensions=1):
         dimensions (int) : 1 or 2 currently supported.
     """
     dict = json.load(f)
-    print(dict)
 
     inpu = Input(
         xsec_to_order(dict["order"]),
@@ -37,7 +36,6 @@ def load(f, dimensions=1):
                     dicd[p1] = float(k)
                 for p2 in params[1]:
                     dicd[p2] = float(l)
-                print(k, l)
                 dicd[order_to_string(inpu.order)] = ufloat(
                     dict["data"][k][l]["xsec_pb"],
                     dict["data"][k][l]["unc_pb"])
