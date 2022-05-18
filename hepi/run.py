@@ -281,10 +281,7 @@ class Runner:
 		"""
         if os.path.isdir(p):
             self.path = p + ("/" if p[-1] != "/" else "")
-        elif os.path.file(p):
-            self.path = p
-        else:
-            warnings.warn("Path: '" + p + "' not set since it does not exist")
+        self.path = p
 
     def set_input_dir(self, indir: str):
         """

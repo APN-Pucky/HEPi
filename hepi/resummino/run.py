@@ -26,8 +26,7 @@ class ResumminoRunner(Runner):
         if os.path.exists(get_path() + "bin/resummino"):
             self.set_path(get_path() + "bin/resummino")
             return True
-        else:
-            return os.path.exists(get_path())
+        return True
 
     def _check_input(self, p: Input, **kwargs) -> bool:
 
@@ -70,10 +69,9 @@ class ResumminoRunner(Runner):
             result = src.substitute(p.__dict__)
             open(self.get_output_dir() + rp.name + ".in", "w").write(result)
             open(self.get_output_dir() + rp.name + ".sh",
-                 "w").write("#!/bin/sh\n" + get_path() +
-                            ' {} {} >> {}'.format(
-                                self.get_output_dir() + rp.name + ".in", flags,
-                                self.get_output_dir() + rp.name + ".out"))
+                 "w").write("#!/bin/sh\n" + get_path() + ' {} {} >> {}'.format(
+                     self.get_output_dir() + rp.name + ".in", flags,
+                     self.get_output_dir() + rp.name + ".out"))
             st = os.stat(self.get_output_dir() + rp.name + ".sh")
             os.chmod(self.get_output_dir() + rp.name + ".sh",
                      st.st_mode | stat.S_IEXEC)
