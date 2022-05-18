@@ -121,11 +121,11 @@ Functions
    hepi.mass_plot
    hepi.mass_vplot
    hepi.get_mass
-   hepi._plot
+   hepi.plot
    hepi.index_open
    hepi.slha_data
    hepi.slha_plot
-   hepi._vplot
+   hepi.vplot
    hepi.mass_mapplot
    hepi.mapplot
    hepi.map_vplot
@@ -164,6 +164,7 @@ Attributes
    hepi.axs
    hepi.lines
    hepi.labels
+   hepi.dl
    hepi.package
    hepi.version
    hepi.__version__
@@ -1076,9 +1077,22 @@ Attributes
        :obj:`list` of float : masses of particles in each element of the dict list.
 
 
-.. py:function:: _plot(dict_list, x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs) -> None
+
+.. py:function:: plot(dict_list, x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs) -> None
 
    Creates a plot based on the entries `x`and `y` in `dict_list`.
+
+   Examples
+
+   .. plot::
+       :include-source:
+
+       >>> import urllib.request
+       >>> import hepi
+       >>> dl = hepi.load(urllib.request.urlopen(
+       ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
+       ... ))
+       >>> hepi.plot(dl,"N1","NLO_PLUS_NLL")
 
 
 .. py:function:: index_open(var, idx)
@@ -1090,9 +1104,10 @@ Attributes
 .. py:function:: slha_plot(li, x, y, **kwargs)
 
 
-.. py:function:: _vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', print_area=False, **kwargs)
+.. py:function:: vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', print_area=False, sort=True, **kwargs)
 
    Creates a plot based on the values in `x`and `y`.
+
 
 
 .. py:function:: mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)
@@ -1648,6 +1663,11 @@ Attributes
    :param dimensions: 1 or 2 currently supported.
    :type dimensions: int
 
+
+.. py:data:: dl
+   
+
+   
 
 .. py:data:: package
    :annotation: = hepi

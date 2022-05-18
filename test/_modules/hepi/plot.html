@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.6-32-g256e97d
+                0.1.6-37-gf5c342e
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -137,15 +137,15 @@ from matplotlib.ticker import NullFormatter
                 label=None,
                 **kwargs):
     &quot;&quot;&quot;Plot energy on the x-axis.&quot;&quot;&quot;
-    _plot(dict_list,
-          &quot;energy&quot;,
-          y,
-          label=label,
-          xaxis=xaxis,
-          yaxis=yaxis,
-          logy=True,
-          yscale=yscale,
-          **kwargs)</div>
+    plot(dict_list,
+         &quot;energy&quot;,
+         y,
+         label=label,
+         xaxis=xaxis,
+         yaxis=yaxis,
+         logy=True,
+         yscale=yscale,
+         **kwargs)</div>
 
 
 <div class="viewcode-block" id="mass_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mass_plot">[docs]</a>def mass_plot(dict_list,
@@ -157,15 +157,15 @@ from matplotlib.ticker import NullFormatter
               label=None,
               **kwargs):
     dict_list[&quot;mass_&quot; + str(part)] = get_mass(dict_list, abs(part))
-    _plot(dict_list,
-          &quot;mass_&quot; + str(part),
-          y,
-          label=label,
-          xaxis=&quot;$m_{&quot; + get_name(part) + &quot;}$ [GeV]&quot;,
-          yaxis=yaxis,
-          logy=logy,
-          yscale=yscale,
-          **kwargs)</div>
+    plot(dict_list,
+         &quot;mass_&quot; + str(part),
+         y,
+         label=label,
+         xaxis=&quot;$m_{&quot; + get_name(part) + &quot;}$ [GeV]&quot;,
+         yaxis=yaxis,
+         logy=logy,
+         yscale=yscale,
+         **kwargs)</div>
 
 
 <div class="viewcode-block" id="mass_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mass_vplot">[docs]</a>def mass_vplot(dict_list,
@@ -177,15 +177,15 @@ from matplotlib.ticker import NullFormatter
                label=None,
                mask=None,
                **kwargs):
-    _vplot(get_mass(dict_list, part)[mask],
-           y[mask],
-           label=label,
-           xaxis=&quot;$m_{&quot; + get_name(part) + &quot;}$ [GeV]&quot;,
-           yaxis=yaxis,
-           logy=logy,
-           yscale=yscale,
-           mask=mask,
-           **kwargs)</div>
+    vplot(get_mass(dict_list, part)[mask],
+          y[mask],
+          label=label,
+          xaxis=&quot;$m_{&quot; + get_name(part) + &quot;}$ [GeV]&quot;,
+          yaxis=yaxis,
+          logy=logy,
+          yscale=yscale,
+          mask=mask,
+          **kwargs)</div>
 
 
 <div class="viewcode-block" id="get_mass"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.get_mass">[docs]</a>def get_mass(l: dict, iid: int):
@@ -194,6 +194,7 @@ from matplotlib.ticker import NullFormatter
 
     Returns
         :obj:`list` of float : masses of particles in each element of the dict list.
+
     &quot;&quot;&quot;
     ret = []
     for s in l[&quot;slha&quot;]:
@@ -202,24 +203,38 @@ from matplotlib.ticker import NullFormatter
     return np.array(ret)</div>
 
 
-<div class="viewcode-block" id="_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi._plot">[docs]</a>def _plot(dict_list,
-          x,
-          y,
-          label=None,
-          xaxis=&quot;E [GeV]&quot;,
-          yaxis=&quot;$\\sigma$ [pb]&quot;,
-          ratio=False,
-          K=False,
-          K_plus_1=False,
-          logy=True,
-          yscale=1.,
-          mask=None,
-          **kwargs) -&gt; None:
-    &quot;&quot;&quot;Creates a plot based on the entries `x`and `y` in `dict_list`.&quot;&quot;&quot;
+<div class="viewcode-block" id="plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.plot">[docs]</a>def plot(dict_list,
+         x,
+         y,
+         label=None,
+         xaxis=&quot;E [GeV]&quot;,
+         yaxis=&quot;$\\sigma$ [pb]&quot;,
+         ratio=False,
+         K=False,
+         K_plus_1=False,
+         logy=True,
+         yscale=1.,
+         mask=None,
+         **kwargs) -&gt; None:
+    &quot;&quot;&quot;
+    Creates a plot based on the entries `x`and `y` in `dict_list`.
+    
+    Examples
+
+    .. plot::
+        :include-source:
+
+        &gt;&gt;&gt; import urllib.request
+        &gt;&gt;&gt; import hepi 
+        &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
+        ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json&quot;
+        ... ))
+        &gt;&gt;&gt; hepi.plot(dl,&quot;N1&quot;,&quot;NLO_PLUS_NLL&quot;)
+    &quot;&quot;&quot;
     if isinstance(y, Iterable) and not isinstance(y, str):
         for yi in y:
-            _plot(dict_list, x, yi, label, xaxis, yaxis, ratio, K, K_plus_1,
-                  logy, yscale, mask, **kwargs)
+            plot(dict_list, x, yi, label, xaxis, yaxis, ratio, K, K_plus_1,
+                 logy, yscale, mask, **kwargs)
         return
     # TODO use kwargs
     if label is None:
@@ -241,7 +256,7 @@ from matplotlib.ticker import NullFormatter
         yscale = 1.0
         vy = vy / splot.unv(vy)
 
-    _vplot(vx, vy, label, xaxis, yaxis, logy, yscale, mask=mask, **kwargs)</div>
+    vplot(vx, vy, label, xaxis, yaxis, logy, yscale, mask=mask, **kwargs)</div>
 
 
 <div class="viewcode-block" id="index_open"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.index_open">[docs]</a>def index_open(var, idx):
@@ -262,26 +277,30 @@ from matplotlib.ticker import NullFormatter
     vx = slha_data(li, x)
     vy = slha_data(li, y)
 
-    _vplot(np.array(vx), np.array(vy), **kwargs)</div>
+    vplot(np.array(vx), np.array(vy), **kwargs)</div>
 
 
-<div class="viewcode-block" id="_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi._vplot">[docs]</a>def _vplot(x,
-           y,
-           label=None,
-           xaxis=&quot;E [GeV]&quot;,
-           yaxis=&quot;$\\sigma$ [pb]&quot;,
-           logy=True,
-           yscale=1.,
-           interpolate=True,
-           plot_data=True,
-           data_color=None,
-           mask=-1,
-           fill=False,
-           data_fmt=&quot;.&quot;,
-           fmt=&quot;-&quot;,
-           print_area=False,
-           **kwargs):
-    &quot;&quot;&quot;Creates a plot based on the values in `x`and `y`.&quot;&quot;&quot;
+<div class="viewcode-block" id="vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.vplot">[docs]</a>def vplot(x,
+          y,
+          label=None,
+          xaxis=&quot;E [GeV]&quot;,
+          yaxis=&quot;$\\sigma$ [pb]&quot;,
+          logy=True,
+          yscale=1.,
+          interpolate=True,
+          plot_data=True,
+          data_color=None,
+          mask=-1,
+          fill=False,
+          data_fmt=&quot;.&quot;,
+          fmt=&quot;-&quot;,
+          print_area=False,
+          sort=True,
+          **kwargs):
+    &quot;&quot;&quot;
+    Creates a plot based on the values in `x`and `y`.
+    
+    &quot;&quot;&quot;
     color = data_color
     if label is None:
         #label = &quot;??&quot;
@@ -289,8 +308,13 @@ from matplotlib.ticker import NullFormatter
     if mask is None:
         x = x[0]
         y = y[0]
-    vx = x
-    vy = y
+    if sort:
+        permute = x.argsort()
+        vx = x[permute]
+        vy = y[permute]
+    else:
+        vx = x
+        vy = y
 
     xnew = np.linspace(
         vx[0],
