@@ -75,7 +75,7 @@ def write_json(dict_list: list,
  Cf. https://github.com/fuenfundachtzig/xsec
  """
     jd = {}
-    jd["initial state"] = "pp"  # TODO add more such cases + filters
+    jd["initial state"] = "pp"  # TODO add more such cases + filters, also in resummino
     if o == Order.LO:
         jd["order"] = "LO"
     elif o == Order.NLO:
@@ -91,7 +91,7 @@ def write_json(dict_list: list,
     jd["tool"] = dict_list["code"][0]
     jd["process_latex"] = "$" + get_name(dict_list["particle1"][0]) + get_name(
         dict_list["particle2"][0]) + "$"
-    jd["comment"] = "?"
+    jd["comment"] = dict_list["id"][0]
     jd["reference"] = "?"
     jd["Ecom [GeV]"] = str(dict_list["energy"][0])
     jd["process_id"] = "pp_" + str(dict_list["energy"][0]) + "_" + str(

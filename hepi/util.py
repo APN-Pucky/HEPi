@@ -1,4 +1,5 @@
 """Collection of utility functions for the :mod:`hepi` package."""
+import json
 from typing import List, Tuple
 import numpy as np
 import hashlib
