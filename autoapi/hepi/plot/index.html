@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.7
+                0.1.8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -265,7 +265,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dl</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
 <span class="gp">... </span><span class="s2">&quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json&quot;</span>
 <span class="gp">... </span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hepi</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;N1&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL&quot;</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$m_{       ilde{\chi}_1^0}$&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hepi</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;N1&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL&quot;</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$m_{</span><span class="se">\\</span><span class="s2">tilde{</span><span class="se">\\</span><span class="s2">chi}_1^0}$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>(<a class="reference external" href="../../../autoapi/hepi/plot/index-1.py">Source code</a>, <a class="reference external" href="../../../autoapi/hepi/plot/index-1.png">png</a>, <a class="reference external" href="../../../autoapi/hepi/plot/index-1.hires.png">hires.png</a>, <a class="reference external" href="../../../autoapi/hepi/plot/index-1.pdf">pdf</a>)</p>
@@ -309,7 +309,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dl</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
 <span class="gp">... </span><span class="s2">&quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;</span>
 <span class="gp">... </span><span class="p">),</span><span class="n">dimensions</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hepi</span><span class="o">.</span><span class="n">mapplot</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;N1&quot;</span><span class="p">,</span><span class="s2">&quot;N2&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL&quot;</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$m_{       ilde{\chi}_1^0}$&#39;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$m_{  ilde{\chi}_2^0}$&#39;</span> <span class="p">,</span> <span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$\sigma_{\mathrm{NLO+NLL}}$&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hepi</span><span class="o">.</span><span class="n">mapplot</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;N1&quot;</span><span class="p">,</span><span class="s2">&quot;N2&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL&quot;</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$m_{</span><span class="se">\\</span><span class="s2">tilde{</span><span class="se">\\</span><span class="s2">chi}_1^0}$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$m_{</span><span class="se">\\</span><span class="s2">tilde{</span><span class="se">\\</span><span class="s2">chi}_2^0}$&quot;</span> <span class="p">,</span> <span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">sigma_{</span><span class="se">\\</span><span class="s2">mathrm{NLO+NLL}}$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>(<a class="reference external" href="../../../autoapi/hepi/plot/index-2.py">Source code</a>, <a class="reference external" href="../../../autoapi/hepi/plot/index-2.png">png</a>, <a class="reference external" href="../../../autoapi/hepi/plot/index-2.hires.png">hires.png</a>, <a class="reference external" href="../../../autoapi/hepi/plot/index-2.pdf">pdf</a>)</p>

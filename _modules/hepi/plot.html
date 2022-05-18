@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.7
+                0.1.8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -230,7 +230,7 @@ from matplotlib.ticker import NullFormatter
         &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
         ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json&quot;
         ... ))
-        &gt;&gt;&gt; hepi.plot(dl,&quot;N1&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=r&quot;$m_{\tilde{\chi}_1^0}$&quot;)
+        &gt;&gt;&gt; hepi.plot(dl,&quot;N1&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=&quot;$m_{\\\\tilde{\\\\chi}_1^0}$&quot;)
     &quot;&quot;&quot;
     if isinstance(y, Iterable) and not isinstance(y, str):
         for yi in y:
@@ -428,7 +428,7 @@ from matplotlib.ticker import NullFormatter
         &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
         ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;
         ... ),dimensions=2)
-        &gt;&gt;&gt; hepi.mapplot(dl,&quot;N1&quot;,&quot;N2&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=r&#39;$m_{\tilde{\chi}_1^0}$&#39;,yaxis=r&#39;$m_{\tilde{\chi}_2^0}$&#39; , zaxis=&quot;$\sigma_{\mathrm{NLO+NLL}}$&quot;)
+        &gt;&gt;&gt; hepi.mapplot(dl,&quot;N1&quot;,&quot;N2&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=&quot;$m_{\\\\tilde{\\\\chi}_1^0}$&quot;,yaxis=&quot;$m_{\\\\tilde{\\\\chi}_2^0}$&quot; , zaxis=&quot;$\\\\sigma_{\\\\mathrm{NLO+NLL}}$&quot;)
     &quot;&quot;&quot;
     if xaxis is None:
         xaxis = x
@@ -487,22 +487,33 @@ from matplotlib.ticker import NullFormatter
         vx, vy = vy, vx
 
     grid = splot.unv(vz).reshape((int(np.rint(np.size(vx) / s)), s)) * zscale
+
+    fig, ax = plt.subplots(nrows=1, ncols=1, constrained_layout=True)
+    im = None
     if (logz):
-        plt.imshow(
-            grid,
+        im = NonUniformImage(
+            ax,
             origin=&quot;lower&quot;,
-            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
             cmap=&#39;viridis&#39;,
-            #cmap=cm.gist_heat,
             interpolation=&#39;nearest&#39;,
-            norm=colors.LogNorm())
+            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
+            norm=colors.LogNorm(),
+        )
     else:
-        plt.imshow(grid,
-                   origin=&quot;lower&quot;,
-                   extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-                   cmap=&#39;viridis&#39;,
-                   interpolation=&#39;nearest&#39;)
-    cb = plt.colorbar()
+        im = NonUniformImage(
+            ax,
+            origin=&quot;lower&quot;,
+            cmap=&#39;viridis&#39;,
+            interpolation=&#39;nearest&#39;,
+            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
+        )
+
+    im.set_data(np.unique(vx), np.unique(vy), grid)
+    ax.images.append(im)
+    ax.set_xlim(vx.min(), vx.max())
+    ax.set_ylim(vy.min(), vy.max())
+
+    cb = plt.colorbar(im)
     cb.set_label(zaxis)
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)

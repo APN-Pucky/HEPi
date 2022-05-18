@@ -1095,7 +1095,7 @@ Attributes
        >>> dl = hepi.load(urllib.request.urlopen(
        ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
        ... ))
-       >>> hepi.plot(dl,"N1","NLO_PLUS_NLL",xaxis=r"$m_{       ilde{\chi}_1^0}$")
+       >>> hepi.plot(dl,"N1","NLO_PLUS_NLL",xaxis="$m_{\\tilde{\\chi}_1^0}$")
 
 
 .. py:function:: index_open(var, idx)
@@ -1128,7 +1128,7 @@ Attributes
        >>> dl = hepi.load(urllib.request.urlopen(
        ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
        ... ),dimensions=2)
-       >>> hepi.mapplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis=r'$m_{       ilde{\chi}_1^0}$',yaxis=r'$m_{  ilde{\chi}_2^0}$' , zaxis="$\sigma_{\mathrm{NLO+NLL}}$")
+       >>> hepi.mapplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\tilde{\\chi}_1^0}$",yaxis="$m_{\\tilde{\\chi}_2^0}$" , zaxis="$\\sigma_{\\mathrm{NLO+NLL}}$")
 
 
 .. py:function:: map_vplot(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, sort=True, fill_missing=True, zscale=1.0)
