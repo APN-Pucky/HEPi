@@ -391,22 +391,33 @@ def map_vplot(vx,
         vx, vy = vy, vx
 
     grid = splot.unv(vz).reshape((int(np.rint(np.size(vx) / s)), s)) * zscale
+
+    fig, ax = plt.subplots(nrows=1, ncols=1, constrained_layout=True)
+    im = None
     if (logz):
-        plt.imshow(
-            grid,
+        im = NonUniformImage(
+            ax,
             origin="lower",
-            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
             cmap='viridis',
-            #cmap=cm.gist_heat,
             interpolation='nearest',
-            norm=colors.LogNorm())
+            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
+            norm=colors.LogNorm(),
+        )
     else:
-        plt.imshow(grid,
-                   origin="lower",
-                   extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-                   cmap='viridis',
-                   interpolation='nearest')
-    cb = plt.colorbar()
+        im = NonUniformImage(
+            ax,
+            origin="lower",
+            cmap='viridis',
+            interpolation='nearest',
+            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
+        )
+
+    im.set_data(np.unique(vx), np.unique(vy), grid)
+    ax.images.append(im)
+    ax.set_xlim(vx.min(), vx.max())
+    ax.set_ylim(vy.min(), vy.max())
+
+    cb = plt.colorbar(im)
     cb.set_label(zaxis)
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)
