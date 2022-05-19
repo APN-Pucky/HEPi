@@ -35,7 +35,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-3-g08c7e5b
+                0.1.8-4-gab93bfa
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -94,7 +94,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.madgraph.run</h1><div class="highlight"><pre>
-<span></span>&quot;&quot;&quot;Runs MadGraph&quot;&quot;&quot;
+<span></span>&quot;&quot;&quot;Runs MadGraph.&quot;&quot;&quot;
 from typing import List
 import subprocess
 from string import Template
@@ -107,9 +107,7 @@ import time
 
 
 <div class="viewcode-block" id="MadGraphRunParams"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunParams">[docs]</a>class MadGraphRunParams(RunParam):
-    &quot;&quot;&quot;
-    Parameters for MadGraph.
-    &quot;&quot;&quot;
+    &quot;&quot;&quot;Parameters for MadGraph.&quot;&quot;&quot;
 
     def __init__(self, dic, skip=False, madstr=True):
         super().__init__(skip)
@@ -123,7 +121,7 @@ import time
 <div class="viewcode-block" id="MadGraphRunner.orders"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
         return [Order.LO, Order.NLO]</div>
 
-<div class="viewcode-block" id="MadGraphRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._check_input">[docs]</a>    def _check_input(self, p: Input, **kwargs) -&gt; bool:
+<div class="viewcode-block" id="MadGraphRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._check_input">[docs]</a>    def _check_input(self, param: Input, **kwargs) -&gt; bool:
         &quot;&quot;&quot;Checks input parameter for compatibility with Prospino&quot;&quot;&quot;
         return True</div>
 
