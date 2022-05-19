@@ -26,6 +26,7 @@ def load(f, dimensions=1):
         pdf_nlo=dict["PDF set"],
         update=False,
     )
+    inpu.code = dict["tool"]
     dat = []
     params = dict["parameters"]
     if dimensions == 2:

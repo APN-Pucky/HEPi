@@ -522,25 +522,27 @@ def slha_write(newname, d):
 
 
 def masses_scan(l: List[Input],
-                vars: List[int],
+                varis: List[int],
                 rrange,
                 diff_L_R=None,
-                negate=[]) -> List[Input]:
+                negate=None) -> List[Input]:
     """
-    Scans the PDG identified mass `var` over `rrange` in the list `l`.
+    Scans the PDG identified masses in `varis` over `rrange` in the list `l`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
     """
+    if negate is None:
+        negate = []
     ret = []
     for s in l:
         for r in rrange:
             d = None
             try:
                 d = pyslha.read(s.slha)
-            except:
+            except Exception:
                 d = pyslha.read(get_output_dir() + s.slha)
 
             mlist = ""
-            for var in vars:
+            for var in varis:
                 d.blocks["MASS"][abs(var)] = r if not var in negate else -r
                 if not (diff_L_R is None):
                     is_L, v = get_LR_partner(abs(var))

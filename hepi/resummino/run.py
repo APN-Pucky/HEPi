@@ -7,7 +7,7 @@ from hepi.results import Result
 from hepi.run import RunParam, Runner
 import pkgutil
 
-from .. import Input, get_output_dir
+from .. import Input
 import os.path
 from .result import is_valid, parse_single
 import os

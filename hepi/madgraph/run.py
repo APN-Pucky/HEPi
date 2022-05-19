@@ -1,4 +1,4 @@
-"""Runs MadGraph"""
+"""Runs MadGraph."""
 from typing import List
 import subprocess
 from string import Template
@@ -11,9 +11,7 @@ import time
 
 
 class MadGraphRunParams(RunParam):
-    """
-    Parameters for MadGraph.
-    """
+    """Parameters for MadGraph."""
 
     def __init__(self, dic, skip=False, madstr=True):
         super().__init__(skip)
@@ -27,7 +25,7 @@ class MadGraphRunner(Runner):
     def orders(self) -> List[Order]:
         return [Order.LO, Order.NLO]
 
-    def _check_input(self, p: Input, **kwargs) -> bool:
+    def _check_input(self, param: Input, **kwargs) -> bool:
         """Checks input parameter for compatibility with Prospino"""
         return True
 
