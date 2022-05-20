@@ -25,13 +25,15 @@ def title(axe,
           extra="",
           cms_energy=True,
           pdf_info=True,
+          id=False,
           **kwargs):
     """Sets the title on axis `axe`."""
     axe.set_title("$pp\\to" + get_name(i.particle1) + get_name(i.particle2) +
                   "$" + (" at $\\sqrt{S} = " + str(i.energy / 1000) +
                          "$ TeV" if cms_energy else "") + " for " +
                   (i.slha.split(".")[0] if scenario == "" else scenario) +
-                  (" with " + i.pdf_nlo if pdf_info else "") + " " + extra)
+                  (" with " + i.pdf_nlo if pdf_info else "") + " " + extra +
+                  ((" [" + i.id + "]") if id else ""))
 
 
 def energy_plot(dict_list,
@@ -329,10 +331,11 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
 
         >>> import urllib.request
         >>> import hepi 
+
         >>> dl = hepi.load(urllib.request.urlopen(
-        ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
+        ... "https://raw.githubusercontent.com/APN-Pucky/xsec/master/json/pp13_SGmodel_GGxsec_NLO%2BNLL.json"
         ... ),dimensions=2)
-        >>> hepi.mapplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\\\tilde{\\\\chi}_1^0}$ [GeV]",yaxis="$m_{\\\\tilde{\\\\chi}_2^0}$ [GeV]" , zaxis="$\\\\sigma_{\\\\mathrm{NLO+NLL}}$ [pb]")
+        >>> hepi.mapplot(dl,"gl","sq","NLO_PLUS_NLL",xaxis="$m_{\\\\tilde{g}}$ [GeV]",yaxis="$m_{\\\\tilde{q}}$ [GeV]" , zaxis="$\\\\sigma_{\\\\mathrm{NLO+NLL}}$ [pb]")
     """
     if xaxis is None:
         xaxis = x
@@ -346,9 +349,9 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
     map_vplot(vx, vy, vz, xaxis=xaxis, yaxis=yaxis, zaxis=zaxis, **kwargs)
 
 
-def map_vplot(vx,
-              vy,
-              vz,
+def map_vplot(tvx,
+              tvy,
+              tvz,
               xaxis=None,
               yaxis=None,
               zaxis=None,
@@ -356,6 +359,9 @@ def map_vplot(vx,
               sort=True,
               fill_missing=True,
               zscale=1.):
+    vx = np.copy(tvx)
+    vy = np.copy(tvy)
+    vz = np.copy(tvz)
     if fill_missing:
         for x in vx:
             for y in vy:
@@ -369,13 +375,13 @@ def map_vplot(vx,
                     vz = np.append(vz, 0)
     if sort:
         p1 = vx.argsort(kind='stable')
-        tvx = vx[p1]
-        tvy = vy[p1]
-        tvz = vz[p1]
-        p2 = tvy.argsort(kind='stable')
-        vx = tvx[p2]
-        vy = tvy[p2]
-        vz = tvz[p2]
+        vx = np.copy(vx[p1])
+        vy = np.copy(vy[p1])
+        vz = np.copy(vz[p1])
+        p2 = vy.argsort(kind='stable')
+        vx = vx[p2]
+        vy = vy[p2]
+        vz = vz[p2]
     s = 1
     while vy[s] == vy[s - 1]:
         s = s + 1
@@ -394,30 +400,113 @@ def map_vplot(vx,
 
     fig, ax = plt.subplots(nrows=1, ncols=1, constrained_layout=True)
     im = None
-    if (logz):
-        im = NonUniformImage(
-            ax,
-            origin="lower",
-            cmap='viridis',
-            interpolation='nearest',
-            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-            norm=colors.LogNorm(),
-        )
-    else:
-        im = NonUniformImage(
-            ax,
-            origin="lower",
-            cmap='viridis',
-            interpolation='nearest',
-            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-        )
+    xl = vx.min() + (vx.min() / 2) - vx[vx != vx.min()].min() / 2
+    xm = vx.max() + (vx.max() / 2) - vx[vx != vx.max()].max() / 2
+    yl = vy.min() + (vy.min() / 2) - vy[vy != vy.min()].min() / 2
+    ym = vy.max() + (vy.max() / 2) - vy[vy != vy.max()].max() / 2
+    im = NonUniformImage(
+        ax,
+        origin="lower",
+        cmap='viridis',
+        interpolation='nearest',
+        extent=(xl, xm, yl, ym),
+        norm=colors.LogNorm() if logz else None,
+    )
 
     im.set_data(np.unique(vx), np.unique(vy), grid)
     ax.images.append(im)
-    ax.set_xlim(vx.min(), vx.max())
-    ax.set_ylim(vy.min(), vy.max())
+    ax.set_xlim(xl, xm)
+    ax.set_ylim(yl, ym)
 
     cb = plt.colorbar(im)
+    cb.set_label(zaxis)
+    plt.xlabel(xaxis)
+    plt.ylabel(yaxis)
+    plt.show()
+
+
+def scatterplot(dict_list,
+                x,
+                y,
+                z,
+                xaxis=None,
+                yaxis=None,
+                zaxis=None,
+                **kwargs):
+    """
+    Scatter map 2d.
+    Central color is the central value, while the inner and outer ring are lower and upper bounds of the uncertainty interval.
+
+    Examples
+
+    .. plot::
+        :include-source:
+
+        >>> import urllib.request
+        >>> import hepi 
+        >>> dl = hepi.load(urllib.request.urlopen(
+        ... "https://raw.githubusercontent.com/APN-Pucky/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
+        ... ),dimensions=2)
+        >>> hepi.scatterplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\\\tilde{\\\\chi}_1^0}$ [GeV]",yaxis="$m_{\\\\tilde{\\\\chi}_2^0}$ [GeV]" , zaxis="$\\\\sigma_{\\\\mathrm{NLO+NLL}}$ [pb]")
+
+    """
+    if xaxis is None:
+        xaxis = x
+    if yaxis is None:
+        yaxis = y
+    if zaxis is None:
+        zaxis = replace_macros(z)
+    vx = dict_list[x]
+    vy = dict_list[y]
+    vz = dict_list[z]
+    scatter_vplot(vx, vy, vz, xaxis=xaxis, yaxis=yaxis, zaxis=zaxis, **kwargs)
+
+
+def scatter_vplot(vx,
+                  vy,
+                  vz,
+                  xaxis=None,
+                  yaxis=None,
+                  zaxis=None,
+                  logz=True,
+                  sort=True,
+                  fill_missing=True,
+                  zscale=1.):
+    if sort:
+        p1 = vx.argsort(kind='stable')
+        vx = np.copy(vx[p1])
+        vy = np.copy(vy[p1])
+        vz = np.copy(vz[p1])
+        p2 = vy.argsort(kind='stable')
+        vx = vx[p2]
+        vy = vy[p2]
+        vz = vz[p2]
+
+    fig, ax = plt.subplots(nrows=1, ncols=1, constrained_layout=True)
+    im = None
+    xl = vx.min() + (vx.min() / 2) - vx[vx != vx.min()].min() / 2
+    xm = vx.max() + (vx.max() / 2) - vx[vx != vx.max()].max() / 2
+    yl = vy.min() + (vy.min() / 2) - vy[vy != vy.min()].min() / 2
+    ym = vy.max() + (vy.max() / 2) - vy[vy != vy.max()].max() / 2
+
+    s = plt.scatter(np.concatenate((vx, vx, vx)),
+                    np.concatenate((vy, vy, vy)),
+                    c=np.concatenate(
+                        (splot.unv(vz) + splot.usd(vz),
+                         splot.unv(vz) - splot.usd(vz), splot.unv(vz))),
+                    s=np.concatenate(
+                        ([(3 * plt.rcParams['lines.markersize'])**2
+                          for i in range(len(vx))], [
+                              (2 * plt.rcParams['lines.markersize'])**2
+                              for i in range(len(vx))
+                          ], [(plt.rcParams['lines.markersize'])**2
+                              for i in range(len(vx))])),
+                    norm=colors.LogNorm() if logz else None)
+
+    ax.set_xlim(xl, xm)
+    ax.set_ylim(yl, ym)
+
+    cb = plt.colorbar(s)
     cb.set_label(zaxis)
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)
