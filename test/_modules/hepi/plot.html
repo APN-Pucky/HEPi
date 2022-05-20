@@ -35,7 +35,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-4-gab93bfa
+                0.1.8-6-ge2e217d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -121,13 +121,15 @@ from matplotlib.ticker import NullFormatter
           extra=&quot;&quot;,
           cms_energy=True,
           pdf_info=True,
+          id=False,
           **kwargs):
     &quot;&quot;&quot;Sets the title on axis `axe`.&quot;&quot;&quot;
     axe.set_title(&quot;$pp\\to&quot; + get_name(i.particle1) + get_name(i.particle2) +
                   &quot;$&quot; + (&quot; at $\\sqrt{S} = &quot; + str(i.energy / 1000) +
                          &quot;$ TeV&quot; if cms_energy else &quot;&quot;) + &quot; for &quot; +
                   (i.slha.split(&quot;.&quot;)[0] if scenario == &quot;&quot; else scenario) +
-                  (&quot; with &quot; + i.pdf_nlo if pdf_info else &quot;&quot;) + &quot; &quot; + extra)</div>
+                  (&quot; with &quot; + i.pdf_nlo if pdf_info else &quot;&quot;) + &quot; &quot; + extra +
+                  ((&quot; [&quot; + i.id + &quot;]&quot;) if id else &quot;&quot;))</div>
 
 
 <div class="viewcode-block" id="energy_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.energy_plot">[docs]</a>def energy_plot(dict_list,
@@ -425,10 +427,11 @@ from matplotlib.ticker import NullFormatter
 
         &gt;&gt;&gt; import urllib.request
         &gt;&gt;&gt; import hepi 
+
         &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
-        ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;
+        ... &quot;https://raw.githubusercontent.com/APN-Pucky/xsec/master/json/pp13_SGmodel_GGxsec_NLO%2BNLL.json&quot;
         ... ),dimensions=2)
-        &gt;&gt;&gt; hepi.mapplot(dl,&quot;N1&quot;,&quot;N2&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=&quot;$m_{\\\\tilde{\\\\chi}_1^0}$ [GeV]&quot;,yaxis=&quot;$m_{\\\\tilde{\\\\chi}_2^0}$ [GeV]&quot; , zaxis=&quot;$\\\\sigma_{\\\\mathrm{NLO+NLL}}$ [pb]&quot;)
+        &gt;&gt;&gt; hepi.mapplot(dl,&quot;gl&quot;,&quot;sq&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=&quot;$m_{\\\\tilde{g}}$ [GeV]&quot;,yaxis=&quot;$m_{\\\\tilde{q}}$ [GeV]&quot; , zaxis=&quot;$\\\\sigma_{\\\\mathrm{NLO+NLL}}$ [pb]&quot;)
     &quot;&quot;&quot;
     if xaxis is None:
         xaxis = x
@@ -442,9 +445,9 @@ from matplotlib.ticker import NullFormatter
     map_vplot(vx, vy, vz, xaxis=xaxis, yaxis=yaxis, zaxis=zaxis, **kwargs)</div>
 
 
-<div class="viewcode-block" id="map_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.map_vplot">[docs]</a>def map_vplot(vx,
-              vy,
-              vz,
+<div class="viewcode-block" id="map_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.map_vplot">[docs]</a>def map_vplot(tvx,
+              tvy,
+              tvz,
               xaxis=None,
               yaxis=None,
               zaxis=None,
@@ -452,6 +455,9 @@ from matplotlib.ticker import NullFormatter
               sort=True,
               fill_missing=True,
               zscale=1.):
+    vx = np.copy(tvx)
+    vy = np.copy(tvy)
+    vz = np.copy(tvz)
     if fill_missing:
         for x in vx:
             for y in vy:
@@ -465,13 +471,13 @@ from matplotlib.ticker import NullFormatter
                     vz = np.append(vz, 0)
     if sort:
         p1 = vx.argsort(kind=&#39;stable&#39;)
-        tvx = vx[p1]
-        tvy = vy[p1]
-        tvz = vz[p1]
-        p2 = tvy.argsort(kind=&#39;stable&#39;)
-        vx = tvx[p2]
-        vy = tvy[p2]
-        vz = tvz[p2]
+        vx = np.copy(vx[p1])
+        vy = np.copy(vy[p1])
+        vz = np.copy(vz[p1])
+        p2 = vy.argsort(kind=&#39;stable&#39;)
+        vx = vx[p2]
+        vy = vy[p2]
+        vz = vz[p2]
     s = 1
     while vy[s] == vy[s - 1]:
         s = s + 1
@@ -490,30 +496,113 @@ from matplotlib.ticker import NullFormatter
 
     fig, ax = plt.subplots(nrows=1, ncols=1, constrained_layout=True)
     im = None
-    if (logz):
-        im = NonUniformImage(
-            ax,
-            origin=&quot;lower&quot;,
-            cmap=&#39;viridis&#39;,
-            interpolation=&#39;nearest&#39;,
-            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-            norm=colors.LogNorm(),
-        )
-    else:
-        im = NonUniformImage(
-            ax,
-            origin=&quot;lower&quot;,
-            cmap=&#39;viridis&#39;,
-            interpolation=&#39;nearest&#39;,
-            extent=(vx.min(), vx.max(), vy.min(), vy.max()),
-        )
+    xl = vx.min() + (vx.min() / 2) - vx[vx != vx.min()].min() / 2
+    xm = vx.max() + (vx.max() / 2) - vx[vx != vx.max()].max() / 2
+    yl = vy.min() + (vy.min() / 2) - vy[vy != vy.min()].min() / 2
+    ym = vy.max() + (vy.max() / 2) - vy[vy != vy.max()].max() / 2
+    im = NonUniformImage(
+        ax,
+        origin=&quot;lower&quot;,
+        cmap=&#39;viridis&#39;,
+        interpolation=&#39;nearest&#39;,
+        extent=(xl, xm, yl, ym),
+        norm=colors.LogNorm() if logz else None,
+    )
 
     im.set_data(np.unique(vx), np.unique(vy), grid)
     ax.images.append(im)
-    ax.set_xlim(vx.min(), vx.max())
-    ax.set_ylim(vy.min(), vy.max())
+    ax.set_xlim(xl, xm)
+    ax.set_ylim(yl, ym)
 
     cb = plt.colorbar(im)
+    cb.set_label(zaxis)
+    plt.xlabel(xaxis)
+    plt.ylabel(yaxis)
+    plt.show()</div>
+
+
+<div class="viewcode-block" id="scatterplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scatterplot">[docs]</a>def scatterplot(dict_list,
+                x,
+                y,
+                z,
+                xaxis=None,
+                yaxis=None,
+                zaxis=None,
+                **kwargs):
+    &quot;&quot;&quot;
+    Scatter map 2d.
+    Central color is the central value, while the inner and outer ring are lower and upper bounds of the uncertainty interval.
+
+    Examples
+
+    .. plot::
+        :include-source:
+
+        &gt;&gt;&gt; import urllib.request
+        &gt;&gt;&gt; import hepi 
+        &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
+        ... &quot;https://raw.githubusercontent.com/APN-Pucky/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;
+        ... ),dimensions=2)
+        &gt;&gt;&gt; hepi.scatterplot(dl,&quot;N1&quot;,&quot;N2&quot;,&quot;NLO_PLUS_NLL&quot;,xaxis=&quot;$m_{\\\\tilde{\\\\chi}_1^0}$ [GeV]&quot;,yaxis=&quot;$m_{\\\\tilde{\\\\chi}_2^0}$ [GeV]&quot; , zaxis=&quot;$\\\\sigma_{\\\\mathrm{NLO+NLL}}$ [pb]&quot;)
+
+    &quot;&quot;&quot;
+    if xaxis is None:
+        xaxis = x
+    if yaxis is None:
+        yaxis = y
+    if zaxis is None:
+        zaxis = replace_macros(z)
+    vx = dict_list[x]
+    vy = dict_list[y]
+    vz = dict_list[z]
+    scatter_vplot(vx, vy, vz, xaxis=xaxis, yaxis=yaxis, zaxis=zaxis, **kwargs)</div>
+
+
+<div class="viewcode-block" id="scatter_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scatter_vplot">[docs]</a>def scatter_vplot(vx,
+                  vy,
+                  vz,
+                  xaxis=None,
+                  yaxis=None,
+                  zaxis=None,
+                  logz=True,
+                  sort=True,
+                  fill_missing=True,
+                  zscale=1.):
+    if sort:
+        p1 = vx.argsort(kind=&#39;stable&#39;)
+        vx = np.copy(vx[p1])
+        vy = np.copy(vy[p1])
+        vz = np.copy(vz[p1])
+        p2 = vy.argsort(kind=&#39;stable&#39;)
+        vx = vx[p2]
+        vy = vy[p2]
+        vz = vz[p2]
+
+    fig, ax = plt.subplots(nrows=1, ncols=1, constrained_layout=True)
+    im = None
+    xl = vx.min() + (vx.min() / 2) - vx[vx != vx.min()].min() / 2
+    xm = vx.max() + (vx.max() / 2) - vx[vx != vx.max()].max() / 2
+    yl = vy.min() + (vy.min() / 2) - vy[vy != vy.min()].min() / 2
+    ym = vy.max() + (vy.max() / 2) - vy[vy != vy.max()].max() / 2
+
+    s = plt.scatter(np.concatenate((vx, vx, vx)),
+                    np.concatenate((vy, vy, vy)),
+                    c=np.concatenate(
+                        (splot.unv(vz) + splot.usd(vz),
+                         splot.unv(vz) - splot.usd(vz), splot.unv(vz))),
+                    s=np.concatenate(
+                        ([(3 * plt.rcParams[&#39;lines.markersize&#39;])**2
+                          for i in range(len(vx))], [
+                              (2 * plt.rcParams[&#39;lines.markersize&#39;])**2
+                              for i in range(len(vx))
+                          ], [(plt.rcParams[&#39;lines.markersize&#39;])**2
+                              for i in range(len(vx))])),
+                    norm=colors.LogNorm() if logz else None)
+
+    ax.set_xlim(xl, xm)
+    ax.set_ylim(yl, ym)
+
+    cb = plt.colorbar(s)
     cb.set_label(zaxis)
     plt.xlabel(xaxis)
     plt.ylabel(yaxis)
