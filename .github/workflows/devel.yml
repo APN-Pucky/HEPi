@@ -7,7 +7,7 @@ on:
     tags-ignore: 
       - '*'
 jobs:
-    test:
+    default:
       runs-on: ubuntu-latest
       container:
         image: apnpucky/ubuntu-pip-lhapdf
