@@ -17,6 +17,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -35,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-12-gfebcf62
+                0.1.8-21-gc7843be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -97,9 +98,10 @@
 <span></span>import json
 from smpl import plot
 import numpy as np
+import pkg_resources as pkg
 
 from .input import Order, order_to_string
-from .util import LD2DF, get_name
+from .util import DL2DF, get_name
 from smpl import io
 
 <div class="viewcode-block" id="splot"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.splot">[docs]</a>splot = plot</div>
@@ -164,7 +166,7 @@ from smpl import io
     &gt;&gt;&gt; hepi.write_csv(dl, open(&quot;test.csv&quot;, &#39;w&#39;))
     &gt;&gt;&gt; with open(&#39;test.csv&#39;, &#39;r&#39;) as f:
     ...     print(f.read())
-    order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,code,N2,N1,NLO_PLUS_NLL
+    order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,runner,N2,N1,NLO_PLUS_NLL
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,81.5,80.0,7.746+/-0.023
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,82.0,80.0,7.646+/-0.024
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,83.0,80.0,7.451+/-0.024
@@ -240,7 +242,7 @@ from smpl import io
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,320.0,300.0,0.04+/-0.05
     &lt;BLANKLINE&gt;
  &quot;&quot;&quot;
-    df = LD2DF(dict_list)
+    df = DL2DF(dict_list)
     df.to_csv(filename, index=False)</div>
 
 
@@ -258,7 +260,7 @@ from smpl import io
 
 
  Args:
-    output (writeable) : Should support a function `.write()`.
+    output (writeable or file name str) : Should support a function `.write()`.
 
  Examples:
 
@@ -270,8 +272,9 @@ from smpl import io
     &gt;&gt;&gt; hepi.write_json(dl, Order.NLO_PLUS_NLL,&quot;N1&quot;,open(&quot;test.json&quot;, &#39;w&#39;))
     &gt;&gt;&gt; with open(&#39;test.json&#39;, &#39;r&#39;) as f:
     ...     print(f.read())
-    {&quot;initial state&quot;: &quot;pp&quot;, &quot;order&quot;: &quot;NLO+NLL&quot;, &quot;source&quot;: &quot;HEPi&quot;, &quot;contact&quot;: &quot;?&quot;, &quot;tool&quot;: &quot;Resummino&quot;, &quot;process_latex&quot;: &quot;$\\\\overline{d}\\\\overline{d}$&quot;, &quot;comment&quot;: &quot;&quot;, &quot;reference&quot;: &quot;?&quot;, &quot;Ecom [GeV]&quot;: &quot;13000.0&quot;, &quot;process_id&quot;: &quot;pp_13000.0_-1_-1&quot;, &quot;PDF set&quot;: &quot;CTEQ6.6 and MSTW2008nlo90cl&quot;, &quot;data&quot;: {&quot;80.0&quot;: {&quot;xsec_pb&quot;: 2.142151}, &quot;60.0&quot;: {&quot;xsec_pb&quot;: 4.504708}, &quot;100.0&quot;: {&quot;xsec_pb&quot;: 1.165897}, &quot;125.0&quot;: {&quot;xsec_pb&quot;: 0.614697}, &quot;150.0&quot;: {&quot;xsec_pb&quot;: 0.354984}, &quot;175.0&quot;: {&quot;xsec_pb&quot;: 0.327625}, &quot;200.0&quot;: {&quot;xsec_pb&quot;: 0.141817}, &quot;225.0&quot;: {&quot;xsec_pb&quot;: 0.138083}, &quot;250.0&quot;: {&quot;xsec_pb&quot;: 0.066363}, &quot;300.0&quot;: {&quot;xsec_pb&quot;: 0.044674}}, &quot;parameters&quot;: [[&quot;N1&quot;]]}
+    {&quot;initial state&quot;: &quot;pp&quot;, &quot;order&quot;: &quot;NLO+NLL&quot;, &quot;source&quot;: &quot;hepi-...&quot;, &quot;contact&quot;: &quot;?&quot;, &quot;tool&quot;: &quot;Resummino&quot;, &quot;process_latex&quot;: &quot;$\\\\overline{d}\\\\overline{d}$&quot;, &quot;comment&quot;: &quot;&quot;, &quot;reference&quot;: &quot;?&quot;, &quot;Ecom [GeV]&quot;: &quot;13000.0&quot;, &quot;process_id&quot;: &quot;pp_13000.0_-1_-1&quot;, &quot;PDF set&quot;: &quot;CTEQ6.6 and MSTW2008nlo90cl&quot;, &quot;data&quot;: {&quot;80.0&quot;: {&quot;xsec_pb&quot;: 2.142151}, &quot;60.0&quot;: {&quot;xsec_pb&quot;: 4.504708}, &quot;100.0&quot;: {&quot;xsec_pb&quot;: 1.165897}, &quot;125.0&quot;: {&quot;xsec_pb&quot;: 0.614697}, &quot;150.0&quot;: {&quot;xsec_pb&quot;: 0.354984}, &quot;175.0&quot;: {&quot;xsec_pb&quot;: 0.327625}, &quot;200.0&quot;: {&quot;xsec_pb&quot;: 0.141817}, &quot;225.0&quot;: {&quot;xsec_pb&quot;: 0.138083}, &quot;250.0&quot;: {&quot;xsec_pb&quot;: 0.066363}, &quot;300.0&quot;: {&quot;xsec_pb&quot;: 0.044674}}, &quot;parameters&quot;: [[&quot;N1&quot;]]}
  &quot;&quot;&quot;
+
     jd = {}
     jd[&quot;initial state&quot;] = &quot;pp&quot;  # TODO add more such cases + filters, also in resummino
     if o == Order.LO:
@@ -284,9 +287,15 @@ from smpl import io
         jd[&quot;order&quot;] = &quot;NNLOapprox+NNLL&quot;
     else:
         raise ValueError(&quot;Order not supported by write_json.&quot;)
-    jd[&quot;source&quot;] = &quot;HEPi&quot;
+    package = &quot;hepi&quot;
+    try:
+        version = pkg.require(package)[0].version
+    except pkg.DistributionNotFound:
+        version = &quot;dirty&quot;
+    jd[&quot;source&quot;] = package + &quot;-&quot; + version
+
     jd[&quot;contact&quot;] = &quot;?&quot;
-    jd[&quot;tool&quot;] = dict_list[&quot;code&quot;][0]
+    jd[&quot;tool&quot;] = dict_list[&quot;runner&quot;][0].replace(&quot;Runner&quot;, &quot;&quot;)
     jd[&quot;process_latex&quot;] = &quot;$&quot; + get_name(dict_list[&quot;particle1&quot;][0]) + get_name(
         dict_list[&quot;particle2&quot;][0]) + &quot;$&quot;
     jd[&quot;comment&quot;] = dict_list[&quot;id&quot;][0]
@@ -310,7 +319,7 @@ from smpl import io
             }
     jd[&quot;data&quot;] = dat
     jd[&quot;parameters&quot;] = [[parameter]]
-    output.write(json.dumps(jd))</div>
+    io.write(output, json.dumps(jd))</div>
 </pre></div>
 
            </div>

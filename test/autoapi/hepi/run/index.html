@@ -18,6 +18,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -38,7 +39,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-12-gfebcf62
+                0.1.8-21-gc7843be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -135,11 +136,11 @@
 }
 </style>
 <section id="module-hepi.run">
-<span id="hepi-run"></span><h1><a class="reference internal" href="#module-hepi.run" title="hepi.run"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a><a class="headerlink" href="#module-hepi.run" title="Permalink to this headline"></a></h1>
+<span id="hepi-run"></span><h1><a class="reference internal" href="#module-hepi.run" title="hepi.run"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a><a class="headerlink" href="#module-hepi.run" title="Permalink to this heading"></a></h1>
 <section id="module-contents">
-<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
 <section id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline"></a></h3>
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -177,6 +178,16 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.Runner.get_version">
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/run.html#Runner.get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.Runner.get_version" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.Runner._sub_run">
+<span class="sig-name descname"><span class="pre">_sub_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/run.html#Runner._sub_run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.Runner._sub_run" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.Runner._check_path">
 <span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../_modules/hepi/run.html#Runner._check_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.Runner._check_path" title="Permalink to this definition"></a></dt>
 <dd><p>Checks if the passed path is valid.</p>
@@ -203,7 +214,7 @@
 <dd><blockquote>
 <div><p>Run the passed list of parameters.</p>
 <dl>
-<dt>Args:</dt><dd><p>params (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="../index.html#id44" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>): All parameters that should be executed/queued.
+<dt>Args:</dt><dd><p>params (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="../index.html#id45" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>): All parameters that should be executed/queued.
 skip (bool): True means stored runs will be skipped. Else the are overwritten.
 parse (bool): Parse the results.</p>
 <blockquote>
@@ -217,10 +228,7 @@ sleep (int): Sleep seconds after starting job.</p>
 <p>run (bool): Actually start/queue runner.</p>
 <blockquote>
 <div><dl class="simple">
-<dt>Returns:</dt><dd><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code><span class="classifier">combined dictionary of results and parameters. Each member therein is a list.</span></dt><dd><p>The dictionary is empty if <cite>parse</cite> is set to False.</p>
-</dd>
-</dl>
+<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> : combined dataframe of results and parameters. The dataframe is empty if <cite>parse</cite> is set to False.</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -257,7 +265,7 @@ sleep (int): Sleep seconds after starting job.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p></li>
-<li><p><strong>p</strong> (<a class="reference internal" href="../index.html#id44" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Onput parameters.</p></li>
+<li><p><strong>p</strong> (<a class="reference internal" href="../index.html#id45" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Onput parameters.</p></li>
 <li><p><strong>d</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Param dictionary.</p></li>
 </ul>
 </dd>

@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -40,7 +41,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-12-gfebcf62
+                0.1.8-21-gc7843be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -312,6 +313,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -320,10 +322,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -335,12 +341,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -368,7 +377,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="SPheno-example">
-<h1>SPheno example<a class="headerlink" href="#SPheno-example" title="Permalink to this headline"></a></h1>
+<h1>SPheno example<a class="headerlink" href="#SPheno-example" title="Permalink to this heading"></a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -382,8 +391,8 @@ div.rendered_html tbody tr:hover {
 <span class="kn">import</span> <span class="nn">hepi.spheno</span> <span class="k">as</span> <span class="nn">sp</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">rs</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;~/git/resummino_ug_to_UX_vNLO&quot;</span><span class="p">)</span>
-<span class="n">sp</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;~/git/SPheno-3.3.8&quot;</span><span class="p">)</span>
+<span class="n">rs</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;~/git/resummino_release&quot;</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;SPheno&quot;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
 </pre></div>
@@ -394,9 +403,9 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.1.4.15+dirty
-~/git/resummino_ug_to_UX_vNLO/
-~/git/SPheno-3.3.8/
+0.1.8.9+dirty
+~/git/resummino_release
+SPheno
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -410,70 +419,66 @@ div.rendered_html tbody tr:hover {
         <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">LO</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">sq</span><span class="p">,</span><span class="mi">1000022</span><span class="p">,</span><span class="s2">&quot;LesHouches.in&quot;</span><span class="p">,</span><span class="n">pdf</span><span class="p">,</span><span class="n">nlopdf</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)]</span>
         <span class="n">li</span><span class="o">=</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_scan_rel</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="k">lambda</span> <span class="n">r</span> <span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">510</span><span class="p">],[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">r</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">470.</span><span class="p">,</span><span class="mf">530.</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
         <span class="n">sp</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
-        <span class="n">dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1000022</span><span class="p">,</span><span class="mi">1000023</span><span class="p">,</span><span class="mi">1000025</span><span class="p">,</span><span class="mi">1000035</span><span class="p">]:</span>
             <span class="n">hepi</span><span class="o">.</span><span class="n">slha_plot</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="s2">&quot;MASS&quot;</span><span class="p">,</span><span class="n">p</span><span class="p">],</span><span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$ [GeV]&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M$&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$&quot;</span><span class="o">+</span><span class="n">hepi</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">get_name</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;$&quot;</span><span class="p">,</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">nm1</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">for</span> <span class="n">nm2</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]:</span>
                 <span class="n">hepi</span><span class="o">.</span><span class="n">slha_plot</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="s2">&quot;NMIX&quot;</span><span class="p">,(</span><span class="n">nm1</span><span class="p">,</span><span class="n">nm2</span><span class="p">)],</span><span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">interpolate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$ [GeV]&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;Mixing&quot;</span><span class="p">,</span><span class="n">logy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$&quot;</span><span class="o">+</span><span class="s2">&quot;N_{&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nm1</span><span class="p">)</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nm2</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;}$&quot;</span><span class="p">,</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">hepi</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="n">dl</span><span class="p">[</span><span class="s2">&quot;lo&quot;</span><span class="p">],</span><span class="n">plot_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$ [GeV]&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span> <span class="s2">&quot;$\sigma$ [pb]&quot;</span><span class="p">,</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\sigma_</span><span class="si">{lo}</span><span class="s2">$&quot;</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="n">dl</span><span class="p">[</span><span class="s2">&quot;LO&quot;</span><span class="p">],</span><span class="n">plot_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$ [GeV]&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span> <span class="s2">&quot;$\sigma$ [pb]&quot;</span><span class="p">,</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\sigma_</span><span class="si">{LO}</span><span class="s2">$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/apn/.local/lib/python3.8/site-packages/hepi/input.py:283: RuntimeWarning: Could not set new central scale to average of masses.
+  warnings.warn(&#34;Could not set new central scale to average of masses.&#34;,
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">/tmp/ipykernel_12727/649120515.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span>     fig<span class="ansi-blue-fg">.</span>subplots_adjust<span class="ansi-blue-fg">(</span>hspace<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span>     <span class="ansi-green-fg">for</span> pdf<span class="ansi-blue-fg">,</span>nlopdf <span class="ansi-green-fg">in</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;CT14lo&#34;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#34;CT14lo&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg">         </span>li <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>hepi<span class="ansi-blue-fg">.</span>Input<span class="ansi-blue-fg">(</span>hepi<span class="ansi-blue-fg">.</span>Order<span class="ansi-blue-fg">.</span>LO<span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">13000</span><span class="ansi-blue-fg">,</span>sq<span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">1000022</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#34;LesHouches.in&#34;</span><span class="ansi-blue-fg">,</span>pdf<span class="ansi-blue-fg">,</span>nlopdf<span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">1.</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">1.</span><span class="ansi-blue-fg">,</span>id<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;test&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span>         li<span class="ansi-blue-fg">=</span>hepi<span class="ansi-blue-fg">.</span>slha_scan_rel<span class="ansi-blue-fg">(</span>li<span class="ansi-blue-fg">,</span><span class="ansi-green-fg">lambda</span> r <span class="ansi-blue-fg">:</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;EXTPAR&#34;</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">510</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;EXTPAR&#34;</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">,</span>r<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>np<span class="ansi-blue-fg">.</span>linspace<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">470.</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">530.</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">16</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      7</span>         sp<span class="ansi-blue-fg">.</span>run<span class="ansi-blue-fg">(</span>li<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/input.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f, mu_r, pdfset_lo, pdfset_nlo, precision, max_iters, invariant_mass, result, pt, id, model_path, update)</span>
-<span class="ansi-green-intense-fg ansi-bold">    151</span>         self<span class="ansi-blue-fg">.</span>model_path <span class="ansi-blue-fg">=</span> model_path
-<span class="ansi-green-intense-fg ansi-bold">    152</span>         <span class="ansi-green-fg">if</span> update<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 153</span><span class="ansi-red-fg">             </span>update_slha<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    154</span>
-<span class="ansi-green-intense-fg ansi-bold">    155</span> <span class="ansi-green-fg">def</span> update_slha<span class="ansi-blue-fg">(</span> i<span class="ansi-blue-fg">:</span>Input <span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/input.py</span> in <span class="ansi-cyan-fg">update_slha</span><span class="ansi-blue-fg">(i)</span>
-<span class="ansi-green-intense-fg ansi-bold">    161</span>
-<span class="ansi-green-intense-fg ansi-bold">    162</span>     &#34;&#34;&#34;
-<span class="ansi-green-fg">--&gt; 163</span><span class="ansi-red-fg">     </span>b <span class="ansi-blue-fg">=</span> pyslha<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span>get_input_dir<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">+</span> i<span class="ansi-blue-fg">.</span>slha<span class="ansi-blue-fg">,</span>ignorenomass<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    164</span>     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    165</span>         i.mu = (abs(b.blocks[&#34;MASS&#34;][abs(i.particle1)]) +
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pyslha.py</span> in <span class="ansi-cyan-fg">read</span><span class="ansi-blue-fg">(spcfile, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1546</span>     Other keyword parameters are passed to readSLHA<span class="ansi-blue-fg">/</span>readISAWIG<span class="ansi-blue-fg">.</span>
-<span class="ansi-green-intense-fg ansi-bold">   1547</span>     &#34;&#34;&#34;
-<span class="ansi-green-fg">-&gt; 1548</span><span class="ansi-red-fg">     </span>txt <span class="ansi-blue-fg">=</span> _read<span class="ansi-blue-fg">(</span>spcfile<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1549</span>     <span class="ansi-green-fg">if</span> type<span class="ansi-blue-fg">(</span>spcfile<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">is</span> str <span class="ansi-green-fg">and</span> spcfile<span class="ansi-blue-fg">.</span>endswith<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;.isa&#34;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1550</span>         <span class="ansi-green-fg">return</span> readISAWIG<span class="ansi-blue-fg">(</span>txt<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/pyslha.py</span> in <span class="ansi-cyan-fg">_read</span><span class="ansi-blue-fg">(f)</span>
-<span class="ansi-green-intense-fg ansi-bold">    235</span>             <span class="ansi-green-fg">return</span> sys<span class="ansi-blue-fg">.</span>stdin<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    236</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 237</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">with</span> open<span class="ansi-blue-fg">(</span>f<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;r&#34;</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> ff<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    238</span>                 <span class="ansi-green-fg">return</span> ff<span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    239</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;./input/LesHouches.in&#39;
+skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipRunning: 16 jobs
 </pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/apn/.local/lib/python3.8/site-packages/hepi/input.py:283: RuntimeWarning: Could not set new central scale to average of masses.
+  warnings.warn(&#34;Could not set new central scale to average of masses.&#34;,
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipRunning: 16 jobs
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_2_4.png" src="../_images/examples_test_spheno_2_4.png" />
+</div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/examples_test_spheno_2_1.png" src="../_images/examples_test_spheno_2_1.png" />
+<img alt="../_images/examples_test_spheno_2_5.png" src="../_images/examples_test_spheno_2_5.png" />
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sq</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2000002</span><span class="p">,</span><span class="mi">1000002</span><span class="p">]:</span>
@@ -484,19 +489,83 @@ div.rendered_html tbody tr:hover {
         <span class="n">li</span><span class="o">=</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_scan</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">500.</span><span class="p">,</span><span class="mf">1500.</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
         <span class="n">li</span><span class="o">=</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_scan</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">500.</span><span class="p">,</span><span class="mf">1500.</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
         <span class="n">sp</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
-        <span class="n">dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">nm1</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">for</span> <span class="n">nm2</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">nm2</span><span class="p">)</span>
                 <span class="n">hepi</span><span class="o">.</span><span class="n">map_vplot</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span>
-                               <span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;NMIX&quot;</span><span class="p">,(</span><span class="n">nm1</span><span class="p">,</span><span class="n">nm2</span><span class="p">)]),</span><span class="n">logz</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;Mixing&quot;</span><span class="p">)</span>
+                               <span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;NMIX&quot;</span><span class="p">,(</span><span class="n">nm1</span><span class="p">,</span><span class="n">nm2</span><span class="p">)]),</span><span class="n">logz</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;Mixing&quot;</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="n">hepi</span><span class="o">.</span><span class="n">map_vplot</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="n">dl</span><span class="p">[</span><span class="s2">&quot;lo&quot;</span><span class="p">],</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$\sigma_</span><span class="si">{lo}</span><span class="s2">$&quot;</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">map_vplot</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span><span class="n">dl</span><span class="p">[</span><span class="s2">&quot;LO&quot;</span><span class="p">],</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$\sigma_</span><span class="si">{LO}</span><span class="s2">$&quot;</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/apn/.local/lib/python3.8/site-packages/hepi/input.py:283: RuntimeWarning: Could not set new central scale to average of masses.
+  warnings.warn(&#34;Could not set new central scale to average of masses.&#34;,
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipRunning: 256 jobs
+1
+2
+skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipRunning: 256 jobs
+1
+2
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_3_2.png" src="../_images/examples_test_spheno_3_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_3_3.png" src="../_images/examples_test_spheno_3_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_3_4.png" src="../_images/examples_test_spheno_3_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_3_5.png" src="../_images/examples_test_spheno_3_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_3_6.png" src="../_images/examples_test_spheno_3_6.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_3_7.png" src="../_images/examples_test_spheno_3_7.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dll</span> <span class="o">=</span> <span class="p">{}</span>
@@ -509,7 +578,7 @@ div.rendered_html tbody tr:hover {
         <span class="n">li</span><span class="o">=</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_scan</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">475.</span><span class="p">,</span><span class="mf">525.</span><span class="p">,</span><span class="mi">10</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">li</span><span class="o">=</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_scan</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">450.</span><span class="p">,</span><span class="mf">500.</span><span class="p">,</span><span class="mi">10</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">sp</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">)</span>
-        <span class="n">dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="kc">False</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">nm1</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">for</span> <span class="n">nm2</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">nm2</span><span class="p">)</span>
@@ -517,22 +586,90 @@ div.rendered_html tbody tr:hover {
                                <span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;NMIX&quot;</span><span class="p">,(</span><span class="n">nm1</span><span class="p">,</span><span class="n">nm2</span><span class="p">)]),</span><span class="n">logz</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;Mixing&quot;</span><span class="p">)</span>
 
         <span class="n">hepi</span><span class="o">.</span><span class="n">map_vplot</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span>
-                       <span class="n">dl</span><span class="p">[</span><span class="s2">&quot;lo&quot;</span><span class="p">],</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$\sigma_</span><span class="si">{lo}</span><span class="s2">$&quot;</span><span class="p">)</span>
+                       <span class="n">dl</span><span class="p">[</span><span class="s2">&quot;LO&quot;</span><span class="p">],</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$\sigma_</span><span class="si">{LO}</span><span class="s2">$&quot;</span><span class="p">)</span>
         <span class="n">hepi</span><span class="o">.</span><span class="n">map_vplot</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span>
                        <span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;MASS&quot;</span><span class="p">,</span><span class="mi">1000022</span><span class="p">]),</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$MX$&quot;</span><span class="p">)</span>
         <span class="n">dll</span><span class="p">[</span><span class="n">sq</span><span class="p">]</span> <span class="o">=</span> <span class="n">dl</span>
 
 <span class="n">hepi</span><span class="o">.</span><span class="n">map_vplot</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="n">hepi</span><span class="o">.</span><span class="n">slha_data</span><span class="p">(</span><span class="n">li</span><span class="p">,[</span><span class="s2">&quot;EXTPAR&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span>
-                       <span class="n">dll</span><span class="p">[</span><span class="n">sqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s2">&quot;lo&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">dll</span><span class="p">[</span><span class="n">sqs</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s2">&quot;lo&quot;</span><span class="p">],</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$\sigma_{lo+lo}$&quot;</span><span class="p">)</span>
+                       <span class="n">dll</span><span class="p">[</span><span class="n">sqs</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s2">&quot;LO&quot;</span><span class="p">]</span><span class="o">+</span><span class="n">dll</span><span class="p">[</span><span class="n">sqs</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s2">&quot;LO&quot;</span><span class="p">],</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$\sigma_{LO+LO}$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipRunning: 121 jobs
+1
+2
+skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipskipRunning: 121 jobs
+1
+2
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_4_1.png" src="../_images/examples_test_spheno_4_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_4_2.png" src="../_images/examples_test_spheno_4_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_4_3.png" src="../_images/examples_test_spheno_4_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_4_4.png" src="../_images/examples_test_spheno_4_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_4_5.png" src="../_images/examples_test_spheno_4_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_4_6.png" src="../_images/examples_test_spheno_4_6.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_4_7.png" src="../_images/examples_test_spheno_4_7.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_4_8.png" src="../_images/examples_test_spheno_4_8.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_spheno_4_9.png" src="../_images/examples_test_spheno_4_9.png" />
 </div>
 </div>
 </section>

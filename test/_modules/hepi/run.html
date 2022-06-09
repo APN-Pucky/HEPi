@@ -17,6 +17,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -35,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-12-gfebcf62
+                0.1.8-21-gc7843be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -97,11 +98,12 @@
 <span></span>from logging import warning
 import os
 import subprocess
+from subprocess import Popen, PIPE
 from typing import List
 import warnings
 from hepi.input import Input, Order, get_input_dir, get_output_dir, get_pre
 from hepi.results import Result
-from hepi.util import LD2DL, DictData, namehash
+from hepi.util import DL2DF, LD2DL, DictData, namehash
 from smpl.parallel import par
 import time
 
@@ -151,6 +153,18 @@ import time
         &quot;&quot;&quot;Returns the name of the runner.&quot;&quot;&quot;
         return type(self).__name__</div>
 
+<div class="viewcode-block" id="Runner.get_version"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.get_version">[docs]</a>    def get_version(self) -&gt; str:
+        return &quot;?&quot;</div>
+
+<div class="viewcode-block" id="Runner._sub_run"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._sub_run">[docs]</a>    def _sub_run(self, coms: List[str]) -&gt; str:
+        process = Popen(coms, stdout=PIPE)
+        (output, err) = process.communicate()
+        exit_code = process.wait()
+        if exit_code != 0:
+            return err.decode()
+        else:
+            return output.decode()</div>
+
 <div class="viewcode-block" id="Runner._check_path"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
         &quot;&quot;&quot;Checks if the passed path is valid.&quot;&quot;&quot;
         return True</div>
@@ -158,7 +172,7 @@ import time
 <div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
         skip_ = kwargs[&quot;skip&quot;]
         d = p.__dict__
-        d[&quot;runner&quot;] = type(self).__name__
+        d[&quot;runner&quot;] = str(type(self).__name__) + &quot;-&quot; + self.get_version()
         name = namehash(&quot;_&quot;.join(&quot;&quot;.join(str(_[0]) + &quot;_&quot; + str(_[1]))
                                  for _ in d.items()).replace(&quot;/&quot;, &quot;-&quot;))
         #print(name)
@@ -215,8 +229,7 @@ import time
             run (bool): Actually start/queue runner.
 
 		Returns:
-		    :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
-		        The dictionary is empty if `parse` is set to False.
+		    :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
 
 		&quot;&quot;&quot;
         if not self._check_path():
@@ -236,8 +249,8 @@ import time
             results = self.parse(outs)
             rdl = LD2DL(results)
             pdl = LD2DL(params)
-            return {**rdl, **pdl}
-        return {}</div>
+            return DL2DF({**rdl, **pdl})
+        return DL2DF({})</div>
 
 <div class="viewcode-block" id="Runner._run"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._run">[docs]</a>    def _run(self,
              rps: List[RunParam],

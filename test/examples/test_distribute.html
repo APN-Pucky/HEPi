@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -40,7 +41,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-12-gfebcf62
+                0.1.8-21-gc7843be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -318,6 +319,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -326,10 +328,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -341,12 +347,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -374,13 +383,13 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Distribute-resummino-run-files-to-clusters">
-<h1>Distribute resummino run files to clusters<a class="headerlink" href="#Distribute-resummino-run-files-to-clusters" title="Permalink to this headline"></a></h1>
+<h1>Distribute resummino run files to clusters<a class="headerlink" href="#Distribute-resummino-run-files-to-clusters" title="Permalink to this heading"></a></h1>
 <p>After running this example one only needs to run the generated output/<a href="#id1"><span class="problematic" id="id2">*</span></a>.sh files or queue them to your favourite cluster:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ ./output/*.sh
 </pre></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hepi</span>
@@ -400,14 +409,14 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.1.4.28+dirty
-~/git/resummino/
+0.1.8.9+dirty
+~/git/resummino
 </pre></div></div>
 </div>
 <section id="Single-point">
-<h2>Single point<a class="headerlink" href="#Single-point" title="Permalink to this headline"></a></h2>
+<h2>Single point<a class="headerlink" href="#Single-point" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
@@ -434,20 +443,16 @@ div.rendered_html tbody tr:hover {
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Running: 1 jobs
-RESTART None None None ./output/b961f87398318a753d6877b7bc41860014d39418ff8f9103d3ac7299a823e7e5.out
 Running: 1 jobs
-RESTART None None None ./output/3c61d60948d6bb02fc05a4e857e668171c247958624c3c0dbe872e848f2b7000.out
 Running: 1 jobs
-RESTART None None None ./output/31ef23f79e10ff50d0dcd4a71f2df9b409c22bb210869d139952edfe0d3215e9.out
 Running: 1 jobs
-RESTART None None None ./output/086a5e6f74677e9101881b8a9f6b0b8c452310ceb102bf7b941a0369c01ac7bf.out
 </pre></div></div>
 </div>
 </section>
 <section id="Mass-scan">
-<h2>Mass scan<a class="headerlink" href="#Mass-scan" title="Permalink to this headline"></a></h2>
+<h2>Mass scan<a class="headerlink" href="#Mass-scan" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
@@ -472,22 +477,13 @@ RESTART None None None ./output/086a5e6f74677e9101881b8a9f6b0b8c452310ceb102bf7b
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Running: 9 jobs
-RESTART None None None ./output/4bb70513d182bfd9166009c7629547997ddb69645082620dd7fef27fd22274d0.out
-RESTART None None None ./output/061cc97365576ff137f4f3c5d1f779f5062296401e7173c779cb5767e9596850.out
-RESTART None None None ./output/063bfb7d7c05793201cb3200ff8c60b1e4d814cf7ce6fc9bd08bde07100c3ebb.out
-RESTART None None None ./output/2a260536e188f13e6d734bce7f0d3a592bf193e40d079627b5a6bf21732e18b5.out
-RESTART None None None ./output/6d436042ce35991fdd665cc1b5052439a78e11ebee862a1c38cb5514ae164347.out
-RESTART None None None ./output/e926d3664adb9d3a9f68c59c9e04ce3040eceb9c31363c47ab78a5cde2031470.out
-RESTART None None None ./output/a35b6d30eb7678eae5f9e09058d8cc7dafbb8879f2dd5a81d3fa10e7ee9b36ba.out
-RESTART None None None ./output/972c523cdf3c4ec63a6635d8ec256666219b288bb500fd281a064da620e4b40a.out
-RESTART None None None ./output/b625f50b5def5c62b99c7c23391b7e64efc1ee5c2375798fe8eb473232c1b6aa.out
 </pre></div></div>
 </div>
 </section>
 <section id="Scale-scan">
-<h2>Scale scan<a class="headerlink" href="#Scale-scan" title="Permalink to this headline"></a></h2>
+<h2>Scale scan<a class="headerlink" href="#Scale-scan" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
@@ -513,32 +509,18 @@ RESTART None None None ./output/b625f50b5def5c62b99c7c23391b7e64efc1ee5c2375798f
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Running: 7 jobs
-RESTART None None None ./output/fe497ab2506f42a4ebe99958c56c61764f813a5bd24387f9950ee0e6f77ed390.out
-RESTART None None None ./output/fdba21a290334224592298e06bc8400cc3e7194584c725b84b166555c5c91081.out
-RESTART None None None ./output/974fbefdf05dd9c0b71fa6085561260e4210fc0b5f792a0ada9637ab16c5a891.out
-RESTART None None None ./output/f3a23c0778650618c68e63613ebfb09d72615faf22e6dce50baa8a13fb136002.out
-RESTART None None None ./output/ab2c8aaefc8d24a6d81fb23c7d7fd5f7e8153e0d8ebaeb6b742a65a8da2403e5.out
-RESTART None None None ./output/94dc758487ebb02ac1b37dc6207783de826ce878585a096aec7c5dd0a03ff46e.out
-RESTART None None None ./output/9357abf1f0344236676fa5f45560764a03b380bea63dc64dd375199fc0108037.out
 Running: 7 jobs
-RESTART None None None ./output/a83b4a9ab8796248db0b78c9798b092a22e2f5904390afd8d7bf693859fa447e.out
-RESTART None None None ./output/2ae783fb6a31fcca5d01408bc9fd609354daa7b67a8d7e423ff54d56a1210924.out
-RESTART None None None ./output/8dc1e45faa60c87d5f1937d6152e712c20dbfd3c2bce735216a24fb1d9050b0f.out
-RESTART None None None ./output/a54496c7d0d5e77aee97c2e8e032278a9d1101b4299686824aa80ef3479048a7.out
-RESTART None None None ./output/81240db73da22087f57d379a1998920d58ef3056a71a7d0d82735899e60f9fd7.out
-RESTART None None None ./output/9c62620744db8acb5ce5d92cadb56c8a52963e4c3a40808de8854b350c59aed9.out
-RESTART None None None ./output/6929de6ef65f92978e5901fffcdd780b20a7888ccd8198b9a63a797fa232d0d0.out
 </pre></div></div>
 </div>
 </section>
 <section id="PDF-scan">
-<h2>PDF scan<a class="headerlink" href="#PDF-scan" title="Permalink to this headline"></a></h2>
+<h2>PDF scan<a class="headerlink" href="#PDF-scan" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;scenarioB.in&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;slha.in&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="n">pss</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="mi">1000011</span><span class="p">,</span><span class="o">-</span><span class="mi">1000011</span><span class="p">),</span>

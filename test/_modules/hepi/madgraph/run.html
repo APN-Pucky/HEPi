@@ -17,6 +17,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -35,7 +36,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-12-gfebcf62
+                0.1.8-21-gc7843be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -104,6 +105,7 @@ import pkgutil
 from .. import Input, Result, get_output_dir
 from .result import is_valid, parse_single
 import time
+import os
 
 
 <div class="viewcode-block" id="MadGraphRunParams"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunParams">[docs]</a>class MadGraphRunParams(RunParam):
@@ -120,6 +122,15 @@ import time
 
 <div class="viewcode-block" id="MadGraphRunner.orders"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
         return [Order.LO, Order.NLO]</div>
+
+<div class="viewcode-block" id="MadGraphRunner._check_path"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
+        if os.path.exists(os.path.expanduser(self.get_path() +
+                                             &quot;/bin/mg5_aMC&quot;)):
+            self.set_path(self.get_path() + &quot;/bin/mg5_aMC&quot;)
+            return True
+        if self.get_path().endswith(&quot;mg5_aMC&quot;):
+            return True
+        return False</div>
 
 <div class="viewcode-block" id="MadGraphRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/madgraph/run/index.html#hepi.madgraph.MadGraphRunner._check_input">[docs]</a>    def _check_input(self, param: Input, **kwargs) -&gt; bool:
         &quot;&quot;&quot;Checks input parameter for compatibility with Prospino&quot;&quot;&quot;
@@ -153,9 +164,9 @@ import time
                 &#39; {dir}  &amp;&amp; cp {slha} {dir}/Cards/param_card.dat &amp;&amp; cp {run} {dir}/Cards/run_card.dat &amp;&amp; echo &quot;nb_core = 1&quot; &gt;&gt; {dir}/Cards/amcatnlo_configuration.txt &#39; + lo+ &#39;&amp;&amp; nice -n 5 {dir}/bin/calculate_xsect -f &gt;&gt; {out}  &amp;&amp; rm -rf {dir}&#39;
             print(rps[0].dic[&quot;out&quot;])
         if not rps[0].skip:
-            mgcom = &#39;bin/mg5_aMC&#39;
+            mgcom = &#39;&#39;
             if rps[0].madstr:
-                mgcom = &#39;bin/mg5_aMC --mode=&quot;MadSTR&quot;&#39;
+                mgcom = &#39; --mode=&quot;MadSTR&quot;&#39;
             com = self.get_path() + mgcom + \
                 &#39; --file {in} &gt;&gt; {out} &amp;&amp; cp {slha} {bdir}/Cards/param_card.dat &amp;&amp; cp {run} {bdir}/Cards/run_card.dat &amp;&amp; sed -i \&#39;s/.*= req_acc_FO/ 1 = req_acc_FO/g\&#39; {bdir}/Cards/run_card.dat &amp;&amp; echo &quot;automatic_html_opening = False&quot; &gt;&gt; {bdir}/Cards/amcatnlo_configuration.txt &amp;&amp; nice -n 5 {bdir}/bin/calculate_xsect -f&#39;
             pp = subprocess.Popen(com.format(**rps[0].dic), shell=True)

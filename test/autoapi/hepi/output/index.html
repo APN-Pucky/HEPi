@@ -18,6 +18,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -38,7 +39,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-12-gfebcf62
+                0.1.8-21-gc7843be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -135,11 +136,11 @@
 }
 </style>
 <section id="module-hepi.output">
-<span id="hepi-output"></span><h1><a class="reference internal" href="#module-hepi.output" title="hepi.output"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.output</span></code></a><a class="headerlink" href="#module-hepi.output" title="Permalink to this headline"></a></h1>
+<span id="hepi-output"></span><h1><a class="reference internal" href="#module-hepi.output" title="hepi.output"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.output</span></code></a><a class="headerlink" href="#module-hepi.output" title="Permalink to this heading"></a></h1>
 <section id="module-contents">
-<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
 <section id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -159,7 +160,7 @@
 </table>
 </section>
 <section id="attributes">
-<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this headline"></a></h3>
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -203,7 +204,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hepi</span><span class="o">.</span><span class="n">write_csv</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.csv&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-<span class="go">order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,code,N2,N1,NLO_PLUS_NLL</span>
+<span class="go">order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,runner,N2,N1,NLO_PLUS_NLL</span>
 <span class="go">2,13000.0,6500.0,-1,-1,$\tilde\chi_2^0\tilde\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,81.5,80.0,7.746+/-0.023</span>
 <span class="go">2,13000.0,6500.0,-1,-1,$\tilde\chi_2^0\tilde\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,82.0,80.0,7.646+/-0.024</span>
 <span class="go">2,13000.0,6500.0,-1,-1,$\tilde\chi_2^0\tilde\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,83.0,80.0,7.451+/-0.024</span>
@@ -288,7 +289,7 @@
 <p>Cf. <a class="reference external" href="https://github.com/fuenfundachtzig/xsec">https://github.com/fuenfundachtzig/xsec</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>output</strong> (<em>writeable</em>) – Should support a function <cite>.write()</cite>.</p>
+<dd class="field-odd"><p><strong>output</strong> (<em>writeable</em><em> or </em><em>file name str</em>) – Should support a function <cite>.write()</cite>.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -300,7 +301,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hepi</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">NLO_PLUS_NLL</span><span class="p">,</span><span class="s2">&quot;N1&quot;</span><span class="p">,</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.json&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-<span class="go">{&quot;initial state&quot;: &quot;pp&quot;, &quot;order&quot;: &quot;NLO+NLL&quot;, &quot;source&quot;: &quot;HEPi&quot;, &quot;contact&quot;: &quot;?&quot;, &quot;tool&quot;: &quot;Resummino&quot;, &quot;process_latex&quot;: &quot;$\\overline{d}\\overline{d}$&quot;, &quot;comment&quot;: &quot;&quot;, &quot;reference&quot;: &quot;?&quot;, &quot;Ecom [GeV]&quot;: &quot;13000.0&quot;, &quot;process_id&quot;: &quot;pp_13000.0_-1_-1&quot;, &quot;PDF set&quot;: &quot;CTEQ6.6 and MSTW2008nlo90cl&quot;, &quot;data&quot;: {&quot;80.0&quot;: {&quot;xsec_pb&quot;: 2.142151}, &quot;60.0&quot;: {&quot;xsec_pb&quot;: 4.504708}, &quot;100.0&quot;: {&quot;xsec_pb&quot;: 1.165897}, &quot;125.0&quot;: {&quot;xsec_pb&quot;: 0.614697}, &quot;150.0&quot;: {&quot;xsec_pb&quot;: 0.354984}, &quot;175.0&quot;: {&quot;xsec_pb&quot;: 0.327625}, &quot;200.0&quot;: {&quot;xsec_pb&quot;: 0.141817}, &quot;225.0&quot;: {&quot;xsec_pb&quot;: 0.138083}, &quot;250.0&quot;: {&quot;xsec_pb&quot;: 0.066363}, &quot;300.0&quot;: {&quot;xsec_pb&quot;: 0.044674}}, &quot;parameters&quot;: [[&quot;N1&quot;]]}</span>
+<span class="go">{&quot;initial state&quot;: &quot;pp&quot;, &quot;order&quot;: &quot;NLO+NLL&quot;, &quot;source&quot;: &quot;hepi-...&quot;, &quot;contact&quot;: &quot;?&quot;, &quot;tool&quot;: &quot;Resummino&quot;, &quot;process_latex&quot;: &quot;$\\overline{d}\\overline{d}$&quot;, &quot;comment&quot;: &quot;&quot;, &quot;reference&quot;: &quot;?&quot;, &quot;Ecom [GeV]&quot;: &quot;13000.0&quot;, &quot;process_id&quot;: &quot;pp_13000.0_-1_-1&quot;, &quot;PDF set&quot;: &quot;CTEQ6.6 and MSTW2008nlo90cl&quot;, &quot;data&quot;: {&quot;80.0&quot;: {&quot;xsec_pb&quot;: 2.142151}, &quot;60.0&quot;: {&quot;xsec_pb&quot;: 4.504708}, &quot;100.0&quot;: {&quot;xsec_pb&quot;: 1.165897}, &quot;125.0&quot;: {&quot;xsec_pb&quot;: 0.614697}, &quot;150.0&quot;: {&quot;xsec_pb&quot;: 0.354984}, &quot;175.0&quot;: {&quot;xsec_pb&quot;: 0.327625}, &quot;200.0&quot;: {&quot;xsec_pb&quot;: 0.141817}, &quot;225.0&quot;: {&quot;xsec_pb&quot;: 0.138083}, &quot;250.0&quot;: {&quot;xsec_pb&quot;: 0.066363}, &quot;300.0&quot;: {&quot;xsec_pb&quot;: 0.044674}}, &quot;parameters&quot;: [[&quot;N1&quot;]]}</span>
 </pre></div>
 </div>
 </dd></dl>

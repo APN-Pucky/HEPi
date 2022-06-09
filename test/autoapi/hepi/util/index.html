@@ -18,6 +18,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -37,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8-12-gfebcf62
+                0.1.8-21-gc7843be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -134,12 +135,12 @@
 }
 </style>
 <section id="module-hepi.util">
-<span id="hepi-util"></span><h1><a class="reference internal" href="#module-hepi.util" title="hepi.util"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.util</span></code></a><a class="headerlink" href="#module-hepi.util" title="Permalink to this headline"></a></h1>
+<span id="hepi-util"></span><h1><a class="reference internal" href="#module-hepi.util" title="hepi.util"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.util</span></code></a><a class="headerlink" href="#module-hepi.util" title="Permalink to this heading"></a></h1>
 <p>Collection of utility functions for the <a class="reference internal" href="../index.html#module-hepi" title="hepi"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a> package.</p>
 <section id="module-contents">
-<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline"></a></h2>
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
 <section id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this headline"></a></h3>
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -153,7 +154,7 @@
 </table>
 </section>
 <section id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -163,7 +164,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.LD2DL" title="hepi.util.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l: List, actual_dict=False) → dict</p></td>
 <td><p>Convert a list of objects into a dictionary of lists.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.LD2DF" title="hepi.util.LD2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DF</span></code></a>(ld: dict) → pandas.DataFrame</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.DL2DF" title="hepi.util.DL2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DL2DF</span></code></a>(ld: dict) → pandas.DataFrame</p></td>
 <td><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.get_name" title="hepi.util.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(pid: int) → str</p></td>
@@ -223,8 +224,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="hepi.util.LD2DF">
-<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">LD2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#LD2DF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.LD2DF" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.util.DL2DF">
+<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#DL2DF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.DL2DF" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p>
 </dd></dl>
 

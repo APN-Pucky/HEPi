@@ -25,9 +25,7 @@ Functions
    hepi.plot.vplot
    hepi.plot.mass_mapplot
    hepi.plot.mapplot
-   hepi.plot.map_vplot
    hepi.plot.scatterplot
-   hepi.plot.scatter_vplot
    hepi.plot.err_plt
    hepi.plot.scale_plot
    hepi.plot.central_scale_plot
@@ -40,6 +38,8 @@ Attributes
 
 .. autoapisummary::
 
+   hepi.plot.map_vplot
+   hepi.plot.scatter_vplot
    hepi.plot.fig
    hepi.plot.axs
    hepi.plot.lines
@@ -122,8 +122,15 @@ Attributes
        >>> hepi.mapplot(dl,"gl","sq","NLO_PLUS_NLL",xaxis="$m_{\\tilde{g}}$ [GeV]",yaxis="$m_{\\tilde{q}}$ [GeV]" , zaxis="$\\sigma_{\\mathrm{NLO+NLL}}$ [pb]")
 
 
-.. py:function:: map_vplot(tvx, tvy, tvz, xaxis=None, yaxis=None, zaxis=None, logz=True, sort=True, fill_missing=True, zscale=1.0)
+.. py:data:: map_vplot
+   
 
+   
+
+.. py:data:: scatter_vplot
+   
+
+   
 
 .. py:function:: scatterplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
 
@@ -142,9 +149,6 @@ Attributes
        ... ),dimensions=2)
        >>> hepi.scatterplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\tilde{\\chi}_1^0}$ [GeV]",yaxis="$m_{\\tilde{\\chi}_2^0}$ [GeV]" , zaxis="$\\sigma_{\\mathrm{NLO+NLL}}$ [pb]")
 
-
-
-.. py:function:: scatter_vplot(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, sort=True, fill_missing=True, zscale=1.0)
 
 
 .. py:data:: fig

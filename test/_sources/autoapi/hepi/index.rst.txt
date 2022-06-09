@@ -69,7 +69,7 @@ Functions
 .. autoapisummary::
 
    hepi.order_to_string
-   hepi.LD2DF
+   hepi.DL2DF
    hepi.get_name
    hepi.write_latex
    hepi.write_csv
@@ -108,7 +108,7 @@ Functions
    hepi.scale_error
    hepi.combine_errors
    hepi.LD2DL
-   hepi.LD2DF
+   hepi.DL2DF
    hepi.get_name
    hepi.get_LR_partner
    hepi.namehash
@@ -128,9 +128,7 @@ Functions
    hepi.vplot
    hepi.mass_mapplot
    hepi.mapplot
-   hepi.map_vplot
    hepi.scatterplot
-   hepi.scatter_vplot
    hepi.err_plt
    hepi.scale_plot
    hepi.central_scale_plot
@@ -138,11 +136,13 @@ Functions
    hepi.get_input_dir
    hepi.get_output_dir
    hepi.get_pre
+   hepi.DL2DF
    hepi.LD2DL
    hepi.namehash
    hepi.order_to_string
    hepi.xsec_to_order
    hepi.LD2DL
+   hepi.DL2DF
    hepi.load
 
 
@@ -162,6 +162,8 @@ Attributes
    hepi.seven_point_scan
    hepi.pdf_scan
    hepi.required_numerical_uncertainty_factor
+   hepi.map_vplot
+   hepi.scatter_vplot
    hepi.fig
    hepi.axs
    hepi.lines
@@ -203,7 +205,7 @@ Attributes
 .. py:function:: order_to_string(o: Order, json_style=False, no_macros=False) -> str
 
 
-.. py:function:: LD2DF(ld: dict) -> pandas.DataFrame
+.. py:function:: DL2DF(ld: dict) -> pandas.DataFrame
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
@@ -255,7 +257,7 @@ Attributes
    >>> hepi.write_csv(dl, open("test.csv", 'w'))
    >>> with open('test.csv', 'r') as f:
    ...     print(f.read())
-   order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,code,N2,N1,NLO_PLUS_NLL
+   order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,runner,N2,N1,NLO_PLUS_NLL
    2,13000.0,6500.0,-1,-1,$\tilde\chi_2^0\tilde\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,81.5,80.0,7.746+/-0.023
    2,13000.0,6500.0,-1,-1,$\tilde\chi_2^0\tilde\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,82.0,80.0,7.646+/-0.024
    2,13000.0,6500.0,-1,-1,$\tilde\chi_2^0\tilde\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,83.0,80.0,7.451+/-0.024
@@ -341,7 +343,7 @@ Attributes
 
 
    :param output: Should support a function `.write()`.
-   :type output: writeable
+   :type output: writeable or file name str
 
    .. rubric:: Examples
 
@@ -353,7 +355,7 @@ Attributes
    >>> hepi.write_json(dl, Order.NLO_PLUS_NLL,"N1",open("test.json", 'w'))
    >>> with open('test.json', 'r') as f:
    ...     print(f.read())
-   {"initial state": "pp", "order": "NLO+NLL", "source": "HEPi", "contact": "?", "tool": "Resummino", "process_latex": "$\\overline{d}\\overline{d}$", "comment": "", "reference": "?", "Ecom [GeV]": "13000.0", "process_id": "pp_13000.0_-1_-1", "PDF set": "CTEQ6.6 and MSTW2008nlo90cl", "data": {"80.0": {"xsec_pb": 2.142151}, "60.0": {"xsec_pb": 4.504708}, "100.0": {"xsec_pb": 1.165897}, "125.0": {"xsec_pb": 0.614697}, "150.0": {"xsec_pb": 0.354984}, "175.0": {"xsec_pb": 0.327625}, "200.0": {"xsec_pb": 0.141817}, "225.0": {"xsec_pb": 0.138083}, "250.0": {"xsec_pb": 0.066363}, "300.0": {"xsec_pb": 0.044674}}, "parameters": [["N1"]]}
+   {"initial state": "pp", "order": "NLO+NLL", "source": "hepi-...", "contact": "?", "tool": "Resummino", "process_latex": "$\\overline{d}\\overline{d}$", "comment": "", "reference": "?", "Ecom [GeV]": "13000.0", "process_id": "pp_13000.0_-1_-1", "PDF set": "CTEQ6.6 and MSTW2008nlo90cl", "data": {"80.0": {"xsec_pb": 2.142151}, "60.0": {"xsec_pb": 4.504708}, "100.0": {"xsec_pb": 1.165897}, "125.0": {"xsec_pb": 0.614697}, "150.0": {"xsec_pb": 0.354984}, "175.0": {"xsec_pb": 0.327625}, "200.0": {"xsec_pb": 0.141817}, "225.0": {"xsec_pb": 0.138083}, "250.0": {"xsec_pb": 0.066363}, "300.0": {"xsec_pb": 0.044674}}, "parameters": [["N1"]]}
 
 
 .. py:class:: DictData
@@ -981,7 +983,7 @@ Attributes
    {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
-.. py:function:: LD2DF(ld: dict) -> pandas.DataFrame
+.. py:function:: DL2DF(ld: dict) -> pandas.DataFrame
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
@@ -1236,8 +1238,15 @@ Attributes
        >>> hepi.mapplot(dl,"gl","sq","NLO_PLUS_NLL",xaxis="$m_{\\tilde{g}}$ [GeV]",yaxis="$m_{\\tilde{q}}$ [GeV]" , zaxis="$\\sigma_{\\mathrm{NLO+NLL}}$ [pb]")
 
 
-.. py:function:: map_vplot(tvx, tvy, tvz, xaxis=None, yaxis=None, zaxis=None, logz=True, sort=True, fill_missing=True, zscale=1.0)
+.. py:data:: map_vplot
+   
 
+   
+
+.. py:data:: scatter_vplot
+   
+
+   
 
 .. py:function:: scatterplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
 
@@ -1256,9 +1265,6 @@ Attributes
        ... ),dimensions=2)
        >>> hepi.scatterplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\tilde{\\chi}_1^0}$ [GeV]",yaxis="$m_{\\tilde{\\chi}_2^0}$ [GeV]" , zaxis="$\\sigma_{\\mathrm{NLO+NLL}}$ [pb]")
 
-
-
-.. py:function:: scatter_vplot(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, sort=True, fill_missing=True, zscale=1.0)
 
 
 .. py:data:: fig
@@ -1464,6 +1470,11 @@ Attributes
    :type annlo_plus_nnll: :obj:`double`
 
 
+.. py:function:: DL2DF(ld: dict) -> pandas.DataFrame
+
+   Convert a `dict` of `list`s to a `pandas.DataFrame`.
+
+
 .. py:function:: LD2DL(l: List, actual_dict=False) -> dict
 
    Convert a list of objects into a dictionary of lists.
@@ -1537,6 +1548,12 @@ Attributes
       Returns the name of the runner.
 
 
+   .. py:method:: get_version(self) -> str
+
+
+   .. py:method:: _sub_run(self, coms: List[str]) -> str
+
+
    .. py:method:: _check_path(self) -> bool
 
       Checks if the passed path is valid.
@@ -1565,8 +1582,7 @@ Attributes
       run (bool): Actually start/queue runner.
 
           Returns:
-              :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
-                  The dictionary is empty if `parse` is set to False.
+              :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
 
 
 
@@ -1795,6 +1811,11 @@ Attributes
    ...         self.c = c
    >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
    {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
+
+
+.. py:function:: DL2DF(ld: dict) -> pandas.DataFrame
+
+   Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
 
 .. py:function:: load(f, dimensions=1)
