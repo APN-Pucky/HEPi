@@ -223,22 +223,7 @@ def vplot(x,
         vx = x
         vy = y
 
-    xnew = np.linspace(
-        vx[0],
-        vx[-1],
-        300,
-    )
-    if interpolate:
-        #print(vx,vy)
-        spl = make_interp_spline(vx, splot.unv(vy), k=3)  # type: BSpline
-        power_smooth = spl(xnew)
-    if fill:
-        spl_up = make_interp_spline(vx, splot.unv(vy) + splot.usd(vy),
-                                    k=3)  # type: BSpline
-        power_up_smooth = spl_up(xnew)
-        spl_down = make_interp_spline(vx, splot.unv(vy) - splot.usd(vy),
-                                      k=3)  # type: BSpline
-        power_down_smooth = spl_down(xnew)
+    
     if data_color is None:
         if 'axes' in kwargs and kwargs['axes'] is not None:
             bl, = kwargs['axes'].plot([], [])
@@ -258,7 +243,7 @@ def vplot(x,
                             sigmas=0 if not fill else 1,
                             **kwargs)
     if iii is not None:
-        ii = iii[0]
+        #ii = iii[0]
         ix = iii[1]
         iy = iii[2]
     if print_area:
