@@ -51,7 +51,7 @@ def LD2DL(l: List, actual_dict=False) -> dict:
     }
 
 
-def LD2DF(ld: dict) -> pd.DataFrame:
+def DL2DF(ld: dict) -> pd.DataFrame:
     """
     Convert a `dict` of `list`s to a `pandas.DataFrame`.
     """

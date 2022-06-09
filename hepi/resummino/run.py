@@ -19,20 +19,29 @@ class ResumminoRunner(Runner):
     def orders(self) -> List[Order]:
         return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL, Order.aNNLO_PLUS_NNLL]
 
+    def get_version(self) -> str:
+        p = os.path.expanduser(self.get_path())
+        ret = self._sub_run([p, "--version"])
+        return ret.split("\n")[-2]
+
     def _check_path(self) -> bool:
-        if os.path.exists(get_path() + "build/bin/resummino"):
-            self.set_path(get_path() + "build/bin/resummino")
+        if os.path.exists(
+                os.path.expanduser(self.get_path() + "/build/bin/resummino")):
+            self.set_path(self.get_path() + "/build/bin/resummino")
             return True
-        if os.path.exists(get_path() + "bin/resummino"):
-            self.set_path(get_path() + "bin/resummino")
+        if os.path.exists(
+                os.path.expanduser(self.get_path() + "/bin/resummino")):
+            self.set_path(self.get_path() + "/bin/resummino")
             return True
-        return True
+        if self.get_path().endswith("resummino"):
+            return True
+        return False
 
     def _check_input(self, p: Input, **kwargs) -> bool:
 
         if p.order == Order.aNNLO_PLUS_NNLL and (
-                p.has_gluino() and p.has_weakino()) or (p.has_squark()
-                                                        and p.has_weakino()):
+            (p.has_gluino() and p.has_weakino()) or
+            (p.has_squark() and p.has_weakino())):
             warnings.warn(
                 "Resummino does not support stong-weak mixed aNNLO+NNLL.")
             return False
