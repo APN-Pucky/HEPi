@@ -5,7 +5,7 @@ on:
     tags: 
       - '*'
 jobs:
-    publish:
+    default:
       runs-on: ubuntu-latest
       container:
         image: apnpucky/ubuntu-pip-lhapdf
