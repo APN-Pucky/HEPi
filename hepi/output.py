@@ -175,7 +175,7 @@ def write_json(dict_list: list,
     >>> hepi.write_json(dl, Order.NLO_PLUS_NLL,"N1",open("test.json", 'w'))
     >>> with open('test.json', 'r') as f:
     ...     print(f.read())
-    {"initial state": "pp", "order": "NLO+NLL", "source": "HEPi", "contact": "?", "tool": "Resummino", "process_latex": "$\\\\overline{d}\\\\overline{d}$", "comment": "", "reference": "?", "Ecom [GeV]": "13000.0", "process_id": "pp_13000.0_-1_-1", "PDF set": "CTEQ6.6 and MSTW2008nlo90cl", "data": {"80.0": {"xsec_pb": 2.142151}, "60.0": {"xsec_pb": 4.504708}, "100.0": {"xsec_pb": 1.165897}, "125.0": {"xsec_pb": 0.614697}, "150.0": {"xsec_pb": 0.354984}, "175.0": {"xsec_pb": 0.327625}, "200.0": {"xsec_pb": 0.141817}, "225.0": {"xsec_pb": 0.138083}, "250.0": {"xsec_pb": 0.066363}, "300.0": {"xsec_pb": 0.044674}}, "parameters": [["N1"]]}
+    {"initial state": "pp", "order": "NLO+NLL", "source": "hepi-...", "contact": "?", "tool": "Resummino", "process_latex": "$\\\\overline{d}\\\\overline{d}$", "comment": "", "reference": "?", "Ecom [GeV]": "13000.0", "process_id": "pp_13000.0_-1_-1", "PDF set": "CTEQ6.6 and MSTW2008nlo90cl", "data": {"80.0": {"xsec_pb": 2.142151}, "60.0": {"xsec_pb": 4.504708}, "100.0": {"xsec_pb": 1.165897}, "125.0": {"xsec_pb": 0.614697}, "150.0": {"xsec_pb": 0.354984}, "175.0": {"xsec_pb": 0.327625}, "200.0": {"xsec_pb": 0.141817}, "225.0": {"xsec_pb": 0.138083}, "250.0": {"xsec_pb": 0.066363}, "300.0": {"xsec_pb": 0.044674}}, "parameters": [["N1"]]}
  """
 
     jd = {}
