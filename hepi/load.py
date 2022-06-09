@@ -3,7 +3,7 @@ import json
 from re import I
 from uncertainties import ufloat
 from hepi.input import Input, order_to_string, xsec_to_order
-from hepi.util import LD2DL
+from hepi.util import LD2DL, DL2DF
 
 
 def load(f, dimensions=1):
@@ -26,7 +26,7 @@ def load(f, dimensions=1):
         pdf_nlo=dict["PDF set"],
         update=False,
     )
-    inpu.code = dict["tool"]
+    inpu.runner = dict["tool"]
     dat = []
     params = dict["parameters"]
     if dimensions == 2:
@@ -49,4 +49,4 @@ def load(f, dimensions=1):
             dicd[order_to_string(inpu.order)] = ufloat(
                 dict["data"][k]["xsec_pb"], dict["data"][k]["unc_pb"])
             dat.append(dicd)
-    return LD2DL(dat, actual_dict=True)
+    return DL2DF(LD2DL(dat, actual_dict=True))
