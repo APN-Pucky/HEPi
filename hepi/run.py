@@ -9,7 +9,6 @@ from hepi.results import Result
 from hepi.util import DL2DF, LD2DL, DictData, namehash
 from smpl.parallel import par
 import time
-import pandas as pd
 
 
 class RunParam(DictData):
