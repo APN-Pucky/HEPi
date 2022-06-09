@@ -69,7 +69,7 @@ def write_csv(dict_list: list, filename: str):
     >>> hepi.write_csv(dl, open("test.csv", 'w'))
     >>> with open('test.csv', 'r') as f:
     ...     print(f.read())
-    order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,code,N2,N1,NLO_PLUS_NLL
+    order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,runner,N2,N1,NLO_PLUS_NLL
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,81.5,80.0,7.746+/-0.023
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,82.0,80.0,7.646+/-0.024
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,83.0,80.0,7.451+/-0.024
