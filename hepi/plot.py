@@ -149,8 +149,8 @@ def plot(dict_list,
     if label == "":
         label = None
 
-    vx = dict_list[x][mask]
-    vy = dict_list[y][mask]
+    vx = dict_list[x].to_numpy()[mask]
+    vy = dict_list[y].to_numpy()[mask]
 
     if K:
         yaxis = "$K$"
@@ -223,83 +223,46 @@ def vplot(x,
         vx = x
         vy = y
 
-    xnew = np.linspace(
-        vx[0],
-        vx[-1],
-        300,
-    )
-    if interpolate:
-        #print(vx,vy)
-        spl = make_interp_spline(vx, splot.unv(vy), k=3)  # type: BSpline
-        power_smooth = spl(xnew)
-    if fill:
-        spl_up = make_interp_spline(vx, splot.unv(vy) + splot.usd(vy),
-                                    k=3)  # type: BSpline
-        power_up_smooth = spl_up(xnew)
-        spl_down = make_interp_spline(vx, splot.unv(vy) - splot.usd(vy),
-                                      k=3)  # type: BSpline
-        power_down_smooth = spl_down(xnew)
+    
     if data_color is None:
         if 'axes' in kwargs and kwargs['axes'] is not None:
             bl, = kwargs['axes'].plot([], [])
         else:
             bl, = plt.gca().plot([], [])
         color = bl.get_color()
-    if plot_data:
+    iii = splot.data(vx,
+                            vy * yscale,
+                            label=label,
+                            xaxis=xaxis,
+                            yaxis=yaxis,
+                            logy=logy,
+                            data_color=color,
+                            also_data=plot_data,
+                            interpolate=interpolate,
+                            fmt=data_fmt,
+                            sigmas=0 if not fill else 1,
+                            **kwargs)
+    if iii is not None:
+        #ii = iii[0]
+        ix = iii[1]
+        iy = iii[2]
+    if print_area:
+        print('computed AUC using sklearn.metrics.auc: {}'.format(auc(ix, iy)))
+    if ((np.any(np.less(vy, 0)) or (interpolate and np.any(np.less(iy, 0))))
+            and logy):
         splot.data(vx,
-                   vy * yscale,
-                   label=label,
+                   -vy * yscale,
+                   label="-" + label,
                    xaxis=xaxis,
                    yaxis=yaxis,
                    logy=logy,
                    data_color=color,
+                   also_data=plot_data,
+                   interpolate=interpolate,
+                   interpolate_fmt=(0, (3, 1, 3, 1, 1, 1)),
                    fmt=data_fmt,
+                   sigmas=0 if not fill else 1,
                    **kwargs)
-    if interpolate:
-        kargs = {}
-        if not plot_data:
-            kargs = {'xaxis': xaxis, 'yaxis': yaxis, 'label': label}
-        if print_area:
-            print('computed AUC using sklearn.metrics.auc: {}'.format(
-                auc(xnew, power_smooth * yscale)))
-        splot.data(xnew,
-                   power_smooth * yscale,
-                   logy=logy,
-                   fmt=fmt,
-                   init=False,
-                   data_color=color,
-                   **kargs,
-                   **kwargs)
-    if fill:
-        plt.fill_between(xnew,
-                         power_up_smooth * yscale,
-                         power_down_smooth * yscale,
-                         alpha=0.3,
-                         color=color)
-    if ((np.any(np.less(vy, 0)) or
-         (interpolate and np.any(np.less(power_smooth, 0)))) and logy):
-        if plot_data:
-            splot.data(vx,
-                       -vy * yscale,
-                       label="-" + label,
-                       xaxis=xaxis,
-                       yaxis=yaxis,
-                       logy=logy,
-                       data_color=color,
-                       fmt=data_fmt,
-                       **kwargs)
-        if interpolate:
-            if not plot_data:
-                kargs = {'xaxis': xaxis, 'yaxis': yaxis, 'label': "-" + label}
-            splot.data(xnew,
-                       -power_smooth * yscale,
-                       logy=logy,
-                       fmt=None,
-                       linestyle=(0, (3, 1, 3, 1, 1, 1)),
-                       init=False,
-                       data_color=color,
-                       **kargs,
-                       **kwargs)
 
 
 def mass_mapplot(dict_list,
@@ -346,84 +309,17 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
     vx = dict_list[x]
     vy = dict_list[y]
     vz = dict_list[z]
-    map_vplot(vx, vy, vz, xaxis=xaxis, yaxis=yaxis, zaxis=zaxis, **kwargs)
+    splot.plot2d(vx,
+                 vy,
+                 vz,
+                 style="image",
+                 xaxis=xaxis,
+                 yaxis=yaxis,
+                 zaxis=zaxis,
+                 **kwargs)
 
-
-def map_vplot(tvx,
-              tvy,
-              tvz,
-              xaxis=None,
-              yaxis=None,
-              zaxis=None,
-              logz=True,
-              sort=True,
-              fill_missing=True,
-              zscale=1.):
-    vx = np.copy(tvx)
-    vy = np.copy(tvy)
-    vz = np.copy(tvz)
-    if fill_missing:
-        for x in vx:
-            for y in vy:
-                ex = False
-                for i in range(len(vx)):
-                    if vx[i] == x and vy[i] == y:
-                        ex = True
-                if not ex:
-                    vx = np.append(vx, x)
-                    vy = np.append(vy, y)
-                    vz = np.append(vz, 0)
-    if sort:
-        p1 = vx.argsort(kind='stable')
-        vx = np.copy(vx[p1])
-        vy = np.copy(vy[p1])
-        vz = np.copy(vz[p1])
-        p2 = vy.argsort(kind='stable')
-        vx = vx[p2]
-        vy = vy[p2]
-        vz = vz[p2]
-    s = 1
-    while vy[s] == vy[s - 1]:
-        s = s + 1
-    if s == 1:
-        #print("flipped x y ")
-        while vx[s] == vx[s - 1]:
-            s = s + 1
-        if s == 1:
-            print("error too small map")
-            return
-        #x, y = y, x
-        xaxis, yaxis = yaxis, xaxis
-        vx, vy = vy, vx
-
-    grid = splot.unv(vz).reshape((int(np.rint(np.size(vx) / s)), s)) * zscale
-
-    fig, ax = plt.subplots(nrows=1, ncols=1, constrained_layout=True)
-    im = None
-    xl = vx.min() + (vx.min() / 2) - vx[vx != vx.min()].min() / 2
-    xm = vx.max() + (vx.max() / 2) - vx[vx != vx.max()].max() / 2
-    yl = vy.min() + (vy.min() / 2) - vy[vy != vy.min()].min() / 2
-    ym = vy.max() + (vy.max() / 2) - vy[vy != vy.max()].max() / 2
-    im = NonUniformImage(
-        ax,
-        origin="lower",
-        cmap='viridis',
-        interpolation='nearest',
-        extent=(xl, xm, yl, ym),
-        norm=colors.LogNorm() if logz else None,
-    )
-
-    im.set_data(np.unique(vx), np.unique(vy), grid)
-    ax.images.append(im)
-    ax.set_xlim(xl, xm)
-    ax.set_ylim(yl, ym)
-
-    cb = plt.colorbar(im)
-    cb.set_label(zaxis)
-    plt.xlabel(xaxis)
-    plt.ylabel(yaxis)
-    plt.show()
-
+map_vplot =  lambda *a,**da : splot.plot2d(*a,style="image",**da)
+scatter_vplot =  lambda *a,**da : splot.plot2d(*a,style="scatter",**da)
 
 def scatterplot(dict_list,
                 x,
@@ -459,58 +355,14 @@ def scatterplot(dict_list,
     vx = dict_list[x]
     vy = dict_list[y]
     vz = dict_list[z]
-    scatter_vplot(vx, vy, vz, xaxis=xaxis, yaxis=yaxis, zaxis=zaxis, **kwargs)
-
-
-def scatter_vplot(vx,
-                  vy,
-                  vz,
-                  xaxis=None,
-                  yaxis=None,
-                  zaxis=None,
-                  logz=True,
-                  sort=True,
-                  fill_missing=True,
-                  zscale=1.):
-    if sort:
-        p1 = vx.argsort(kind='stable')
-        vx = np.copy(vx[p1])
-        vy = np.copy(vy[p1])
-        vz = np.copy(vz[p1])
-        p2 = vy.argsort(kind='stable')
-        vx = vx[p2]
-        vy = vy[p2]
-        vz = vz[p2]
-
-    fig, ax = plt.subplots(nrows=1, ncols=1, constrained_layout=True)
-    im = None
-    xl = vx.min() + (vx.min() / 2) - vx[vx != vx.min()].min() / 2
-    xm = vx.max() + (vx.max() / 2) - vx[vx != vx.max()].max() / 2
-    yl = vy.min() + (vy.min() / 2) - vy[vy != vy.min()].min() / 2
-    ym = vy.max() + (vy.max() / 2) - vy[vy != vy.max()].max() / 2
-
-    s = plt.scatter(np.concatenate((vx, vx, vx)),
-                    np.concatenate((vy, vy, vy)),
-                    c=np.concatenate(
-                        (splot.unv(vz) + splot.usd(vz),
-                         splot.unv(vz) - splot.usd(vz), splot.unv(vz))),
-                    s=np.concatenate(
-                        ([(3 * plt.rcParams['lines.markersize'])**2
-                          for i in range(len(vx))], [
-                              (2 * plt.rcParams['lines.markersize'])**2
-                              for i in range(len(vx))
-                          ], [(plt.rcParams['lines.markersize'])**2
-                              for i in range(len(vx))])),
-                    norm=colors.LogNorm() if logz else None)
-
-    ax.set_xlim(xl, xm)
-    ax.set_ylim(yl, ym)
-
-    cb = plt.colorbar(s)
-    cb.set_label(zaxis)
-    plt.xlabel(xaxis)
-    plt.ylabel(yaxis)
-    plt.show()
+    splot.plot2d(vx,
+                 vy,
+                 vz,
+                 style="scatter",
+                 xaxis=xaxis,
+                 yaxis=yaxis,
+                 zaxis=zaxis,
+                 **kwargs)
 
 
 fig = None

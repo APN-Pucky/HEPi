@@ -1,9 +1,10 @@
 import json
 from smpl import plot
 import numpy as np
+import pkg_resources as pkg
 
 from .input import Order, order_to_string
-from .util import LD2DF, get_name
+from .util import DL2DF, get_name
 from smpl import io
 
 splot = plot
@@ -68,7 +69,7 @@ def write_csv(dict_list: list, filename: str):
     >>> hepi.write_csv(dl, open("test.csv", 'w'))
     >>> with open('test.csv', 'r') as f:
     ...     print(f.read())
-    order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,code,N2,N1,NLO_PLUS_NLL
+    order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,runner,N2,N1,NLO_PLUS_NLL
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,81.5,80.0,7.746+/-0.023
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,82.0,80.0,7.646+/-0.024
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,83.0,80.0,7.451+/-0.024
@@ -144,7 +145,7 @@ def write_csv(dict_list: list, filename: str):
     2,13000.0,6500.0,-1,-1,$\\tilde\\chi_2^0\\tilde\\chi_1^0$ (higgsino),CTEQ6.6 and MSTW2008nlo90cl,0,CTEQ6.6 and MSTW2008nlo90cl,0,0,0,1.0,1.0,0.01,50,auto,auto,total,,,0.0,Resummino,320.0,300.0,0.04+/-0.05
     <BLANKLINE>
  """
-    df = LD2DF(dict_list)
+    df = DL2DF(dict_list)
     df.to_csv(filename, index=False)
 
 
@@ -162,7 +163,7 @@ def write_json(dict_list: list,
 
 
  Args:
-    output (writeable) : Should support a function `.write()`.
+    output (writeable or file name str) : Should support a function `.write()`.
 
  Examples:
 
@@ -174,8 +175,9 @@ def write_json(dict_list: list,
     >>> hepi.write_json(dl, Order.NLO_PLUS_NLL,"N1",open("test.json", 'w'))
     >>> with open('test.json', 'r') as f:
     ...     print(f.read())
-    {"initial state": "pp", "order": "NLO+NLL", "source": "HEPi", "contact": "?", "tool": "Resummino", "process_latex": "$\\\\overline{d}\\\\overline{d}$", "comment": "", "reference": "?", "Ecom [GeV]": "13000.0", "process_id": "pp_13000.0_-1_-1", "PDF set": "CTEQ6.6 and MSTW2008nlo90cl", "data": {"80.0": {"xsec_pb": 2.142151}, "60.0": {"xsec_pb": 4.504708}, "100.0": {"xsec_pb": 1.165897}, "125.0": {"xsec_pb": 0.614697}, "150.0": {"xsec_pb": 0.354984}, "175.0": {"xsec_pb": 0.327625}, "200.0": {"xsec_pb": 0.141817}, "225.0": {"xsec_pb": 0.138083}, "250.0": {"xsec_pb": 0.066363}, "300.0": {"xsec_pb": 0.044674}}, "parameters": [["N1"]]}
+    {"initial state": "pp", "order": "NLO+NLL", "source": "hepi-...", "contact": "?", "tool": "Resummino", "process_latex": "$\\\\overline{d}\\\\overline{d}$", "comment": "", "reference": "?", "Ecom [GeV]": "13000.0", "process_id": "pp_13000.0_-1_-1", "PDF set": "CTEQ6.6 and MSTW2008nlo90cl", "data": {"80.0": {"xsec_pb": 2.142151}, "60.0": {"xsec_pb": 4.504708}, "100.0": {"xsec_pb": 1.165897}, "125.0": {"xsec_pb": 0.614697}, "150.0": {"xsec_pb": 0.354984}, "175.0": {"xsec_pb": 0.327625}, "200.0": {"xsec_pb": 0.141817}, "225.0": {"xsec_pb": 0.138083}, "250.0": {"xsec_pb": 0.066363}, "300.0": {"xsec_pb": 0.044674}}, "parameters": [["N1"]]}
  """
+
     jd = {}
     jd["initial state"] = "pp"  # TODO add more such cases + filters, also in resummino
     if o == Order.LO:
@@ -188,9 +190,15 @@ def write_json(dict_list: list,
         jd["order"] = "NNLOapprox+NNLL"
     else:
         raise ValueError("Order not supported by write_json.")
-    jd["source"] = "HEPi"
+    package = "hepi"
+    try:
+        version = pkg.require(package)[0].version
+    except pkg.DistributionNotFound:
+        version = "dirty"
+    jd["source"] = package + "-" + version
+
     jd["contact"] = "?"
-    jd["tool"] = dict_list["code"][0]
+    jd["tool"] = dict_list["runner"][0].replace("Runner", "")
     jd["process_latex"] = "$" + get_name(dict_list["particle1"][0]) + get_name(
         dict_list["particle2"][0]) + "$"
     jd["comment"] = dict_list["id"][0]
@@ -214,4 +222,4 @@ def write_json(dict_list: list,
             }
     jd["data"] = dat
     jd["parameters"] = [[parameter]]
-    output.write(json.dumps(jd))
+    io.write(output, json.dumps(jd))

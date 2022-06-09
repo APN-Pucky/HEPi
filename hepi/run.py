@@ -1,11 +1,12 @@
 from logging import warning
 import os
 import subprocess
+from subprocess import Popen, PIPE
 from typing import List
 import warnings
 from hepi.input import Input, Order, get_input_dir, get_output_dir, get_pre
 from hepi.results import Result
-from hepi.util import LD2DL, DictData, namehash
+from hepi.util import DL2DF, LD2DL, DictData, namehash
 from smpl.parallel import par
 import time
 
@@ -55,6 +56,18 @@ class Runner:
         """Returns the name of the runner."""
         return type(self).__name__
 
+    def get_version(self) -> str:
+        return "?"
+
+    def _sub_run(self, coms: List[str]) -> str:
+        process = Popen(coms, stdout=PIPE)
+        (output, err) = process.communicate()
+        exit_code = process.wait()
+        if exit_code != 0:
+            return err.decode()
+        else:
+            return output.decode()
+
     def _check_path(self) -> bool:
         """Checks if the passed path is valid."""
         return True
@@ -62,7 +75,7 @@ class Runner:
     def _prepare(self, p: Input, **kwargs) -> RunParam:
         skip_ = kwargs["skip"]
         d = p.__dict__
-        d["runner"] = type(self).__name__
+        d["runner"] = str(type(self).__name__) + "-" + self.get_version()
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
                                  for _ in d.items()).replace("/", "-"))
         #print(name)
@@ -119,8 +132,7 @@ class Runner:
             run (bool): Actually start/queue runner.
 
 		Returns:
-		    :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
-		        The dictionary is empty if `parse` is set to False.
+		    :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
 
 		"""
         if not self._check_path():
@@ -140,8 +152,8 @@ class Runner:
             results = self.parse(outs)
             rdl = LD2DL(results)
             pdl = LD2DL(params)
-            return {**rdl, **pdl}
-        return {}
+            return DL2DF({**rdl, **pdl})
+        return DL2DF({})
 
     def _run(self,
              rps: List[RunParam],

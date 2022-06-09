@@ -8,6 +8,7 @@ import pkgutil
 from .. import Input, Result, get_output_dir
 from .result import is_valid, parse_single
 import time
+import os
 
 
 class MadGraphRunParams(RunParam):
@@ -24,6 +25,15 @@ class MadGraphRunner(Runner):
 
     def orders(self) -> List[Order]:
         return [Order.LO, Order.NLO]
+
+    def _check_path(self) -> bool:
+        if os.path.exists(os.path.expanduser(self.get_path() +
+                                             "/bin/mg5_aMC")):
+            self.set_path(self.get_path() + "/bin/mg5_aMC")
+            return True
+        if self.get_path().endswith("mg5_aMC"):
+            return True
+        return False
 
     def _check_input(self, param: Input, **kwargs) -> bool:
         """Checks input parameter for compatibility with Prospino"""
@@ -57,9 +67,9 @@ class MadGraphRunner(Runner):
                 ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && echo "nb_core = 1" >> {dir}/Cards/amcatnlo_configuration.txt ' + lo+ '&& nice -n 5 {dir}/bin/calculate_xsect -f >> {out}  && rm -rf {dir}'
             print(rps[0].dic["out"])
         if not rps[0].skip:
-            mgcom = 'bin/mg5_aMC'
+            mgcom = ''
             if rps[0].madstr:
-                mgcom = 'bin/mg5_aMC --mode="MadSTR"'
+                mgcom = ' --mode="MadSTR"'
             com = self.get_path() + mgcom + \
                 ' --file {in} >> {out} && cp {slha} {bdir}/Cards/param_card.dat && cp {run} {bdir}/Cards/run_card.dat && sed -i \'s/.*= req_acc_FO/ 1 = req_acc_FO/g\' {bdir}/Cards/run_card.dat && echo "automatic_html_opening = False" >> {bdir}/Cards/amcatnlo_configuration.txt && nice -n 5 {bdir}/bin/calculate_xsect -f'
             pp = subprocess.Popen(com.format(**rps[0].dic), shell=True)
