@@ -17,6 +17,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -35,7 +36,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8
+                0.1.9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -104,6 +105,14 @@ from hepi.run import Runner
 
 <div class="viewcode-block" id="SPhenoRunner"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.SPhenoRunner">[docs]</a>class SPhenoRunner(Runner):
 
+<div class="viewcode-block" id="SPhenoRunner._check_path"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.SPhenoRunner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
+        if os.path.exists(os.path.expanduser(self.get_path() + &quot;/bin/SPheno&quot;)):
+            self.set_path(self.get_path() + &quot;/bin/SPheno&quot;)
+            return True
+        if self.get_path().endswith(&quot;SPheno&quot;):
+            return True
+        return False</div>
+
 <div class="viewcode-block" id="SPhenoRunner.run"><a class="viewcode-back" href="../../../autoapi/hepi/spheno/run/index.html#hepi.spheno.SPhenoRunner.run">[docs]</a>    def run(self, slhas: List[Input], **kwargs) -&gt; List[Input]:
         &quot;&quot;&quot;
         Run the passed list of parameters for SPheno.
@@ -113,13 +122,15 @@ from hepi.run import Runner
         Returns:
             :obj:`list` of :class:`Input`
         &quot;&quot;&quot;
+        if not self._check_path():
+            warnings.warn(&quot;The path is not valid for &quot; + self.get_name())
         if os.path.exists(&quot;Messages.out&quot;):
             os.remove(&quot;Messages.out&quot;)
         for s in slhas:
             # Remove Creation time for hash-/caching
             comm = &quot;cp &quot; + self.get_output_dir(
             ) + s.slha + &quot; spheno_tmp.in &amp;&amp; &quot; + get_path(
-            ) + &quot;bin/SPheno spheno_tmp.in &amp;&amp; mv &quot; + &quot;SPheno.spc &quot; + self.get_output_dir(
+            ) + &quot; spheno_tmp.in &amp;&amp; mv &quot; + &quot;SPheno.spc &quot; + self.get_output_dir(
             ) + s.slha + &quot; &amp;&amp; sed -i &#39;/Created/d&#39; &quot; + self.get_output_dir(
             ) + s.slha
             proc = subprocess.Popen(comm,

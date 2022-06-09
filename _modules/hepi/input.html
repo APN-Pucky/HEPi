@@ -17,6 +17,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -35,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8
+                0.1.9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -618,25 +619,27 @@ import lhapdf
 
 
 <div class="viewcode-block" id="masses_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.masses_scan">[docs]</a>def masses_scan(l: List[Input],
-                vars: List[int],
+                varis: List[int],
                 rrange,
                 diff_L_R=None,
-                negate=[]) -&gt; List[Input]:
+                negate=None) -&gt; List[Input]:
     &quot;&quot;&quot;
-    Scans the PDG identified mass `var` over `rrange` in the list `l`.
+    Scans the PDG identified masses in `varis` over `rrange` in the list `l`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
     &quot;&quot;&quot;
+    if negate is None:
+        negate = []
     ret = []
     for s in l:
         for r in rrange:
             d = None
             try:
                 d = pyslha.read(s.slha)
-            except:
+            except Exception:
                 d = pyslha.read(get_output_dir() + s.slha)
 
             mlist = &quot;&quot;
-            for var in vars:
+            for var in varis:
                 d.blocks[&quot;MASS&quot;][abs(var)] = r if not var in negate else -r
                 if not (diff_L_R is None):
                     is_L, v = get_LR_partner(abs(var))

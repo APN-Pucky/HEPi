@@ -17,6 +17,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -35,7 +36,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8
+                0.1.9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -103,7 +104,7 @@ from hepi.results import Result
 from hepi.run import RunParam, Runner
 import pkgutil
 
-from .. import Input, get_output_dir
+from .. import Input
 import os.path
 from .result import is_valid, parse_single
 import os
@@ -115,20 +116,29 @@ import stat
 <div class="viewcode-block" id="ResumminoRunner.orders"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
         return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL, Order.aNNLO_PLUS_NNLL]</div>
 
+<div class="viewcode-block" id="ResumminoRunner.get_version"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner.get_version">[docs]</a>    def get_version(self) -&gt; str:
+        p = os.path.expanduser(self.get_path())
+        ret = self._sub_run([p, &quot;--version&quot;])
+        return ret.split(&quot;\n&quot;)[-2]</div>
+
 <div class="viewcode-block" id="ResumminoRunner._check_path"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
-        if os.path.exists(get_path() + &quot;build/bin/resummino&quot;):
-            self.set_path(get_path() + &quot;build/bin/resummino&quot;)
+        if os.path.exists(
+                os.path.expanduser(self.get_path() + &quot;/build/bin/resummino&quot;)):
+            self.set_path(self.get_path() + &quot;/build/bin/resummino&quot;)
             return True
-        if os.path.exists(get_path() + &quot;bin/resummino&quot;):
-            self.set_path(get_path() + &quot;bin/resummino&quot;)
+        if os.path.exists(
+                os.path.expanduser(self.get_path() + &quot;/bin/resummino&quot;)):
+            self.set_path(self.get_path() + &quot;/bin/resummino&quot;)
             return True
-        return True</div>
+        if self.get_path().endswith(&quot;resummino&quot;):
+            return True
+        return False</div>
 
 <div class="viewcode-block" id="ResumminoRunner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._check_input">[docs]</a>    def _check_input(self, p: Input, **kwargs) -&gt; bool:
 
         if p.order == Order.aNNLO_PLUS_NNLL and (
-                p.has_gluino() and p.has_weakino()) or (p.has_squark()
-                                                        and p.has_weakino()):
+            (p.has_gluino() and p.has_weakino()) or
+            (p.has_squark() and p.has_weakino())):
             warnings.warn(
                 &quot;Resummino does not support stong-weak mixed aNNLO+NNLL.&quot;)
             return False

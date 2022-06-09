@@ -25,7 +25,7 @@ Functions
    hepi.plot.vplot
    hepi.plot.mass_mapplot
    hepi.plot.mapplot
-   hepi.plot.map_vplot
+   hepi.plot.scatterplot
    hepi.plot.err_plt
    hepi.plot.scale_plot
    hepi.plot.central_scale_plot
@@ -38,13 +38,15 @@ Attributes
 
 .. autoapisummary::
 
+   hepi.plot.map_vplot
+   hepi.plot.scatter_vplot
    hepi.plot.fig
    hepi.plot.axs
    hepi.plot.lines
    hepi.plot.labels
 
 
-.. py:function:: title(axe, i: hepi.input.Input, scenario='', diff_L_R=None, extra='', cms_energy=True, pdf_info=True, **kwargs)
+.. py:function:: title(axe, i: hepi.input.Input, scenario='', diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
 
    Sets the title on axis `axe`.
 
@@ -83,7 +85,7 @@ Attributes
        >>> dl = hepi.load(urllib.request.urlopen(
        ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json"
        ... ))
-       >>> hepi.plot(dl,"N1","NLO_PLUS_NLL",xaxis="$m_{\\tilde{\\chi}_1^0}$")
+       >>> hepi.plot(dl,"N1","NLO_PLUS_NLL",xaxis="$m_{\\tilde{\\chi}_1^0}$ [GeV]")
 
 
 .. py:function:: index_open(var, idx)
@@ -113,13 +115,40 @@ Attributes
 
        >>> import urllib.request
        >>> import hepi
+
        >>> dl = hepi.load(urllib.request.urlopen(
-       ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
+       ... "https://raw.githubusercontent.com/APN-Pucky/xsec/master/json/pp13_SGmodel_GGxsec_NLO%2BNLL.json"
        ... ),dimensions=2)
-       >>> hepi.mapplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\tilde{\\chi}_1^0}$",yaxis="$m_{\\tilde{\\chi}_2^0}$" , zaxis="$\\sigma_{\\mathrm{NLO+NLL}}$")
+       >>> hepi.mapplot(dl,"gl","sq","NLO_PLUS_NLL",xaxis="$m_{\\tilde{g}}$ [GeV]",yaxis="$m_{\\tilde{q}}$ [GeV]" , zaxis="$\\sigma_{\\mathrm{NLO+NLL}}$ [pb]")
 
 
-.. py:function:: map_vplot(vx, vy, vz, xaxis=None, yaxis=None, zaxis=None, logz=True, sort=True, fill_missing=True, zscale=1.0)
+.. py:data:: map_vplot
+   
+
+   
+
+.. py:data:: scatter_vplot
+   
+
+   
+
+.. py:function:: scatterplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
+
+   Scatter map 2d.
+   Central color is the central value, while the inner and outer ring are lower and upper bounds of the uncertainty interval.
+
+   Examples
+
+   .. plot::
+       :include-source:
+
+       >>> import urllib.request
+       >>> import hepi
+       >>> dl = hepi.load(urllib.request.urlopen(
+       ... "https://raw.githubusercontent.com/APN-Pucky/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
+       ... ),dimensions=2)
+       >>> hepi.scatterplot(dl,"N1","N2","NLO_PLUS_NLL",xaxis="$m_{\\tilde{\\chi}_1^0}$ [GeV]",yaxis="$m_{\\tilde{\\chi}_2^0}$ [GeV]" , zaxis="$\\sigma_{\\mathrm{NLO+NLL}}$ [pb]")
+
 
 
 .. py:data:: fig

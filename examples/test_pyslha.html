@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -40,7 +41,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8
+                0.1.9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -312,6 +313,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -320,10 +322,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -335,12 +341,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -368,9 +377,9 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="pyslha-comparison">
-<h1>pyslha comparison<a class="headerlink" href="#pyslha-comparison" title="Permalink to this headline"></a></h1>
+<h1>pyslha comparison<a class="headerlink" href="#pyslha-comparison" title="Permalink to this heading"></a></h1>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hepi</span>
@@ -380,7 +389,7 @@ div.rendered_html tbody tr:hover {
 <span class="kn">import</span> <span class="nn">hepi.resummino</span> <span class="k">as</span> <span class="nn">rs</span>
 <span class="kn">import</span> <span class="nn">hepi.util</span> <span class="k">as</span> <span class="nn">util</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">rs</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;~/git/resummino_test&quot;</span><span class="p">)</span>
+<span class="n">rs</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;~/git/resummino_release&quot;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -390,12 +399,12 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.1.4.28+dirty
-~/git/resummino_test/
+0.1.8.9+dirty
+~/git/resummino_release
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
@@ -408,7 +417,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
@@ -418,21 +427,30 @@ div.rendered_html tbody tr:hover {
         <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">([</span><span class="n">i</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">2.48758955E+02</span><span class="p">,</span><span class="mf">2.48758955E+02</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">noskip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">)</span>
+<span class="n">rs_dl</span><span class="p">[</span><span class="s2">&quot;NLO&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Running: 1 jobs
-{&#39;LO&#39;: array([8.7592441e-06+/-7.8475953e-09], dtype=object), &#39;NLO&#39;: array([1.0663038e-05+/-9.2752399e-09], dtype=object), &#39;NLO_PLUS_NLL&#39;: array([0.0+/-0], dtype=object), &#39;K_LO&#39;: array([1.0+/-0], dtype=object), &#39;K_NLO&#39;: array([1.2173468256239144+/-0.0015201312515062064], dtype=object), &#39;K_NLO_PLUS_NLL&#39;: array([0.0+/-0], dtype=object), &#39;NLO_PLUS_NLL_OVER_NLO&#39;: array([0.0+/-0], dtype=object), &#39;VNLO&#39;: array([1.2408607e-06+/-4.5813373e-09], dtype=object), &#39;P_PLUS_K&#39;: array([3.8807666e-07+/-2.0758299e-09], dtype=object), &#39;RNLOG&#39;: array([-4.1688858e-08+/-4.0857279e-10], dtype=object), &#39;RNLOQ&#39;: array([1.6592239e-07+/-4.9756549e-10], dtype=object), &#39;VNLO_PLUS_P_PLUS_K&#39;: array([1.62893736e-06+/-5.029684008971667e-09], dtype=object), &#39;RNLO&#39;: array([1.24233532e-07+/-6.438191839075038e-10], dtype=object), &#39;RNLO_PLUS_VNLO_PLUS_P_PLUS_K&#39;: array([1.7531708919999999e-06+/-5.070722273174959e-09], dtype=object), &#39;order&#39;: array([1]), &#39;energy&#39;: array([13000]), &#39;energyhalf&#39;: array([6500.]), &#39;particle1&#39;: array([1000022]), &#39;particle2&#39;: array([1000022]), &#39;slha&#39;: array([&#39;mastercode_with_gm2.in_mass_1000022_248.758955&#39;], dtype=&#39;&lt;U46&#39;), &#39;pdf_lo&#39;: array([&#39;cteq6l1&#39;], dtype=&#39;&lt;U7&#39;), &#39;pdfset_lo&#39;: array([0]), &#39;pdf_nlo&#39;: array([&#39;cteq66&#39;], dtype=&#39;&lt;U6&#39;), &#39;pdfset_nlo&#39;: array([0]), &#39;pdf_lo_id&#39;: array([10042]), &#39;pdf_nlo_id&#39;: array([10550]), &#39;mu_f&#39;: array([1.]), &#39;mu_r&#39;: array([1.]), &#39;precision&#39;: array([0.01]), &#39;max_iters&#39;: array([50]), &#39;invariant_mass&#39;: array([&#39;auto&#39;], dtype=&#39;&lt;U4&#39;), &#39;pt&#39;: array([&#39;auto&#39;], dtype=&#39;&lt;U4&#39;), &#39;result&#39;: array([&#39;total&#39;], dtype=&#39;&lt;U5&#39;), &#39;id&#39;: array([&#39;5&#39;], dtype=&#39;&lt;U1&#39;), &#39;model_path&#39;: array([&#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;], dtype=&#39;&lt;U40&#39;), &#39;mu&#39;: array([248.758955]), &#39;mass_1000022&#39;: array([248.758955]), &#39;code&#39;: array([&#39;RS&#39;], dtype=&#39;&lt;U2&#39;)}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0    (9.721+/-0.008)e-06
+Name: NLO, dtype: object
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
@@ -442,19 +460,35 @@ Running: 1 jobs
         <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="c1">#li = hepi.mass_scan([i],pa, np.linspace(2.4876e2,2.4876e2,1))</span>
         <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">noskip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">)</span>
+<span class="n">rs_dl</span><span class="p">[</span><span class="s2">&quot;NLO&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Running: 1 jobs
-RESTART None None None ./output/01306087b8a5d7c92a02239ba9a08dd7cd8e055cbeecb8db7a1b22b3ec70a1a4.out
-{&#39;LO&#39;: array([8.7592443e-06+/-7.8475955e-09], dtype=object), &#39;NLO&#39;: array([1.0662875e-05+/-9.274417e-09], dtype=object), &#39;NLO_PLUS_NLL&#39;: array([0.0+/-0], dtype=object), &#39;K_LO&#39;: array([1.0+/-1.1419754446251318e-19], dtype=object), &#39;K_NLO&#39;: array([1.2173281889169367+/-0.0015200538159673982], dtype=object), &#39;K_NLO_PLUS_NLL&#39;: array([0.0+/-0], dtype=object), &#39;NLO_PLUS_NLL_OVER_NLO&#39;: array([0.0+/-0], dtype=object), &#39;VNLO&#39;: array([1.2408607e-06+/-4.5813374e-09], dtype=object), &#39;P_PLUS_K&#39;: array([3.8807668e-07+/-2.0758299e-09], dtype=object), &#39;RNLOG&#39;: array([-4.1688859e-08+/-4.085728e-10], dtype=object), &#39;RNLOQ&#39;: array([1.6575915e-07+/-4.8197672e-10], dtype=object), &#39;VNLO_PLUS_P_PLUS_K&#39;: array([1.62893738e-06+/-5.029684100057653e-09], dtype=object), &#39;RNLO&#39;: array([1.2407029100000002e-07+/-6.318491050257161e-10], dtype=object), &#39;RNLO_PLUS_VNLO_PLUS_P_PLUS_K&#39;: array([1.753007671e-06+/-5.0692164520657985e-09], dtype=object), &#39;order&#39;: array([1]), &#39;energy&#39;: array([13000]), &#39;energyhalf&#39;: array([6500.]), &#39;particle1&#39;: array([1000022]), &#39;particle2&#39;: array([1000022]), &#39;slha&#39;: array([&#39;mastercode_with_gm2.in&#39;], dtype=&#39;&lt;U22&#39;), &#39;pdf_lo&#39;: array([&#39;cteq6l1&#39;], dtype=&#39;&lt;U7&#39;), &#39;pdfset_lo&#39;: array([0]), &#39;pdf_nlo&#39;: array([&#39;cteq66&#39;], dtype=&#39;&lt;U6&#39;), &#39;pdfset_nlo&#39;: array([0]), &#39;pdf_lo_id&#39;: array([10042]), &#39;pdf_nlo_id&#39;: array([10550]), &#39;mu_f&#39;: array([1.]), &#39;mu_r&#39;: array([1.]), &#39;precision&#39;: array([0.01]), &#39;max_iters&#39;: array([50]), &#39;invariant_mass&#39;: array([&#39;auto&#39;], dtype=&#39;&lt;U4&#39;), &#39;pt&#39;: array([&#39;auto&#39;], dtype=&#39;&lt;U4&#39;), &#39;result&#39;: array([&#39;total&#39;], dtype=&#39;&lt;U5&#39;), &#39;id&#39;: array([&#39;5&#39;], dtype=&#39;&lt;U1&#39;), &#39;model_path&#39;: array([&#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;], dtype=&#39;&lt;U40&#39;), &#39;mu&#39;: array([248.758955]), &#39;code&#39;: array([&#39;RS&#39;], dtype=&#39;&lt;U2&#39;)}
 </pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0    (9.721+/-0.008)e-06
+Name: NLO, dtype: object
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:

@@ -5,7 +5,7 @@
 
 .. autoapi-nested-parse::
 
-   Runs MadGraph
+   Runs MadGraph.
 
 
 
@@ -50,7 +50,12 @@ Attributes
       List of supported Orders in this runner.
 
 
-   .. py:method:: _check_input(self, p: hepi.Input, **kwargs) -> bool
+   .. py:method:: _check_path(self) -> bool
+
+      Checks if the passed path is valid.
+
+
+   .. py:method:: _check_input(self, param: hepi.Input, **kwargs) -> bool
 
       Checks input parameter for compatibility with Prospino
 

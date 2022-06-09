@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -40,7 +41,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8
+                0.1.9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -318,6 +319,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -326,10 +328,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -341,12 +347,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -374,7 +383,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Result-writing-example">
-<h1>Result writing example<a class="headerlink" href="#Result-writing-example" title="Permalink to this headline"></a></h1>
+<h1>Result writing example<a class="headerlink" href="#Result-writing-example" title="Permalink to this heading"></a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -396,8 +405,8 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.1.6.19+dirty
-~/git/resummino_release/
+0.1.8.9+dirty
+~/git/resummino_release
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -414,7 +423,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <section id="Print">
-<h2>Print<a class="headerlink" href="#Print" title="Permalink to this headline"></a></h2>
+<h2>Print<a class="headerlink" href="#Print" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -435,107 +444,73 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Running: 9 jobs
-{&#39;LO&#39;: array([0.20208405+/-0.00029302563, 0.013712558+/-1.7676046e-05,
-       0.0026090769+/-3.1243321e-06, 0.00073465133+/-8.3509755e-07,
-       0.00025475179+/-2.7854162e-07, 0.00010047166+/-1.0658448e-07,
-       4.3224927e-05+/-4.4747701e-08, 1.9789732e-05+/-2.0079547e-08,
-       9.4894125e-06+/-9.4681338e-09], dtype=object), &#39;NLO&#39;: array([0.26786916+/-0.00036328325, 0.017042798+/-1.9927369e-05,
-       0.0031280684+/-3.4502997e-06, 0.00085929957+/-8.9960357e-07,
-       0.00029242159+/-2.9376357e-07, 0.00011369143+/-1.1027916e-07,
-       4.8409699e-05+/-4.5616627e-08, 2.2010282e-05+/-2.0217058e-08,
-       1.0515472e-05+/-9.4331156e-09], dtype=object), &#39;NLO_PLUS_NLL&#39;: array([0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0,
-       0.0+/-0, 0.0+/-0], dtype=object), &#39;aNNLO_PLUS_NNLL&#39;: array([None, None, None, None, None, None, None, None, None], dtype=object), &#39;K_LO&#39;: array([1.0+/-2.602590409850336e-19, 1.0+/-0, 1.0+/-0, 1.0+/-0,
-       1.0+/-1.2666606380662415e-19, 1.0+/-0, 1.0+/-0, 1.0+/-0, 1.0+/-0],
-      dtype=object), &#39;K_NLO&#39;: array([1.3255334104794516+/-0.002631717384869068,
-       1.2428605953754217+/-0.0021629996223859554,
-       1.1989176708436613+/-0.0019519208991142045,
-       1.1696699303600253+/-0.0018075671400151847,
-       1.1478686371546203+/-0.0017043776737595882,
-       1.1315771034339435+/-0.001626583762921709,
-       1.1199486583285612+/-0.0015677821392965133,
-       1.112207178955228+/-0.0015222201496370444,
-       1.108126767594938+/-0.0014868134066253849], dtype=object), &#39;K_NLO_PLUS_NLL&#39;: array([0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0,
-       0.0+/-0, 0.0+/-0], dtype=object), &#39;NLO_PLUS_NLL_OVER_NLO&#39;: array([0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0, 0.0+/-0,
-       0.0+/-0, 0.0+/-0], dtype=object), &#39;K_aNNLO_PLUS_NNLL&#39;: array([None, None, None, None, None, None, None, None, None], dtype=object), &#39;aNNLO_PLUS_NNLL_OVER_NLO&#39;: array([None, None, None, None, None, None, None, None, None], dtype=object), &#39;VNLO&#39;: array([0.010615536+/-8.4512336e-05, 0.00063926004+/-4.632389e-06,
-       0.00011283865+/-7.642409e-07, 3.0095916e-05+/-1.9609956e-07,
-       9.9948463e-06+/-6.2984029e-08, 3.8048342e-06+/-2.3308244e-08,
-       1.5903164e-06+/-9.5087621e-09, 7.1148582e-07+/-4.1666038e-09,
-       3.3509692e-07+/-1.926412e-09], dtype=object), &#39;P_PLUS_K&#39;: array([0.029977367+/-0.00016932363, 0.0015237026+/-6.0107947e-06,
-       0.00026283529+/-1.0235514e-06, 7.2806828e-05+/-2.5010226e-07,
-       2.5616614e-05+/-7.9953718e-08, 1.0433286e-05+/-3.0123817e-08,
-       4.6784194e-06+/-1.2700738e-08, 2.2422485e-06+/-5.7793878e-09,
-       1.1286971e-06+/-2.7714589e-09], dtype=object), &#39;RNLOG&#39;: array([-0.0021761091+/-4.7592963e-05, -0.00010655742+/-1.9718797e-06,
-       -1.5536608e-05+/-2.907792e-07, -3.5006405e-06+/-6.3650574e-08,
-       -1.0050803e-06+/-1.7184012e-08, -3.4380552e-07+/-3.2594707e-09,
-       -1.2446762e-07+/-1.5589143e-09, -4.8978122e-08+/-8.7732056e-10,
-       -2.0648145e-08+/-3.8538584e-10], dtype=object), &#39;RNLOQ&#39;: array([0.0099487103+/-2.4886658e-05, 0.00037843043+/-8.8163305e-07,
-       4.905887e-05+/-1.0890402e-07, 1.0307804e-05+/-2.1819124e-08,
-       2.8204412e-06+/-5.7653472e-09, 9.122583e-07+/-1.8026799e-09,
-       3.3116334e-07+/-6.3405971e-10, 1.307273e-07+/-2.4517185e-10,
-       5.4966422e-08+/-1.0015655e-10], dtype=object), &#39;VNLO_PLUS_P_PLUS_K&#39;: array([0.040592903+/-0.00018924277162563912,
-       0.00216296264+/-7.588720628200059e-06,
-       0.00037567393999999996+/-1.2773885946237228e-06,
-       0.00010290274400000001+/-3.178146911162245e-07,
-       3.56114603e-05+/-1.0178204621197378e-07,
-       1.42381202e-05+/-3.808829989659587e-08,
-       6.2687358e-06+/-1.5865853346701538e-08,
-       2.95373432e-06+/-7.124739333404646e-09,
-       1.46379402e-06+/-3.3752107531431587e-09], dtype=object), &#39;RNLO&#39;: array([0.0077726012+/-5.370694436968401e-05,
-       0.00027187300999999996+/-2.1599968486376067e-06,
-       3.352226199999999e-05+/-3.105038304510919e-07,
-       6.807163500000001e-06+/-6.728647518377562e-08,
-       1.8153609e-06+/-1.8125382665000258e-08,
-       5.6845278e-07+/-3.724755571312365e-09,
-       2.0669572e-07+/-1.6829276605338016e-09,
-       8.174917800000001e-08+/-9.109339169397176e-10,
-       3.4318277e-08+/-3.9818787045866686e-10], dtype=object), &#39;RNLO_PLUS_VNLO_PLUS_P_PLUS_K&#39;: array([0.0483655042+/-0.00019671619782336716,
-       0.00243483565+/-7.890137334609168e-06,
-       0.00040919620199999997+/-1.3145852008902164e-06,
-       0.00010970990750000001+/-3.248594274943519e-07,
-       3.74268212e-05+/-1.0338333728337975e-07,
-       1.480657298e-05+/-3.8269993377044725e-08,
-       6.47543152e-06+/-1.5954859696331715e-08,
-       3.035483498e-06+/-7.18273702497832e-09,
-       1.498112297e-06+/-3.3986175436953212e-09], dtype=object), &#39;order&#39;: array([1, 1, 1, 1, 1, 1, 1, 1, 1]), &#39;energy&#39;: array([13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000, 13000]), &#39;energyhalf&#39;: array([6500., 6500., 6500., 6500., 6500., 6500., 6500., 6500., 6500.]), &#39;particle1&#39;: array([1000011, 1000011, 1000011, 1000011, 1000011, 1000011, 1000011,
-       1000011, 1000011]), &#39;particle2&#39;: array([-1000011, -1000011, -1000011, -1000011, -1000011, -1000011,
-       -1000011, -1000011, -1000011]), &#39;slha&#39;: array([&#39;mastercode_with_gm2.in_mass_1000011_100.0&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_212.5&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_325.0&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_437.5&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_550.0&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_662.5&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_775.0&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_887.5&#39;,
-       &#39;mastercode_with_gm2.in_mass_1000011_1000.0&#39;], dtype=&#39;&lt;U42&#39;), &#39;pdf_lo&#39;: array([&#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;,
-       &#39;cteq6l1&#39;, &#39;cteq6l1&#39;, &#39;cteq6l1&#39;], dtype=&#39;&lt;U7&#39;), &#39;pdfset_lo&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0]), &#39;pdf_nlo&#39;: array([&#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;,
-       &#39;cteq66&#39;, &#39;cteq66&#39;, &#39;cteq66&#39;], dtype=&#39;&lt;U6&#39;), &#39;pdfset_nlo&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0]), &#39;pdf_lo_id&#39;: array([10042, 10042, 10042, 10042, 10042, 10042, 10042, 10042, 10042]), &#39;pdf_nlo_id&#39;: array([10550, 10550, 10550, 10550, 10550, 10550, 10550, 10550, 10550]), &#39;mu_f&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1.]), &#39;mu_r&#39;: array([1., 1., 1., 1., 1., 1., 1., 1., 1.]), &#39;precision&#39;: array([0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]), &#39;max_iters&#39;: array([50, 50, 50, 50, 50, 50, 50, 50, 50]), &#39;invariant_mass&#39;: array([&#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;,
-       &#39;auto&#39;], dtype=&#39;&lt;U4&#39;), &#39;pt&#39;: array([&#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;, &#39;auto&#39;,
-       &#39;auto&#39;], dtype=&#39;&lt;U4&#39;), &#39;result&#39;: array([&#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;, &#39;total&#39;,
-       &#39;total&#39;, &#39;total&#39;], dtype=&#39;&lt;U5&#39;), &#39;id&#39;: array([&#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;], dtype=&#39;&lt;U1&#39;), &#39;model_path&#39;: array([&#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
-       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
-       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
-       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
-       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
-       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
-       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
-       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;,
-       &#39;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&#39;], dtype=&#39;&lt;U40&#39;), &#39;mu&#39;: array([ 100. ,  212.5,  325. ,  437.5,  550. ,  662.5,  775. ,  887.5,
-       1000. ]), &#39;mass_1000011&#39;: array([ 100. ,  212.5,  325. ,  437.5,  550. ,  662.5,  775. ,  887.5,
-       1000. ]), &#39;runner&#39;: array([&#39;ResumminoRunner&#39;, &#39;ResumminoRunner&#39;, &#39;ResumminoRunner&#39;,
-       &#39;ResumminoRunner&#39;, &#39;ResumminoRunner&#39;, &#39;ResumminoRunner&#39;,
-       &#39;ResumminoRunner&#39;, &#39;ResumminoRunner&#39;, &#39;ResumminoRunner&#39;],
-      dtype=&#39;&lt;U15&#39;)}
+skipskipskipskipskipskipskipskipskipRunning: 9 jobs
+                        LO                      NLO NLO_PLUS_NLL  \
+0        0.20208+/-0.00029          0.2679+/-0.0004      0.0+/-0
+1      0.013713+/-0.000018      0.017043+/-0.000020      0.0+/-0
+2    0.0026091+/-0.0000031    0.0031281+/-0.0000035      0.0+/-0
+3    0.0007347+/-0.0000008    0.0008593+/-0.0000009      0.0+/-0
+4  0.00025475+/-0.00000028  0.00029242+/-0.00000029      0.0+/-0
+5  0.00010047+/-0.00000011  0.00011369+/-0.00000011      0.0+/-0
+6      (4.322+/-0.004)e-05      (4.841+/-0.005)e-05      0.0+/-0
+7    (1.9790+/-0.0020)e-05    (2.2010+/-0.0020)e-05      0.0+/-0
+8      (9.489+/-0.009)e-06    (1.0515+/-0.0009)e-05      0.0+/-0
+
+  aNNLO_PLUS_NNLL                                             K_LO  \
+0            None  1.00000000000000000000+/-0.00000000000000000026
+1            None                                          1.0+/-0
+2            None                                          1.0+/-0
+3            None                                          1.0+/-0
+4            None  1.00000000000000000000+/-0.00000000000000000013
+5            None                                          1.0+/-0
+6            None                                          1.0+/-0
+7            None                                          1.0+/-0
+8            None                                          1.0+/-0
+
+             K_NLO K_NLO_PLUS_NLL NLO_PLUS_NLL_OVER_NLO K_aNNLO_PLUS_NNLL  \
+0  1.3255+/-0.0026        0.0+/-0               0.0+/-0              None
+1  1.2429+/-0.0022        0.0+/-0               0.0+/-0              None
+2  1.1989+/-0.0020        0.0+/-0               0.0+/-0              None
+3  1.1697+/-0.0018        0.0+/-0               0.0+/-0              None
+4  1.1479+/-0.0017        0.0+/-0               0.0+/-0              None
+5  1.1316+/-0.0016        0.0+/-0               0.0+/-0              None
+6  1.1199+/-0.0016        0.0+/-0               0.0+/-0              None
+7  1.1122+/-0.0015        0.0+/-0               0.0+/-0              None
+8  1.1081+/-0.0015        0.0+/-0               0.0+/-0              None
+
+  aNNLO_PLUS_NNLL_OVER_NLO  ... precision max_iters invariant_mass    pt  \
+0                     None  ...      0.01        50           auto  auto
+1                     None  ...      0.01        50           auto  auto
+2                     None  ...      0.01        50           auto  auto
+3                     None  ...      0.01        50           auto  auto
+4                     None  ...      0.01        50           auto  auto
+5                     None  ...      0.01        50           auto  auto
+6                     None  ...      0.01        50           auto  auto
+7                     None  ...      0.01        50           auto  auto
+8                     None  ...      0.01        50           auto  auto
+
+  result id model      mu  mass_1000011                           runner
+0  total  5         100.0         100.0  ResumminoRunner-resummino 3.1.1
+1  total  5         212.5         212.5  ResumminoRunner-resummino 3.1.1
+2  total  5         325.0         325.0  ResumminoRunner-resummino 3.1.1
+3  total  5         437.5         437.5  ResumminoRunner-resummino 3.1.1
+4  total  5         550.0         550.0  ResumminoRunner-resummino 3.1.1
+5  total  5         662.5         662.5  ResumminoRunner-resummino 3.1.1
+6  total  5         775.0         775.0  ResumminoRunner-resummino 3.1.1
+7  total  5         887.5         887.5  ResumminoRunner-resummino 3.1.1
+8  total  5        1000.0        1000.0  ResumminoRunner-resummino 3.1.1
+
+[9 rows x 41 columns]
 </pre></div></div>
 </div>
 </section>
 <section id="Pandas">
-<h2>Pandas<a class="headerlink" href="#Pandas" title="Permalink to this headline"></a></h2>
+<h2>Pandas<a class="headerlink" href="#Pandas" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hepi</span><span class="o">.</span><span class="n">LD2DF</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rs_dl</span>
 </pre></div>
 </div>
 </div>
@@ -579,7 +554,7 @@ Running: 9 jobs
       <th>pt</th>
       <th>result</th>
       <th>id</th>
-      <th>model_path</th>
+      <th>model</th>
       <th>mu</th>
       <th>mass_1000011</th>
       <th>runner</th>
@@ -605,10 +580,10 @@ Running: 9 jobs
       <td>auto</td>
       <td>total</td>
       <td>5</td>
-      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td></td>
       <td>100.0</td>
       <td>100.0</td>
-      <td>ResumminoRunner</td>
+      <td>ResumminoRunner-resummino 3.1.1</td>
     </tr>
     <tr>
       <th>1</th>
@@ -629,10 +604,10 @@ Running: 9 jobs
       <td>auto</td>
       <td>total</td>
       <td>5</td>
-      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td></td>
       <td>212.5</td>
       <td>212.5</td>
-      <td>ResumminoRunner</td>
+      <td>ResumminoRunner-resummino 3.1.1</td>
     </tr>
     <tr>
       <th>2</th>
@@ -653,10 +628,10 @@ Running: 9 jobs
       <td>auto</td>
       <td>total</td>
       <td>5</td>
-      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td></td>
       <td>325.0</td>
       <td>325.0</td>
-      <td>ResumminoRunner</td>
+      <td>ResumminoRunner-resummino 3.1.1</td>
     </tr>
     <tr>
       <th>3</th>
@@ -677,10 +652,10 @@ Running: 9 jobs
       <td>auto</td>
       <td>total</td>
       <td>5</td>
-      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td></td>
       <td>437.5</td>
       <td>437.5</td>
-      <td>ResumminoRunner</td>
+      <td>ResumminoRunner-resummino 3.1.1</td>
     </tr>
     <tr>
       <th>4</th>
@@ -701,10 +676,10 @@ Running: 9 jobs
       <td>auto</td>
       <td>total</td>
       <td>5</td>
-      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td></td>
       <td>550.0</td>
       <td>550.0</td>
-      <td>ResumminoRunner</td>
+      <td>ResumminoRunner-resummino 3.1.1</td>
     </tr>
     <tr>
       <th>5</th>
@@ -725,10 +700,10 @@ Running: 9 jobs
       <td>auto</td>
       <td>total</td>
       <td>5</td>
-      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td></td>
       <td>662.5</td>
       <td>662.5</td>
-      <td>ResumminoRunner</td>
+      <td>ResumminoRunner-resummino 3.1.1</td>
     </tr>
     <tr>
       <th>6</th>
@@ -749,10 +724,10 @@ Running: 9 jobs
       <td>auto</td>
       <td>total</td>
       <td>5</td>
-      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td></td>
       <td>775.0</td>
       <td>775.0</td>
-      <td>ResumminoRunner</td>
+      <td>ResumminoRunner-resummino 3.1.1</td>
     </tr>
     <tr>
       <th>7</th>
@@ -773,10 +748,10 @@ Running: 9 jobs
       <td>auto</td>
       <td>total</td>
       <td>5</td>
-      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td></td>
       <td>887.5</td>
       <td>887.5</td>
-      <td>ResumminoRunner</td>
+      <td>ResumminoRunner-resummino 3.1.1</td>
     </tr>
     <tr>
       <th>8</th>
@@ -797,10 +772,10 @@ Running: 9 jobs
       <td>auto</td>
       <td>total</td>
       <td>5</td>
-      <td>/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO</td>
+      <td></td>
       <td>1000.0</td>
       <td>1000.0</td>
-      <td>ResumminoRunner</td>
+      <td>ResumminoRunner-resummino 3.1.1</td>
     </tr>
   </tbody>
 </table>
@@ -809,7 +784,7 @@ Running: 9 jobs
 </div>
 </section>
 <section id="CSV">
-<h2>CSV<a class="headerlink" href="#CSV" title="Permalink to this headline"></a></h2>
+<h2>CSV<a class="headerlink" href="#CSV" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -824,22 +799,22 @@ Running: 9 jobs
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-LO,NLO,NLO_PLUS_NLL,aNNLO_PLUS_NNLL,K_LO,K_NLO,K_NLO_PLUS_NLL,NLO_PLUS_NLL_OVER_NLO,K_aNNLO_PLUS_NNLL,aNNLO_PLUS_NNLL_OVER_NLO,VNLO,P_PLUS_K,RNLOG,RNLOQ,VNLO_PLUS_P_PLUS_K,RNLO,RNLO_PLUS_VNLO_PLUS_P_PLUS_K,order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model_path,mu,mass_1000011,runner
-0.20208+/-0.00029,0.2679+/-0.0004,0.0+/-0,,1.00000000000000000000+/-0.00000000000000000026,1.3255+/-0.0026,0.0+/-0,0.0+/-0,,,0.01062+/-0.00008,0.02998+/-0.00017,-0.00218+/-0.00005,0.009949+/-0.000025,0.04059+/-0.00019,0.00777+/-0.00005,0.04837+/-0.00020,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_100.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,100.0,100.0,ResumminoRunner
-0.013713+/-0.000018,0.017043+/-0.000020,0.0+/-0,,1.0+/-0,1.2429+/-0.0022,0.0+/-0,0.0+/-0,,,0.000639+/-0.000005,0.001524+/-0.000006,-0.0001066+/-0.0000020,0.0003784+/-0.0000009,0.002163+/-0.000008,0.0002719+/-0.0000022,0.002435+/-0.000008,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_212.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,212.5,212.5,ResumminoRunner
-0.0026091+/-0.0000031,0.0031281+/-0.0000035,0.0+/-0,,1.0+/-0,1.1989+/-0.0020,0.0+/-0,0.0+/-0,,,0.0001128+/-0.0000008,0.0002628+/-0.0000010,(-1.554+/-0.029)e-05,(4.906+/-0.011)e-05,0.0003757+/-0.0000013,(3.352+/-0.031)e-05,0.0004092+/-0.0000013,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_325.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,325.0,325.0,ResumminoRunner
-0.0007347+/-0.0000008,0.0008593+/-0.0000009,0.0+/-0,,1.0+/-0,1.1697+/-0.0018,0.0+/-0,0.0+/-0,,,(3.010+/-0.020)e-05,(7.281+/-0.025)e-05,(-3.50+/-0.06)e-06,(1.0308+/-0.0022)e-05,0.00010290+/-0.00000032,(6.81+/-0.07)e-06,0.00010971+/-0.00000032,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_437.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,437.5,437.5,ResumminoRunner
-0.00025475+/-0.00000028,0.00029242+/-0.00000029,0.0+/-0,,1.00000000000000000000+/-0.00000000000000000013,1.1479+/-0.0017,0.0+/-0,0.0+/-0,,,(9.99+/-0.06)e-06,(2.562+/-0.008)e-05,(-1.005+/-0.017)e-06,(2.820+/-0.006)e-06,(3.561+/-0.010)e-05,(1.815+/-0.018)e-06,(3.743+/-0.010)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_550.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,550.0,550.0,ResumminoRunner
-0.00010047+/-0.00000011,0.00011369+/-0.00000011,0.0+/-0,,1.0+/-0,1.1316+/-0.0016,0.0+/-0,0.0+/-0,,,(3.805+/-0.023)e-06,(1.0433+/-0.0030)e-05,(-3.438+/-0.033)e-07,(9.123+/-0.018)e-07,(1.424+/-0.004)e-05,(5.68+/-0.04)e-07,(1.481+/-0.004)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_662.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,662.5,662.5,ResumminoRunner
-(4.322+/-0.004)e-05,(4.841+/-0.005)e-05,0.0+/-0,,1.0+/-0,1.1199+/-0.0016,0.0+/-0,0.0+/-0,,,(1.590+/-0.010)e-06,(4.678+/-0.013)e-06,(-1.245+/-0.016)e-07,(3.312+/-0.006)e-07,(6.269+/-0.016)e-06,(2.067+/-0.017)e-07,(6.475+/-0.016)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_775.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,775.0,775.0,ResumminoRunner
-(1.9790+/-0.0020)e-05,(2.2010+/-0.0020)e-05,0.0+/-0,,1.0+/-0,1.1122+/-0.0015,0.0+/-0,0.0+/-0,,,(7.11+/-0.04)e-07,(2.242+/-0.006)e-06,(-4.90+/-0.09)e-08,(1.3073+/-0.0025)e-07,(2.954+/-0.007)e-06,(8.17+/-0.09)e-08,(3.035+/-0.007)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_887.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,887.5,887.5,ResumminoRunner
-(9.489+/-0.009)e-06,(1.0515+/-0.0009)e-05,0.0+/-0,,1.0+/-0,1.1081+/-0.0015,0.0+/-0,0.0+/-0,,,(3.351+/-0.019)e-07,(1.1287+/-0.0028)e-06,(-2.06+/-0.04)e-08,(5.497+/-0.010)e-08,(1.4638+/-0.0034)e-06,(3.43+/-0.04)e-08,(1.4981+/-0.0034)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_1000.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO,1000.0,1000.0,ResumminoRunner
+LO,NLO,NLO_PLUS_NLL,aNNLO_PLUS_NNLL,K_LO,K_NLO,K_NLO_PLUS_NLL,NLO_PLUS_NLL_OVER_NLO,K_aNNLO_PLUS_NNLL,aNNLO_PLUS_NNLL_OVER_NLO,VNLO,P_PLUS_K,RNLOG,RNLOQ,VNLO_PLUS_P_PLUS_K,RNLO,RNLO_PLUS_VNLO_PLUS_P_PLUS_K,order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,mass_1000011,runner
+0.20208+/-0.00029,0.2679+/-0.0004,0.0+/-0,,1.00000000000000000000+/-0.00000000000000000026,1.3255+/-0.0026,0.0+/-0,0.0+/-0,,,0.01062+/-0.00008,0.02998+/-0.00017,-0.00218+/-0.00005,0.009949+/-0.000025,0.04059+/-0.00019,0.00777+/-0.00005,0.04837+/-0.00020,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_100.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,,100.0,100.0,ResumminoRunner-resummino 3.1.1
+0.013713+/-0.000018,0.017043+/-0.000020,0.0+/-0,,1.0+/-0,1.2429+/-0.0022,0.0+/-0,0.0+/-0,,,0.000639+/-0.000005,0.001524+/-0.000006,-0.0001066+/-0.0000020,0.0003784+/-0.0000009,0.002163+/-0.000008,0.0002719+/-0.0000022,0.002435+/-0.000008,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_212.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,,212.5,212.5,ResumminoRunner-resummino 3.1.1
+0.0026091+/-0.0000031,0.0031281+/-0.0000035,0.0+/-0,,1.0+/-0,1.1989+/-0.0020,0.0+/-0,0.0+/-0,,,0.0001128+/-0.0000008,0.0002628+/-0.0000010,(-1.554+/-0.029)e-05,(4.906+/-0.011)e-05,0.0003757+/-0.0000013,(3.352+/-0.031)e-05,0.0004092+/-0.0000013,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_325.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,,325.0,325.0,ResumminoRunner-resummino 3.1.1
+0.0007347+/-0.0000008,0.0008593+/-0.0000009,0.0+/-0,,1.0+/-0,1.1697+/-0.0018,0.0+/-0,0.0+/-0,,,(3.010+/-0.020)e-05,(7.281+/-0.025)e-05,(-3.50+/-0.06)e-06,(1.0308+/-0.0022)e-05,0.00010290+/-0.00000032,(6.81+/-0.07)e-06,0.00010971+/-0.00000032,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_437.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,,437.5,437.5,ResumminoRunner-resummino 3.1.1
+0.00025475+/-0.00000028,0.00029242+/-0.00000029,0.0+/-0,,1.00000000000000000000+/-0.00000000000000000013,1.1479+/-0.0017,0.0+/-0,0.0+/-0,,,(9.99+/-0.06)e-06,(2.562+/-0.008)e-05,(-1.005+/-0.017)e-06,(2.820+/-0.006)e-06,(3.561+/-0.010)e-05,(1.815+/-0.018)e-06,(3.743+/-0.010)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_550.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,,550.0,550.0,ResumminoRunner-resummino 3.1.1
+0.00010047+/-0.00000011,0.00011369+/-0.00000011,0.0+/-0,,1.0+/-0,1.1316+/-0.0016,0.0+/-0,0.0+/-0,,,(3.805+/-0.023)e-06,(1.0433+/-0.0030)e-05,(-3.438+/-0.033)e-07,(9.123+/-0.018)e-07,(1.424+/-0.004)e-05,(5.68+/-0.04)e-07,(1.481+/-0.004)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_662.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,,662.5,662.5,ResumminoRunner-resummino 3.1.1
+(4.322+/-0.004)e-05,(4.841+/-0.005)e-05,0.0+/-0,,1.0+/-0,1.1199+/-0.0016,0.0+/-0,0.0+/-0,,,(1.590+/-0.010)e-06,(4.678+/-0.013)e-06,(-1.245+/-0.016)e-07,(3.312+/-0.006)e-07,(6.269+/-0.016)e-06,(2.067+/-0.017)e-07,(6.475+/-0.016)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_775.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,,775.0,775.0,ResumminoRunner-resummino 3.1.1
+(1.9790+/-0.0020)e-05,(2.2010+/-0.0020)e-05,0.0+/-0,,1.0+/-0,1.1122+/-0.0015,0.0+/-0,0.0+/-0,,,(7.11+/-0.04)e-07,(2.242+/-0.006)e-06,(-4.90+/-0.09)e-08,(1.3073+/-0.0025)e-07,(2.954+/-0.007)e-06,(8.17+/-0.09)e-08,(3.035+/-0.007)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_887.5,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,,887.5,887.5,ResumminoRunner-resummino 3.1.1
+(9.489+/-0.009)e-06,(1.0515+/-0.0009)e-05,0.0+/-0,,1.0+/-0,1.1081+/-0.0015,0.0+/-0,0.0+/-0,,,(3.351+/-0.019)e-07,(1.1287+/-0.0028)e-06,(-2.06+/-0.04)e-08,(5.497+/-0.010)e-08,(1.4638+/-0.0034)e-06,(3.43+/-0.04)e-08,(1.4981+/-0.0034)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_1000.0,cteq6l1,0,cteq66,0,10042,10550,1.0,1.0,0.01,50,auto,auto,total,5,,1000.0,1000.0,ResumminoRunner-resummino 3.1.1
 
 </pre></div></div>
 </div>
 </section>
 <section id="JSON">
-<h2>JSON<a class="headerlink" href="#JSON" title="Permalink to this headline"></a></h2>
+<h2>JSON<a class="headerlink" href="#JSON" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -854,20 +829,7 @@ LO,NLO,NLO_PLUS_NLL,aNNLO_PLUS_NNLL,K_LO,K_NLO,K_NLO_PLUS_NLL,NLO_PLUS_NLL_OVER_
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
-<span class="ansi-green-fg">/tmp/ipykernel_29869/1301378516.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>hepi<span class="ansi-blue-fg">.</span>write_json<span class="ansi-blue-fg">(</span>rs_dl<span class="ansi-blue-fg">,</span>hepi<span class="ansi-blue-fg">.</span>Order<span class="ansi-blue-fg">.</span>NLO<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#34;mass_1000011&#34;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#34;out.json&#34;</span><span class="ansi-blue-fg">,</span>error_sym<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> print<span class="ansi-blue-fg">(</span>open<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;out.json&#39;</span><span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;r&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>read<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/output.py</span> in <span class="ansi-cyan-fg">write_json</span><span class="ansi-blue-fg">(dict_list, o, parameter, filename, error_sym, error_asym)</span>
-<span class="ansi-green-intense-fg ansi-bold">     89</span>     jd<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;source&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;HEPi&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">     90</span>     jd<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;contact&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#34;?&#34;</span>
-<span class="ansi-green-fg">---&gt; 91</span><span class="ansi-red-fg">     </span>jd<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;tool&#34;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> dict_list<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;code&#34;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">     92</span>     jd[&#34;process_latex&#34;] = &#34;$&#34; + get_name(dict_list[&#34;particle1&#34;][0]) + get_name(
-<span class="ansi-green-intense-fg ansi-bold">     93</span>         dict_list[&#34;particle2&#34;][0]) + &#34;$&#34;
-
-<span class="ansi-red-fg">KeyError</span>: &#39;code&#39;
+{&#34;initial state&#34;: &#34;pp&#34;, &#34;order&#34;: &#34;NLO&#34;, &#34;source&#34;: &#34;hepi-0.1.8.9+dirty&#34;, &#34;contact&#34;: &#34;?&#34;, &#34;tool&#34;: &#34;Resummino-resummino 3.1.1&#34;, &#34;process_latex&#34;: &#34;$\\tilde{e}_{L}^{-}\\tilde{e}_{L}^{+}$&#34;, &#34;comment&#34;: &#34;5&#34;, &#34;reference&#34;: &#34;?&#34;, &#34;Ecom [GeV]&#34;: &#34;13000&#34;, &#34;process_id&#34;: &#34;pp_13000_1000011_-1000011&#34;, &#34;PDF set&#34;: &#34;cteq66&#34;, &#34;data&#34;: {&#34;100.0&#34;: {&#34;xsec_pb&#34;: 0.26786916, &#34;unc_pb&#34;: 0.00036328325}, &#34;212.5&#34;: {&#34;xsec_pb&#34;: 0.017042798, &#34;unc_pb&#34;: 1.9927369e-05}, &#34;325.0&#34;: {&#34;xsec_pb&#34;: 0.0031280684, &#34;unc_pb&#34;: 3.4502997e-06}, &#34;437.5&#34;: {&#34;xsec_pb&#34;: 0.00085929957, &#34;unc_pb&#34;: 8.9960357e-07}, &#34;550.0&#34;: {&#34;xsec_pb&#34;: 0.00029242159, &#34;unc_pb&#34;: 2.9376357e-07}, &#34;662.5&#34;: {&#34;xsec_pb&#34;: 0.00011369143, &#34;unc_pb&#34;: 1.1027916e-07}, &#34;775.0&#34;: {&#34;xsec_pb&#34;: 4.8409699e-05, &#34;unc_pb&#34;: 4.5616627e-08}, &#34;887.5&#34;: {&#34;xsec_pb&#34;: 2.2010282e-05, &#34;unc_pb&#34;: 2.0217058e-08}, &#34;1000.0&#34;: {&#34;xsec_pb&#34;: 1.0515472e-05, &#34;unc_pb&#34;: 9.4331156e-09}}, &#34;parameters&#34;: [[&#34;mass_1000011&#34;]]}
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">

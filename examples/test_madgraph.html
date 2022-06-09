@@ -18,6 +18,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -40,7 +41,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.8
+                0.1.9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -316,6 +317,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -324,10 +326,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -339,12 +345,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -372,9 +381,9 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="MadGraph-example">
-<h1>MadGraph example<a class="headerlink" href="#MadGraph-example" title="Permalink to this headline"></a></h1>
+<h1>MadGraph example<a class="headerlink" href="#MadGraph-example" title="Permalink to this heading"></a></h1>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hepi</span>
@@ -384,7 +393,7 @@ div.rendered_html tbody tr:hover {
 <span class="kn">import</span> <span class="nn">hepi.madgraph</span> <span class="k">as</span> <span class="nn">mg</span>
 <span class="kn">import</span> <span class="nn">hepi.util</span> <span class="k">as</span> <span class="nn">util</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">mg</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;/opt/MG5_aMC_v2_7_0/&quot;</span><span class="p">)</span>
+<span class="n">mg</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;/opt/MG5_aMC_v2_7_3/&quot;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">mg</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -394,22 +403,14 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.1.6.20+dirty
-/opt/MG5_aMC_v2_7_0/
+0.1.8.9+dirty
+/opt/MG5_aMC_v2_7_3/
 </pre></div></div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
 <section id="No-on-shell-subtraction-through-madstr">
-<h2>No on-shell subtraction through madstr<a class="headerlink" href="#No-on-shell-subtraction-through-madstr" title="Permalink to this headline"></a></h2>
+<h2>No on-shell subtraction through madstr<a class="headerlink" href="#No-on-shell-subtraction-through-madstr" title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
@@ -420,7 +421,7 @@ div.rendered_html tbody tr:hover {
      <span class="p">]</span>
 <span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;cteq6l1&quot;</span><span class="p">,</span><span class="s2">&quot;cteq66&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;/opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO&quot;</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;cteq6l1&quot;</span><span class="p">,</span><span class="s2">&quot;cteq66&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;/opt/MG5_aMC_v2_7_3/models/MSSMatNLO_UFO&quot;</span><span class="p">)</span>
         <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">([</span><span class="n">i</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">7</span><span class="o">+</span><span class="mi">8</span><span class="p">))</span>
         <span class="n">mg_dl</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">skip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">madstr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -437,7 +438,7 @@ div.rendered_html tbody tr:hover {
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Running: 15 jobs
-./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.out
+./output/09f0fa80d6ffa4d16b6c3b7f888df66d3c6debf643b46bfa1441c5a941d5bc4a.out
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -445,81 +446,323 @@ Running: 15 jobs
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/bin/sh: line 1: /opt/MG5_aMC_v2_7_0/bin/mg5_aMC: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
-cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928b954ab6f432446.bdir&#39;: No such file or directory
+/opt/MG5_aMC_v2_7_3/HEPTools/HEPToolsInstallers/HEPToolInstaller.py:510: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  _mg5_version = LooseVersion(line[9:].strip())
+/opt/MG5_aMC_v2_7_3/HEPTools/HEPToolsInstallers/HEPToolInstaller.py:456: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  if tool_name in [&#39;lhapdf6&#39;, &#39;lhapdf&#39;] and MG5_version and MG5_version &lt; LooseVersion(&#34;2.6.1&#34;):
+/opt/MG5_aMC_v2_7_3/HEPTools/HEPToolsInstallers/HEPToolInstaller.py:255: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  ( lambda MG5version: MG5version &lt; LooseVersion(&#34;2.6.1&#34;),
+Detected &#39;ninja&#39; missing dependency: &#39;oneloop&#39;. Will install it now.
+Fetching data with command:
+  wget --no-check-certificate http://helac-phegas.web.cern.ch/helac-phegas/tar-files/OneLOop-3.6.tgz
+--2022-06-08 11:43:47--  http://helac-phegas.web.cern.ch/helac-phegas/tar-files/OneLOop-3.6.tgz
+Resolving helac-phegas.web.cern.ch... 188.184.100.128
+Connecting to helac-phegas.web.cern.ch|188.184.100.128|:80... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://helac-phegas.web.cern.ch/tar-files/OneLOop-3.6.tgz [following]
+--2022-06-08 11:43:48--  https://helac-phegas.web.cern.ch/tar-files/OneLOop-3.6.tgz
+Connecting to helac-phegas.web.cern.ch|188.184.100.128|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 111734 (109K) [application/x-compressed]
+Saving to: ‘OneLOop-3.6.tgz’
+
+     0K .......... .......... .......... .......... .......... 45% 1.40M 0s
+    50K .......... .......... .......... .......... .......... 91% 2.99M 0s
+   100K .........                                             100%  156M=0.05s
+
+2022-06-08 11:43:48 (2.08 MB/s) - ‘OneLOop-3.6.tgz’ saved [111734/111734]
+
+Installing tool &#39;oneloop&#39;...
+    &gt; Follow the installation progress by running the command below in a separate terminal)
+    &gt; tail -f /opt/MG5_aMC_v2_7_3/HEPTools/oneloop/oneloop_install.log
+    &gt; Successful installation of dependency &#39;oneloop&#39; in &#39;/opt/MG5_aMC_v2_7_3/HEPTools&#39;.
+    &gt; See installation log at &#39;/opt/MG5_aMC_v2_7_3/HEPTools/oneloop/oneloop_install.log&#39;.
+Fetching data with command:
+  wget --no-check-certificate https://ninja.hepforge.org/downloads//ninja-1.1.0.tar.gz
+--2022-06-08 11:44:27--  https://ninja.hepforge.org/downloads//ninja-1.1.0.tar.gz
+Resolving ninja.hepforge.org... 129.234.186.186
+Connecting to ninja.hepforge.org|129.234.186.186|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: /downloads?f=/ninja-1.1.0.tar.gz [following]
+--2022-06-08 11:44:27--  https://ninja.hepforge.org/downloads?f=/ninja-1.1.0.tar.gz
+Reusing existing connection to ninja.hepforge.org:443.
+HTTP request sent, awaiting response... 302 Found
+Location: /downloads?f=ninja-1.1.0.tar.gz [following]
+--2022-06-08 11:44:27--  https://ninja.hepforge.org/downloads?f=ninja-1.1.0.tar.gz
+Reusing existing connection to ninja.hepforge.org:443.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [application/x-gzip]
+Saving to: ‘ninja-1.1.0.tar.gz’
+
+     0K .......... .......... .......... .......... ..........  771K
+    50K .......... .......... .......... .......... .......... 1.53M
+   100K .......... .......... .......... .......... ..........  224M
+   150K .......... .......... .......... .......... .......... 1.63M
+   200K .......... .......... .......... .......... .......... 17.9M
+   250K .......... .......... .......... .......... ..........  181M
+   300K .......... .......... .......... .......... ..........  206M
+   350K .......... .......... .......... .......... .......... 1.63M
+   400K .......... .......... .......... .......... .......... 36.0M
+   450K .......... .......... .......... .......... ..........  180M
+   500K .......... .......... .......... .......... ..........  163M
+   550K .......... .......                                      219M=0.2s
+
+2022-06-08 11:44:27 (3.42 MB/s) - ‘ninja-1.1.0.tar.gz’ saved [581566]
+
+Installing tool &#39;ninja&#39;...
+    &gt; Follow the installation progress by running the command below in a separate terminal)
+    &gt; tail -f /opt/MG5_aMC_v2_7_3/HEPTools/ninja/ninja_install.log
+Successful installation of &#39;ninja&#39; in &#39;/opt/MG5_aMC_v2_7_3/HEPTools&#39;.
+/opt/MG5_aMC_v2_7_3/HEPTools/HEPToolsInstallers/HEPToolInstaller.py:510: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  _mg5_version = LooseVersion(line[9:].strip())
+/opt/MG5_aMC_v2_7_3/HEPTools/HEPToolsInstallers/HEPToolInstaller.py:456: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  if tool_name in [&#39;lhapdf6&#39;, &#39;lhapdf&#39;] and MG5_version and MG5_version &lt; LooseVersion(&#34;2.6.1&#34;):
+/opt/MG5_aMC_v2_7_3/HEPTools/HEPToolsInstallers/HEPToolInstaller.py:255: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+  ( lambda MG5version: MG5version &lt; LooseVersion(&#34;2.6.1&#34;),
+Fetching data with command:
+  wget --no-check-certificate http://collier.hepforge.org//collier-latest.tar.gz
+--2022-06-08 11:49:29--  http://collier.hepforge.org//collier-latest.tar.gz
+Resolving collier.hepforge.org... 129.234.186.186
+Connecting to collier.hepforge.org|129.234.186.186|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://collier.hepforge.org/collier-latest.tar.gz [following]
+--2022-06-08 11:49:29--  https://collier.hepforge.org/collier-latest.tar.gz
+Connecting to collier.hepforge.org|129.234.186.186|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 933676 (912K) [application/x-gzip]
+Saving to: ‘collier-latest.tar.gz’
+
+     0K .......... .......... .......... .......... ..........  5%  808K 1s
+    50K .......... .......... .......... .......... .......... 10% 1.54M 1s
+   100K .......... .......... .......... .......... .......... 16% 55.5M 0s
+   150K .......... .......... .......... .......... .......... 21% 1.51M 0s
+   200K .......... .......... .......... .......... .......... 27%  146M 0s
+   250K .......... .......... .......... .......... .......... 32%  136M 0s
+   300K .......... .......... .......... .......... .......... 38%  137M 0s
+   350K .......... .......... .......... .......... .......... 43% 1.61M 0s
+   400K .......... .......... .......... .......... .......... 49% 24.1M 0s
+   450K .......... .......... .......... .......... .......... 54%  207M 0s
+   500K .......... .......... .......... .......... .......... 60%  229M 0s
+   550K .......... .......... .......... .......... .......... 65%  175M 0s
+   600K .......... .......... .......... .......... .......... 71% 8.41M 0s
+   650K .......... .......... .......... .......... .......... 76% 15.2M 0s
+   700K .......... .......... .......... .......... .......... 82%  212M 0s
+   750K .......... .......... .......... .......... .......... 87% 2.76M 0s
+   800K .......... .......... .......... .......... .......... 93% 98.5M 0s
+   850K .......... .......... .......... .......... .......... 98% 19.4M 0s
+   900K .......... .                                          100%  313M=0.2s
+
+2022-06-08 11:49:29 (4.66 MB/s) - ‘collier-latest.tar.gz’ saved [933676/933676]
+
+Installing tool &#39;collier&#39;...
+    &gt; Follow the installation progress by running the command below in a separate terminal)
+    &gt; tail -f /opt/MG5_aMC_v2_7_3/HEPTools/collier/collier_install.log
+Successful installation of &#39;collier&#39; in &#39;/opt/MG5_aMC_v2_7_3/HEPTools&#39;.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+No module named &#39;madgraph&#39;
+ No hepmc reader since No module named &#39;madgraph&#39; <span class="ansi-black-intense-fg ansi-bold">[lhe_parser.py at line 50]</span>
+INFO: ************************************************************
+*                                                          *
+*           W E L C O M E  to  M A D G R A P H 5           *
+*                       a M C @ N L O                      *
+*                                                          *
+*                 *                       *                *
+*                   *        * *        *                  *
+*                     * * * * 5 * * * *                    *
+*                   *        * *        *                  *
+*                 *                       *                *
+*                                                          *
+*         VERSION 5.2.7.3.py3           20xx-xx-xx         *
+*                                                          *
+*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+*                 http://amcatnlo.cern.ch                  *
+*                                                          *
+*               Type &#39;help&#39; for in-line help.              *
+*                                                          *
+************************************************************
+INFO: load configuration from /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/09f0fa80d6ffa4d16b6c3b7f888df66d3c6debf643b46bfa1441c5a941d5bc4a.bdir/Cards/amcatnlo_configuration.txt
+INFO: load configuration from /opt/MG5_aMC_v2_7_3/input/mg5_configuration.txt
+INFO: load configuration from /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/09f0fa80d6ffa4d16b6c3b7f888df66d3c6debf643b46bfa1441c5a941d5bc4a.bdir/Cards/amcatnlo_configuration.txt
+Using default eps viewer &#34;evince&#34;. Set another one in ./input/mg5_configuration.txt
+Using default web browser &#34;firefox&#34;. Set another one in ./input/mg5_configuration.txt
+calculate_xsect -f
+INFO: will run in mode: NLO
+INFO: Starting run
+INFO: Compiling the code
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+INFO: Using LHAPDF v6.3.0 interface for PDFs
+INFO: Compiling source...
+INFO:           ...done, continuing with P* directories
+<span class="ansi-blue-intense-fg ansi-bold">WARNING: Could not compile StdHEP because its source directory could not be found in the SOURCE folder.
+ Check the MG5_aMC option &#39;output_dependencies&#39;.
+ This will prevent the use of HERWIG6/Pythia6 shower. </span>
+INFO: Compiling directories...
+INFO: Compiling on 8 cores
+INFO:  Compiling P0_uux_elmelp...
+INFO:  Compiling P0_ddx_elmelp...
+INFO:  Compiling P0_uxu_elmelp...
+INFO:  Compiling P0_dxd_elmelp...
+INFO:     P0_ddx_elmelp done.
+INFO:     P0_uxu_elmelp done.
+INFO:     P0_uux_elmelp done.
+INFO:     P0_dxd_elmelp done.
+INFO: Checking test output:
+INFO: P0_uux_elmelp
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_ddx_elmelp
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_uxu_elmelp
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_dxd_elmelp
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: Starting run
+INFO: Using 8 cores
+INFO: Cleaning previous results
+INFO: Doing fixed order NLO
+INFO: Setting up grids
+INFO:  Idle: 0,  Running: 4,  Completed: 0 [ current time: 11h58 ]
+INFO:  Idle: 0,  Running: 3,  Completed: 1 [  0.33s  ]
+INFO:  Idle: 0,  Running: 2,  Completed: 2 [  0.36s  ]
+INFO:  Idle: 0,  Running: 1,  Completed: 3 [  0.48s  ]
+INFO:  Idle: 0,  Running: 0,  Completed: 4 [  0.69s  ]
+INFO:
+      Results after grid setup:
+      Total cross section:      2.489e-01 +- 1.5e-03 pb
+
+INFO: Refining results, step 1
+INFO:  Idle: 0,  Running: 5,  Completed: 0 [ current time: 11h58 ]
+INFO:  Idle: 0,  Running: 4,  Completed: 1 [  0.25s  ]
+INFO:  Idle: 0,  Running: 3,  Completed: 2 [  0.33s  ]
+INFO:  Idle: 0,  Running: 2,  Completed: 3 [  1.1s  ]
+INFO:  Idle: 0,  Running: 1,  Completed: 4 [  1.2s  ]
+INFO:  Idle: 0,  Running: 0,  Completed: 5 [  1.2s  ]
+INFO:
+   --------------------------------------------------------------
+      Final results and run summary:
+      Process p p &gt; 1000011 -1000011 [QCD]
+      Run at p-p collider (6500.0 + 6500.0 GeV)
+      Total cross section: 2.468e-01 +- 9.1e-04 pb
+   --------------------------------------------------------------
+
+INFO: The results of this run and the HwU and GnuPlot files with the plots have been saved in /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/09f0fa80d6ffa4d16b6c3b7f888df66d3c6debf643b46bfa1441c5a941d5bc4a.bdir/Events/run_01
+INFO: Run complete
+INFO:
+quit
+INFO:
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+stty: stty: &#39;standard input&#39;&#39;standard input&#39;: Inappropriate ioctl for device
+: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for devicestty:
+&#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: stty: &#39;standard input&#39;&#39;standard input&#39;: Inappropriate ioctl for device
+: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for devicestty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+
+stty: stty: stty: stty: &#39;standard input&#39;&#39;standard input&#39;: Inappropriate ioctl for device
+: Inappropriate ioctl for device
+&#39;standard input&#39;: Inappropriate ioctl for device
+stty: stty: stty: &#39;standard input&#39;: Inappropriate ioctl for device
+&#39;standard input&#39;: Inappropriate ioctl for device
+&#39;standard input&#39;: Inappropriate ioctl for device
+&#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">/tmp/ipykernel_3679/832802357.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">     12</span>         mg_dl <span class="ansi-blue-fg">=</span> mg<span class="ansi-blue-fg">.</span>run<span class="ansi-blue-fg">(</span>li<span class="ansi-blue-fg">,</span>skip<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">,</span>madstr<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     13</span>
-<span class="ansi-green-fg">---&gt; 14</span><span class="ansi-red-fg">         </span>hepi<span class="ansi-blue-fg">.</span>mass_plot<span class="ansi-blue-fg">(</span>mg_dl<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#34;LO&#34;</span><span class="ansi-blue-fg">,</span>pa<span class="ansi-blue-fg">,</span>logy<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     15</span>         hepi<span class="ansi-blue-fg">.</span>mass_plot<span class="ansi-blue-fg">(</span>mg_dl<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#34;NLO&#34;</span><span class="ansi-blue-fg">,</span>pa<span class="ansi-blue-fg">,</span>logy<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     16</span>         hepi<span class="ansi-blue-fg">.</span>title<span class="ansi-blue-fg">(</span>plt<span class="ansi-blue-fg">.</span>gca<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>li<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>scenario<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">&#34;mastercode&#34;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/plot.py</span> in <span class="ansi-cyan-fg">mass_plot</span><span class="ansi-blue-fg">(dict_list, y, part, logy, yaxis, yscale, label, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">     62</span>               **kwargs):
-<span class="ansi-green-intense-fg ansi-bold">     63</span>     dict_list<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#34;mass_&#34;</span> <span class="ansi-blue-fg">+</span> str<span class="ansi-blue-fg">(</span>part<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> get_mass<span class="ansi-blue-fg">(</span>dict_list<span class="ansi-blue-fg">,</span> abs<span class="ansi-blue-fg">(</span>part<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 64</span><span class="ansi-red-fg">     _plot(dict_list,
-</span><span class="ansi-green-intense-fg ansi-bold">     65</span>           <span class="ansi-blue-fg">&#34;mass_&#34;</span> <span class="ansi-blue-fg">+</span> str<span class="ansi-blue-fg">(</span>part<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">     66</span>           y<span class="ansi-blue-fg">,</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/plot.py</span> in <span class="ansi-cyan-fg">_plot</span><span class="ansi-blue-fg">(dict_list, x, y, label, xaxis, yaxis, ratio, K, K_plus_1, logy, yscale, mask, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    146</span>         vy <span class="ansi-blue-fg">=</span> vy <span class="ansi-blue-fg">/</span> splot<span class="ansi-blue-fg">.</span>unv<span class="ansi-blue-fg">(</span>vy<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    147</span>
-<span class="ansi-green-fg">--&gt; 148</span><span class="ansi-red-fg">     </span>_vplot<span class="ansi-blue-fg">(</span>vx<span class="ansi-blue-fg">,</span> vy<span class="ansi-blue-fg">,</span> label<span class="ansi-blue-fg">,</span> xaxis<span class="ansi-blue-fg">,</span> yaxis<span class="ansi-blue-fg">,</span> logy<span class="ansi-blue-fg">,</span> yscale<span class="ansi-blue-fg">,</span> mask<span class="ansi-blue-fg">=</span>mask<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    149</span>
-<span class="ansi-green-intense-fg ansi-bold">    150</span>
-
-<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/hepi/plot.py</span> in <span class="ansi-cyan-fg">_vplot</span><span class="ansi-blue-fg">(x, y, label, xaxis, yaxis, logy, yscale, interpolate, plot_data, data_color, mask, fill, data_fmt, fmt, print_area, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    204</span>     <span class="ansi-green-fg">if</span> interpolate<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    205</span>         <span class="ansi-red-fg">#print(vx,vy)</span>
-<span class="ansi-green-fg">--&gt; 206</span><span class="ansi-red-fg">         </span>spl <span class="ansi-blue-fg">=</span> make_interp_spline<span class="ansi-blue-fg">(</span>vx<span class="ansi-blue-fg">,</span> splot<span class="ansi-blue-fg">.</span>unv<span class="ansi-blue-fg">(</span>vy<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> k<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg"># type: BSpline</span>
-<span class="ansi-green-intense-fg ansi-bold">    207</span>         power_smooth <span class="ansi-blue-fg">=</span> spl<span class="ansi-blue-fg">(</span>xnew<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    208</span>     <span class="ansi-green-fg">if</span> fill<span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">/usr/lib/python3.8/site-packages/scipy/interpolate/_bsplines.py</span> in <span class="ansi-cyan-fg">make_interp_spline</span><span class="ansi-blue-fg">(x, y, k, t, bc_type, axis, check_finite)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1238</span>
-<span class="ansi-green-intense-fg ansi-bold">   1239</span>     x <span class="ansi-blue-fg">=</span> _as_float_array<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> check_finite<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">-&gt; 1240</span><span class="ansi-red-fg">     </span>y <span class="ansi-blue-fg">=</span> _as_float_array<span class="ansi-blue-fg">(</span>y<span class="ansi-blue-fg">,</span> check_finite<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1241</span>
-<span class="ansi-green-intense-fg ansi-bold">   1242</span>     y <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>moveaxis<span class="ansi-blue-fg">(</span>y<span class="ansi-blue-fg">,</span> axis<span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span>    <span class="ansi-red-fg"># now internally interp axis is zero</span>
-
-<span class="ansi-green-fg">/usr/lib/python3.8/site-packages/scipy/interpolate/_bsplines.py</span> in <span class="ansi-cyan-fg">_as_float_array</span><span class="ansi-blue-fg">(x, check_finite)</span>
-<span class="ansi-green-intense-fg ansi-bold">     34</span>     x <span class="ansi-blue-fg">=</span> x<span class="ansi-blue-fg">.</span>astype<span class="ansi-blue-fg">(</span>dtyp<span class="ansi-blue-fg">,</span> copy<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     35</span>     <span class="ansi-green-fg">if</span> check_finite <span class="ansi-green-fg">and</span> <span class="ansi-green-fg">not</span> np<span class="ansi-blue-fg">.</span>isfinite<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>all<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---&gt; 36</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;Array must not contain infs or nans.&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     37</span>     <span class="ansi-green-fg">return</span> x
-<span class="ansi-green-intense-fg ansi-bold">     38</span>
-
-<span class="ansi-red-fg">ValueError</span>: Array must not contain infs or nans.
-</pre></div></div>
+<img alt="../_images/examples_test_madgraph_3_6.png" src="../_images/examples_test_madgraph_3_6.png" />
+</div>
 </div>
 </section>
 <section id="On-shell-subtraction-through-madstr">
-<h2>On-shell subtraction through madstr<a class="headerlink" href="#On-shell-subtraction-through-madstr" title="Permalink to this headline"></a></h2>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<h2>On-shell subtraction through madstr<a class="headerlink" href="#On-shell-subtraction-through-madstr" title="Permalink to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
@@ -530,7 +773,7 @@ cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928
      <span class="p">]</span>
 <span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;cteq6l1&quot;</span><span class="p">,</span><span class="s2">&quot;cteq66&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;/opt/MG5_aMC_v2_7_0/models/EWKino_NLO_UFO_py3&quot;</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;cteq6l1&quot;</span><span class="p">,</span><span class="s2">&quot;cteq66&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;/opt/MG5_aMC_v2_7_3/models/EWKino_NLO_UFO&quot;</span><span class="p">)</span>
         <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">([</span><span class="n">i</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">7</span><span class="o">+</span><span class="mi">8</span><span class="p">))</span>
         <span class="n">mg_dl</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">skip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">madstr</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -538,6 +781,284 @@ cp: cannot stat &#39;./output/dd6217160a629c3e78f6d632d334ec2a5503b99be880523928
         <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">mg_dl</span><span class="p">,</span><span class="s2">&quot;NLO&quot;</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">hepi</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">scenario</span><span class="o">=</span><span class="s2">&quot;mastercode&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running: 15 jobs
+./output/90bcfe8bc719ea89d80f8ce26ccfc425f6ff8937aec2e0a3f8031ea161b0d4cc.out
+No module named &#39;madgraph&#39;
+ No hepmc reader since No module named &#39;madgraph&#39; <span class="ansi-black-intense-fg ansi-bold">[lhe_parser.py at line 50]</span>
+INFO: ************************************************************
+*                                                          *
+*           W E L C O M E  to  M A D G R A P H 5           *
+*                       a M C @ N L O                      *
+*                                                          *
+*                 *                       *                *
+*                   *        * *        *                  *
+*                     * * * * 5 * * * *                    *
+*                   *        * *        *                  *
+*                 *                       *                *
+*                                                          *
+*         VERSION 5.2.7.3.py3           20xx-xx-xx         *
+*                                                          *
+*    The MadGraph5_aMC@NLO Development Team - Find us at   *
+*                 http://amcatnlo.cern.ch                  *
+*                                                          *
+*               Type &#39;help&#39; for in-line help.              *
+*                                                          *
+************************************************************
+INFO: load configuration from /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/90bcfe8bc719ea89d80f8ce26ccfc425f6ff8937aec2e0a3f8031ea161b0d4cc.bdir/Cards/amcatnlo_configuration.txt
+INFO: load configuration from /opt/MG5_aMC_v2_7_3/input/mg5_configuration.txt
+INFO: load configuration from /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/90bcfe8bc719ea89d80f8ce26ccfc425f6ff8937aec2e0a3f8031ea161b0d4cc.bdir/Cards/amcatnlo_configuration.txt
+Using default eps viewer &#34;evince&#34;. Set another one in ./input/mg5_configuration.txt
+Using default web browser &#34;firefox&#34;. Set another one in ./input/mg5_configuration.txt
+calculate_xsect -f
+INFO: will run in mode: NLO
+INFO: Starting run
+INFO: Compiling the code
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+write ./param_card.dat
+INFO: MadSTR: Forcing width MDL_WSUL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSUL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSCL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSCL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSUR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSUR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSCR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSCR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSDL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSDL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSSL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSSL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSBL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSBL to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSDR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSDR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSSR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSSR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MDL_WSBR to zero inside param_card.inc
+INFO: MadSTR: Forcing width MP__MDL_WSBR to zero inside param_card.inc
+<span class="ansi-blue-intense-fg ansi-bold">WARNING: The replacements above ensure poles cancelation, and affect all widths
+   EXCEPT those which enter the resonance-treatment counterterms, which
+   are taken from the param_card.
+   Do NOT set these widths to zero in the param_card. </span>
+INFO: Using LHAPDF v6.3.0 interface for PDFs
+INFO: Compiling source...
+INFO:           ...done, continuing with P* directories
+<span class="ansi-blue-intense-fg ansi-bold">WARNING: Could not compile StdHEP because its source directory could not be found in the SOURCE folder.
+ Check the MG5_aMC option &#39;output_dependencies&#39;.
+ This will prevent the use of HERWIG6/Pythia6 shower. </span>
+INFO: Compiling directories...
+INFO: Compiling on 8 cores
+INFO:  Compiling P0_uux_n1n1...
+INFO:  Compiling P0_ccx_n1n1...
+INFO:  Compiling P0_ddx_n1n1...
+INFO:  Compiling P0_ssx_n1n1...
+INFO:  Compiling P0_uxu_n1n1...
+INFO:  Compiling P0_cxc_n1n1...
+INFO:  Compiling P0_dxd_n1n1...
+INFO:  Compiling P0_sxs_n1n1...
+INFO:     P0_uux_n1n1 done.
+INFO:  Compiling P0_bbx_n1n1...
+INFO:     P0_ddx_n1n1 done.
+INFO:  Compiling P0_bxb_n1n1...
+INFO:     P0_sxs_n1n1 done.
+INFO:     P0_uxu_n1n1 done.
+INFO:     P0_cxc_n1n1 done.
+INFO:     P0_dxd_n1n1 done.
+INFO:     P0_ccx_n1n1 done.
+INFO:     P0_ssx_n1n1 done.
+INFO:     P0_bxb_n1n1 done.
+INFO:     P0_bbx_n1n1 done.
+INFO: Checking test output:
+INFO: P0_uux_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_ccx_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_ddx_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_ssx_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_uxu_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_cxc_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_dxd_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_sxs_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_bbx_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: P0_bxb_n1n1
+INFO:  Result for test_ME:
+INFO:    Passed.
+INFO:  Result for check_poles:
+INFO:    Poles successfully cancel for 20 points over 20 (tolerance=1.0e-05)
+INFO: Starting run
+INFO: Using 8 cores
+INFO: Cleaning previous results
+INFO: Doing fixed order NLO
+INFO: Setting up grids
+INFO:  Idle: 2,  Running: 8,  Completed: 0 [ current time: 13h11 ]
+INFO:  Idle: 1,  Running: 8,  Completed: 1 [  13.4s  ]
+INFO:  Idle: 0,  Running: 8,  Completed: 2 [  14.2s  ]
+INFO:  Idle: 0,  Running: 7,  Completed: 3 [  15.1s  ]
+INFO:  Idle: 0,  Running: 6,  Completed: 4 [  15.2s  ]
+INFO:  Idle: 0,  Running: 5,  Completed: 5 [  15.6s  ]
+INFO:  Idle: 0,  Running: 4,  Completed: 6 [  17.9s  ]
+INFO:  Idle: 0,  Running: 3,  Completed: 7 [  21.1s  ]
+INFO:  Idle: 0,  Running: 2,  Completed: 8 [  21.7s  ]
+INFO:  Idle: 0,  Running: 1,  Completed: 9 [  23.3s  ]
+INFO:  Idle: 0,  Running: 0,  Completed: 10 [  23.4s  ]
+INFO:
+      Results after grid setup:
+      Total cross section:      7.316e-06 +- 2.4e-07 pb
+
+INFO: Refining results, step 1
+INFO:  Idle: 2,  Running: 8,  Completed: 0 [ current time: 13h11 ]
+INFO:  Idle: 1,  Running: 8,  Completed: 1 [  16.8s  ]
+INFO:  Idle: 0,  Running: 8,  Completed: 2 [  18.1s  ]
+INFO:  Idle: 0,  Running: 7,  Completed: 3 [  18.5s  ]
+INFO:  Idle: 0,  Running: 6,  Completed: 4 [  18.8s  ]
+INFO:  Idle: 0,  Running: 5,  Completed: 5 [  21.4s  ]
+INFO:  Idle: 0,  Running: 4,  Completed: 6 [  24.9s  ]
+INFO:  Idle: 0,  Running: 3,  Completed: 7 [  26.9s  ]
+INFO:  Idle: 0,  Running: 2,  Completed: 8 [  28.7s  ]
+INFO:  Idle: 0,  Running: 1,  Completed: 9 [  30.8s  ]
+INFO:  Idle: 0,  Running: 0,  Completed: 10 [  31s  ]
+INFO:
+   --------------------------------------------------------------
+      Final results and run summary:
+      Process p p &gt; 1000022 1000022 [QCD]
+      Run at p-p collider (6500.0 + 6500.0 GeV)
+      Total cross section: 7.403e-06 +- 1.2e-07 pb
+   --------------------------------------------------------------
+
+INFO: The results of this run and the HwU and GnuPlot files with the plots have been saved in /home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/docs/source/examples/output/90bcfe8bc719ea89d80f8ce26ccfc425f6ff8937aec2e0a3f8031ea161b0d4cc.bdir/Events/run_01
+INFO: Run complete
+INFO:
+quit
+INFO:
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+stty: &#39;standard input&#39;: Inappropriate ioctl for device
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_madgraph_5_4.png" src="../_images/examples_test_madgraph_5_4.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">

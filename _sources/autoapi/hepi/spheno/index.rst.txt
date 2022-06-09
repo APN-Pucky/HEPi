@@ -147,6 +147,12 @@ Attributes
       Returns the name of the runner.
 
 
+   .. py:method:: get_version(self) -> str
+
+
+   .. py:method:: _sub_run(self, coms: List[str]) -> str
+
+
    .. py:method:: _check_path(self) -> bool
 
       Checks if the passed path is valid.
@@ -175,8 +181,7 @@ Attributes
       run (bool): Actually start/queue runner.
 
           Returns:
-              :obj:`dict` : combined dictionary of results and parameters. Each member therein is a list.
-                  The dictionary is empty if `parse` is set to False.
+              :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
 
 
 
@@ -305,6 +310,11 @@ Attributes
 .. py:class:: SPhenoRunner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
 
    Bases: :py:obj:`hepi.run.Runner`
+
+   .. py:method:: _check_path(self) -> bool
+
+      Checks if the passed path is valid.
+
 
    .. py:method:: run(self, slhas: List[hepi.input.Input], **kwargs) -> List[hepi.input.Input]
 
