@@ -8,7 +8,7 @@ Currently, slurm is supported for clusters.
 | [Stable][doc stable]        | [Unstable][doc test]           |
 | ------------- |:-------------:|
 | [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
-| [![Coverage Status][c s i]][c s l] | [![Coverage Status][c t i]][c t l] |
+| - | [![Coverage Status][c t i]][c t l] |
 | -      |[![Codacy Badge][codacy cover image]][codacy cover link] | 
 | -     |[![Codacy Badge][codacy quality image]][codacy quality link] | 
 | [![Documentation][rtd s i]][rtd s l] | [![Documentation][rtd t i]][rtd t l]  | 
