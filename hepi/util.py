@@ -8,6 +8,7 @@ import pyslha
 import lhapdf
 import pandas as pd
 import warnings
+from smpl import interpolate as ip
 
 class DictData:
     def __str__(self):
@@ -148,3 +149,20 @@ def lhapdf_name_to_id(name : str) -> int:
         warnings.warn("PDF set '" + name + "' not installed!")
         return 0
     return lhapdf.getPDFSet(name).lhapdfID
+
+def interpolate_1d(df,x,y,xrange):
+    """
+    Last key is the value to be interpolatet, while the rest are cooridnates.
+    
+    Args:
+        df (pandas.DataFrame): results
+    """
+    f = ip.interpolate(df[x],df[y])
+    a = []
+    for xr in xrange:
+        c = df.head(1)
+        c[x] = xr
+        c[y] = f(xr)
+        a += [c]
+    return pd.concat([df, *a])
+     
