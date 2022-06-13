@@ -8,7 +8,7 @@
 #*                *                       *                 *
 #*                                                          *
 #*                                                          *
-#*         VERSION 2.7.3                 2020-06-21         *
+#*         VERSION 2.7.3.py3             2020-06-28         *
 #*                                                          *
 #*    The MadGraph5_aMC@NLO Development Team - Find us at   *
 #*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
@@ -20,41 +20,39 @@
 #*     run as ./bin/mg5_aMC  filename                       *
 #*                                                          *
 #************************************************************
-set default_unset_couplings 99
 set group_subprocesses Auto
 set ignore_six_quark_processes False
-set loop_optimized_output True
 set low_mem_multicore_nlo_generation False
-set loop_color_flows False
-set gauge unitary
 set complex_mass_scheme False
+set gauge unitary
+set loop_optimized_output True
+set loop_color_flows False
 set max_npoint_for_channel 0
+set default_unset_couplings 99
 set automatic_html_opening False
-import model /opt/MG5_aMC_v2_7_3_py3/models/EWKino_NLO_UFO_py3
+import model /opt/MG5_aMC_v2_7_0/models/EWKino_NLO_UFO_py3
 Traceback (most recent call last):
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/extended_cmd.py", line 1515, in onecmd
+  File "/opt/MG5_aMC_v2_7_3/madgraph/interface/extended_cmd.py", line 1541, in onecmd
     return self.onecmd_orig(line, **opt)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/extended_cmd.py", line 1464, in onecmd_orig
+  File "/opt/MG5_aMC_v2_7_3/madgraph/interface/extended_cmd.py", line 1490, in onecmd_orig
     return func(arg, **opt)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/master_interface.py", line 280, in do_import
+  File "/opt/MG5_aMC_v2_7_3/madgraph/interface/master_interface.py", line 281, in do_import
     self.cmd.do_import(self, *args, **opts)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/madgraph_interface.py", line 5466, in do_import
+  File "/opt/MG5_aMC_v2_7_3/madgraph/interface/madgraph_interface.py", line 5536, in do_import
     self.import_command_file(args[1])
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/extended_cmd.py", line 1661, in import_command_file
+  File "/opt/MG5_aMC_v2_7_3/madgraph/interface/extended_cmd.py", line 1687, in import_command_file
     self.exec_cmd(line, precmd=True)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/extended_cmd.py", line 1544, in exec_cmd
+  File "/opt/MG5_aMC_v2_7_3/madgraph/interface/extended_cmd.py", line 1570, in exec_cmd
     stop = Cmd.onecmd_orig(current_interface, line, **opt)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/extended_cmd.py", line 1464, in onecmd_orig
+  File "/opt/MG5_aMC_v2_7_3/madgraph/interface/extended_cmd.py", line 1490, in onecmd_orig
     return func(arg, **opt)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/master_interface.py", line 280, in do_import
+  File "/opt/MG5_aMC_v2_7_3/madgraph/interface/master_interface.py", line 281, in do_import
     self.cmd.do_import(self, *args, **opts)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/madgraph_interface.py", line 5412, in do_import
-    complex_mass_scheme=self.options['complex_mass_scheme'])
-  File "/opt/MG5_aMC_v2_7_0/models/import_ufo.py", line 239, in import_model
-    model = import_full_model(model_path, decay, prefix)
-  File "/opt/MG5_aMC_v2_7_0/models/import_ufo.py", line 383, in import_full_model
-    ufo_model = ufomodels.load_model(model_path, decay)
-  File "/opt/MG5_aMC_v2_7_0/models/__init__.py", line 48, in load_model
-    (path_split[-1], model_path, sys_path)
-Exception: name EWKino_NLO_UFO_py3 already consider as a python library cann't be reassigned(/opt/MG5_aMC_v2_7_3_py3/models/EWKino_NLO_UFO_py3!=/opt/MG5_aMC_v2_7_0/models/EWKino_NLO_UFO_py3)
+  File "/opt/MG5_aMC_v2_7_3/madgraph/interface/madgraph_interface.py", line 5481, in do_import
+    self._curr_model = import_ufo.import_model(args[1], prefix=prefix,
+  File "/opt/MG5_aMC_v2_7_3/models/import_ufo.py", line 206, in import_model
+    model_path = find_ufo_path(model_name)
+  File "/opt/MG5_aMC_v2_7_3/models/import_ufo.py", line 95, in find_ufo_path
+    raise UFOImportError("Path %s is not a valid pathname" % model_name)
+models.import_ufo.UFOImportError: Path /opt/MG5_aMC_v2_7_0/models/EWKino_NLO_UFO_py3 is not a valid pathname
 Fail to write options with error No model currently active, please import a model!

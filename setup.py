@@ -3,7 +3,6 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-
 setuptools.setup(
     name="hepi",
     setup_requires=['setuptools-git-versioning'],
@@ -13,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://gitlab.com/APN-Pucky/hepi",
-    packages=setuptools.find_packages(exclude=("tests",)),
+    packages=setuptools.find_packages(exclude=("tests", )),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
@@ -27,7 +26,7 @@ setuptools.setup(
         "scipy",
         "sympy",
         "scikit-learn",
-        "smpl>=0.0.118",
+        "smpl>=0.0.131",
         "pyslha",
         "enlighten",
         "particle",
@@ -39,6 +38,7 @@ setuptools.setup(
         "dev": [
             "build",
             "pytest",
+            "pytest-cov",
             "jupyterlab",
             "ipython",
         ],
