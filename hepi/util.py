@@ -161,9 +161,11 @@ def lhapdf_name_to_id(name: str) -> int:
         return 0
     return lhapdf.getPDFSet(name).lhapdfID
 
-def interpolate_1d(df,x,y,xrange):
+# TODO fix dependent(mu) for new masses
+
+def interpolate_1d(df,x,y,xrange,only_interpolation=True):
     """
-    Last key is the value to be interpolatet, while the rest are cooridnates.
+    Last key is the value to be interpolated, while the rest are cooridnates.
     
     Args:
         df (pandas.DataFrame): results
@@ -175,5 +177,29 @@ def interpolate_1d(df,x,y,xrange):
         c[x] = xr
         c[y] = f(xr)
         a += [c]
-    return pd.concat([df, *a])
-     
+    if only_interpolation:
+        return pd.concat(a)
+    else:
+        return pd.concat([df, *a])
+ 
+def interpolate_2d(df,x,y,z,xrange,yrange,only_interpolation=True):
+    """
+    Last key is the value to be interpolated, while the rest are cooridnates.
+    
+    Args:
+        df (pandas.DataFrame): results
+    """
+    f = ip.interpolate(df[x],df[y],df[z],order=5)
+    a = []
+    for i in range(len(xrange)):
+        xr = xrange[i]
+        yr = yrange[i]
+        c = df.head(1).copy()
+        c[x] = xr
+        c[y] = yr
+        c[z] = f(xr,yr)
+        a += [c]
+    if only_interpolation:
+        return pd.concat(a)
+    else:
+        return pd.concat([df, *a])
