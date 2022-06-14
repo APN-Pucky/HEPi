@@ -113,6 +113,8 @@ Functions
    hepi.get_LR_partner
    hepi.namehash
    hepi.lhapdf_name_to_id
+   hepi.interpolate_1d
+   hepi.interpolate_2d
    hepi.get_output_dir
    hepi.replace_macros
    hepi.get_name
@@ -1059,6 +1061,22 @@ Attributes
    13200
 
 
+.. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True)
+
+   Last key is the value to be interpolated, while the rest are cooridnates.
+
+   :param df: results
+   :type df: pandas.DataFrame
+
+
+.. py:function:: interpolate_2d(df, x, y, z, xrange, yrange, only_interpolation=True, **kwargs)
+
+   Last key is the value to be interpolated, while the rest are cooridnates.
+
+   :param df: results
+   :type df: pandas.DataFrame
+
+
 .. py:class:: Input(order: Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
    Bases: :py:obj:`hepi.util.DictData`
@@ -1568,7 +1586,7 @@ Attributes
    .. py:method:: _prepare_all(self, params: List[hepi.input.Input], skip=True, **kwargs) -> List[RunParam]
 
 
-   .. py:method:: run(self, params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, **kwargs)
+   .. py:method:: run(self, params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, **kwargs)
 
           Run the passed list of parameters.
 
@@ -1580,6 +1598,7 @@ Attributes
               parallel (bool): Run jobs in parallel.
               sleep (int): Sleep seconds after starting job.
       run (bool): Actually start/queue runner.
+      ignore_error (bool): Continue instead of raising Exceptions.
 
           Returns:
               :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.

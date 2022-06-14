@@ -57,7 +57,7 @@ Classes
    .. py:method:: _prepare_all(self, params: List[hepi.input.Input], skip=True, **kwargs) -> List[RunParam]
 
 
-   .. py:method:: run(self, params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, **kwargs)
+   .. py:method:: run(self, params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, **kwargs)
 
           Run the passed list of parameters.
 
@@ -69,6 +69,7 @@ Classes
               parallel (bool): Run jobs in parallel.
               sleep (int): Sleep seconds after starting job.
       run (bool): Actually start/queue runner.
+      ignore_error (bool): Continue instead of raising Exceptions.
 
           Returns:
               :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.

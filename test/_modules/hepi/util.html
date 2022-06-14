@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.10-1-g329b145
+                0.1.11-1-gca7190f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -105,6 +105,7 @@ from particle import PDGID
 import lhapdf
 import pandas as pd
 import warnings
+from smpl import interpolate as ip
 
 
 <div class="viewcode-block" id="DictData"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DictData">[docs]</a>class DictData:
@@ -256,6 +257,50 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(&quot;PDGName&quot;,
         warnings.warn(&quot;PDF set &#39;&quot; + name + &quot;&#39; not installed!&quot;)
         return 0
     return lhapdf.getPDFSet(name).lhapdfID</div>
+
+# TODO fix dependent(mu) for new masses
+
+<div class="viewcode-block" id="interpolate_1d"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.interpolate_1d">[docs]</a>def interpolate_1d(df,x,y,xrange,only_interpolation=True):
+    &quot;&quot;&quot;
+    Last key is the value to be interpolated, while the rest are cooridnates.
+    
+    Args:
+        df (pandas.DataFrame): results
+    &quot;&quot;&quot;
+    f = ip.interpolate(df[x],df[y])
+    a = []
+    for xr in xrange:
+        c = df.head(1)
+        c[x] = xr
+        c[y] = f(xr)
+        a += [c]
+    if only_interpolation:
+        return pd.concat(a)
+    else:
+        return pd.concat([df, *a])</div>
+ 
+<div class="viewcode-block" id="interpolate_2d"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.interpolate_2d">[docs]</a>def interpolate_2d(df,x,y,z,xrange,yrange,only_interpolation=True,**kwargs):
+    &quot;&quot;&quot;
+    Last key is the value to be interpolated, while the rest are cooridnates.
+    
+    Args:
+        df (pandas.DataFrame): results
+    &quot;&quot;&quot;
+    f = ip.interpolate(df[x],df[y],df[z],**kwargs)
+    a = []
+    for i in range(len(xrange)):
+        xr = xrange[i]
+        yr = yrange[i]
+        zr = f(xr,yr)
+        c = df.head(1).copy()
+        c[x] = xr
+        c[y] = yr
+        c[z] = zr
+        a += [c]
+    if only_interpolation:
+        return pd.concat(a)
+    else:
+        return pd.concat([df, *a])</div>
 </pre></div>
 
            </div>

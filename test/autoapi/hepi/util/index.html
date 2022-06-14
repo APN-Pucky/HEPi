@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.10-1-g329b145
+                0.1.11-1-gca7190f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -178,6 +178,12 @@
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.lhapdf_name_to_id" title="hepi.util.lhapdf_name_to_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_to_id</span></code></a>(name: str) → int</p></td>
 <td><p>Converts a LHAPDF name to the sets id.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.interpolate_1d" title="hepi.util.interpolate_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interpolate_1d</span></code></a>(df, x, y, xrange, only_interpolation=True)</p></td>
+<td><p>Last key is the value to be interpolated, while the rest are cooridnates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.util.interpolate_2d" title="hepi.util.interpolate_2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interpolate_2d</span></code></a>(df, x, y, z, xrange, yrange, only_interpolation=True, **kwargs)</p></td>
+<td><p>Last key is the value to be interpolated, while the rest are cooridnates.</p></td>
 </tr>
 </tbody>
 </table>
@@ -322,6 +328,28 @@
 <span class="go">13200</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.util.interpolate_1d">
+<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">interpolate_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xrange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/util.html#interpolate_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.interpolate_1d" title="Permalink to this definition"></a></dt>
+<dd><p>Last key is the value to be interpolated, while the rest are cooridnates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – results</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.util.interpolate_2d">
+<span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">interpolate_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xrange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yrange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/util.html#interpolate_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.interpolate_2d" title="Permalink to this definition"></a></dt>
+<dd><p>Last key is the value to be interpolated, while the rest are cooridnates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – results</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
