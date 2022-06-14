@@ -32,6 +32,8 @@ Functions
    hepi.util.get_LR_partner
    hepi.util.namehash
    hepi.util.lhapdf_name_to_id
+   hepi.util.interpolate_1d
+   hepi.util.interpolate_2d
 
 
 
@@ -142,5 +144,21 @@ Functions
 
    >>> lhapdf_name_to_id("CT14lo")
    13200
+
+
+.. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True)
+
+   Last key is the value to be interpolated, while the rest are cooridnates.
+
+   :param df: results
+   :type df: pandas.DataFrame
+
+
+.. py:function:: interpolate_2d(df, x, y, z, xrange, yrange, only_interpolation=True, **kwargs)
+
+   Last key is the value to be interpolated, while the rest are cooridnates.
+
+   :param df: results
+   :type df: pandas.DataFrame
 
 

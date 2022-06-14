@@ -41,7 +41,7 @@
             <a href="../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.10
+                0.1.11
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -403,14 +403,14 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.1.8.9+dirty
+0.1.10.0+dirty
 ~/git/resummino_release/
 </pre></div></div>
 </div>
 <section id="aNNLO+NNLL-for-weakino-pair,-slepton-pair,-Z’/W’-&gt;leptons,">
 <h2>aNNLO+NNLL for weakino pair, slepton pair, Z’/W’-&gt;leptons,<a class="headerlink" href="#aNNLO+NNLL-for-weakino-pair,-slepton-pair,-Z’/W’->leptons," title="Permalink to this heading"></a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
@@ -430,34 +430,25 @@ div.rendered_html tbody tr:hover {
         <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">skip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">_</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">init_double_plot</span><span class="p">()</span>
-        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="s2">&quot;NLO&quot;</span><span class="p">,</span><span class="s2">&quot;aNNLO_PLUS_NNLL&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;K_LO&quot;</span><span class="p">,</span><span class="s2">&quot;K_NLO&quot;</span><span class="p">,</span><span class="s2">&quot;K_aNNLO_PLUS_NNLL&quot;</span><span class="p">,</span><span class="s2">&quot;aNNLO_PLUS_NNLL_OVER_NLO&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">logy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="s2">&quot;NLO&quot;</span><span class="p">,</span><span class="s2">&quot;aNNLO_PLUS_NNLL&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;K_LO&quot;</span><span class="p">,</span><span class="s2">&quot;K_NLO&quot;</span><span class="p">,</span><span class="s2">&quot;K_aNNLO_PLUS_NNLL&quot;</span><span class="p">,</span><span class="s2">&quot;aNNLO_PLUS_NNLL_OVER_NLO&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">logy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">hepi</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">scenario</span><span class="o">=</span><span class="s2">&quot;mastercode&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipRunning: 15 jobs
-CPU times: user 1.56 s, sys: 250 ms, total: 1.81 s
-Wall time: 2.01 s
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/examples_demo_resummino_3_1.png" src="../_images/examples_demo_resummino_3_1.png" />
-</div>
+<div class="highlight"><pre>
+skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipRunning: 15 jobs
+</pre></div></div>
 </div>
 </section>
 <section id="NLO+NLL-for-squark/gluino+weakino">
 <h2>NLO+NLL for squark/gluino+weakino<a class="headerlink" href="#NLO+NLL-for-squark/gluino+weakino" title="Permalink to this heading"></a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
@@ -475,27 +466,10 @@ Wall time: 2.01 s
         <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">skip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="n">_</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">init_double_plot</span><span class="p">()</span>
-        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="s2">&quot;NLO&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;K_NLO&quot;</span><span class="p">,</span><span class="s2">&quot;K_NLO_PLUS_NLL&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL_OVER_NLO&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">logy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="s2">&quot;NLO&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;K_NLO&quot;</span><span class="p">,</span><span class="s2">&quot;K_NLO_PLUS_NLL&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL_OVER_NLO&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">logy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">hepi</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">scenario</span><span class="o">=</span><span class="s2">&quot;mastercode&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-skipskipskipskipskipskipskipskipskipskipskipskipskipskipskipRunning: 15 jobs
-CPU times: user 791 ms, sys: 221 ms, total: 1.01 s
-Wall time: 1.22 s
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/examples_demo_resummino_5_1.png" src="../_images/examples_demo_resummino_5_1.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
