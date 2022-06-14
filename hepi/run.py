@@ -118,6 +118,7 @@ class Runner:
             parallel=True,
             sleep=0,
             run=True,
+            ignore_error=False,
             **kwargs):
         """
 		Run the passed list of parameters.
@@ -130,6 +131,7 @@ class Runner:
 		    parallel (bool): Run jobs in parallel.
 		    sleep (int): Sleep seconds after starting job.
             run (bool): Actually start/queue runner.
+            ignore_error (bool): Continue instead of raising Exceptions.
 
 		Returns:
 		    :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
@@ -137,6 +139,8 @@ class Runner:
 		"""
         if not self._check_path():
             warnings.warn("The path is not valid for " + self.get_name())
+            if not ignore_error:
+                raise RuntimeError("The path is not valid for " + self.get_name())
         rps = self._prepare_all(params, parse=parse, skip=skip, **kwargs)
         print("Running: " + str(len(params)) + " jobs")
         if sleep is None:
