@@ -75,7 +75,7 @@ class Runner:
     def _prepare(self, p: Input, **kwargs) -> RunParam:
         skip_ = kwargs["skip"]
         d = p.__dict__
-        d["runner"] = str(type(self).__name__) + "-" + self.get_version()
+        d["runner"] = str(type(self).__name__) #+ "-" + self.get_version() # TODO re add version, but removed for reusable hashing!
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
                                  for _ in d.items()).replace("/", "-"))
         #print(name)
