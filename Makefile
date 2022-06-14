@@ -5,7 +5,7 @@ html:
 	$(MAKE) -C docs html
 
 install:
-	python3 -m pip install --user .
+	python3 -m pip install --user .[docs,dev]
 
 build:
 	python3 -m build
@@ -24,8 +24,8 @@ push: commit
 pull: commit
 	git pull
 
-clean-all: clean
-	find source/example/ -type f -name '*.ipynb' | xargs jupyter nbconvert --clear-output --inplace
+clean: 
+	rm -r .eggs .pytest_cache hepi.egg-info dist build
 
 
 release: push html
