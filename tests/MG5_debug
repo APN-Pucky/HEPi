@@ -8,7 +8,7 @@
 #*                *                       *                 *
 #*                                                          *
 #*                                                          *
-#*         VERSION 2.7.0                 2020-01-20         *
+#*         VERSION 2.7.3                 2020-06-21         *
 #*                                                          *
 #*    The MadGraph5_aMC@NLO Development Team - Find us at   *
 #*    https://server06.fynu.ucl.ac.be/projects/madgraph     *
@@ -24,29 +24,21 @@ set default_unset_couplings 99
 set group_subprocesses Auto
 set ignore_six_quark_processes False
 set loop_optimized_output True
+set low_mem_multicore_nlo_generation False
 set loop_color_flows False
 set gauge unitary
 set complex_mass_scheme False
 set max_npoint_for_channel 0
-import model /opt/MG5_aMC_v2_7_0/models/MSSMatNLO_UFO
-define p = g u c d s u~ c~ d~ s~
-define j = g u c d s u~ c~ d~ s~
-define l+ = e+ mu+
-define l- = e- mu-
-define vl = ve vm vt
-define vl~ = ve~ vm~ vt~
-define p = 21 2 4 1 3 -2 -4 -1 -3 5 -5 # pass to 5 flavors
-define j = p
-generate p p > 1000021 1000022 QCD=1
-output ./output/order_Order.LO_energy_13000_particle1_1000021_particle2_1000022_slha_param_card_nlo.dat_pdf_lo_CT14lo_pdf_nlo_CT14lo_mu_f_0.1_mu_r_0.1_id_LO_TEST_code_MG.bdir
+set automatic_html_opening False
+import model X
 Traceback (most recent call last):
   File "/opt/MG5_aMC_v2_7_0/madgraph/interface/extended_cmd.py", line 1515, in onecmd
     return self.onecmd_orig(line, **opt)
   File "/opt/MG5_aMC_v2_7_0/madgraph/interface/extended_cmd.py", line 1464, in onecmd_orig
     return func(arg, **opt)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/master_interface.py", line 278, in do_import
+  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/master_interface.py", line 280, in do_import
     self.cmd.do_import(self, *args, **opts)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/madgraph_interface.py", line 5441, in do_import
+  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/madgraph_interface.py", line 5466, in do_import
     self.import_command_file(args[1])
   File "/opt/MG5_aMC_v2_7_0/madgraph/interface/extended_cmd.py", line 1661, in import_command_file
     self.exec_cmd(line, precmd=True)
@@ -54,76 +46,13 @@ Traceback (most recent call last):
     stop = Cmd.onecmd_orig(current_interface, line, **opt)
   File "/opt/MG5_aMC_v2_7_0/madgraph/interface/extended_cmd.py", line 1464, in onecmd_orig
     return func(arg, **opt)
-  File "/opt/MG5_aMC_v2_7_0/PLUGIN/MadSTR/madstr_interface.py", line 152, in do_output
-    super(MadSTRInterface, self).do_output(line)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/master_interface.py", line 296, in do_output
-    self.cmd.do_output(self, line, *args, **opts)
-  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/madgraph_interface.py", line 7841, in do_output
-    self.export(nojpeg, main_file_name, group_processes, args)
-  File "/opt/MG5_aMC_v2_7_0/PLUGIN/MadSTR/madstr_interface.py", line 339, in export
-    ndiags, cpu_time = generate_matrix_elements(self, group=group_processes)
-  File "/opt/MG5_aMC_v2_7_0/PLUGIN/MadSTR/madstr_interface.py", line 278, in generate_matrix_elements
-    "exporting to NLO")
-MadGraph5Error: Cannot group subprocesses when exporting to NLO
-                          MadGraph5_aMC@NLO Options    
-                          ----------------    
-        complex_mass_scheme 	:	False
-    default_unset_couplings 	:	99
-                      gauge 	:	unitary
-         group_subprocesses 	:	Auto
-  ignore_six_quark_processes 	:	False
-           loop_color_flows 	:	False
-      loop_optimized_output 	:	True
-  low_mem_multicore_nlo_generation 	:	False
-     max_npoint_for_channel 	:	0
-               stdout_level 	:	20 (user set)
-
-                         MadEvent Options    
-                          ----------------    
-     automatic_html_opening 	:	True
-                    nb_core 	:	None
-        notification_center 	:	True
-                   run_mode 	:	2
-
-                      Configuration Options    
-                      ---------------------    
-                        OLP 	:	MadLoop
-                    amcfast 	:	amcfast-config
-                   applgrid 	:	applgrid-config
-                auto_update 	:	7
-         cluster_local_path 	:	None
-           cluster_nb_retry 	:	1
-              cluster_queue 	:	None (user set)
-         cluster_retry_wait 	:	300
-               cluster_size 	:	100
-      cluster_status_update 	:	(600, 30)
-          cluster_temp_path 	:	None
-               cluster_type 	:	condor
-                    collier 	:	/opt/MG5_aMC_v2_7_0/HEPTools/collier (user set)
-               cpp_compiler 	:	None
-             crash_on_error 	:	False
-               delphes_path 	:	./Delphes
-                 eps_viewer 	:	None
-        exrootanalysis_path 	:	./ExRootAnalysis
-              f2py_compiler 	:	None
-                    fastjet 	:	None (user set)
-           fortran_compiler 	:	None
-                      golem 	:	None (user set)
-                 hepmc_path 	:	None (user set)
-                  hwpp_path 	:	None (user set)
-                     lhapdf 	:	lhapdf-config
-          madanalysis5_path 	:	None (user set)
-           madanalysis_path 	:	./MadAnalysis
-  mg5amc_py8_interface_path 	:	None (user set)
-                      ninja 	:	None (user set)
-        output_dependencies 	:	external
-                      pjfry 	:	None (user set)
-            pythia-pgs_path 	:	./pythia-pgs
-               pythia8_path 	:	None (user set)
-                    samurai 	:	None
-               syscalc_path 	:	./SysCalc
-                    td_path 	:	./td
-                text_editor 	:	None
-                thepeg_path 	:	None (user set)
-                    timeout 	:	60
-                web_browser 	:	None
+  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/master_interface.py", line 280, in do_import
+    self.cmd.do_import(self, *args, **opts)
+  File "/opt/MG5_aMC_v2_7_0/madgraph/interface/madgraph_interface.py", line 5412, in do_import
+    complex_mass_scheme=self.options['complex_mass_scheme'])
+  File "/opt/MG5_aMC_v2_7_0/models/import_ufo.py", line 201, in import_model
+    model_path = find_ufo_path(model_name)
+  File "/opt/MG5_aMC_v2_7_0/models/import_ufo.py", line 91, in find_ufo_path
+    raise UFOImportError("Path %s is not a valid pathname" % model_name)
+UFOImportError: Path X is not a valid pathname
+Fail to write options with error No model currently active, please import a model!

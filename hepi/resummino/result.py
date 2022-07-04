@@ -56,7 +56,7 @@ class ResumminoResult(Result):
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None
 
 
-def is_valid(file: str, p: Input, d) -> bool:
+def is_valid(file: str, p: Input, d,**kwargs) -> bool:
     """
     Verifies that an file is a complete output.
 
@@ -75,7 +75,7 @@ def is_valid(file: str, p: Input, d) -> bool:
     sname = d['slha']
     with open(file, mode='r') as f:
         with open(get_output_dir() + sname, 'r') as sf:
-            if not f.read().startswith(result + "\n\n" + sf.read()):
+            if not kwargs['ignore_error'] and not f.read().startswith(result + "\n\n" + sf.read()):
                 warnings.warn(
                     "Possible hash collision in " + file + " -> moved to " +
                     file + ".old", RuntimeWarning)

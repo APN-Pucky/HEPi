@@ -75,7 +75,7 @@ class Runner:
     def _prepare(self, p: Input, **kwargs) -> RunParam:
         skip_ = kwargs["skip"]
         d = p.__dict__
-        d["runner"] = str(type(self).__name__) #+ "-" + self.get_version() # TODO re add version, but removed for reusable hashing!
+        d["runner"] = str(type(self).__name__) + "-" + self.get_version() # TODO re add version, but removed for reusable hashing!
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
                                  for _ in d.items()).replace("/", "-"))
         #print(name)
@@ -83,7 +83,7 @@ class Runner:
         if skip_ and os.path.isfile(self.get_output_dir() + name +
                                     ".out") and self._is_valid(
                                         self.get_output_dir() + name + ".out",
-                                        p, d):
+                                        p, d,**kwargs):
             print("skip", end='')
             skip = True
         return RunParam(execute=self.get_output_dir() + name + ".sh",
@@ -131,7 +131,7 @@ class Runner:
 		    parallel (bool): Run jobs in parallel.
 		    sleep (int): Sleep seconds after starting job.
             run (bool): Actually start/queue runner.
-            ignore_error (bool): Continue instead of raising Exceptions.
+            ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
 
 		Returns:
 		    :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
@@ -141,7 +141,7 @@ class Runner:
             warnings.warn("The path is not valid for " + self.get_name())
             if not ignore_error:
                 raise RuntimeError("The path is not valid for " + self.get_name())
-        rps = self._prepare_all(params, parse=parse, skip=skip, **kwargs)
+        rps = self._prepare_all(params, parse=parse, skip=skip, ignore_error=ignore_error,**kwargs)
         print("Running: " + str(len(params)) + " jobs")
         if sleep is None:
             sleep = 0 if parse else 5
@@ -200,7 +200,7 @@ class Runner:
             return output
         return []
 
-    def _is_valid(self, file: str, p: Input, d) -> bool:
+    def _is_valid(self, file: str, p: Input, d, **kwargs) -> bool:
         """
 		Verifies that a file is a complete output.
 	
