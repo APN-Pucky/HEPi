@@ -145,11 +145,11 @@ def pdf_error(li, dl,ordername="LO", confidence_level=90):
                     required_numerical_uncertainty_factor >
                     -dl[ordername + "_PDF_ERRMINUS"][i]):
                     rel = plot.unv(dl[ordername][i])
-                    warnings.warn("too bad numerical precision vs pdf @ "+ordername+ " "+
-                                    str(plot.usd(dl[ordername][i])/rel*100.)+ "% vs "+ str(dl[ordername + "_PDF_ERRPLUS"][i]/rel*100.)+ "% to "+ str(dl[ordername + "_PDF_ERRMINUS"][i]/rel*100. + "%"),
+                    warnings.warn("too bad numerical precision vs pdf @ "+ordername+ " num: "+
+                                    str(plot.usd(dl[ordername][i])/rel*100.)+ "% vs "+ str(dl[ordername + "_PDF_ERRPLUS"][i]/rel*100.)+ "% to pdf: "+ str(dl[ordername + "_PDF_ERRMINUS"][i]/rel*100. + "%"),
                             RuntimeWarning)
 
-    mask = dl[ordername+"_PDF_CENTRAL"] != np.array(None)
+    mask = dl[ordername+"_PDF_CENTRAL"].notnull() 
     dl.loc[mask,ordername+"_PDF"] = unumpy.uarray(
         plot.unv(dl[ordername+"_PDF_CENTRAL"][mask]) +
         dl[ordername+"_PDF_ERRPLUS"][mask] / 2. + dl[ordername+"_PDF_ERRMINUS"][mask] / 2.,
@@ -324,11 +324,11 @@ def scale_error(li, dl,ordername="LO"):
                     required_numerical_uncertainty_factor >
                     -dl[ordername+"_SCALE_ERRMINUS"][i]):
                 rel = plot.unv(dl[ordername][i])
-                warnings.warn("too bad numerical precision vs scale @ "+ordername + " " + str(plot.usd(dl[ordername][i])/rel*100.) + "% vs " +str(dl[ordername+"_SCALE_ERRPLUS"][i]/rel*100.) + "% to " + str(dl[ordername+"_SCALE_ERRMINUS"][i]/rel*100.) + "%"  ,  
+                warnings.warn("too bad numerical precision vs scale @ num:"+ordername + " " + str(plot.usd(dl[ordername][i])/rel*100.) + "% vs scale:" +str(dl[ordername+"_SCALE_ERRPLUS"][i]/rel*100.) + "% to " + str(dl[ordername+"_SCALE_ERRMINUS"][i]/rel*100.) + "%"  ,  
                               RuntimeWarning)
 
 
-    mask = dl[ordername+"_SCALE_ERRPLUS"] != np.array(None)
+    mask = dl[ordername+"_SCALE_ERRPLUS"].notnull()
     dl.loc[mask ,ordername+"_SCALE"] = unumpy.uarray(
         plot.unv(dl[ordername][mask]) + dl[ordername+"_SCALE_ERRPLUS"][mask] / 2. +
         dl[ordername+"_SCALE_ERRMINUS"][mask] / 2.,
@@ -478,7 +478,7 @@ def combine_error(dl: dict,ordername="LO"):
     dl[ordername+"_COMBINED"] = np.array([None] * len(dl["pdfset_nlo"]))
 
 
-    mask = dl[ordername+"_PDF_CENTRAL"] != np.array(None)
+    mask = dl[ordername+"_PDF_CENTRAL"].notnull() 
     dl.loc[mask,ordername+"_NOERR"] = plot.unv(dl[ordername+""][mask]).astype(float)
     dl.loc[mask,ordername+"_ERRPLUS"] = np.sqrt(
         dl[ordername+"_PDF_ERRPLUS"][mask].astype(float)**2 +

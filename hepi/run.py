@@ -9,6 +9,7 @@ from hepi.results import Result
 from hepi.util import DL2DF, LD2DL, DictData, namehash
 from smpl.parallel import par
 import time
+import tqdm
 
 
 class RunParam(DictData):
@@ -84,8 +85,10 @@ class Runner:
                                     ".out") and self._is_valid(
                                         self.get_output_dir() + name + ".out",
                                         p, d,**kwargs):
-            print("skip", end='')
+            print(".", end='')
             skip = True
+        else:
+            print('|', end='')
         return RunParam(execute=self.get_output_dir() + name + ".sh",
                         in_file=self.get_output_dir() + name + ".in",
                         out_file=self.get_output_dir() + name + ".out",
@@ -142,7 +145,7 @@ class Runner:
             if not ignore_error:
                 raise RuntimeError("The path is not valid for " + self.get_name())
         rps = self._prepare_all(params, parse=parse, skip=skip, ignore_error=ignore_error,**kwargs)
-        print("Running: " + str(len(params)) + " jobs")
+        print("= " + str(len(params)) + " jobs")
         if sleep is None:
             sleep = 0 if parse else 5
         if run:
@@ -235,8 +238,12 @@ class Runner:
 	
 		"""
         rsl = []
-        for r in par(self._parse_file, outputs):
-            rsl.append(r)
+        #for r in par(self._parse_file, outputs):
+        #    rsl.append(r)
+
+        # parallelized opens to many files at times
+        for o in tqdm.tqdm(outputs):
+            rsl.append(self._parse_file(o))
         return rsl
 
     def _parse_file(self, file: str) -> Result:
