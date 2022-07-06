@@ -18,8 +18,8 @@ from .util import get_name
 from matplotlib.ticker import NullFormatter
 
 
-def title(axe,
-          i: Input,
+def title(i: Input,
+          axe=None,
           scenario="",
           diff_L_R=None,
           extra="",
@@ -28,6 +28,8 @@ def title(axe,
           id=False,
           **kwargs):
     """Sets the title on axis `axe`."""
+    if axe is None:
+        axe = plt.gca()
     axe.set_title("$pp\\to" + get_name(i.particle1) + get_name(i.particle2) +
                   "$" + (" at $\\sqrt{S} = " + str(i.energy / 1000) +
                          "$ TeV" if cms_energy else "") + " for " +

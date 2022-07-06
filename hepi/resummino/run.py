@@ -47,10 +47,10 @@ class ResumminoRunner(Runner):
             return False
         return True
 
-    def _is_valid(self, file: str, p: Input, d) -> bool:
+    def _is_valid(self, file: str, p: Input, d, **kwargs) -> bool:
         if not super()._is_valid(file, p, d):
             return False
-        return is_valid(file, p, d)
+        return is_valid(file, p, d, **kwargs)
 
     def _parse_file(self, file: str) -> Result:
         return parse_single(file)
