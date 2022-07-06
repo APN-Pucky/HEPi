@@ -76,7 +76,8 @@ class Runner:
     def _prepare(self, p: Input, **kwargs) -> RunParam:
         skip_ = kwargs["skip"]
         d = p.__dict__
-        d["runner"] = str(type(self).__name__) + "-" + self.get_version() # TODO re add version, but removed for reusable hashing!
+        d["runner"] = str(type(self).__name__) + "-" + self.get_version(
+        )  # TODO re add version, but removed for reusable hashing!
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
                                  for _ in d.items()).replace("/", "-"))
         #print(name)
@@ -84,7 +85,7 @@ class Runner:
         if skip_ and os.path.isfile(self.get_output_dir() + name +
                                     ".out") and self._is_valid(
                                         self.get_output_dir() + name + ".out",
-                                        p, d,**kwargs):
+                                        p, d, **kwargs):
             print(".", end='')
             skip = True
         else:
@@ -143,8 +144,13 @@ class Runner:
         if not self._check_path():
             warnings.warn("The path is not valid for " + self.get_name())
             if not ignore_error:
-                raise RuntimeError("The path is not valid for " + self.get_name())
-        rps = self._prepare_all(params, parse=parse, skip=skip, ignore_error=ignore_error,**kwargs)
+                raise RuntimeError("The path is not valid for " +
+                                   self.get_name())
+        rps = self._prepare_all(params,
+                                parse=parse,
+                                skip=skip,
+                                ignore_error=ignore_error,
+                                **kwargs)
         print("= " + str(len(params)) + " jobs")
         if sleep is None:
             sleep = 0 if parse else 5
