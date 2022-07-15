@@ -36,7 +36,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.11
+                0.1.12
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -59,6 +59,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
@@ -153,7 +154,7 @@ import shutil
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None</div>
 
 
-<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.is_valid">[docs]</a>def is_valid(file: str, p: Input, d) -&gt; bool:
+<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/result/index.html#hepi.resummino.result.is_valid">[docs]</a>def is_valid(file: str, p: Input, d,**kwargs) -&gt; bool:
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
 
@@ -172,7 +173,7 @@ import shutil
     sname = d[&#39;slha&#39;]
     with open(file, mode=&#39;r&#39;) as f:
         with open(get_output_dir() + sname, &#39;r&#39;) as sf:
-            if not f.read().startswith(result + &quot;\n\n&quot; + sf.read()):
+            if not kwargs[&#39;ignore_error&#39;] and not f.read().startswith(result + &quot;\n\n&quot; + sf.read()):
                 warnings.warn(
                     &quot;Possible hash collision in &quot; + file + &quot; -&gt; moved to &quot; +
                     file + &quot;.old&quot;, RuntimeWarning)

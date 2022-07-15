@@ -69,7 +69,7 @@ Classes
               parallel (bool): Run jobs in parallel.
               sleep (int): Sleep seconds after starting job.
       run (bool): Actually start/queue runner.
-      ignore_error (bool): Continue instead of raising Exceptions.
+      ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
 
           Returns:
               :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
@@ -96,7 +96,7 @@ Classes
       :rtype: :obj:`list` of int
 
 
-   .. py:method:: _is_valid(self, file: str, p: hepi.input.Input, d) -> bool
+   .. py:method:: _is_valid(self, file: str, p: hepi.input.Input, d, **kwargs) -> bool
 
       Verifies that a file is a complete output.
 
