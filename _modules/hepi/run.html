@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.12
+                0.1.13
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -174,7 +174,8 @@ import tqdm
 <div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
         skip_ = kwargs[&quot;skip&quot;]
         d = p.__dict__
-        d[&quot;runner&quot;] = str(type(self).__name__) + &quot;-&quot; + self.get_version() # TODO re add version, but removed for reusable hashing!
+        d[&quot;runner&quot;] = str(type(self).__name__) + &quot;-&quot; + self.get_version(
+        )  # TODO re add version, but removed for reusable hashing!
         name = namehash(&quot;_&quot;.join(&quot;&quot;.join(str(_[0]) + &quot;_&quot; + str(_[1]))
                                  for _ in d.items()).replace(&quot;/&quot;, &quot;-&quot;))
         #print(name)
@@ -182,7 +183,7 @@ import tqdm
         if skip_ and os.path.isfile(self.get_output_dir() + name +
                                     &quot;.out&quot;) and self._is_valid(
                                         self.get_output_dir() + name + &quot;.out&quot;,
-                                        p, d,**kwargs):
+                                        p, d, **kwargs):
             print(&quot;.&quot;, end=&#39;&#39;)
             skip = True
         else:
@@ -241,8 +242,13 @@ import tqdm
         if not self._check_path():
             warnings.warn(&quot;The path is not valid for &quot; + self.get_name())
             if not ignore_error:
-                raise RuntimeError(&quot;The path is not valid for &quot; + self.get_name())
-        rps = self._prepare_all(params, parse=parse, skip=skip, ignore_error=ignore_error,**kwargs)
+                raise RuntimeError(&quot;The path is not valid for &quot; +
+                                   self.get_name())
+        rps = self._prepare_all(params,
+                                parse=parse,
+                                skip=skip,
+                                ignore_error=ignore_error,
+                                **kwargs)
         print(&quot;= &quot; + str(len(params)) + &quot; jobs&quot;)
         if sleep is None:
             sleep = 0 if parse else 5

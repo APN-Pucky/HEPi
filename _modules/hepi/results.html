@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.12
+                0.1.13
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -170,17 +170,23 @@ import warnings
         else:
             self.aNNLO_PLUS_NNLL_OVER_NLO = None</div>
 
-<div class="viewcode-block" id="pdf_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_errors">[docs]</a>def pdf_errors(li, dl,ordernames=[&quot;LO&quot;,&quot;NLO&quot;,&quot;aNNLO_PLUS_NNLL&quot;], confidence_level=90):
+
+# TODO detect which errors also for scales
+<div class="viewcode-block" id="pdf_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_errors">[docs]</a>def pdf_errors(li,
+               dl,
+               ordernames=[&quot;LO&quot;, &quot;NLO&quot;, &quot;aNNLO_PLUS_NNLL&quot;],
+               confidence_level=90):
     &quot;&quot;&quot;
     Just like `pdf_error` but over a list of ordernames.
     &quot;&quot;&quot;
     r_dl = dl
     for o in ordernames:
-        r_dl = pdf_error(li,r_dl,o,confidence_level=confidence_level)
+        r_dl = pdf_error(li, r_dl, o, confidence_level=confidence_level)
 
     return r_dl</div>
 
-<div class="viewcode-block" id="pdf_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error">[docs]</a>def pdf_error(li, dl,ordername=&quot;LO&quot;, confidence_level=90):
+
+<div class="viewcode-block" id="pdf_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error">[docs]</a>def pdf_error(li, dl, ordername=&quot;LO&quot;, confidence_level=90):
     &quot;&quot;&quot;
     Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
@@ -202,10 +208,10 @@ import warnings
     ]
 
     dl[ordername + &quot;_PDF&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
-    dl[ordername+&quot;_PDF_CENTRAL&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
-    dl[ordername+&quot;_PDF_ERRPLUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
-    dl[ordername+&quot;_PDF_ERRMINUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
-    dl[ordername+&quot;_PDF_ERRSYM&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_PDF_CENTRAL&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_PDF_ERRPLUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_PDF_ERRMINUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_PDF_ERRSYM&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
 
     for i in range(len(dl[&quot;pdfset_nlo&quot;])):
         if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][
@@ -222,39 +228,48 @@ import warnings
                 if same:
                     pdfs[dl[&quot;pdfset_nlo&quot;][j]] = j
 
-           # lo_unc = pdfset.uncertainty(
-            #    [plot.unv(dl[&quot;LO&quot;][k]) for k in pdfs], -1)
-            if ordername==&quot;LO&quot;:
-                dl.loc[i,&quot;LO_PDF_CENTRAL&quot;] = plot.unv(dl[&quot;LO&quot;][i])
-                dl.loc[i,&quot;LO_PDF_ERRPLUS&quot;] = 0.0
-                dl.loc[i,&quot;LO_PDF_ERRMINUS&quot;] = 0.0
-                dl.loc[i,&quot;LO_PDF_ERRSYM&quot;] = 0.0
+        # lo_unc = pdfset.uncertainty(
+        #    [plot.unv(dl[&quot;LO&quot;][k]) for k in pdfs], -1)
+            if ordername == &quot;LO&quot;:
+                dl.loc[i, &quot;LO_PDF_CENTRAL&quot;] = plot.unv(dl[&quot;LO&quot;][i])
+                dl.loc[i, &quot;LO_PDF_ERRPLUS&quot;] = 0.0
+                dl.loc[i, &quot;LO_PDF_ERRMINUS&quot;] = 0.0
+                dl.loc[i, &quot;LO_PDF_ERRSYM&quot;] = 0.0
             else:
                 nlo_unc = pdfset.uncertainty(
                     [plot.unv(dl[&quot;NLO&quot;][k]) for k in pdfs], confidence_level)
-                dl.loc[i,ordername + &quot;_PDF_CENTRAL&quot;] = nlo_unc.central
-                dl.loc[i,ordername + &quot;_PDF_ERRPLUS&quot;] = nlo_unc.errplus
-                dl.loc[i,ordername + &quot;_PDF_ERRMINUS&quot;] = -nlo_unc.errminus
-                dl.loc[i,ordername + &quot;_PDF_ERRSYM&quot;] = nlo_unc.errsymm
+                dl.loc[i, ordername + &quot;_PDF_CENTRAL&quot;] = nlo_unc.central
+                dl.loc[i, ordername + &quot;_PDF_ERRPLUS&quot;] = nlo_unc.errplus
+                dl.loc[i, ordername + &quot;_PDF_ERRMINUS&quot;] = -nlo_unc.errminus
+                dl.loc[i, ordername + &quot;_PDF_ERRSYM&quot;] = nlo_unc.errsymm
             #TODO error sym to minus and plus
-            if ordername!= &quot;LO&quot;:
-                if (plot.usd(dl[ordername][i]) * required_numerical_uncertainty_factor
-                    &gt; dl[ordername + &quot;_PDF_ERRPLUS&quot;][i] or plot.usd(dl[ordername][i]) *
-                    required_numerical_uncertainty_factor &gt;
-                    -dl[ordername + &quot;_PDF_ERRMINUS&quot;][i]):
+            if ordername != &quot;LO&quot;:
+                if (plot.usd(dl[ordername][i]) *
+                        required_numerical_uncertainty_factor &gt;
+                        dl[ordername + &quot;_PDF_ERRPLUS&quot;][i]
+                        or plot.usd(dl[ordername][i]) *
+                        required_numerical_uncertainty_factor &gt;
+                        -dl[ordername + &quot;_PDF_ERRMINUS&quot;][i]):
                     rel = plot.unv(dl[ordername][i])
-                    warnings.warn(&quot;too bad numerical precision vs pdf @ &quot;+ordername+ &quot; num: &quot;+
-                                    str(plot.usd(dl[ordername][i])/rel*100.)+ &quot;% vs &quot;+ str(dl[ordername + &quot;_PDF_ERRPLUS&quot;][i]/rel*100.)+ &quot;% to pdf: &quot;+ str(dl[ordername + &quot;_PDF_ERRMINUS&quot;][i]/rel*100. + &quot;%&quot;),
-                            RuntimeWarning)
+                    warnings.warn(
+                        &quot;too bad numerical precision vs pdf @ &quot; + ordername +
+                        &quot; num: &quot; +
+                        str(plot.usd(dl[ordername][i]) / rel * 100.) +
+                        &quot;% vs &quot; +
+                        str(dl[ordername + &quot;_PDF_ERRPLUS&quot;][i] / rel * 100.) +
+                        &quot;% to pdf: &quot; +
+                        str(dl[ordername + &quot;_PDF_ERRMINUS&quot;][i] / rel * 100.) +
+                        &quot;%&quot;, RuntimeWarning)
 
-    mask = dl[ordername+&quot;_PDF_CENTRAL&quot;].notnull() 
-    dl.loc[mask,ordername+&quot;_PDF&quot;] = unumpy.uarray(
-        plot.unv(dl[ordername+&quot;_PDF_CENTRAL&quot;][mask]) +
-        dl[ordername+&quot;_PDF_ERRPLUS&quot;][mask] / 2. + dl[ordername+&quot;_PDF_ERRMINUS&quot;][mask] / 2.,
-        (+dl[ordername+&quot;_PDF_ERRPLUS&quot;][mask] - dl[ordername+&quot;_PDF_ERRMINUS&quot;][mask]) / 2.)
+    mask = dl[ordername + &quot;_PDF_CENTRAL&quot;].notnull()
+    dl.loc[mask, ordername + &quot;_PDF&quot;] = unumpy.uarray(
+        plot.unv(dl[ordername + &quot;_PDF_CENTRAL&quot;][mask]) +
+        dl[ordername + &quot;_PDF_ERRPLUS&quot;][mask] / 2. +
+        dl[ordername + &quot;_PDF_ERRMINUS&quot;][mask] / 2.,
+        (+dl[ordername + &quot;_PDF_ERRPLUS&quot;][mask] -
+         dl[ordername + &quot;_PDF_ERRMINUS&quot;][mask]) / 2.)
 
     return dl</div>
-
 
 
 <div class="viewcode-block" id="pdf_error_old"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error_old">[docs]</a>def pdf_error_old(li, dl, confidence_level=90):
@@ -364,16 +379,19 @@ import warnings
          dl[&quot;NLO_PLUS_NLL_PDF_ERRMINUS&quot;][mask]) / 2.)
     return dl</div>
 
-<div class="viewcode-block" id="scale_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_errors">[docs]</a>def scale_errors(li, dl,ordernames=[&quot;LO&quot;,&quot;NLO&quot;,&quot;aNNLO_PLUS_NNLL&quot;]):
+
+<div class="viewcode-block" id="scale_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_errors">[docs]</a>def scale_errors(li, dl, ordernames=[&quot;LO&quot;, &quot;NLO&quot;, &quot;aNNLO_PLUS_NNLL&quot;]):
     &quot;&quot;&quot;
     Just like `scale_error` but over a list of ordernames.
     &quot;&quot;&quot;
     r_dl = dl
     for o in ordernames:
-        r_dl = scale_error(li,r_dl,o)
+        r_dl = scale_error(li, r_dl, o)
 
     return r_dl</div>
-<div class="viewcode-block" id="scale_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_error">[docs]</a>def scale_error(li, dl,ordername=&quot;LO&quot;):
+
+
+<div class="viewcode-block" id="scale_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_error">[docs]</a>def scale_error(li, dl, ordername=&quot;LO&quot;):
     &quot;&quot;&quot;
     Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
 
@@ -391,9 +409,10 @@ import warnings
         attr for attr in dir(example)
         if not callable(getattr(example, attr)) and not attr.startswith(&quot;__&quot;)
     ]
-    dl[ordername+&quot;_SCALE&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
-    dl[ordername+&quot;_SCALE_ERRPLUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
-    dl[ordername+&quot;_SCALE_ERRMINUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_SCALE&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_SCALE_ERRPLUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_SCALE_ERRMINUS&quot;] = np.array([None] *
+                                                 len(dl[&quot;pdfset_nlo&quot;]))
 
     for i in range(len(dl[&quot;pdfset_nlo&quot;])):
         if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][
@@ -411,30 +430,37 @@ import warnings
 
             # lo_unc = pdfset.uncertainty(
             #    [plot.unv(dl[&quot;LO&quot;][k]) for k in pdfs], -1)
-            dl.loc[i,ordername+&quot;_SCALE_ERRPLUS&quot;] = np.max(
+            dl.loc[i, ordername + &quot;_SCALE_ERRPLUS&quot;] = np.max(
                 [plot.unv(dl[ordername][k])
                  for k in scales]) - plot.unv(dl[ordername][i])
-            dl.loc[i,ordername+&quot;_SCALE_ERRMINUS&quot;] = np.min(
+            dl.loc[i, ordername + &quot;_SCALE_ERRMINUS&quot;] = np.min(
                 [plot.unv(dl[ordername][k])
                  for k in scales]) - plot.unv(dl[ordername][i])
-            if (plot.usd(dl[ordername][i]) * required_numerical_uncertainty_factor &gt;
-                    dl[ordername+&quot;_SCALE_ERRPLUS&quot;][i] or plot.usd(dl[ordername][i]) *
+            if (plot.usd(dl[ordername][i]) *
                     required_numerical_uncertainty_factor &gt;
-                    -dl[ordername+&quot;_SCALE_ERRMINUS&quot;][i]):
+                    dl[ordername + &quot;_SCALE_ERRPLUS&quot;][i]
+                    or plot.usd(dl[ordername][i]) *
+                    required_numerical_uncertainty_factor &gt;
+                    -dl[ordername + &quot;_SCALE_ERRMINUS&quot;][i]):
                 rel = plot.unv(dl[ordername][i])
-                warnings.warn(&quot;too bad numerical precision vs scale @ num:&quot;+ordername + &quot; &quot; + str(plot.usd(dl[ordername][i])/rel*100.) + &quot;% vs scale:&quot; +str(dl[ordername+&quot;_SCALE_ERRPLUS&quot;][i]/rel*100.) + &quot;% to &quot; + str(dl[ordername+&quot;_SCALE_ERRMINUS&quot;][i]/rel*100.) + &quot;%&quot;  ,  
-                              RuntimeWarning)
+                warnings.warn(
+                    &quot;too bad numerical precision vs scale @ num:&quot; + ordername +
+                    &quot; &quot; + str(plot.usd(dl[ordername][i]) / rel * 100.) +
+                    &quot;% vs scale:&quot; +
+                    str(dl[ordername + &quot;_SCALE_ERRPLUS&quot;][i] / rel * 100.) +
+                    &quot;% to &quot; +
+                    str(dl[ordername + &quot;_SCALE_ERRMINUS&quot;][i] / rel * 100.) +
+                    &quot;%&quot;, RuntimeWarning)
 
-
-    mask = dl[ordername+&quot;_SCALE_ERRPLUS&quot;].notnull()
-    dl.loc[mask ,ordername+&quot;_SCALE&quot;] = unumpy.uarray(
-        plot.unv(dl[ordername][mask]) + dl[ordername+&quot;_SCALE_ERRPLUS&quot;][mask] / 2. +
-        dl[ordername+&quot;_SCALE_ERRMINUS&quot;][mask] / 2.,
-        (+dl[ordername+&quot;_SCALE_ERRPLUS&quot;][mask] - dl[ordername+&quot;_SCALE_ERRMINUS&quot;][mask]) / 2.)
-
+    mask = dl[ordername + &quot;_SCALE_ERRPLUS&quot;].notnull()
+    dl.loc[mask, ordername + &quot;_SCALE&quot;] = unumpy.uarray(
+        plot.unv(dl[ordername][mask]) +
+        dl[ordername + &quot;_SCALE_ERRPLUS&quot;][mask] / 2. +
+        dl[ordername + &quot;_SCALE_ERRMINUS&quot;][mask] / 2.,
+        (+dl[ordername + &quot;_SCALE_ERRPLUS&quot;][mask] -
+         dl[ordername + &quot;_SCALE_ERRMINUS&quot;][mask]) / 2.)
 
     return dl</div>
-
 
 
 <div class="viewcode-block" id="scale_error_old"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_error_old">[docs]</a>def scale_error_old(li, dl):
@@ -546,17 +572,18 @@ import warnings
     return dl</div>
 
 
-<div class="viewcode-block" id="combine_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.combine_errors">[docs]</a>def combine_errors( dl,ordernames=[&quot;LO&quot;,&quot;NLO&quot;,&quot;aNNLO_PLUS_NNLL&quot;]):
+<div class="viewcode-block" id="combine_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.combine_errors">[docs]</a>def combine_errors(dl, ordernames=[&quot;LO&quot;, &quot;NLO&quot;, &quot;aNNLO_PLUS_NNLL&quot;]):
     &quot;&quot;&quot;
     Just like `combine_error` but over a list of ordernames.
     &quot;&quot;&quot;
     r_dl = dl
     for o in ordernames:
-        r_dl = combine_error(r_dl,o)
+        r_dl = combine_error(r_dl, o)
 
     return r_dl</div>
 
-<div class="viewcode-block" id="combine_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.combine_error">[docs]</a>def combine_error(dl: dict,ordername=&quot;LO&quot;):
+
+<div class="viewcode-block" id="combine_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.combine_error">[docs]</a>def combine_error(dl: dict, ordername=&quot;LO&quot;):
     &quot;&quot;&quot;
     Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
 
@@ -570,24 +597,25 @@ import warnings
         :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
             - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
     &quot;&quot;&quot;
-    dl[ordername+&quot;_NOERR&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
-    dl[ordername+&quot;_ERRPLUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
-    dl[ordername+&quot;_ERRMINUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
-    dl[ordername+&quot;_COMBINED&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_NOERR&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_ERRPLUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_ERRMINUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
+    dl[ordername + &quot;_COMBINED&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
 
-
-    mask = dl[ordername+&quot;_PDF_CENTRAL&quot;].notnull() 
-    dl.loc[mask,ordername+&quot;_NOERR&quot;] = plot.unv(dl[ordername+&quot;&quot;][mask]).astype(float)
-    dl.loc[mask,ordername+&quot;_ERRPLUS&quot;] = np.sqrt(
-        dl[ordername+&quot;_PDF_ERRPLUS&quot;][mask].astype(float)**2 +
-        dl[ordername+&quot;_SCALE_ERRPLUS&quot;][mask].astype(float)**2)
-    dl.loc[mask,ordername+&quot;_ERRMINUS&quot;] = -np.sqrt(dl[ordername+&quot;_PDF_ERRMINUS&quot;][mask].astype(
-        float)**2 + dl[ordername+&quot;_SCALE_ERRMINUS&quot;][mask].astype(float)**2)
-    dl.loc[mask,ordername+&quot;_COMBINED&quot;] = unumpy.uarray(
-        plot.unv(dl[ordername+&quot;&quot;][mask]) + dl[ordername+&quot;_ERRPLUS&quot;][mask] / 2. +
-        dl[ordername+&quot;_ERRMINUS&quot;][mask] / 2.,
-        +dl[ordername+&quot;_ERRPLUS&quot;][mask] - dl[ordername+&quot;_ERRMINUS&quot;][mask])
-
+    mask = dl[ordername + &quot;_PDF_CENTRAL&quot;].notnull()
+    dl.loc[mask, ordername + &quot;_NOERR&quot;] = plot.unv(dl[ordername +
+                                                     &quot;&quot;][mask]).astype(float)
+    dl.loc[mask, ordername + &quot;_ERRPLUS&quot;] = np.sqrt(
+        dl[ordername + &quot;_PDF_ERRPLUS&quot;][mask].astype(float)**2 +
+        dl[ordername + &quot;_SCALE_ERRPLUS&quot;][mask].astype(float)**2)
+    dl.loc[mask, ordername + &quot;_ERRMINUS&quot;] = -np.sqrt(
+        dl[ordername + &quot;_PDF_ERRMINUS&quot;][mask].astype(float)**2 +
+        dl[ordername + &quot;_SCALE_ERRMINUS&quot;][mask].astype(float)**2)
+    dl.loc[mask, ordername + &quot;_COMBINED&quot;] = unumpy.uarray(
+        plot.unv(dl[ordername + &quot;&quot;][mask]) +
+        dl[ordername + &quot;_ERRPLUS&quot;][mask] / 2. +
+        dl[ordername + &quot;_ERRMINUS&quot;][mask] / 2.,
+        +dl[ordername + &quot;_ERRPLUS&quot;][mask] - dl[ordername + &quot;_ERRMINUS&quot;][mask])
 
     return dl</div>
 
