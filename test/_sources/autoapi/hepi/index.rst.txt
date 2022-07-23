@@ -104,9 +104,12 @@ Functions
    hepi.slha_scan
    hepi.slha_scan_rel
    hepi.scan_pdf
+   hepi.pdf_errors
    hepi.pdf_error
+   hepi.scale_errors
    hepi.scale_error
    hepi.combine_errors
+   hepi.combine_error
    hepi.LD2DL
    hepi.DL2DF
    hepi.get_name
@@ -902,7 +905,12 @@ Attributes
    :type annlo_plus_nnll: :obj:`double`
 
 
-.. py:function:: pdf_error(li, dl, confidence_level=90)
+.. py:function:: pdf_errors(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'], confidence_level=90)
+
+   Just like `pdf_error` but over a list of ordernames.
+
+
+.. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90)
 
    Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
@@ -910,6 +918,8 @@ Attributes
    :type li: :obj:`list` of :class:`Input`
    :param dl: :class:`Result` dictionary with lists per entry.
    :type dl: :obj:`dict`
+   :param ordername: Name of the order.
+   :type ordername: `str`
    :param confidence_level: Confidence Level for PDF uncertainty
    :type confidence_level: :obj:`double`
 
@@ -920,7 +930,12 @@ Attributes
    :rtype: :obj:`dict`
 
 
-.. py:function:: scale_error(li, dl)
+.. py:function:: scale_errors(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])
+
+   Just like `scale_error` but over a list of ordernames.
+
+
+.. py:function:: scale_error(li, dl, ordername='LO')
 
    Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
 
@@ -936,7 +951,12 @@ Attributes
    :rtype: :obj:`dict`
 
 
-.. py:function:: combine_errors(dl: dict)
+.. py:function:: combine_errors(dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])
+
+   Just like `combine_error` but over a list of ordernames.
+
+
+.. py:function:: combine_error(dl: dict, ordername='LO')
 
    Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
 
@@ -1180,7 +1200,7 @@ Attributes
    '\\tilde{\\chi}_{1}^{0}'
 
 
-.. py:function:: title(axe, i: hepi.input.Input, scenario='', diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
+.. py:function:: title(i: hepi.input.Input, axe=None, scenario='', diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
 
    Sets the title on axis `axe`.
 
@@ -1598,7 +1618,7 @@ Attributes
               parallel (bool): Run jobs in parallel.
               sleep (int): Sleep seconds after starting job.
       run (bool): Actually start/queue runner.
-      ignore_error (bool): Continue instead of raising Exceptions.
+      ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
 
           Returns:
               :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
@@ -1625,7 +1645,7 @@ Attributes
       :rtype: :obj:`list` of int
 
 
-   .. py:method:: _is_valid(self, file: str, p: hepi.input.Input, d) -> bool
+   .. py:method:: _is_valid(self, file: str, p: hepi.input.Input, d, **kwargs) -> bool
 
       Verifies that a file is a complete output.
 

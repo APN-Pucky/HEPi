@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.11-2-ge780e32
+                0.1.13-1-gb2309a3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -116,8 +116,8 @@ from .util import get_name
 from matplotlib.ticker import NullFormatter
 
 
-<div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(axe,
-          i: Input,
+<div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(i: Input,
+          axe=None,
           scenario=&quot;&quot;,
           diff_L_R=None,
           extra=&quot;&quot;,
@@ -126,6 +126,8 @@ from matplotlib.ticker import NullFormatter
           id=False,
           **kwargs):
     &quot;&quot;&quot;Sets the title on axis `axe`.&quot;&quot;&quot;
+    if axe is None:
+        axe = plt.gca()
     axe.set_title(&quot;$pp\\to&quot; + get_name(i.particle1) + get_name(i.particle2) +
                   &quot;$&quot; + (&quot; at $\\sqrt{S} = &quot; + str(i.energy / 1000) +
                          &quot;$ TeV&quot; if cms_energy else &quot;&quot;) + &quot; for &quot; +

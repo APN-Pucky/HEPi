@@ -36,7 +36,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.11-2-ge780e32
+                0.1.13-1-gb2309a3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -145,10 +145,10 @@ import stat
             return False
         return True</div>
 
-<div class="viewcode-block" id="ResumminoRunner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d) -&gt; bool:
+<div class="viewcode-block" id="ResumminoRunner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d, **kwargs) -&gt; bool:
         if not super()._is_valid(file, p, d):
             return False
-        return is_valid(file, p, d)</div>
+        return is_valid(file, p, d, **kwargs)</div>
 
 <div class="viewcode-block" id="ResumminoRunner._parse_file"><a class="viewcode-back" href="../../../autoapi/hepi/resummino/run/index.html#hepi.resummino.ResumminoRunner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
         return parse_single(file)</div>
