@@ -45,7 +45,7 @@ jobs:
           uses: JamesIves/github-pages-deploy-action@4.1.5
           with:
             BRANCH: gh-pages # The branch the action should deploy to.
-            FOLDER: doc/build/html # The folder the action should deploy.
+            FOLDER: docs/build/html # The folder the action should deploy.
             target-folder: test
         - name: Deploy PyPI
           if: startsWith(github.ref, 'refs/tags')
@@ -59,5 +59,5 @@ jobs:
             #ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
             #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             BRANCH: gh-pages # The branch the action should deploy to.
-            FOLDER: doc/build/html # The folder the action should deploy.
+            FOLDER: docs/build/html # The folder the action should deploy.
             clean-exclude: test/
