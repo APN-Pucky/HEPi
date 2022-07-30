@@ -32,23 +32,23 @@ Attributes
 
    Bases: :py:obj:`hepi.run.Runner`
 
-   .. py:method:: orders(self) -> List[hepi.input.Order]
+   .. py:method:: orders() -> List[hepi.input.Order]
 
       List of supported Orders in this runner.
 
 
-   .. py:method:: _get_nf_proc(self, p: hepi.input.Input)
+   .. py:method:: _get_nf_proc(p: hepi.input.Input)
 
 
-   .. py:method:: _get_nf_input(self, p: hepi.input.Input) -> dict
+   .. py:method:: _get_nf_input(p: hepi.input.Input) -> dict
 
 
-   .. py:method:: _check_input(self, p: hepi.input.Input, **kwargs) -> bool
+   .. py:method:: _check_input(p: hepi.input.Input, **kwargs) -> bool
 
       Checks input parameter for compatibility with Prospino
 
 
-   .. py:method:: _is_valid(self, file: str, p: hepi.input.Input, d) -> bool
+   .. py:method:: _is_valid(file: str, p: hepi.input.Input, d) -> bool
 
       Verifies that a file is a complete output.
 
@@ -63,7 +63,7 @@ Attributes
       :rtype: bool
 
 
-   .. py:method:: _parse_file(self, file: str) -> hepi.results.Result
+   .. py:method:: _parse_file(file: str) -> hepi.results.Result
 
       Extracts results from an output file.
 
@@ -74,7 +74,7 @@ Attributes
       :rtype: :class:`Result`
 
 
-   .. py:method:: _prepare(self, p: hepi.input.Input, **kwargs) -> hepi.run.RunParam
+   .. py:method:: _prepare(p: hepi.input.Input, **kwargs) -> hepi.run.RunParam
 
 
 

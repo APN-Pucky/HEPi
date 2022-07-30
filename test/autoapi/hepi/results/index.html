@@ -39,7 +39,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.13-1-gb2309a3
+                0.1.13-2-g039e9c9
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -163,22 +163,22 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.pdf_errors" title="hepi.results.pdf_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_errors</span></code></a>(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'], confidence_level=90)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.pdf_errors" title="hepi.results.pdf_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_errors</span></code></a>(li, dl[, ordernames, confidence_level])</p></td>
 <td><p>Just like <cite>pdf_error</cite> but over a list of ordernames.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.pdf_error" title="hepi.results.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl, ordername='LO', confidence_level=90)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.pdf_error" title="hepi.results.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl[, ordername, confidence_level])</p></td>
 <td><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.scale_errors" title="hepi.results.scale_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_errors</span></code></a>(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.scale_errors" title="hepi.results.scale_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_errors</span></code></a>(li, dl[, ordernames])</p></td>
 <td><p>Just like <cite>scale_error</cite> but over a list of ordernames.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.scale_error" title="hepi.results.scale_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error</span></code></a>(li, dl, ordername='LO')</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.scale_error" title="hepi.results.scale_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error</span></code></a>(li, dl[, ordername])</p></td>
 <td><p>Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. <code class="xref py py-meth docutils literal notranslate"><span class="pre">seven_point_scan()</span></code>).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.combine_errors" title="hepi.results.combine_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_errors</span></code></a>(dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.combine_errors" title="hepi.results.combine_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_errors</span></code></a>(dl[, ordernames])</p></td>
 <td><p>Just like <cite>combine_error</cite> but over a list of ordernames.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.combine_error" title="hepi.results.combine_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_error</span></code></a>(dl: dict, ordername='LO')</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.combine_error" title="hepi.results.combine_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_error</span></code></a>(dl[, ordername])</p></td>
 <td><p>Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.</p></td>
 </tr>
 </tbody>
