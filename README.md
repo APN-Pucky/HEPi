@@ -10,7 +10,7 @@ Currently, slurm is supported for clusters.
 | [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
 | [![Coverage Status][c s i]][c s l] | [![Coverage Status][c t i]][c t l] |
 | [![Codacy Badge][cc s cover i]][cc s cover l]      |[![Codacy Badge][cc cover i]][cc cover l] | 
-| [![Codacy Badge][cc s quality i]][cc s quality l]      |[![Codacy Badge][cc quality i]][c quality l] | 
+| [![Codacy Badge][cc s quality i]][cc s quality l]      |[![Codacy Badge][cc quality i]][cc quality l] | 
 | [![Documentation][rtd s i]][rtd s l] | [![Documentation][rtd t i]][rtd t l]  | 
 
 ## Documentation
