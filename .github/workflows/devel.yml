@@ -28,14 +28,3 @@ jobs:
         - name: Build Sphinx
           working-directory: ./docs
           run: make html
-        - name: Report Coveralls
-          if: github.event_name != 'pull_request'
-          uses: AndreMiras/coveralls-python-action@develop
-        - name: Report Codacy
-          if: github.event_name != 'pull_request'
-          uses: codacy/codacy-coverage-reporter-action@v1
-          with:
-            project-token: ${{ secrets.CODACY_API_TOKEN }}
-            # or
-            #api-token: ${{ secrets.CODACY_API_TOKEN }}
-            coverage-reports: coverage.xml
