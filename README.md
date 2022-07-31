@@ -8,9 +8,9 @@ Currently, slurm is supported for clusters.
 | [Stable][doc stable]        | [Unstable][doc test]           |
 | ------------- |:-------------:|
 | [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
-| - | [![Coverage Status][c t i]][c t l] |
-| -      |[![Codacy Badge][codacy cover image]][codacy cover link] | 
-| -     |[![Codacy Badge][codacy quality image]][codacy quality link] | 
+| [![Coverage Status][c s i]][c s l] | [![Coverage Status][c t i]][c t l] |
+| [![Codacy Badge][codacy s cover image]][codacy s cover link]      |[![Codacy Badge][codacy cover image]][codacy cover link] | 
+| [![Codacy Badge][codacy s quality image]][codacy s quality link]      |[![Codacy Badge][codacy quality image]][codacy quality link] | 
 | [![Documentation][rtd s i]][rtd s l] | [![Documentation][rtd t i]][rtd t l]  | 
 
 ## Documentation
@@ -42,6 +42,11 @@ pip install --index-url https://test.pypi.org/simple/ hepi
 [a s link]: https://github.com/APN-Pucky/HEPi/actions/workflows/stable.yml
 [a t link]: https://github.com/APN-Pucky/HEPi/actions/workflows/unstable.yml
 [a t image]: https://github.com/APN-Pucky/HEPi/actions/workflows/unstable.yml/badge.svg
+
+[codacy s quality image]: https://app.codacy.com/project/badge/Grade/ef07b792a0f84f2eb1d7ebe07ae9e639?branch=stable
+[codacy s quality link]: https://www.codacy.com/gh/APN-Pucky/HEPi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/HEPi&amp;utm_campaign=Badge_Grade?branch=stable
+[codacy s cover image]: https://app.codacy.com/project/badge/Coverage/ef07b792a0f84f2eb1d7ebe07ae9e639?branch=stable
+[codacy s cover link]: https://www.codacy.com/gh/APN-Pucky/HEPi/dashboard?utm_source=github.com&utm_medium=referral&utm_content=APN-Pucky/HEPi&utm_campaign=Badge_Coverage?branch=stable
 
 [codacy quality image]: https://app.codacy.com/project/badge/Grade/ef07b792a0f84f2eb1d7ebe07ae9e639
 [codacy quality link]: https://www.codacy.com/gh/APN-Pucky/HEPi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=APN-Pucky/HEPi&amp;utm_campaign=Badge_Grade
