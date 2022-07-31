@@ -12,12 +12,9 @@ jobs:
       container:
         image: apnpucky/ubuntu-pip-lhapdf
       steps:
-        - name: work around permission issue
-          run: git config --global --add safe.directory /__w/HEPi/HEPi
         - uses: actions/checkout@v3
           with:
-            fetch-depth: "0"
-        - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+            fetch-depth: 0
         - name: Build 
           run: make build
         - name: Install 
