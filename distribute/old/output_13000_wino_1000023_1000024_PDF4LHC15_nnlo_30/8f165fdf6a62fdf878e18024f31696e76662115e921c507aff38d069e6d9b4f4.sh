@@ -1,0 +1,2 @@
+#!/bin/sh
+~/git/resummino/build/bin/resummino output_13000_wino_1000023_1000024_PDF4LHC15_nnlo_30/8f165fdf6a62fdf878e18024f31696e76662115e921c507aff38d069e6d9b4f4.in --nnll >> output_13000_wino_1000023_1000024_PDF4LHC15_nnlo_30/8f165fdf6a62fdf878e18024f31696e76662115e921c507aff38d069e6d9b4f4.out

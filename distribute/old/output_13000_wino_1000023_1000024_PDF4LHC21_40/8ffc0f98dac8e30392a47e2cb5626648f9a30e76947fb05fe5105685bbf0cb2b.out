@@ -1,0 +1,774 @@
+# Input card for Resummino.
+
+# This input card defines the hadron collider parameters and the process. The
+# SUSY model is defined in a separate file in the SLHA file format.
+# All energies and masses are in GeV.
+
+# Collider parameters.
+collider_type         = proton-proton  # proton-proton or proton-antiproton
+center_of_mass_energy = 13000
+
+# Outgoing particles using the value of the PDG-scheme number.
+# The particles are listed in the table below. A minus in front of the PDG
+# means charge conjugation. 
+# ┌─────────────────────┬───────────────────┬───────────────────┐
+# │ e_L-      =      11 │ nu_eL   =      12 │                   │
+# │ mu_L-     =      13 │ nu_muL  =      14 │                   │
+# │ tau_1-    =      15 │ nu_tau  =      16 │                   │
+# ├─────────────────────┼───────────────────┼───────────────────┤
+# │ ~e_L-     = 1000011 │ ~e_R-   = 2000011 │ ~nu_eL  = 1000012 │
+# │ ~mu_L-    = 1000013 │ ~mu_R-  = 2000013 │ ~nu_muL = 1000014 │
+# │ ~tau_1-   = 1000015 │ ~tau_2- = 2000015 │ ~nu_tau = 1000016 │
+# ├─────────────────────┼───────────────────┼───────────────────┤
+# │ ~chi_10   = 1000022 │ ~chi_20 = 1000023 │ ~chi_30 = 1000025 │
+# │ ~chi_40   = 1000035 │ ~chi_1+ = 1000024 │ ~chi_2+ = 1000037 │
+# ├─────────────────────┼───────────────────┼───────────────────┤
+# │ ~u_L      = 1000002 │ ~u_R    = 2000002 │ ~d_L    = 1000001 │
+# │ ~d_R      = 2000001 │ ~c_L    = 1000004 │ ~c_R    = 2000004 │
+# │ ~s_L      = 1000003 │ ~s_R    = 2000003 │ ~t_L    = 1000006 │
+# │ ~t_R      = 2000006 │ ~b_L    = 1000005 │ ~b_R    = 2000005 │
+# ├─────────────────────┼───────────────────┴───────────────────┤
+# │ ~g        = 1000021 │                                       │
+# └─────────────────────┴───────────────────────────────────────┘
+#
+particle1 =  1000023
+particle2 =  1000024
+
+# Defines the computation to be performed. Three computations are supported:
+#
+# - result = total: Outputs the total cross section.
+#
+# - result = pt:    Outputs the value for the transverse momentum at the
+#                   value specified by the `pt` variable.
+#
+# - result = ptj:   Outputs the value for the transverse momentum at the
+#                   value specified by the `pt` variable using the joint
+#                   resummation formalism.
+#
+# - result = m:     Outputs the value for the invariant mass distribution at the
+#                   value specified by the `M` variable.
+#
+result = total # total, pt, ptj or m.
+M      = auto  # auto = sqrt((p1 + p2)^2)
+pt     = auto
+
+# SLHA input file that defines the SUSY benchmark point.
+slha = wino.slha_mass_1000022_1000023_1000024_1000.0
+
+# Z'/W' model parameters.
+# (For di-lepton production, input parameters are read from the zpwp file.)
+#zpwp = ssm.in
+
+# PDF sets for LO and NLO. They should be present in the LHAPDF local setup.
+pdf_format = lhgrid  # lhgrid or lhpdf
+#pdf_lo     = cteq6l1 
+pdf_lo     = PDF4LHC21_40 
+pdfset_lo  = 0
+pdf_nlo    = PDF4LHC21_40
+pdfset_nlo = 17
+
+#scale factors 
+# (1.0 is central scale mu = (m1 + m2) / 2)
+mu_f = 1.0
+mu_r = 1.0
+
+# Integration parameters.
+precision = 0.001  # desired precision
+max_iters = 50  # maximum iterations
+#ptcutmax = 0 #6491.18850451893
+#ptcutmin = 0.1
+
+# Minimum invariant mass cut for integration for massless outgoing particles. Ignored otherwise.
+# (Minv_min = auto sets Minv_min = (3/4)*Mz')
+# (Minv_max = auto sets Minv_max = (5/4)*Mz')
+Minv_min = auto
+Minv_max = auto
+
+# optional PDF fit parameter
+# weights
+# (If you get weird fit results decrease the weight up tp -2.0)
+weight_valence = -1.6
+weight_sea = -1.6
+weight_gluon = -1.6
+# fit PDF from xmin to 1 (auto = mis/sh)
+xmin = auto
+
+
+BLOCK MODSEL
+   1   0
+#
+BLOCK SMINPUTS
+   1    127.934
+   2    1.16639e-05
+   3    0.1172
+   4    91.187
+   5    4.25
+   6    175
+   7    1.777
+#
+BLOCK MASS
+   24    80.496122
+   25    125
+   35    100000
+   36    100000
+   37    100000
+   5    4.8788427
+   1000001    100000
+   2000001    100000
+   1000002    100000
+   2000002    100000
+   1000003    100000
+   2000003    100000
+   1000004    100000
+   2000004    100000
+   1000005    100000
+   2000005    100000
+   1000006    100000
+   2000006    100000
+   1000011    100000
+   2000011    100000
+   1000012    100000
+   1000013    100000
+   2000013    100000
+   1000014    100000
+   1000015    100000
+   2000015    100000
+   1000016    100000
+   1000021    100000
+   1000022   1000.0
+   1000023   1000.0
+   1000025    100000
+   1000035    100000
+   1000024   1000.0
+   1000037    100000
+#
+BLOCK NMIX
+   1   1    1
+   1   2    0
+   1   3    0
+   1   4    0
+   2   1    0
+   2   2    1
+   2   3    0
+   2   4    0
+   3   1    0
+   3   2    0
+   3   3    0
+   3   4    0
+   4   1    0
+   4   2    0
+   4   3    0
+   4   4    0
+#
+BLOCK UMIX
+   1   1    1
+   1   2    0
+   2   1    0
+   2   2    0
+#
+BLOCK VMIX
+   1   1    1
+   1   2    0
+   2   1    0
+   2   2    0
+#
+BLOCK STOPMIX
+   1   1    0
+   1   2    0
+   2   1    0
+   2   2    0
+#
+BLOCK SBOTMIX
+   1   1    0
+   1   2    0
+   2   1    0
+   2   2    0
+#
+BLOCK STAUMIX
+   1   1    0
+   1   2    0
+   2   1    0
+   2   2    0
+#
+BLOCK ALPHA
+       0
+#
+BLOCK HMIX Q=  100000
+   1    100000
+   2    100000
+   3    100000
+   4    100000
+#
+BLOCK AU Q=  1000
+   1   1    0
+   2   2    0
+   3   3    0
+#
+BLOCK AD Q=  1000
+   1   1    0
+   2   2    0
+   3   3    0
+#
+BLOCK AE Q=  1000
+   1   1    0
+   2   2    0
+   3   3    0
+#
+BLOCK YU Q=  1000
+   1   1    0
+   2   2    0
+   3   3    0.87406498
+#
+BLOCK YD Q=  1000
+   1   1    0
+   2   2    0
+   3   3    0.13599463
+#
+BLOCK YE Q=  1000
+   1   1    0
+   2   2    0
+   3   3    0.10041534
+#
+BLOCK MSOFT Q=  1000
+   1    100000
+   2    100000
+   3    100000
+   21    100000
+   22    100000
+   31    100000
+   32    100000
+   33    100000
+   34    100000
+   35    100000
+   36    100000
+   41    100000
+   42    100000
+   43    100000
+   44    100000
+   45    100000
+   46    100000
+   47    100000
+   48    100000
+   49    100000
+#
+DECAY 24 -1
+#
+#
+DECAY 25 -1
+#
+#
+DECAY 35 -1
+#
+#
+DECAY 36 -1
+#
+#
+DECAY 37 -1
+#
+#
+DECAY 5 -1
+#
+#
+DECAY 1000001 -1
+#
+#
+DECAY 2000001 -1
+#
+#
+DECAY 1000002 -1
+#
+#
+DECAY 2000002 -1
+#
+#
+DECAY 1000003 -1
+#
+#
+DECAY 2000003 -1
+#
+#
+DECAY 1000004 -1
+#
+#
+DECAY 2000004 -1
+#
+#
+DECAY 1000005 -1
+#
+#
+DECAY 2000005 -1
+#
+#
+DECAY 1000006 -1
+#
+#
+DECAY 2000006 -1
+#
+#
+DECAY 1000011 -1
+#
+#
+DECAY 2000011 -1
+#
+#
+DECAY 1000012 -1
+#
+#
+DECAY 1000013 -1
+#
+#
+DECAY 2000013 -1
+#
+#
+DECAY 1000014 -1
+#
+#
+DECAY 1000015 -1
+#
+#
+DECAY 2000015 -1
+#
+#
+DECAY 1000016 -1
+#
+#
+DECAY 1000021 -1
+#
+#
+DECAY 1000022 -1
+#
+#
+DECAY 1000023 -1
+#
+#
+DECAY 1000025 -1
+#
+#
+DECAY 1000035 -1
+#
+#
+DECAY 1000024 -1
+#
+#
+DECAY 1000037 -1
+
+
+
+  Welcome to Resummino 3.1.1
+  Copyright 2008-2010 Jonathan Debove.
+  Copyright 2011-2014 David R. Lamprea.
+  Copyright 2011-2016 Marcel Rothering.
+
+  Licensed under the EUPL 1.1 or later.
+  See http://www.resummino.org/ for more information.
+
+  If using Resummino for slepton pair production, please cite.
+  - G. Bozzi, B. Fuks, M. Klasen, PRD 74, 015001 (2006); NPB 777, 157 (2007); NPB 794, 46 (2007).
+  - B. Fuks, M. Klasen, D. R. Lamprea, M. Rothering, EPJC 73, 2480 (2013).
+
+  For gaugino pair production, please cite:
+  - J. Debove, B. Fuks, M. Klasen, PLB 688, 208 (2010); NPB 842, 51 (2011); NPB 849, 64 (2011).
+  - B. Fuks, M. Klasen, D. R. Lamprea, M. Rothering, JHEP 1210, 081 (2012); EPJC 73, 2480 (2013).
+
+  For associated gaugino gluino production, please cite:
+  - B. Fuks, M. Klasen, M. Rothering, JHEP 07:053, (2016).
+  - B. Fuks, M. Klasen, D. R. Lamprea, M. Rothering, EPJC 73, 2480 (2013).
+
+LHAPDF 6.4.0 loading /home/a/a_neuw01/LHAPDF-6.4.0/share/LHAPDF/PDF4LHC21_40/PDF4LHC21_40_0000.dat
+PDF4LHC21_40 PDF set, member #0, version 1; LHAPDF ID = 93100
+ alpha_s(M_Z^2) = 0.1180 	 for LO PDF set 
+ alpha_s(1000.000^2) = 0.0868 	 for LO PDF set 
+
+********************
+* LO cross section *
+********************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+
+num_dim=3, calls=2000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        8.0626e-04   3.13e-05          8.0626e-04      3.13e-05    0.00e+00
+   2        8.7635e-04   1.05e-05          8.6923e-04      9.97e-06    4.51e+00
+   3        8.7911e-04   5.95e-06          8.7652e-04      5.11e-06    2.62e+00
+   4        8.7154e-04   5.64e-06          8.7427e-04      3.79e-06    1.89e+00
+   5        8.7284e-04   5.70e-06          8.7384e-04      3.15e-06    1.43e+00
+
+num_dim=3, calls=20000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        8.7953e-04   1.75e-06          8.7953e-04      1.75e-06    0.00e+00
+   2        8.7850e-04   1.70e-06          8.7900e-04      1.22e-06    1.79e-01
+   3        8.7853e-04   1.65e-06          8.7883e-04      9.81e-07    1.15e-01
+   4        8.7889e-04   1.75e-06          8.7885e-04      8.56e-07    7.68e-02
+   5        8.7616e-04   1.77e-06          8.7834e-04      7.70e-07    5.26e-01
+   5        8.7505e-04   1.76e-06          8.7781e-04      7.06e-07    1.00e+00
+   5        8.7690e-04   1.74e-06          8.7768e-04      6.54e-07    8.74e-01
+   5        8.7505e-04   1.80e-06          8.7737e-04      6.15e-07    1.02e+00
+   5        8.7695e-04   1.83e-06          8.7733e-04      5.83e-07    8.98e-01
+   5        8.7481e-04   1.86e-06          8.7710e-04      5.56e-07    9.85e-01
+   5        8.7774e-04   1.88e-06          8.7715e-04      5.33e-07    8.97e-01
+   5        8.7760e-04   1.93e-06          8.7719e-04      5.14e-07    8.20e-01
+   5        8.7900e-04   1.99e-06          8.7730e-04      4.98e-07    8.17e-01
+   5        8.7894e-04   2.09e-06          8.7739e-04      4.84e-07    7.99e-01
+   5        8.7942e-04   2.17e-06          8.7748e-04      4.72e-07    8.01e-01
+   5        8.7609e-04   2.24e-06          8.7742e-04      4.62e-07    7.73e-01
+   5        8.7505e-04   2.29e-06          8.7733e-04      4.53e-07    7.89e-01
+   5        8.7894e-04   2.37e-06          8.7739e-04      4.45e-07    7.68e-01
+   5        8.7962e-04   2.49e-06          8.7746e-04      4.38e-07    7.69e-01
+   5        8.7913e-04   2.54e-06          8.7751e-04      4.32e-07    7.51e-01
+   5        8.7319e-04   2.62e-06          8.7739e-04      4.26e-07    8.46e-01
+   5        8.7956e-04   2.72e-06          8.7744e-04      4.21e-07    8.35e-01
+   5        8.7851e-04   2.77e-06          8.7747e-04      4.16e-07    8.04e-01
+   5        8.7948e-04   2.82e-06          8.7751e-04      4.12e-07    7.90e-01
+   5        8.8014e-04   2.82e-06          8.7757e-04      4.07e-07    7.93e-01
+   5        8.7363e-04   2.76e-06          8.7748e-04      4.03e-07    8.40e-01
+   5        8.8200e-04   2.87e-06          8.7757e-04      3.99e-07    9.01e-01
+   5        8.7687e-04   2.89e-06          8.7756e-04      3.95e-07    8.70e-01
+   5        8.7798e-04   3.02e-06          8.7756e-04      3.92e-07    8.40e-01
+   5        8.7861e-04   2.93e-06          8.7758e-04      3.88e-07    8.15e-01
+   5        8.7707e-04   2.95e-06          8.7757e-04      3.85e-07    7.89e-01
+   5        8.7795e-04   3.05e-06          8.7758e-04      3.82e-07    7.64e-01
+   5        8.8077e-04   3.06e-06          8.7763e-04      3.79e-07    7.73e-01
+   5        8.7615e-04   3.10e-06          8.7761e-04      3.76e-07    7.57e-01
+   5        8.7207e-04   3.04e-06          8.7752e-04      3.73e-07    8.30e-01
+   5        8.8115e-04   3.13e-06          8.7757e-04      3.71e-07    8.44e-01
+   5        8.7191e-04   3.25e-06          8.7750e-04      3.68e-07    9.04e-01
+   5        8.7483e-04   3.34e-06          8.7747e-04      3.66e-07    8.97e-01
+   5        8.7812e-04   3.35e-06          8.7748e-04      3.64e-07    8.74e-01
+   5        8.7596e-04   3.34e-06          8.7746e-04      3.62e-07    8.57e-01
+   5        8.7693e-04   3.30e-06          8.7745e-04      3.60e-07    8.36e-01
+   5        8.7451e-04   3.35e-06          8.7742e-04      3.58e-07    8.34e-01
+   5        8.8644e-04   3.45e-06          8.7751e-04      3.56e-07    9.75e-01
+   5        8.7939e-04   3.18e-06          8.7754e-04      3.54e-07    9.61e-01
+   5        8.7226e-04   3.22e-06          8.7747e-04      3.52e-07    9.99e-01
+   5        8.7712e-04   3.23e-06          8.7747e-04      3.49e-07    9.77e-01
+   5        8.8143e-04   3.28e-06          8.7751e-04      3.47e-07    9.87e-01
+   5        8.7026e-04   3.30e-06          8.7743e-04      3.46e-07    1.07e+00
+   5        8.8401e-04   3.34e-06          8.7750e-04      3.44e-07    1.13e+00
+   5        8.8230e-04   3.45e-06          8.7755e-04      3.42e-07    1.14e+00
+   5        8.7686e-04   3.43e-06          8.7754e-04      3.40e-07    1.12e+00
+   5        8.7365e-04   3.47e-06          8.7751e-04      3.39e-07    1.12e+00
+   5        8.7837e-04   3.34e-06          8.7752e-04      3.37e-07    1.10e+00
+   5        8.8010e-04   3.38e-06          8.7754e-04      3.35e-07    1.09e+00
+   5        8.8064e-04   3.24e-06          8.7757e-04      3.34e-07    1.09e+00
+LO = (8.7757443e-04 +- 3.3355946e-07) pb
+LHAPDF 6.4.0 loading /home/a/a_neuw01/LHAPDF-6.4.0/share/LHAPDF/PDF4LHC21_40/PDF4LHC21_40_0017.dat
+PDF4LHC21_40 PDF set, member #17, version 1; LHAPDF ID = 93117
+ alpha_s(M_Z^2) = 0.1180 	 for NLO PDF set 
+ alpha_s(1000.000^2) = 0.0868 	 for NLO PDF set 
+
+********************
+* LO cross section *
+********************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+
+num_dim=3, calls=2000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        8.0535e-04   3.10e-05          8.0535e-04      3.10e-05    0.00e+00
+   2        8.7445e-04   1.05e-05          8.6738e-04      9.93e-06    4.45e+00
+   3        8.7698e-04   5.94e-06          8.7445e-04      5.10e-06    2.57e+00
+   4        8.6949e-04   5.64e-06          8.7222e-04      3.78e-06    1.85e+00
+   5        8.7070e-04   5.68e-06          8.7175e-04      3.15e-06    1.40e+00
+
+num_dim=3, calls=20000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        8.7750e-04   1.75e-06          8.7750e-04      1.75e-06    0.00e+00
+   2        8.7650e-04   1.69e-06          8.7698e-04      1.22e-06    1.70e-01
+   3        8.7650e-04   1.65e-06          8.7681e-04      9.79e-07    1.13e-01
+   4        8.7686e-04   1.75e-06          8.7682e-04      8.54e-07    7.54e-02
+   5        8.7419e-04   1.77e-06          8.7632e-04      7.69e-07    5.08e-01
+   5        8.7305e-04   1.76e-06          8.7580e-04      7.04e-07    9.90e-01
+   5        8.7489e-04   1.74e-06          8.7567e-04      6.53e-07    8.64e-01
+   5        8.7300e-04   1.79e-06          8.7536e-04      6.13e-07    1.02e+00
+   5        8.7497e-04   1.82e-06          8.7532e-04      5.81e-07    8.97e-01
+   5        8.7288e-04   1.85e-06          8.7510e-04      5.55e-07    9.72e-01
+   5        8.7574e-04   1.88e-06          8.7515e-04      5.32e-07    8.86e-01
+   5        8.7562e-04   1.92e-06          8.7518e-04      5.13e-07    8.10e-01
+   5        8.7699e-04   1.99e-06          8.7530e-04      4.96e-07    8.07e-01
+   5        8.7694e-04   2.08e-06          8.7539e-04      4.83e-07    7.91e-01
+   5        8.7740e-04   2.16e-06          8.7548e-04      4.71e-07    7.93e-01
+   5        8.7409e-04   2.23e-06          8.7542e-04      4.61e-07    7.65e-01
+   5        8.7303e-04   2.29e-06          8.7533e-04      4.52e-07    7.83e-01
+   5        8.7691e-04   2.36e-06          8.7538e-04      4.44e-07    7.62e-01
+   5        8.7757e-04   2.48e-06          8.7545e-04      4.37e-07    7.61e-01
+   5        8.7702e-04   2.53e-06          8.7550e-04      4.31e-07    7.41e-01
+   5        8.7120e-04   2.61e-06          8.7538e-04      4.25e-07    8.35e-01
+   5        8.7750e-04   2.71e-06          8.7543e-04      4.20e-07    8.24e-01
+   5        8.7648e-04   2.76e-06          8.7546e-04      4.15e-07    7.93e-01
+   5        8.7755e-04   2.82e-06          8.7550e-04      4.11e-07    7.82e-01
+   5        8.7806e-04   2.82e-06          8.7556e-04      4.06e-07    7.83e-01
+   5        8.7160e-04   2.76e-06          8.7547e-04      4.02e-07    8.32e-01
+   5        8.7999e-04   2.87e-06          8.7556e-04      3.98e-07    8.93e-01
+   5        8.7485e-04   2.89e-06          8.7554e-04      3.94e-07    8.62e-01
+   5        8.7593e-04   3.01e-06          8.7555e-04      3.91e-07    8.32e-01
+   5        8.7653e-04   2.93e-06          8.7557e-04      3.88e-07    8.07e-01
+   5        8.7503e-04   2.96e-06          8.7556e-04      3.84e-07    7.81e-01
+   5        8.7592e-04   3.05e-06          8.7557e-04      3.81e-07    7.57e-01
+   5        8.7877e-04   3.06e-06          8.7561e-04      3.78e-07    7.67e-01
+   5        8.7415e-04   3.10e-06          8.7559e-04      3.76e-07    7.50e-01
+   5        8.7007e-04   3.05e-06          8.7551e-04      3.73e-07    8.23e-01
+   5        8.7912e-04   3.14e-06          8.7556e-04      3.70e-07    8.37e-01
+   5        8.6987e-04   3.25e-06          8.7549e-04      3.68e-07    8.98e-01
+   5        8.7273e-04   3.34e-06          8.7545e-04      3.66e-07    8.92e-01
+   5        8.7604e-04   3.35e-06          8.7546e-04      3.63e-07    8.69e-01
+   5        8.7400e-04   3.34e-06          8.7544e-04      3.61e-07    8.52e-01
+   5        8.7484e-04   3.30e-06          8.7544e-04      3.59e-07    8.31e-01
+   5        8.7247e-04   3.35e-06          8.7540e-04      3.57e-07    8.30e-01
+   5        8.8450e-04   3.45e-06          8.7550e-04      3.55e-07    9.74e-01
+   5        8.7741e-04   3.18e-06          8.7552e-04      3.53e-07    9.59e-01
+   5        8.7038e-04   3.21e-06          8.7546e-04      3.51e-07    9.95e-01
+   5        8.7504e-04   3.23e-06          8.7546e-04      3.49e-07    9.73e-01
+   5        8.7940e-04   3.28e-06          8.7550e-04      3.47e-07    9.83e-01
+   5        8.6844e-04   3.29e-06          8.7542e-04      3.45e-07    1.06e+00
+   5        8.8186e-04   3.32e-06          8.7549e-04      3.43e-07    1.11e+00
+   5        8.8023e-04   3.44e-06          8.7554e-04      3.41e-07    1.13e+00
+   5        8.7490e-04   3.43e-06          8.7553e-04      3.40e-07    1.11e+00
+   5        8.7165e-04   3.47e-06          8.7549e-04      3.38e-07    1.11e+00
+   5        8.7637e-04   3.33e-06          8.7550e-04      3.36e-07    1.09e+00
+   5        8.7810e-04   3.36e-06          8.7553e-04      3.35e-07    1.08e+00
+   5        8.7851e-04   3.23e-06          8.7556e-04      3.33e-07    1.08e+00
+LO = (8.7556133e-04 +- 3.3287618e-07) pb
+
+*******************************************
+* virtual corrections + integrated dipole *
+*******************************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+
+num_dim=3, calls=240, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        3.0126e-05   3.47e-06          3.0126e-05      3.47e-06    0.00e+00
+   2        3.1554e-05   1.51e-06          3.1326e-05      1.39e-06    1.42e-01
+   3        3.2794e-05   9.74e-07          3.2309e-05      7.97e-07    4.46e-01
+   4        3.3169e-05   8.15e-07          3.2729e-05      5.70e-07    4.87e-01
+   5        3.3615e-05   7.79e-07          3.3038e-05      4.60e-07    5.76e-01
+
+num_dim=3, calls=1200, it_num=1, max_it_num=3 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        3.1427e-05   3.35e-07          3.1427e-05      3.35e-07    0.00e+00
+   2        3.2164e-05   2.87e-07          3.1853e-05      2.18e-07    2.80e+00
+   3        3.2005e-05   2.73e-07          3.1912e-05      1.70e-07    1.49e+00
+vNLO = (3.1911740e-05 +- 1.7018864e-07) pb
+
+*****************************
+* collinear remainder (P+K) *
+*****************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+xl[3]=0.000000    xu[3]=1.000000
+
+num_dim=4, calls=2500, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.2516e-04   8.96e-06          1.2516e-04      8.96e-06    0.00e+00
+   2        1.2542e-04   2.52e-06          1.2540e-04      2.43e-06    8.11e-04
+   3        1.1953e-04   1.91e-06          1.2177e-04      1.50e-06    1.81e+00
+   4        1.2289e-04   1.61e-06          1.2229e-04      1.10e-06    1.29e+00
+   5        1.2246e-04   1.59e-06          1.2234e-04      9.03e-07    9.73e-01
+
+num_dim=4, calls=25000, it_num=1, max_it_num=3 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.2057e-04   5.23e-07          1.2057e-04      5.23e-07    0.00e+00
+   2        1.2020e-04   5.32e-07          1.2038e-04      3.73e-07    2.46e-01
+   3        1.2002e-04   5.26e-07          1.2026e-04      3.04e-07    2.80e-01
+   3        1.2031e-04   5.25e-07          1.2027e-04      2.63e-07    1.88e-01
+   3        1.1964e-04   5.35e-07          1.2015e-04      2.36e-07    4.25e-01
+   3        1.1939e-04   5.31e-07          1.2002e-04      2.16e-07    6.88e-01
+P+K = (1.2002400e-04 +- 2.1580315e-07) pb
+
+********************************
+* real gluon emission - dipole *
+********************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+xl[3]=0.000000    xu[3]=1.000000
+xl[4]=0.000000    xu[4]=1.000000
+xl[5]=0.000000    xu[5]=1.000000
+
+num_dim=6, calls=250, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        -1.9909e-06   4.43e-07          -1.9909e-06      4.43e-07    0.00e+00
+   2        -2.2333e-06   4.22e-07          -2.1180e-06      3.05e-07    1.57e-01
+   3        -2.3480e-06   2.95e-07          -2.2370e-06      2.12e-07    2.25e-01
+   4        -2.5740e-06   3.86e-07          -2.3153e-06      1.86e-07    3.46e-01
+   5        -2.8765e-06   6.06e-07          -2.3635e-06      1.78e-07    4.55e-01
+
+num_dim=6, calls=2500, it_num=1, max_it_num=3 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        -2.5675e-06   1.77e-07          -2.5675e-06      1.77e-07    0.00e+00
+   2        -2.4062e-06   6.74e-08          -2.4265e-06      6.30e-08    7.22e-01
+   3        -2.3126e-06   3.25e-08          -2.3365e-06      2.89e-08    1.65e+00
+   3        -2.2730e-06   2.50e-08          -2.3001e-06      1.89e-08    2.02e+00
+   3        -2.2983e-06   2.18e-08          -2.2993e-06      1.43e-08    1.52e+00
+   3        -2.2955e-06   2.01e-08          -2.2980e-06      1.16e-08    1.22e+00
+rNLOg = (-2.2980406e-06 +- 1.1643278e-08) pb
+
+**************************************************
+* real light quark emission - dipole - (onshell) *
+**************************************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+xl[3]=0.000000    xu[3]=1.000000
+xl[4]=0.000000    xu[4]=1.000000
+xl[5]=0.000000    xu[5]=1.000000
+
+num_dim=6, calls=5000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        4.7610e-06   2.47e-07          4.7610e-06      2.47e-07    0.00e+00
+   2        4.7341e-06   9.03e-08          4.7372e-06      8.48e-08    1.05e-02
+   3        4.7057e-06   5.14e-08          4.7142e-06      4.40e-08    5.57e-02
+   4        4.7200e-06   3.34e-08          4.7179e-06      2.66e-08    4.08e-02
+   5        4.7206e-06   2.83e-08          4.7192e-06      1.94e-08    3.18e-02
+
+num_dim=6, calls=50000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        4.7164e-06   8.74e-09          4.7164e-06      8.74e-09    0.00e+00
+   2        4.7290e-06   1.05e-08          4.7215e-06      6.73e-09    8.56e-01
+   3        4.7366e-06   1.12e-08          4.7255e-06      5.77e-09    1.09e+00
+   4        4.7311e-06   9.44e-09          4.7270e-06      4.92e-09    8.12e-01
+   5        4.7329e-06   1.04e-08          4.7281e-06      4.45e-09    6.73e-01
+rNLOq = (4.7280979e-06 +- 4.4493428e-09) pb
+NLO = (1.0299271e-03 +- 4.3185308e-07) pb
+#chisq/dof = 2.31948e-09
+#status = success
+#chisq/dof = 1.37053e-09
+#status = success
+#chisq/dof = 7.20212e-10
+#status = success
+#chisq/dof = 1.11457e-09
+#status = success
+#chisq/dof = 1.87749e-10
+#status = success
+#chisq/dof = 2.85242e-12
+#status = success
+#chisq/dof = 3.3212e-10
+#status = success
+#chisq/dof = 9.58941e-11
+#status = success
+
+*******************************************************
+* threshold resummation (unimproved nnll) - expansion *
+*******************************************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+
+num_dim=3, calls=7000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.1236e-05   6.19e-07          1.1236e-05      6.19e-07    0.00e+00
+   2        1.0828e-05   3.57e-07          1.0930e-05      3.09e-07    3.25e-01
+   3        1.0630e-05   3.33e-07          1.0791e-05      2.27e-07    3.80e-01
+   4        1.1554e-05   3.32e-07          1.1033e-05      1.87e-07    1.45e+00
+   5        1.0439e-05   3.35e-07          1.0892e-05      1.64e-07    1.69e+00
+
+num_dim=3, calls=35000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.0935e-05   1.49e-07          1.0935e-05      1.49e-07    0.00e+00
+   2        1.0994e-05   1.49e-07          1.0964e-05      1.06e-07    7.63e-02
+   3        1.1045e-05   1.50e-07          1.0991e-05      8.63e-08    1.35e-01
+   4        1.0852e-05   1.50e-07          1.0957e-05      7.48e-08    3.05e-01
+   5        1.1122e-05   1.50e-07          1.0990e-05      6.69e-08    4.75e-01
+   5        1.1027e-05   1.48e-07          1.0996e-05      6.10e-08    3.90e-01
+   5        1.0997e-05   1.50e-07          1.0996e-05      5.65e-08    3.25e-01
+   5        1.1073e-05   1.50e-07          1.1006e-05      5.28e-08    3.12e-01
+   5        1.1070e-05   1.51e-07          1.1013e-05      4.99e-08    2.93e-01
+   5        1.0872e-05   1.50e-07          1.0999e-05      4.73e-08    3.48e-01
+   5        1.0973e-05   1.50e-07          1.0996e-05      4.51e-08    3.16e-01
+   5        1.1349e-05   1.50e-07          1.1026e-05      4.32e-08    7.48e-01
+aNNLO+NNLL = (1.0409528e-03 +- 4.3401073e-07) pb
+
+Results:
+LO = (8.7757443e-04 +- 3.3355946e-07) pb
+NLO = (1.0299271e-03 +- 4.3185308e-07) pb
+aNNLO+NNLL = (1.0409528e-03 +- 4.3401073e-07) pb
+Thanks for using LHAPDF 6.4.0. Please make sure to cite the paper:
+  Eur.Phys.J. C75 (2015) 3, 132  (http://arxiv.org/abs/1412.7420)
+ ====================================================
+   FF 2.0, a package to evaluate one-loop integrals
+ written by G. J. van Oldenborgh, NIKHEF-H, Amsterdam
+ ====================================================
+ for the algorithms used see preprint NIKHEF-H 89/17,
+ 'New Algorithms for One-loop Integrals', by G.J. van
+ Oldenborgh and J.A.M. Vermaseren, published in 
+ Zeitschrift fuer Physik C46(1990)425.
+ ====================================================
+ 
+total number of errors and warnings
+===================================
+fferr: no errors
+ 

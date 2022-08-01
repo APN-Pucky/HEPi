@@ -1,0 +1,2 @@
+#!/bin/sh
+~/git/resummino/build/bin/resummino output_13000_wino_1000023_1000024/d4cd3e92d569e8eda00b05e5b6cf4204a9f6c8db8862a0edcb31fbc87e162874.in --nnll >> output_13000_wino_1000023_1000024/d4cd3e92d569e8eda00b05e5b6cf4204a9f6c8db8862a0edcb31fbc87e162874.out
