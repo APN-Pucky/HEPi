@@ -5,9 +5,8 @@ from uncertainties import unumpy
 from smpl import plot
 import lhapdf
 import warnings
-
-required_numerical_uncertainty_factor = 10
-"""If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown."""
+"""If the numerical uncertainty times :attr:`required_numerical_uncertainty_factor` is higher than the scale or pdf uncertainty a warning is shown."""
+required_numerical_uncertainty_factor = 5
 
 
 class Result(DictData):
@@ -145,13 +144,13 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
             dl.loc[i, ordername + "_PDF_ERRMINUS"] = -nlo_unc.errminus
             dl.loc[i, ordername + "_PDF_ERRSYM"] = nlo_unc.errsymm
             #TODO error sym to minus and plus
-            #if ordername != "LO":
-            if (plot.usd(dl[ordername][i]) *
-                    required_numerical_uncertainty_factor >
-                    dl[ordername + "_PDF_ERRPLUS"][i]
-                    or plot.usd(dl[ordername][i]) *
-                    required_numerical_uncertainty_factor >
-                    -dl[ordername + "_PDF_ERRMINUS"][i]):
+            #if :
+            if (ordername != "LO" and (plot.usd(dl[ordername][i]) *
+                                       required_numerical_uncertainty_factor >
+                                       dl[ordername + "_PDF_ERRPLUS"][i]
+                                       or plot.usd(dl[ordername][i]) *
+                                       required_numerical_uncertainty_factor >
+                                       -dl[ordername + "_PDF_ERRMINUS"][i])):
                 rel = plot.unv(dl[ordername][i])
                 warnings.warn(
                     "too bad numerical precision vs pdf @ " + ordername +
