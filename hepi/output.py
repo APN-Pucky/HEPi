@@ -10,17 +10,60 @@ from smpl import io
 splot = plot
 
 
-def write_latex(dict_list, key, fname, scale=True, pdf=True, yscale=1.):
-    """
- Saves a `dict` of `list`s to `filename` as latex table.
- """
+def write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.):
     dl = dict_list
-    mask = dl["NLO_SCALE"] != np.array(None)
-    lo = splot.unv(dl["LO"][mask])
-    nlo = splot.unv(dl["NLO"][mask])
-    nlo_plus_nll = splot.unv(dl["NLO_PLUS_NLL"][mask])
+    mask = dl[t + "_SCALE"].notnull()
+    #lo = splot.unv(dl["LO"][mask])
+    #nlo = splot.unv(dl["NLO"][mask])
+    #nlo_plus_nll = splot.unv(dl["NLO_PLUS_NLL"][mask])
+    s = ""
+    mdl = dl[key][mask]
+    for i in range(len(dl[t][mask])):
+        s = s + "$" + io.gf(4).format(mdl.iloc[i] * yscale) + "$ \t&\t "
+
+    if s not in io.read(fname):
+        io.write(fname, s + "\\\\\n")
+
+
+def write_latex_table_transposed(dict_list,
+                                 t,
+                                 fname,
+                                 scale=True,
+                                 pdf=True,
+                                 yscale=1.):
+    dl = dict_list
+    mask = dl[t + "_SCALE"].notnull()
+    # NLO is a relict misnomer
+    nlo = splot.unv(dl[t][mask])
+    with open(fname, 'a') as f:
+        for i in range(len(dl[t][mask])):
+            f.write("${:.3f}".format(nlo[i] * yscale) + "^{+" +
+                    ("{:.1f}".format(dl[t + "_SCALE_ERRPLUS"][mask].iloc[i] /
+                                     nlo[i] * 100.) if scale else "") +
+                    ("\\%+" +
+                     "{:.1f}".format(dl[t + "_PDF_ERRPLUS"][mask].iloc[i] /
+                                     nlo[i] * 100.) if pdf else "") +
+                    ("\\%}_{" +
+                     "{:.1f}".format(dl[t + "_SCALE_ERRMINUS"][mask].iloc[i] /
+                                     nlo[i] * 100.) if scale else "") +
+                    ("\\%" +
+                     "{:.1f}".format(dl[t + "_PDF_ERRMINUS"][mask].iloc[i] /
+                                     nlo[i] * 100.) if pdf else "") +
+                    "\\%}$ \t&\t ")
+        f.write("\\\\\n")
+
+
+def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.):
+    """
+    Saves a `dict` of `list`s to `filename` as latex table.
+    """
+    dl = dict_list
+    mask = dl[t + "_SCALE"].notnull()
+    #lo = splot.unv(dl["LO"][mask])
+    #nlo = splot.unv(dl["NLO"][mask])
+    #nlo_plus_nll = splot.unv(dl["NLO_PLUS_NLL"][mask])
     with open(fname, 'w+') as f:
-        for i in range(len(dl["LO"][mask])):
+        for i in range(len(dl[t][mask])):
             f.write(
                 "$" + io.gf(4).format(dl[key][mask][i]) + "$ \t&\t $" +
                 "{:.3f}".format(lo[i] * yscale) + "^{+" +
