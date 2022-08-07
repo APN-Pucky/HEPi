@@ -225,25 +225,25 @@ def vplot(x,
         vx = x
         vy = y
 
-    
-    if data_color is None:
+    if data_color is None and 'next_color' not in kwargs:
         if 'axes' in kwargs and kwargs['axes'] is not None:
             bl, = kwargs['axes'].plot([], [])
         else:
             bl, = plt.gca().plot([], [])
         color = bl.get_color()
     iii = splot.data(vx,
-                            vy * yscale,
-                            label=label,
-                            xaxis=xaxis,
-                            yaxis=yaxis,
-                            logy=logy,
-                            data_color=color,
-                            also_data=plot_data,
-                            interpolate=interpolate,
-                            fmt=data_fmt,
-                            sigmas=0 if not fill else 1,
-                            **kwargs)
+                     vy * yscale,
+                     label=label,
+                     xaxis=xaxis,
+                     yaxis=yaxis,
+                     logy=logy,
+                     data_color=color,
+                     fit_color=color,
+                     also_data=plot_data,
+                     interpolate=interpolate,
+                     fmt=data_fmt,
+                     sigmas=0 if not fill else 1,
+                     **kwargs)
     if iii is not None:
         #ii = iii[0]
         ix = iii[1]
@@ -259,6 +259,7 @@ def vplot(x,
                    yaxis=yaxis,
                    logy=logy,
                    data_color=color,
+                   fit_color=color,
                    also_data=plot_data,
                    interpolate=interpolate,
                    interpolate_fmt=(0, (3, 1, 3, 1, 1, 1)),
@@ -320,8 +321,10 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
                  zaxis=zaxis,
                  **kwargs)
 
-map_vplot =  lambda *a,**da : splot.plot2d(*a,style="image",**da)
-scatter_vplot =  lambda *a,**da : splot.plot2d(*a,style="scatter",**da)
+
+map_vplot = lambda *a, **da: splot.plot2d(*a, style="image", **da)
+scatter_vplot = lambda *a, **da: splot.plot2d(*a, style="scatter", **da)
+
 
 def scatterplot(dict_list,
                 x,
