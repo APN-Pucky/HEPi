@@ -166,7 +166,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
         plot.unv(dl[ordername + "_PDF_CENTRAL"][mask]) +
         dl[ordername + "_PDF_ERRPLUS"][mask] / 2. +
         dl[ordername + "_PDF_ERRMINUS"][mask] / 2.,
-        (+dl[ordername + "_PDF_ERRPLUS"][mask] -
+        (dl[ordername + "_PDF_ERRPLUS"][mask] -
          dl[ordername + "_PDF_ERRMINUS"][mask]) / 2.)
 
     return dl

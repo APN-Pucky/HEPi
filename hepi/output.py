@@ -22,9 +22,10 @@ def write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.):
         s = s + "$" + io.gf(4).format(mdl.iloc[i] * yscale) + "$ \t&\t "
 
     if s not in io.read(fname):
-        io.write(fname, s + "\\\\\n")
+        io.write(fname, s + "\\\\\n", mode='a+')
 
 
+# TODO fix PDF scale brackets here for output
 def write_latex_table_transposed(dict_list,
                                  t,
                                  fname,
@@ -37,7 +38,7 @@ def write_latex_table_transposed(dict_list,
     nlo = splot.unv(dl[t][mask])
     with open(fname, 'a') as f:
         for i in range(len(dl[t][mask])):
-            f.write("${:.3f}".format(nlo[i] * yscale) + "^{+" +
+            f.write("${:.4g}".format(nlo[i] * yscale) + "^{+" +
                     ("{:.1f}".format(dl[t + "_SCALE_ERRPLUS"][mask].iloc[i] /
                                      nlo[i] * 100.) if scale else "") +
                     ("\\%+" +
