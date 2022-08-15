@@ -26,7 +26,7 @@ setuptools.setup(
         "scipy",
         "sympy",
         "scikit-learn",
-        "smpl==0.0.136",
+        "smpl==0.0.145",
         "pyslha",
         "enlighten",
         "particle",
