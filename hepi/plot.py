@@ -65,14 +65,17 @@ def mass_plot(dict_list,
               yaxis="$\\sigma$ [pb]",
               yscale=1.,
               label=None,
+              xaxis = None,
               **kwargs):
     dict_list["mass_" + str(part)] = get_mass(dict_list, abs(part))
+    if xaxis is None:
+        xaxis = "$m_{" + get_name(part) + "}$ [GeV]"
     plot(dict_list,
          "mass_" + str(part),
          y,
          label=label,
-         xaxis="$m_{" + get_name(part) + "}$ [GeV]",
          yaxis=yaxis,
+         xaxis=xaxis,
          logy=logy,
          yscale=yscale,
          **kwargs)
