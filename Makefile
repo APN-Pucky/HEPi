@@ -3,6 +3,8 @@ livehtml:
 
 html:
 	$(MAKE) -C docs html
+	
+doc: html
 
 install:
 	python3 -m pip install --user .[docs,dev]
