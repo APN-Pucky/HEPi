@@ -11,19 +11,9 @@ jobs:
     devel:
       runs-on: ubuntu-latest
       container:
-        image: apnpucky/ubuntu-pip-lhapdf
+        image: apnpucky/ubuntu-pip-lhapdf:20220905235333
       steps:
-        - name: work around permission issue
-          run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
-        - uses: actions/checkout@v3
+        - uses: APN-Pucky/make-python-action@main
           with:
-            fetch-depth: "0"
-        - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-        - name: Build 
-          run: make build
-        - name: Install 
-          run: make install
-        - name: Tests
-          run: make test
-        - name: Build Sphinx
-          run: make doc
+            test: true
+            doc: true
