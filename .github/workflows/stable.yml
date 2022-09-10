@@ -23,8 +23,7 @@ jobs:
         - name: Tests
           run: make test
         - name: Build Sphinx
-          working-directory: ./docs
-          run: make html
+          run: make doc
         - name: Report Coveralls
           uses: AndreMiras/coveralls-python-action@develop
         - name: Report Codacy
