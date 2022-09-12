@@ -80,7 +80,7 @@ class Runner:
         )  # TODO re add version, but removed for reusable hashing!
         name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
                                  for _ in d.items()).replace("/", "-"))
-        #print(name)
+        print(name)
         skip = False
         if skip_ and os.path.isfile(self.get_output_dir() + name +
                                     ".out") and self._is_valid(
