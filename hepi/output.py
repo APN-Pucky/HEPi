@@ -254,7 +254,11 @@ def write_json(dict_list: list,
     dat = {}
     for j in range(len(dict_list[parameter])):
         if error_asym:
-            raise ValueError("asymmetric errors not supported by write_json.")
+            dat[str(dict_list[parameter][j])] = {
+                "xsec_pb": float(plot.unv(dict_list[order_to_string(o) + "_NOERR"][j])),
+                "unc_up_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"][j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"][j]) + plot.usd(dict_list[order_to_string(o)+ "_COMBINED"][j])),
+                "unc_down_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"][j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"][j]) - plot.usd(dict_list[order_to_string(o)+ "_COMBINED"][j])),
+            }
         elif error_sym:
             dat[str(dict_list[parameter][j])] = {
                 "xsec_pb": float(plot.unv(dict_list[order_to_string(o)][j])),
