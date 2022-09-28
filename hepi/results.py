@@ -298,6 +298,6 @@ def combine_error(dl: dict, ordername="LO"):
         plot.unv(dl[ordername + ""][mask]) +
         dl[ordername + "_ERRPLUS"][mask] / 2. +
         dl[ordername + "_ERRMINUS"][mask] / 2.,
-        +dl[ordername + "_ERRPLUS"][mask] - dl[ordername + "_ERRMINUS"][mask])
+        (+dl[ordername + "_ERRPLUS"][mask] - dl[ordername + "_ERRMINUS"][mask]) /2.)
 
     return dl
