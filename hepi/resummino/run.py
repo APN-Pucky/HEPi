@@ -100,3 +100,4 @@ default_resummino_runner = ResumminoRunner("~/resummino/")
 run = default_resummino_runner.run
 set_path = default_resummino_runner.set_path
 get_path = default_resummino_runner.get_path
+get_version = default_resummino_runner.get_version

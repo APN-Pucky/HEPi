@@ -1,0 +1,2 @@
+#!/bin/sh
+~/git/resummino/build/bin/resummino test_output_13000_sleptons_1000011_-1000011_PDF4LHC21_mc/858976eb3525b317a61e12cb53ca03488a12248211273c00d675f9d105cb623d.in --nnll >> test_output_13000_sleptons_1000011_-1000011_PDF4LHC21_mc/858976eb3525b317a61e12cb53ca03488a12248211273c00d675f9d105cb623d.out
