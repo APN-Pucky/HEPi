@@ -109,14 +109,10 @@ def pdf_error_single(members, i, dl, ordername, confidence_level=90):
             i] == 1.0:
         pdfset = lhapdf.getPDFSet(dl["pdf_nlo"][i])
         pdfs = [0.0] * pdfset.size
+        ddl = dl[members].drop(columns=["pdfset_nlo", "precision","max_iters"])
+        bol = ddl.eq(ddl.iloc[i]).all(axis='columns')
         for j in range(len(dl["pdfset_nlo"])):
-            same = True
-            for s in members:
-                if not (
-                        dl[s][i] == dl[s][j]
-                ) and s != "pdfset_nlo" and s != "precision" and s != "max_iters":
-                    same = False
-            if same:
+            if bol[j]:
                 pdfs[dl["pdfset_nlo"][j]] = j
 
     # lo_unc = pdfset.uncertainty(
@@ -170,7 +166,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
         "confidence_level": confidence_level
     } for i in range(len(dl["pdfset_nlo"])) if dl["pdfset_nlo"][i] == 0
             and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0]
-    ret = ppqdm(args,
+    ret = tpqdm(args,
                 pdf_error_single,
                 n_jobs=mp.cpu_count(),
                 argument_type='kwargs',
@@ -221,14 +217,10 @@ def scale_error_single(members,i,dl,ordername="LO"):
     if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
         i] == 1.0:
         scales = []
+        ddl = dl[members].drop(columns=["mu_f","mu_r", "precision","max_iters"])
+        bol = ddl.eq(ddl.iloc[i]).all(axis='columns')
         for j in range(len(dl["pdfset_nlo"])):
-            same = True
-            for s in members:
-                if not (
-                        dl[s][i] == dl[s][j]
-                ) and s != "mu_f" and s != "mu_r" and s != "precision" and s != "max_iters":
-                    same = False
-            if same:
+            if bol[j]:
                 scales.append(j)
     # index, errplus,errminus
     return i,np.max( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i]),np.min( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i])
@@ -264,7 +256,7 @@ def scale_error(li, dl, ordername="LO"):
         "ordername": ordername,
     } for i in range(len(dl["pdfset_nlo"])) if dl["pdfset_nlo"][i] == 0
             and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0]
-    ret = ppqdm(args,
+    ret = tpqdm(args,
                 scale_error_single,
                 n_jobs=mp.cpu_count(),
                 argument_type='kwargs',
