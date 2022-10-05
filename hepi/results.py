@@ -5,6 +5,7 @@ from uncertainties import unumpy
 from smpl import plot
 import lhapdf
 import warnings
+import tqdm
 """If the numerical uncertainty times :attr:`required_numerical_uncertainty_factor` is higher than the scale or pdf uncertainty a warning is shown."""
 required_numerical_uncertainty_factor = 5
 
@@ -114,7 +115,8 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
     dl[ordername + "_PDF_ERRMINUS"] = np.array([None] * len(dl["pdfset_nlo"]))
     dl[ordername + "_PDF_ERRSYM"] = np.array([None] * len(dl["pdfset_nlo"]))
 
-    for i in range(len(dl["pdfset_nlo"])):
+    # parallelize
+    for i in tqdm.tqdm(range(len(dl["pdfset_nlo"])),desc="PDF uncertainty @ " + ordername):
         if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
                 i] == 1.0:
             pdfset = lhapdf.getPDFSet(dl["pdf_nlo"][i])
@@ -137,8 +139,9 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
         #    dl.loc[i, "LO_PDF_ERRMINUS"] = 0.0
         #    dl.loc[i, "LO_PDF_ERRSYM"] = 0.0
         #else:
+            #print([float(plot.unv(dl[ordername][k])) for k in pdfs])
             nlo_unc = pdfset.uncertainty(
-                [plot.unv(dl[ordername][k]) for k in pdfs], confidence_level)
+                [float(plot.unv(dl[ordername][k])) for k in pdfs], confidence_level)
             dl.loc[i, ordername + "_PDF_CENTRAL"] = nlo_unc.central
             dl.loc[i, ordername + "_PDF_ERRPLUS"] = nlo_unc.errplus
             dl.loc[i, ordername + "_PDF_ERRMINUS"] = -nlo_unc.errminus
@@ -206,7 +209,8 @@ def scale_error(li, dl, ordername="LO"):
     dl[ordername + "_SCALE_ERRMINUS"] = np.array([None] *
                                                  len(dl["pdfset_nlo"]))
 
-    for i in range(len(dl["pdfset_nlo"])):
+    # parallel?
+    for i in tqdm.tqdm(range(len(dl["pdfset_nlo"])),desc="scale uncertainty @ " + ordername):
         if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
                 i] == 1.0:
             scales = []
@@ -298,6 +302,7 @@ def combine_error(dl: dict, ordername="LO"):
         plot.unv(dl[ordername + ""][mask]) +
         dl[ordername + "_ERRPLUS"][mask] / 2. +
         dl[ordername + "_ERRMINUS"][mask] / 2.,
-        (+dl[ordername + "_ERRPLUS"][mask] - dl[ordername + "_ERRMINUS"][mask]) /2.)
+        (+dl[ordername + "_ERRPLUS"][mask] - dl[ordername + "_ERRMINUS"][mask])
+        / 2.)
 
     return dl
