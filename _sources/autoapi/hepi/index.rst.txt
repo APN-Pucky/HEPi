@@ -368,7 +368,7 @@ Attributes
 
 .. py:class:: DictData
 
-   .. py:method:: __str__(self)
+   .. py:method:: __str__()
 
       Returns attributes as dict as string
 
@@ -563,22 +563,22 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino(self) -> bool
+   .. py:method:: has_gluino() -> bool
 
 
-   .. py:method:: has_neutralino(self) -> bool
+   .. py:method:: has_neutralino() -> bool
 
 
-   .. py:method:: has_charginos(self) -> bool
+   .. py:method:: has_charginos() -> bool
 
 
-   .. py:method:: has_weakino(self) -> bool
+   .. py:method:: has_weakino() -> bool
 
 
-   .. py:method:: has_squark(self) -> bool
+   .. py:method:: has_squark() -> bool
 
 
-   .. py:method:: has_slepton(self) -> bool
+   .. py:method:: has_slepton() -> bool
 
 
 
@@ -859,7 +859,7 @@ Attributes
 
 .. py:class:: DictData
 
-   .. py:method:: __str__(self)
+   .. py:method:: __str__()
 
       Returns attributes as dict as string
 
@@ -1027,7 +1027,7 @@ Attributes
 
 .. py:class:: DictData
 
-   .. py:method:: __str__(self)
+   .. py:method:: __str__()
 
       Returns attributes as dict as string
 
@@ -1205,22 +1205,22 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino(self) -> bool
+   .. py:method:: has_gluino() -> bool
 
 
-   .. py:method:: has_neutralino(self) -> bool
+   .. py:method:: has_neutralino() -> bool
 
 
-   .. py:method:: has_charginos(self) -> bool
+   .. py:method:: has_charginos() -> bool
 
 
-   .. py:method:: has_weakino(self) -> bool
+   .. py:method:: has_weakino() -> bool
 
 
-   .. py:method:: has_squark(self) -> bool
+   .. py:method:: has_squark() -> bool
 
 
-   .. py:method:: has_slepton(self) -> bool
+   .. py:method:: has_slepton() -> bool
 
 
 
@@ -1451,22 +1451,22 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino(self) -> bool
+   .. py:method:: has_gluino() -> bool
 
 
-   .. py:method:: has_neutralino(self) -> bool
+   .. py:method:: has_neutralino() -> bool
 
 
-   .. py:method:: has_charginos(self) -> bool
+   .. py:method:: has_charginos() -> bool
 
 
-   .. py:method:: has_weakino(self) -> bool
+   .. py:method:: has_weakino() -> bool
 
 
-   .. py:method:: has_squark(self) -> bool
+   .. py:method:: has_squark() -> bool
 
 
-   .. py:method:: has_slepton(self) -> bool
+   .. py:method:: has_slepton() -> bool
 
 
 
@@ -1593,7 +1593,7 @@ Attributes
 
 .. py:class:: DictData
 
-   .. py:method:: __str__(self)
+   .. py:method:: __str__()
 
       Returns attributes as dict as string
 
@@ -1629,37 +1629,37 @@ Attributes
 
 .. py:class:: Runner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
 
-   .. py:method:: orders(self) -> List[hepi.input.Order]
+   .. py:method:: orders() -> List[hepi.input.Order]
 
       List of supported Orders in this runner.
 
 
-   .. py:method:: get_name(self) -> str
+   .. py:method:: get_name() -> str
 
       Returns the name of the runner.
 
 
-   .. py:method:: get_version(self) -> str
+   .. py:method:: get_version() -> str
 
 
-   .. py:method:: _sub_run(self, coms: List[str]) -> str
+   .. py:method:: _sub_run(coms: List[str]) -> str
 
 
-   .. py:method:: _check_path(self) -> bool
+   .. py:method:: _check_path() -> bool
 
       Checks if the passed path is valid.
 
 
-   .. py:method:: _prepare(self, p: hepi.input.Input, **kwargs) -> RunParam
+   .. py:method:: _prepare(p: hepi.input.Input, **kwargs) -> RunParam
 
 
-   .. py:method:: _check_input(self, param: hepi.input.Input, **kwargs) -> bool
+   .. py:method:: _check_input(param: hepi.input.Input, **kwargs) -> bool
 
 
-   .. py:method:: _prepare_all(self, params: List[hepi.input.Input], skip=True, **kwargs) -> List[RunParam]
+   .. py:method:: _prepare_all(params: List[hepi.input.Input], skip=True, **kwargs) -> List[RunParam]
 
 
-   .. py:method:: run(self, params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, **kwargs)
+   .. py:method:: run(params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, **kwargs)
 
           Run the passed list of parameters.
 
@@ -1679,7 +1679,7 @@ Attributes
 
 
 
-   .. py:method:: _run(self, rps: List[RunParam], wait=True, parallel=True, sleep=0, **kwargs)
+   .. py:method:: _run(rps: List[RunParam], wait=True, parallel=True, sleep=0, **kwargs)
 
       Runs Runner per :class:`RunParams`.
 
@@ -1698,7 +1698,7 @@ Attributes
       :rtype: :obj:`list` of int
 
 
-   .. py:method:: _is_valid(self, file: str, p: hepi.input.Input, d, **kwargs) -> bool
+   .. py:method:: _is_valid(file: str, p: hepi.input.Input, d, **kwargs) -> bool
 
       Verifies that a file is a complete output.
 
@@ -1713,7 +1713,7 @@ Attributes
       :rtype: bool
 
 
-   .. py:method:: parse(self, outputs: List[str]) -> List[hepi.results.Result]
+   .. py:method:: parse(outputs: List[str]) -> List[hepi.results.Result]
 
       Parses Resummino output files and returns List of Results.
 
@@ -1723,7 +1723,7 @@ Attributes
       :returns: :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
 
 
-   .. py:method:: _parse_file(self, file: str) -> hepi.results.Result
+   .. py:method:: _parse_file(file: str) -> hepi.results.Result
 
       Extracts results from an output file.
 
@@ -1734,7 +1734,7 @@ Attributes
       :rtype: :class:`Result`
 
 
-   .. py:method:: get_path(self) -> str
+   .. py:method:: get_path() -> str
 
       Get the Runner path.
 
@@ -1742,7 +1742,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: get_input_dir(self) -> str
+   .. py:method:: get_input_dir() -> str
 
       Get the input directory.
 
@@ -1750,7 +1750,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: get_output_dir(self) -> str
+   .. py:method:: get_output_dir() -> str
 
       Get the input directory.
 
@@ -1758,7 +1758,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: get_pre(self) -> str
+   .. py:method:: get_pre() -> str
 
       Gets the command prefix.
 
@@ -1766,7 +1766,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: set_path(self, p: str)
+   .. py:method:: set_path(p: str)
 
       Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
 
@@ -1774,7 +1774,7 @@ Attributes
       :type p: str
 
 
-   .. py:method:: set_input_dir(self, indir: str)
+   .. py:method:: set_input_dir(indir: str)
 
       Sets the input directory.
 
@@ -1782,7 +1782,7 @@ Attributes
       :type indir: str
 
 
-   .. py:method:: set_output_dir(self, outdir: str, create: bool = True)
+   .. py:method:: set_output_dir(outdir: str, create: bool = True)
 
       Sets the output directory.
 
@@ -1791,7 +1791,7 @@ Attributes
       :type outdir: str
 
 
-   .. py:method:: set_pre(self, ppre: str)
+   .. py:method:: set_pre(ppre: str)
 
       Sets the command prefix.
 
@@ -1855,22 +1855,22 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino(self) -> bool
+   .. py:method:: has_gluino() -> bool
 
 
-   .. py:method:: has_neutralino(self) -> bool
+   .. py:method:: has_neutralino() -> bool
 
 
-   .. py:method:: has_charginos(self) -> bool
+   .. py:method:: has_charginos() -> bool
 
 
-   .. py:method:: has_weakino(self) -> bool
+   .. py:method:: has_weakino() -> bool
 
 
-   .. py:method:: has_squark(self) -> bool
+   .. py:method:: has_squark() -> bool
 
 
-   .. py:method:: has_slepton(self) -> bool
+   .. py:method:: has_slepton() -> bool
 
 
 

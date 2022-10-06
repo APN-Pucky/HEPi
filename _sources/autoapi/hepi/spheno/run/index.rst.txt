@@ -32,12 +32,12 @@ Attributes
 
    Bases: :py:obj:`hepi.run.Runner`
 
-   .. py:method:: _check_path(self) -> bool
+   .. py:method:: _check_path() -> bool
 
       Checks if the passed path is valid.
 
 
-   .. py:method:: run(self, slhas: List[hepi.input.Input], **kwargs) -> List[hepi.input.Input]
+   .. py:method:: run(slhas: List[hepi.input.Input], **kwargs) -> List[hepi.input.Input]
 
       Run the passed list of parameters for SPheno.
 
