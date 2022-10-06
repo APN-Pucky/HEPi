@@ -31,7 +31,7 @@ setuptools.setup(
         "enlighten",
         "particle",
         "pqdm",
-        #"lhapdf>=6.0.0",
+        "lhapdf>=6.3.0",
         "pandas>=1.0.0",
         "tqdm",
     ],
