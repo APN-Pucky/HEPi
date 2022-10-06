@@ -228,7 +228,11 @@ def scale_error_single(members,i,dl,ordername="LO"):
             if bol[j]:
                 scales.append(j)
     # index, errplus,errminus
-    return i,np.max( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i]),np.min( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i])
+    return (
+        i,
+        np.max( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i]),
+        np.min( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i])
+    )
 
 def scale_error(li, dl, ordername="LO"):
     """
@@ -267,25 +271,25 @@ def scale_error(li, dl, ordername="LO"):
                 argument_type='kwargs',
                 desc="Scale uncertainty @ " + ordername)
     for i,errplus,errminus in ret:
-            # lo_unc = pdfset.uncertainty(
-            #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
-            dl.loc[i, ordername + "_SCALE_ERRPLUS"] = errplus
-            dl.loc[i, ordername + "_SCALE_ERRMINUS"] = errminus
-            if (plot.usd(dl[ordername][i]) *
-                    required_numerical_uncertainty_factor >
-                    dl[ordername + "_SCALE_ERRPLUS"][i]
-                    or plot.usd(dl[ordername][i]) *
-                    required_numerical_uncertainty_factor >
-                    -dl[ordername + "_SCALE_ERRMINUS"][i]):
-                rel = plot.unv(dl[ordername][i])
-                warnings.warn(
-                    "too bad numerical precision vs scale @ num:" + ordername +
-                    " " + str(plot.usd(dl[ordername][i]) / rel * 100.) +
-                    "% vs scale:" +
-                    str(dl[ordername + "_SCALE_ERRPLUS"][i] / rel * 100.) +
-                    "% to " +
-                    str(dl[ordername + "_SCALE_ERRMINUS"][i] / rel * 100.) +
-                    "%", RuntimeWarning)
+        # lo_unc = pdfset.uncertainty(
+        #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
+        dl.loc[i, ordername + "_SCALE_ERRPLUS"] = errplus
+        dl.loc[i, ordername + "_SCALE_ERRMINUS"] = errminus
+        if (plot.usd(dl[ordername][i]) *
+                required_numerical_uncertainty_factor >
+                dl[ordername + "_SCALE_ERRPLUS"][i]
+                or plot.usd(dl[ordername][i]) *
+                required_numerical_uncertainty_factor >
+                -dl[ordername + "_SCALE_ERRMINUS"][i]):
+            rel = plot.unv(dl[ordername][i])
+            warnings.warn(
+                "too bad numerical precision vs scale @ num:" + ordername +
+                " " + str(plot.usd(dl[ordername][i]) / rel * 100.) +
+                "% vs scale:" +
+                str(dl[ordername + "_SCALE_ERRPLUS"][i] / rel * 100.) +
+                "% to " +
+                str(dl[ordername + "_SCALE_ERRMINUS"][i] / rel * 100.) +
+                "%", RuntimeWarning)
 
     mask = dl[ordername + "_SCALE_ERRPLUS"].notnull()
     dl.loc[mask, ordername + "_SCALE"] = unumpy.uarray(
