@@ -593,7 +593,7 @@ def slha_scan_rel(l: List[Input], lambdas, rrange: List) -> List[Input]:
             for b, v, res in ls:
                 d.blocks[b][v] = res
                 setattr(tmp, b + "_" + str(v), res)
-                newname = newname + "_" + str(b) + "_" + str(v) + "_" + str(
+                newname = newname + "_" + str(b) + "_" + str(v).replace(" ","") + "_" + str(
                     res)
             #pyslha.write(get_output_dir()+newname, d)
             slha_write(newname, d)
