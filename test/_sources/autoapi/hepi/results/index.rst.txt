@@ -26,9 +26,12 @@ Functions
 
 .. autoapisummary::
 
+   hepi.results.my_parallel
    hepi.results.pdf_errors
+   hepi.results.pdf_error_single
    hepi.results.pdf_error
    hepi.results.scale_errors
+   hepi.results.scale_error_single
    hepi.results.scale_error
    hepi.results.combine_errors
    hepi.results.combine_error
@@ -44,9 +47,14 @@ Attributes
 
 
 .. py:data:: required_numerical_uncertainty_factor
-   :annotation: = 10
+   :annotation: = 5
 
-   If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.
+   
+
+.. py:function:: my_parallel(arr, f, n_jobs=None, desc=None)
+
+   Parallel execution of f on each element of args
+
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
@@ -86,9 +94,12 @@ Attributes
    :type annlo_plus_nnll: :obj:`double`
 
 
-.. py:function:: pdf_errors(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'], confidence_level=90)
+.. py:function:: pdf_errors(li, dl, ordernames=None, confidence_level=90)
 
    Just like `pdf_error` but over a list of ordernames.
+
+
+.. py:function:: pdf_error_single(members, i, dl, ordername, confidence_level=90)
 
 
 .. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90)
@@ -111,9 +122,12 @@ Attributes
    :rtype: :obj:`dict`
 
 
-.. py:function:: scale_errors(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])
+.. py:function:: scale_errors(li, dl, ordernames=None)
 
    Just like `scale_error` but over a list of ordernames.
+
+
+.. py:function:: scale_error_single(members, i, dl, ordername='LO')
 
 
 .. py:function:: scale_error(li, dl, ordername='LO')
@@ -132,7 +146,7 @@ Attributes
    :rtype: :obj:`dict`
 
 
-.. py:function:: combine_errors(dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])
+.. py:function:: combine_errors(dl, ordernames=None)
 
    Just like `combine_error` but over a list of ordernames.
 

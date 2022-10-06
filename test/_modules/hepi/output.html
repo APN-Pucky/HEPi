@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.13-67-g08700953
+                0.2.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -108,17 +108,61 @@ from smpl import io
 <div class="viewcode-block" id="splot"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.splot">[docs]</a>splot = plot</div>
 
 
-<div class="viewcode-block" id="write_latex"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex">[docs]</a>def write_latex(dict_list, key, fname, scale=True, pdf=True, yscale=1.):
-    &quot;&quot;&quot;
- Saves a `dict` of `list`s to `filename` as latex table.
- &quot;&quot;&quot;
+<div class="viewcode-block" id="write_latex_table_transposed_header"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex_table_transposed_header">[docs]</a>def write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.):
     dl = dict_list
-    mask = dl[&quot;NLO_SCALE&quot;] != np.array(None)
-    lo = splot.unv(dl[&quot;LO&quot;][mask])
-    nlo = splot.unv(dl[&quot;NLO&quot;][mask])
-    nlo_plus_nll = splot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])
+    mask = dl[t + &quot;_SCALE&quot;].notnull()
+    #lo = splot.unv(dl[&quot;LO&quot;][mask])
+    #nlo = splot.unv(dl[&quot;NLO&quot;][mask])
+    #nlo_plus_nll = splot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])
+    s = &quot;&quot;
+    mdl = dl[key][mask]
+    for i in range(len(dl[t][mask])):
+        s = s + &quot;$&quot; + io.gf(4).format(mdl.iloc[i] * yscale) + &quot;$ \t&amp;\t &quot;
+
+    if s not in io.read(fname):
+        io.write(fname, s + &quot;\\\\\n&quot;, mode=&#39;a+&#39;)</div>
+
+
+# TODO fix PDF scale brackets here for output
+<div class="viewcode-block" id="write_latex_table_transposed"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex_table_transposed">[docs]</a>def write_latex_table_transposed(dict_list,
+                                 t,
+                                 fname,
+                                 scale=True,
+                                 pdf=True,
+                                 yscale=1.):
+    dl = dict_list
+    mask = dl[t + &quot;_SCALE&quot;].notnull()
+    # NLO is a relict misnomer
+    nlo = splot.unv(dl[t][mask])
+    with open(fname, &#39;a&#39;) as f:
+        for i in range(len(dl[t][mask])):
+            f.write(&quot;${:.4g}&quot;.format(nlo[i] * yscale) + &quot;^{+&quot; +
+                    (&quot;{:.1f}&quot;.format(dl[t + &quot;_SCALE_ERRPLUS&quot;][mask].iloc[i] /
+                                     nlo[i] * 100.) if scale else &quot;&quot;) +
+                    (&quot;\\%+&quot; +
+                     &quot;{:.1f}&quot;.format(dl[t + &quot;_PDF_ERRPLUS&quot;][mask].iloc[i] /
+                                     nlo[i] * 100.) if pdf else &quot;&quot;) +
+                    (&quot;\\%}_{&quot; +
+                     &quot;{:.1f}&quot;.format(dl[t + &quot;_SCALE_ERRMINUS&quot;][mask].iloc[i] /
+                                     nlo[i] * 100.) if scale else &quot;&quot;) +
+                    (&quot;\\%&quot; +
+                     &quot;{:.1f}&quot;.format(dl[t + &quot;_PDF_ERRMINUS&quot;][mask].iloc[i] /
+                                     nlo[i] * 100.) if pdf else &quot;&quot;) +
+                    &quot;\\%}$ \t&amp;\t &quot;)
+        f.write(&quot;\\\\\n&quot;)</div>
+
+
+<div class="viewcode-block" id="write_latex"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex">[docs]</a>def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.):
+    &quot;&quot;&quot;
+    Saves a `dict` of `list`s to `filename` as latex table.
+    &quot;&quot;&quot;
+    dl = dict_list
+    mask = dl[t + &quot;_SCALE&quot;].notnull()
+    #lo = splot.unv(dl[&quot;LO&quot;][mask])
+    #nlo = splot.unv(dl[&quot;NLO&quot;][mask])
+    #nlo_plus_nll = splot.unv(dl[&quot;NLO_PLUS_NLL&quot;][mask])
     with open(fname, &#39;w+&#39;) as f:
-        for i in range(len(dl[&quot;LO&quot;][mask])):
+        for i in range(len(dl[t][mask])):
             f.write(
                 &quot;$&quot; + io.gf(4).format(dl[key][mask][i]) + &quot;$ \t&amp;\t $&quot; +
                 &quot;{:.3f}&quot;.format(lo[i] * yscale) + &quot;^{+&quot; +
@@ -308,7 +352,11 @@ from smpl import io
     dat = {}
     for j in range(len(dict_list[parameter])):
         if error_asym:
-            raise ValueError(&quot;asymmetric errors not supported by write_json.&quot;)
+            dat[str(dict_list[parameter][j])] = {
+                &quot;xsec_pb&quot;: float(plot.unv(dict_list[order_to_string(o) + &quot;_NOERR&quot;][j])),
+                &quot;unc_up_pb&quot;: float(plot.unv(dict_list[order_to_string(o)+ &quot;_COMBINED&quot;][j])-plot.unv(dict_list[order_to_string(o) + &quot;_NOERR&quot;][j]) + plot.usd(dict_list[order_to_string(o)+ &quot;_COMBINED&quot;][j])),
+                &quot;unc_down_pb&quot;: float(plot.unv(dict_list[order_to_string(o)+ &quot;_COMBINED&quot;][j])-plot.unv(dict_list[order_to_string(o) + &quot;_NOERR&quot;][j]) - plot.usd(dict_list[order_to_string(o)+ &quot;_COMBINED&quot;][j])),
+            }
         elif error_sym:
             dat[str(dict_list[parameter][j])] = {
                 &quot;xsec_pb&quot;: float(plot.unv(dict_list[order_to_string(o)][j])),

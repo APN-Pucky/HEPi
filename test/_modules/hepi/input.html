@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.13-67-g08700953
+                0.2.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -379,19 +379,17 @@ import lhapdf
                 abs(b.blocks[&quot;MASS&quot;][abs(i.particle2)])) / 2.
     except Exception:
         warnings.warn(&quot;Could not set new central scale to average of masses.&quot;,
-                      RuntimeWarning)
-        pass</div>
+                      RuntimeWarning)</div>
 
-
-<div class="viewcode-block" id="scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan">[docs]</a>def scan(l: List[Input], var: str, rrange: Iterable) -&gt; List[Input]:
+<div class="viewcode-block" id="scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan">[docs]</a>def scan(input_list: List[Input], var: str, rrange: Iterable) -&gt; List[Input]:
     &quot;&quot;&quot;
-    Scans a variable `var` over `rrange` in `l`.
+    Scans a variable `var` over `rrange` in `input_list`.
 
     Note:
         This function does not ensure that dependent vairables are updated (see `energyhalf` in Examples).
 
     Args:
-        l (:obj:`list` of :class:`Input`): Input parameters that get scanned each.
+        input_list (:obj:`list` of :class:`Input`): Input parameters that get scanned each.
         var (str): Scan variable name.
         rrange (Iterable): Range of `var` to be scanned.
 
@@ -420,7 +418,7 @@ import lhapdf
  
     &quot;&quot;&quot;
     ret = []
-    for s in l:
+    for s in input_list:
         for r in rrange:
             tmp = copy.copy(s)
             setattr(tmp, var, r)
@@ -509,7 +507,7 @@ import lhapdf
 <div class="viewcode-block" id="scale_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scale_scan">[docs]</a>scale_scan = scan_scale</div>
 
 
-<div class="viewcode-block" id="scan_seven_point"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_seven_point">[docs]</a>def scan_seven_point(l: List[Input]):
+<div class="viewcode-block" id="scan_seven_point"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_seven_point">[docs]</a>def scan_seven_point(input_list: List[Input]):
     &quot;&quot;&quot;
     Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
 
@@ -528,7 +526,7 @@ import lhapdf
     rrange = 3
     distance = 2.
     ret = []
-    for s in l:
+    for s in input_list:
         # not on error pdfs
         if s.pdfset_nlo == 0 and s.mu_f == 1.0 and s.mu_r == 1.0:
             tmp = scan([s], &quot;mu_f&quot;,
@@ -552,9 +550,49 @@ import lhapdf
 <div class="viewcode-block" id="seven_point_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.seven_point_scan">[docs]</a>seven_point_scan = scan_seven_point</div>
 
 
-<div class="viewcode-block" id="change_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.change_where">[docs]</a>def change_where(l: List[Input], dicts: dict, **kwargs):
+<div class="viewcode-block" id="keep_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.keep_where">[docs]</a>def keep_where(input_list: List[Input], condition):
     &quot;&quot;&quot;
-    Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
+    Only keep the inputs where the condition is true.
+
+    Inversion of the `remove_where` function.
+
+    Parameters
+    ----------
+    input_list : List[Input]
+        The list of inputs to filter.
+    condition : Callable[[Input.__dict__], bool]
+        The condition to filter on.
+    &quot;&quot;&quot;
+    return remove_where(input_list, lambda x: not condition(x))</div>
+
+
+<div class="viewcode-block" id="remove_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.remove_where">[docs]</a>def remove_where(input_list: List[Input], condition, **kwargs):
+    &quot;&quot;&quot;
+    Remove elements in list which satisfy condition.
+
+    Parameters
+    ----------
+    input_list : List[Input]
+        The list of inputs to filter.
+    condition : Callable[[Input.__dict__], bool]
+        The condition to filter on.
+
+    Examples:
+        &gt;&gt;&gt; li = scan_multi([Input(Order.LO, 13000,  1000022,1000022, &quot;None&quot;, &quot;CT14lo&quot;,&quot;CT14lo&quot;,update=False)],energy=range(10000,13000,1000))
+        &gt;&gt;&gt; for e in remove_where(li,lambda dict : (dict[&quot;energy&quot;] == 10000 or dict[&quot;energy&quot;] == 11000)):
+        ...     print(e)
+        {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model&#39;: &#39;&#39;, &#39;mu&#39;: 0.0}
+    &quot;&quot;&quot;
+    nl = []
+    for e in input_list:
+        if not condition(e.__dict__):
+            nl.append(e)
+    return nl</div>
+
+
+<div class="viewcode-block" id="change_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.change_where">[docs]</a>def change_where(input_list: List[Input], dicts: dict, **kwargs):
+    &quot;&quot;&quot;
+    Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `input_list`.
 
     The changes only applied to the matching list members.
 
@@ -574,7 +612,7 @@ import lhapdf
         {&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 11000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 2, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model&#39;: &#39;&#39;, &#39;mu&#39;: 0.0}
     &quot;&quot;&quot;
     ret = []
-    for s in l:
+    for s in input_list:
         ok = True
         for k, v in kwargs.items():
             if getattr(s, k) != v:
@@ -590,12 +628,12 @@ import lhapdf
     return ret</div>
 
 
-<div class="viewcode-block" id="scan_invariant_mass"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_invariant_mass">[docs]</a>def scan_invariant_mass(l: List[Input], diff, points, low=0.001):
+<div class="viewcode-block" id="scan_invariant_mass"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_invariant_mass">[docs]</a>def scan_invariant_mass(input_list: List[Input], diff, points, low=0.001):
     &quot;&quot;&quot;
     Logarithmic `invariant_mass` scan close to the production threshold.
     &quot;&quot;&quot;
     ret = []
-    for s in l:
+    for s in input_list:
         for r in s.mu * 2. + low + (np.logspace(
                 np.log10(low), np.log10(1 + low), points) - low) * diff:
             tmp = copy.copy(s)
@@ -619,19 +657,19 @@ import lhapdf
         writer.truncate()</div>
 
 
-<div class="viewcode-block" id="masses_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.masses_scan">[docs]</a>def masses_scan(l: List[Input],
+<div class="viewcode-block" id="masses_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.masses_scan">[docs]</a>def masses_scan(input_list: List[Input],
                 varis: List[int],
                 rrange,
                 diff_L_R=None,
                 negate=None) -&gt; List[Input]:
     &quot;&quot;&quot;
-    Scans the PDG identified masses in `varis` over `rrange` in the list `l`.
+    Scans the PDG identified masses in `varis` over `rrange` in the list `input_list`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
     &quot;&quot;&quot;
     if negate is None:
         negate = []
     ret = []
-    for s in l:
+    for s in input_list:
         for r in rrange:
             d = None
             try:
@@ -658,27 +696,27 @@ import lhapdf
     return ret</div>
 
 
-<div class="viewcode-block" id="mass_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.mass_scan">[docs]</a>def mass_scan(l: List[Input], var: int, rrange, diff_L_R=None) -&gt; List[Input]:
+<div class="viewcode-block" id="mass_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.mass_scan">[docs]</a>def mass_scan(input_list: List[Input], var: int, rrange, diff_L_R=None) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scans the PDG identified mass `var` over `rrange` in the list `l`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
     &quot;&quot;&quot;
-    return masses_scan(l, [var], rrange, diff_L_R)</div>
+    return masses_scan(input_list, [var], rrange, diff_L_R)</div>
 
 
-<div class="viewcode-block" id="slha_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan">[docs]</a>def slha_scan(l: List[Input], block, var, rrange: List) -&gt; List[Input]:
+<div class="viewcode-block" id="slha_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan">[docs]</a>def slha_scan(input_list: List[Input], block, var, rrange: List) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scan a generic
     &quot;&quot;&quot;
-    return slha_scan_rel(l, lambda r, : [(block, var, r)], rrange)</div>
+    return slha_scan_rel(input_list, lambda r, : [(block, var, r)], rrange)</div>
 
 
-<div class="viewcode-block" id="slha_scan_rel"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan_rel">[docs]</a>def slha_scan_rel(l: List[Input], lambdas, rrange: List) -&gt; List[Input]:
+<div class="viewcode-block" id="slha_scan_rel"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan_rel">[docs]</a>def slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scan a generic slha variable.
     &quot;&quot;&quot;
     ret = []
-    for s in l:
+    for s in input_list:
         for r in rrange:
             d = None
             tmp = copy.copy(s)
@@ -691,7 +729,7 @@ import lhapdf
             for b, v, res in ls:
                 d.blocks[b][v] = res
                 setattr(tmp, b + &quot;_&quot; + str(v), res)
-                newname = newname + &quot;_&quot; + str(b) + &quot;_&quot; + str(v) + &quot;_&quot; + str(
+                newname = newname + &quot;_&quot; + str(b) + &quot;_&quot; + str(v).replace(&quot; &quot;,&quot;&quot;) + &quot;_&quot; + str(
                     res)
             #pyslha.write(get_output_dir()+newname, d)
             slha_write(newname, d)
@@ -702,7 +740,7 @@ import lhapdf
     return ret</div>
 
 
-<div class="viewcode-block" id="scan_pdf"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_pdf">[docs]</a>def scan_pdf(l: List[Input]):
+<div class="viewcode-block" id="scan_pdf"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_pdf">[docs]</a>def scan_pdf(input_list: List[Input]):
     &quot;&quot;&quot;
     Scans NLO PDF sets.
 
@@ -771,7 +809,7 @@ import lhapdf
         {&#39;order&#39;: &lt;Order.NLO: 1&gt;, &#39;energy&#39;: 13000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14nlo&#39;, &#39;pdfset_nlo&#39;: 56, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13100, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model&#39;: &#39;&#39;, &#39;mu&#39;: 0.0}
     &quot;&quot;&quot;
     ret = []
-    for s in l:
+    for s in input_list:
         # only central scale
         if s.mu_f == 1.0 and s.mu_r == 1.0:
             sset = lhapdf.getPDFSet(s.pdf_nlo)

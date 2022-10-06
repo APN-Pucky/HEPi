@@ -13,6 +13,8 @@ Functions
 
 .. autoapisummary::
 
+   hepi.output.write_latex_table_transposed_header
+   hepi.output.write_latex_table_transposed
    hepi.output.write_latex
    hepi.output.write_csv
    hepi.output.write_json
@@ -33,7 +35,13 @@ Attributes
 
    
 
-.. py:function:: write_latex(dict_list, key, fname, scale=True, pdf=True, yscale=1.0)
+.. py:function:: write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0)
+
+
+.. py:function:: write_latex_table_transposed(dict_list, t, fname, scale=True, pdf=True, yscale=1.0)
+
+
+.. py:function:: write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0)
 
    Saves a `dict` of `list`s to `filename` as latex table.
 

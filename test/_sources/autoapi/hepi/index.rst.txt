@@ -71,6 +71,8 @@ Functions
    hepi.order_to_string
    hepi.DL2DF
    hepi.get_name
+   hepi.write_latex_table_transposed_header
+   hepi.write_latex_table_transposed
    hepi.write_latex
    hepi.write_csv
    hepi.write_json
@@ -96,6 +98,8 @@ Functions
    hepi.scan_multi
    hepi.scan_scale
    hepi.scan_seven_point
+   hepi.keep_where
+   hepi.remove_where
    hepi.change_where
    hepi.scan_invariant_mass
    hepi.slha_write
@@ -104,9 +108,12 @@ Functions
    hepi.slha_scan
    hepi.slha_scan_rel
    hepi.scan_pdf
+   hepi.my_parallel
    hepi.pdf_errors
+   hepi.pdf_error_single
    hepi.pdf_error
    hepi.scale_errors
+   hepi.scale_error_single
    hepi.scale_error
    hepi.combine_errors
    hepi.combine_error
@@ -144,6 +151,7 @@ Functions
    hepi.DL2DF
    hepi.LD2DL
    hepi.namehash
+   hepi.my_parallel
    hepi.order_to_string
    hepi.xsec_to_order
    hepi.LD2DL
@@ -238,7 +246,13 @@ Attributes
 
    
 
-.. py:function:: write_latex(dict_list, key, fname, scale=True, pdf=True, yscale=1.0)
+.. py:function:: write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0)
+
+
+.. py:function:: write_latex_table_transposed(dict_list, t, fname, scale=True, pdf=True, yscale=1.0)
+
+
+.. py:function:: write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0)
 
    Saves a `dict` of `list`s to `filename` as latex table.
 
@@ -604,14 +618,14 @@ Attributes
    Mainly concerns the `mu` value used by `madgraph`.
 
 
-.. py:function:: scan(l: List[Input], var: str, rrange: Iterable) -> List[Input]
+.. py:function:: scan(input_list: List[Input], var: str, rrange: Iterable) -> List[Input]
 
-   Scans a variable `var` over `rrange` in `l`.
+   Scans a variable `var` over `rrange` in `input_list`.
 
    .. note:: This function does not ensure that dependent vairables are updated (see `energyhalf` in Examples).
 
-   :param l: Input parameters that get scanned each.
-   :type l: :obj:`list` of :class:`Input`
+   :param input_list: Input parameters that get scanned each.
+   :type input_list: :obj:`list` of :class:`Input`
    :param var: Scan variable name.
    :type var: str
    :param rrange: Range of `var` to be scanned.
@@ -703,7 +717,7 @@ Attributes
 
    
 
-.. py:function:: scan_seven_point(l: List[Input])
+.. py:function:: scan_seven_point(input_list: List[Input])
 
    Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
 
@@ -726,9 +740,35 @@ Attributes
 
    
 
-.. py:function:: change_where(l: List[Input], dicts: dict, **kwargs)
+.. py:function:: keep_where(input_list: List[Input], condition)
 
-   Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
+   Only keep the inputs where the condition is true.
+
+   Inversion of the `remove_where` function.
+
+   :param input_list: The list of inputs to filter.
+   :type input_list: List[Input]
+   :param condition: The condition to filter on.
+   :type condition: Callable[[Input.__dict__], bool]
+
+
+.. py:function:: remove_where(input_list: List[Input], condition, **kwargs)
+
+   Remove elements in list which satisfy condition.
+
+   :param input_list: The list of inputs to filter.
+   :type input_list: List[Input]
+   :param condition: The condition to filter on.
+   :type condition: Callable[[Input.__dict__], bool]
+   :param Examples: >>> li = scan_multi([Input(Order.LO, 13000,  1000022,1000022, "None", "CT14lo","CT14lo",update=False)],energy=range(10000,13000,1000))
+                    >>> for e in remove_where(li,lambda dict : (dict["energy"] == 10000 or dict["energy"] == 11000)):
+                    ...     print(e)
+                    {'order': <Order.LO: 0>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
+
+
+.. py:function:: change_where(input_list: List[Input], dicts: dict, **kwargs)
+
+   Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `input_list`.
 
    The changes only applied to the matching list members.
 
@@ -749,7 +789,7 @@ Attributes
    {'order': <Order.LO: 0>, 'energy': 11000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 2, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
 
 
-.. py:function:: scan_invariant_mass(l: List[Input], diff, points, low=0.001)
+.. py:function:: scan_invariant_mass(input_list: List[Input], diff, points, low=0.001)
 
    Logarithmic `invariant_mass` scan close to the production threshold.
 
@@ -757,29 +797,29 @@ Attributes
 .. py:function:: slha_write(newname, d)
 
 
-.. py:function:: masses_scan(l: List[Input], varis: List[int], rrange, diff_L_R=None, negate=None) -> List[Input]
+.. py:function:: masses_scan(input_list: List[Input], varis: List[int], rrange, diff_L_R=None, negate=None) -> List[Input]
 
-   Scans the PDG identified masses in `varis` over `rrange` in the list `l`.
+   Scans the PDG identified masses in `varis` over `rrange` in the list `input_list`.
    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
 
 
-.. py:function:: mass_scan(l: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]
+.. py:function:: mass_scan(input_list: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]
 
    Scans the PDG identified mass `var` over `rrange` in the list `l`.
    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
 
 
-.. py:function:: slha_scan(l: List[Input], block, var, rrange: List) -> List[Input]
+.. py:function:: slha_scan(input_list: List[Input], block, var, rrange: List) -> List[Input]
 
    Scan a generic
 
 
-.. py:function:: slha_scan_rel(l: List[Input], lambdas, rrange: List) -> List[Input]
+.. py:function:: slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -> List[Input]
 
    Scan a generic slha variable.
 
 
-.. py:function:: scan_pdf(l: List[Input])
+.. py:function:: scan_pdf(input_list: List[Input])
 
    Scans NLO PDF sets.
 
@@ -863,9 +903,14 @@ Attributes
 
 
 .. py:data:: required_numerical_uncertainty_factor
-   :annotation: = 10
+   :annotation: = 5
 
-   If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.
+   
+
+.. py:function:: my_parallel(arr, f, n_jobs=None, desc=None)
+
+   Parallel execution of f on each element of args
+
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
@@ -905,9 +950,12 @@ Attributes
    :type annlo_plus_nnll: :obj:`double`
 
 
-.. py:function:: pdf_errors(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'], confidence_level=90)
+.. py:function:: pdf_errors(li, dl, ordernames=None, confidence_level=90)
 
    Just like `pdf_error` but over a list of ordernames.
+
+
+.. py:function:: pdf_error_single(members, i, dl, ordername, confidence_level=90)
 
 
 .. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90)
@@ -930,9 +978,12 @@ Attributes
    :rtype: :obj:`dict`
 
 
-.. py:function:: scale_errors(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])
+.. py:function:: scale_errors(li, dl, ordernames=None)
 
    Just like `scale_error` but over a list of ordernames.
+
+
+.. py:function:: scale_error_single(members, i, dl, ordername='LO')
 
 
 .. py:function:: scale_error(li, dl, ordername='LO')
@@ -951,7 +1002,7 @@ Attributes
    :rtype: :obj:`dict`
 
 
-.. py:function:: combine_errors(dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])
+.. py:function:: combine_errors(dl, ordernames=None)
 
    Just like `combine_error` but over a list of ordernames.
 
@@ -1200,7 +1251,7 @@ Attributes
    '\\tilde{\\chi}_{1}^{0}'
 
 
-.. py:function:: title(i: hepi.input.Input, axe=None, scenario='', diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
+.. py:function:: title(i: hepi.input.Input, axe=None, scenario=None, diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
 
    Sets the title on axis `axe`.
 
@@ -1210,7 +1261,7 @@ Attributes
    Plot energy on the x-axis.
 
 
-.. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, **kwargs)
+.. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, xaxis=None, **kwargs)
 
 
 .. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)
@@ -1567,6 +1618,16 @@ Attributes
    '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
+.. py:function:: my_parallel(f, arr, n_jobs=None, desc=None)
+
+   Parallel execution of f on each element of args
+
+   .. rubric:: Examples
+
+   >>> my_parallel(lambda x : x**2, range(0,5))
+   [0, 1, 4, 9, 16]
+
+
 .. py:class:: RunParam(skip: bool = False, in_file: str = None, out_file: str = None, execute: str = None, name: str = None)
 
    Bases: :py:obj:`hepi.util.DictData`
@@ -1597,7 +1658,7 @@ Attributes
       Checks if the passed path is valid.
 
 
-   .. py:method:: _prepare(p: hepi.input.Input, **kwargs) -> RunParam
+   .. py:method:: _prepare(p: hepi.input.Input, skip=False, **kwargs) -> RunParam
 
 
    .. py:method:: _check_input(param: hepi.input.Input, **kwargs) -> bool
