@@ -1,5 +1,4 @@
 from logging import warning
-import multiprocessing
 import os
 import subprocess
 from subprocess import Popen, PIPE
@@ -13,7 +12,6 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
 from smpl.parallel import par
 import time
 import tqdm
-import multiprocessing
 from pqdm.threads import pqdm as tpqdm
 from pqdm.processes import pqdm as ppqdm
 import multiprocessing as mp
@@ -30,7 +28,7 @@ def my_parallel(f, arr, n_jobs=None, desc=None):
     [0, 1, 4, 9, 16]
 
     """
-    n_jobs = n_jobs or multiprocessing.cpu_count()
+    n_jobs = n_jobs or mp.cpu_count()
     sa = np.array_split(np.array(arr), len(arr) / n_jobs)
     res = []
     for i in tqdm.tqdm(range(len(sa)), desc=desc):
@@ -142,7 +140,7 @@ class Runner:
         #ret = my_parallel(self._check_input,params,desc="Checking input")
         ret = tpqdm(params,
                     self._check_input,
-                    n_jobs=multiprocessing.cpu_count(),
+                    n_jobs=mp.cpu_count(),
                     desc="Checking input")
         if not np.alltrue(ret):
             warnings.warn("Check input failed.")
@@ -150,12 +148,12 @@ class Runner:
         #ret = my_parallel(
         #    lambda p: self._prepare(p, skip=skip, **kwargs),
         #    params,
-        #    #n_jobs=multiprocessing.cpu_count(),
+        #    #n_jobs=mp.cpu_count(),
         #    desc="Preparing")
         args = [{'p': p, 'skip': skip, **kwargs} for p in params]
         ret = ppqdm(args,
                     self._prepare,
-                    n_jobs=multiprocessing.cpu_count(),
+                    n_jobs=mp.cpu_count(),
                     argument_type='kwargs',
                     desc="Preparing")
         skipped = 0
@@ -309,7 +307,7 @@ class Runner:
         #rsl = my_parallel(self._parse_file, outputs, desc="Parsing")
         rsl = tpqdm(outputs,
                    self._parse_file,
-                   n_jobs=multiprocessing.cpu_count(),
+                   n_jobs=mp.cpu_count(),
                    desc="Parsing")
         return rsl
         #for o in tqdm.tqdm(outputs):
@@ -358,7 +356,7 @@ class Runner:
 
     def get_pre(self) -> str:
         """
-		Gets the command prefix. 
+		Gets the command prefix.
 
 		Returns:
 		    str: :attr:`pre`
@@ -399,7 +397,7 @@ class Runner:
 
     def set_pre(self, ppre: str):
         """
-		Sets the command prefix. 
+		Sets the command prefix.
 
 		Args:
 		    ppre (str): new command prefix.

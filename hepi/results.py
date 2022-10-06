@@ -6,11 +6,12 @@ from smpl import plot
 import lhapdf
 import warnings
 import tqdm
-from pqdm.processes import pqdm as ppqdm
+#from pqdm.processes import pqdm as ppqdm
 from pqdm.threads import pqdm as tpqdm
 import multiprocessing as mp
 from smpl.parallel import par
-"""If the numerical uncertainty times :attr:`required_numerical_uncertainty_factor` is higher than the scale or pdf uncertainty a warning is shown."""
+
+#If the numerical uncertainty times :attr:`required_numerical_uncertainty_factor` is higher than the scale or pdf uncertainty a warning is shown.
 required_numerical_uncertainty_factor = 5
 
 
@@ -92,11 +93,13 @@ class Result(DictData):
 # TODO detect which errors also for scales
 def pdf_errors(li,
                dl,
-               ordernames=["LO", "NLO", "aNNLO_PLUS_NNLL"],
+               ordernames=None,
                confidence_level=90):
     """
     Just like `pdf_error` but over a list of ordernames.
     """
+    if ordernames is None:
+        ordernames = ["LO", "NLO", "aNNLO_PLUS_NNLL"]
     r_dl = dl
     for o in ordernames:
         r_dl = pdf_error(li, r_dl, o, confidence_level=confidence_level)
@@ -203,10 +206,12 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
     return dl
 
 
-def scale_errors(li, dl, ordernames=["LO", "NLO", "aNNLO_PLUS_NNLL"]):
+def scale_errors(li, dl, ordernames=None):
     """
     Just like `scale_error` but over a list of ordernames.
     """
+    if ordernames is None:
+        ordernames = ["LO", "NLO", "aNNLO_PLUS_NNLL"]
     r_dl = dl
     for o in ordernames:
         r_dl = scale_error(li, r_dl, o)
@@ -293,10 +298,12 @@ def scale_error(li, dl, ordername="LO"):
     return dl
 
 
-def combine_errors(dl, ordernames=["LO", "NLO", "aNNLO_PLUS_NNLL"]):
+def combine_errors(dl, ordernames=None):
     """
     Just like `combine_error` but over a list of ordernames.
     """
+    if ordernames is None:
+        ordernames = ["LO", "NLO", "aNNLO_PLUS_NNLL"]
     r_dl = dl
     for o in ordernames:
         r_dl = combine_error(r_dl, o)
