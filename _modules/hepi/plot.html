@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.14
+                0.2.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -118,7 +118,7 @@ from matplotlib.ticker import NullFormatter
 
 <div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(i: Input,
           axe=None,
-          scenario=&quot;&quot;,
+          scenario=None,
           diff_L_R=None,
           extra=&quot;&quot;,
           cms_energy=True,
@@ -130,8 +130,9 @@ from matplotlib.ticker import NullFormatter
         axe = plt.gca()
     axe.set_title(&quot;$pp\\to&quot; + get_name(i.particle1) + get_name(i.particle2) +
                   &quot;$&quot; + (&quot; at $\\sqrt{S} = &quot; + str(i.energy / 1000) +
-                         &quot;$ TeV&quot; if cms_energy else &quot;&quot;) + &quot; for &quot; +
-                  (i.slha.split(&quot;.&quot;)[0] if scenario == &quot;&quot; else scenario) +
+                         &quot;$ TeV&quot; if cms_energy else &quot;&quot;) +
+                  ((&quot; for &quot; +
+                    i.slha.split(&quot;.&quot;)[0]) if scenario is None else scenario) +
                   (&quot; with &quot; + i.pdf_nlo if pdf_info else &quot;&quot;) + &quot; &quot; + extra +
                   ((&quot; [&quot; + i.id + &quot;]&quot;) if id else &quot;&quot;))</div>
 
@@ -162,14 +163,17 @@ from matplotlib.ticker import NullFormatter
               yaxis=&quot;$\\sigma$ [pb]&quot;,
               yscale=1.,
               label=None,
+              xaxis = None,
               **kwargs):
     dict_list[&quot;mass_&quot; + str(part)] = get_mass(dict_list, abs(part))
+    if xaxis is None:
+        xaxis = &quot;$m_{&quot; + get_name(part) + &quot;}$ [GeV]&quot;
     plot(dict_list,
          &quot;mass_&quot; + str(part),
          y,
          label=label,
-         xaxis=&quot;$m_{&quot; + get_name(part) + &quot;}$ [GeV]&quot;,
          yaxis=yaxis,
+         xaxis=xaxis,
          logy=logy,
          yscale=yscale,
          **kwargs)</div>
@@ -323,25 +327,25 @@ from matplotlib.ticker import NullFormatter
         vx = x
         vy = y
 
-    
-    if data_color is None:
+    if data_color is None and &#39;next_color&#39; not in kwargs:
         if &#39;axes&#39; in kwargs and kwargs[&#39;axes&#39;] is not None:
             bl, = kwargs[&#39;axes&#39;].plot([], [])
         else:
             bl, = plt.gca().plot([], [])
         color = bl.get_color()
     iii = splot.data(vx,
-                            vy * yscale,
-                            label=label,
-                            xaxis=xaxis,
-                            yaxis=yaxis,
-                            logy=logy,
-                            data_color=color,
-                            also_data=plot_data,
-                            interpolate=interpolate,
-                            fmt=data_fmt,
-                            sigmas=0 if not fill else 1,
-                            **kwargs)
+                     vy * yscale,
+                     label=label,
+                     xaxis=xaxis,
+                     yaxis=yaxis,
+                     logy=logy,
+                     data_color=color,
+                     fit_color=color,
+                     also_data=plot_data,
+                     interpolate=interpolate,
+                     fmt=data_fmt,
+                     sigmas=0 if not fill else 1,
+                     **kwargs)
     if iii is not None:
         #ii = iii[0]
         ix = iii[1]
@@ -357,6 +361,7 @@ from matplotlib.ticker import NullFormatter
                    yaxis=yaxis,
                    logy=logy,
                    data_color=color,
+                   fit_color=color,
                    also_data=plot_data,
                    interpolate=interpolate,
                    interpolate_fmt=(0, (3, 1, 3, 1, 1, 1)),
@@ -418,8 +423,10 @@ from matplotlib.ticker import NullFormatter
                  zaxis=zaxis,
                  **kwargs)</div>
 
-<div class="viewcode-block" id="map_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.map_vplot">[docs]</a>map_vplot =  lambda *a,**da : splot.plot2d(*a,style=&quot;image&quot;,**da)</div>
-<div class="viewcode-block" id="scatter_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scatter_vplot">[docs]</a>scatter_vplot =  lambda *a,**da : splot.plot2d(*a,style=&quot;scatter&quot;,**da)</div>
+
+<div class="viewcode-block" id="map_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.map_vplot">[docs]</a>map_vplot = lambda *a, **da: splot.plot2d(*a, style=&quot;image&quot;, **da)</div>
+<div class="viewcode-block" id="scatter_vplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scatter_vplot">[docs]</a>scatter_vplot = lambda *a, **da: splot.plot2d(*a, style=&quot;scatter&quot;, **da)</div>
+
 
 <div class="viewcode-block" id="scatterplot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.scatterplot">[docs]</a>def scatterplot(dict_list,
                 x,

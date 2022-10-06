@@ -26,15 +26,15 @@ Functions
 
 .. autoapisummary::
 
+   hepi.results.my_parallel
    hepi.results.pdf_errors
+   hepi.results.pdf_error_single
    hepi.results.pdf_error
-   hepi.results.pdf_error_old
    hepi.results.scale_errors
+   hepi.results.scale_error_single
    hepi.results.scale_error
-   hepi.results.scale_error_old
    hepi.results.combine_errors
    hepi.results.combine_error
-   hepi.results.combine_errors_old
 
 
 
@@ -47,9 +47,14 @@ Attributes
 
 
 .. py:data:: required_numerical_uncertainty_factor
-   :annotation: = 10
+   :annotation: = 5
 
-   If the numerical uncertainty is :attr:`required_numerical_uncertainty_factor` times higher than the scale or pdf uncertainty a warning is shown.
+   
+
+.. py:function:: my_parallel(arr, f, n_jobs=None, desc=None)
+
+   Parallel execution of f on each element of args
+
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
@@ -89,9 +94,12 @@ Attributes
    :type annlo_plus_nnll: :obj:`double`
 
 
-.. py:function:: pdf_errors(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'], confidence_level=90)
+.. py:function:: pdf_errors(li, dl, ordernames=None, confidence_level=90)
 
    Just like `pdf_error` but over a list of ordernames.
+
+
+.. py:function:: pdf_error_single(members, i, dl, ordername, confidence_level=90)
 
 
 .. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90)
@@ -114,27 +122,12 @@ Attributes
    :rtype: :obj:`dict`
 
 
-.. py:function:: pdf_error_old(li, dl, confidence_level=90)
-
-   Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
-
-   :param li: Input list.
-   :type li: :obj:`list` of :class:`Input`
-   :param dl: :class:`Result` dictionary with lists per entry.
-   :type dl: :obj:`dict`
-   :param confidence_level: Confidence Level for PDF uncertainty
-   :type confidence_level: :obj:`double`
-
-   :returns:
-
-             Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
-                 - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
-   :rtype: :obj:`dict`
-
-
-.. py:function:: scale_errors(li, dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])
+.. py:function:: scale_errors(li, dl, ordernames=None)
 
    Just like `scale_error` but over a list of ordernames.
+
+
+.. py:function:: scale_error_single(members, i, dl, ordername='LO')
 
 
 .. py:function:: scale_error(li, dl, ordername='LO')
@@ -153,44 +146,12 @@ Attributes
    :rtype: :obj:`dict`
 
 
-.. py:function:: scale_error_old(li, dl)
-
-   Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
-
-   :param li: Input list.
-   :type li: :obj:`list` of :class:`Input`
-   :param dl: :class:`Result` dictionary with lists per entry.
-   :type dl: :obj:`dict`
-
-   :returns:
-
-             Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
-                 - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
-   :rtype: :obj:`dict`
-
-
-.. py:function:: combine_errors(dl, ordernames=['LO', 'NLO', 'aNNLO_PLUS_NNLL'])
+.. py:function:: combine_errors(dl, ordernames=None)
 
    Just like `combine_error` but over a list of ordernames.
 
 
 .. py:function:: combine_error(dl: dict, ordername='LO')
-
-   Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
-
-   .. note:: Running :func:`scale_errors` and :func:`pdf_errors` before is necessary.
-
-   :param dl: :class:`Result` dictionary with lists per entry.
-   :type dl: :obj:`dict`
-
-   :returns:
-
-             Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
-                 - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
-   :rtype: :obj:`dict`
-
-
-.. py:function:: combine_errors_old(dl: dict)
 
    Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
 

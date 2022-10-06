@@ -17,6 +17,24 @@ Classes
 
 
 
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   hepi.run.my_parallel
+
+
+
+.. py:function:: my_parallel(f, arr, n_jobs=None, desc=None)
+
+   Parallel execution of f on each element of args
+
+   .. rubric:: Examples
+
+   >>> my_parallel(lambda x : x**2, range(0,5))
+   [0, 1, 4, 9, 16]
+
 
 .. py:class:: RunParam(skip: bool = False, in_file: str = None, out_file: str = None, execute: str = None, name: str = None)
 
@@ -48,7 +66,7 @@ Classes
       Checks if the passed path is valid.
 
 
-   .. py:method:: _prepare(p: hepi.input.Input, **kwargs) -> RunParam
+   .. py:method:: _prepare(p: hepi.input.Input, skip=False, **kwargs) -> RunParam
 
 
    .. py:method:: _check_input(param: hepi.input.Input, **kwargs) -> bool

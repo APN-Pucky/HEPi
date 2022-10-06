@@ -46,7 +46,7 @@ Attributes
    hepi.plot.labels
 
 
-.. py:function:: title(i: hepi.input.Input, axe=None, scenario='', diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
+.. py:function:: title(i: hepi.input.Input, axe=None, scenario=None, diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
 
    Sets the title on axis `axe`.
 
@@ -56,7 +56,7 @@ Attributes
    Plot energy on the x-axis.
 
 
-.. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, **kwargs)
+.. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, xaxis=None, **kwargs)
 
 
 .. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)

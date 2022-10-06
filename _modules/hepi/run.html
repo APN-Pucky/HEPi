@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.1.14
+                0.2.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -102,12 +102,36 @@ import subprocess
 from subprocess import Popen, PIPE
 from typing import List
 import warnings
+
+import numpy as np
 from hepi.input import Input, Order, get_input_dir, get_output_dir, get_pre
 from hepi.results import Result
 from hepi.util import DL2DF, LD2DL, DictData, namehash
 from smpl.parallel import par
 import time
 import tqdm
+from pqdm.threads import pqdm as tpqdm
+from pqdm.processes import pqdm as ppqdm
+import multiprocessing as mp
+#from pqdm.processes import pqdm
+
+
+<div class="viewcode-block" id="my_parallel"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.my_parallel">[docs]</a>def my_parallel(f, arr, n_jobs=None, desc=None):
+    &quot;&quot;&quot;
+    Parallel execution of f on each element of args
+
+    Examples
+    --------
+    &gt;&gt;&gt; my_parallel(lambda x : x**2, range(0,5))
+    [0, 1, 4, 9, 16]
+
+    &quot;&quot;&quot;
+    n_jobs = n_jobs or mp.cpu_count()
+    sa = np.array_split(np.array(arr), len(arr) / n_jobs)
+    res = []
+    for i in tqdm.tqdm(range(len(sa)), desc=desc):
+        res += par(f, sa[i])
+    return res</div>
 
 
 <div class="viewcode-block" id="RunParam"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.RunParam">[docs]</a>class RunParam(DictData):
@@ -171,8 +195,8 @@ import tqdm
         &quot;&quot;&quot;Checks if the passed path is valid.&quot;&quot;&quot;
         return True</div>
 
-<div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
-        skip_ = kwargs[&quot;skip&quot;]
+<div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, skip=False, **kwargs) -&gt; RunParam:
+        skip_ = skip
         d = p.__dict__
         d[&quot;runner&quot;] = str(type(self).__name__) + &quot;-&quot; + self.get_version(
         )  # TODO re add version, but removed for reusable hashing!
@@ -183,11 +207,15 @@ import tqdm
         if skip_ and os.path.isfile(self.get_output_dir() + name +
                                     &quot;.out&quot;) and self._is_valid(
                                         self.get_output_dir() + name + &quot;.out&quot;,
-                                        p, d, **kwargs):
-            print(&quot;.&quot;, end=&#39;&#39;)
+                                        p,
+                                        d,
+                                        skip=skip_,
+                                        **kwargs):
+            #print(&quot;.&quot;, end=&#39;&#39;)
             skip = True
         else:
-            print(&#39;|&#39;, end=&#39;&#39;)
+            #print(&#39;|&#39;, end=&#39;&#39;)
+            pass
         return RunParam(execute=self.get_output_dir() + name + &quot;.sh&quot;,
                         in_file=self.get_output_dir() + name + &quot;.in&quot;,
                         out_file=self.get_output_dir() + name + &quot;.out&quot;,
@@ -206,11 +234,39 @@ import tqdm
                      skip=True,
                      **kwargs) -&gt; List[RunParam]:
         ret = []
-        for p in params:
-            if not self._check_input(p):
-                warnings.warn(&quot;Check input failed.&quot;)
-                return []
-            ret.append(self._prepare(p, skip=skip, **kwargs))
+
+        #ret = my_parallel(self._check_input,params,desc=&quot;Checking input&quot;)
+        ret = tpqdm(params,
+                    self._check_input,
+                    n_jobs=mp.cpu_count(),
+                    desc=&quot;Checking input&quot;)
+        if not np.alltrue(ret):
+            warnings.warn(&quot;Check input failed.&quot;)
+            return []
+        #ret = my_parallel(
+        #    lambda p: self._prepare(p, skip=skip, **kwargs),
+        #    params,
+        #    #n_jobs=mp.cpu_count(),
+        #    desc=&quot;Preparing&quot;)
+        args = [{&#39;p&#39;: p, &#39;skip&#39;: skip, **kwargs} for p in params]
+        ret = ppqdm(args,
+                    self._prepare,
+                    n_jobs=mp.cpu_count(),
+                    argument_type=&#39;kwargs&#39;,
+                    desc=&quot;Preparing&quot;)
+        skipped = 0
+        not_skipped = 0
+        for r in ret:
+            if r.skip:
+                skipped += 1
+            else:
+                not_skipped += 1
+        print(&quot;Skipped: &quot; + str(skipped) + &quot; Not skipped: &quot; + str(not_skipped))
+        #for p in params:
+        #    if not self._check_input(p):
+        #        warnings.warn(&quot;Check input failed.&quot;)
+        #        return []
+        #    ret.append(self._prepare(p, skip=skip, **kwargs))
         return ret</div>
 
 <div class="viewcode-block" id="Runner.run"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.run">[docs]</a>    def run(self,
@@ -249,7 +305,7 @@ import tqdm
                                 skip=skip,
                                 ignore_error=ignore_error,
                                 **kwargs)
-        print(&quot;= &quot; + str(len(params)) + &quot; jobs&quot;)
+        #print(&quot;= &quot; + str(len(params)) + &quot; jobs&quot;)
         if sleep is None:
             sleep = 0 if parse else 5
         if run:
@@ -342,13 +398,19 @@ import tqdm
 	
 		&quot;&quot;&quot;
         rsl = []
-        #for r in par(self._parse_file, outputs):
+        #for r in parallel(self._parse_file, outputs):
         #    rsl.append(r)
 
         # parallelized opens to many files at times
-        for o in tqdm.tqdm(outputs):
-            rsl.append(self._parse_file(o))
+        #rsl = my_parallel(self._parse_file, outputs, desc=&quot;Parsing&quot;)
+        rsl = tpqdm(outputs,
+                   self._parse_file,
+                   n_jobs=mp.cpu_count(),
+                   desc=&quot;Parsing&quot;)
         return rsl</div>
+        #for o in tqdm.tqdm(outputs):
+        #    rsl.append(self._parse_file(o))
+        #return rsl
 
 <div class="viewcode-block" id="Runner._parse_file"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
         &quot;&quot;&quot;
@@ -392,7 +454,7 @@ import tqdm
 
 <div class="viewcode-block" id="Runner.get_pre"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.get_pre">[docs]</a>    def get_pre(self) -&gt; str:
         &quot;&quot;&quot;
-		Gets the command prefix. 
+		Gets the command prefix.
 
 		Returns:
 		    str: :attr:`pre`
@@ -433,7 +495,7 @@ import tqdm
 
 <div class="viewcode-block" id="Runner.set_pre"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.set_pre">[docs]</a>    def set_pre(self, ppre: str):
         &quot;&quot;&quot;
-		Sets the command prefix. 
+		Sets the command prefix.
 
 		Args:
 		    ppre (str): new command prefix.
