@@ -282,18 +282,16 @@ def update_slha(i: Input):
     except Exception:
         warnings.warn("Could not set new central scale to average of masses.",
                       RuntimeWarning)
-        pass
 
-
-def scan(l: List[Input], var: str, rrange: Iterable) -> List[Input]:
+def scan(input_list: List[Input], var: str, rrange: Iterable) -> List[Input]:
     """
-    Scans a variable `var` over `rrange` in `l`.
+    Scans a variable `var` over `rrange` in `input_list`.
 
     Note:
         This function does not ensure that dependent vairables are updated (see `energyhalf` in Examples).
 
     Args:
-        l (:obj:`list` of :class:`Input`): Input parameters that get scanned each.
+        input_list (:obj:`list` of :class:`Input`): Input parameters that get scanned each.
         var (str): Scan variable name.
         rrange (Iterable): Range of `var` to be scanned.
 
@@ -322,7 +320,7 @@ def scan(l: List[Input], var: str, rrange: Iterable) -> List[Input]:
  
     """
     ret = []
-    for s in l:
+    for s in input_list:
         for r in rrange:
             tmp = copy.copy(s)
             setattr(tmp, var, r)
@@ -411,7 +409,7 @@ def scan_scale(l: List[Input], rrange=3, distance=2.):
 scale_scan = scan_scale
 
 
-def scan_seven_point(l: List[Input]):
+def scan_seven_point(input_list: List[Input]):
     """
     Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
 
@@ -430,7 +428,7 @@ def scan_seven_point(l: List[Input]):
     rrange = 3
     distance = 2.
     ret = []
-    for s in l:
+    for s in input_list:
         # not on error pdfs
         if s.pdfset_nlo == 0 and s.mu_f == 1.0 and s.mu_r == 1.0:
             tmp = scan([s], "mu_f",
@@ -494,9 +492,9 @@ def remove_where(input_list: List[Input], condition, **kwargs):
     return nl
 
 
-def change_where(l: List[Input], dicts: dict, **kwargs):
+def change_where(input_list: List[Input], dicts: dict, **kwargs):
     """
-    Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
+    Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `input_list`.
 
     The changes only applied to the matching list members.
 
@@ -516,7 +514,7 @@ def change_where(l: List[Input], dicts: dict, **kwargs):
         {'order': <Order.LO: 0>, 'energy': 11000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 2, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
     """
     ret = []
-    for s in l:
+    for s in input_list:
         ok = True
         for k, v in kwargs.items():
             if getattr(s, k) != v:
@@ -532,12 +530,12 @@ def change_where(l: List[Input], dicts: dict, **kwargs):
     return ret
 
 
-def scan_invariant_mass(l: List[Input], diff, points, low=0.001):
+def scan_invariant_mass(input_list: List[Input], diff, points, low=0.001):
     """
     Logarithmic `invariant_mass` scan close to the production threshold.
     """
     ret = []
-    for s in l:
+    for s in input_list:
         for r in s.mu * 2. + low + (np.logspace(
                 np.log10(low), np.log10(1 + low), points) - low) * diff:
             tmp = copy.copy(s)
@@ -561,19 +559,19 @@ def slha_write(newname, d):
         writer.truncate()
 
 
-def masses_scan(l: List[Input],
+def masses_scan(input_list: List[Input],
                 varis: List[int],
                 rrange,
                 diff_L_R=None,
                 negate=None) -> List[Input]:
     """
-    Scans the PDG identified masses in `varis` over `rrange` in the list `l`.
+    Scans the PDG identified masses in `varis` over `rrange` in the list `input_list`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
     """
     if negate is None:
         negate = []
     ret = []
-    for s in l:
+    for s in input_list:
         for r in rrange:
             d = None
             try:
@@ -600,27 +598,27 @@ def masses_scan(l: List[Input],
     return ret
 
 
-def mass_scan(l: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]:
+def mass_scan(input_list: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]:
     """
     Scans the PDG identified mass `var` over `rrange` in the list `l`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
     """
-    return masses_scan(l, [var], rrange, diff_L_R)
+    return masses_scan(input_list, [var], rrange, diff_L_R)
 
 
-def slha_scan(l: List[Input], block, var, rrange: List) -> List[Input]:
+def slha_scan(input_list: List[Input], block, var, rrange: List) -> List[Input]:
     """
     Scan a generic
     """
-    return slha_scan_rel(l, lambda r, : [(block, var, r)], rrange)
+    return slha_scan_rel(input_list, lambda r, : [(block, var, r)], rrange)
 
 
-def slha_scan_rel(l: List[Input], lambdas, rrange: List) -> List[Input]:
+def slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -> List[Input]:
     """
     Scan a generic slha variable.
     """
     ret = []
-    for s in l:
+    for s in input_list:
         for r in rrange:
             d = None
             tmp = copy.copy(s)
@@ -644,7 +642,7 @@ def slha_scan_rel(l: List[Input], lambdas, rrange: List) -> List[Input]:
     return ret
 
 
-def scan_pdf(l: List[Input]):
+def scan_pdf(input_list: List[Input]):
     """
     Scans NLO PDF sets.
 
@@ -713,7 +711,7 @@ def scan_pdf(l: List[Input]):
         {'order': <Order.NLO: 1>, 'energy': 13000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14nlo', 'pdfset_nlo': 56, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13100, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
     """
     ret = []
-    for s in l:
+    for s in input_list:
         # only central scale
         if s.mu_f == 1.0 and s.mu_r == 1.0:
             sset = lhapdf.getPDFSet(s.pdf_nlo)
