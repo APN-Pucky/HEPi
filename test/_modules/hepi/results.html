@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0-3-g39b25b85
+                0.2.0-4-gcae471cf
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -243,8 +243,8 @@ from smpl.parallel import par
         confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
 
     Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
-            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
+        :obj:`dict`: Modified `dl` with new `ordername_{PDF,PDF_CENTRAL,PDF_ERRPLUS,PDF_ERRMINUS,PDF_ERRSYM}` entries.
+            - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
     &quot;&quot;&quot;
     global required_numerical_uncertainty_factor
     example = li[0]
@@ -341,8 +341,8 @@ from smpl.parallel import par
         dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
 
     Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
-            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
+        :obj:`dict`: Modified `dl` with new `ordername_{SCALE,SCALE_ERRPLUS,SCALE_ERRMINUS}` entries.
+            - `ordername_SCALE` contains a symmetrized :mod:`uncertainties` object.
     &quot;&quot;&quot;
     global required_numerical_uncertainty_factor
     example = li[0]
@@ -424,8 +424,8 @@ from smpl.parallel import par
         dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
 
     Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
-            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
+        :obj:`dict`: Modified `dl` with new `ordername_{COMBINED,ERRPLUS,ERRMINUS}` entries.
+            - `ordername_COMBINED` contains a symmetrized :mod:`uncertainties` object.
     &quot;&quot;&quot;
     dl[ordername + &quot;_NOERR&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
     dl[ordername + &quot;_ERRPLUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
