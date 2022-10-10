@@ -145,8 +145,8 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
         confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
 
     Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
-            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
+        :obj:`dict`: Modified `dl` with new `ordername_{PDF,PDF_CENTRAL,PDF_ERRPLUS,PDF_ERRMINUS,PDF_ERRSYM}` entries.
+            - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
     """
     global required_numerical_uncertainty_factor
     example = li[0]
@@ -243,8 +243,8 @@ def scale_error(li, dl, ordername="LO"):
         dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
 
     Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
-            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
+        :obj:`dict`: Modified `dl` with new `ordername_{SCALE,SCALE_ERRPLUS,SCALE_ERRMINUS}` entries.
+            - `ordername_SCALE` contains a symmetrized :mod:`uncertainties` object.
     """
     global required_numerical_uncertainty_factor
     example = li[0]
@@ -326,8 +326,8 @@ def combine_error(dl: dict, ordername="LO"):
         dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
 
     Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
-            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
+        :obj:`dict`: Modified `dl` with new `ordername_{COMBINED,ERRPLUS,ERRMINUS}` entries.
+            - `ordername_COMBINED` contains a symmetrized :mod:`uncertainties` object.
     """
     dl[ordername + "_NOERR"] = np.array([None] * len(dl["pdfset_nlo"]))
     dl[ordername + "_ERRPLUS"] = np.array([None] * len(dl["pdfset_nlo"]))
