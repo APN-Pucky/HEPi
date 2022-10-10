@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0-4-gcae471cf
+                0.2.0-5-gf884fe90
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -259,7 +259,7 @@ from matplotlib.ticker import NullFormatter
     if K:
         yaxis = &quot;$K$&quot;
         yscale = 1.0
-        vy = vy / splot.unv(dict_list[&quot;LO&quot;][mask])
+        vy = vy / splot.unv(dict_list[&quot;LO&quot;].to_numpy()[mask])
         if K_plus_1:
             vy = vy + vy / vy
     if ratio:
