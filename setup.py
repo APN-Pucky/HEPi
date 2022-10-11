@@ -37,7 +37,7 @@ setuptools.setup(
     extras_require={
         "full" : [
             "lhapdf>=6.3.0",
-        ]
+        ],
         "dev": [
             "build",
             "pytest",
