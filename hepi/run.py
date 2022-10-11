@@ -98,7 +98,7 @@ class Runner:
         """Checks if the passed path is valid."""
         return True
 
-    def _prepare(self, p: Input, skip=False, **kwargs) -> RunParam:
+    def _prepare(self, p: Input, skip=False, assume_valid = False, **kwargs) -> RunParam:
         skip_ = skip
         d = p.__dict__
         d["runner"] = str(type(self).__name__) + "-" + self.get_version(
@@ -108,12 +108,12 @@ class Runner:
         #print(name)
         skip = False
         if skip_ and os.path.isfile(self.get_output_dir() + name +
-                                    ".out") and self._is_valid(
+                                    ".out") and (assume_valid or self._is_valid(
                                         self.get_output_dir() + name + ".out",
                                         p,
                                         d,
                                         skip=skip_,
-                                        **kwargs):
+                                        **kwargs)):
             #print(".", end='')
             skip = True
         else:
