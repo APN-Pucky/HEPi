@@ -22,14 +22,16 @@ Python interface for gluing together several HEP programs (e.g. from HEPForge <h
 ### Stable
 
 ```sh
-pip install hepi [--user] [--upgrade]
+pip install hepi[opt] [--user] [--upgrade]
 ```
 
 ### Dev
 
 ```sh
-pip install --index-url https://test.pypi.org/simple/ hepi
+pip install --index-url https://test.pypi.org/simple/ hepi[opt]
 ```
+
+`[opt]` can be omitted to avoid optional dependencies (ie. lhapdf).
 
 [doc stable]: https://apn-pucky.github.io/HEPi/index.html
 [doc test]: https://apn-pucky.github.io/HEPi/test/index.html
