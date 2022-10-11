@@ -145,7 +145,7 @@ def namehash(n: any) -> str:
 def import_lhapdf() -> bool:
     try:
         import lhapdf
-        if StrictVersion(lhapdf.__version__) >= StrictVersion('6.3.0')
+        if StrictVersion(lhapdf.__version__) >= StrictVersion('6.3.0'):
             return True
         else:
             warnings.warn("LHAPDF>=6.3.0 version required")
