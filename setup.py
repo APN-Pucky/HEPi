@@ -31,11 +31,13 @@ setuptools.setup(
         "enlighten",
         "particle",
         "pqdm",
-        "lhapdf>=6.3.0",
         "pandas>=1.0.0",
         "tqdm",
     ],
     extras_require={
+        "full" : [
+            "lhapdf>=6.3.0",
+        ]
         "dev": [
             "build",
             "pytest",
