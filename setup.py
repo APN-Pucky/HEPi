@@ -25,7 +25,7 @@ setuptools.setup(
         "matplotlib",
         "scipy",
         "sympy",
-        "smpl>=0.0.148",
+        "smpl>=0.0.149",
         "pyslha",
         "particle",
         "pandas>=1.0.0",
