@@ -108,12 +108,13 @@ Functions
    hepi.slha_scan
    hepi.slha_scan_rel
    hepi.scan_pdf
+   hepi.import_lhapdf
    hepi.my_parallel
    hepi.pdf_errors
-   hepi.pdf_error_single
+   hepi._pdf_error_single
    hepi.pdf_error
    hepi.scale_errors
-   hepi.scale_error_single
+   hepi._scale_error_single
    hepi.scale_error
    hepi.combine_errors
    hepi.combine_error
@@ -122,7 +123,9 @@ Functions
    hepi.get_name
    hepi.get_LR_partner
    hepi.namehash
+   hepi.import_lhapdf
    hepi.lhapdf_name_to_id
+   hepi.lhapdf_id_to_name
    hepi.interpolate_1d
    hepi.interpolate_2d
    hepi.get_output_dir
@@ -902,6 +905,9 @@ Attributes
 
 
 
+.. py:function:: import_lhapdf() -> bool
+
+
 .. py:data:: required_numerical_uncertainty_factor
    :annotation: = 5
 
@@ -955,7 +961,7 @@ Attributes
    Just like `pdf_error` but over a list of ordernames.
 
 
-.. py:function:: pdf_error_single(members, i, dl, ordername, confidence_level=90)
+.. py:function:: _pdf_error_single(members, i, dl, ordername, confidence_level=90)
 
 
 .. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90)
@@ -983,7 +989,7 @@ Attributes
    Just like `scale_error` but over a list of ordernames.
 
 
-.. py:function:: scale_error_single(members, i, dl, ordername='LO')
+.. py:function:: _scale_error_single(members, i, dl, ordername='LO')
 
 
 .. py:function:: scale_error(li, dl, ordername='LO')
@@ -1116,6 +1122,9 @@ Attributes
    '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
+.. py:function:: import_lhapdf() -> bool
+
+
 .. py:function:: lhapdf_name_to_id(name: str) -> int
 
    Converts a LHAPDF name to the sets id.
@@ -1130,6 +1139,9 @@ Attributes
 
    >>> lhapdf_name_to_id("CT14lo")
    13200
+
+
+.. py:function:: lhapdf_id_to_name(lid: int) -> str
 
 
 .. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True)

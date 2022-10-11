@@ -28,10 +28,10 @@ Functions
 
    hepi.results.my_parallel
    hepi.results.pdf_errors
-   hepi.results.pdf_error_single
+   hepi.results._pdf_error_single
    hepi.results.pdf_error
    hepi.results.scale_errors
-   hepi.results.scale_error_single
+   hepi.results._scale_error_single
    hepi.results.scale_error
    hepi.results.combine_errors
    hepi.results.combine_error
@@ -99,7 +99,7 @@ Attributes
    Just like `pdf_error` but over a list of ordernames.
 
 
-.. py:function:: pdf_error_single(members, i, dl, ordername, confidence_level=90)
+.. py:function:: _pdf_error_single(members, i, dl, ordername, confidence_level=90)
 
 
 .. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90)
@@ -127,7 +127,7 @@ Attributes
    Just like `scale_error` but over a list of ordernames.
 
 
-.. py:function:: scale_error_single(members, i, dl, ordername='LO')
+.. py:function:: _scale_error_single(members, i, dl, ordername='LO')
 
 
 .. py:function:: scale_error(li, dl, ordername='LO')

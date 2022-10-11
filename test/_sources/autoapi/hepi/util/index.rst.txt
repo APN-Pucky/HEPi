@@ -31,7 +31,9 @@ Functions
    hepi.util.get_name
    hepi.util.get_LR_partner
    hepi.util.namehash
+   hepi.util.import_lhapdf
    hepi.util.lhapdf_name_to_id
+   hepi.util.lhapdf_id_to_name
    hepi.util.interpolate_1d
    hepi.util.interpolate_2d
 
@@ -130,6 +132,9 @@ Functions
    '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
+.. py:function:: import_lhapdf() -> bool
+
+
 .. py:function:: lhapdf_name_to_id(name: str) -> int
 
    Converts a LHAPDF name to the sets id.
@@ -144,6 +149,9 @@ Functions
 
    >>> lhapdf_name_to_id("CT14lo")
    13200
+
+
+.. py:function:: lhapdf_id_to_name(lid: int) -> str
 
 
 .. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True)
