@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.util &mdash; HEPi  documentation</title>
@@ -38,7 +38,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0-15-g8416c58a
+                0.2.0-14-gf2b12a48
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -143,10 +143,6 @@
 <section id="classes">
 <h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.DictData" title="hepi.util.DictData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DictData</span></code></a></p></td>
 <td><p></p></td>
@@ -157,10 +153,6 @@
 <section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.util.LD2DL" title="hepi.util.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(→ dict)</p></td>
 <td><p>Convert a list of objects into a dictionary of lists.</p></td>
@@ -211,16 +203,16 @@
 <dd><p>Convert a list of objects into a dictionary of lists.</p>
 <p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>l</strong> (<em>List</em>) – list of objects.</p></li>
 <li><p><strong>actual_dict</strong> (<em>bool</em>) – objects are already dicts</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>dictionary of numpy arrays.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
@@ -247,13 +239,13 @@
 <span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.get_name" title="Permalink to this definition"></a></dt>
 <dd><p>Get the latex name of a particle.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>pid</strong> (<em>int</em>) – PDG Monte Carlo identifier for the particle.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Latex name.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -271,13 +263,13 @@
 <span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">get_LR_partner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#get_LR_partner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.get_LR_partner" title="Permalink to this definition"></a></dt>
 <dd><p>Transforms a PDG id to it’s left-right partner.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>pid</strong> (<em>int</em>) – PDG Monte Carlo identifier for the particle.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>First int is -1 for Left and 1 for Right. Second int is the PDG id.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
@@ -293,13 +285,13 @@
 <span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">namehash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#namehash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.namehash" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a sha256 hash from the objects string representation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>n</strong> (<em>any</em>) – object.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>sha256 of object.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
 </dd>
 </dl>
@@ -325,13 +317,13 @@
 <span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../../../_modules/hepi/util.html#lhapdf_name_to_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.lhapdf_name_to_id" title="Permalink to this definition"></a></dt>
 <dd><p>Converts a LHAPDF name to the sets id.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – LHAPDF set name.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>id of the LHAPDF set.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>int</p>
 </dd>
 </dl>
@@ -352,7 +344,7 @@
 <span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">interpolate_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xrange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/util.html#interpolate_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.interpolate_1d" title="Permalink to this definition"></a></dt>
 <dd><p>Last key is the value to be interpolated, while the rest are cooridnates.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – results</p>
 </dd>
 </dl>
@@ -363,7 +355,7 @@
 <span class="sig-prename descclassname"><span class="pre">hepi.util.</span></span><span class="sig-name descname"><span class="pre">interpolate_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xrange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yrange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/util.html#interpolate_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.util.interpolate_2d" title="Permalink to this definition"></a></dt>
 <dd><p>Last key is the value to be interpolated, while the rest are cooridnates.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>df</strong> (<em>pandas.DataFrame</em>) – results</p>
 </dd>
 </dl>

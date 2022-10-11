@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.madgraph.run &mdash; HEPi  documentation</title>
@@ -39,7 +39,7 @@
             <a href="../../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0-15-g8416c58a
+                0.2.0-14-gf2b12a48
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -149,10 +149,6 @@
 <section id="classes">
 <h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.madgraph.run.MadGraphRunParams" title="hepi.madgraph.run.MadGraphRunParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MadGraphRunParams</span></code></a></p></td>
 <td><p>Parameters for MadGraph.</p></td>
@@ -166,10 +162,6 @@
 <section id="attributes">
 <h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.madgraph.run.default_madgraph_runner" title="hepi.madgraph.run.default_madgraph_runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_madgraph_runner</span></code></a></p></td>
 <td><p>Default MadGraph Runner to provide backward compatibility</p></td>
@@ -219,17 +211,17 @@
 <span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../index.html#id47" title="hepi.Input"><span class="pre">hepi.Input</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../_modules/hepi/madgraph/run.html#MadGraphRunner._is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.run.MadGraphRunner._is_valid" title="Permalink to this definition"></a></dt>
 <dd><p>Verifies that a file is a complete output.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p></li>
 <li><p><strong>p</strong> (<a class="reference internal" href="../../index.html#id47" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Onput parameters.</p></li>
 <li><p><strong>d</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Param dictionary.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if <cite>file</cite> could be parsed.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -240,13 +232,13 @@
 <span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../index.html#id40" title="hepi.Result"><span class="pre">hepi.Result</span></a></span></span><a class="reference internal" href="../../../../_modules/hepi/madgraph/run.html#MadGraphRunner._parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.run.MadGraphRunner._parse_file" title="Permalink to this definition"></a></dt>
 <dd><p>Extracts results from an output file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>If a value is not found in the file None is used.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></p>
 </dd>
 </dl>
@@ -257,7 +249,7 @@
 <span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../run/index.html#hepi.run.RunParam" title="hepi.run.RunParam"><span class="pre">hepi.run.RunParam</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/madgraph/run.html#MadGraphRunner._run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.run.MadGraphRunner._run" title="Permalink to this definition"></a></dt>
 <dd><p>Runs Runner per <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rps</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>) – Extended run parameters.</p></li>
 <li><p><strong>bar</strong> (<em>bool</em>) – Enable info bar.</p></li>
@@ -266,10 +258,10 @@
 <li><p><strong>parallel</strong> (<em>bool</em>) – Run jobs in parallel.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>return codes from jobs if <cite>no_parse</cite> is False.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of int</p>
 </dd>
 </dl>
