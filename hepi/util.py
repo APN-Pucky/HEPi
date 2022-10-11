@@ -142,18 +142,6 @@ def namehash(n: any) -> str:
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
 
-def import_lhapdf() -> bool:
-    try:
-        import lhapdf
-        if StrictVersion(lhapdf.__version__) >= StrictVersion('6.3.0'):
-            return lhapdf
-        else:
-            warnings.warn("LHAPDF>=6.3.0 version required")
-            return None
-    except ImportError:
-        warnings.warn("LHAPDF python binding not installed?")
-        return None
-
 def lhapdf_name_to_id(name: str) -> int:
     """
     Converts a LHAPDF name to the sets id.
@@ -168,16 +156,22 @@ def lhapdf_name_to_id(name: str) -> int:
         >>> lhapdf_name_to_id("CT14lo")
         13200
     """
-    lhapdf = import_lhapdf()
-    if lhapdf is None: return 0
+    try:
+        import lhapdf
+    except ImportError:
+        warnings.warn("LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly.")
+        return 0
     if not name in lhapdf.availablePDFSets():
         warnings.warn("PDF set '" + name + "' not installed?")
         return 0
     return lhapdf.getPDFSet(name).lhapdfID
 
 def lhapdf_id_to_name(lid : int) -> str:
-    lhapdf = import_lhapdf()
-    if lhapdf is None: return ""
+    try:
+        import lhapdf
+    except ImportError:
+        warnings.warn("LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly.")
+        return ""
     for n in lhapdf.availablePDFSets():
         if lhapdf.getPDFSet(n).lhapdfID == lid:
             return n

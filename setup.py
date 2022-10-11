@@ -36,7 +36,7 @@ setuptools.setup(
     ],
     extras_require={
         "opt" : [
-            "lhapdf>=6.3.0",
+            "lhapdf",
         ],
         "dev": [
             "build",

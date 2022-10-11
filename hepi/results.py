@@ -149,8 +149,10 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
             - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
     """
     global required_numerical_uncertainty_factor
-    lhapdf = import_lhapdf()
-    if lhapdf is None: raise RuntimeException("LHAPDF>=6.3.0 with python bindings needed to compute PDF uncertainties.")
+    try:
+        import lhapdf
+    except ImportError:
+        raise RuntimeError("LHAPDF>=6.3.0 with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly.")
     example = li[0]
     members = [
         attr for attr in dir(example)
