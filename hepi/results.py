@@ -3,7 +3,6 @@ from .util import DictData
 import numpy as np
 from uncertainties import unumpy
 from smpl import plot
-import lhapdf
 import warnings
 import tqdm
 #from pqdm.processes import pqdm as ppqdm
@@ -107,7 +106,8 @@ def pdf_errors(li,
     return r_dl
 
 
-def pdf_error_single(members, i, dl, ordername, confidence_level=90):
+def pdf_error_single(members, i, dl, ordername, confidence_level=90):  
+    import lhapdf
     if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
             i] == 1.0:
         pdfset = lhapdf.getPDFSet(dl["pdf_nlo"][i])
@@ -149,6 +149,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
             - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
     """
     global required_numerical_uncertainty_factor
+    import lhapdf
     example = li[0]
     members = [
         attr for attr in dir(example)
