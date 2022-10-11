@@ -30,8 +30,8 @@ setuptools.setup(
         "pyslha",
         "enlighten",
         "particle",
-        "lhapdf",
-        "pandas",
+        #"lhapdf>=6.0.0",
+        "pandas>=1.0.0",
         "tqdm",
     ],
     extras_require={

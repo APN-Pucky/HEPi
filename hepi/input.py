@@ -454,6 +454,46 @@ def scan_seven_point(l: List[Input]):
 seven_point_scan = scan_seven_point
 
 
+def keep_where(l: List[Input], condition):
+    """
+    Only keep the inputs where the condition is true.
+
+    Inversion of the `remove_where` function.
+
+    Parameters
+    ----------
+    l : List[Input]
+        The list of inputs to filter.
+    condition : Callable[[Input.__dict__], bool]
+        The condition to filter on.
+    """
+    return remove_where(l, lambda x: not condition(x))
+
+
+def remove_where(l: List[Input], condition, **kwargs):
+    """
+    Remove elements in list which satisfy condition.
+
+    Parameters
+    ----------
+    l : List[Input]
+        The list of inputs to filter.
+    condition : Callable[[Input.__dict__], bool]
+        The condition to filter on. 
+
+    Examples:
+        >>> li = scan_multi([Input(Order.LO, 13000,  1000022,1000022, "None", "CT14lo","CT14lo",update=False)],energy=range(10000,13000,1000))
+        >>> for e in remove_where(li,lambda dict : dict["energy"] == 10000 || dict["energy"] == 11000): 
+        ...     print(e)
+        {'order': <Order.LO: 0>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
+    """
+    nl = []
+    for e in l:
+        if not condition(e.__dict__):
+            nl.append(e)
+    return nl
+
+
 def change_where(l: List[Input], dicts: dict, **kwargs):
     """
     Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `l`.
