@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0-16-g8e178090
+                0.2.0-19-g02c09115
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -96,7 +96,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.run</h1><div class="highlight"><pre>
-<span></span>from logging import warning
+<span></span>from concurrent.futures import ThreadPoolExecutor
+from logging import warning
 import os
 import subprocess
 from subprocess import Popen, PIPE
@@ -232,13 +233,22 @@ import multiprocessing as mp
 <div class="viewcode-block" id="Runner._prepare_all"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare_all">[docs]</a>    def _prepare_all(self,
                      params: List[Input],
                      skip=True,
+                     n_jobs = None,
                      **kwargs) -&gt; List[RunParam]:
+        &quot;&quot;&quot;
+        Prepares all parameters for execution.
+
+        Args:
+            params (List[:class:`hepi.Input`]): List of input parameters.
+            skip (bool, optional): If True, the runner will check if the output file already exists and skip the execution if it does. Defaults to True.
+            n_jobs (int): Number of parallel jobs. If None, use all available cores.
+        &quot;&quot;&quot;
         ret = []
 
         #ret = my_parallel(self._check_input,params,desc=&quot;Checking input&quot;)
         ret = tpqdm(params,
                     self._check_input,
-                    n_jobs=mp.cpu_count(),
+                    n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                     desc=&quot;Checking input&quot;)
         if not np.alltrue(ret):
             warnings.warn(&quot;Check input failed.&quot;)
@@ -251,7 +261,7 @@ import multiprocessing as mp
         args = [{&#39;p&#39;: p, &#39;skip&#39;: skip, **kwargs} for p in params]
         ret = ppqdm(args,
                     self._prepare,
-                    n_jobs=mp.cpu_count(),
+                    n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                     argument_type=&#39;kwargs&#39;,
                     desc=&quot;Preparing&quot;)
         skipped = 0
@@ -277,6 +287,7 @@ import multiprocessing as mp
             sleep=0,
             run=True,
             ignore_error=False,
+            n_jobs = None,
             **kwargs):
         &quot;&quot;&quot;
 		Run the passed list of parameters.
@@ -290,6 +301,7 @@ import multiprocessing as mp
 		    sleep (int): Sleep seconds after starting job.
             run (bool): Actually start/queue runner.
             ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
+            n_jobs (int): Number of parallel jobs. If None, use all available cores.
 
 		Returns:
 		    :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
@@ -304,6 +316,7 @@ import multiprocessing as mp
                                 parse=parse,
                                 skip=skip,
                                 ignore_error=ignore_error,
+                                n_jobs=n_jobs,
                                 **kwargs)
         #print(&quot;= &quot; + str(len(params)) + &quot; jobs&quot;)
         if sleep is None:
@@ -313,10 +326,11 @@ import multiprocessing as mp
                       wait=parse,
                       parallel=parallel,
                       sleep=sleep,
+                      n_jobs = n_jobs,
                       **kwargs)
         if parse:
             outs = LD2DL(rps)[&quot;out_file&quot;]
-            results = self.parse(outs)
+            results = self.parse(outs,n_jobs=n_jobs)
             rdl = LD2DL(results)
             pdl = LD2DL(params)
             return DL2DF({**rdl, **pdl})
@@ -327,6 +341,7 @@ import multiprocessing as mp
              wait=True,
              parallel=True,
              sleep=0,
+             n_jobs = None,
              **kwargs):
         &quot;&quot;&quot;
 		Runs Runner per :class:`RunParams`.
@@ -337,6 +352,7 @@ import multiprocessing as mp
 		    wait (bool): Wait for parallel runs to finish.
 		    sleep (int): Sleep seconds after starting subprocess.
 		    parallel (bool): Run jobs in parallel.
+            n_jobs (int): Number of parallel jobs. If None, use all available cores.
 	
 		Returns:
 		    :obj:`list` of int: return codes from jobs if `no_parse` is False.
@@ -346,16 +362,32 @@ import multiprocessing as mp
 
         # Run commands in parallel
         processes = []
+        cmds = []
 
         for rp in rps:
             if not rp.skip:
                 command = template.format(rp.execute)
-                process = subprocess.Popen(command, shell=True)
-                processes.append(process)
-                if not parallel:
-                    process.wait()
-                # Forced delay to prevent overloading clusters when registering jobs
-                time.sleep(sleep)
+                cmds.append(command)
+
+        if wait and parallel:
+            return tpqdm(cmds,
+                  lambda c: subprocess.call(c,shell=True),
+                  n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
+                  desc=&quot;Running&quot;)
+            #with ThreadPoolExecutor(max_workers=n_jobs if n_jobs is not None else mp.cpu_count()) as executor:
+            #    for cmd in cmds:
+            #        processes.append(executor.submit(subprocess.call, cmd, shell=True))
+            #        time.sleep(sleep)
+            #    return [p.result() for p in processes]
+
+        for command in cmds:
+            command = template.format(rp.execute)
+            process = subprocess.Popen(command, shell=True)
+            processes.append(process)
+            if not parallel:
+                process.wait()
+            # Forced delay to prevent overloading clusters when registering jobs
+            time.sleep(sleep)
 
         if wait:
             # Collect statuses
@@ -386,12 +418,13 @@ import multiprocessing as mp
             return False
         return True</div>
 
-<div class="viewcode-block" id="Runner.parse"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.parse">[docs]</a>    def parse(self, outputs: List[str]) -&gt; List[Result]:
+<div class="viewcode-block" id="Runner.parse"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner.parse">[docs]</a>    def parse(self, outputs: List[str],n_jobs=None) -&gt; List[Result]:
         &quot;&quot;&quot;
 		Parses Resummino output files and returns List of Results.
 	
 		Args:
 		    outputs (:obj:`list` of `str`): List of the filenames to be parsed.
+            n_jobs (int): Number of parallel jobs. If None, use all available cores.
 	
 		Returns:
 		    :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
@@ -405,7 +438,7 @@ import multiprocessing as mp
         #rsl = my_parallel(self._parse_file, outputs, desc=&quot;Parsing&quot;)
         rsl = tpqdm(outputs,
                    self._parse_file,
-                   n_jobs=mp.cpu_count(),
+                   n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                    desc=&quot;Parsing&quot;)
         return rsl</div>
         #for o in tqdm.tqdm(outputs):

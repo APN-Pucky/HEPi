@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0-16-g8e178090
+                0.2.0-19-g02c09115
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -97,7 +97,6 @@
              
   <h1>Source code for hepi.plot</h1><div class="highlight"><pre>
 <span></span>from matplotlib.image import NonUniformImage
-from sklearn.metrics import auc
 from collections.abc import Iterable
 import matplotlib as mpl
 from smpl import plot as splot
@@ -114,6 +113,7 @@ from matplotlib import colors
 from .input import Input, get_output_dir, replace_macros
 from .util import get_name
 from matplotlib.ticker import NullFormatter
+from scipy import integrate as auc
 
 
 <div class="viewcode-block" id="title"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.title">[docs]</a>def title(i: Input,
@@ -351,7 +351,7 @@ from matplotlib.ticker import NullFormatter
         ix = iii[1]
         iy = iii[2]
     if print_area:
-        print(&#39;computed AUC using sklearn.metrics.auc: {}&#39;.format(auc(ix, iy)))
+        print(&#39;computed AUC using scipy.integrate.simpson: {}&#39;.format(auc.simpson(iy, ix)))
     if ((np.any(np.less(vy, 0)) or (interpolate and np.any(np.less(iy, 0))))
             and logy):
         splot.data(vx,
@@ -482,14 +482,14 @@ from matplotlib.ticker import NullFormatter
     v = label
     ind = np.argsort(splot.unv(x), kind=&#39;stable&#39;)
     if error:
-        l, _, _ = axes.errorbar(x[ind],
+        l, _, _ = axes.errorbar(x.to_numpy()[ind],
                                 splot.unv(y)[ind],
                                 yerr=splot.usd(y),
                                 capsize=5,
                                 label=v)
         return l
     else:
-        l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
+        l = axes.plot(x.to_numpy()[ind], splot.unv(y)[ind], label=v)
         return l[0]</div>
 
 

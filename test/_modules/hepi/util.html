@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0-16-g8e178090
+                0.2.0-19-g02c09115
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -240,18 +240,6 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(&quot;PDGName&quot;,
     m.update(str(n).encode(&#39;utf-8&#39;))
     return m.hexdigest()</div>
 
-<div class="viewcode-block" id="import_lhapdf"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.import_lhapdf">[docs]</a>def import_lhapdf() -&gt; bool:
-    try:
-        import lhapdf
-        if StrictVersion(lhapdf.__version__) &gt;= StrictVersion(&#39;6.3.0&#39;):
-            return lhapdf
-        else:
-            warnings.warn(&quot;LHAPDF&gt;=6.3.0 version required&quot;)
-            return None
-    except ImportError:
-        warnings.warn(&quot;LHAPDF python binding not installed?&quot;)
-        return None</div>
-
 <div class="viewcode-block" id="lhapdf_name_to_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_name_to_id">[docs]</a>def lhapdf_name_to_id(name: str) -&gt; int:
     &quot;&quot;&quot;
     Converts a LHAPDF name to the sets id.
@@ -266,16 +254,22 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(&quot;PDGName&quot;,
         &gt;&gt;&gt; lhapdf_name_to_id(&quot;CT14lo&quot;)
         13200
     &quot;&quot;&quot;
-    lhapdf = import_lhapdf()
-    if lhapdf is None: return 0
+    try:
+        import lhapdf
+    except ImportError:
+        warnings.warn(&quot;LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly.&quot;)
+        return 0
     if not name in lhapdf.availablePDFSets():
         warnings.warn(&quot;PDF set &#39;&quot; + name + &quot;&#39; not installed?&quot;)
         return 0
     return lhapdf.getPDFSet(name).lhapdfID</div>
 
 <div class="viewcode-block" id="lhapdf_id_to_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_id_to_name">[docs]</a>def lhapdf_id_to_name(lid : int) -&gt; str:
-    lhapdf = import_lhapdf()
-    if lhapdf is None: return &quot;&quot;
+    try:
+        import lhapdf
+    except ImportError:
+        warnings.warn(&quot;LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly.&quot;)
+        return &quot;&quot;
     for n in lhapdf.availablePDFSets():
         if lhapdf.getPDFSet(n).lhapdfID == lid:
             return n
