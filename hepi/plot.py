@@ -319,14 +319,14 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
     splot.plot2d(vx,
                  vy,
                  vz,
-                 style="image",
+                 style="pcolormesh",
                  xaxis=xaxis,
                  yaxis=yaxis,
                  zaxis=zaxis,
                  **kwargs)
 
 
-map_vplot = lambda *a, **da: splot.plot2d(*a, style="image", **da)
+map_vplot = lambda *a, **da: splot.plot2d(*a, style="pcolormesh", **da)
 scatter_vplot = lambda *a, **da: splot.plot2d(*a, style="scatter", **da)
 
 
