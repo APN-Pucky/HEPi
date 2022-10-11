@@ -319,7 +319,7 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
     splot.plot2d(vx,
                  vy,
                  vz,
-                 style="image",
+                 style="pcolormesh",
                  xaxis=xaxis,
                  yaxis=yaxis,
                  zaxis=zaxis,
