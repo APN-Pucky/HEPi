@@ -105,7 +105,6 @@ def parse_single(file: str) -> ResumminoResult:
         :class:`ResumminoResult` : If a value is not found in the file None is used.
 
     """
-    # TODO aNNLO+ NNLL support?
     # TODO generalize units like RS
     lo_pattern = re.compile(r'^LO = \((.*)\) pb')
     nlo_pattern = re.compile(r'^NLO = \((.*)\) pb')
@@ -154,5 +153,13 @@ def parse_single(file: str) -> ResumminoResult:
             if tmp is not None:
                 rnloq_result = ufloat_fromstr(
                     tmp.group(1).replace("+-", "+/-"))
+    if lo_result < 0:
+        warnings.warn("LO < 0")
+    if nlo_result < 0:
+        warnings.warn("NLO < 0")
+    if nll_result < 0:
+        warnings.warn("NLL < 0")
+    if nnll_result < 0:
+        warnings.warn("NNLL < 0")
     return ResumminoResult(lo_result, nlo_result, nll_result, nnll_result,
                            vnlo_result, ppk_result, rnlog_result, rnloq_result)
