@@ -5,7 +5,8 @@ import numpy as np
 import hashlib
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
-import lhapdf
+from distutils.version import StrictVersion
+
 import pandas as pd
 import warnings
 from smpl import interpolate as ip
@@ -141,6 +142,17 @@ def namehash(n: any) -> str:
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
 
+def import_lhapdf() -> bool:
+    try:
+        import lhapdf
+        if StrictVersion(lhapdf.__version__) >= StrictVersion('6.3.0')
+            return True
+        else:
+            warnings.warn("LHAPDF>=6.3.0 version required")
+            return False
+    except ImportError:
+        warnings.warn("LHAPDF python binding not installed?")
+        return False
 
 def lhapdf_name_to_id(name: str) -> int:
     """
@@ -156,10 +168,20 @@ def lhapdf_name_to_id(name: str) -> int:
         >>> lhapdf_name_to_id("CT14lo")
         13200
     """
+    if not import_lhapdf(): return 0
     if not name in lhapdf.availablePDFSets():
-        warnings.warn("PDF set '" + name + "' not installed!")
+        warnings.warn("PDF set '" + name + "' not installed?")
         return 0
     return lhapdf.getPDFSet(name).lhapdfID
+
+def lhapdf_id_to_name(lid : int) -> str:
+    if not import_lhapdf(): return ""
+    for n in lhapdf.availablePDFSets():
+        if lhapdf.getPDFSet(n).lhapdfID == lid:
+            return n
+        
+    warnings.warn("PDF set with id " + str(lid) + " unknown/uninstalled?")
+    return "Unknown PDF ID: " + str(lid)
 
 # TODO fix dependent(mu) for new masses
 
