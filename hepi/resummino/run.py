@@ -76,20 +76,21 @@ class ResumminoRunner(Runner):
 
             src = Template(data)
             result = src.substitute(p.__dict__)
-            open(self.get_output_dir() + rp.name + ".in", "w").write(result)
-            open(self.get_output_dir() + rp.name + ".sh",
+            od = self.get_output_dir()
+            open(od + rp.name + ".in", "w").write(result)
+            open(od + rp.name + ".sh",
                  "w").write("#!/bin/sh\n" + get_path() + ' {} {} >> {}'.format(
-                     self.get_output_dir() + rp.name + ".in", flags,
-                     self.get_output_dir() + rp.name + ".out"))
-            st = os.stat(self.get_output_dir() + rp.name + ".sh")
-            os.chmod(self.get_output_dir() + rp.name + ".sh",
+                     od + rp.name + ".in", flags,
+                     od + rp.name + ".out"))
+            st = os.stat(od + rp.name + ".sh")
+            os.chmod(od + rp.name + ".sh",
                      st.st_mode | stat.S_IEXEC)
-            open(self.get_output_dir() + rp.name + ".out",
+            open(od + rp.name + ".out",
                  "w").write(result + "\n\n")
 
             sname = p.slha
-            with open(self.get_output_dir() + sname, 'r') as f:
-                open(self.get_output_dir() + rp.name + ".out",
+            with open(od + sname, 'r') as f:
+                open(od + rp.name + ".out",
                      "a").write(f.read() + "\n\n")
         return rp
 
