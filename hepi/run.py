@@ -4,12 +4,36 @@ import subprocess
 from subprocess import Popen, PIPE
 from typing import List
 import warnings
+
+import numpy as np
 from hepi.input import Input, Order, get_input_dir, get_output_dir, get_pre
 from hepi.results import Result
 from hepi.util import DL2DF, LD2DL, DictData, namehash
 from smpl.parallel import par
 import time
 import tqdm
+from pqdm.threads import pqdm as tpqdm
+from pqdm.processes import pqdm as ppqdm
+import multiprocessing as mp
+#from pqdm.processes import pqdm
+
+
+def my_parallel(f, arr, n_jobs=None, desc=None):
+    """
+    Parallel execution of f on each element of args
+
+    Examples
+    --------
+    >>> my_parallel(lambda x : x**2, range(0,5))
+    [0, 1, 4, 9, 16]
+
+    """
+    n_jobs = n_jobs or mp.cpu_count()
+    sa = np.array_split(np.array(arr), len(arr) / n_jobs)
+    res = []
+    for i in tqdm.tqdm(range(len(sa)), desc=desc):
+        res += par(f, sa[i])
+    return res
 
 
 class RunParam(DictData):
@@ -73,8 +97,8 @@ class Runner:
         """Checks if the passed path is valid."""
         return True
 
-    def _prepare(self, p: Input, **kwargs) -> RunParam:
-        skip_ = kwargs["skip"]
+    def _prepare(self, p: Input, skip=False, **kwargs) -> RunParam:
+        skip_ = skip
         d = p.__dict__
         d["runner"] = str(type(self).__name__) + "-" + self.get_version(
         )  # TODO re add version, but removed for reusable hashing!
@@ -85,11 +109,15 @@ class Runner:
         if skip_ and os.path.isfile(self.get_output_dir() + name +
                                     ".out") and self._is_valid(
                                         self.get_output_dir() + name + ".out",
-                                        p, d, **kwargs):
-            print(".", end='')
+                                        p,
+                                        d,
+                                        skip=skip_,
+                                        **kwargs):
+            #print(".", end='')
             skip = True
         else:
-            print('|', end='')
+            #print('|', end='')
+            pass
         return RunParam(execute=self.get_output_dir() + name + ".sh",
                         in_file=self.get_output_dir() + name + ".in",
                         out_file=self.get_output_dir() + name + ".out",
@@ -108,11 +136,39 @@ class Runner:
                      skip=True,
                      **kwargs) -> List[RunParam]:
         ret = []
-        for p in params:
-            if not self._check_input(p):
-                warnings.warn("Check input failed.")
-                return []
-            ret.append(self._prepare(p, skip=skip, **kwargs))
+
+        #ret = my_parallel(self._check_input,params,desc="Checking input")
+        ret = tpqdm(params,
+                    self._check_input,
+                    n_jobs=mp.cpu_count(),
+                    desc="Checking input")
+        if not np.alltrue(ret):
+            warnings.warn("Check input failed.")
+            return []
+        #ret = my_parallel(
+        #    lambda p: self._prepare(p, skip=skip, **kwargs),
+        #    params,
+        #    #n_jobs=mp.cpu_count(),
+        #    desc="Preparing")
+        args = [{'p': p, 'skip': skip, **kwargs} for p in params]
+        ret = ppqdm(args,
+                    self._prepare,
+                    n_jobs=mp.cpu_count(),
+                    argument_type='kwargs',
+                    desc="Preparing")
+        skipped = 0
+        not_skipped = 0
+        for r in ret:
+            if r.skip:
+                skipped += 1
+            else:
+                not_skipped += 1
+        print("Skipped: " + str(skipped) + " Not skipped: " + str(not_skipped))
+        #for p in params:
+        #    if not self._check_input(p):
+        #        warnings.warn("Check input failed.")
+        #        return []
+        #    ret.append(self._prepare(p, skip=skip, **kwargs))
         return ret
 
     def run(self,
@@ -151,7 +207,7 @@ class Runner:
                                 skip=skip,
                                 ignore_error=ignore_error,
                                 **kwargs)
-        print("= " + str(len(params)) + " jobs")
+        #print("= " + str(len(params)) + " jobs")
         if sleep is None:
             sleep = 0 if parse else 5
         if run:
@@ -244,13 +300,19 @@ class Runner:
 	
 		"""
         rsl = []
-        #for r in par(self._parse_file, outputs):
+        #for r in parallel(self._parse_file, outputs):
         #    rsl.append(r)
 
         # parallelized opens to many files at times
-        for o in tqdm.tqdm(outputs):
-            rsl.append(self._parse_file(o))
+        #rsl = my_parallel(self._parse_file, outputs, desc="Parsing")
+        rsl = tpqdm(outputs,
+                   self._parse_file,
+                   n_jobs=mp.cpu_count(),
+                   desc="Parsing")
         return rsl
+        #for o in tqdm.tqdm(outputs):
+        #    rsl.append(self._parse_file(o))
+        #return rsl
 
     def _parse_file(self, file: str) -> Result:
         """
@@ -294,7 +356,7 @@ class Runner:
 
     def get_pre(self) -> str:
         """
-		Gets the command prefix. 
+		Gets the command prefix.
 
 		Returns:
 		    str: :attr:`pre`
@@ -335,7 +397,7 @@ class Runner:
 
     def set_pre(self, ppre: str):
         """
-		Sets the command prefix. 
+		Sets the command prefix.
 
 		Args:
 		    ppre (str): new command prefix.

@@ -1,6 +1,6 @@
 # HEPi
 
-Python interface for gluing together several HEP programs (e.g. from HEP-Forge).
+Python interface for gluing together several HEP programs (e.g. from HEPForge <https://www.hepforge.org/>).
 
 [![PyPI version][pypi image]][pypi link] ![downloads](https://img.shields.io/pypi/dm/hepi.svg) 
 

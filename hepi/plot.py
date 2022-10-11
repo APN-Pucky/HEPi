@@ -161,7 +161,7 @@ def plot(dict_list,
     if K:
         yaxis = "$K$"
         yscale = 1.0
-        vy = vy / splot.unv(dict_list["LO"][mask])
+        vy = vy / splot.unv(dict_list["LO"].to_numpy()[mask])
         if K_plus_1:
             vy = vy + vy / vy
     if ratio:
