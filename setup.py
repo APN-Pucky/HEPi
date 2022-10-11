@@ -27,11 +27,11 @@ setuptools.setup(
         "sympy",
         "smpl>=0.0.146",
         "pyslha",
-        "enlighten",
         "particle",
         "pandas>=1.0.0",
         "tqdm",
         "pqdm",
+        "futures",
     ],
     extras_require={
         "opt" : [

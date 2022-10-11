@@ -1,5 +1,5 @@
 """Results and postprocessing for the :mod:`hepi` package."""
-from .util import DictData, import_lhapdf
+from .util import DictData
 import numpy as np
 from uncertainties import unumpy
 from smpl import plot

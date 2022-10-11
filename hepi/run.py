@@ -228,6 +228,7 @@ class Runner:
                       wait=parse,
                       parallel=parallel,
                       sleep=sleep,
+                      n_jobs = n_jobs,
                       **kwargs)
         if parse:
             outs = LD2DL(rps)["out_file"]
@@ -258,8 +259,6 @@ class Runner:
 		Returns:
 		    :obj:`list` of int: return codes from jobs if `no_parse` is False.
 		"""
-        if n_jobs == 1:
-            parallel = False
         # get cluster or niceness prefix
         template = self.get_pre() + " " + "{}"
 
@@ -273,11 +272,15 @@ class Runner:
                 cmds.append(command)
 
         if wait and parallel:
-            with ThreadPoolExecutor(max_workers=n_jobs if n_jobs is not None else mp.cpu_count()) as executor:
-                for cmd in cmds:
-                    processes.append(executor.submit(subprocess.run, cmd, shell=True))
-                    time.sleep(sleep)
-                return [p.result() for p in processes]
+            return tpqdm(cmds,
+                  lambda c: subprocess.call(c,shell=True),
+                  n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
+                  desc="Running")
+            #with ThreadPoolExecutor(max_workers=n_jobs if n_jobs is not None else mp.cpu_count()) as executor:
+            #    for cmd in cmds:
+            #        processes.append(executor.submit(subprocess.call, cmd, shell=True))
+            #        time.sleep(sleep)
+            #    return [p.result() for p in processes]
 
         for command in cmds:
             command = template.format(rp.execute)

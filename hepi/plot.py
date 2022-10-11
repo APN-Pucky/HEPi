@@ -384,14 +384,14 @@ def err_plt(axes, x, y, label=None, error=False):
     v = label
     ind = np.argsort(splot.unv(x), kind='stable')
     if error:
-        l, _, _ = axes.errorbar(x[ind],
+        l, _, _ = axes.errorbar(x.to_numpy()[ind],
                                 splot.unv(y)[ind],
                                 yerr=splot.usd(y),
                                 capsize=5,
                                 label=v)
         return l
     else:
-        l = axes.plot(x[ind], splot.unv(y)[ind], label=v)
+        l = axes.plot(x.to_numpy()[ind], splot.unv(y)[ind], label=v)
         return l[0]
 
 
