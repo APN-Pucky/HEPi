@@ -25,14 +25,13 @@ setuptools.setup(
         "matplotlib",
         "scipy",
         "sympy",
-        "scikit-learn",
         "smpl>=0.0.146",
         "pyslha",
         "enlighten",
         "particle",
-        "pqdm",
         "pandas>=1.0.0",
         "tqdm",
+        "pqdm",
     ],
     extras_require={
         "opt" : [

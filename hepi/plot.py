@@ -1,5 +1,4 @@
 from matplotlib.image import NonUniformImage
-from sklearn.metrics import auc
 from collections.abc import Iterable
 import matplotlib as mpl
 from smpl import plot as splot
@@ -16,6 +15,7 @@ from matplotlib import colors
 from .input import Input, get_output_dir, replace_macros
 from .util import get_name
 from matplotlib.ticker import NullFormatter
+from scipy import integrate as auc
 
 
 def title(i: Input,
@@ -253,7 +253,7 @@ def vplot(x,
         ix = iii[1]
         iy = iii[2]
     if print_area:
-        print('computed AUC using sklearn.metrics.auc: {}'.format(auc(ix, iy)))
+        print('computed AUC using scipy.integrate.simpson: {}'.format(auc.simpson(iy, ix)))
     if ((np.any(np.less(vy, 0)) or (interpolate and np.any(np.less(iy, 0))))
             and logy):
         splot.data(vx,

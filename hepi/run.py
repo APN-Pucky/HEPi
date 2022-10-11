@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 from logging import warning
 import os
 import subprocess
@@ -134,13 +135,22 @@ class Runner:
     def _prepare_all(self,
                      params: List[Input],
                      skip=True,
+                     n_jobs = None,
                      **kwargs) -> List[RunParam]:
+        """
+        Prepares all parameters for execution.
+
+        Args:
+            params (List[:class:`hepi.Input`]): List of input parameters.
+            skip (bool, optional): If True, the runner will check if the output file already exists and skip the execution if it does. Defaults to True.
+            n_jobs (int): Number of parallel jobs. If None, use all available cores.
+        """
         ret = []
 
         #ret = my_parallel(self._check_input,params,desc="Checking input")
         ret = tpqdm(params,
                     self._check_input,
-                    n_jobs=mp.cpu_count(),
+                    n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                     desc="Checking input")
         if not np.alltrue(ret):
             warnings.warn("Check input failed.")
@@ -153,7 +163,7 @@ class Runner:
         args = [{'p': p, 'skip': skip, **kwargs} for p in params]
         ret = ppqdm(args,
                     self._prepare,
-                    n_jobs=mp.cpu_count(),
+                    n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                     argument_type='kwargs',
                     desc="Preparing")
         skipped = 0
@@ -179,6 +189,7 @@ class Runner:
             sleep=0,
             run=True,
             ignore_error=False,
+            n_jobs = None,
             **kwargs):
         """
 		Run the passed list of parameters.
@@ -192,6 +203,7 @@ class Runner:
 		    sleep (int): Sleep seconds after starting job.
             run (bool): Actually start/queue runner.
             ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
+            n_jobs (int): Number of parallel jobs. If None, use all available cores.
 
 		Returns:
 		    :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
@@ -206,6 +218,7 @@ class Runner:
                                 parse=parse,
                                 skip=skip,
                                 ignore_error=ignore_error,
+                                n_jobs=n_jobs,
                                 **kwargs)
         #print("= " + str(len(params)) + " jobs")
         if sleep is None:
@@ -218,7 +231,7 @@ class Runner:
                       **kwargs)
         if parse:
             outs = LD2DL(rps)["out_file"]
-            results = self.parse(outs)
+            results = self.parse(outs,n_jobs=n_jobs)
             rdl = LD2DL(results)
             pdl = LD2DL(params)
             return DL2DF({**rdl, **pdl})
@@ -229,6 +242,7 @@ class Runner:
              wait=True,
              parallel=True,
              sleep=0,
+             n_jobs = None,
              **kwargs):
         """
 		Runs Runner per :class:`RunParams`.
@@ -239,25 +253,40 @@ class Runner:
 		    wait (bool): Wait for parallel runs to finish.
 		    sleep (int): Sleep seconds after starting subprocess.
 		    parallel (bool): Run jobs in parallel.
+            n_jobs (int): Number of parallel jobs. If None, use all available cores.
 	
 		Returns:
 		    :obj:`list` of int: return codes from jobs if `no_parse` is False.
 		"""
+        if n_jobs == 1:
+            parallel = False
         # get cluster or niceness prefix
         template = self.get_pre() + " " + "{}"
 
         # Run commands in parallel
         processes = []
+        cmds = []
 
         for rp in rps:
             if not rp.skip:
                 command = template.format(rp.execute)
-                process = subprocess.Popen(command, shell=True)
-                processes.append(process)
-                if not parallel:
-                    process.wait()
-                # Forced delay to prevent overloading clusters when registering jobs
-                time.sleep(sleep)
+                cmds.append(command)
+
+        if wait and parallel:
+            with ThreadPoolExecutor(max_workers=n_jobs if n_jobs is not None else mp.cpu_count()) as executor:
+                for cmd in cmds:
+                    processes.append(executor.submit(subprocess.run, cmd, shell=True))
+                    time.sleep(sleep)
+                return [p.result() for p in processes]
+
+        for command in cmds:
+            command = template.format(rp.execute)
+            process = subprocess.Popen(command, shell=True)
+            processes.append(process)
+            if not parallel:
+                process.wait()
+            # Forced delay to prevent overloading clusters when registering jobs
+            time.sleep(sleep)
 
         if wait:
             # Collect statuses
@@ -288,12 +317,13 @@ class Runner:
             return False
         return True
 
-    def parse(self, outputs: List[str]) -> List[Result]:
+    def parse(self, outputs: List[str],n_jobs=None) -> List[Result]:
         """
 		Parses Resummino output files and returns List of Results.
 	
 		Args:
 		    outputs (:obj:`list` of `str`): List of the filenames to be parsed.
+            n_jobs (int): Number of parallel jobs. If None, use all available cores.
 	
 		Returns:
 		    :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
@@ -307,7 +337,7 @@ class Runner:
         #rsl = my_parallel(self._parse_file, outputs, desc="Parsing")
         rsl = tpqdm(outputs,
                    self._parse_file,
-                   n_jobs=mp.cpu_count(),
+                   n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                    desc="Parsing")
         return rsl
         #for o in tqdm.tqdm(outputs):

@@ -93,7 +93,7 @@ class Result(DictData):
 def pdf_errors(li,
                dl,
                ordernames=None,
-               confidence_level=90):
+               confidence_level=90,n_jobs=None):
     """
     Just like `pdf_error` but over a list of ordernames.
     """
@@ -101,7 +101,7 @@ def pdf_errors(li,
         ordernames = ["LO", "NLO", "aNNLO_PLUS_NNLL"]
     r_dl = dl
     for o in ordernames:
-        r_dl = pdf_error(li, r_dl, o, confidence_level=confidence_level)
+        r_dl = pdf_error(li, r_dl, o, confidence_level=confidence_level,n_jobs=n_jobs)
 
     return r_dl
 
@@ -134,7 +134,7 @@ def _pdf_error_single(members, i, dl, ordername, confidence_level=90):
     return (i,nlo_unc)
 
 
-def pdf_error(li, dl, ordername="LO", confidence_level=90):
+def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
     """
     Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
@@ -175,7 +175,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
             and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0]
     ret = tpqdm(args,
                 _pdf_error_single,
-                n_jobs=mp.cpu_count(),
+                n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                 argument_type='kwargs',
                 desc="PDF uncertainty @ " + ordername)
     for i, nlo_unc in ret:
@@ -210,7 +210,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
     return dl
 
 
-def scale_errors(li, dl, ordernames=None):
+def scale_errors(li, dl, ordernames=None,n_jobs=None):
     """
     Just like `scale_error` but over a list of ordernames.
     """
@@ -218,7 +218,7 @@ def scale_errors(li, dl, ordernames=None):
         ordernames = ["LO", "NLO", "aNNLO_PLUS_NNLL"]
     r_dl = dl
     for o in ordernames:
-        r_dl = scale_error(li, r_dl, o)
+        r_dl = scale_error(li, r_dl, o, n_jobs=n_jobs)
 
     return r_dl
 
@@ -238,7 +238,7 @@ def _scale_error_single(members,i,dl,ordername="LO"):
         np.min( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i])
     )
 
-def scale_error(li, dl, ordername="LO"):
+def scale_error(li, dl, ordername="LO",n_jobs=None):
     """
     Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
 
@@ -271,7 +271,7 @@ def scale_error(li, dl, ordername="LO"):
             and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0]
     ret = tpqdm(args,
                 _scale_error_single,
-                n_jobs=mp.cpu_count(),
+                n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                 argument_type='kwargs',
                 desc="Scale uncertainty @ " + ordername)
     for i,errplus,errminus in ret:
