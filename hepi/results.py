@@ -1,5 +1,5 @@
 """Results and postprocessing for the :mod:`hepi` package."""
-from .util import DictData
+from .util import DictData, import_lhapdf
 import numpy as np
 from uncertainties import unumpy
 from smpl import plot
@@ -106,8 +106,8 @@ def pdf_errors(li,
     return r_dl
 
 
-def pdf_error_single(members, i, dl, ordername, confidence_level=90):  
-    import lhapdf
+def _pdf_error_single(members, i, dl, ordername, confidence_level=90):  
+    #import lhapdf
     if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
             i] == 1.0:
         pdfset = lhapdf.getPDFSet(dl["pdf_nlo"][i])
@@ -149,7 +149,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
             - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
     """
     global required_numerical_uncertainty_factor
-    import lhapdf
+    if not import_lhapdf(): raise RuntimeException("LHAPDF>=6.3.0 with python bindings needed to compute PDF uncertainties.")
     example = li[0]
     members = [
         attr for attr in dir(example)
@@ -171,7 +171,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90):
     } for i in range(len(dl["pdfset_nlo"])) if dl["pdfset_nlo"][i] == 0
             and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0]
     ret = tpqdm(args,
-                pdf_error_single,
+                _pdf_error_single,
                 n_jobs=mp.cpu_count(),
                 argument_type='kwargs',
                 desc="PDF uncertainty @ " + ordername)
@@ -219,7 +219,7 @@ def scale_errors(li, dl, ordernames=None):
 
     return r_dl
 
-def scale_error_single(members,i,dl,ordername="LO"):
+def _scale_error_single(members,i,dl,ordername="LO"):
     if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
         i] == 1.0:
         scales = []
@@ -267,7 +267,7 @@ def scale_error(li, dl, ordername="LO"):
     } for i in range(len(dl["pdfset_nlo"])) if dl["pdfset_nlo"][i] == 0
             and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0]
     ret = tpqdm(args,
-                scale_error_single,
+                _scale_error_single,
                 n_jobs=mp.cpu_count(),
                 argument_type='kwargs',
                 desc="Scale uncertainty @ " + ordername)
