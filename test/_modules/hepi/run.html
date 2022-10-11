@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0-19-g02c09115
+                0.2.0-21-g7bdc04af
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -196,7 +196,7 @@ import multiprocessing as mp
         &quot;&quot;&quot;Checks if the passed path is valid.&quot;&quot;&quot;
         return True</div>
 
-<div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, skip=False, **kwargs) -&gt; RunParam:
+<div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, skip=False, assume_valid = False, **kwargs) -&gt; RunParam:
         skip_ = skip
         d = p.__dict__
         d[&quot;runner&quot;] = str(type(self).__name__) + &quot;-&quot; + self.get_version(
@@ -206,12 +206,12 @@ import multiprocessing as mp
         #print(name)
         skip = False
         if skip_ and os.path.isfile(self.get_output_dir() + name +
-                                    &quot;.out&quot;) and self._is_valid(
+                                    &quot;.out&quot;) and (assume_valid or self._is_valid(
                                         self.get_output_dir() + name + &quot;.out&quot;,
                                         p,
                                         d,
                                         skip=skip_,
-                                        **kwargs):
+                                        **kwargs)):
             #print(&quot;.&quot;, end=&#39;&#39;)
             skip = True
         else:
