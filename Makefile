@@ -7,7 +7,7 @@ html:
 doc: html
 
 install:
-	python3 -m pip install --user .[docs,dev]
+	python3 -m pip install --user .[doc,dev]
 
 build:
 	python3 -m build
