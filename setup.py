@@ -35,7 +35,7 @@ setuptools.setup(
         "tqdm",
     ],
     extras_require={
-        "full" : [
+        "opt" : [
             "lhapdf>=6.3.0",
         ],
         "dev": [
@@ -45,7 +45,7 @@ setuptools.setup(
             "jupyterlab",
             "ipython",
         ],
-        "docs": [
+        "doc": [
             "sphinx-rtd-theme",
             "sphinx",
             "nbsphinx",
