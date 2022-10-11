@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0-7-gd9d1fc56
+                0.2.0-8-g36b7cdde
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -101,7 +101,6 @@ from .util import DictData
 import numpy as np
 from uncertainties import unumpy
 from smpl import plot
-import lhapdf
 import warnings
 import tqdm
 #from pqdm.processes import pqdm as ppqdm
@@ -205,7 +204,8 @@ from smpl.parallel import par
     return r_dl</div>
 
 
-<div class="viewcode-block" id="pdf_error_single"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error_single">[docs]</a>def pdf_error_single(members, i, dl, ordername, confidence_level=90):
+<div class="viewcode-block" id="pdf_error_single"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error_single">[docs]</a>def pdf_error_single(members, i, dl, ordername, confidence_level=90):  
+    import lhapdf
     if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][
             i] == 1.0:
         pdfset = lhapdf.getPDFSet(dl[&quot;pdf_nlo&quot;][i])
@@ -247,6 +247,7 @@ from smpl.parallel import par
             - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
     &quot;&quot;&quot;
     global required_numerical_uncertainty_factor
+    import lhapdf
     example = li[0]
     members = [
         attr for attr in dir(example)
