@@ -142,6 +142,9 @@ def namehash(n: any) -> str:
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
 
+def import_lhapdf():
+
+
 def lhapdf_name_to_id(name: str) -> int:
     """
     Converts a LHAPDF name to the sets id.
@@ -159,7 +162,10 @@ def lhapdf_name_to_id(name: str) -> int:
     try:
         import lhapdf
     except ImportError:
-        warnings.warn("LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly.")
+        warnings.warn("LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version).")
+        return 0
+    if not lhapdf.availablePDFSets():
+        warnings.warn("No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).")
         return 0
     if not name in lhapdf.availablePDFSets():
         warnings.warn("PDF set '" + name + "' not installed?")
@@ -170,13 +176,16 @@ def lhapdf_id_to_name(lid : int) -> str:
     try:
         import lhapdf
     except ImportError:
-        warnings.warn("LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly.")
+        warnings.warn("LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version).")
         return ""
+    if not lhapdf.availablePDFSets():
+        warnings.warn("No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).")
+        return 0
     for n in lhapdf.availablePDFSets():
         if lhapdf.getPDFSet(n).lhapdfID == lid:
             return n
         
-    warnings.warn("PDF set with id " + str(lid) + " unknown/uninstalled?")
+    warnings.warn("PDF set with id " + str(lid) + " unknown/not installed?")
     return "Unknown PDF ID: " + str(lid)
 
 # TODO fix dependent(mu) for new masses

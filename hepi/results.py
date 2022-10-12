@@ -152,7 +152,9 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
     try:
         import lhapdf
     except ImportError:
-        raise RuntimeError("LHAPDF>=6.3.0 with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly.")
+        raise RuntimeError("LHAPDF with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly (i.e. correct python version).")
+    if not lhapdf.availablePDFSets():
+        raise RuntimeError("No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).")
     example = li[0]
     members = [
         attr for attr in dir(example)
