@@ -142,8 +142,6 @@ def namehash(n: any) -> str:
     m.update(str(n).encode('utf-8'))
     return m.hexdigest()
 
-def import_lhapdf():
-
 
 def lhapdf_name_to_id(name: str) -> int:
     """
