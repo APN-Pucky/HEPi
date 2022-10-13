@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.1-1-g39efcb41
+                0.2.1-4-ga2310c6c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -556,12 +556,11 @@ import lhapdf
 
     Inversion of the `remove_where` function.
 
-    Parameters
-    ----------
-    input_list : List[Input]
-        The list of inputs to filter.
-    condition : Callable[[Input.__dict__], bool]
-        The condition to filter on.
+    Args:
+        input_list : List[Input]
+            The list of inputs to filter.
+        condition : Callable[[Input.__dict__], bool]
+            The condition to filter on.
     &quot;&quot;&quot;
     return remove_where(input_list, lambda x: not condition(x))</div>
 
@@ -570,12 +569,11 @@ import lhapdf
     &quot;&quot;&quot;
     Remove elements in list which satisfy condition.
 
-    Parameters
-    ----------
-    input_list : List[Input]
-        The list of inputs to filter.
-    condition : Callable[[Input.__dict__], bool]
-        The condition to filter on.
+    Args:
+        input_list : List[Input]
+	    The list of inputs to filter.
+        condition : Callable[[Input.__dict__], bool]
+	    The condition to filter on.
 
     Examples:
         &gt;&gt;&gt; li = scan_multi([Input(Order.LO, 13000,  1000022,1000022, &quot;None&quot;, &quot;CT14lo&quot;,&quot;CT14lo&quot;,update=False)],energy=range(10000,13000,1000))
