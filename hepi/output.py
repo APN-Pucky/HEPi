@@ -210,7 +210,6 @@ def write_json(dict_list: list,
     output (writeable or file name str) : Should support a function `.write()`.
 
  Examples:
-
     >>> import hepi 
     >>> import urllib.request
     >>> dl = hepi.load(urllib.request.urlopen(
