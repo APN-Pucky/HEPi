@@ -458,12 +458,11 @@ def keep_where(input_list: List[Input], condition):
 
     Inversion of the `remove_where` function.
 
-    Parameters
-    ----------
-    input_list : List[Input]
-        The list of inputs to filter.
-    condition : Callable[[Input.__dict__], bool]
-        The condition to filter on.
+    Args:
+        input_list : List[Input]
+            The list of inputs to filter.
+        condition : Callable[[Input.__dict__], bool]
+            The condition to filter on.
     """
     return remove_where(input_list, lambda x: not condition(x))
 
@@ -472,12 +471,11 @@ def remove_where(input_list: List[Input], condition, **kwargs):
     """
     Remove elements in list which satisfy condition.
 
-    Parameters
-    ----------
-    input_list : List[Input]
-        The list of inputs to filter.
-    condition : Callable[[Input.__dict__], bool]
-        The condition to filter on.
+    Args:
+        input_list : List[Input]
+	    The list of inputs to filter.
+        condition : Callable[[Input.__dict__], bool]
+	    The condition to filter on.
 
     Examples:
         >>> li = scan_multi([Input(Order.LO, 13000,  1000022,1000022, "None", "CT14lo","CT14lo",update=False)],energy=range(10000,13000,1000))
