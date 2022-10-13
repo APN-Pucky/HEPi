@@ -32,6 +32,7 @@ Functions
    hepi.util.get_LR_partner
    hepi.util.namehash
    hepi.util.lhapdf_name_to_id
+   hepi.util.lhapdf_id_to_name
    hepi.util.interpolate_1d
    hepi.util.interpolate_2d
 
@@ -144,6 +145,9 @@ Functions
 
    >>> lhapdf_name_to_id("CT14lo")
    13200
+
+
+.. py:function:: lhapdf_id_to_name(lid: int) -> str
 
 
 .. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True)

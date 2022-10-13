@@ -88,21 +88,19 @@ Attributes
 
    .. py:method:: _run(rps: List[hepi.run.RunParam], wait=True, parallel=True, sleep=0, **kwargs)
 
-      Runs Runner per :class:`RunParams`.
+          Runs Runner per :class:`RunParams`.
 
-      :param rps: Extended run parameters.
-      :type rps: :obj:`list` of :class:`RunParams`
-      :param bar: Enable info bar.
-      :type bar: bool
-      :param wait: Wait for parallel runs to finish.
-      :type wait: bool
-      :param sleep: Sleep seconds after starting subprocess.
-      :type sleep: int
-      :param parallel: Run jobs in parallel.
-      :type parallel: bool
+          Args:
+              rps (:obj:`list` of :class:`RunParams`): Extended run parameters.
+              bar (bool): Enable info bar.
+              wait (bool): Wait for parallel runs to finish.
+              sleep (int): Sleep seconds after starting subprocess.
+              parallel (bool): Run jobs in parallel.
+      n_jobs (int): Number of parallel jobs. If None, use all available cores.
 
-      :returns: return codes from jobs if `no_parse` is False.
-      :rtype: :obj:`list` of int
+          Returns:
+              :obj:`list` of int: return codes from jobs if `no_parse` is False.
+
 
 
    .. py:method:: _prepare(p: hepi.Input, **kwargs) -> hepi.run.RunParam

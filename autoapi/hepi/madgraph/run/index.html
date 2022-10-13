@@ -39,7 +39,7 @@
             <a href="../../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0
+                0.2.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -255,24 +255,24 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.madgraph.run.MadGraphRunner._run">
 <span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../run/index.html#hepi.run.RunParam" title="hepi.run.RunParam"><span class="pre">hepi.run.RunParam</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/madgraph/run.html#MadGraphRunner._run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.madgraph.run.MadGraphRunner._run" title="Permalink to this definition"></a></dt>
-<dd><p>Runs Runner per <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rps</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>) – Extended run parameters.</p></li>
-<li><p><strong>bar</strong> (<em>bool</em>) – Enable info bar.</p></li>
-<li><p><strong>wait</strong> (<em>bool</em>) – Wait for parallel runs to finish.</p></li>
-<li><p><strong>sleep</strong> (<em>int</em>) – Sleep seconds after starting subprocess.</p></li>
-<li><p><strong>parallel</strong> (<em>bool</em>) – Run jobs in parallel.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>return codes from jobs if <cite>no_parse</cite> is False.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of int</p>
+<dd><blockquote>
+<div><p>Runs Runner per <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>rps (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>): Extended run parameters.
+bar (bool): Enable info bar.
+wait (bool): Wait for parallel runs to finish.
+sleep (int): Sleep seconds after starting subprocess.
+parallel (bool): Run jobs in parallel.</p>
 </dd>
 </dl>
+</div></blockquote>
+<p>n_jobs (int): Number of parallel jobs. If None, use all available cores.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of int: return codes from jobs if <cite>no_parse</cite> is False.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">

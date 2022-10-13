@@ -36,7 +36,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0
+                0.2.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -203,7 +203,6 @@ import shutil
         :class:`ResumminoResult` : If a value is not found in the file None is used.
 
     &quot;&quot;&quot;
-    # TODO aNNLO+ NNLL support?
     # TODO generalize units like RS
     lo_pattern = re.compile(r&#39;^LO = \((.*)\) pb&#39;)
     nlo_pattern = re.compile(r&#39;^NLO = \((.*)\) pb&#39;)
@@ -252,6 +251,14 @@ import shutil
             if tmp is not None:
                 rnloq_result = ufloat_fromstr(
                     tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
+    if lo_result &lt; 0:
+        warnings.warn(&quot;LO &lt; 0&quot;)
+    if nlo_result &lt; 0:
+        warnings.warn(&quot;NLO &lt; 0&quot;)
+    if nll_result &lt; 0:
+        warnings.warn(&quot;NLL &lt; 0&quot;)
+    if nnll_result &lt; 0:
+        warnings.warn(&quot;NNLL &lt; 0&quot;)
     return ResumminoResult(lo_result, nlo_result, nll_result, nnll_result,
                            vnlo_result, ppk_result, rnlog_result, rnloq_result)</div>
 </pre></div>

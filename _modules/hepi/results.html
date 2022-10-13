@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0
+                0.2.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -101,7 +101,6 @@ from .util import DictData
 import numpy as np
 from uncertainties import unumpy
 from smpl import plot
-import lhapdf
 import warnings
 import tqdm
 #from pqdm.processes import pqdm as ppqdm
@@ -192,7 +191,7 @@ from smpl.parallel import par
 <div class="viewcode-block" id="pdf_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_errors">[docs]</a>def pdf_errors(li,
                dl,
                ordernames=None,
-               confidence_level=90):
+               confidence_level=90,n_jobs=None):
     &quot;&quot;&quot;
     Just like `pdf_error` but over a list of ordernames.
     &quot;&quot;&quot;
@@ -200,12 +199,13 @@ from smpl.parallel import par
         ordernames = [&quot;LO&quot;, &quot;NLO&quot;, &quot;aNNLO_PLUS_NNLL&quot;]
     r_dl = dl
     for o in ordernames:
-        r_dl = pdf_error(li, r_dl, o, confidence_level=confidence_level)
+        r_dl = pdf_error(li, r_dl, o, confidence_level=confidence_level,n_jobs=n_jobs)
 
     return r_dl</div>
 
 
-<div class="viewcode-block" id="pdf_error_single"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error_single">[docs]</a>def pdf_error_single(members, i, dl, ordername, confidence_level=90):
+<div class="viewcode-block" id="_pdf_error_single"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi._pdf_error_single">[docs]</a>def _pdf_error_single(members, i, dl, ordername, confidence_level=90):  
+    #import lhapdf
     if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][
             i] == 1.0:
         pdfset = lhapdf.getPDFSet(dl[&quot;pdf_nlo&quot;][i])
@@ -232,7 +232,7 @@ from smpl.parallel import par
     return (i,nlo_unc)</div>
 
 
-<div class="viewcode-block" id="pdf_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error">[docs]</a>def pdf_error(li, dl, ordername=&quot;LO&quot;, confidence_level=90):
+<div class="viewcode-block" id="pdf_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error">[docs]</a>def pdf_error(li, dl, ordername=&quot;LO&quot;, confidence_level=90, n_jobs=None):
     &quot;&quot;&quot;
     Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
@@ -243,10 +243,16 @@ from smpl.parallel import par
         confidence_level (:obj:`double`): Confidence Level for PDF uncertainty
 
     Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
-            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
+        :obj:`dict`: Modified `dl` with new `ordername_{PDF,PDF_CENTRAL,PDF_ERRPLUS,PDF_ERRMINUS,PDF_ERRSYM}` entries.
+            - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
     &quot;&quot;&quot;
     global required_numerical_uncertainty_factor
+    try:
+        import lhapdf
+    except ImportError:
+        raise RuntimeError(&quot;LHAPDF with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly (i.e. correct python version).&quot;)
+    if not lhapdf.availablePDFSets():
+        raise RuntimeError(&quot;No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).&quot;)
     example = li[0]
     members = [
         attr for attr in dir(example)
@@ -268,8 +274,8 @@ from smpl.parallel import par
     } for i in range(len(dl[&quot;pdfset_nlo&quot;])) if dl[&quot;pdfset_nlo&quot;][i] == 0
             and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][i] == 1.0]
     ret = tpqdm(args,
-                pdf_error_single,
-                n_jobs=mp.cpu_count(),
+                _pdf_error_single,
+                n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                 argument_type=&#39;kwargs&#39;,
                 desc=&quot;PDF uncertainty @ &quot; + ordername)
     for i, nlo_unc in ret:
@@ -304,7 +310,7 @@ from smpl.parallel import par
     return dl</div>
 
 
-<div class="viewcode-block" id="scale_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_errors">[docs]</a>def scale_errors(li, dl, ordernames=None):
+<div class="viewcode-block" id="scale_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_errors">[docs]</a>def scale_errors(li, dl, ordernames=None,n_jobs=None):
     &quot;&quot;&quot;
     Just like `scale_error` but over a list of ordernames.
     &quot;&quot;&quot;
@@ -312,11 +318,11 @@ from smpl.parallel import par
         ordernames = [&quot;LO&quot;, &quot;NLO&quot;, &quot;aNNLO_PLUS_NNLL&quot;]
     r_dl = dl
     for o in ordernames:
-        r_dl = scale_error(li, r_dl, o)
+        r_dl = scale_error(li, r_dl, o, n_jobs=n_jobs)
 
     return r_dl</div>
 
-<div class="viewcode-block" id="scale_error_single"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_error_single">[docs]</a>def scale_error_single(members,i,dl,ordername=&quot;LO&quot;):
+<div class="viewcode-block" id="_scale_error_single"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi._scale_error_single">[docs]</a>def _scale_error_single(members,i,dl,ordername=&quot;LO&quot;):
     if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][
         i] == 1.0:
         scales = []
@@ -332,7 +338,7 @@ from smpl.parallel import par
         np.min( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i])
     )</div>
 
-<div class="viewcode-block" id="scale_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_error">[docs]</a>def scale_error(li, dl, ordername=&quot;LO&quot;):
+<div class="viewcode-block" id="scale_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_error">[docs]</a>def scale_error(li, dl, ordername=&quot;LO&quot;,n_jobs=None):
     &quot;&quot;&quot;
     Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
 
@@ -341,8 +347,8 @@ from smpl.parallel import par
         dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
 
     Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
-            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
+        :obj:`dict`: Modified `dl` with new `ordername_{SCALE,SCALE_ERRPLUS,SCALE_ERRMINUS}` entries.
+            - `ordername_SCALE` contains a symmetrized :mod:`uncertainties` object.
     &quot;&quot;&quot;
     global required_numerical_uncertainty_factor
     example = li[0]
@@ -364,8 +370,8 @@ from smpl.parallel import par
     } for i in range(len(dl[&quot;pdfset_nlo&quot;])) if dl[&quot;pdfset_nlo&quot;][i] == 0
             and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][i] == 1.0]
     ret = tpqdm(args,
-                scale_error_single,
-                n_jobs=mp.cpu_count(),
+                _scale_error_single,
+                n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
                 argument_type=&#39;kwargs&#39;,
                 desc=&quot;Scale uncertainty @ &quot; + ordername)
     for i,errplus,errminus in ret:
@@ -424,8 +430,8 @@ from smpl.parallel import par
         dl (:obj:`dict`): :class:`Result` dictionary with lists per entry.
 
     Returns:
-        :obj:`dict`: Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
-            - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
+        :obj:`dict`: Modified `dl` with new `ordername_{COMBINED,ERRPLUS,ERRMINUS}` entries.
+            - `ordername_COMBINED` contains a symmetrized :mod:`uncertainties` object.
     &quot;&quot;&quot;
     dl[ordername + &quot;_NOERR&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))
     dl[ordername + &quot;_ERRPLUS&quot;] = np.array([None] * len(dl[&quot;pdfset_nlo&quot;]))

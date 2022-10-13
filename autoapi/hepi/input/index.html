@@ -39,7 +39,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0
+                0.2.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -677,8 +677,10 @@ Only points with <cite>mu_f`=`mu_r</cite> or <cite>mu_r/f`=1 or `mu_r/f`=`distan
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input_list</strong> (<em>List</em><em>[</em><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><em>Input</em></a><em>]</em>) – The list of inputs to filter.</p></li>
-<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Input.__dict__</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The condition to filter on.</p></li>
+<li><p><strong>input_list</strong> – List[Input]
+The list of inputs to filter.</p></li>
+<li><p><strong>condition</strong> – Callable[[Input.__dict__], bool]
+The condition to filter on.</p></li>
 </ul>
 </dd>
 </dl>
@@ -691,18 +693,20 @@ Only points with <cite>mu_f`=`mu_r</cite> or <cite>mu_r/f`=1 or `mu_r/f`=`distan
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input_list</strong> (<em>List</em><em>[</em><a class="reference internal" href="#hepi.input.Input" title="hepi.input.Input"><em>Input</em></a><em>]</em>) – The list of inputs to filter.</p></li>
-<li><p><strong>condition</strong> (<em>Callable</em><em>[</em><em>[</em><em>Input.__dict__</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – The condition to filter on.</p></li>
-<li><p><strong>Examples</strong> – <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">li</span> <span class="o">=</span> <span class="n">scan_multi</span><span class="p">([</span><span class="n">Input</span><span class="p">(</span><span class="n">Order</span><span class="o">.</span><span class="n">LO</span><span class="p">,</span> <span class="mi">13000</span><span class="p">,</span>  <span class="mi">1000022</span><span class="p">,</span><span class="mi">1000022</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;CT14lo&quot;</span><span class="p">,</span><span class="s2">&quot;CT14lo&quot;</span><span class="p">,</span><span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">)],</span><span class="n">energy</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+<li><p><strong>input_list</strong> – List[Input]
+The list of inputs to filter.</p></li>
+<li><p><strong>condition</strong> – Callable[[Input.__dict__], bool]
+The condition to filter on.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">li</span> <span class="o">=</span> <span class="n">scan_multi</span><span class="p">([</span><span class="n">Input</span><span class="p">(</span><span class="n">Order</span><span class="o">.</span><span class="n">LO</span><span class="p">,</span> <span class="mi">13000</span><span class="p">,</span>  <span class="mi">1000022</span><span class="p">,</span><span class="mi">1000022</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;CT14lo&quot;</span><span class="p">,</span><span class="s2">&quot;CT14lo&quot;</span><span class="p">,</span><span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">)],</span><span class="n">energy</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">remove_where</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="k">lambda</span> <span class="nb">dict</span> <span class="p">:</span> <span class="p">(</span><span class="nb">dict</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10000</span> <span class="ow">or</span> <span class="nb">dict</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">11000</span><span class="p">)):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="go">{&#39;order&#39;: &lt;Order.LO: 0&gt;, &#39;energy&#39;: 12000, &#39;energyhalf&#39;: 6500.0, &#39;particle1&#39;: 1000022, &#39;particle2&#39;: 1000022, &#39;slha&#39;: &#39;None&#39;, &#39;pdf_lo&#39;: &#39;CT14lo&#39;, &#39;pdfset_lo&#39;: 0, &#39;pdf_nlo&#39;: &#39;CT14lo&#39;, &#39;pdfset_nlo&#39;: 0, &#39;pdf_lo_id&#39;: 13200, &#39;pdf_nlo_id&#39;: 13200, &#39;mu_f&#39;: 1.0, &#39;mu_r&#39;: 1.0, &#39;precision&#39;: 0.01, &#39;max_iters&#39;: 50, &#39;invariant_mass&#39;: &#39;auto&#39;, &#39;pt&#39;: &#39;auto&#39;, &#39;result&#39;: &#39;total&#39;, &#39;id&#39;: &#39;&#39;, &#39;model&#39;: &#39;&#39;, &#39;mu&#39;: 0.0}</span>
 </pre></div>
 </div>
-</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">

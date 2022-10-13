@@ -36,7 +36,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0
+                0.2.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -174,20 +174,21 @@ import stat
 
             src = Template(data)
             result = src.substitute(p.__dict__)
-            open(self.get_output_dir() + rp.name + &quot;.in&quot;, &quot;w&quot;).write(result)
-            open(self.get_output_dir() + rp.name + &quot;.sh&quot;,
+            od = self.get_output_dir()
+            open(od + rp.name + &quot;.in&quot;, &quot;w&quot;).write(result)
+            open(od + rp.name + &quot;.sh&quot;,
                  &quot;w&quot;).write(&quot;#!/bin/sh\n&quot; + get_path() + &#39; {} {} &gt;&gt; {}&#39;.format(
-                     self.get_output_dir() + rp.name + &quot;.in&quot;, flags,
-                     self.get_output_dir() + rp.name + &quot;.out&quot;))
-            st = os.stat(self.get_output_dir() + rp.name + &quot;.sh&quot;)
-            os.chmod(self.get_output_dir() + rp.name + &quot;.sh&quot;,
+                     od + rp.name + &quot;.in&quot;, flags,
+                     od + rp.name + &quot;.out&quot;))
+            st = os.stat(od + rp.name + &quot;.sh&quot;)
+            os.chmod(od + rp.name + &quot;.sh&quot;,
                      st.st_mode | stat.S_IEXEC)
-            open(self.get_output_dir() + rp.name + &quot;.out&quot;,
+            open(od + rp.name + &quot;.out&quot;,
                  &quot;w&quot;).write(result + &quot;\n\n&quot;)
 
             sname = p.slha
-            with open(self.get_output_dir() + sname, &#39;r&#39;) as f:
-                open(self.get_output_dir() + rp.name + &quot;.out&quot;,
+            with open(od + sname, &#39;r&#39;) as f:
+                open(od + rp.name + &quot;.out&quot;,
                      &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
         return rp</div></div>
 

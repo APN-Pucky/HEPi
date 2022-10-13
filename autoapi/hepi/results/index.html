@@ -39,7 +39,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0
+                0.2.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -166,22 +166,22 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.my_parallel" title="hepi.results.my_parallel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">my_parallel</span></code></a>(arr, f[, n_jobs, desc])</p></td>
 <td><p>Parallel execution of f on each element of args</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.pdf_errors" title="hepi.results.pdf_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_errors</span></code></a>(li, dl[, ordernames, confidence_level])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.pdf_errors" title="hepi.results.pdf_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_errors</span></code></a>(li, dl[, ordernames, confidence_level, n_jobs])</p></td>
 <td><p>Just like <cite>pdf_error</cite> but over a list of ordernames.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.pdf_error_single" title="hepi.results.pdf_error_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error_single</span></code></a>(members, i, dl, ordername[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results._pdf_error_single" title="hepi.results._pdf_error_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_pdf_error_single</span></code></a>(members, i, dl, ordername[, ...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.pdf_error" title="hepi.results.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl[, ordername, confidence_level])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.pdf_error" title="hepi.results.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl[, ordername, confidence_level, n_jobs])</p></td>
 <td><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.scale_errors" title="hepi.results.scale_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_errors</span></code></a>(li, dl[, ordernames])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.scale_errors" title="hepi.results.scale_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_errors</span></code></a>(li, dl[, ordernames, n_jobs])</p></td>
 <td><p>Just like <cite>scale_error</cite> but over a list of ordernames.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.scale_error_single" title="hepi.results.scale_error_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error_single</span></code></a>(members, i, dl[, ordername])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results._scale_error_single" title="hepi.results._scale_error_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_scale_error_single</span></code></a>(members, i, dl[, ordername])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.scale_error" title="hepi.results.scale_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error</span></code></a>(li, dl[, ordername])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.scale_error" title="hepi.results.scale_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error</span></code></a>(li, dl[, ordername, n_jobs])</p></td>
 <td><p>Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. <code class="xref py py-meth docutils literal notranslate"><span class="pre">seven_point_scan()</span></code>).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.combine_errors" title="hepi.results.combine_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_errors</span></code></a>(dl[, ordernames])</p></td>
@@ -252,18 +252,18 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.results.pdf_errors">
-<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">pdf_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordernames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#pdf_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.pdf_errors" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">pdf_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordernames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#pdf_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.pdf_errors" title="Permalink to this definition"></a></dt>
 <dd><p>Just like <cite>pdf_error</cite> but over a list of ordernames.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="hepi.results.pdf_error_single">
-<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">pdf_error_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">members</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordername</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#pdf_error_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.pdf_error_single" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.results._pdf_error_single">
+<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">_pdf_error_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">members</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordername</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#_pdf_error_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results._pdf_error_single" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.results.pdf_error">
-<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">pdf_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordername</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LO'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#pdf_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.pdf_error" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">pdf_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordername</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LO'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#pdf_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.pdf_error" title="Permalink to this definition"></a></dt>
 <dd><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -276,8 +276,8 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>PDF</cite>/<cite>PDF_CENTRAL</cite>/<cite>PDF_ERRPLUS</cite>/<cite>PDF_ERRMINUS</cite>/<cite>PDF_ERRSYM</cite> entries.</dt><dd><ul class="simple">
-<li><p><cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>PDF</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
+<dt>Modified <cite>dl</cite> with new <cite>ordername_{PDF,PDF_CENTRAL,PDF_ERRPLUS,PDF_ERRMINUS,PDF_ERRSYM}</cite> entries.</dt><dd><ul class="simple">
+<li><p>(<cite>ordername</cite>)_`PDF` contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
 </ul>
 </dd>
 </dl>
@@ -291,18 +291,18 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.results.scale_errors">
-<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">scale_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordernames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#scale_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.scale_errors" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">scale_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordernames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#scale_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.scale_errors" title="Permalink to this definition"></a></dt>
 <dd><p>Just like <cite>scale_error</cite> but over a list of ordernames.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="hepi.results.scale_error_single">
-<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">scale_error_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">members</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordername</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LO'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#scale_error_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.scale_error_single" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.results._scale_error_single">
+<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">_scale_error_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">members</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordername</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LO'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#_scale_error_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results._scale_error_single" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.results.scale_error">
-<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">scale_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordername</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LO'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#scale_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.scale_error" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">scale_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordername</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LO'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/results.html#scale_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.scale_error" title="Permalink to this definition"></a></dt>
 <dd><p>Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. <code class="xref py py-meth docutils literal notranslate"><span class="pre">seven_point_scan()</span></code>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -313,8 +313,8 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>SCALE</cite>/<cite>SCALE_ERRPLUS</cite>/<cite>SCALE_ERRMINUS</cite>/<cite>SCALE_ERRSYM</cite> entries.</dt><dd><ul class="simple">
-<li><p><cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>SCALE</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
+<dt>Modified <cite>dl</cite> with new <cite>ordername_{SCALE,SCALE_ERRPLUS,SCALE_ERRMINUS}</cite> entries.</dt><dd><ul class="simple">
+<li><p><cite>ordername_SCALE</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
 </ul>
 </dd>
 </dl>
@@ -346,8 +346,8 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>Modified <cite>dl</cite> with new <cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>COMBINED</cite>/<cite>ERRPLUS</cite>/<cite>ERRMINUS</cite> entries.</dt><dd><ul class="simple">
-<li><p><cite>LO</cite>/<cite>NLO</cite>/<cite>NLO_PLUS_NLL</cite> _ <cite>COMBINED</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
+<dt>Modified <cite>dl</cite> with new <cite>ordername_{COMBINED,ERRPLUS,ERRMINUS}</cite> entries.</dt><dd><ul class="simple">
+<li><p><cite>ordername_COMBINED</cite> contains a symmetrized <code class="xref py py-mod docutils literal notranslate"><span class="pre">uncertainties</span></code> object.</p></li>
 </ul>
 </dd>
 </dl>

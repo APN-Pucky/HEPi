@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.0
+                0.2.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -103,7 +103,8 @@ import numpy as np
 import hashlib
 from particle.converters.bimap import DirectionalMaps
 from particle import PDGID
-import lhapdf
+from distutils.version import StrictVersion
+
 import pandas as pd
 import warnings
 from smpl import interpolate as ip
@@ -254,10 +255,34 @@ PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(&quot;PDGName&quot;,
         &gt;&gt;&gt; lhapdf_name_to_id(&quot;CT14lo&quot;)
         13200
     &quot;&quot;&quot;
+    try:
+        import lhapdf
+    except ImportError:
+        warnings.warn(&quot;LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version).&quot;)
+        return 0
+    if not lhapdf.availablePDFSets():
+        warnings.warn(&quot;No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).&quot;)
+        return 0
     if not name in lhapdf.availablePDFSets():
-        warnings.warn(&quot;PDF set &#39;&quot; + name + &quot;&#39; not installed!&quot;)
+        warnings.warn(&quot;PDF set &#39;&quot; + name + &quot;&#39; not installed?&quot;)
         return 0
     return lhapdf.getPDFSet(name).lhapdfID</div>
+
+<div class="viewcode-block" id="lhapdf_id_to_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_id_to_name">[docs]</a>def lhapdf_id_to_name(lid : int) -&gt; str:
+    try:
+        import lhapdf
+    except ImportError:
+        warnings.warn(&quot;LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version).&quot;)
+        return &quot;&quot;
+    if not lhapdf.availablePDFSets():
+        warnings.warn(&quot;No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).&quot;)
+        return 0
+    for n in lhapdf.availablePDFSets():
+        if lhapdf.getPDFSet(n).lhapdfID == lid:
+            return n
+        
+    warnings.warn(&quot;PDF set with id &quot; + str(lid) + &quot; unknown/not installed?&quot;)
+    return &quot;Unknown PDF ID: &quot; + str(lid)</div>
 
 # TODO fix dependent(mu) for new masses
 

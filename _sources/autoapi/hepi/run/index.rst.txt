@@ -66,16 +66,25 @@ Functions
       Checks if the passed path is valid.
 
 
-   .. py:method:: _prepare(p: hepi.input.Input, skip=False, **kwargs) -> RunParam
+   .. py:method:: _prepare(p: hepi.input.Input, skip=False, assume_valid=False, **kwargs) -> RunParam
 
 
    .. py:method:: _check_input(param: hepi.input.Input, **kwargs) -> bool
 
 
-   .. py:method:: _prepare_all(params: List[hepi.input.Input], skip=True, **kwargs) -> List[RunParam]
+   .. py:method:: _prepare_all(params: List[hepi.input.Input], skip=True, n_jobs=None, **kwargs) -> List[RunParam]
+
+      Prepares all parameters for execution.
+
+      :param params: List of input parameters.
+      :type params: List[:class:`hepi.Input`]
+      :param skip: If True, the runner will check if the output file already exists and skip the execution if it does. Defaults to True.
+      :type skip: bool, optional
+      :param n_jobs: Number of parallel jobs. If None, use all available cores.
+      :type n_jobs: int
 
 
-   .. py:method:: run(params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, **kwargs)
+   .. py:method:: run(params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
 
           Run the passed list of parameters.
 
@@ -88,6 +97,7 @@ Functions
               sleep (int): Sleep seconds after starting job.
       run (bool): Actually start/queue runner.
       ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
+      n_jobs (int): Number of parallel jobs. If None, use all available cores.
 
           Returns:
               :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
@@ -95,23 +105,21 @@ Functions
 
 
 
-   .. py:method:: _run(rps: List[RunParam], wait=True, parallel=True, sleep=0, **kwargs)
+   .. py:method:: _run(rps: List[RunParam], wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
 
-      Runs Runner per :class:`RunParams`.
+          Runs Runner per :class:`RunParams`.
 
-      :param rps: Extended run parameters.
-      :type rps: :obj:`list` of :class:`RunParams`
-      :param bar: Enable info bar.
-      :type bar: bool
-      :param wait: Wait for parallel runs to finish.
-      :type wait: bool
-      :param sleep: Sleep seconds after starting subprocess.
-      :type sleep: int
-      :param parallel: Run jobs in parallel.
-      :type parallel: bool
+          Args:
+              rps (:obj:`list` of :class:`RunParams`): Extended run parameters.
+              bar (bool): Enable info bar.
+              wait (bool): Wait for parallel runs to finish.
+              sleep (int): Sleep seconds after starting subprocess.
+              parallel (bool): Run jobs in parallel.
+      n_jobs (int): Number of parallel jobs. If None, use all available cores.
 
-      :returns: return codes from jobs if `no_parse` is False.
-      :rtype: :obj:`list` of int
+          Returns:
+              :obj:`list` of int: return codes from jobs if `no_parse` is False.
+
 
 
    .. py:method:: _is_valid(file: str, p: hepi.input.Input, d, **kwargs) -> bool
@@ -129,14 +137,18 @@ Functions
       :rtype: bool
 
 
-   .. py:method:: parse(outputs: List[str]) -> List[hepi.results.Result]
+   .. py:method:: parse(outputs: List[str], n_jobs=None) -> List[hepi.results.Result]
 
-      Parses Resummino output files and returns List of Results.
+          Parses Resummino output files and returns List of Results.
 
-      :param outputs: List of the filenames to be parsed.
-      :type outputs: :obj:`list` of `str`
+          Args:
+              outputs (:obj:`list` of `str`): List of the filenames to be parsed.
+      n_jobs (int): Number of parallel jobs. If None, use all available cores.
 
-      :returns: :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+          Returns:
+              :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+
+
 
 
    .. py:method:: _parse_file(file: str) -> hepi.results.Result

@@ -28,10 +28,10 @@ Functions
 
    hepi.results.my_parallel
    hepi.results.pdf_errors
-   hepi.results.pdf_error_single
+   hepi.results._pdf_error_single
    hepi.results.pdf_error
    hepi.results.scale_errors
-   hepi.results.scale_error_single
+   hepi.results._scale_error_single
    hepi.results.scale_error
    hepi.results.combine_errors
    hepi.results.combine_error
@@ -94,15 +94,15 @@ Attributes
    :type annlo_plus_nnll: :obj:`double`
 
 
-.. py:function:: pdf_errors(li, dl, ordernames=None, confidence_level=90)
+.. py:function:: pdf_errors(li, dl, ordernames=None, confidence_level=90, n_jobs=None)
 
    Just like `pdf_error` but over a list of ordernames.
 
 
-.. py:function:: pdf_error_single(members, i, dl, ordername, confidence_level=90)
+.. py:function:: _pdf_error_single(members, i, dl, ordername, confidence_level=90)
 
 
-.. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90)
+.. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90, n_jobs=None)
 
    Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
 
@@ -117,20 +117,20 @@ Attributes
 
    :returns:
 
-             Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF`/`PDF_CENTRAL`/`PDF_ERRPLUS`/`PDF_ERRMINUS`/`PDF_ERRSYM` entries.
-                 - `LO`/`NLO`/`NLO_PLUS_NLL` _ `PDF` contains a symmetrized :mod:`uncertainties` object.
+             Modified `dl` with new `ordername_{PDF,PDF_CENTRAL,PDF_ERRPLUS,PDF_ERRMINUS,PDF_ERRSYM}` entries.
+                 - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
    :rtype: :obj:`dict`
 
 
-.. py:function:: scale_errors(li, dl, ordernames=None)
+.. py:function:: scale_errors(li, dl, ordernames=None, n_jobs=None)
 
    Just like `scale_error` but over a list of ordernames.
 
 
-.. py:function:: scale_error_single(members, i, dl, ordername='LO')
+.. py:function:: _scale_error_single(members, i, dl, ordername='LO')
 
 
-.. py:function:: scale_error(li, dl, ordername='LO')
+.. py:function:: scale_error(li, dl, ordername='LO', n_jobs=None)
 
    Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
 
@@ -141,8 +141,8 @@ Attributes
 
    :returns:
 
-             Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE`/`SCALE_ERRPLUS`/`SCALE_ERRMINUS`/`SCALE_ERRSYM` entries.
-                 - `LO`/`NLO`/`NLO_PLUS_NLL` _ `SCALE` contains a symmetrized :mod:`uncertainties` object.
+             Modified `dl` with new `ordername_{SCALE,SCALE_ERRPLUS,SCALE_ERRMINUS}` entries.
+                 - `ordername_SCALE` contains a symmetrized :mod:`uncertainties` object.
    :rtype: :obj:`dict`
 
 
@@ -162,8 +162,8 @@ Attributes
 
    :returns:
 
-             Modified `dl` with new `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED`/`ERRPLUS`/`ERRMINUS` entries.
-                 - `LO`/`NLO`/`NLO_PLUS_NLL` _ `COMBINED` contains a symmetrized :mod:`uncertainties` object.
+             Modified `dl` with new `ordername_{COMBINED,ERRPLUS,ERRMINUS}` entries.
+                 - `ordername_COMBINED` contains a symmetrized :mod:`uncertainties` object.
    :rtype: :obj:`dict`
 
 
