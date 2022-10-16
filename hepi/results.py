@@ -107,7 +107,12 @@ def pdf_errors(li,
 
 
 def _pdf_error_single(members, i, dl, ordername, confidence_level=90):  
-    #import lhapdf
+    try:
+        import lhapdf
+    except ImportError:
+        raise RuntimeError("LHAPDF with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly (i.e. correct python version).")
+    if not lhapdf.availablePDFSets():
+        raise RuntimeError("No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).")
     if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
             i] == 1.0:
         pdfset = lhapdf.getPDFSet(dl["pdf_nlo"][i])
@@ -130,7 +135,6 @@ def _pdf_error_single(members, i, dl, ordername, confidence_level=90):
         nlo_unc = pdfset.uncertainty(
             [float(plot.unv(dl[ordername][k])) for k in pdfs],
             confidence_level)
-
     return (i,nlo_unc)
 
 
@@ -149,12 +153,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
             - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
     """
     global required_numerical_uncertainty_factor
-    try:
-        import lhapdf
-    except ImportError:
-        raise RuntimeError("LHAPDF with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly (i.e. correct python version).")
-    if not lhapdf.availablePDFSets():
-        raise RuntimeError("No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).")
+
     example = li[0]
     members = [
         attr for attr in dir(example)
