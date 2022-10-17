@@ -188,9 +188,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
         #if :
         if (ordername != "LO" and
             (plot.usd(dl[ordername][i]) * required_numerical_uncertainty_factor
-             > dl[ordername + "_PDF_ERRPLUS"][i] or
-             plot.usd(dl[ordername][i]) * required_numerical_uncertainty_factor
-             > -dl[ordername + "_PDF_ERRMINUS"][i])):
+             > dl[ordername + "_PDF_ERRPLUS"][i]-dl[ordername + "_PDF_ERRMINUS"][i]  )):
             rel = plot.unv(dl[ordername][i])
             warnings.warn(
                 "too bad numerical precision vs pdf @ " + ordername +
@@ -282,10 +280,8 @@ def scale_error(li, dl, ordername="LO",n_jobs=None):
         dl.loc[i, ordername + "_SCALE_ERRMINUS"] = errminus
         if (plot.usd(dl[ordername][i]) *
                 required_numerical_uncertainty_factor >
-                dl[ordername + "_SCALE_ERRPLUS"][i]
-                or plot.usd(dl[ordername][i]) *
-                required_numerical_uncertainty_factor >
-                -dl[ordername + "_SCALE_ERRMINUS"][i]):
+                dl[ordername + "_SCALE_ERRPLUS"][i]-dl[ordername + "_SCALE_ERRMINUS"][i]
+                ):
             rel = plot.unv(dl[ordername][i])
             warnings.warn(
                 "too bad numerical precision vs scale @ num:" + ordername +
