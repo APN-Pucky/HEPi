@@ -57,6 +57,31 @@ def energy_plot(dict_list,
          yscale=yscale,
          **kwargs)
 
+def combined_mass_plot(dict_list,
+                          y,
+                            part,
+                            label=None,
+                            **kwargs):
+    if label is "":
+        kwargs["label"] = ""
+    mass_plot(dict_list, y +"_NOERR",part,next_color=False,fmt=" ",fill=False,interpolate_label=label,  **kwargs)
+    if 'label' in kwargs:
+        del kwargs["label"]
+    mass_plot(dict_list, y +"_COMBINED",part,next_color=True,fit_fmt=" ",fill=True, label="",interpolate_lower_uncertainty=False, **kwargs)
+
+def combined_plot(dict_list,
+x,
+                          y,
+                            label=None,
+                            **kwargs):
+    if label is "":
+        kwargs["label"] = ""
+    plot(dict_list, x,y +"_NOERR",next_color=False,fmt=" ",fill=False,interpolate_label=label,  **kwargs)
+    if 'label' in kwargs:
+        del kwargs["label"]
+    plot(dict_list, x,y +"_COMBINED",next_color=True,fit_fmt=" ",fill=True, label="",interpolate_lower_uncertainty=False, **kwargs)
+
+
 
 def mass_plot(dict_list,
               y,
@@ -113,6 +138,7 @@ def get_mass(l: dict, iid: int):
     for s in l["slha"]:
         d = pyslha.read(get_output_dir() + s)
         ret.append(d.blocks["MASS"][abs(iid)])
+        
     return np.array(ret)
 
 
