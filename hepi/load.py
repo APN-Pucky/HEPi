@@ -6,7 +6,7 @@ from hepi.input import Input, order_to_string, xsec_to_order
 from hepi.util import LD2DL, DL2DF
 
 
-def load(f, dimensions=1):
+def load_json(f, dimensions=1):
     """
     Load xsec data from json in to something that works within hepi's plotting.
 
@@ -65,4 +65,12 @@ def load(f, dimensions=1):
             else:
                 raise ValueError("No uncertainty found in data.")
             dat.append(dicd)
-    return DL2DF(LD2DL(dat, actual_dict=True))
+    ddf = DL2DF(LD2DL(dat, actual_dict=True))
+    # copy mass list to single masses
+    for k in ddf.keys():
+        if k.startswith("mass_"):
+            for m in k[5:].split("_"): 
+                ddf["mass_"+ m] = ddf[k]
+    return ddf
+
+load = load_json
