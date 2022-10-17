@@ -18,25 +18,6 @@ from pqdm.processes import pqdm as ppqdm
 import multiprocessing as mp
 #from pqdm.processes import pqdm
 
-
-def my_parallel(f, arr, n_jobs=None, desc=None):
-    """
-    Parallel execution of f on each element of args
-
-    Examples
-    --------
-    >>> my_parallel(lambda x : x**2, range(0,5))
-    [0, 1, 4, 9, 16]
-
-    """
-    n_jobs = n_jobs or mp.cpu_count()
-    sa = np.array_split(np.array(arr), len(arr) / n_jobs)
-    res = []
-    for i in tqdm.tqdm(range(len(sa)), desc=desc):
-        res += par(f, sa[i])
-    return res
-
-
 class RunParam(DictData):
     """Abstract class that is similar to a dictionary but with fixed keys."""
 
