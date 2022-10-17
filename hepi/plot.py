@@ -62,7 +62,7 @@ def combined_mass_plot(dict_list,
                             part,
                             label=None,
                             **kwargs):
-    if label is "":
+    if label == "":
         kwargs["label"] = ""
     mass_plot(dict_list, y +"_NOERR",part,next_color=False,fmt=" ",fill=False,interpolate_label=label,  **kwargs)
     if 'label' in kwargs:
@@ -74,7 +74,7 @@ x,
                           y,
                             label=None,
                             **kwargs):
-    if label is "":
+    if label == "":
         kwargs["label"] = ""
     plot(dict_list, x,y +"_NOERR",next_color=False,fmt=" ",fill=False,interpolate_label=label,  **kwargs)
     if 'label' in kwargs:
@@ -92,7 +92,8 @@ def mass_plot(dict_list,
               label=None,
               xaxis = None,
               **kwargs):
-    dict_list["mass_" + str(part)] = get_mass(dict_list, abs(part))
+    if not "mass_" + str(part) in dict_list:
+        dict_list["mass_" + str(part)] = get_mass(dict_list, abs(part))
     if xaxis is None:
         xaxis = "$m_{" + get_name(part) + "}$ [GeV]"
     plot(dict_list,

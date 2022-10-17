@@ -276,6 +276,8 @@ def write_json(dict_list: list,
                 dat[str(dict_list[parameterj].iloc[j])]={**dat[str(dict_list[parameterj].iloc[j])],str(dict_list[parameteri].iloc[j]):td}
             else:
                 dat[str(dict_list[parameterj].iloc[j])]={str(dict_list[parameteri].iloc[j]):td}
+
+        jd["parameters"] = [[parameterj],[parameteri]]
     if len(parameters) == 1:
         parameter = parameters[0]
         for j in range(len(dict_list[parameter])):
@@ -295,7 +297,7 @@ def write_json(dict_list: list,
                     "xsec_pb": float(plot.unv(dict_list[order_to_string(o)].iloc[j]))
                 }
             dat[str(dict_list[parameter].iloc[j])]=td
+        jd["parameters"] = [[parameter]]
 
     jd["data"] = dat
-    jd["parameters"] = [parameters]
     io.write(output, json.dumps(jd, indent=4))
