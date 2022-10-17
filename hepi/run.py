@@ -143,7 +143,8 @@ class Runner:
         #    params,
         #    #n_jobs=mp.cpu_count(),
         #    desc="Preparing")
-        for p in params: p.runner = str(type(self).__name__) + "-" + self.get_version()
+        runnername = str(type(self).__name__) + "-" + self.get_version()
+        for p in params: p.runner = runnername
         args = [{'p': p, 'skip': skip, **kwargs} for p in params]
         ret = ppqdm(args,
                     self._prepare,
