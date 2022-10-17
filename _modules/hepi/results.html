@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.3
+                0.2.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -205,7 +205,12 @@ from smpl.parallel import par
 
 
 <div class="viewcode-block" id="_pdf_error_single"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi._pdf_error_single">[docs]</a>def _pdf_error_single(members, i, dl, ordername, confidence_level=90):  
-    #import lhapdf
+    try:
+        import lhapdf
+    except ImportError:
+        raise RuntimeError(&quot;LHAPDF with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly (i.e. correct python version).&quot;)
+    if not lhapdf.availablePDFSets():
+        raise RuntimeError(&quot;No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).&quot;)
     if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][
             i] == 1.0:
         pdfset = lhapdf.getPDFSet(dl[&quot;pdf_nlo&quot;][i])
@@ -228,7 +233,6 @@ from smpl.parallel import par
         nlo_unc = pdfset.uncertainty(
             [float(plot.unv(dl[ordername][k])) for k in pdfs],
             confidence_level)
-
     return (i,nlo_unc)</div>
 
 
@@ -247,12 +251,7 @@ from smpl.parallel import par
             - (`ordername`)_`PDF` contains a symmetrized :mod:`uncertainties` object.
     &quot;&quot;&quot;
     global required_numerical_uncertainty_factor
-    try:
-        import lhapdf
-    except ImportError:
-        raise RuntimeError(&quot;LHAPDF with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly (i.e. correct python version).&quot;)
-    if not lhapdf.availablePDFSets():
-        raise RuntimeError(&quot;No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).&quot;)
+
     example = li[0]
     members = [
         attr for attr in dir(example)
