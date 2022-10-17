@@ -195,32 +195,32 @@ def write_csv(dict_list: list, filename: str):
 
 def write_json(dict_list: list,
                o: Order,
-               parameter: str,
+               parameters: str,
                output,
                error_sym=False,
                error_asym=False):
     """
- Saves a `dict` of `list`s to `filename` as json.
+    Saves a `dict` of `list`s to `filename` as json.
 
 
- Cf. https://github.com/fuenfundachtzig/xsec
+    Cf. https://github.com/fuenfundachtzig/xsec
 
 
- Args:
-    output (writeable or file name str) : Should support a function `.write()`.
+    Args:
+       output (writeable or file name str) : Should support a function `.write()`.
 
- Examples:
-    >>> import hepi 
-    >>> import urllib.request
-    >>> dl = hepi.load(urllib.request.urlopen(
-    ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
-    ... ),dimensions=2)
-    >>> with open("test.json", "w") as f:
-    ...     hepi.write_json(dl, Order.NLO_PLUS_NLL,"N1",f)
-    >>> with open('test.json', 'r') as f:
-    ...     print(f.read())
-    {"initial state": "pp", "order": "NLO+NLL", "source": "hepi-...", "contact": "?", "tool": "Resummino", "process_latex": "$\\\\overline{d}\\\\overline{d}$", "comment": "", "reference": "?", "Ecom [GeV]": "13000.0", "process_id": "pp_13000.0_-1_-1", "PDF set": "CTEQ6.6 and MSTW2008nlo90cl", "data": {"80.0": {"xsec_pb": 2.142151}, "60.0": {"xsec_pb": 4.504708}, "100.0": {"xsec_pb": 1.165897}, "125.0": {"xsec_pb": 0.614697}, "150.0": {"xsec_pb": 0.354984}, "175.0": {"xsec_pb": 0.327625}, "200.0": {"xsec_pb": 0.141817}, "225.0": {"xsec_pb": 0.138083}, "250.0": {"xsec_pb": 0.066363}, "300.0": {"xsec_pb": 0.044674}}, "parameters": [["N1"]]}
- """
+    Examples:
+       >>> import hepi 
+       >>> import urllib.request
+       >>> dl = hepi.load(urllib.request.urlopen(
+       ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
+       ... ),dimensions=2)
+       >>> with open("test.json", "w") as f:
+       ...     hepi.write_json(dl, Order.NLO_PLUS_NLL,["N1"],f)
+       >>> with open('test.json', 'r') as f:
+       ...     print(f.read())
+       {"initial state": "pp", "order": "NLO+NLL", "source": "hepi-...", "contact": "?", "tool": "Resummino", "process_latex": "$\\\\overline{d}\\\\overline{d}$", "comment": "", "reference": "?", "Ecom [GeV]": "13000.0", "process_id": "pp_13000.0_-1_-1", "PDF set": "CTEQ6.6 and MSTW2008nlo90cl", "data": {"80.0": {"xsec_pb": 2.142151}, "60.0": {"xsec_pb": 4.504708}, "100.0": {"xsec_pb": 1.165897}, "125.0": {"xsec_pb": 0.614697}, "150.0": {"xsec_pb": 0.354984}, "175.0": {"xsec_pb": 0.327625}, "200.0": {"xsec_pb": 0.141817}, "225.0": {"xsec_pb": 0.138083}, "250.0": {"xsec_pb": 0.066363}, "300.0": {"xsec_pb": 0.044674}}, "parameters": [["N1"]]}
+    """
 
     jd = {}
     jd["initial state"] = "pp"  # TODO add more such cases + filters, also in resummino
@@ -242,32 +242,60 @@ def write_json(dict_list: list,
     jd["source"] = package + "-" + version
 
     jd["contact"] = "?"
-    jd["tool"] = dict_list["runner"][0].replace("Runner", "")
-    jd["process_latex"] = "$" + get_name(dict_list["particle1"][0]) + get_name(
-        dict_list["particle2"][0]) + "$"
-    jd["comment"] = dict_list["id"][0]
+    jd["tool"] = dict_list["runner"].iloc[0].replace("Runner", "")
+    jd["process_latex"] = "$" + get_name(dict_list["particle1"].iloc[0]) + get_name(
+        dict_list["particle2"].iloc[0]) + "$"
+    jd["comment"] = dict_list["id"].iloc[0]
     jd["reference"] = "?"
-    jd["Ecom [GeV]"] = str(dict_list["energy"][0])
-    jd["process_id"] = "pp_" + str(dict_list["energy"][0]) + "_" + str(
-        dict_list["particle1"][0]) + "_" + str(dict_list["particle2"][0])
-    jd["PDF set"] = dict_list["pdf_nlo"][0]
+    jd["Ecom [GeV]"] = str(dict_list["energy"].iloc[0])
+    jd["process_id"] = "pp_" + str(dict_list["energy"].iloc[0]) + "_" + str(
+        dict_list["particle1"].iloc[0]) + "_" + str(dict_list["particle2"].iloc[0])
+    jd["PDF set"] = dict_list["pdf_nlo"].iloc[0]
     dat = {}
-    for j in range(len(dict_list[parameter])):
-        if error_asym:
-            dat[str(dict_list[parameter][j])] = {
-                "xsec_pb": float(plot.unv(dict_list[order_to_string(o) + "_NOERR"][j])),
-                "unc_up_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"][j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"][j]) + plot.usd(dict_list[order_to_string(o)+ "_COMBINED"][j])),
-                "unc_down_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"][j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"][j]) - plot.usd(dict_list[order_to_string(o)+ "_COMBINED"][j])),
-            }
-        elif error_sym:
-            dat[str(dict_list[parameter][j])] = {
-                "xsec_pb": float(plot.unv(dict_list[order_to_string(o)][j])),
-                "unc_pb": float(plot.usd(dict_list[order_to_string(o)][j]))
-            }
-        else:
-            dat[str(dict_list[parameter][j])] = {
-                "xsec_pb": float(plot.unv(dict_list[order_to_string(o)][j]))
-            }
+    if len(parameters) == 2:
+        parameterj = parameters[0]
+        parameteri = parameters[1]
+        for j in range(len(dict_list[parameterj])):
+            dati = {}
+            if error_asym:
+                td = {
+                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j])),
+                    "unc_up_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j]) + plot.usd(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])),
+                    "unc_down_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j]) - plot.usd(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])),
+                }
+            elif error_sym:
+                td= {
+                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o)].iloc[j])),
+                    "unc_pb": float(plot.usd(dict_list[order_to_string(o)].iloc[j]))
+                }
+            else:
+                 td= {
+                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o)].iloc[j]))
+                }
+            if str(dict_list[parameterj].iloc[j]) in dat:
+                dat[str(dict_list[parameterj].iloc[j])]={**dat[str(dict_list[parameterj].iloc[j])],str(dict_list[parameteri].iloc[j]):td}
+            else:
+                dat[str(dict_list[parameterj].iloc[j])]={str(dict_list[parameteri].iloc[j]):td}
+    if len(parameters) == 1:
+        parameter = parameters[0]
+        for j in range(len(dict_list[parameter])):
+            if error_asym:
+                td= {
+                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j])),
+                    "unc_up_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j]) + plot.usd(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])),
+                    "unc_down_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j]) - plot.usd(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])),
+                }
+            elif error_sym:
+                td = {
+                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o)].iloc[j])),
+                    "unc_pb": float(plot.usd(dict_list[order_to_string(o)].iloc[j]))
+                }
+            else:
+                 td= {
+                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o)].iloc[j]))
+                }
+            dat[str(dict_list[parameter].iloc[j])]=td
+
     jd["data"] = dat
-    jd["parameters"] = [[parameter]]
-    io.write(output, json.dumps(jd))
+    jd["parameters"] = [parameters]
+    io.write(output, json.dumps(jd, indent=4))
