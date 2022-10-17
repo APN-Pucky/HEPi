@@ -81,6 +81,8 @@ class Runner:
 
     def _prepare(self, p: Input, skip=False, assume_valid = False, **kwargs) -> RunParam:
         skip_ = skip
+        #p.runner = str(type(self).__name__) + "-" + self.get_version()
+
         d = p.__dict__
         d["runner"] = str(type(self).__name__) + "-" + self.get_version(
         )  # TODO re add version, but removed for reusable hashing!
@@ -88,8 +90,7 @@ class Runner:
                                  for _ in d.items()).replace("/", "-"))
         #print(name)
         skip = False
-        if skip_ and os.path.isfile(self.get_output_dir() + name +
-                                    ".out") and (assume_valid or self._is_valid(
+        if skip_ and os.path.isfile(self.get_output_dir() + name + ".out") and (assume_valid or self._is_valid(
                                         self.get_output_dir() + name + ".out",
                                         p,
                                         d,
@@ -98,8 +99,9 @@ class Runner:
             #print(".", end='')
             skip = True
         else:
+            #print(str(self.get_output_dir()  + name + ".out")) 
             #print('|', end='')
-            pass
+            skip = False
         return RunParam(execute=self.get_output_dir() + name + ".sh",
                         in_file=self.get_output_dir() + name + ".in",
                         out_file=self.get_output_dir() + name + ".out",
@@ -141,6 +143,7 @@ class Runner:
         #    params,
         #    #n_jobs=mp.cpu_count(),
         #    desc="Preparing")
+        for p in params: p.runner = str(type(self).__name__) + "-" + self.get_version()
         args = [{'p': p, 'skip': skip, **kwargs} for p in params]
         ret = ppqdm(args,
                     self._prepare,
