@@ -36,7 +36,7 @@
             <a href="../../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.2-1-gaa264bc1
+                0.2.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -251,13 +251,13 @@ import shutil
             if tmp is not None:
                 rnloq_result = ufloat_fromstr(
                     tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
-    if lo_result &lt; 0:
+    if lo_result is not None and lo_result &lt; 0:
         warnings.warn(&quot;LO &lt; 0&quot;)
-    if nlo_result &lt; 0:
+    if nlo_result is not None and nlo_result &lt; 0:
         warnings.warn(&quot;NLO &lt; 0&quot;)
-    if nll_result &lt; 0:
+    if nll_result is not None and nll_result &lt; 0:
         warnings.warn(&quot;NLL &lt; 0&quot;)
-    if nnll_result &lt; 0:
+    if nnll_result is not None and nnll_result &lt; 0:
         warnings.warn(&quot;NNLL &lt; 0&quot;)
     return ResumminoResult(lo_result, nlo_result, nll_result, nnll_result,
                            vnlo_result, ppk_result, rnlog_result, rnloq_result)</div>
