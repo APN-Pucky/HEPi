@@ -198,7 +198,10 @@ def write_json(dict_list: list,
                parameters: str,
                output,
                error_sym=False,
-               error_asym=False):
+               error_asym=False,
+               scale=True,
+               pdf=True,
+               ):
     """
     Saves a `dict` of `list`s to `filename` as json.
 
@@ -234,6 +237,7 @@ def write_json(dict_list: list,
         jd["order"] = "NNLOapprox+NNLL"
     else:
         raise ValueError("Order not supported by write_json.")
+    so = so
     package = "hepi"
     try:
         version = pkg.require(package)[0].version
@@ -259,18 +263,31 @@ def write_json(dict_list: list,
             dati = {}
             if error_asym:
                 td = {
-                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j])),
-                    "unc_up_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j]) + plot.usd(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])),
-                    "unc_down_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j]) - plot.usd(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])),
+                    "xsec_pb": float(plot.unv(dict_list[so + "_NOERR"].iloc[j])),
+                    "unc_up_pb": float(plot.unv(dict_list[so+ "_COMBINED"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) + plot.usd(dict_list[so+ "_COMBINED"].iloc[j])),
+                    "unc_down_pb": float(plot.unv(dict_list[so+ "_COMBINED"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) - plot.usd(dict_list[so+ "_COMBINED"].iloc[j])),
+
                 }
+                if scale:
+                    td = {**td,"unc_scale_up_pb": float(plot.unv(dict_list[so+ "_SCALE"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) + plot.usd(dict_list[so+ "_SCALE"].iloc[j])),
+                    "unc_scale_down_pb": float(plot.unv(dict_list[so+ "_SCALE"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) - plot.usd(dict_list[so+ "_SCALE"].iloc[j])),
+                    }
+                if pdf:
+                    td = {**td,"unc_pdf_up_pb": float(plot.unv(dict_list[so+ "_PDF"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) + plot.usd(dict_list[so+ "_PDF"].iloc[j])),
+                    "unc_pdf_down_pb": float(plot.unv(dict_list[so+ "_PDF"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) - plot.usd(dict_list[so+ "_PDF"].iloc[j])),
+                    }
             elif error_sym:
                 td= {
-                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o)].iloc[j])),
-                    "unc_pb": float(plot.usd(dict_list[order_to_string(o)].iloc[j]))
+                    "xsec_pb": float(plot.unv(dict_list[so].iloc[j])),
+                    "unc_pb": float(plot.usd(dict_list[so].iloc[j]))
                 }
+                if scale:
+                    td = {**td,"unc_scale_pb": float(plot.usd(dict_list[so+ "_SCALE"].iloc[j]))}
+                if pdf:
+                    td = {**td,"unc_pdf_pb": float(plot.usd(dict_list[so+ "_PDF"].iloc[j]))}
             else:
                  td= {
-                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o)].iloc[j]))
+                    "xsec_pb": float(plot.unv(dict_list[so].iloc[j]))
                 }
             if str(dict_list[parameterj].iloc[j]) in dat:
                 dat[str(dict_list[parameterj].iloc[j])]={**dat[str(dict_list[parameterj].iloc[j])],str(dict_list[parameteri].iloc[j]):td}
@@ -283,18 +300,30 @@ def write_json(dict_list: list,
         for j in range(len(dict_list[parameter])):
             if error_asym:
                 td= {
-                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j])),
-                    "unc_up_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j]) + plot.usd(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])),
-                    "unc_down_pb": float(plot.unv(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])-plot.unv(dict_list[order_to_string(o) + "_NOERR"].iloc[j]) - plot.usd(dict_list[order_to_string(o)+ "_COMBINED"].iloc[j])),
+                    "xsec_pb": float(plot.unv(dict_list[so + "_NOERR"].iloc[j])),
+                    "unc_up_pb": float(plot.unv(dict_list[so+ "_COMBINED"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) + plot.usd(dict_list[so+ "_COMBINED"].iloc[j])),
+                    "unc_down_pb": float(plot.unv(dict_list[so+ "_COMBINED"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) - plot.usd(dict_list[so+ "_COMBINED"].iloc[j])),
                 }
+                if scale:
+                    td = {**td,"unc_scale_up_pb": float(plot.unv(dict_list[so+ "_SCALE"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) + plot.usd(dict_list[so+ "_SCALE"].iloc[j])),
+                    "unc_scale_down_pb": float(plot.unv(dict_list[so+ "_SCALE"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) - plot.usd(dict_list[so+ "_SCALE"].iloc[j])),
+                    }
+                if pdf:
+                    td = {**td,"unc_pdf_up_pb": float(plot.unv(dict_list[so+ "_PDF"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) + plot.usd(dict_list[so+ "_PDF"].iloc[j])),
+                    "unc_pdf_down_pb": float(plot.unv(dict_list[so+ "_PDF"].iloc[j])-plot.unv(dict_list[so + "_NOERR"].iloc[j]) - plot.usd(dict_list[so+ "_PDF"].iloc[j])),
+                    }
             elif error_sym:
                 td = {
-                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o)].iloc[j])),
-                    "unc_pb": float(plot.usd(dict_list[order_to_string(o)].iloc[j]))
+                    "xsec_pb": float(plot.unv(dict_list[so].iloc[j])),
+                    "unc_pb": float(plot.usd(dict_list[so].iloc[j]))
                 }
+                if scale:
+                    td = {**td,"unc_scale_pb": float(plot.usd(dict_list[so+ "_SCALE"].iloc[j]))}
+                if pdf:
+                    td = {**td,"unc_pdf_pb": float(plot.usd(dict_list[so+ "_PDF"].iloc[j]))}
             else:
                  td= {
-                    "xsec_pb": float(plot.unv(dict_list[order_to_string(o)].iloc[j]))
+                    "xsec_pb": float(plot.unv(dict_list[so].iloc[j]))
                 }
             dat[str(dict_list[parameter].iloc[j])]=td
         jd["parameters"] = [[parameter]]
