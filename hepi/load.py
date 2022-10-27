@@ -26,7 +26,7 @@ def load_json(f, dimensions=1):
         pdf_nlo=dict["PDF set"],
         update=False,
     )
-    so = so
+    so = order_to_string(inpu.order)
     inpu.runner = dict["tool"]
     dat = []
     params = dict["parameters"]

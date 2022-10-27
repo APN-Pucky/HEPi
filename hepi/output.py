@@ -237,7 +237,7 @@ def write_json(dict_list: list,
         jd["order"] = "NNLOapprox+NNLL"
     else:
         raise ValueError("Order not supported by write_json.")
-    so = so
+    so =  order_to_string(o)
     package = "hepi"
     try:
         version = pkg.require(package)[0].version
