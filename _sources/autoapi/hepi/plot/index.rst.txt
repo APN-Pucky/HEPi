@@ -15,6 +15,8 @@ Functions
 
    hepi.plot.title
    hepi.plot.energy_plot
+   hepi.plot.combined_mass_plot
+   hepi.plot.combined_plot
    hepi.plot.mass_plot
    hepi.plot.mass_vplot
    hepi.plot.get_mass
@@ -54,6 +56,12 @@ Attributes
 .. py:function:: energy_plot(dict_list, y, yscale=1.0, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', label=None, **kwargs)
 
    Plot energy on the x-axis.
+
+
+.. py:function:: combined_mass_plot(dict_list, y, part, label=None, **kwargs)
+
+
+.. py:function:: combined_plot(dict_list, x, y, label=None, **kwargs)
 
 
 .. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, xaxis=None, **kwargs)

@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.5
+                0.2.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -179,15 +179,16 @@ import multiprocessing as mp
 
 <div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, skip=False, assume_valid = False, **kwargs) -&gt; RunParam:
         skip_ = skip
+        #p.runner = str(type(self).__name__) + &quot;-&quot; + self.get_version()
+
         d = p.__dict__
-        d[&quot;runner&quot;] = str(type(self).__name__) + &quot;-&quot; + self.get_version(
-        )  # TODO re add version, but removed for reusable hashing!
+        #d[&quot;runner&quot;] = str(type(self).__name__) + &quot;-&quot; + self.get_version(
+        #)  # TODO re add version, but removed for reusable hashing!
         name = namehash(&quot;_&quot;.join(&quot;&quot;.join(str(_[0]) + &quot;_&quot; + str(_[1]))
                                  for _ in d.items()).replace(&quot;/&quot;, &quot;-&quot;))
         #print(name)
         skip = False
-        if skip_ and os.path.isfile(self.get_output_dir() + name +
-                                    &quot;.out&quot;) and (assume_valid or self._is_valid(
+        if skip_ and os.path.isfile(self.get_output_dir() + name + &quot;.out&quot;) and (assume_valid or self._is_valid(
                                         self.get_output_dir() + name + &quot;.out&quot;,
                                         p,
                                         d,
@@ -196,8 +197,9 @@ import multiprocessing as mp
             #print(&quot;.&quot;, end=&#39;&#39;)
             skip = True
         else:
+            #print(str(self.get_output_dir()  + name + &quot;.out&quot;)) 
             #print(&#39;|&#39;, end=&#39;&#39;)
-            pass
+            skip = False
         return RunParam(execute=self.get_output_dir() + name + &quot;.sh&quot;,
                         in_file=self.get_output_dir() + name + &quot;.in&quot;,
                         out_file=self.get_output_dir() + name + &quot;.out&quot;,
@@ -239,6 +241,8 @@ import multiprocessing as mp
         #    params,
         #    #n_jobs=mp.cpu_count(),
         #    desc=&quot;Preparing&quot;)
+        runnername = str(type(self).__name__) + &quot;-&quot; + self.get_version()
+        for p in params: p.runner = runnername
         args = [{&#39;p&#39;: p, &#39;skip&#39;: skip, **kwargs} for p in params]
         ret = ppqdm(args,
                     self._prepare,

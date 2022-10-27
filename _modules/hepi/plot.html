@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.5
+                0.2.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -155,6 +155,31 @@ from scipy import integrate as auc
          yscale=yscale,
          **kwargs)</div>
 
+<div class="viewcode-block" id="combined_mass_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.combined_mass_plot">[docs]</a>def combined_mass_plot(dict_list,
+                          y,
+                            part,
+                            label=None,
+                            **kwargs):
+    if label == &quot;&quot;:
+        kwargs[&quot;label&quot;] = &quot;&quot;
+    mass_plot(dict_list, y +&quot;_NOERR&quot;,part,next_color=False,fmt=&quot; &quot;,fill=False,interpolate_label=label,  **kwargs)
+    if &#39;label&#39; in kwargs:
+        del kwargs[&quot;label&quot;]
+    mass_plot(dict_list, y +&quot;_COMBINED&quot;,part,next_color=True,fit_fmt=&quot; &quot;,fill=True, label=&quot;&quot;,interpolate_lower_uncertainty=False, **kwargs)</div>
+
+<div class="viewcode-block" id="combined_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.combined_plot">[docs]</a>def combined_plot(dict_list,
+x,
+                          y,
+                            label=None,
+                            **kwargs):
+    if label == &quot;&quot;:
+        kwargs[&quot;label&quot;] = &quot;&quot;
+    plot(dict_list, x,y +&quot;_NOERR&quot;,next_color=False,fmt=&quot; &quot;,fill=False,interpolate_label=label,  **kwargs)
+    if &#39;label&#39; in kwargs:
+        del kwargs[&quot;label&quot;]
+    plot(dict_list, x,y +&quot;_COMBINED&quot;,next_color=True,fit_fmt=&quot; &quot;,fill=True, label=&quot;&quot;,interpolate_lower_uncertainty=False, **kwargs)</div>
+
+
 
 <div class="viewcode-block" id="mass_plot"><a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.mass_plot">[docs]</a>def mass_plot(dict_list,
               y,
@@ -165,7 +190,8 @@ from scipy import integrate as auc
               label=None,
               xaxis = None,
               **kwargs):
-    dict_list[&quot;mass_&quot; + str(part)] = get_mass(dict_list, abs(part))
+    if not &quot;mass_&quot; + str(part) in dict_list:
+        dict_list[&quot;mass_&quot; + str(part)] = get_mass(dict_list, abs(part))
     if xaxis is None:
         xaxis = &quot;$m_{&quot; + get_name(part) + &quot;}$ [GeV]&quot;
     plot(dict_list,
@@ -211,6 +237,7 @@ from scipy import integrate as auc
     for s in l[&quot;slha&quot;]:
         d = pyslha.read(get_output_dir() + s)
         ret.append(d.blocks[&quot;MASS&quot;][abs(iid)])
+        
     return np.array(ret)</div>
 
 

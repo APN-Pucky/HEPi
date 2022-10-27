@@ -39,7 +39,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.5
+                0.2.7
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -269,7 +269,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.write_csv" title="hepi.write_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_csv</span></code></a>(dict_list, filename)</p></td>
 <td><p>Saves a <cite>dict</cite> of <cite>list`s to `filename</cite> as csv table.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.write_json" title="hepi.write_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_json</span></code></a>(dict_list, o, parameter, output[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.write_json" title="hepi.write_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_json</span></code></a>(dict_list, o, parameters, output[, ...])</p></td>
 <td><p>Saves a <cite>dict</cite> of <cite>list`s to `filename</cite> as json.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#id12" title="hepi.get_LR_partner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_LR_partner</span></code></a>(→ Tuple[int, int])</p></td>
@@ -437,6 +437,12 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.energy_plot" title="hepi.energy_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_plot</span></code></a>(dict_list, y[, yscale, xaxis, yaxis, label])</p></td>
 <td><p>Plot energy on the x-axis.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.combined_mass_plot" title="hepi.combined_mass_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_mass_plot</span></code></a>(dict_list, y, part[, label])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.combined_plot" title="hepi.combined_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_plot</span></code></a>(dict_list, x, y[, label])</p></td>
+<td><p></p></td>
+</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_plot" title="hepi.mass_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_plot</span></code></a>(dict_list, y, part[, logy, yaxis, yscale, ...])</p></td>
 <td><p></p></td>
 </tr>
@@ -512,7 +518,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#id55" title="hepi.DL2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DL2DF</span></code></a>(→ pandas.DataFrame)</p></td>
 <td><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="load/index.html#module-hepi.load" title="hepi.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a>(f[, dimensions])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.load_json" title="hepi.load_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_json</span></code></a>(f[, dimensions])</p></td>
 <td><p>Load xsec data from json in to something that works within hepi's plotting.</p></td>
 </tr>
 </tbody>
@@ -574,13 +580,16 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.labels" title="hepi.labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">labels</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.package" title="hepi.package"><code class="xref py py-obj docutils literal notranslate"><span class="pre">package</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="load/index.html#module-hepi.load" title="hepi.load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.version" title="hepi.version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">version</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.package" title="hepi.package"><code class="xref py py-obj docutils literal notranslate"><span class="pre">package</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.__version__" title="hepi.__version__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__version__</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.version" title="hepi.version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">version</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.__version__" title="hepi.__version__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__version__</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -771,7 +780,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.write_json">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">write_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="input/index.html#hepi.input.Order" title="hepi.input.Order"><span class="pre">hepi.input.Order</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_sym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_asym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/output.html#write_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.write_json" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">write_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="input/index.html#hepi.input.Order" title="hepi.input.Order"><span class="pre">hepi.input.Order</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_sym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_asym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/output.html#write_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.write_json" title="Permalink to this definition"></a></dt>
 <dd><p>Saves a <cite>dict</cite> of <cite>list`s to `filename</cite> as json.</p>
 <p>Cf. <a class="reference external" href="https://github.com/fuenfundachtzig/xsec">https://github.com/fuenfundachtzig/xsec</a></p>
 <dl class="field-list simple">
@@ -786,10 +795,59 @@
 <span class="gp">... </span><span class="s2">&quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;</span>
 <span class="gp">... </span><span class="p">),</span><span class="n">dimensions</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">hepi</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">NLO_PLUS_NLL</span><span class="p">,</span><span class="s2">&quot;N1&quot;</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">hepi</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span> <span class="n">Order</span><span class="o">.</span><span class="n">NLO_PLUS_NLL</span><span class="p">,[</span><span class="s2">&quot;N1&quot;</span><span class="p">],</span><span class="n">f</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-<span class="go">{&quot;initial state&quot;: &quot;pp&quot;, &quot;order&quot;: &quot;NLO+NLL&quot;, &quot;source&quot;: &quot;hepi-...&quot;, &quot;contact&quot;: &quot;?&quot;, &quot;tool&quot;: &quot;Resummino&quot;, &quot;process_latex&quot;: &quot;$\\overline{d}\\overline{d}$&quot;, &quot;comment&quot;: &quot;&quot;, &quot;reference&quot;: &quot;?&quot;, &quot;Ecom [GeV]&quot;: &quot;13000.0&quot;, &quot;process_id&quot;: &quot;pp_13000.0_-1_-1&quot;, &quot;PDF set&quot;: &quot;CTEQ6.6 and MSTW2008nlo90cl&quot;, &quot;data&quot;: {&quot;80.0&quot;: {&quot;xsec_pb&quot;: 2.142151}, &quot;60.0&quot;: {&quot;xsec_pb&quot;: 4.504708}, &quot;100.0&quot;: {&quot;xsec_pb&quot;: 1.165897}, &quot;125.0&quot;: {&quot;xsec_pb&quot;: 0.614697}, &quot;150.0&quot;: {&quot;xsec_pb&quot;: 0.354984}, &quot;175.0&quot;: {&quot;xsec_pb&quot;: 0.327625}, &quot;200.0&quot;: {&quot;xsec_pb&quot;: 0.141817}, &quot;225.0&quot;: {&quot;xsec_pb&quot;: 0.138083}, &quot;250.0&quot;: {&quot;xsec_pb&quot;: 0.066363}, &quot;300.0&quot;: {&quot;xsec_pb&quot;: 0.044674}}, &quot;parameters&quot;: [[&quot;N1&quot;]]}</span>
+<span class="go">{</span>
+<span class="go">    &quot;initial state&quot;: &quot;pp&quot;,</span>
+<span class="go">    &quot;order&quot;: &quot;NLO+NLL&quot;,</span>
+<span class="go">    &quot;source&quot;: &quot;hepi-...&quot;,</span>
+<span class="go">    &quot;contact&quot;: &quot;...&quot;,</span>
+<span class="go">    &quot;tool&quot;: &quot;Resummino&quot;,</span>
+<span class="go">    &quot;process_latex&quot;: &quot;$\\overline{d}\\overline{d}$&quot;,</span>
+<span class="go">    &quot;comment&quot;: &quot;&quot;,</span>
+<span class="go">    &quot;reference&quot;: &quot;?&quot;,</span>
+<span class="go">    &quot;Ecom [GeV]&quot;: &quot;13000.0&quot;,</span>
+<span class="go">    &quot;process_id&quot;: &quot;pp_13000.0_-1_-1&quot;,</span>
+<span class="go">    &quot;PDF set&quot;: &quot;CTEQ6.6 and MSTW2008nlo90cl&quot;,</span>
+<span class="go">    &quot;parameters&quot;: [</span>
+<span class="go">        [</span>
+<span class="go">            &quot;N1&quot;</span>
+<span class="go">        ]</span>
+<span class="go">    ],</span>
+<span class="go">    &quot;data&quot;: {</span>
+<span class="go">        &quot;80.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 2.142151</span>
+<span class="go">        },</span>
+<span class="go">        &quot;60.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 4.504708</span>
+<span class="go">        },</span>
+<span class="go">        &quot;100.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 1.165897</span>
+<span class="go">        },</span>
+<span class="go">        &quot;125.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 0.614697</span>
+<span class="go">        },</span>
+<span class="go">        &quot;150.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 0.354984</span>
+<span class="go">        },</span>
+<span class="go">        &quot;175.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 0.327625</span>
+<span class="go">        },</span>
+<span class="go">        &quot;200.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 0.141817</span>
+<span class="go">        },</span>
+<span class="go">        &quot;225.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 0.138083</span>
+<span class="go">        },</span>
+<span class="go">        &quot;250.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 0.066363</span>
+<span class="go">        },</span>
+<span class="go">        &quot;300.0&quot;: {</span>
+<span class="go">            &quot;xsec_pb&quot;: 0.044674</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+<span class="go">}</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1861,6 +1919,16 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="hepi.combined_mass_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">combined_mass_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot.html#combined_mass_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.combined_mass_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.combined_plot">
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">combined_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot.html#combined_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.combined_plot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="hepi.mass_plot">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">mass_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot.html#mass_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.mass_plot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -2656,8 +2724,8 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="hepi.load">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/load.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.load" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.load_json">
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/load.html#load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.load_json" title="Permalink to this definition"></a></dt>
 <dd><p>Load xsec data from json in to something that works within hepi’s plotting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2668,6 +2736,11 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.load">
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">load</span></span><a class="reference internal" href="../../_modules/hepi/load.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.load" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.package">

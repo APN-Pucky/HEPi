@@ -13,11 +13,19 @@ Functions
 
 .. autoapisummary::
 
+   hepi.load.load_json
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
    hepi.load.load
 
 
-
-.. py:function:: load(f, dimensions=1)
+.. py:function:: load_json(f, dimensions=1)
 
    Load xsec data from json in to something that works within hepi's plotting.
 
@@ -25,4 +33,9 @@ Functions
    :param dimensions: 1 or 2 currently supported.
    :type dimensions: int
 
+
+.. py:data:: load
+   
+
+   
 
