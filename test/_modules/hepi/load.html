@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.5-96-gd68e810b
+                0.2.6-4-gcd7c789c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -104,7 +104,7 @@ from hepi.input import Input, order_to_string, xsec_to_order
 from hepi.util import LD2DL, DL2DF
 
 
-<div class="viewcode-block" id="load"><a class="viewcode-back" href="../../autoapi/hepi/load/index.html#hepi.load">[docs]</a>def load(f, dimensions=1):
+<div class="viewcode-block" id="load_json"><a class="viewcode-back" href="../../autoapi/hepi/load/index.html#hepi.load_json">[docs]</a>def load_json(f, dimensions=1):
     &quot;&quot;&quot;
     Load xsec data from json in to something that works within hepi&#39;s plotting.
 
@@ -124,6 +124,7 @@ from hepi.util import LD2DL, DL2DF
         pdf_nlo=dict[&quot;PDF set&quot;],
         update=False,
     )
+    so = order_to_string(inpu.order)
     inpu.runner = dict[&quot;tool&quot;]
     dat = []
     params = dict[&quot;parameters&quot;]
@@ -136,14 +137,22 @@ from hepi.util import LD2DL, DL2DF
                 for p2 in params[1]:
                     dicd[p2] = float(l)
                 if &quot;unc_pb&quot; in dict[&quot;data&quot;][k][l]:
-                    dicd[order_to_string(inpu.order)] = ufloat(
+                    dicd[so] = ufloat(
                         dict[&quot;data&quot;][k][l][&quot;xsec_pb&quot;],
                         dict[&quot;data&quot;][k][l][&quot;unc_pb&quot;])
                 elif &quot;unc_down_pb&quot; in dict[&quot;data&quot;][k][l] and &quot;unc_up_pb&quot; in dict[&quot;data&quot;][k][l]:
-                    dicd[order_to_string(inpu.order)+ &quot;_NOERR&quot;] = dict[&quot;data&quot;][k][l][&quot;xsec_pb&quot;]
-                    dicd[order_to_string(inpu.order)+ &quot;_COMBINED&quot;] = ufloat(
+                    dicd[so+ &quot;_NOERR&quot;] = dict[&quot;data&quot;][k][l][&quot;xsec_pb&quot;]
+                    dicd[so+ &quot;_COMBINED&quot;] = ufloat(
                         dict[&quot;data&quot;][k][l][&quot;xsec_pb&quot;] + (dict[&quot;data&quot;][k][l][&quot;unc_up_pb&quot;] + dict[&quot;data&quot;][k][l][&quot;unc_down_pb&quot;]) / 2,
                         (dict[&quot;data&quot;][k][l][&quot;unc_up_pb&quot;] - dict[&quot;data&quot;][k][l][&quot;unc_down_pb&quot;]) / 2)
+                    if &quot;unc_scale_up_pb&quot; in dict[&quot;data&quot;][k][l] and &quot;unc_scale_down_pb&quot; in dict[&quot;data&quot;][k][l]:
+                        dicd[so+ &quot;_SCALE&quot;] = ufloat(
+                            dict[&quot;data&quot;][k][l][&quot;xsec_pb&quot;] + (dict[&quot;data&quot;][k][l][&quot;unc_up_pb&quot;] + dict[&quot;data&quot;][k][l][&quot;unc_down_pb&quot;]) / 2,
+                            (dict[&quot;data&quot;][k][l][&quot;unc_up_pb&quot;] - dict[&quot;data&quot;][k][l][&quot;unc_down_pb&quot;]) / 2 + (dict[&quot;data&quot;][k][l][&quot;unc_scale_up_pb&quot;] - dict[&quot;data&quot;][k][l][&quot;unc_scale_down_pb&quot;]) / 2)
+                    if &quot;unc_pdf_up_pb&quot; in dict[&quot;data&quot;][k][l] and &quot;unc_pdf_down_pb&quot; in dict[&quot;data&quot;][k][l]:
+                        dicd[so+ &quot;_PDF&quot;] = ufloat(
+                            dict[&quot;data&quot;][k][l][&quot;xsec_pb&quot;] + (dict[&quot;data&quot;][k][l][&quot;unc_up_pb&quot;] + dict[&quot;data&quot;][k][l][&quot;unc_down_pb&quot;]) / 2,
+                            (dict[&quot;data&quot;][k][l][&quot;unc_up_pb&quot;] - dict[&quot;data&quot;][k][l][&quot;unc_down_pb&quot;]) / 2 + (dict[&quot;data&quot;][k][l][&quot;unc_pdf_up_pb&quot;] - dict[&quot;data&quot;][k][l][&quot;unc_pdf_down_pb&quot;]) / 2)
                 else:
                     raise ValueError(&quot;No uncertainty found in data.&quot;)
                 dat.append(dicd)
@@ -153,17 +162,33 @@ from hepi.util import LD2DL, DL2DF
             for p1 in params[0]:
                 dicd[p1] = float(k)
             if &quot;unc_pb&quot; in dict[&quot;data&quot;][k]:
-                dicd[order_to_string(inpu.order)] = ufloat(
+                dicd[so] = ufloat(
                     dict[&quot;data&quot;][k][&quot;xsec_pb&quot;], dict[&quot;data&quot;][k][&quot;unc_pb&quot;])
             elif &quot;unc_down_pb&quot; in dict[&quot;data&quot;][k] and &quot;unc_up_pb&quot; in dict[&quot;data&quot;][k]:
-                dicd[order_to_string(inpu.order)+ &quot;_NOERR&quot;] = dict[&quot;data&quot;][k][&quot;xsec_pb&quot;]
-                dicd[order_to_string(inpu.order)+ &quot;_COMBINED&quot;] = ufloat(
+                dicd[so+ &quot;_NOERR&quot;] = dict[&quot;data&quot;][k][&quot;xsec_pb&quot;]
+                dicd[so+ &quot;_COMBINED&quot;] = ufloat(
                     dict[&quot;data&quot;][k][&quot;xsec_pb&quot;] + (dict[&quot;data&quot;][k][&quot;unc_up_pb&quot;] + dict[&quot;data&quot;][k][&quot;unc_down_pb&quot;]) / 2,
                     (dict[&quot;data&quot;][k][&quot;unc_up_pb&quot;] - dict[&quot;data&quot;][k][&quot;unc_down_pb&quot;]) / 2)
+                if &quot;unc_scale_up_pb&quot; in dict[&quot;data&quot;][k] and &quot;unc_scale_down_pb&quot; in dict[&quot;data&quot;][k]:
+                    dicd[so+ &quot;_SCALE&quot;] = ufloat(
+                        dict[&quot;data&quot;][k][&quot;xsec_pb&quot;] + (dict[&quot;data&quot;][k][&quot;unc_scale_up_pb&quot;] + dict[&quot;data&quot;][k][&quot;unc_scale_down_pb&quot;]) / 2,
+                        (dict[&quot;data&quot;][k][&quot;unc_scale_up_pb&quot;] - dict[&quot;data&quot;][k][&quot;unc_scale_down_pb&quot;]) / 2)
+                if &quot;unc_pdf_up_pb&quot; in dict[&quot;data&quot;][k] and &quot;unc_pdf_down_pb&quot; in dict[&quot;data&quot;][k]:
+                    dicd[so+ &quot;_PDF&quot;] = ufloat(
+                        dict[&quot;data&quot;][k][&quot;xsec_pb&quot;] + (dict[&quot;data&quot;][k][&quot;unc_pdf_up_pb&quot;] + dict[&quot;data&quot;][k][&quot;unc_pdf_down_pb&quot;]) / 2,
+                        (dict[&quot;data&quot;][k][&quot;unc_pdf_up_pb&quot;] - dict[&quot;data&quot;][k][&quot;unc_pdf_down_pb&quot;]) / 2)
             else:
                 raise ValueError(&quot;No uncertainty found in data.&quot;)
             dat.append(dicd)
-    return DL2DF(LD2DL(dat, actual_dict=True))</div>
+    ddf = DL2DF(LD2DL(dat, actual_dict=True))
+    # copy mass list to single masses
+    for k in ddf.keys():
+        if k.startswith(&quot;mass_&quot;):
+            for m in k[5:].split(&quot;_&quot;): 
+                ddf[&quot;mass_&quot;+ m] = ddf[k]
+    return ddf</div>
+
+<div class="viewcode-block" id="load"><a class="viewcode-back" href="../../autoapi/hepi/load/index.html#hepi.load">[docs]</a>load = load_json</div>
 </pre></div>
 
            </div>

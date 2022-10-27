@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.5-96-gd68e810b
+                0.2.6-4-gcd7c789c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -293,32 +293,84 @@ from smpl import io
 
 <div class="viewcode-block" id="write_json"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_json">[docs]</a>def write_json(dict_list: list,
                o: Order,
-               parameter: str,
+               parameters: str,
                output,
                error_sym=False,
-               error_asym=False):
+               error_asym=False,
+               scale=True,
+               pdf=True,
+               ):
     &quot;&quot;&quot;
- Saves a `dict` of `list`s to `filename` as json.
+    Saves a `dict` of `list`s to `filename` as json.
 
 
- Cf. https://github.com/fuenfundachtzig/xsec
+    Cf. https://github.com/fuenfundachtzig/xsec
 
 
- Args:
-    output (writeable or file name str) : Should support a function `.write()`.
+    Args:
+       output (writeable or file name str) : Should support a function `.write()`.
 
- Examples:
-    &gt;&gt;&gt; import hepi 
-    &gt;&gt;&gt; import urllib.request
-    &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
-    ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;
-    ... ),dimensions=2)
-    &gt;&gt;&gt; with open(&quot;test.json&quot;, &quot;w&quot;) as f:
-    ...     hepi.write_json(dl, Order.NLO_PLUS_NLL,&quot;N1&quot;,f)
-    &gt;&gt;&gt; with open(&#39;test.json&#39;, &#39;r&#39;) as f:
-    ...     print(f.read())
-    {&quot;initial state&quot;: &quot;pp&quot;, &quot;order&quot;: &quot;NLO+NLL&quot;, &quot;source&quot;: &quot;hepi-...&quot;, &quot;contact&quot;: &quot;?&quot;, &quot;tool&quot;: &quot;Resummino&quot;, &quot;process_latex&quot;: &quot;$\\\\overline{d}\\\\overline{d}$&quot;, &quot;comment&quot;: &quot;&quot;, &quot;reference&quot;: &quot;?&quot;, &quot;Ecom [GeV]&quot;: &quot;13000.0&quot;, &quot;process_id&quot;: &quot;pp_13000.0_-1_-1&quot;, &quot;PDF set&quot;: &quot;CTEQ6.6 and MSTW2008nlo90cl&quot;, &quot;data&quot;: {&quot;80.0&quot;: {&quot;xsec_pb&quot;: 2.142151}, &quot;60.0&quot;: {&quot;xsec_pb&quot;: 4.504708}, &quot;100.0&quot;: {&quot;xsec_pb&quot;: 1.165897}, &quot;125.0&quot;: {&quot;xsec_pb&quot;: 0.614697}, &quot;150.0&quot;: {&quot;xsec_pb&quot;: 0.354984}, &quot;175.0&quot;: {&quot;xsec_pb&quot;: 0.327625}, &quot;200.0&quot;: {&quot;xsec_pb&quot;: 0.141817}, &quot;225.0&quot;: {&quot;xsec_pb&quot;: 0.138083}, &quot;250.0&quot;: {&quot;xsec_pb&quot;: 0.066363}, &quot;300.0&quot;: {&quot;xsec_pb&quot;: 0.044674}}, &quot;parameters&quot;: [[&quot;N1&quot;]]}
- &quot;&quot;&quot;
+    Examples:
+       &gt;&gt;&gt; import hepi 
+       &gt;&gt;&gt; import urllib.request
+       &gt;&gt;&gt; dl = hepi.load(urllib.request.urlopen(
+       ... &quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;
+       ... ),dimensions=2)
+       &gt;&gt;&gt; with open(&quot;test.json&quot;, &quot;w&quot;) as f:
+       ...     hepi.write_json(dl, Order.NLO_PLUS_NLL,[&quot;N1&quot;],f)
+       &gt;&gt;&gt; with open(&#39;test.json&#39;, &#39;r&#39;) as f:
+       ...     print(f.read())
+       {
+           &quot;initial state&quot;: &quot;pp&quot;,
+           &quot;order&quot;: &quot;NLO+NLL&quot;,
+           &quot;source&quot;: &quot;hepi-...&quot;,
+           &quot;contact&quot;: &quot;...&quot;,
+           &quot;tool&quot;: &quot;Resummino&quot;,
+           &quot;process_latex&quot;: &quot;$\\\\overline{d}\\\\overline{d}$&quot;,
+           &quot;comment&quot;: &quot;&quot;,
+           &quot;reference&quot;: &quot;?&quot;,
+           &quot;Ecom [GeV]&quot;: &quot;13000.0&quot;,
+           &quot;process_id&quot;: &quot;pp_13000.0_-1_-1&quot;,
+           &quot;PDF set&quot;: &quot;CTEQ6.6 and MSTW2008nlo90cl&quot;,
+           &quot;parameters&quot;: [
+               [
+                   &quot;N1&quot;
+               ]
+           ],
+           &quot;data&quot;: {
+               &quot;80.0&quot;: {
+                   &quot;xsec_pb&quot;: 2.142151
+               },
+               &quot;60.0&quot;: {
+                   &quot;xsec_pb&quot;: 4.504708
+               },
+               &quot;100.0&quot;: {
+                   &quot;xsec_pb&quot;: 1.165897
+               },
+               &quot;125.0&quot;: {
+                   &quot;xsec_pb&quot;: 0.614697
+               },
+               &quot;150.0&quot;: {
+                   &quot;xsec_pb&quot;: 0.354984
+               },
+               &quot;175.0&quot;: {
+                   &quot;xsec_pb&quot;: 0.327625
+               },
+               &quot;200.0&quot;: {
+                   &quot;xsec_pb&quot;: 0.141817
+               },
+               &quot;225.0&quot;: {
+                   &quot;xsec_pb&quot;: 0.138083
+               },
+               &quot;250.0&quot;: {
+                   &quot;xsec_pb&quot;: 0.066363
+               },
+               &quot;300.0&quot;: {
+                   &quot;xsec_pb&quot;: 0.044674
+               }
+           }
+       }
+    &quot;&quot;&quot;
 
     jd = {}
     jd[&quot;initial state&quot;] = &quot;pp&quot;  # TODO add more such cases + filters, also in resummino
@@ -332,6 +384,7 @@ from smpl import io
         jd[&quot;order&quot;] = &quot;NNLOapprox+NNLL&quot;
     else:
         raise ValueError(&quot;Order not supported by write_json.&quot;)
+    so =  order_to_string(o)
     package = &quot;hepi&quot;
     try:
         version = pkg.require(package)[0].version
@@ -339,36 +392,91 @@ from smpl import io
         version = &quot;dirty&quot;
     jd[&quot;source&quot;] = package + &quot;-&quot; + version
 
-    jd[&quot;contact&quot;] = &quot;?&quot;
-    jd[&quot;tool&quot;] = dict_list[&quot;runner&quot;][0].replace(&quot;Runner&quot;, &quot;&quot;)
-    jd[&quot;process_latex&quot;] = &quot;$&quot; + get_name(dict_list[&quot;particle1&quot;][0]) + get_name(
-        dict_list[&quot;particle2&quot;][0]) + &quot;$&quot;
-    jd[&quot;comment&quot;] = dict_list[&quot;id&quot;][0]
+    jd[&quot;contact&quot;] = &quot;Alexander Puck Neuwirth &lt;alexander@neuwirth-informatik.de&gt;&quot;
+    jd[&quot;tool&quot;] = dict_list[&quot;runner&quot;].iloc[0].replace(&quot;Runner&quot;, &quot;&quot;)
+    jd[&quot;process_latex&quot;] = &quot;$&quot; + get_name(dict_list[&quot;particle1&quot;].iloc[0]) + get_name(
+        dict_list[&quot;particle2&quot;].iloc[0]) + &quot;$&quot;
+    jd[&quot;comment&quot;] = dict_list[&quot;id&quot;].iloc[0]
     jd[&quot;reference&quot;] = &quot;?&quot;
-    jd[&quot;Ecom [GeV]&quot;] = str(dict_list[&quot;energy&quot;][0])
-    jd[&quot;process_id&quot;] = &quot;pp_&quot; + str(dict_list[&quot;energy&quot;][0]) + &quot;_&quot; + str(
-        dict_list[&quot;particle1&quot;][0]) + &quot;_&quot; + str(dict_list[&quot;particle2&quot;][0])
-    jd[&quot;PDF set&quot;] = dict_list[&quot;pdf_nlo&quot;][0]
+    jd[&quot;Ecom [GeV]&quot;] = str(dict_list[&quot;energy&quot;].iloc[0])
+    jd[&quot;process_id&quot;] = &quot;pp_&quot; + str(dict_list[&quot;energy&quot;].iloc[0]) + &quot;_&quot; + str(
+        dict_list[&quot;particle1&quot;].iloc[0]) + &quot;_&quot; + str(dict_list[&quot;particle2&quot;].iloc[0])
+    jd[&quot;PDF set&quot;] = dict_list[&quot;pdf_nlo&quot;].iloc[0]
     dat = {}
-    for j in range(len(dict_list[parameter])):
-        if error_asym:
-            dat[str(dict_list[parameter][j])] = {
-                &quot;xsec_pb&quot;: float(plot.unv(dict_list[order_to_string(o) + &quot;_NOERR&quot;][j])),
-                &quot;unc_up_pb&quot;: float(plot.unv(dict_list[order_to_string(o)+ &quot;_COMBINED&quot;][j])-plot.unv(dict_list[order_to_string(o) + &quot;_NOERR&quot;][j]) + plot.usd(dict_list[order_to_string(o)+ &quot;_COMBINED&quot;][j])),
-                &quot;unc_down_pb&quot;: float(plot.unv(dict_list[order_to_string(o)+ &quot;_COMBINED&quot;][j])-plot.unv(dict_list[order_to_string(o) + &quot;_NOERR&quot;][j]) - plot.usd(dict_list[order_to_string(o)+ &quot;_COMBINED&quot;][j])),
-            }
-        elif error_sym:
-            dat[str(dict_list[parameter][j])] = {
-                &quot;xsec_pb&quot;: float(plot.unv(dict_list[order_to_string(o)][j])),
-                &quot;unc_pb&quot;: float(plot.usd(dict_list[order_to_string(o)][j]))
-            }
-        else:
-            dat[str(dict_list[parameter][j])] = {
-                &quot;xsec_pb&quot;: float(plot.unv(dict_list[order_to_string(o)][j]))
-            }
+    if len(parameters) == 2:
+        parameterj = parameters[0]
+        parameteri = parameters[1]
+        for j in range(len(dict_list[parameterj])):
+            dati = {}
+            if error_asym:
+                td = {
+                    &quot;xsec_pb&quot;: float(plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j])),
+                    &quot;unc_up_pb&quot;: float(plot.unv(dict_list[so+ &quot;_COMBINED&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) + plot.usd(dict_list[so+ &quot;_COMBINED&quot;].iloc[j])),
+                    &quot;unc_down_pb&quot;: float(plot.unv(dict_list[so+ &quot;_COMBINED&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) - plot.usd(dict_list[so+ &quot;_COMBINED&quot;].iloc[j])),
+
+                }
+                if scale:
+                    td = {**td,&quot;unc_scale_up_pb&quot;: float(plot.unv(dict_list[so+ &quot;_SCALE&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) + plot.usd(dict_list[so+ &quot;_SCALE&quot;].iloc[j])),
+                    &quot;unc_scale_down_pb&quot;: float(plot.unv(dict_list[so+ &quot;_SCALE&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) - plot.usd(dict_list[so+ &quot;_SCALE&quot;].iloc[j])),
+                    }
+                if pdf:
+                    td = {**td,&quot;unc_pdf_up_pb&quot;: float(plot.unv(dict_list[so+ &quot;_PDF&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) + plot.usd(dict_list[so+ &quot;_PDF&quot;].iloc[j])),
+                    &quot;unc_pdf_down_pb&quot;: float(plot.unv(dict_list[so+ &quot;_PDF&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) - plot.usd(dict_list[so+ &quot;_PDF&quot;].iloc[j])),
+                    }
+            elif error_sym:
+                td= {
+                    &quot;xsec_pb&quot;: float(plot.unv(dict_list[so].iloc[j])),
+                    &quot;unc_pb&quot;: float(plot.usd(dict_list[so].iloc[j]))
+                }
+                if scale:
+                    td = {**td,&quot;unc_scale_pb&quot;: float(plot.usd(dict_list[so+ &quot;_SCALE&quot;].iloc[j]))}
+                if pdf:
+                    td = {**td,&quot;unc_pdf_pb&quot;: float(plot.usd(dict_list[so+ &quot;_PDF&quot;].iloc[j]))}
+            else:
+                 td= {
+                    &quot;xsec_pb&quot;: float(plot.unv(dict_list[so].iloc[j]))
+                }
+            if str(dict_list[parameterj].iloc[j]) in dat:
+                dat[str(dict_list[parameterj].iloc[j])]={**dat[str(dict_list[parameterj].iloc[j])],str(dict_list[parameteri].iloc[j]):td}
+            else:
+                dat[str(dict_list[parameterj].iloc[j])]={str(dict_list[parameteri].iloc[j]):td}
+
+        jd[&quot;parameters&quot;] = [[parameterj],[parameteri]]
+    if len(parameters) == 1:
+        parameter = parameters[0]
+        for j in range(len(dict_list[parameter])):
+            if error_asym:
+                td= {
+                    &quot;xsec_pb&quot;: float(plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j])),
+                    &quot;unc_up_pb&quot;: float(plot.unv(dict_list[so+ &quot;_COMBINED&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) + plot.usd(dict_list[so+ &quot;_COMBINED&quot;].iloc[j])),
+                    &quot;unc_down_pb&quot;: float(plot.unv(dict_list[so+ &quot;_COMBINED&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) - plot.usd(dict_list[so+ &quot;_COMBINED&quot;].iloc[j])),
+                }
+                if scale:
+                    td = {**td,&quot;unc_scale_up_pb&quot;: float(plot.unv(dict_list[so+ &quot;_SCALE&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) + plot.usd(dict_list[so+ &quot;_SCALE&quot;].iloc[j])),
+                    &quot;unc_scale_down_pb&quot;: float(plot.unv(dict_list[so+ &quot;_SCALE&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) - plot.usd(dict_list[so+ &quot;_SCALE&quot;].iloc[j])),
+                    }
+                if pdf:
+                    td = {**td,&quot;unc_pdf_up_pb&quot;: float(plot.unv(dict_list[so+ &quot;_PDF&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) + plot.usd(dict_list[so+ &quot;_PDF&quot;].iloc[j])),
+                    &quot;unc_pdf_down_pb&quot;: float(plot.unv(dict_list[so+ &quot;_PDF&quot;].iloc[j])-plot.unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]) - plot.usd(dict_list[so+ &quot;_PDF&quot;].iloc[j])),
+                    }
+            elif error_sym:
+                td = {
+                    &quot;xsec_pb&quot;: float(plot.unv(dict_list[so].iloc[j])),
+                    &quot;unc_pb&quot;: float(plot.usd(dict_list[so].iloc[j]))
+                }
+                if scale:
+                    td = {**td,&quot;unc_scale_pb&quot;: float(plot.usd(dict_list[so+ &quot;_SCALE&quot;].iloc[j]))}
+                if pdf:
+                    td = {**td,&quot;unc_pdf_pb&quot;: float(plot.usd(dict_list[so+ &quot;_PDF&quot;].iloc[j]))}
+            else:
+                 td= {
+                    &quot;xsec_pb&quot;: float(plot.unv(dict_list[so].iloc[j]))
+                }
+            dat[str(dict_list[parameter].iloc[j])]=td
+        jd[&quot;parameters&quot;] = [[parameter]]
+
     jd[&quot;data&quot;] = dat
-    jd[&quot;parameters&quot;] = [[parameter]]
-    io.write(output, json.dumps(jd))</div>
+    io.write(output, json.dumps(jd, indent=4))</div>
 </pre></div>
 
            </div>

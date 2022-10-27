@@ -36,7 +36,7 @@
             <a href="../../index.html" class="icon icon-home"> HEPi
           </a>
               <div class="version">
-                0.2.5-96-gd68e810b
+                0.2.6-4-gcd7c789c
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -286,9 +286,7 @@ from smpl.parallel import par
         #if :
         if (ordername != &quot;LO&quot; and
             (plot.usd(dl[ordername][i]) * required_numerical_uncertainty_factor
-             &gt; dl[ordername + &quot;_PDF_ERRPLUS&quot;][i] or
-             plot.usd(dl[ordername][i]) * required_numerical_uncertainty_factor
-             &gt; -dl[ordername + &quot;_PDF_ERRMINUS&quot;][i])):
+             &gt; dl[ordername + &quot;_PDF_ERRPLUS&quot;][i]-dl[ordername + &quot;_PDF_ERRMINUS&quot;][i]  )):
             rel = plot.unv(dl[ordername][i])
             warnings.warn(
                 &quot;too bad numerical precision vs pdf @ &quot; + ordername +
@@ -380,10 +378,8 @@ from smpl.parallel import par
         dl.loc[i, ordername + &quot;_SCALE_ERRMINUS&quot;] = errminus
         if (plot.usd(dl[ordername][i]) *
                 required_numerical_uncertainty_factor &gt;
-                dl[ordername + &quot;_SCALE_ERRPLUS&quot;][i]
-                or plot.usd(dl[ordername][i]) *
-                required_numerical_uncertainty_factor &gt;
-                -dl[ordername + &quot;_SCALE_ERRMINUS&quot;][i]):
+                dl[ordername + &quot;_SCALE_ERRPLUS&quot;][i]-dl[ordername + &quot;_SCALE_ERRMINUS&quot;][i]
+                ):
             rel = plot.unv(dl[ordername][i])
             warnings.warn(
                 &quot;too bad numerical precision vs scale @ num:&quot; + ordername +
