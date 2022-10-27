@@ -1,0 +1,28 @@
+# Interpolate data (loaded from json) and save interpolation function as pickle? (scale and pdf uncertainties)
+
+from hepi.load import load_json_with_metadata
+from hepi.input import order_to_string
+from smpl import interpolate as ip
+import numpy as np
+import time
+
+
+#df,d = load_json_with_metadata(open("data/13000_hino_deg_1000022_-1000024_NNLL.json"))
+df,d = load_json_with_metadata(open("data/sqsq_13000_wino_1000023_-1000024_NLO.json"))
+
+
+so = order_to_string(df["order"].iloc[0])
+if len(d) == 1:
+	dat = [df[d[0][0]]] 
+elif len(d) ==2:
+	dat = [df[d[0][0]],df[d[1][0]]] 
+else:
+	raise ValueError("Only 1 or 2 dimensions supported")
+
+f_noerr = ip.interpolate(*dat,df[so + "_NOERR"],interpolator="linearnd",pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+f_combined = ip.interpolate(*dat,df[so+ "_COMBINED"],interpolator="linearnd",pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+f_scale = ip.interpolate(*dat,df[so+ "_SCALE"],interpolator="linearnd",pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+f_pdf = ip.interpolate(*dat,df[so+ "_PDF"],interpolator="linearnd",pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+
+print(f_noerr(1700,700), f_scale(1700,700),f_pdf(1700,700)  ,f_combined(1700,700))
+
