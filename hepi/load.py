@@ -26,6 +26,7 @@ def load_json(f, dimensions=1):
         pdf_nlo=dict["PDF set"],
         update=False,
     )
+    so = so
     inpu.runner = dict["tool"]
     dat = []
     params = dict["parameters"]
@@ -38,14 +39,22 @@ def load_json(f, dimensions=1):
                 for p2 in params[1]:
                     dicd[p2] = float(l)
                 if "unc_pb" in dict["data"][k][l]:
-                    dicd[order_to_string(inpu.order)] = ufloat(
+                    dicd[so] = ufloat(
                         dict["data"][k][l]["xsec_pb"],
                         dict["data"][k][l]["unc_pb"])
                 elif "unc_down_pb" in dict["data"][k][l] and "unc_up_pb" in dict["data"][k][l]:
-                    dicd[order_to_string(inpu.order)+ "_NOERR"] = dict["data"][k][l]["xsec_pb"]
-                    dicd[order_to_string(inpu.order)+ "_COMBINED"] = ufloat(
+                    dicd[so+ "_NOERR"] = dict["data"][k][l]["xsec_pb"]
+                    dicd[so+ "_COMBINED"] = ufloat(
                         dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_up_pb"] + dict["data"][k][l]["unc_down_pb"]) / 2,
                         (dict["data"][k][l]["unc_up_pb"] - dict["data"][k][l]["unc_down_pb"]) / 2)
+                    if "unc_scale_up_pb" in dict["data"][k][l] and "unc_scale_down_pb" in dict["data"][k][l]:
+                        dicd[so+ "_SCALE"] = ufloat(
+                            dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_up_pb"] + dict["data"][k][l]["unc_down_pb"]) / 2,
+                            (dict["data"][k][l]["unc_up_pb"] - dict["data"][k][l]["unc_down_pb"]) / 2 + (dict["data"][k][l]["unc_scale_up_pb"] - dict["data"][k][l]["unc_scale_down_pb"]) / 2)
+                    if "unc_pdf_up_pb" in dict["data"][k][l] and "unc_pdf_down_pb" in dict["data"][k][l]:
+                        dicd[so+ "_PDF"] = ufloat(
+                            dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_up_pb"] + dict["data"][k][l]["unc_down_pb"]) / 2,
+                            (dict["data"][k][l]["unc_up_pb"] - dict["data"][k][l]["unc_down_pb"]) / 2 + (dict["data"][k][l]["unc_pdf_up_pb"] - dict["data"][k][l]["unc_pdf_down_pb"]) / 2)
                 else:
                     raise ValueError("No uncertainty found in data.")
                 dat.append(dicd)
@@ -55,13 +64,21 @@ def load_json(f, dimensions=1):
             for p1 in params[0]:
                 dicd[p1] = float(k)
             if "unc_pb" in dict["data"][k]:
-                dicd[order_to_string(inpu.order)] = ufloat(
+                dicd[so] = ufloat(
                     dict["data"][k]["xsec_pb"], dict["data"][k]["unc_pb"])
             elif "unc_down_pb" in dict["data"][k] and "unc_up_pb" in dict["data"][k]:
-                dicd[order_to_string(inpu.order)+ "_NOERR"] = dict["data"][k]["xsec_pb"]
-                dicd[order_to_string(inpu.order)+ "_COMBINED"] = ufloat(
+                dicd[so+ "_NOERR"] = dict["data"][k]["xsec_pb"]
+                dicd[so+ "_COMBINED"] = ufloat(
                     dict["data"][k]["xsec_pb"] + (dict["data"][k]["unc_up_pb"] + dict["data"][k]["unc_down_pb"]) / 2,
                     (dict["data"][k]["unc_up_pb"] - dict["data"][k]["unc_down_pb"]) / 2)
+                if "unc_scale_up_pb" in dict["data"][k] and "unc_scale_down_pb" in dict["data"][k]:
+                    dicd[so+ "_SCALE"] = ufloat(
+                        dict["data"][k]["xsec_pb"] + (dict["data"][k]["unc_scale_up_pb"] + dict["data"][k]["unc_scale_down_pb"]) / 2,
+                        (dict["data"][k]["unc_scale_up_pb"] - dict["data"][k]["unc_scale_down_pb"]) / 2)
+                if "unc_pdf_up_pb" in dict["data"][k] and "unc_pdf_down_pb" in dict["data"][k]:
+                    dicd[so+ "_PDF"] = ufloat(
+                        dict["data"][k]["xsec_pb"] + (dict["data"][k]["unc_pdf_up_pb"] + dict["data"][k]["unc_pdf_down_pb"]) / 2,
+                        (dict["data"][k]["unc_pdf_up_pb"] - dict["data"][k]["unc_pdf_down_pb"]) / 2)
             else:
                 raise ValueError("No uncertainty found in data.")
             dat.append(dicd)
