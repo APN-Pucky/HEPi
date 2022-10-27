@@ -31,7 +31,6 @@ setuptools.setup(
         "pandas>=1.0.0",
         "tqdm",
         "pqdm",
-        "futures",
     ],
     extras_require={
         "opt" : [
