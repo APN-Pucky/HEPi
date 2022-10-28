@@ -63,6 +63,7 @@ setuptools.setup(
         "version_file": None,
         "count_commits_from_version_file": False
     },
+    scripts=['scripts/hepi-fast'],
     include_package_data=True,
     python_requires='>=3.6',
 )
