@@ -24,12 +24,16 @@ import hepi.data
 unv = unp.nominal_values
 usd = unp.std_devs
 
+# TODO info
+# TODO subplots?
+
 def __main__():
 	parser = argparse.ArgumentParser(description="Interpolate data (loaded from json) in the format: \nCentral value | error down | error up | error pdf down | error pdf up | error scale down | error scale up")
 	parser.add_argument("json", type=str, nargs='*',help="url/file/string/name", default=[ ])
 	parser.add_argument("-l", "--list", action="store_true",help="list installed grids",default=False)
 	parser.add_argument("-p", "--plot", action="store_true",help="plot listed files",default =False)
-	parser.add_argument("-s", "--size", help="number of points after interpolation",default =50)
+	parser.add_argument("-i", "--info", action="store_true",help="plot listed files",default =False)
+	parser.add_argument("-s", "--size", type=int,help="number of points after interpolation",default =50)
 	args = parser.parse_args()
 
 	fs = []
@@ -39,9 +43,19 @@ def __main__():
 		for f in hepi.data.list_files():
 			print(f)
 		return
-		
+	if args.plot:
+				# on the fly import to speed up hepi-fast
+		from hepi.plot import mapplot
+		from hepi.interpolate import interpolate_2d
+		from smpl import data
+		from matplotlib import pyplot as plt
+		from hepi.plot import combined_plot
+		fig, axs = plt.subplots(len(args.json),2)         # Remove horizontal space between axes         
+		if len(args.json) == 1:
+			axs = np.array([axs])
+                        
 
-	for j in args.json:
+	for xs,j in enumerate(args.json):
 		if path.exists(j):
 			with open(j) as f:
 				df,d = load_json_with_metadata(f)
@@ -60,29 +74,37 @@ def __main__():
 			dat = [df[d[0][0]]] 
 			interpolator="cubic"
 			if args.plot:
-				# on the fly import to speed up hepi-fast
-				from hepi.plot import combined_plot
-				combined_plot(df,d[0][0],so,tight=False,plot_data=False,logy=True,interpolate=True,xaxis=d[0][0],interpolator='cubic',pre=np.log,post=np.exp,init=False ,label=df["slha"].iloc[0] + " @ " + str(df["energy"].iloc[0]))
+				combined_plot(df,d[0][0],so,axe=axs[xs,0],tight=False,plot_data=False,logy=True,interpolate=True,xaxis=d[0][0],interpolator='cubic',pre=np.log,post=np.exp,init=False ,label=df["slha"].iloc[0] + " @ " + str(df["energy"].iloc[0]))
 		elif len(d) ==2:
 
 			dat = [df[d[0][0]],df[d[1][0]]] 
 			interpolator="linearnd"
 			if args.plot:
-				# on the fly import to speed up hepi-fast
-				from hepi.plot import mapplot
-				from hepi.interpolate import interpolate_2d
-				from smpl import data
-				xx,yy = data.flatmesh(np.linspace(dat[0].min(),dat[0].max(),args.size),np.linspace(dat[1].min(),dat[1].max(),args.size))
+				x = np.around(np.linspace(dat[0].min(),dat[0].max(),args.size),0)
+				y = np.around(np.linspace(dat[1].min(),dat[1].max(),args.size),0)
+				xx,yy = data.flatmesh(x,y)
 				dll = interpolate_2d(df,d[0][0],d[1][0],so+"_COMBINED",xx,yy,interpolator="linearnd",interpolate_lower_uncertainty=False,pre=np.log,post=np.exp)             
-				mapplot(dll,d[0][0],d[1][0],so+"_COMBINED",xaxis=d[0][0],yaxis=d[1][0] , zaxis="$\\sigma$ [pb]",fill_missing=False,init=True)
+				mapplot(dll,d[0][0],d[1][0],so+"_COMBINED",axes=axs[xs,0],xaxis=d[0][0],yaxis=d[1][0] , zaxis="$\\sigma$ [pb]",fill_missing=False,init=True)
+				dlln = interpolate_2d(df,d[0][0],d[1][0],so+"_NOERR",xx,yy,interpolator="linearnd",interpolate_lower_uncertainty=False,pre=np.log,post=np.exp)             
+				dll[so+"_NOERR"] = dlln[so+"_NOERR"]
+				for m_x in y[::5]:
+					mask = (dll[d[1][0]]==m_x) & (dll[so+"_NOERR"].notnull())& (dll[so+"_COMBINED"].notnull())& (dll[so+"_NOERR"]>0)& (dll[so+"_COMBINED"]>0)
+					hepi.combined_plot(dll[mask],d[0][0],so,alpha=0.1,axes=axs[xs,1],tight=False,init=False,interpolator='cubic',xaxis=d[0][0],label=str(m_x),cont=True,plot_data=False,pre=np.log,post=np.exp,interpolate=True)
+					plt.legend(title=d[1][0])
 
 		else:
 			raise ValueError("Only 1 or 2 dimensions supported.")
 		if not args.plot:
 			f_noerr = ip.interpolate(*dat,df[so + "_NOERR"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
 			f_combined = ip.interpolate(*dat,df[so+ "_COMBINED"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
-			f_pdf = ip.interpolate(*dat,df[so+ "_PDF"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
-			f_scale = ip.interpolate(*dat,df[so+ "_SCALE"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+			if so + "_PDF" in df.columns:
+				f_pdf = ip.interpolate(*dat,df[so+ "_PDF"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+			else:	
+				f_pdf = f_noerr
+			if so + "_SCALE" in df.columns:
+				f_scale = ip.interpolate(*dat,df[so+ "_SCALE"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+			else:
+				f_scale = f_noerr
 
 			fs = [*fs,(f_noerr,f_combined,f_pdf,f_scale)]
 	if args.plot:
@@ -91,13 +113,13 @@ def __main__():
 	else:
 		try: 
 			for line in sys.stdin:
-				for f_noerr,f_combined,f_pdf,f_scale in fs:
-					arg = line.split(' ')
+				for i,(f_noerr,f_combined,f_pdf,f_scale) in enumerate(fs):
+					arg = [float(a)  for a in line.split(' ')]
 					vn = f_noerr(*arg)
 					vs = f_scale(*arg) 
 					vp = f_pdf(*arg)
 					vc = f_combined(*arg)
-					print(vn, vn-unv(vc)-usd(vc), vn-unv(vc)+usd(vc), vn - unv(vs)-usd(vs), vn-unv(vs)+usd(vs), vn-unv(vp)-usd(vp), vn-unv(vp)+usd(vp))
+					print(i,*arg,vn, vn-unv(vc)-usd(vc), vn-unv(vc)+usd(vc), vn - unv(vs)-usd(vs), vn-unv(vs)+usd(vs), vn-unv(vp)-usd(vp), vn-unv(vp)+usd(vp))
 		except KeyboardInterrupt:
 			pass
 __main__()
