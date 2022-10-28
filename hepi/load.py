@@ -5,8 +5,8 @@ from uncertainties import ufloat
 from hepi.input import Input, order_to_string, xsec_to_order
 from hepi.util import LD2DL, DL2DF
 
+def load_json_with_metadata(file):
 
-def load_json(f, dimensions=1):
     """
     Load xsec data from json in to something that works within hepi's plotting.
 
@@ -14,7 +14,7 @@ def load_json(f, dimensions=1):
         f : readable object, e.g. `open(filepath:str)`.
         dimensions (int) : 1 or 2 currently supported.
     """
-    dict = json.load(f)
+    dict = json.load(file)
 
     inpu = Input(
         xsec_to_order(dict["order"]),
@@ -30,6 +30,7 @@ def load_json(f, dimensions=1):
     inpu.runner = dict["tool"]
     dat = []
     params = dict["parameters"]
+    dimensions = len(params)
     if dimensions == 2:
         for k in dict["data"]:
             for l in dict["data"][k]:
@@ -49,12 +50,12 @@ def load_json(f, dimensions=1):
                         (dict["data"][k][l]["unc_up_pb"] - dict["data"][k][l]["unc_down_pb"]) / 2)
                     if "unc_scale_up_pb" in dict["data"][k][l] and "unc_scale_down_pb" in dict["data"][k][l]:
                         dicd[so+ "_SCALE"] = ufloat(
-                            dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_up_pb"] + dict["data"][k][l]["unc_down_pb"]) / 2,
-                            (dict["data"][k][l]["unc_up_pb"] - dict["data"][k][l]["unc_down_pb"]) / 2 + (dict["data"][k][l]["unc_scale_up_pb"] - dict["data"][k][l]["unc_scale_down_pb"]) / 2)
+                            dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_scale_up_pb"] + dict["data"][k][l]["unc_scale_down_pb"]) / 2,
+                            (dict["data"][k][l]["unc_scale_up_pb"] - dict["data"][k][l]["unc_scale_down_pb"]) / 2 )
                     if "unc_pdf_up_pb" in dict["data"][k][l] and "unc_pdf_down_pb" in dict["data"][k][l]:
                         dicd[so+ "_PDF"] = ufloat(
-                            dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_up_pb"] + dict["data"][k][l]["unc_down_pb"]) / 2,
-                            (dict["data"][k][l]["unc_up_pb"] - dict["data"][k][l]["unc_down_pb"]) / 2 + (dict["data"][k][l]["unc_pdf_up_pb"] - dict["data"][k][l]["unc_pdf_down_pb"]) / 2)
+                            dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_pdf_up_pb"] + dict["data"][k][l]["unc_pdf_down_pb"]) / 2,
+                            (dict["data"][k][l]["unc_pdf_up_pb"] - dict["data"][k][l]["unc_pdf_down_pb"]) / 2 )
                 else:
                     raise ValueError("No uncertainty found in data.")
                 dat.append(dicd)
@@ -88,6 +89,8 @@ def load_json(f, dimensions=1):
         if k.startswith("mass_"):
             for m in k[5:].split("_"): 
                 ddf["mass_"+ m] = ddf[k]
-    return ddf
+    return ddf, params
 
+def load_json(f,dimension=1):
+    return load_json_with_metadata(f)[0]
 load = load_json

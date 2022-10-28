@@ -1,28 +1,80 @@
-# Interpolate data (loaded from json) and save interpolation function as pickle? (scale and pdf uncertainties)
-
+#!/usr/bin/python3
+# Interpolate data (loaded from json)
+import argparse
+import sys
+import numpy as np
 from hepi.load import load_json_with_metadata
 from hepi.input import order_to_string
 from smpl import interpolate as ip
-import numpy as np
-import time
+import uncertainties.unumpy as unp
+
+try:
+    import readline
+except ImportError:
+    pass
+
+unv = unp.nominal_values
+usd = unp.std_devs
+
+def __main__():
+	parser = argparse.ArgumentParser(description="Interpolate data (loaded from json) in the format: \nCentral value | error down | error up | error pdf down | error pdf up | error scale down | error scale up")
+	parser.add_argument("json", type=str, nargs='+',help="url/file/string/name")
+	parser.add_argument("-l", "--list", action="store_true",help="list installed grids",default=False)
+	parser.add_argument("-p", "--plot", action="store_true",help="plot listed files",default =False)
+	parser.add_argument("-s", "--size", help="number of points after interpolation",default =50)
+	args = parser.parse_args()
+
+	fs = []
+
+	for j in args.json:
+	# TODO lookup in installed dir and http
+		with open(j) as f:
+			df,d = load_json_with_metadata(f)
+
+		so = order_to_string(df["order"].iloc[0])
+		if len(d) == 1:
+			dat = [df[d[0][0]]] 
+			interpolator="cubic"
+			if args.plot:
+				from hepi.plot import combined_plot
+				combined_plot(df,d[0][0],so,tight=False,plot_data=False,logy=True,interpolate=True,xaxis="$m_{1}$ [GeV]",interpolator='cubic',pre=np.log,post=np.exp,init=False ,label=df["slha"].iloc[0] + " @ " + str(df["energy"].iloc[0]))
+		elif len(d) ==2:
+
+			dat = [df[d[0][0]],df[d[1][0]]] 
+			interpolator="linearnd"
+			if args.plot:
+				from hepi.plot import mapplot
+				from hepi.interpolate import interpolate_2d
+				from smpl import data
+				xx,yy = data.flatmesh(np.linspace(dat[0].min(),dat[0].max(),args.size),np.linspace(dat[1].min(),dat[1].max(),args.size))
+				dll = interpolate_2d(df,d[0][0],d[1][0],so+"_COMBINED",xx,yy,interpolator="linearnd",interpolate_lower_uncertainty=False,pre=np.log,post=np.exp)             
+				mapplot(dll,d[0][0],d[1][0],so+"_COMBINED",xaxis="$m_{1}$ [GeV]",yaxis="$m_{2}$ [GeV]" , zaxis="$\\sigma$ [pb]",fill_missing=False,init=True)
+
+		else:
+			raise ValueError("Only 1 or 2 dimensions supported.")
+		if not args.plot:
+			f_noerr = ip.interpolate(*dat,df[so + "_NOERR"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+			f_combined = ip.interpolate(*dat,df[so+ "_COMBINED"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+			f_pdf = ip.interpolate(*dat,df[so+ "_PDF"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+			f_scale = ip.interpolate(*dat,df[so+ "_SCALE"],interpolator=interpolator,pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
+
+			fs = [*fs,(f_noerr,f_combined,f_pdf,f_scale)]
+	if args.plot:
+		from matplotlib import pyplot as plt
+		plt.show()
+	else:
+		try: 
+			for line in sys.stdin:
+				for f_noerr,f_combined,f_pdf,f_scale in fs:
+					arg = line.split(' ')
+					vn = f_noerr(*arg)
+					vs = f_scale(*arg) 
+					vp = f_pdf(*arg)
+					vc = f_combined(*arg)
+					print(vn, vn-unv(vc)-usd(vc), vn-unv(vc)+usd(vc), vn - unv(vs)-usd(vs), vn-unv(vs)+usd(vs), vn-unv(vp)-usd(vp), vn-unv(vp)+usd(vp))
+		except KeyboardInterrupt:
+			pass
+__main__()
 
 
-#df,d = load_json_with_metadata(open("data/13000_hino_deg_1000022_-1000024_NNLL.json"))
-df,d = load_json_with_metadata(open("data/sqsq_13000_wino_1000023_-1000024_NLO.json"))
-
-
-so = order_to_string(df["order"].iloc[0])
-if len(d) == 1:
-	dat = [df[d[0][0]]] 
-elif len(d) ==2:
-	dat = [df[d[0][0]],df[d[1][0]]] 
-else:
-	raise ValueError("Only 1 or 2 dimensions supported")
-
-f_noerr = ip.interpolate(*dat,df[so + "_NOERR"],interpolator="linearnd",pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
-f_combined = ip.interpolate(*dat,df[so+ "_COMBINED"],interpolator="linearnd",pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
-f_scale = ip.interpolate(*dat,df[so+ "_SCALE"],interpolator="linearnd",pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
-f_pdf = ip.interpolate(*dat,df[so+ "_PDF"],interpolator="linearnd",pre=np.log,post=np.exp,interpolate_lower_uncertainty=False)
-
-print(f_noerr(1700,700), f_scale(1700,700),f_pdf(1700,700)  ,f_combined(1700,700))
 

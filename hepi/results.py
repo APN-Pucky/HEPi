@@ -2,33 +2,25 @@
 from .util import DictData
 import numpy as np
 from uncertainties import unumpy
-from smpl import plot
+import uncertainties.unumpy as unp
 import warnings
 import tqdm
 #from pqdm.processes import pqdm as ppqdm
 from pqdm.threads import pqdm as tpqdm
 import multiprocessing as mp
-from smpl.parallel import par
 
 #If the numerical uncertainty times :attr:`required_numerical_uncertainty_factor` is higher than the scale or pdf uncertainty a warning is shown.
 required_numerical_uncertainty_factor = 5
 
+unv = unp.nominal_values
+usd = unp.std_devs
 
-def my_parallel(arr, f, n_jobs=None, desc=None):
-    """
-    Parallel execution of f on each element of args
-    """
-    n_jobs = n_jobs or mp.cpu_count()
-    sa = np.array_split(np.array(arr), len(arr) / n_jobs)
-    res = []
-    for i in tqdm.tqdm(range(len(sa)), desc=desc):
-        res += par(f, sa[i])
-    return res
+
 
 
 class Result(DictData):
     """
-    General result class.
+    General result class. All uncertainties are of numerical origin.
 
     Attributes:
         LO (:obj:`double`): Leading Order result. Defaults to None.
@@ -124,16 +116,16 @@ def _pdf_error_single(members, i, dl, ordername, confidence_level=90):
                 pdfs[dl["pdfset_nlo"][j]] = j
 
     # lo_unc = pdfset.uncertainty(
-    #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
+    #    [unv(dl["LO"][k]) for k in pdfs], -1)
     #if ordername == "LO":
-    #    dl.loc[i, "LO_PDF_CENTRAL"] = plot.unv(dl["LO"][i])
+    #    dl.loc[i, "LO_PDF_CENTRAL"] = unv(dl["LO"][i])
     #    dl.loc[i, "LO_PDF_ERRPLUS"] = 0.0
     #    dl.loc[i, "LO_PDF_ERRMINUS"] = 0.0
     #    dl.loc[i, "LO_PDF_ERRSYM"] = 0.0
     #else:
-    #print([float(plot.unv(dl[ordername][k])) for k in pdfs])
+    #print([float(unv(dl[ordername][k])) for k in pdfs])
         nlo_unc = pdfset.uncertainty(
-            [float(plot.unv(dl[ordername][k])) for k in pdfs],
+            [float(unv(dl[ordername][k])) for k in pdfs],
             confidence_level)
     return (i,nlo_unc)
 
@@ -187,12 +179,12 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
         #TODO error sym to minus and plus
         #if :
         if (ordername != "LO" and
-            (plot.usd(dl[ordername][i]) * required_numerical_uncertainty_factor
+            (usd(dl[ordername][i]) * required_numerical_uncertainty_factor
              > dl[ordername + "_PDF_ERRPLUS"][i]-dl[ordername + "_PDF_ERRMINUS"][i]  )):
-            rel = plot.unv(dl[ordername][i])
+            rel = unv(dl[ordername][i])
             warnings.warn(
                 "too bad numerical precision vs pdf @ " + ordername +
-                " num: " + str(plot.usd(dl[ordername][i]) / rel * 100.) +
+                " num: " + str(usd(dl[ordername][i]) / rel * 100.) +
                 "% vs " + str(dl[ordername + "_PDF_ERRPLUS"][i] / rel * 100.) +
                 "% to pdf: " +
                 str(dl[ordername + "_PDF_ERRMINUS"][i] / rel * 100.) + "%",
@@ -200,7 +192,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
 
     mask = dl[ordername + "_PDF_CENTRAL"].notnull()
     dl.loc[mask, ordername + "_PDF"] = unumpy.uarray(
-        plot.unv(dl[ordername + "_PDF_CENTRAL"][mask]) +
+        unv(dl[ordername + "_PDF_CENTRAL"][mask]) +
         dl[ordername + "_PDF_ERRPLUS"][mask] / 2. +
         dl[ordername + "_PDF_ERRMINUS"][mask] / 2.,
         (dl[ordername + "_PDF_ERRPLUS"][mask] -
@@ -233,8 +225,8 @@ def _scale_error_single(members,i,dl,ordername="LO"):
     # index, errplus,errminus
     return (
         i,
-        np.max( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i]),
-        np.min( [plot.unv(dl[ordername][k]) for k in scales]) - plot.unv(dl[ordername][i])
+        np.max( [unv(dl[ordername][k]) for k in scales]) - unv(dl[ordername][i]),
+        np.min( [unv(dl[ordername][k]) for k in scales]) - unv(dl[ordername][i])
     )
 
 def scale_error(li, dl, ordername="LO",n_jobs=None):
@@ -275,17 +267,17 @@ def scale_error(li, dl, ordername="LO",n_jobs=None):
                 desc="Scale uncertainty @ " + ordername)
     for i,errplus,errminus in ret:
         # lo_unc = pdfset.uncertainty(
-        #    [plot.unv(dl["LO"][k]) for k in pdfs], -1)
+        #    [unv(dl["LO"][k]) for k in pdfs], -1)
         dl.loc[i, ordername + "_SCALE_ERRPLUS"] = errplus
         dl.loc[i, ordername + "_SCALE_ERRMINUS"] = errminus
-        if (plot.usd(dl[ordername][i]) *
+        if (usd(dl[ordername][i]) *
                 required_numerical_uncertainty_factor >
                 dl[ordername + "_SCALE_ERRPLUS"][i]-dl[ordername + "_SCALE_ERRMINUS"][i]
                 ):
-            rel = plot.unv(dl[ordername][i])
+            rel = unv(dl[ordername][i])
             warnings.warn(
                 "too bad numerical precision vs scale @ num:" + ordername +
-                " " + str(plot.usd(dl[ordername][i]) / rel * 100.) +
+                " " + str(usd(dl[ordername][i]) / rel * 100.) +
                 "% vs scale:" +
                 str(dl[ordername + "_SCALE_ERRPLUS"][i] / rel * 100.) +
                 "% to " +
@@ -294,7 +286,7 @@ def scale_error(li, dl, ordername="LO",n_jobs=None):
 
     mask = dl[ordername + "_SCALE_ERRPLUS"].notnull()
     dl.loc[mask, ordername + "_SCALE"] = unumpy.uarray(
-        plot.unv(dl[ordername][mask]) +
+        unv(dl[ordername][mask]) +
         dl[ordername + "_SCALE_ERRPLUS"][mask] / 2. +
         dl[ordername + "_SCALE_ERRMINUS"][mask] / 2.,
         (+dl[ordername + "_SCALE_ERRPLUS"][mask] -
@@ -336,7 +328,7 @@ def combine_error(dl: dict, ordername="LO"):
     dl[ordername + "_COMBINED"] = np.array([None] * len(dl["pdfset_nlo"]))
 
     mask = dl[ordername + "_PDF_CENTRAL"].notnull()
-    dl.loc[mask, ordername + "_NOERR"] = plot.unv(dl[ordername +
+    dl.loc[mask, ordername + "_NOERR"] = unv(dl[ordername +
                                                      ""][mask]).astype(float)
     dl.loc[mask, ordername + "_ERRPLUS"] = np.sqrt(
         dl[ordername + "_PDF_ERRPLUS"][mask].astype(float)**2 +
@@ -345,7 +337,7 @@ def combine_error(dl: dict, ordername="LO"):
         dl[ordername + "_PDF_ERRMINUS"][mask].astype(float)**2 +
         dl[ordername + "_SCALE_ERRMINUS"][mask].astype(float)**2)
     dl.loc[mask, ordername + "_COMBINED"] = unumpy.uarray(
-        plot.unv(dl[ordername + ""][mask]) +
+        unv(dl[ordername + ""][mask]) +
         dl[ordername + "_ERRPLUS"][mask] / 2. +
         dl[ordername + "_ERRMINUS"][mask] / 2.,
         (+dl[ordername + "_ERRPLUS"][mask] - dl[ordername + "_ERRMINUS"][mask])

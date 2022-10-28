@@ -1,4 +1,4 @@
-from enum import IntEnum
+
 import os
 import shutil
 import warnings
@@ -8,7 +8,9 @@ import numpy as np
 from typing import Iterable, List
 
 import pyslha
-from .util import DictData, get_LR_partner, lhapdf_name_to_id
+from .util import DictData, lhapdf_name_to_id
+
+from .order     import Order,xsec_to_order,order_to_string,replace_macros
 
 import lhapdf
 
@@ -89,55 +91,6 @@ def set_pre(ppre):
     pre = ppre
 
 
-class Order(IntEnum):
-    """
-    Computation orders.
-    """
-    LO = 0
-    """Leading Order"""
-    NLO = 1
-    """Next-to-Leading Order"""
-    NLO_PLUS_NLL = 2
-    """Next-to-Leading Order plus Next-to-Leading Logarithms"""
-    aNNLO_PLUS_NNLL = 3
-    """Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms"""
-
-
-def replace_macros(s: str) -> str:
-    return s.replace("_PLUS_", "+").replace(" ", "\\ ")
-
-
-def order_to_string(o: Order, json_style=False, no_macros=False) -> str:
-    ret = ""
-    if o == Order.LO:
-        ret = "LO"
-    elif o == Order.NLO:
-        ret = "NLO"
-    elif o == Order.NLO_PLUS_NLL:
-        ret = "NLO_PLUS_NLL"
-    elif o == Order.aNNLO_PLUS_NNLL:
-        if json_style:
-            ret = "NNLOapprox+NNLL"
-        else:
-            ret = "aNNLO_PLUS_NNLL"
-    else:
-        raise ValueError("Order '" + o + "' not supported by HEPi.")
-    if no_macros:
-        return replace_macros(ret)
-    return ret
-
-
-def xsec_to_order(s: str):
-    if s == "NNLOapprox+NNLL":
-        return Order.aNNLO_PLUS_NNLL
-    elif s == "NLO+NLL":
-        return Order.NLO_PLUS_NLL
-    elif s == "NLO":
-        return Order.NLO
-    elif s == "LO":
-        return Order.LO
-    else:
-        raise ValueError("Unknown Order '" + s + "', not supported by HEPi.")
 
 
 class Input(DictData):
@@ -566,6 +519,7 @@ def masses_scan(input_list: List[Input],
     Scans the PDG identified masses in `varis` over `rrange` in the list `input_list`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
     """
+    from .particles import get_LR_partner
     if negate is None:
         negate = []
     ret = []

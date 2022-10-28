@@ -10,7 +10,6 @@ import numpy as np
 from hepi.input import Input, Order, get_input_dir, get_output_dir, get_pre
 from hepi.results import Result
 from hepi.util import DL2DF, LD2DL, DictData, namehash
-from smpl.parallel import par
 import time
 import tqdm
 from pqdm.threads import pqdm as tpqdm

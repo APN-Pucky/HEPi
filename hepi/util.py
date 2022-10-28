@@ -3,13 +3,9 @@ import json
 from typing import List, Tuple
 import numpy as np
 import hashlib
-from particle.converters.bimap import DirectionalMaps
-from particle import PDGID
-from distutils.version import StrictVersion
 
 import pandas as pd
 import warnings
-from smpl import interpolate as ip
 
 
 class DictData:
@@ -60,63 +56,8 @@ def DL2DF(ld: dict) -> pd.DataFrame:
     return pd.DataFrame.from_dict(ld)
 
 
-PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps("PDGID",
-                                                     "LaTexName",
-                                                     converters=(PDGID, str))
-
-PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps("PDGName",
-                                                "PDGID",
-                                                converters=(str, PDGID))
 
 
-def get_name(pid: int) -> str:
-    """
-    Get the latex name of a particle.
-
-    Args:
-        pid (int) : PDG Monte Carlo identifier for the particle.
-
-    Returns:
-        str: Latex name.
-
-    Examples:
-        >>> get_name(21)
-        'g'
-        >>> get_name(1000022)
-        '\\\\tilde{\\\\chi}_{1}^{0}'
-    """
-    global PDG2LaTeXNameMap
-    pdgid = PDG2LaTeXNameMap[pid]
-    return pdgid
-
-
-def get_LR_partner(pid: int) -> Tuple[int, int]:
-    """Transforms a PDG id to it's left-right partner.
-
-    Args:
-        pid (int) : PDG Monte Carlo identifier for the particle.
-
-    Returns:
-        tuple : First int is -1 for Left and 1 for Right. Second int is the PDG id.
-
-    Examples:
-        >>> get_LR_partner(1000002)
-        (-1, 2000002)
-    """
-    n = PDGID2NameMap[pid]
-    if "L" in n:
-        n = n.replace("L", "R")
-        return -1, int(PDG2Name2IDMap[n])
-    if "R" in n:
-        n = n.replace("R", "L")
-        return 1, int(PDG2Name2IDMap[n])
-    if "1" in n:
-        n = n.replace("1", "2")
-        return -1, int(PDG2Name2IDMap[n])
-    if "2" in n:
-        n = n.replace("2", "1")
-        return 1, int(PDG2Name2IDMap[n])
-    return None
 
 
 def namehash(n: any) -> str:
@@ -186,46 +127,4 @@ def lhapdf_id_to_name(lid : int) -> str:
     warnings.warn("PDF set with id " + str(lid) + " unknown/not installed?")
     return "Unknown PDF ID: " + str(lid)
 
-# TODO fix dependent(mu) for new masses
 
-def interpolate_1d(df,x,y,xrange,only_interpolation=True):
-    """
-    Last key is the value to be interpolated, while the rest are cooridnates.
-    
-    Args:
-        df (pandas.DataFrame): results
-    """
-    f = ip.interpolate(df[x],df[y])
-    a = []
-    for xr in xrange:
-        c = df.head(1)
-        c[x] = xr
-        c[y] = f(xr)
-        a += [c]
-    if only_interpolation:
-        return pd.concat(a)
-    else:
-        return pd.concat([df, *a])
- 
-def interpolate_2d(df,x,y,z,xrange,yrange,only_interpolation=True,**kwargs):
-    """
-    Last key is the value to be interpolated, while the rest are cooridnates.
-    
-    Args:
-        df (pandas.DataFrame): results
-    """
-    f = ip.interpolate(df[x],df[y],df[z],**kwargs)
-    a = []
-    for i in range(len(xrange)):
-        xr = xrange[i]
-        yr = yrange[i]
-        zr = f(xr,yr)
-        c = df.head(1).copy()
-        c[x] = xr
-        c[y] = yr
-        c[z] = zr
-        a += [c]
-    if only_interpolation:
-        return pd.concat(a)
-    else:
-        return pd.concat([df, *a])
