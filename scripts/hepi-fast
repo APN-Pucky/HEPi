@@ -1,24 +1,32 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 # Interpolate data (loaded from json)
 import argparse
+import warnings
 import sys
 import numpy as np
 from hepi.load import load_json_with_metadata
 from hepi.input import order_to_string
 from smpl import interpolate as ip
 import uncertainties.unumpy as unp
+import os.path
+from os import path
+import validators
+import urllib.request
+
+#from hepi import data
 
 try:
     import readline
 except ImportError:
     pass
 
+import hepi.data 
 unv = unp.nominal_values
 usd = unp.std_devs
 
 def __main__():
 	parser = argparse.ArgumentParser(description="Interpolate data (loaded from json) in the format: \nCentral value | error down | error up | error pdf down | error pdf up | error scale down | error scale up")
-	parser.add_argument("json", type=str, nargs='+',help="url/file/string/name")
+	parser.add_argument("json", type=str, nargs='*',help="url/file/string/name", default=[ ])
 	parser.add_argument("-l", "--list", action="store_true",help="list installed grids",default=False)
 	parser.add_argument("-p", "--plot", action="store_true",help="plot listed files",default =False)
 	parser.add_argument("-s", "--size", help="number of points after interpolation",default =50)
@@ -26,29 +34,47 @@ def __main__():
 
 	fs = []
 
+	if args.list:
+		print( "Available grids:")
+		for f in hepi.data.list_files():
+			print(f)
+		return
+		
+
 	for j in args.json:
-	# TODO lookup in installed dir and http
-		with open(j) as f:
-			df,d = load_json_with_metadata(f)
+		if path.exists(j):
+			with open(j) as f:
+				df,d = load_json_with_metadata(f)
+		elif j in hepi.data.list_files() or j + ".json" in hepi.data.list_files():
+			with open(hepi.data.get_file(j.replace(".json","")+ ".json")) as f :
+				df,d = load_json_with_metadata(f)
+		elif validators.url(j):
+			with urllib.request.urlopen(j) as f:
+				df,d = load_json_with_metadata(f)
+		else:
+			warnings.warn("Unknown input: " + j)
+			continue
 
 		so = order_to_string(df["order"].iloc[0])
 		if len(d) == 1:
 			dat = [df[d[0][0]]] 
 			interpolator="cubic"
 			if args.plot:
+				# on the fly import to speed up hepi-fast
 				from hepi.plot import combined_plot
-				combined_plot(df,d[0][0],so,tight=False,plot_data=False,logy=True,interpolate=True,xaxis="$m_{1}$ [GeV]",interpolator='cubic',pre=np.log,post=np.exp,init=False ,label=df["slha"].iloc[0] + " @ " + str(df["energy"].iloc[0]))
+				combined_plot(df,d[0][0],so,tight=False,plot_data=False,logy=True,interpolate=True,xaxis=d[0][0],interpolator='cubic',pre=np.log,post=np.exp,init=False ,label=df["slha"].iloc[0] + " @ " + str(df["energy"].iloc[0]))
 		elif len(d) ==2:
 
 			dat = [df[d[0][0]],df[d[1][0]]] 
 			interpolator="linearnd"
 			if args.plot:
+				# on the fly import to speed up hepi-fast
 				from hepi.plot import mapplot
 				from hepi.interpolate import interpolate_2d
 				from smpl import data
 				xx,yy = data.flatmesh(np.linspace(dat[0].min(),dat[0].max(),args.size),np.linspace(dat[1].min(),dat[1].max(),args.size))
 				dll = interpolate_2d(df,d[0][0],d[1][0],so+"_COMBINED",xx,yy,interpolator="linearnd",interpolate_lower_uncertainty=False,pre=np.log,post=np.exp)             
-				mapplot(dll,d[0][0],d[1][0],so+"_COMBINED",xaxis="$m_{1}$ [GeV]",yaxis="$m_{2}$ [GeV]" , zaxis="$\\sigma$ [pb]",fill_missing=False,init=True)
+				mapplot(dll,d[0][0],d[1][0],so+"_COMBINED",xaxis=d[0][0],yaxis=d[1][0] , zaxis="$\\sigma$ [pb]",fill_missing=False,init=True)
 
 		else:
 			raise ValueError("Only 1 or 2 dimensions supported.")
@@ -75,6 +101,3 @@ def __main__():
 		except KeyboardInterrupt:
 			pass
 __main__()
-
-
-

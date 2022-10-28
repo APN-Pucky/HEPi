@@ -12,8 +12,8 @@ import pyslha
 import matplotlib.cm as cm
 from matplotlib import colors
 
-from .input import Input, get_output_dir, replace_macros
-from .particles import get_name
+from ..input import Input, get_output_dir, replace_macros
+from ..particles import get_name
 from matplotlib.ticker import NullFormatter
 from scipy import integrate as auc
 

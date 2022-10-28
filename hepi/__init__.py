@@ -3,7 +3,8 @@ from .output import *
 from .input import *
 from .results import *
 from .util import *
-#from .plot import *
+# TODO remvoe this for speed
+from .plot import *
 from .run import *
 from .load import *
 from .interpolate import *

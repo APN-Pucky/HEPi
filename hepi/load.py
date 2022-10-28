@@ -40,7 +40,8 @@ def load_json_with_metadata(file):
                 for p2 in params[1]:
                     dicd[p2] = float(l)
                 if "unc_pb" in dict["data"][k][l]:
-                    dicd[so] = ufloat(
+                    dicd[so+ "_NOERR"] = dict["data"][k][l]["xsec_pb"]
+                    dicd[so + "_COMBINED"] = ufloat(
                         dict["data"][k][l]["xsec_pb"],
                         dict["data"][k][l]["unc_pb"])
                 elif "unc_down_pb" in dict["data"][k][l] and "unc_up_pb" in dict["data"][k][l]:
@@ -65,7 +66,8 @@ def load_json_with_metadata(file):
             for p1 in params[0]:
                 dicd[p1] = float(k)
             if "unc_pb" in dict["data"][k]:
-                dicd[so] = ufloat(
+                dicd[so+ "_NOERR"]  = dict["data"][k]["xsec_pb"]
+                dicd[so+ "_COMBINED"] = ufloat(
                     dict["data"][k]["xsec_pb"], dict["data"][k]["unc_pb"])
             elif "unc_down_pb" in dict["data"][k] and "unc_up_pb" in dict["data"][k]:
                 dicd[so+ "_NOERR"] = dict["data"][k]["xsec_pb"]
@@ -91,6 +93,6 @@ def load_json_with_metadata(file):
                 ddf["mass_"+ m] = ddf[k]
     return ddf, params
 
-def load_json(f,dimension=1):
+def load_json(f,dimensions=1):
     return load_json_with_metadata(f)[0]
 load = load_json
