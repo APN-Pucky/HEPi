@@ -25,7 +25,7 @@ setuptools.setup(
         "matplotlib",
         "scipy",
         "sympy",
-        "smpl>=0.0.150",
+        "smpl>=0.0.152",
         "pyslha",
         "particle",
         "pandas>=1.0.0",
@@ -33,7 +33,7 @@ setuptools.setup(
         "pqdm",
     ],
     extras_require={
-        "opt" : [
+        "opt": [
             "lhapdf",
         ],
         "dev": [
