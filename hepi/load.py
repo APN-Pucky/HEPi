@@ -91,7 +91,7 @@ def load_json_with_metadata(file):
         if k.startswith("mass_"):
             for m in k[5:].split("_"): 
                 ddf["mass_"+ m] = ddf[k]
-    return ddf, params
+    return ddf, params,inpu
 
 def load_json(f,dimensions=1):
     return load_json_with_metadata(f)[0]
