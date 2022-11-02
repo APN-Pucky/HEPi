@@ -1,0 +1,406 @@
+
+  Welcome to Resummino git-latest
+  Copyright 2008-2010 Jonathan Debove.
+  Copyright 2011-2014 David R. Lamprea.
+  Copyright 2011-2016 Marcel Rothering.
+
+  Licensed under the EUPL 1.1 or later.
+  See http://www.resummino.org/ for more information.
+
+  If using Resummino for slepton pair production, please cite.
+  - G. Bozzi, B. Fuks, M. Klasen, PRD 74, 015001 (2006); NPB 777, 157 (2007); NPB 794, 46 (2007).
+  - B. Fuks, M. Klasen, D. R. Lamprea, M. Rothering, EPJC 73, 2480 (2013).
+
+  For gaugino pair production, please cite:
+  - J. Debove, B. Fuks, M. Klasen, PLB 688, 208 (2010); NPB 842, 51 (2011); NPB 849, 64 (2011).
+  - B. Fuks, M. Klasen, D. R. Lamprea, M. Rothering, JHEP 1210, 081 (2012); EPJC 73, 2480 (2013).
+
+  For associated gaugino gluino production, please cite:
+  - B. Fuks, M. Klasen, M. Rothering, JHEP 07:053, (2016).
+  - B. Fuks, M. Klasen, D. R. Lamprea, M. Rothering, EPJC 73, 2480 (2013).
+
+LHAPDF 6.2.3 loading /pool/condor/dir_6163/resummino-releases/lhapdf-prefix/share/LHAPDF/PDF4LHC21_40/PDF4LHC21_40_0000.dat
+PDF4LHC21_40 PDF set, member #0, version 1
+ alpha_s(M_Z^2) = 0.1180 	 for LO PDF set 
+ alpha_s(1400.000^2) = 0.0837 	 for LO PDF set 
+
+********************
+* LO cross section *
+********************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+
+num_dim=3, calls=2000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        9.0967e-14   2.97e-15          9.0967e-14      2.97e-15    0.00e+00
+   2        9.7571e-14   1.06e-15          9.6826e-14      9.95e-16    4.40e+00
+   3        9.8408e-14   5.21e-16          9.8068e-14      4.62e-16    3.19e+00
+   4        9.7763e-14   4.77e-16          9.7921e-14      3.32e-16    2.20e+00
+   5        9.7892e-14   4.65e-16          9.7911e-14      2.70e-16    1.65e+00
+
+num_dim=3, calls=20000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        9.7827e-14   1.49e-16          9.7827e-14      1.49e-16    0.00e+00
+   2        9.7808e-14   1.43e-16          9.7818e-14      1.03e-16    8.49e-03
+   3        9.7915e-14   1.38e-16          9.7853e-14      8.27e-17    1.64e-01
+   4        9.7945e-14   1.47e-16          9.7875e-14      7.21e-17    2.09e-01
+   5        9.7537e-14   1.53e-16          9.7813e-14      6.52e-17    1.16e+00
+LO = (9.7813383e-14 +- 6.5173756e-17) pb
+LHAPDF 6.2.3 loading /pool/condor/dir_6163/resummino-releases/lhapdf-prefix/share/LHAPDF/PDF4LHC21_40/PDF4LHC21_40_0024.dat
+PDF4LHC21_40 PDF set, member #24, version 1
+ alpha_s(M_Z^2) = 0.1180 	 for NLO PDF set 
+ alpha_s(1400.000^2) = 0.0837 	 for NLO PDF set 
+
+********************
+* LO cross section *
+********************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+
+num_dim=3, calls=2000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.0421e-13   3.14e-15          1.0421e-13      3.14e-15    0.00e+00
+   2        1.1060e-13   1.13e-15          1.0986e-13      1.07e-15    3.67e+00
+   3        1.1158e-13   5.78e-16          1.1119e-13      5.08e-16    2.84e+00
+   4        1.1065e-13   5.41e-16          1.1094e-13      3.70e-16    2.07e+00
+   5        1.1082e-13   5.31e-16          1.1090e-13      3.04e-16    1.56e+00
+
+num_dim=3, calls=20000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.1092e-13   1.68e-16          1.1092e-13      1.68e-16    0.00e+00
+   2        1.1095e-13   1.62e-16          1.1093e-13      1.17e-16    1.51e-02
+   3        1.1102e-13   1.56e-16          1.1096e-13      9.35e-17    1.05e-01
+   4        1.1106e-13   1.67e-16          1.1099e-13      8.16e-17    1.60e-01
+   5        1.1064e-13   1.72e-16          1.1092e-13      7.37e-17    9.46e-01
+   5        1.1076e-13   1.70e-16          1.1090e-13      6.76e-17    9.14e-01
+   5        1.1110e-13   1.69e-16          1.1093e-13      6.28e-17    9.60e-01
+   5        1.1084e-13   1.75e-16          1.1092e-13      5.91e-17    8.51e-01
+   5        1.1087e-13   1.76e-16          1.1091e-13      5.60e-17    7.53e-01
+   5        1.1070e-13   1.80e-16          1.1089e-13      5.35e-17    8.13e-01
+   5        1.1071e-13   1.89e-16          1.1088e-13      5.15e-17    8.18e-01
+   5        1.1099e-13   1.93e-16          1.1089e-13      4.97e-17    7.71e-01
+   5        1.1100e-13   2.02e-16          1.1089e-13      4.83e-17    7.34e-01
+   5        1.1076e-13   2.17e-16          1.1089e-13      4.71e-17    7.05e-01
+   5        1.1088e-13   2.26e-16          1.1089e-13      4.62e-17    6.54e-01
+   5        1.1072e-13   2.38e-16          1.1088e-13      4.53e-17    6.43e-01
+   5        1.1053e-13   2.38e-16          1.1087e-13      4.45e-17    7.35e-01
+   5        1.1121e-13   2.46e-16          1.1088e-13      4.38e-17    8.02e-01
+   5        1.1110e-13   2.66e-16          1.1088e-13      4.32e-17    7.94e-01
+   5        1.1096e-13   2.66e-16          1.1089e-13      4.27e-17    7.57e-01
+   5        1.1062e-13   2.84e-16          1.1088e-13      4.22e-17    7.61e-01
+   5        1.1079e-13   2.95e-16          1.1088e-13      4.18e-17    7.30e-01
+   5        1.1125e-13   2.89e-16          1.1089e-13      4.13e-17    7.70e-01
+   5        1.1087e-13   3.08e-16          1.1089e-13      4.10e-17    7.36e-01
+   5        1.1116e-13   3.13e-16          1.1089e-13      4.06e-17    7.37e-01
+   5        1.1060e-13   3.21e-16          1.1089e-13      4.03e-17    7.39e-01
+   5        1.1153e-13   3.44e-16          1.1089e-13      4.00e-17    8.43e-01
+   5        1.1081e-13   3.28e-16          1.1089e-13      3.97e-17    8.14e-01
+   5        1.1074e-13   3.36e-16          1.1089e-13      3.95e-17    7.92e-01
+   5        1.1106e-13   3.51e-16          1.1089e-13      3.92e-17    7.73e-01
+   5        1.1094e-13   3.55e-16          1.1089e-13      3.90e-17    7.48e-01
+   5        1.1066e-13   3.71e-16          1.1089e-13      3.88e-17    7.37e-01
+   5        1.1127e-13   3.70e-16          1.1090e-13      3.85e-17    7.46e-01
+   5        1.1075e-13   3.90e-16          1.1089e-13      3.84e-17    7.27e-01
+   5        1.1037e-13   3.83e-16          1.1089e-13      3.82e-17    7.60e-01
+   5        1.1131e-13   3.93e-16          1.1089e-13      3.80e-17    7.71e-01
+   5        1.0971e-13   3.94e-16          1.1088e-13      3.78e-17    1.00e+00
+   5        1.1021e-13   3.98e-16          1.1088e-13      3.76e-17    1.05e+00
+   5        1.1120e-13   4.03e-16          1.1088e-13      3.75e-17    1.04e+00
+   5        1.1080e-13   4.13e-16          1.1088e-13      3.73e-17    1.01e+00
+   5        1.1099e-13   3.95e-16          1.1088e-13      3.72e-17    9.88e-01
+   5        1.1067e-13   4.01e-16          1.1088e-13      3.70e-17    9.71e-01
+   5        1.1195e-13   4.23e-16          1.1089e-13      3.69e-17    1.10e+00
+LO = (1.1088505e-13 +- 3.6863215e-17) pb
+
+*******************************************
+* virtual corrections + integrated dipole *
+*******************************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+
+num_dim=3, calls=240, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.1910e-14   1.07e-15          1.1910e-14      1.07e-15    0.00e+00
+   2        1.2806e-14   6.16e-16          1.2583e-14      5.33e-16    5.29e-01
+   3        1.3840e-14   3.40e-16          1.3477e-14      2.87e-16    2.24e+00
+   4        1.4050e-14   2.80e-16          1.3770e-14      2.00e-16    2.18e+00
+   5        1.4077e-14   2.70e-16          1.3879e-14      1.61e-16    1.84e+00
+
+num_dim=3, calls=1200, it_num=1, max_it_num=3 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.3628e-14   1.22e-16          1.3628e-14      1.22e-16    0.00e+00
+   2        1.3895e-14   9.63e-17          1.3793e-14      7.55e-17    2.96e+00
+   3        1.3849e-14   9.44e-17          1.3815e-14      5.90e-17    1.59e+00
+   3        1.3948e-14   8.53e-17          1.3858e-14      4.85e-17    1.61e+00
+   3        1.3731e-14   9.58e-17          1.3832e-14      4.33e-17    1.56e+00
+   3        1.3895e-14   8.99e-17          1.3844e-14      3.90e-17    1.33e+00
+   3        1.3795e-14   9.49e-17          1.3837e-14      3.61e-17    1.14e+00
+   3        1.3880e-14   8.97e-17          1.3843e-14      3.35e-17    1.01e+00
+   3        1.3869e-14   8.90e-17          1.3846e-14      3.13e-17    8.92e-01
+vNLO = (1.3845908e-14 +- 3.1323602e-17) pb
+
+*****************************
+* collinear remainder (P+K) *
+*****************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+xl[3]=0.000000    xu[3]=1.000000
+
+num_dim=4, calls=2500, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.4694e-14   8.89e-16          1.4694e-14      8.89e-16    0.00e+00
+   2        1.4835e-14   3.62e-16          1.4815e-14      3.35e-16    2.16e-02
+   3        1.5024e-14   2.96e-16          1.4932e-14      2.22e-16    1.20e-01
+   4        1.5095e-14   2.86e-16          1.4993e-14      1.75e-16    1.47e-01
+   5        1.5334e-14   2.80e-16          1.5090e-14      1.49e-16    3.76e-01
+
+num_dim=4, calls=25000, it_num=1, max_it_num=3 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.5318e-14   8.76e-17          1.5318e-14      8.76e-17    0.00e+00
+   2        1.5348e-14   8.71e-17          1.5333e-14      6.18e-17    6.08e-02
+   3        1.5124e-14   8.81e-17          1.5264e-14      5.06e-17    1.92e+00
+   3        1.5231e-14   8.80e-17          1.5256e-14      4.38e-17    1.31e+00
+   3        1.5054e-14   8.90e-17          1.5216e-14      3.93e-17    2.01e+00
+   3        1.5052e-14   8.86e-17          1.5189e-14      3.60e-17    2.19e+00
+   3        1.5119e-14   8.82e-17          1.5179e-14      3.33e-17    1.92e+00
+   3        1.5174e-14   8.86e-17          1.5179e-14      3.12e-17    1.64e+00
+   3        1.5181e-14   8.96e-17          1.5179e-14      2.94e-17    1.44e+00
+P+K = (1.5178830e-14 +- 2.9437937e-17) pb
+
+********************************
+* real gluon emission - dipole *
+********************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+xl[3]=0.000000    xu[3]=1.000000
+xl[4]=0.000000    xu[4]=1.000000
+xl[5]=0.000000    xu[5]=1.000000
+
+num_dim=6, calls=250, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        -1.8139e-16   5.87e-17          -1.8139e-16      5.87e-17    0.00e+00
+   2        -2.3515e-16   5.55e-17          -2.0975e-16      4.03e-17    4.43e-01
+   3        -1.2554e-16   1.63e-17          -1.3741e-16      1.51e-17    2.10e+00
+   4        -1.4127e-16   1.39e-17          -1.3951e-16      1.02e-17    1.41e+00
+   5        -1.7238e-16   1.84e-17          -1.4728e-16      8.95e-18    1.67e+00
+
+num_dim=6, calls=2500, it_num=1, max_it_num=3 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        -1.6190e-16   4.47e-18          -1.6190e-16      4.47e-18    0.00e+00
+   2        -1.6233e-16   2.25e-18          -1.6224e-16      2.01e-18    7.19e-03
+   3        -1.6757e-16   2.57e-18          -1.6427e-16      1.58e-18    1.34e+00
+rNLOg = (-1.6426747e-16 +- 1.5829379e-18) pb
+
+**************************************************
+* real light quark emission - dipole - (onshell) *
+**************************************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+xl[3]=0.000000    xu[3]=1.000000
+xl[4]=0.000000    xu[4]=1.000000
+xl[5]=0.000000    xu[5]=1.000000
+
+num_dim=6, calls=5000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        3.5559e-16   2.10e-17          3.5559e-16      2.10e-17    0.00e+00
+   2        3.6090e-16   7.55e-18          3.6030e-16      7.10e-18    5.68e-02
+   3        3.4680e-16   3.85e-18          3.4986e-16      3.39e-18    1.42e+00
+   4        3.4703e-16   2.71e-18          3.4814e-16      2.12e-18    1.09e+00
+   5        3.4679e-16   2.39e-18          3.4755e-16      1.58e-18    8.63e-01
+
+num_dim=6, calls=50000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        3.4662e-16   7.28e-19          3.4662e-16      7.28e-19    0.00e+00
+   2        3.4892e-16   1.02e-18          3.4740e-16      5.92e-19    3.39e+00
+   3        3.4947e-16   1.01e-18          3.4793e-16      5.10e-19    3.26e+00
+   4        3.4730e-16   8.53e-19          3.4776e-16      4.38e-19    2.31e+00
+   5        3.4842e-16   9.35e-19          3.4788e-16      3.97e-19    1.83e+00
+rNLOq = (3.4788019e-16 +- 3.9664345e-19) pb
+NLO = (1.4009340e-13 +- 5.6650859e-17) pb
+#chisq/dof = 2.01607e-09
+#status = success
+#chisq/dof = 1.90852e-09
+#status = success
+#chisq/dof = 4.96547e-10
+#status = success
+#chisq/dof = 1.77131e-08
+#status = success
+#chisq/dof = 1.06262e-10
+#status = success
+#chisq/dof = 3.28721e-12
+#status = success
+#chisq/dof = 2.90827e-10
+#status = success
+#chisq/dof = 2.474e-11
+#status = success
+
+*******************************************************
+* threshold resummation (unimproved nnll) - expansion *
+*******************************************************
+The limits of integration are:
+
+xl[0]=0.000000    xu[0]=1.000000
+xl[1]=0.000000    xu[1]=1.000000
+xl[2]=0.000000    xu[2]=1.000000
+
+num_dim=3, calls=7000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        6.0787e-15   4.28e-15          6.0787e-15      4.28e-15    0.00e+00
+   2        3.4693e-15   2.44e-15          4.1099e-15      2.12e-15    2.80e-01
+   3        -3.8028e-15   2.24e-15          3.6694e-16      1.54e-15    3.43e+00
+   4        -2.7042e-15   2.27e-15          -6.0031e-16      1.27e-15    2.71e+00
+   5        -5.5821e-15   2.26e-15          -1.8001e-15      1.11e-15    2.95e+00
+
+num_dim=3, calls=35000, it_num=1, max_it_num=5 verb=0, alph=1.50,
+mode=0, bins=50, boxes=1
+
+       single.......iteration                   accumulated......results   
+iteration     integral    sigma             integral         sigma     chi-sq/it
+
+   1        1.7946e-15   9.93e-16          1.7946e-15      9.93e-16    0.00e+00
+   2        2.1511e-15   1.00e-15          1.9712e-15      7.05e-16    6.39e-02
+   3        1.1749e-15   9.98e-16          1.7062e-15      5.76e-16    2.44e-01
+   4        2.8326e-15   1.00e-15          1.9856e-15      4.99e-16    4.79e-01
+   5        4.6205e-16   9.99e-16          1.6812e-15      4.47e-16    8.24e-01
+   5        7.6813e-16   9.97e-16          1.5287e-15      4.08e-16    7.99e-01
+   5        1.6125e-15   1.00e-15          1.5406e-15      3.78e-16    6.67e-01
+   5        2.3621e-15   1.00e-15          1.6431e-15      3.53e-16    6.56e-01
+   5        1.9373e-15   1.00e-15          1.6755e-15      3.33e-16    5.84e-01
+   5        2.3312e-15   1.00e-15          1.7407e-15      3.16e-16    5.62e-01
+   5        1.6689e-15   1.00e-15          1.7342e-15      3.02e-16    5.06e-01
+   5        6.1681e-16   1.01e-15          1.6420e-15      2.89e-16    5.63e-01
+   5        1.3373e-15   1.00e-15          1.6186e-15      2.78e-16    5.23e-01
+   5        7.4912e-16   1.01e-15          1.5572e-15      2.68e-16    5.36e-01
+   5        3.1098e-15   1.01e-15          1.6589e-15      2.59e-16    6.55e-01
+   5        5.0967e-15   1.01e-15          1.8716e-15      2.51e-16    1.34e+00
+   5        1.0261e-15   1.01e-15          1.8226e-15      2.43e-16    1.30e+00
+   5        1.6437e-15   1.01e-15          1.8127e-15      2.36e-16    1.22e+00
+   5        1.4905e-15   1.01e-15          1.7960e-15      2.30e-16    1.16e+00
+   5        2.6041e-15   1.01e-15          1.8359e-15      2.24e-16    1.13e+00
+   5        -1.4093e-15   1.01e-15          1.6836e-15      2.19e-16    1.57e+00
+   5        2.4395e-15   1.02e-15          1.7172e-15      2.14e-16    1.52e+00
+   5        8.2242e-16   1.02e-15          1.6791e-15      2.10e-16    1.48e+00
+   5        2.4540e-15   1.02e-15          1.7104e-15      2.05e-16    1.44e+00
+   5        7.9964e-16   1.02e-15          1.6750e-15      2.01e-16    1.41e+00
+   5        2.5468e-15   1.02e-15          1.7077e-15      1.97e-16    1.38e+00
+   5        4.2611e-16   1.02e-15          1.6612e-15      1.94e-16    1.39e+00
+   5        1.7031e-15   1.02e-15          1.6627e-15      1.90e-16    1.34e+00
+   5        1.2802e-15   1.02e-15          1.6498e-15      1.87e-16    1.30e+00
+   5        2.0013e-15   1.03e-15          1.6611e-15      1.84e-16    1.25e+00
+   5        -5.6753e-17   1.03e-15          1.6074e-15      1.81e-16    1.30e+00
+   5        3.0151e-15   1.03e-15          1.6495e-15      1.79e-16    1.32e+00
+   5        1.2932e-15   1.03e-15          1.6391e-15      1.76e-16    1.28e+00
+   5        -1.6554e-16   1.03e-15          1.5881e-15      1.73e-16    1.33e+00
+   5        3.2034e-15   1.03e-15          1.6323e-15      1.71e-16    1.36e+00
+   5        1.0826e-15   1.04e-15          1.6178e-15      1.69e-16    1.33e+00
+   5        1.7883e-15   1.03e-15          1.6222e-15      1.67e-16    1.30e+00
+   5        -3.7048e-16   1.04e-15          1.5724e-15      1.64e-16    1.36e+00
+   5        1.8229e-15   1.05e-15          1.5784e-15      1.62e-16    1.32e+00
+   5        4.4375e-16   1.04e-15          1.5515e-15      1.61e-16    1.32e+00
+   5        7.5625e-16   1.05e-15          1.5334e-15      1.59e-16    1.30e+00
+   5        2.2709e-15   1.05e-15          1.5500e-15      1.57e-16    1.28e+00
+   5        -6.8407e-17   1.04e-15          1.5143e-15      1.55e-16    1.31e+00
+   5        2.1860e-15   1.05e-15          1.5286e-15      1.54e-16    1.28e+00
+   5        1.4162e-15   1.05e-15          1.5263e-15      1.52e-16    1.26e+00
+   5        1.0613e-15   1.05e-15          1.5167e-15      1.50e-16    1.23e+00
+   5        5.2810e-16   1.06e-15          1.4973e-15      1.49e-16    1.22e+00
+   5        -1.7753e-16   1.06e-15          1.4647e-15      1.47e-16    1.25e+00
+   5        1.8757e-15   1.06e-15          1.4725e-15      1.46e-16    1.23e+00
+   5        1.3159e-15   1.07e-15          1.4696e-15      1.45e-16    1.20e+00
+   5        2.0241e-15   1.07e-15          1.4795e-15      1.43e-16    1.18e+00
+   5        2.4091e-15   1.07e-15          1.4958e-15      1.42e-16    1.18e+00
+   5        7.5649e-16   1.08e-15          1.4832e-15      1.41e-16    1.16e+00
+   5        2.2753e-16   1.06e-15          1.4616e-15      1.40e-16    1.17e+00
+   5        5.6237e-16   1.08e-15          1.4467e-15      1.38e-16    1.16e+00
+aNNLO+NNLL = (1.4154013e-13 +- 1.4963362e-16) pb
+
+Results:
+LO = (9.7813383e-14 +- 6.5173756e-17) pb
+NLO = (1.4009340e-13 +- 5.6650859e-17) pb
+aNNLO+NNLL = (1.4154013e-13 +- 1.4963362e-16) pb
+Thanks for using LHAPDF 6.2.3. Please make sure to cite the paper:
+  Eur.Phys.J. C75 (2015) 3, 132  (http://arxiv.org/abs/1412.7420)
+ ====================================================
+   FF 2.0, a package to evaluate one-loop integrals
+ written by G. J. van Oldenborgh, NIKHEF-H, Amsterdam
+ ====================================================
+ for the algorithms used see preprint NIKHEF-H 89/17,
+ 'New Algorithms for One-loop Integrals', by G.J. van
+ Oldenborgh and J.A.M. Vermaseren, published in 
+ Zeitschrift fuer Physik C46(1990)425.
+ ====================================================
+ 
+total number of errors and warnings
+===================================
+fferr: no errors
+ 
