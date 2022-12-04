@@ -15,7 +15,7 @@ build:
 
 test:
 	rm -f .coverage coverage.xml
-	poetry run pytest hepi
+	poetry run pytest
 
 commit: 
 	-git add .
@@ -28,7 +28,7 @@ pull: commit
 	git pull
 
 clean: 
-	rm -r .eggs .pytest_cache hepi.egg-info dist build
+	rm -r .eggs .pytest_cache *.egg-info dist build
 
 
 release: push html
