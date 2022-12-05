@@ -3,4 +3,4 @@
 
 Find it here https://resummino.hepforge.org/.
 """
-from .run import run, set_path, get_path, default_resummino_runner,get_version
+from .run import default_resummino_runner, get_path, get_version, run, set_path

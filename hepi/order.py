@@ -1,8 +1,11 @@
 from enum import IntEnum
+
+
 class Order(IntEnum):
     """
     Computation orders.
     """
+
     LO = 0
     """Leading Order"""
     NLO = 1
@@ -13,10 +16,8 @@ class Order(IntEnum):
     """Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms"""
 
 
-
 def replace_macros(s: str) -> str:
     return s.replace("_PLUS_", "+").replace(" ", "\\ ")
-
 
 
 def xsec_to_order(s: str):
@@ -30,6 +31,7 @@ def xsec_to_order(s: str):
         return Order.LO
     else:
         raise ValueError("Unknown Order '" + s + "', not supported by HEPi.")
+
 
 def order_to_string(o: Order, json_style=False, no_macros=False) -> str:
     ret = ""

@@ -1,21 +1,22 @@
 """Results and postprocessing for the :mod:`hepi` package."""
-from .util import DictData
-import numpy as np
-from uncertainties import unumpy
-import uncertainties.unumpy as unp
-import warnings
-import tqdm
-#from pqdm.processes import pqdm as ppqdm
-from pqdm.threads import pqdm as tpqdm
 import multiprocessing as mp
+import warnings
 
-#If the numerical uncertainty times :attr:`required_numerical_uncertainty_factor` is higher than the scale or pdf uncertainty a warning is shown.
+import numpy as np
+import tqdm
+import uncertainties.unumpy as unp
+
+# from pqdm.processes import pqdm as ppqdm
+from pqdm.threads import pqdm as tpqdm
+from uncertainties import unumpy
+
+from .util import DictData
+
+# If the numerical uncertainty times :attr:`required_numerical_uncertainty_factor` is higher than the scale or pdf uncertainty a warning is shown.
 required_numerical_uncertainty_factor = 5
 
 unv = unp.nominal_values
 usd = unp.std_devs
-
-
 
 
 class Result(DictData):
@@ -34,11 +35,7 @@ class Result(DictData):
         aNNLO_PLUS_NNLL_OVER_NLO (:obj:`double`): aNNLO+NNLL divided by NLO.
     """
 
-    def __init__(self,
-                 lo=None,
-                 nlo=None,
-                 nlo_plus_nll=None,
-                 annlo_plus_nnll=None):
+    def __init__(self, lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None):
         """
         Sets given and computes dependent ``Attributes``.
 
@@ -82,10 +79,7 @@ class Result(DictData):
 
 
 # TODO detect which errors also for scales
-def pdf_errors(li,
-               dl,
-               ordernames=None,
-               confidence_level=90,n_jobs=None):
+def pdf_errors(li, dl, ordernames=None, confidence_level=90, n_jobs=None):
     """
     Just like `pdf_error` but over a list of ordernames.
     """
@@ -93,41 +87,44 @@ def pdf_errors(li,
         ordernames = ["LO", "NLO", "aNNLO_PLUS_NNLL"]
     r_dl = dl
     for o in ordernames:
-        r_dl = pdf_error(li, r_dl, o, confidence_level=confidence_level,n_jobs=n_jobs)
+        r_dl = pdf_error(li, r_dl, o, confidence_level=confidence_level, n_jobs=n_jobs)
 
     return r_dl
 
 
-def _pdf_error_single(members, i, dl, ordername, confidence_level=90):  
+def _pdf_error_single(members, i, dl, ordername, confidence_level=90):
     try:
         import lhapdf
     except ImportError:
-        raise RuntimeError("LHAPDF with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly (i.e. correct python version).")
+        raise RuntimeError(
+            "LHAPDF with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly (i.e. correct python version)."
+        )
     if not lhapdf.availablePDFSets():
-        raise RuntimeError("No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).")
-    if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
-            i] == 1.0:
+        raise RuntimeError(
+            "No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF)."
+        )
+    if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0:
         pdfset = lhapdf.getPDFSet(dl["pdf_nlo"][i])
         pdfs = [0.0] * pdfset.size
-        ddl = dl[members].drop(columns=["pdfset_nlo", "precision","max_iters"])
-        bol = ddl.eq(ddl.iloc[i]).all(axis='columns')
+        ddl = dl[members].drop(columns=["pdfset_nlo", "precision", "max_iters"])
+        bol = ddl.eq(ddl.iloc[i]).all(axis="columns")
         for j in range(len(dl["pdfset_nlo"])):
             if bol[j]:
                 pdfs[dl["pdfset_nlo"][j]] = j
 
-    # lo_unc = pdfset.uncertainty(
-    #    [unv(dl["LO"][k]) for k in pdfs], -1)
-    #if ordername == "LO":
-    #    dl.loc[i, "LO_PDF_CENTRAL"] = unv(dl["LO"][i])
-    #    dl.loc[i, "LO_PDF_ERRPLUS"] = 0.0
-    #    dl.loc[i, "LO_PDF_ERRMINUS"] = 0.0
-    #    dl.loc[i, "LO_PDF_ERRSYM"] = 0.0
-    #else:
-    #print([float(unv(dl[ordername][k])) for k in pdfs])
+        # lo_unc = pdfset.uncertainty(
+        #    [unv(dl["LO"][k]) for k in pdfs], -1)
+        # if ordername == "LO":
+        #    dl.loc[i, "LO_PDF_CENTRAL"] = unv(dl["LO"][i])
+        #    dl.loc[i, "LO_PDF_ERRPLUS"] = 0.0
+        #    dl.loc[i, "LO_PDF_ERRMINUS"] = 0.0
+        #    dl.loc[i, "LO_PDF_ERRSYM"] = 0.0
+        # else:
+        # print([float(unv(dl[ordername][k])) for k in pdfs])
         nlo_unc = pdfset.uncertainty(
-            [float(unv(dl[ordername][k])) for k in pdfs],
-            confidence_level)
-    return (i,nlo_unc)
+            [float(unv(dl[ordername][k])) for k in pdfs], confidence_level
+        )
+    return (i, nlo_unc)
 
 
 def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
@@ -148,7 +145,8 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
 
     example = li[0]
     members = [
-        attr for attr in dir(example)
+        attr
+        for attr in dir(example)
         if not callable(getattr(example, attr)) and not attr.startswith("__")
     ]
 
@@ -158,50 +156,62 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
     dl[ordername + "_PDF_ERRMINUS"] = np.array([None] * len(dl["pdfset_nlo"]))
     dl[ordername + "_PDF_ERRSYM"] = np.array([None] * len(dl["pdfset_nlo"]))
 
-    args = [{
-        "members": members,
-        "i": i,
-        "dl": dl,
-        "ordername": ordername,
-        "confidence_level": confidence_level
-    } for i in range(len(dl["pdfset_nlo"])) if dl["pdfset_nlo"][i] == 0
-            and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0]
-    ret = tpqdm(args,
-                _pdf_error_single,
-                n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
-                argument_type='kwargs',
-                desc="PDF uncertainty @ " + ordername)
+    args = [
+        {
+            "members": members,
+            "i": i,
+            "dl": dl,
+            "ordername": ordername,
+            "confidence_level": confidence_level,
+        }
+        for i in range(len(dl["pdfset_nlo"]))
+        if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0
+    ]
+    ret = tpqdm(
+        args,
+        _pdf_error_single,
+        n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
+        argument_type="kwargs",
+        desc="PDF uncertainty @ " + ordername,
+    )
     for i, nlo_unc in ret:
         dl.loc[i, ordername + "_PDF_CENTRAL"] = nlo_unc.central
         dl.loc[i, ordername + "_PDF_ERRPLUS"] = nlo_unc.errplus
         dl.loc[i, ordername + "_PDF_ERRMINUS"] = -nlo_unc.errminus
         dl.loc[i, ordername + "_PDF_ERRSYM"] = nlo_unc.errsymm
-        #TODO error sym to minus and plus
-        #if :
-        if (ordername != "LO" and
-            (usd(dl[ordername][i]) * required_numerical_uncertainty_factor
-             > dl[ordername + "_PDF_ERRPLUS"][i]-dl[ordername + "_PDF_ERRMINUS"][i]  )):
+        # TODO error sym to minus and plus
+        # if :
+        if ordername != "LO" and (
+            usd(dl[ordername][i]) * required_numerical_uncertainty_factor
+            > dl[ordername + "_PDF_ERRPLUS"][i] - dl[ordername + "_PDF_ERRMINUS"][i]
+        ):
             rel = unv(dl[ordername][i])
             warnings.warn(
-                "too bad numerical precision vs pdf @ " + ordername +
-                " num: " + str(usd(dl[ordername][i]) / rel * 100.) +
-                "% vs " + str(dl[ordername + "_PDF_ERRPLUS"][i] / rel * 100.) +
-                "% to pdf: " +
-                str(dl[ordername + "_PDF_ERRMINUS"][i] / rel * 100.) + "%",
-                RuntimeWarning)
+                "too bad numerical precision vs pdf @ "
+                + ordername
+                + " num: "
+                + str(usd(dl[ordername][i]) / rel * 100.0)
+                + "% vs "
+                + str(dl[ordername + "_PDF_ERRPLUS"][i] / rel * 100.0)
+                + "% to pdf: "
+                + str(dl[ordername + "_PDF_ERRMINUS"][i] / rel * 100.0)
+                + "%",
+                RuntimeWarning,
+            )
 
     mask = dl[ordername + "_PDF_CENTRAL"].notnull()
     dl.loc[mask, ordername + "_PDF"] = unumpy.uarray(
-        unv(dl[ordername + "_PDF_CENTRAL"][mask]) +
-        dl[ordername + "_PDF_ERRPLUS"][mask] / 2. +
-        dl[ordername + "_PDF_ERRMINUS"][mask] / 2.,
-        (dl[ordername + "_PDF_ERRPLUS"][mask] -
-         dl[ordername + "_PDF_ERRMINUS"][mask]) / 2.)
+        unv(dl[ordername + "_PDF_CENTRAL"][mask])
+        + dl[ordername + "_PDF_ERRPLUS"][mask] / 2.0
+        + dl[ordername + "_PDF_ERRMINUS"][mask] / 2.0,
+        (dl[ordername + "_PDF_ERRPLUS"][mask] - dl[ordername + "_PDF_ERRMINUS"][mask])
+        / 2.0,
+    )
 
     return dl
 
 
-def scale_errors(li, dl, ordernames=None,n_jobs=None):
+def scale_errors(li, dl, ordernames=None, n_jobs=None):
     """
     Just like `scale_error` but over a list of ordernames.
     """
@@ -213,23 +223,24 @@ def scale_errors(li, dl, ordernames=None,n_jobs=None):
 
     return r_dl
 
-def _scale_error_single(members,i,dl,ordername="LO"):
-    if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][
-        i] == 1.0:
+
+def _scale_error_single(members, i, dl, ordername="LO"):
+    if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0:
         scales = []
-        ddl = dl[members].drop(columns=["mu_f","mu_r", "precision","max_iters"])
-        bol = ddl.eq(ddl.iloc[i]).all(axis='columns')
+        ddl = dl[members].drop(columns=["mu_f", "mu_r", "precision", "max_iters"])
+        bol = ddl.eq(ddl.iloc[i]).all(axis="columns")
         for j in range(len(dl["pdfset_nlo"])):
             if bol[j]:
                 scales.append(j)
     # index, errplus,errminus
     return (
         i,
-        np.max( [unv(dl[ordername][k]) for k in scales]) - unv(dl[ordername][i]),
-        np.min( [unv(dl[ordername][k]) for k in scales]) - unv(dl[ordername][i])
+        np.max([unv(dl[ordername][k]) for k in scales]) - unv(dl[ordername][i]),
+        np.min([unv(dl[ordername][k]) for k in scales]) - unv(dl[ordername][i]),
     )
 
-def scale_error(li, dl, ordername="LO",n_jobs=None):
+
+def scale_error(li, dl, ordername="LO", n_jobs=None):
     """
     Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
 
@@ -244,53 +255,65 @@ def scale_error(li, dl, ordername="LO",n_jobs=None):
     global required_numerical_uncertainty_factor
     example = li[0]
     members = [
-        attr for attr in dir(example)
+        attr
+        for attr in dir(example)
         if not callable(getattr(example, attr)) and not attr.startswith("__")
     ]
     dl[ordername + "_SCALE"] = np.array([None] * len(dl["pdfset_nlo"]))
     dl[ordername + "_SCALE_ERRPLUS"] = np.array([None] * len(dl["pdfset_nlo"]))
-    dl[ordername + "_SCALE_ERRMINUS"] = np.array([None] *
-                                                 len(dl["pdfset_nlo"]))
+    dl[ordername + "_SCALE_ERRMINUS"] = np.array([None] * len(dl["pdfset_nlo"]))
 
-
-    args = [{
-        "members": members,
-        "i": i,
-        "dl": dl,
-        "ordername": ordername,
-    } for i in range(len(dl["pdfset_nlo"])) if dl["pdfset_nlo"][i] == 0
-            and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0]
-    ret = tpqdm(args,
-                _scale_error_single,
-                n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
-                argument_type='kwargs',
-                desc="Scale uncertainty @ " + ordername)
-    for i,errplus,errminus in ret:
+    args = [
+        {
+            "members": members,
+            "i": i,
+            "dl": dl,
+            "ordername": ordername,
+        }
+        for i in range(len(dl["pdfset_nlo"]))
+        if dl["pdfset_nlo"][i] == 0 and dl["mu_f"][i] == 1.0 and dl["mu_r"][i] == 1.0
+    ]
+    ret = tpqdm(
+        args,
+        _scale_error_single,
+        n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
+        argument_type="kwargs",
+        desc="Scale uncertainty @ " + ordername,
+    )
+    for i, errplus, errminus in ret:
         # lo_unc = pdfset.uncertainty(
         #    [unv(dl["LO"][k]) for k in pdfs], -1)
         dl.loc[i, ordername + "_SCALE_ERRPLUS"] = errplus
         dl.loc[i, ordername + "_SCALE_ERRMINUS"] = errminus
-        if (usd(dl[ordername][i]) *
-                required_numerical_uncertainty_factor >
-                dl[ordername + "_SCALE_ERRPLUS"][i]-dl[ordername + "_SCALE_ERRMINUS"][i]
-                ):
+        if (
+            usd(dl[ordername][i]) * required_numerical_uncertainty_factor
+            > dl[ordername + "_SCALE_ERRPLUS"][i] - dl[ordername + "_SCALE_ERRMINUS"][i]
+        ):
             rel = unv(dl[ordername][i])
             warnings.warn(
-                "too bad numerical precision vs scale @ num:" + ordername +
-                " " + str(usd(dl[ordername][i]) / rel * 100.) +
-                "% vs scale:" +
-                str(dl[ordername + "_SCALE_ERRPLUS"][i] / rel * 100.) +
-                "% to " +
-                str(dl[ordername + "_SCALE_ERRMINUS"][i] / rel * 100.) +
-                "%", RuntimeWarning)
+                "too bad numerical precision vs scale @ num:"
+                + ordername
+                + " "
+                + str(usd(dl[ordername][i]) / rel * 100.0)
+                + "% vs scale:"
+                + str(dl[ordername + "_SCALE_ERRPLUS"][i] / rel * 100.0)
+                + "% to "
+                + str(dl[ordername + "_SCALE_ERRMINUS"][i] / rel * 100.0)
+                + "%",
+                RuntimeWarning,
+            )
 
     mask = dl[ordername + "_SCALE_ERRPLUS"].notnull()
     dl.loc[mask, ordername + "_SCALE"] = unumpy.uarray(
-        unv(dl[ordername][mask]) +
-        dl[ordername + "_SCALE_ERRPLUS"][mask] / 2. +
-        dl[ordername + "_SCALE_ERRMINUS"][mask] / 2.,
-        (+dl[ordername + "_SCALE_ERRPLUS"][mask] -
-         dl[ordername + "_SCALE_ERRMINUS"][mask]) / 2.)
+        unv(dl[ordername][mask])
+        + dl[ordername + "_SCALE_ERRPLUS"][mask] / 2.0
+        + dl[ordername + "_SCALE_ERRMINUS"][mask] / 2.0,
+        (
+            +dl[ordername + "_SCALE_ERRPLUS"][mask]
+            - dl[ordername + "_SCALE_ERRMINUS"][mask]
+        )
+        / 2.0,
+    )
 
     return dl
 
@@ -328,19 +351,20 @@ def combine_error(dl: dict, ordername="LO"):
     dl[ordername + "_COMBINED"] = np.array([None] * len(dl["pdfset_nlo"]))
 
     mask = dl[ordername + "_PDF_CENTRAL"].notnull()
-    dl.loc[mask, ordername + "_NOERR"] = unv(dl[ordername +
-                                                     ""][mask]).astype(float)
+    dl.loc[mask, ordername + "_NOERR"] = unv(dl[ordername + ""][mask]).astype(float)
     dl.loc[mask, ordername + "_ERRPLUS"] = np.sqrt(
-        dl[ordername + "_PDF_ERRPLUS"][mask].astype(float)**2 +
-        dl[ordername + "_SCALE_ERRPLUS"][mask].astype(float)**2)
+        dl[ordername + "_PDF_ERRPLUS"][mask].astype(float) ** 2
+        + dl[ordername + "_SCALE_ERRPLUS"][mask].astype(float) ** 2
+    )
     dl.loc[mask, ordername + "_ERRMINUS"] = -np.sqrt(
-        dl[ordername + "_PDF_ERRMINUS"][mask].astype(float)**2 +
-        dl[ordername + "_SCALE_ERRMINUS"][mask].astype(float)**2)
+        dl[ordername + "_PDF_ERRMINUS"][mask].astype(float) ** 2
+        + dl[ordername + "_SCALE_ERRMINUS"][mask].astype(float) ** 2
+    )
     dl.loc[mask, ordername + "_COMBINED"] = unumpy.uarray(
-        unv(dl[ordername + ""][mask]) +
-        dl[ordername + "_ERRPLUS"][mask] / 2. +
-        dl[ordername + "_ERRMINUS"][mask] / 2.,
-        (+dl[ordername + "_ERRPLUS"][mask] - dl[ordername + "_ERRMINUS"][mask])
-        / 2.)
+        unv(dl[ordername + ""][mask])
+        + dl[ordername + "_ERRPLUS"][mask] / 2.0
+        + dl[ordername + "_ERRMINUS"][mask] / 2.0,
+        (+dl[ordername + "_ERRPLUS"][mask] - dl[ordername + "_ERRMINUS"][mask]) / 2.0,
+    )
 
     return dl

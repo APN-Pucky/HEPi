@@ -1,9 +1,12 @@
 import copy
 import json
 from re import I
+
 from uncertainties import ufloat
+
 from hepi.input import Input, order_to_string, xsec_to_order
-from hepi.util import LD2DL, DL2DF
+from hepi.util import DL2DF, LD2DL
+
 
 def load_json_with_metadata(file):
 
@@ -40,23 +43,62 @@ def load_json_with_metadata(file):
                 for p2 in params[1]:
                     dicd[p2] = float(l)
                 if "unc_pb" in dict["data"][k][l]:
-                    dicd[so+ "_NOERR"] = dict["data"][k][l]["xsec_pb"]
+                    dicd[so + "_NOERR"] = dict["data"][k][l]["xsec_pb"]
                     dicd[so + "_COMBINED"] = ufloat(
-                        dict["data"][k][l]["xsec_pb"],
-                        dict["data"][k][l]["unc_pb"])
-                elif "unc_down_pb" in dict["data"][k][l] and "unc_up_pb" in dict["data"][k][l]:
-                    dicd[so+ "_NOERR"] = dict["data"][k][l]["xsec_pb"]
-                    dicd[so+ "_COMBINED"] = ufloat(
-                        dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_up_pb"] + dict["data"][k][l]["unc_down_pb"]) / 2,
-                        (dict["data"][k][l]["unc_up_pb"] - dict["data"][k][l]["unc_down_pb"]) / 2)
-                    if "unc_scale_up_pb" in dict["data"][k][l] and "unc_scale_down_pb" in dict["data"][k][l]:
-                        dicd[so+ "_SCALE"] = ufloat(
-                            dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_scale_up_pb"] + dict["data"][k][l]["unc_scale_down_pb"]) / 2,
-                            (dict["data"][k][l]["unc_scale_up_pb"] - dict["data"][k][l]["unc_scale_down_pb"]) / 2 )
-                    if "unc_pdf_up_pb" in dict["data"][k][l] and "unc_pdf_down_pb" in dict["data"][k][l]:
-                        dicd[so+ "_PDF"] = ufloat(
-                            dict["data"][k][l]["xsec_pb"] + (dict["data"][k][l]["unc_pdf_up_pb"] + dict["data"][k][l]["unc_pdf_down_pb"]) / 2,
-                            (dict["data"][k][l]["unc_pdf_up_pb"] - dict["data"][k][l]["unc_pdf_down_pb"]) / 2 )
+                        dict["data"][k][l]["xsec_pb"], dict["data"][k][l]["unc_pb"]
+                    )
+                elif (
+                    "unc_down_pb" in dict["data"][k][l]
+                    and "unc_up_pb" in dict["data"][k][l]
+                ):
+                    dicd[so + "_NOERR"] = dict["data"][k][l]["xsec_pb"]
+                    dicd[so + "_COMBINED"] = ufloat(
+                        dict["data"][k][l]["xsec_pb"]
+                        + (
+                            dict["data"][k][l]["unc_up_pb"]
+                            + dict["data"][k][l]["unc_down_pb"]
+                        )
+                        / 2,
+                        (
+                            dict["data"][k][l]["unc_up_pb"]
+                            - dict["data"][k][l]["unc_down_pb"]
+                        )
+                        / 2,
+                    )
+                    if (
+                        "unc_scale_up_pb" in dict["data"][k][l]
+                        and "unc_scale_down_pb" in dict["data"][k][l]
+                    ):
+                        dicd[so + "_SCALE"] = ufloat(
+                            dict["data"][k][l]["xsec_pb"]
+                            + (
+                                dict["data"][k][l]["unc_scale_up_pb"]
+                                + dict["data"][k][l]["unc_scale_down_pb"]
+                            )
+                            / 2,
+                            (
+                                dict["data"][k][l]["unc_scale_up_pb"]
+                                - dict["data"][k][l]["unc_scale_down_pb"]
+                            )
+                            / 2,
+                        )
+                    if (
+                        "unc_pdf_up_pb" in dict["data"][k][l]
+                        and "unc_pdf_down_pb" in dict["data"][k][l]
+                    ):
+                        dicd[so + "_PDF"] = ufloat(
+                            dict["data"][k][l]["xsec_pb"]
+                            + (
+                                dict["data"][k][l]["unc_pdf_up_pb"]
+                                + dict["data"][k][l]["unc_pdf_down_pb"]
+                            )
+                            / 2,
+                            (
+                                dict["data"][k][l]["unc_pdf_up_pb"]
+                                - dict["data"][k][l]["unc_pdf_down_pb"]
+                            )
+                            / 2,
+                        )
                 else:
                     raise ValueError("No uncertainty found in data.")
                 dat.append(dicd)
@@ -66,22 +108,52 @@ def load_json_with_metadata(file):
             for p1 in params[0]:
                 dicd[p1] = float(k)
             if "unc_pb" in dict["data"][k]:
-                dicd[so+ "_NOERR"]  = dict["data"][k]["xsec_pb"]
-                dicd[so+ "_COMBINED"] = ufloat(
-                    dict["data"][k]["xsec_pb"], dict["data"][k]["unc_pb"])
+                dicd[so + "_NOERR"] = dict["data"][k]["xsec_pb"]
+                dicd[so + "_COMBINED"] = ufloat(
+                    dict["data"][k]["xsec_pb"], dict["data"][k]["unc_pb"]
+                )
             elif "unc_down_pb" in dict["data"][k] and "unc_up_pb" in dict["data"][k]:
-                dicd[so+ "_NOERR"] = dict["data"][k]["xsec_pb"]
-                dicd[so+ "_COMBINED"] = ufloat(
-                    dict["data"][k]["xsec_pb"] + (dict["data"][k]["unc_up_pb"] + dict["data"][k]["unc_down_pb"]) / 2,
-                    (dict["data"][k]["unc_up_pb"] - dict["data"][k]["unc_down_pb"]) / 2)
-                if "unc_scale_up_pb" in dict["data"][k] and "unc_scale_down_pb" in dict["data"][k]:
-                    dicd[so+ "_SCALE"] = ufloat(
-                        dict["data"][k]["xsec_pb"] + (dict["data"][k]["unc_scale_up_pb"] + dict["data"][k]["unc_scale_down_pb"]) / 2,
-                        (dict["data"][k]["unc_scale_up_pb"] - dict["data"][k]["unc_scale_down_pb"]) / 2)
-                if "unc_pdf_up_pb" in dict["data"][k] and "unc_pdf_down_pb" in dict["data"][k]:
-                    dicd[so+ "_PDF"] = ufloat(
-                        dict["data"][k]["xsec_pb"] + (dict["data"][k]["unc_pdf_up_pb"] + dict["data"][k]["unc_pdf_down_pb"]) / 2,
-                        (dict["data"][k]["unc_pdf_up_pb"] - dict["data"][k]["unc_pdf_down_pb"]) / 2)
+                dicd[so + "_NOERR"] = dict["data"][k]["xsec_pb"]
+                dicd[so + "_COMBINED"] = ufloat(
+                    dict["data"][k]["xsec_pb"]
+                    + (dict["data"][k]["unc_up_pb"] + dict["data"][k]["unc_down_pb"])
+                    / 2,
+                    (dict["data"][k]["unc_up_pb"] - dict["data"][k]["unc_down_pb"]) / 2,
+                )
+                if (
+                    "unc_scale_up_pb" in dict["data"][k]
+                    and "unc_scale_down_pb" in dict["data"][k]
+                ):
+                    dicd[so + "_SCALE"] = ufloat(
+                        dict["data"][k]["xsec_pb"]
+                        + (
+                            dict["data"][k]["unc_scale_up_pb"]
+                            + dict["data"][k]["unc_scale_down_pb"]
+                        )
+                        / 2,
+                        (
+                            dict["data"][k]["unc_scale_up_pb"]
+                            - dict["data"][k]["unc_scale_down_pb"]
+                        )
+                        / 2,
+                    )
+                if (
+                    "unc_pdf_up_pb" in dict["data"][k]
+                    and "unc_pdf_down_pb" in dict["data"][k]
+                ):
+                    dicd[so + "_PDF"] = ufloat(
+                        dict["data"][k]["xsec_pb"]
+                        + (
+                            dict["data"][k]["unc_pdf_up_pb"]
+                            + dict["data"][k]["unc_pdf_down_pb"]
+                        )
+                        / 2,
+                        (
+                            dict["data"][k]["unc_pdf_up_pb"]
+                            - dict["data"][k]["unc_pdf_down_pb"]
+                        )
+                        / 2,
+                    )
             else:
                 raise ValueError("No uncertainty found in data.")
             dat.append(dicd)
@@ -89,10 +161,13 @@ def load_json_with_metadata(file):
     # copy mass list to single masses
     for k in ddf.keys():
         if k.startswith("mass_"):
-            for m in k[5:].split("_"): 
-                ddf["mass_"+ m] = ddf[k]
-    return ddf, params,inpu
+            for m in k[5:].split("_"):
+                ddf["mass_" + m] = ddf[k]
+    return ddf, params, inpu
 
-def load_json(f,dimensions=1):
+
+def load_json(f, dimensions=1):
     return load_json_with_metadata(f)[0]
+
+
 load = load_json
