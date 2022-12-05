@@ -3,12 +3,10 @@ import multiprocessing as mp
 import warnings
 
 import numpy as np
-import tqdm
 import uncertainties.unumpy as unp
 
 # from pqdm.processes import pqdm as ppqdm
 from pqdm.threads import pqdm as tpqdm
-from uncertainties import unumpy
 
 from .util import DictData
 
@@ -200,7 +198,7 @@ def pdf_error(li, dl, ordername="LO", confidence_level=90, n_jobs=None):
             )
 
     mask = dl[ordername + "_PDF_CENTRAL"].notnull()
-    dl.loc[mask, ordername + "_PDF"] = unumpy.uarray(
+    dl.loc[mask, ordername + "_PDF"] = unp.uarray(
         unv(dl[ordername + "_PDF_CENTRAL"][mask])
         + dl[ordername + "_PDF_ERRPLUS"][mask] / 2.0
         + dl[ordername + "_PDF_ERRMINUS"][mask] / 2.0,
@@ -304,7 +302,7 @@ def scale_error(li, dl, ordername="LO", n_jobs=None):
             )
 
     mask = dl[ordername + "_SCALE_ERRPLUS"].notnull()
-    dl.loc[mask, ordername + "_SCALE"] = unumpy.uarray(
+    dl.loc[mask, ordername + "_SCALE"] = unp.uarray(
         unv(dl[ordername][mask])
         + dl[ordername + "_SCALE_ERRPLUS"][mask] / 2.0
         + dl[ordername + "_SCALE_ERRMINUS"][mask] / 2.0,
@@ -360,7 +358,7 @@ def combine_error(dl: dict, ordername="LO"):
         dl[ordername + "_PDF_ERRMINUS"][mask].astype(float) ** 2
         + dl[ordername + "_SCALE_ERRMINUS"][mask].astype(float) ** 2
     )
-    dl.loc[mask, ordername + "_COMBINED"] = unumpy.uarray(
+    dl.loc[mask, ordername + "_COMBINED"] = unp.uarray(
         unv(dl[ordername + ""][mask])
         + dl[ordername + "_ERRPLUS"][mask] / 2.0
         + dl[ordername + "_ERRMINUS"][mask] / 2.0,

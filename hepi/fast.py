@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # Interpolate data (loaded from json)
 import argparse
-import os.path
 import sys
 import urllib.request
 import warnings
@@ -72,13 +71,13 @@ def main():
     for xs, j in enumerate(args.json):
         if path.exists(j):
             with open(j) as f:
-                df, d, li = load_json_with_metadata(f)
+                df, d, _ = load_json_with_metadata(f)
         elif j in hepi.data.list_files() or j + ".json" in hepi.data.list_files():
             with open(hepi.data.get_file(j.replace(".json", "") + ".json")) as f:
-                df, d, li = load_json_with_metadata(f)
+                df, d, _ = load_json_with_metadata(f)
         elif validators.url(j):
             with urllib.request.urlopen(j) as f:
-                df, d, li = load_json_with_metadata(f)
+                df, d, _ = load_json_with_metadata(f)
         else:
             warnings.warn("Unknown input: " + j)
             continue
