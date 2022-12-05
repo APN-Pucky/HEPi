@@ -22,6 +22,10 @@ validators = "*"
 
 lhapdf = {version = "^6", optional = true}
 
+
+[tool.poetry.scripts]
+hepi-fast = "hepi.fast:main"
+
 [tool.poetry.extras]
 lhapdf = ["lhapdf"]
 
@@ -41,9 +45,6 @@ pandoc = "*"
 numpydoc = "*"
 myst-parser  = "*"
 toml ="*"
-
-[tool.poetry.scripts]
-hepi-fast = "hepi.fast:main"
 
 [tool.poetry.group.dev]
 optional = true
