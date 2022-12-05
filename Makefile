@@ -1,4 +1,3 @@
-PROJECT := $(shell python -c "import toml; print(toml.load('pyproject.toml')['tool']['poetry']['name'])")
 livehtml:
 	poetry run $(MAKE) -C docs livehtml
 
