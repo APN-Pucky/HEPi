@@ -28,16 +28,16 @@ Attributes
    hepi.run.spheno.run.get_path
 
 
-.. py:class:: SPhenoRunner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
+.. py:class:: SPhenoRunner(path, in_dir = None, out_dir = None, pre=None)
 
    Bases: :py:obj:`hepi.run.Runner`
 
-   .. py:method:: _check_path() -> bool
+   .. py:method:: _check_path()
 
       Checks if the passed path is valid.
 
 
-   .. py:method:: run(slhas: List[hepi.input.Input], **kwargs) -> List[hepi.input.Input]
+   .. py:method:: run(slhas, **kwargs)
 
       Run the passed list of parameters for SPheno.
 

@@ -66,7 +66,7 @@ Functions
    :type rnloq: :obj:`double`
 
 
-.. py:function:: is_valid(file: str, p: hepi.run.Input, d, **kwargs) -> bool
+.. py:function:: is_valid(file, p, d, **kwargs)
 
    Verifies that an file is a complete output.
 
@@ -81,7 +81,7 @@ Functions
    :rtype: bool
 
 
-.. py:function:: parse_single(file: str) -> ResumminoResult
+.. py:function:: parse_single(file)
 
    Extracts LO, NLO and NLO+NLL from Resummino output file.
 

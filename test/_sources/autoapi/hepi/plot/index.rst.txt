@@ -68,7 +68,7 @@ Attributes
    hepi.plot.labels
 
 
-.. py:class:: Input(order: hepi.order.Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
+.. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -123,22 +123,22 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino() -> bool
+   .. py:method:: has_gluino()
 
 
-   .. py:method:: has_neutralino() -> bool
+   .. py:method:: has_neutralino()
 
 
-   .. py:method:: has_charginos() -> bool
+   .. py:method:: has_charginos()
 
 
-   .. py:method:: has_weakino() -> bool
+   .. py:method:: has_weakino()
 
 
-   .. py:method:: has_squark() -> bool
+   .. py:method:: has_squark()
 
 
-   .. py:method:: has_slepton() -> bool
+   .. py:method:: has_slepton()
 
 
 
@@ -150,10 +150,10 @@ Attributes
    :rtype: str
 
 
-.. py:function:: replace_macros(s: str) -> str
+.. py:function:: replace_macros(s)
 
 
-.. py:function:: get_name(pid: int) -> str
+.. py:function:: get_name(pid)
 
    Get the latex name of a particle.
 
@@ -171,7 +171,7 @@ Attributes
    '\\tilde{\\chi}_{1}^{0}'
 
 
-.. py:function:: title(i: hepi.input.Input, axe=None, scenario=None, diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
+.. py:function:: title(i, axe=None, scenario=None, diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
 
    Sets the title on axis `axe`.
 
@@ -193,7 +193,7 @@ Attributes
 .. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)
 
 
-.. py:function:: get_mass(l: dict, iid: int)
+.. py:function:: get_mass(l, iid)
 
    Get the mass of particle with id `iid` out of the list in the "slha" element in the dict.
 
@@ -202,7 +202,7 @@ Attributes
 
 
 
-.. py:function:: plot(dict_list, x, y, label=None, xaxis='M [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs) -> None
+.. py:function:: plot(dict_list, x, y, label=None, xaxis='M [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs)
 
    Creates a plot based on the entries `x`and `y` in `dict_list`.
 

@@ -57,7 +57,7 @@ Attributes
 
    
 
-.. py:function:: write_csv(dict_list: list, filename: str)
+.. py:function:: write_csv(dict_list, filename)
 
    Saves a `dict` of `list`s to `filename` as csv table.
 
@@ -148,7 +148,7 @@ Attributes
    <BLANKLINE>
 
 
-.. py:function:: write_json(dict_list: list, o: hepi.order.Order, parameters: str, output, error=True, error_sym=None, scale=True, pdf=True)
+.. py:function:: write_json(dict_list, o, parameters, output, error=True, error_sym=None, scale=True, pdf=True)
 
    Saves a `dict` of `list`s to `filename` as json.
 

@@ -112,7 +112,7 @@ Attributes
    :type ind: str
 
 
-.. py:function:: set_output_dir(outd, create: bool = True)
+.. py:function:: set_output_dir(outd, create = True)
 
    Sets the output directory.
 
@@ -129,7 +129,7 @@ Attributes
    :type ppre: str
 
 
-.. py:class:: Input(order: hepi.order.Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
+.. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -184,51 +184,51 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino() -> bool
+   .. py:method:: has_gluino()
 
 
-   .. py:method:: has_neutralino() -> bool
+   .. py:method:: has_neutralino()
 
 
-   .. py:method:: has_charginos() -> bool
+   .. py:method:: has_charginos()
 
 
-   .. py:method:: has_weakino() -> bool
+   .. py:method:: has_weakino()
 
 
-   .. py:method:: has_squark() -> bool
+   .. py:method:: has_squark()
 
 
-   .. py:method:: has_slepton() -> bool
+   .. py:method:: has_slepton()
 
 
 
-.. py:function:: is_gluino(iid: int) -> bool
+.. py:function:: is_gluino(iid)
 
 
-.. py:function:: is_neutralino(iid: int) -> bool
+.. py:function:: is_neutralino(iid)
 
 
-.. py:function:: is_chargino(iid: int) -> bool
+.. py:function:: is_chargino(iid)
 
 
-.. py:function:: is_weakino(iid: int) -> bool
+.. py:function:: is_weakino(iid)
 
 
-.. py:function:: is_squark(iid: int) -> bool
+.. py:function:: is_squark(iid)
 
 
-.. py:function:: is_slepton(iid: int) -> bool
+.. py:function:: is_slepton(iid)
 
 
-.. py:function:: update_slha(i: Input)
+.. py:function:: update_slha(i)
 
    Updates dependent parameters in Input `i`.
 
    Mainly concerns the `mu` value used by `madgraph`.
 
 
-.. py:function:: scan(input_list: List[Input], var: str, rrange: Iterable) -> List[Input]
+.. py:function:: scan(input_list, var, rrange)
 
    Scans a variable `var` over `rrange` in `input_list`.
 
@@ -266,7 +266,7 @@ Attributes
    {'order': <Order.NLO_PLUS_NLL: 2>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
 
 
-.. py:function:: scan_multi(li: List[Input], **kwargs) -> List[Input]
+.. py:function:: scan_multi(li, **kwargs)
 
    Magically scans the variables passed to this function.
 
@@ -299,7 +299,7 @@ Attributes
 
    
 
-.. py:function:: scan_scale(l: List[Input], rrange=3, distance=2.0)
+.. py:function:: scan_scale(l, rrange=3, distance=2.0)
 
    Scans scale by varying `mu_f` and `mu_r`.
 
@@ -327,7 +327,7 @@ Attributes
 
    
 
-.. py:function:: scan_seven_point(input_list: List[Input])
+.. py:function:: scan_seven_point(input_list)
 
    Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
 
@@ -350,7 +350,7 @@ Attributes
 
    
 
-.. py:function:: keep_where(input_list: List[Input], condition)
+.. py:function:: keep_where(input_list, condition)
 
    Only keep the inputs where the condition is true.
 
@@ -362,7 +362,7 @@ Attributes
                      The condition to filter on.
 
 
-.. py:function:: remove_where(input_list: List[Input], condition, **kwargs)
+.. py:function:: remove_where(input_list, condition, **kwargs)
 
    Remove elements in list which satisfy condition.
 
@@ -379,7 +379,7 @@ Attributes
    {'order': <Order.LO: 0>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
 
 
-.. py:function:: change_where(input_list: List[Input], dicts: dict, **kwargs)
+.. py:function:: change_where(input_list, dicts, **kwargs)
 
    Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `input_list`.
 
@@ -402,7 +402,7 @@ Attributes
    {'order': <Order.LO: 0>, 'energy': 11000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 2, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
 
 
-.. py:function:: scan_invariant_mass(input_list: List[Input], diff, points, low=0.001)
+.. py:function:: scan_invariant_mass(input_list, diff, points, low=0.001)
 
    Logarithmic `invariant_mass` scan close to the production threshold.
 
@@ -410,29 +410,29 @@ Attributes
 .. py:function:: slha_write(newname, d)
 
 
-.. py:function:: masses_scan(input_list: List[Input], varis: List[int], rrange, diff_L_R=None, negate=None) -> List[Input]
+.. py:function:: masses_scan(input_list, varis, rrange, diff_L_R=None, negate=None)
 
    Scans the PDG identified masses in `varis` over `rrange` in the list `input_list`.
    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
 
 
-.. py:function:: mass_scan(input_list: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]
+.. py:function:: mass_scan(input_list, var, rrange, diff_L_R=None)
 
    Scans the PDG identified mass `var` over `rrange` in the list `l`.
    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
 
 
-.. py:function:: slha_scan(input_list: List[Input], block, var, rrange: List) -> List[Input]
+.. py:function:: slha_scan(input_list, block, var, rrange)
 
    Scan a generic
 
 
-.. py:function:: slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -> List[Input]
+.. py:function:: slha_scan_rel(input_list, lambdas, rrange)
 
    Scan a generic slha variable.
 
 
-.. py:function:: scan_pdf(input_list: List[Input])
+.. py:function:: scan_pdf(input_list)
 
    Scans NLO PDF sets.
 

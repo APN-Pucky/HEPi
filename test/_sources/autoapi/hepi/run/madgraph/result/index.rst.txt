@@ -35,7 +35,7 @@ Functions
    Sets LO and NLO result. NLO+NLL is set to None.
 
 
-.. py:function:: is_valid(file: str, p: hepi.run.Input, d) -> bool
+.. py:function:: is_valid(file, p, d)
 
    Verifies that an file is a complete output.
 
@@ -50,7 +50,7 @@ Functions
    :rtype: bool
 
 
-.. py:function:: parse_single(file) -> MadgraphResult
+.. py:function:: parse_single(file)
 
    Extracts Result from MadGraph output file.
 

@@ -216,13 +216,13 @@ Attributes
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
 
 
-.. py:function:: order_to_string(o: Order, json_style=False, no_macros=False) -> str
+.. py:function:: order_to_string(o, json_style=False, no_macros=False)
 
 
-.. py:function:: replace_macros(s: str) -> str
+.. py:function:: replace_macros(s)
 
 
-.. py:function:: xsec_to_order(s: str)
+.. py:function:: xsec_to_order(s)
 
 
 .. py:class:: DictData
@@ -233,7 +233,7 @@ Attributes
 
 
 
-.. py:function:: lhapdf_name_to_id(name: str) -> int
+.. py:function:: lhapdf_name_to_id(name)
 
    Converts a LHAPDF name to the sets id.
 
@@ -296,7 +296,7 @@ Attributes
    :type ind: str
 
 
-.. py:function:: set_output_dir(outd, create: bool = True)
+.. py:function:: set_output_dir(outd, create = True)
 
    Sets the output directory.
 
@@ -313,7 +313,7 @@ Attributes
    :type ppre: str
 
 
-.. py:class:: Input(order: hepi.order.Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
+.. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -368,51 +368,51 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino() -> bool
+   .. py:method:: has_gluino()
 
 
-   .. py:method:: has_neutralino() -> bool
+   .. py:method:: has_neutralino()
 
 
-   .. py:method:: has_charginos() -> bool
+   .. py:method:: has_charginos()
 
 
-   .. py:method:: has_weakino() -> bool
+   .. py:method:: has_weakino()
 
 
-   .. py:method:: has_squark() -> bool
+   .. py:method:: has_squark()
 
 
-   .. py:method:: has_slepton() -> bool
+   .. py:method:: has_slepton()
 
 
 
-.. py:function:: is_gluino(iid: int) -> bool
+.. py:function:: is_gluino(iid)
 
 
-.. py:function:: is_neutralino(iid: int) -> bool
+.. py:function:: is_neutralino(iid)
 
 
-.. py:function:: is_chargino(iid: int) -> bool
+.. py:function:: is_chargino(iid)
 
 
-.. py:function:: is_weakino(iid: int) -> bool
+.. py:function:: is_weakino(iid)
 
 
-.. py:function:: is_squark(iid: int) -> bool
+.. py:function:: is_squark(iid)
 
 
-.. py:function:: is_slepton(iid: int) -> bool
+.. py:function:: is_slepton(iid)
 
 
-.. py:function:: update_slha(i: Input)
+.. py:function:: update_slha(i)
 
    Updates dependent parameters in Input `i`.
 
    Mainly concerns the `mu` value used by `madgraph`.
 
 
-.. py:function:: scan(input_list: List[Input], var: str, rrange: Iterable) -> List[Input]
+.. py:function:: scan(input_list, var, rrange)
 
    Scans a variable `var` over `rrange` in `input_list`.
 
@@ -450,7 +450,7 @@ Attributes
    {'order': <Order.NLO_PLUS_NLL: 2>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
 
 
-.. py:function:: scan_multi(li: List[Input], **kwargs) -> List[Input]
+.. py:function:: scan_multi(li, **kwargs)
 
    Magically scans the variables passed to this function.
 
@@ -483,7 +483,7 @@ Attributes
 
    
 
-.. py:function:: scan_scale(l: List[Input], rrange=3, distance=2.0)
+.. py:function:: scan_scale(l, rrange=3, distance=2.0)
 
    Scans scale by varying `mu_f` and `mu_r`.
 
@@ -511,7 +511,7 @@ Attributes
 
    
 
-.. py:function:: scan_seven_point(input_list: List[Input])
+.. py:function:: scan_seven_point(input_list)
 
    Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
 
@@ -534,7 +534,7 @@ Attributes
 
    
 
-.. py:function:: keep_where(input_list: List[Input], condition)
+.. py:function:: keep_where(input_list, condition)
 
    Only keep the inputs where the condition is true.
 
@@ -546,7 +546,7 @@ Attributes
                      The condition to filter on.
 
 
-.. py:function:: remove_where(input_list: List[Input], condition, **kwargs)
+.. py:function:: remove_where(input_list, condition, **kwargs)
 
    Remove elements in list which satisfy condition.
 
@@ -563,7 +563,7 @@ Attributes
    {'order': <Order.LO: 0>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
 
 
-.. py:function:: change_where(input_list: List[Input], dicts: dict, **kwargs)
+.. py:function:: change_where(input_list, dicts, **kwargs)
 
    Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `input_list`.
 
@@ -586,7 +586,7 @@ Attributes
    {'order': <Order.LO: 0>, 'energy': 11000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 2, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
 
 
-.. py:function:: scan_invariant_mass(input_list: List[Input], diff, points, low=0.001)
+.. py:function:: scan_invariant_mass(input_list, diff, points, low=0.001)
 
    Logarithmic `invariant_mass` scan close to the production threshold.
 
@@ -594,29 +594,29 @@ Attributes
 .. py:function:: slha_write(newname, d)
 
 
-.. py:function:: masses_scan(input_list: List[Input], varis: List[int], rrange, diff_L_R=None, negate=None) -> List[Input]
+.. py:function:: masses_scan(input_list, varis, rrange, diff_L_R=None, negate=None)
 
    Scans the PDG identified masses in `varis` over `rrange` in the list `input_list`.
    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
 
 
-.. py:function:: mass_scan(input_list: List[Input], var: int, rrange, diff_L_R=None) -> List[Input]
+.. py:function:: mass_scan(input_list, var, rrange, diff_L_R=None)
 
    Scans the PDG identified mass `var` over `rrange` in the list `l`.
    `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
 
 
-.. py:function:: slha_scan(input_list: List[Input], block, var, rrange: List) -> List[Input]
+.. py:function:: slha_scan(input_list, block, var, rrange)
 
    Scan a generic
 
 
-.. py:function:: slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -> List[Input]
+.. py:function:: slha_scan_rel(input_list, lambdas, rrange)
 
    Scan a generic slha variable.
 
 
-.. py:function:: scan_pdf(input_list: List[Input])
+.. py:function:: scan_pdf(input_list)
 
    Scans NLO PDF sets.
 
@@ -707,7 +707,7 @@ Attributes
    :type df: pandas.DataFrame
 
 
-.. py:class:: Input(order: hepi.order.Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
+.. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -762,37 +762,37 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino() -> bool
+   .. py:method:: has_gluino()
 
 
-   .. py:method:: has_neutralino() -> bool
+   .. py:method:: has_neutralino()
 
 
-   .. py:method:: has_charginos() -> bool
+   .. py:method:: has_charginos()
 
 
-   .. py:method:: has_weakino() -> bool
+   .. py:method:: has_weakino()
 
 
-   .. py:method:: has_squark() -> bool
+   .. py:method:: has_squark()
 
 
-   .. py:method:: has_slepton() -> bool
+   .. py:method:: has_slepton()
 
 
 
-.. py:function:: order_to_string(o: Order, json_style=False, no_macros=False) -> str
+.. py:function:: order_to_string(o, json_style=False, no_macros=False)
 
 
-.. py:function:: xsec_to_order(s: str)
+.. py:function:: xsec_to_order(s)
 
 
-.. py:function:: DL2DF(ld: dict) -> pandas.DataFrame
+.. py:function:: DL2DF(ld)
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
 
-.. py:function:: LD2DL(l: List, actual_dict=False) -> dict
+.. py:function:: LD2DL(l, actual_dict=False)
 
    Convert a list of objects into a dictionary of lists.
 
@@ -863,10 +863,10 @@ Attributes
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
 
 
-.. py:function:: order_to_string(o: Order, json_style=False, no_macros=False) -> str
+.. py:function:: order_to_string(o, json_style=False, no_macros=False)
 
 
-.. py:function:: DL2DF(ld: dict) -> pandas.DataFrame
+.. py:function:: DL2DF(ld)
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
@@ -897,7 +897,7 @@ Attributes
 
    
 
-.. py:function:: write_csv(dict_list: list, filename: str)
+.. py:function:: write_csv(dict_list, filename)
 
    Saves a `dict` of `list`s to `filename` as csv table.
 
@@ -988,7 +988,7 @@ Attributes
    <BLANKLINE>
 
 
-.. py:function:: write_json(dict_list: list, o: hepi.order.Order, parameters: str, output, error=True, error_sym=None, scale=True, pdf=True)
+.. py:function:: write_json(dict_list, o, parameters, output, error=True, error_sym=None, scale=True, pdf=True)
 
    Saves a `dict` of `list`s to `filename` as json.
 
@@ -1062,7 +1062,7 @@ Attributes
    }
 
 
-.. py:class:: Input(order: hepi.order.Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
+.. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -1117,22 +1117,22 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino() -> bool
+   .. py:method:: has_gluino()
 
 
-   .. py:method:: has_neutralino() -> bool
+   .. py:method:: has_neutralino()
 
 
-   .. py:method:: has_charginos() -> bool
+   .. py:method:: has_charginos()
 
 
-   .. py:method:: has_weakino() -> bool
+   .. py:method:: has_weakino()
 
 
-   .. py:method:: has_squark() -> bool
+   .. py:method:: has_squark()
 
 
-   .. py:method:: has_slepton() -> bool
+   .. py:method:: has_slepton()
 
 
 
@@ -1144,10 +1144,10 @@ Attributes
    :rtype: str
 
 
-.. py:function:: replace_macros(s: str) -> str
+.. py:function:: replace_macros(s)
 
 
-.. py:function:: get_name(pid: int) -> str
+.. py:function:: get_name(pid)
 
    Get the latex name of a particle.
 
@@ -1165,7 +1165,7 @@ Attributes
    '\\tilde{\\chi}_{1}^{0}'
 
 
-.. py:function:: title(i: hepi.input.Input, axe=None, scenario=None, diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
+.. py:function:: title(i, axe=None, scenario=None, diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
 
    Sets the title on axis `axe`.
 
@@ -1187,7 +1187,7 @@ Attributes
 .. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)
 
 
-.. py:function:: get_mass(l: dict, iid: int)
+.. py:function:: get_mass(l, iid)
 
    Get the mass of particle with id `iid` out of the list in the "slha" element in the dict.
 
@@ -1196,7 +1196,7 @@ Attributes
 
 
 
-.. py:function:: plot(dict_list, x, y, label=None, xaxis='M [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs) -> None
+.. py:function:: plot(dict_list, x, y, label=None, xaxis='M [GeV]', yaxis='$\\sigma$ [pb]', ratio=False, K=False, K_plus_1=False, logy=True, yscale=1.0, mask=None, **kwargs)
 
    Creates a plot based on the entries `x`and `y` in `dict_list`.
 
@@ -1432,7 +1432,7 @@ Attributes
    Just like `combine_error` but over a list of ordernames.
 
 
-.. py:function:: combine_error(dl: dict, ordername='LO')
+.. py:function:: combine_error(dl, ordername='LO')
 
    Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
 
@@ -1448,7 +1448,7 @@ Attributes
    :rtype: :obj:`dict`
 
 
-.. py:class:: Input(order: hepi.order.Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
+.. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -1503,22 +1503,22 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino() -> bool
+   .. py:method:: has_gluino()
 
 
-   .. py:method:: has_neutralino() -> bool
+   .. py:method:: has_neutralino()
 
 
-   .. py:method:: has_charginos() -> bool
+   .. py:method:: has_charginos()
 
 
-   .. py:method:: has_weakino() -> bool
+   .. py:method:: has_weakino()
 
 
-   .. py:method:: has_squark() -> bool
+   .. py:method:: has_squark()
 
 
-   .. py:method:: has_slepton() -> bool
+   .. py:method:: has_slepton()
 
 
 
@@ -1613,12 +1613,12 @@ Attributes
    :type annlo_plus_nnll: :obj:`double`
 
 
-.. py:function:: DL2DF(ld: dict) -> pandas.DataFrame
+.. py:function:: DL2DF(ld)
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
 
-.. py:function:: LD2DL(l: List, actual_dict=False) -> dict
+.. py:function:: LD2DL(l, actual_dict=False)
 
    Convert a list of objects into a dictionary of lists.
 
@@ -1651,7 +1651,7 @@ Attributes
 
 
 
-.. py:function:: namehash(n: any) -> str
+.. py:function:: namehash(n)
 
    Creates a sha256 hash from the objects string representation.
 
@@ -1672,43 +1672,43 @@ Attributes
    '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
-.. py:class:: RunParam(skip: bool = False, in_file: str = None, out_file: str = None, execute: str = None, name: str = None)
+.. py:class:: RunParam(skip = False, in_file = None, out_file = None, execute = None, name = None)
 
    Bases: :py:obj:`hepi.util.DictData`
 
    Abstract class that is similar to a dictionary but with fixed keys.
 
 
-.. py:class:: Runner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
+.. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
 
-   .. py:method:: orders() -> List[hepi.input.Order]
+   .. py:method:: orders()
 
       List of supported Orders in this runner.
 
 
-   .. py:method:: get_name() -> str
+   .. py:method:: get_name()
 
       Returns the name of the runner.
 
 
-   .. py:method:: get_version() -> str
+   .. py:method:: get_version()
 
 
-   .. py:method:: _sub_run(coms: List[str]) -> str
+   .. py:method:: _sub_run(coms)
 
 
-   .. py:method:: _check_path() -> bool
+   .. py:method:: _check_path()
 
       Checks if the passed path is valid.
 
 
-   .. py:method:: _prepare(p: hepi.input.Input, skip=False, assume_valid=False, **kwargs) -> RunParam
+   .. py:method:: _prepare(p, skip=False, assume_valid=False, **kwargs)
 
 
-   .. py:method:: _check_input(param: hepi.input.Input, **kwargs) -> bool
+   .. py:method:: _check_input(param, **kwargs)
 
 
-   .. py:method:: _prepare_all(params: List[hepi.input.Input], skip=True, n_jobs=None, **kwargs) -> List[RunParam]
+   .. py:method:: _prepare_all(params, skip=True, n_jobs=None, **kwargs)
 
       Prepares all parameters for execution.
 
@@ -1720,7 +1720,7 @@ Attributes
       :type n_jobs: int
 
 
-   .. py:method:: run(params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
+   .. py:method:: run(params, skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
 
           Run the passed list of parameters.
 
@@ -1740,7 +1740,7 @@ Attributes
 
 
 
-   .. py:method:: _run(rps: List[RunParam], wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
+   .. py:method:: _run(rps, wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
 
           Runs Runner per :class:`RunParams`.
 
@@ -1756,7 +1756,7 @@ Attributes
               :obj:`list` of int: return codes from jobs if `no_parse` is False.
 
 
-   .. py:method:: _is_valid(file: str, p: hepi.input.Input, d, **kwargs) -> bool
+   .. py:method:: _is_valid(file, p, d, **kwargs)
 
       Verifies that a file is a complete output.
 
@@ -1771,7 +1771,7 @@ Attributes
       :rtype: bool
 
 
-   .. py:method:: parse(outputs: List[str], n_jobs=None) -> List[hepi.results.Result]
+   .. py:method:: parse(outputs, n_jobs=None)
 
           Parses Resummino output files and returns List of Results.
 
@@ -1784,7 +1784,7 @@ Attributes
 
 
 
-   .. py:method:: _parse_file(file: str) -> hepi.results.Result
+   .. py:method:: _parse_file(file)
 
       Extracts results from an output file.
 
@@ -1795,7 +1795,7 @@ Attributes
       :rtype: :class:`Result`
 
 
-   .. py:method:: get_path() -> str
+   .. py:method:: get_path()
 
       Get the Runner path.
 
@@ -1803,7 +1803,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: get_input_dir() -> str
+   .. py:method:: get_input_dir()
 
       Get the input directory.
 
@@ -1811,7 +1811,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: get_output_dir() -> str
+   .. py:method:: get_output_dir()
 
       Get the input directory.
 
@@ -1819,7 +1819,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: get_pre() -> str
+   .. py:method:: get_pre()
 
       Gets the command prefix.
 
@@ -1827,7 +1827,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: set_path(p: str)
+   .. py:method:: set_path(p)
 
       Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
 
@@ -1835,7 +1835,7 @@ Attributes
       :type p: str
 
 
-   .. py:method:: set_input_dir(indir: str)
+   .. py:method:: set_input_dir(indir)
 
       Sets the input directory.
 
@@ -1843,7 +1843,7 @@ Attributes
       :type indir: str
 
 
-   .. py:method:: set_output_dir(outdir: str, create: bool = True)
+   .. py:method:: set_output_dir(outdir, create = True)
 
       Sets the output directory.
 
@@ -1852,7 +1852,7 @@ Attributes
       :type outdir: str
 
 
-   .. py:method:: set_pre(ppre: str)
+   .. py:method:: set_pre(ppre)
 
       Sets the command prefix.
 
@@ -1869,7 +1869,7 @@ Attributes
 
 
 
-.. py:function:: LD2DL(l: List, actual_dict=False) -> dict
+.. py:function:: LD2DL(l, actual_dict=False)
 
    Convert a list of objects into a dictionary of lists.
 
@@ -1894,12 +1894,12 @@ Attributes
    {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
-.. py:function:: DL2DF(ld: dict) -> pandas.DataFrame
+.. py:function:: DL2DF(ld)
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
 
-.. py:function:: namehash(n: any) -> str
+.. py:function:: namehash(n)
 
    Creates a sha256 hash from the objects string representation.
 
@@ -1920,7 +1920,7 @@ Attributes
    '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
-.. py:function:: lhapdf_name_to_id(name: str) -> int
+.. py:function:: lhapdf_name_to_id(name)
 
    Converts a LHAPDF name to the sets id.
 
@@ -1936,7 +1936,7 @@ Attributes
    13200
 
 
-.. py:function:: lhapdf_id_to_name(lid: int) -> str
+.. py:function:: lhapdf_id_to_name(lid)
 
 
 .. py:data:: package

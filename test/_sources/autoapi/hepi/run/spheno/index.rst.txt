@@ -54,7 +54,7 @@ Attributes
    hepi.run.spheno.get_path
 
 
-.. py:class:: Input(order: hepi.order.Order, energy: float, particle1: int, particle2: int, slha: str, pdf_lo: str, pdf_nlo: str, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
+.. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.01, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -109,62 +109,62 @@ Attributes
 
    :vartype update: bool
 
-   .. py:method:: has_gluino() -> bool
+   .. py:method:: has_gluino()
 
 
-   .. py:method:: has_neutralino() -> bool
+   .. py:method:: has_neutralino()
 
 
-   .. py:method:: has_charginos() -> bool
+   .. py:method:: has_charginos()
 
 
-   .. py:method:: has_weakino() -> bool
+   .. py:method:: has_weakino()
 
 
-   .. py:method:: has_squark() -> bool
+   .. py:method:: has_squark()
 
 
-   .. py:method:: has_slepton() -> bool
+   .. py:method:: has_slepton()
 
 
 
-.. py:function:: update_slha(i: Input)
+.. py:function:: update_slha(i)
 
    Updates dependent parameters in Input `i`.
 
    Mainly concerns the `mu` value used by `madgraph`.
 
 
-.. py:class:: Runner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
+.. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
 
-   .. py:method:: orders() -> List[hepi.input.Order]
+   .. py:method:: orders()
 
       List of supported Orders in this runner.
 
 
-   .. py:method:: get_name() -> str
+   .. py:method:: get_name()
 
       Returns the name of the runner.
 
 
-   .. py:method:: get_version() -> str
+   .. py:method:: get_version()
 
 
-   .. py:method:: _sub_run(coms: List[str]) -> str
+   .. py:method:: _sub_run(coms)
 
 
-   .. py:method:: _check_path() -> bool
+   .. py:method:: _check_path()
 
       Checks if the passed path is valid.
 
 
-   .. py:method:: _prepare(p: hepi.input.Input, skip=False, assume_valid=False, **kwargs) -> RunParam
+   .. py:method:: _prepare(p, skip=False, assume_valid=False, **kwargs)
 
 
-   .. py:method:: _check_input(param: hepi.input.Input, **kwargs) -> bool
+   .. py:method:: _check_input(param, **kwargs)
 
 
-   .. py:method:: _prepare_all(params: List[hepi.input.Input], skip=True, n_jobs=None, **kwargs) -> List[RunParam]
+   .. py:method:: _prepare_all(params, skip=True, n_jobs=None, **kwargs)
 
       Prepares all parameters for execution.
 
@@ -176,7 +176,7 @@ Attributes
       :type n_jobs: int
 
 
-   .. py:method:: run(params: List[hepi.input.Input], skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
+   .. py:method:: run(params, skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
 
           Run the passed list of parameters.
 
@@ -196,7 +196,7 @@ Attributes
 
 
 
-   .. py:method:: _run(rps: List[RunParam], wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
+   .. py:method:: _run(rps, wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
 
           Runs Runner per :class:`RunParams`.
 
@@ -212,7 +212,7 @@ Attributes
               :obj:`list` of int: return codes from jobs if `no_parse` is False.
 
 
-   .. py:method:: _is_valid(file: str, p: hepi.input.Input, d, **kwargs) -> bool
+   .. py:method:: _is_valid(file, p, d, **kwargs)
 
       Verifies that a file is a complete output.
 
@@ -227,7 +227,7 @@ Attributes
       :rtype: bool
 
 
-   .. py:method:: parse(outputs: List[str], n_jobs=None) -> List[hepi.results.Result]
+   .. py:method:: parse(outputs, n_jobs=None)
 
           Parses Resummino output files and returns List of Results.
 
@@ -240,7 +240,7 @@ Attributes
 
 
 
-   .. py:method:: _parse_file(file: str) -> hepi.results.Result
+   .. py:method:: _parse_file(file)
 
       Extracts results from an output file.
 
@@ -251,7 +251,7 @@ Attributes
       :rtype: :class:`Result`
 
 
-   .. py:method:: get_path() -> str
+   .. py:method:: get_path()
 
       Get the Runner path.
 
@@ -259,7 +259,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: get_input_dir() -> str
+   .. py:method:: get_input_dir()
 
       Get the input directory.
 
@@ -267,7 +267,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: get_output_dir() -> str
+   .. py:method:: get_output_dir()
 
       Get the input directory.
 
@@ -275,7 +275,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: get_pre() -> str
+   .. py:method:: get_pre()
 
       Gets the command prefix.
 
@@ -283,7 +283,7 @@ Attributes
       :rtype: str
 
 
-   .. py:method:: set_path(p: str)
+   .. py:method:: set_path(p)
 
       Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
 
@@ -291,7 +291,7 @@ Attributes
       :type p: str
 
 
-   .. py:method:: set_input_dir(indir: str)
+   .. py:method:: set_input_dir(indir)
 
       Sets the input directory.
 
@@ -299,7 +299,7 @@ Attributes
       :type indir: str
 
 
-   .. py:method:: set_output_dir(outdir: str, create: bool = True)
+   .. py:method:: set_output_dir(outdir, create = True)
 
       Sets the output directory.
 
@@ -308,7 +308,7 @@ Attributes
       :type outdir: str
 
 
-   .. py:method:: set_pre(ppre: str)
+   .. py:method:: set_pre(ppre)
 
       Sets the command prefix.
 
@@ -317,16 +317,16 @@ Attributes
 
 
 
-.. py:class:: SPhenoRunner(path: str, in_dir: str = None, out_dir: str = None, pre=None)
+.. py:class:: SPhenoRunner(path, in_dir = None, out_dir = None, pre=None)
 
    Bases: :py:obj:`hepi.run.Runner`
 
-   .. py:method:: _check_path() -> bool
+   .. py:method:: _check_path()
 
       Checks if the passed path is valid.
 
 
-   .. py:method:: run(slhas: List[hepi.input.Input], **kwargs) -> List[hepi.input.Input]
+   .. py:method:: run(slhas, **kwargs)
 
       Run the passed list of parameters for SPheno.
 

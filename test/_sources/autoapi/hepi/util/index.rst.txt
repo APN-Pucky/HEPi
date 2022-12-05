@@ -42,7 +42,7 @@ Functions
 
 
 
-.. py:function:: LD2DL(l: List, actual_dict=False) -> dict
+.. py:function:: LD2DL(l, actual_dict=False)
 
    Convert a list of objects into a dictionary of lists.
 
@@ -67,12 +67,12 @@ Functions
    {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
-.. py:function:: DL2DF(ld: dict) -> pandas.DataFrame
+.. py:function:: DL2DF(ld)
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
 
-.. py:function:: namehash(n: any) -> str
+.. py:function:: namehash(n)
 
    Creates a sha256 hash from the objects string representation.
 
@@ -93,7 +93,7 @@ Functions
    '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
 
 
-.. py:function:: lhapdf_name_to_id(name: str) -> int
+.. py:function:: lhapdf_name_to_id(name)
 
    Converts a LHAPDF name to the sets id.
 
@@ -109,6 +109,6 @@ Functions
    13200
 
 
-.. py:function:: lhapdf_id_to_name(lid: int) -> str
+.. py:function:: lhapdf_id_to_name(lid)
 
 
