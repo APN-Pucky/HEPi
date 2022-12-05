@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 =================================
-|name| |version| documentation
+|project| |version| documentation
 =================================
 
 
