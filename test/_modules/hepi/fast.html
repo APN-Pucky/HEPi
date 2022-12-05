@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>hepi.fast &mdash; hepi  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> hepi
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.8-13-g33bb368c
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html">Subpackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html#submodules">Submodules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html#package-contents">Package Contents</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">hepi</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../hepi.html">hepi</a> &raquo;</li>
+        
+      <li>hepi.fast</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for hepi.fast</h1><div class="highlight"><pre>
+<span></span>#!/usr/bin/env python
+# Interpolate data (loaded from json)
+import argparse
+import sys
+import urllib.request
+import warnings
+from os import path
+
+import numpy as np
+import uncertainties.unumpy as unp
+import validators
+from smpl import interpolate as ip
+
+from hepi.input import order_to_string
+from hepi.load import load_json_with_metadata
+from hepi.order import replace_macros
+
+# from hepi import data
+
+try:
+    import readline
+except ImportError:
+    pass
+
+import hepi.data
+
+<div class="viewcode-block" id="unv"><a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.unv">[docs]</a>unv = unp.nominal_values</div>
+<div class="viewcode-block" id="usd"><a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.usd">[docs]</a>usd = unp.std_devs</div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.main">[docs]</a>def main():
+    parser = argparse.ArgumentParser(
+        description=&quot;Interpolate data (loaded from json) in the format: \nCentral value | error down | error up | error pdf down | error pdf up | error scale down | error scale up&quot;
+    )
+    parser.add_argument(
+        &quot;json&quot;, type=str, nargs=&quot;*&quot;, help=&quot;url/file/string/name&quot;, default=[]
+    )
+    parser.add_argument(
+        &quot;-l&quot;, &quot;--list&quot;, action=&quot;store_true&quot;, help=&quot;list installed grids&quot;, default=False
+    )
+    parser.add_argument(
+        &quot;-p&quot;, &quot;--plot&quot;, action=&quot;store_true&quot;, help=&quot;plot listed files&quot;, default=False
+    )
+    parser.add_argument(
+        &quot;-i&quot;, &quot;--info&quot;, action=&quot;store_true&quot;, help=&quot;plot listed files&quot;, default=False
+    )
+    parser.add_argument(
+        &quot;-s&quot;,
+        &quot;--size&quot;,
+        type=int,
+        help=&quot;number of points after interpolation&quot;,
+        default=50,
+    )
+    args = parser.parse_args()
+
+    fs = []
+
+    if args.list:
+        print(&quot;Available grids:&quot;)
+        for f in hepi.data.list_files():
+            print(f)
+        return
+    if args.plot:
+        # on the fly import to speed up hepi-fast
+        from matplotlib import pyplot as plt
+        from smpl import data
+
+        from hepi.interpolate import interpolate_2d
+        from hepi.plot import combined_plot, mapplot
+
+    for xs, j in enumerate(args.json):
+        if path.exists(j):
+            with open(j) as f:
+                df, d, _ = load_json_with_metadata(f)
+        elif j in hepi.data.list_files() or j + &quot;.json&quot; in hepi.data.list_files():
+            with open(hepi.data.get_file(j.replace(&quot;.json&quot;, &quot;&quot;) + &quot;.json&quot;)) as f:
+                df, d, _ = load_json_with_metadata(f)
+        elif validators.url(j):
+            with urllib.request.urlopen(j) as f:
+                df, d, _ = load_json_with_metadata(f)
+        else:
+            warnings.warn(&quot;Unknown input: &quot; + j)
+            continue
+
+        if args.info:
+            print(
+                &quot;Process &quot;
+                + str(df[&quot;slha&quot;].iloc[0])
+                + &quot; using &quot;
+                + str(df[&quot;pdf_nlo&quot;].iloc[0])
+                + &quot; at energy &quot;
+                + str(df[&quot;energy&quot;].iloc[0])
+                + &quot; GeV computed with &quot;
+                + str(df[&quot;runner&quot;].iloc[0])
+            )
+            continue
+
+        so = order_to_string(df[&quot;order&quot;].iloc[0])
+        if len(d) == 1:
+            dat = [df[d[0][0]]]
+            interpolator = &quot;cubic&quot;
+            if args.plot:
+                combined_plot(
+                    df,
+                    d[0][0],
+                    so,
+                    tight=False,
+                    plot_data=False,
+                    logy=True,
+                    interpolate=True,
+                    xaxis=d[0][0],
+                    interpolator=&quot;cubic&quot;,
+                    pre=np.log,
+                    post=np.exp,
+                    init=False,
+                    label=df[&quot;slha&quot;].iloc[0]
+                    + &quot; @ &quot;
+                    + replace_macros(order_to_string(df[&quot;order&quot;].iloc[0]))
+                    + &quot; with &quot;
+                    + str(df[&quot;pdf_nlo&quot;].iloc[0])
+                    + &quot; at $\\sqrt{S} = &quot;
+                    + str(int(df[&quot;energy&quot;].iloc[0]) / 1000)
+                    + &quot;$ TeV&quot;,
+                )
+                # hepi.title(li,axe=axs[xs,0],cms_energy=True,pdf_info=False)
+        elif len(d) == 2:
+            if xs == 0:
+                fig, axs = plt.subplots(
+                    len(args.json), 2
+                )  # Remove horizontal space between axes
+                if len(args.json) == 1:
+                    axs = np.array([axs])
+
+            dat = [df[d[0][0]], df[d[1][0]]]
+            interpolator = &quot;linearnd&quot;
+            if args.plot:
+                x = np.around(np.linspace(dat[0].min(), dat[0].max(), args.size), 0)
+                y = np.around(np.linspace(dat[1].min(), dat[1].max(), args.size), 0)
+                xx, yy = data.flatmesh(x, y)
+                dll = interpolate_2d(
+                    df,
+                    d[0][0],
+                    d[1][0],
+                    so + &quot;_COMBINED&quot;,
+                    xx,
+                    yy,
+                    interpolator=&quot;linearnd&quot;,
+                    interpolate_lower_uncertainty=False,
+                    pre=np.log,
+                    post=np.exp,
+                )
+                mapplot(
+                    dll,
+                    d[0][0],
+                    d[1][0],
+                    so + &quot;_COMBINED&quot;,
+                    axes=axs[xs, 0],
+                    xaxis=d[0][0],
+                    yaxis=d[1][0],
+                    zaxis=&quot;$\\sigma$ [pb]&quot;,
+                    fill_missing=False,
+                    init=True,
+                )
+                dlln = interpolate_2d(
+                    df,
+                    d[0][0],
+                    d[1][0],
+                    so + &quot;_NOERR&quot;,
+                    xx,
+                    yy,
+                    interpolator=&quot;linearnd&quot;,
+                    interpolate_lower_uncertainty=False,
+                    pre=np.log,
+                    post=np.exp,
+                )
+                dll[so + &quot;_NOERR&quot;] = dlln[so + &quot;_NOERR&quot;]
+                for m_x in y[::5]:
+                    mask = (
+                        (dll[d[1][0]] == m_x)
+                        &amp; (dll[so + &quot;_NOERR&quot;].notnull())
+                        &amp; (dll[so + &quot;_COMBINED&quot;].notnull())
+                        &amp; (dll[so + &quot;_NOERR&quot;] &gt; 0)
+                        &amp; (dll[so + &quot;_COMBINED&quot;] &gt; 0)
+                    )
+                    hepi.combined_plot(
+                        dll[mask],
+                        d[0][0],
+                        so,
+                        alpha=0.1,
+                        axes=axs[xs, 1],
+                        tight=False,
+                        init=False,
+                        interpolator=&quot;cubic&quot;,
+                        xaxis=d[0][0],
+                        label=str(m_x),
+                        cont=True,
+                        plot_data=False,
+                        pre=np.log,
+                        post=np.exp,
+                        interpolate=True,
+                    )
+                    plt.legend(title=d[1][0])
+
+        else:
+            raise ValueError(&quot;Only 1 or 2 dimensions supported.&quot;)
+        if not args.plot:
+            f_noerr = ip.interpolate(
+                *dat,
+                df[so + &quot;_NOERR&quot;],
+                interpolator=interpolator,
+                pre=np.log,
+                post=np.exp,
+                interpolate_lower_uncertainty=False
+            )
+            f_combined = ip.interpolate(
+                *dat,
+                df[so + &quot;_COMBINED&quot;],
+                interpolator=interpolator,
+                pre=np.log,
+                post=np.exp,
+                interpolate_lower_uncertainty=False
+            )
+            if so + &quot;_PDF&quot; in df.columns:
+                f_pdf = ip.interpolate(
+                    *dat,
+                    df[so + &quot;_PDF&quot;],
+                    interpolator=interpolator,
+                    pre=np.log,
+                    post=np.exp,
+                    interpolate_lower_uncertainty=False
+                )
+            else:
+                f_pdf = f_noerr
+            if so + &quot;_SCALE&quot; in df.columns:
+                f_scale = ip.interpolate(
+                    *dat,
+                    df[so + &quot;_SCALE&quot;],
+                    interpolator=interpolator,
+                    pre=np.log,
+                    post=np.exp,
+                    interpolate_lower_uncertainty=False
+                )
+            else:
+                f_scale = f_noerr
+
+            fs = [*fs, (f_noerr, f_combined, f_pdf, f_scale)]
+    if args.plot:
+        from matplotlib import pyplot as plt
+
+        plt.show()
+    else:
+        if len(fs) != 0:
+            try:
+                for line in sys.stdin:
+                    for i, (f_noerr, f_combined, f_pdf, f_scale) in enumerate(fs):
+                        arg = [float(a) for a in line.split(&quot; &quot;)]
+                        vn = f_noerr(*arg)
+                        vs = f_scale(*arg)
+                        vp = f_pdf(*arg)
+                        vc = f_combined(*arg)
+                        print(
+                            i,
+                            *arg,
+                            vn,
+                            vn - unv(vc) - usd(vc),
+                            vn - unv(vc) + usd(vc),
+                            vn - unv(vs) - usd(vs),
+                            vn - unv(vs) + usd(vs),
+                            vn - unv(vp) - usd(vp),
+                            vn - unv(vp) + usd(vp)
+                        )
+            except KeyboardInterrupt:
+                pass</div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2022, Alexander Puck Neuwirth.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -28,13 +28,9 @@ Functions
 
    hepi.util.LD2DL
    hepi.util.DL2DF
-   hepi.util.get_name
-   hepi.util.get_LR_partner
    hepi.util.namehash
    hepi.util.lhapdf_name_to_id
    hepi.util.lhapdf_id_to_name
-   hepi.util.interpolate_1d
-   hepi.util.interpolate_2d
 
 
 
@@ -76,40 +72,6 @@ Functions
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
 
 
-.. py:function:: get_name(pid: int) -> str
-
-   Get the latex name of a particle.
-
-   :param pid: PDG Monte Carlo identifier for the particle.
-   :type pid: int
-
-   :returns: Latex name.
-   :rtype: str
-
-   .. rubric:: Examples
-
-   >>> get_name(21)
-   'g'
-   >>> get_name(1000022)
-   '\\tilde{\\chi}_{1}^{0}'
-
-
-.. py:function:: get_LR_partner(pid: int) -> Tuple[int, int]
-
-   Transforms a PDG id to it's left-right partner.
-
-   :param pid: PDG Monte Carlo identifier for the particle.
-   :type pid: int
-
-   :returns: First int is -1 for Left and 1 for Right. Second int is the PDG id.
-   :rtype: tuple
-
-   .. rubric:: Examples
-
-   >>> get_LR_partner(1000002)
-   (-1, 2000002)
-
-
 .. py:function:: namehash(n: any) -> str
 
    Creates a sha256 hash from the objects string representation.
@@ -148,21 +110,5 @@ Functions
 
 
 .. py:function:: lhapdf_id_to_name(lid: int) -> str
-
-
-.. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True)
-
-   Last key is the value to be interpolated, while the rest are cooridnates.
-
-   :param df: results
-   :type df: pandas.DataFrame
-
-
-.. py:function:: interpolate_2d(df, x, y, z, xrange, yrange, only_interpolation=True, **kwargs)
-
-   Last key is the value to be interpolated, while the rest are cooridnates.
-
-   :param df: results
-   :type df: pandas.DataFrame
 
 

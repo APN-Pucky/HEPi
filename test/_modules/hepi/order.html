@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>hepi.order &mdash; hepi  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> hepi
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.8-13-g33bb368c
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html">Subpackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html#submodules">Submodules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/hepi/index.html#package-contents">Package Contents</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">hepi</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../hepi.html">hepi</a> &raquo;</li>
+        
+      <li>hepi.order</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for hepi.order</h1><div class="highlight"><pre>
+<span></span>from enum import IntEnum
+
+
+<div class="viewcode-block" id="Order"><a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.Order">[docs]</a>class Order(IntEnum):
+    &quot;&quot;&quot;
+    Computation orders.
+    &quot;&quot;&quot;
+
+<div class="viewcode-block" id="Order.LO"><a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.Order.LO">[docs]</a>    LO = 0</div>
+    &quot;&quot;&quot;Leading Order&quot;&quot;&quot;
+<div class="viewcode-block" id="Order.NLO"><a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.Order.NLO">[docs]</a>    NLO = 1</div>
+    &quot;&quot;&quot;Next-to-Leading Order&quot;&quot;&quot;
+<div class="viewcode-block" id="Order.NLO_PLUS_NLL"><a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.Order.NLO_PLUS_NLL">[docs]</a>    NLO_PLUS_NLL = 2</div>
+    &quot;&quot;&quot;Next-to-Leading Order plus Next-to-Leading Logarithms&quot;&quot;&quot;
+<div class="viewcode-block" id="Order.aNNLO_PLUS_NNLL"><a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.Order.aNNLO_PLUS_NNLL">[docs]</a>    aNNLO_PLUS_NNLL = 3</div>
+    &quot;&quot;&quot;Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms&quot;&quot;&quot;</div>
+
+
+<div class="viewcode-block" id="replace_macros"><a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.replace_macros">[docs]</a>def replace_macros(s: str) -&gt; str:
+    return s.replace(&quot;_PLUS_&quot;, &quot;+&quot;).replace(&quot; &quot;, &quot;\\ &quot;)</div>
+
+
+<div class="viewcode-block" id="xsec_to_order"><a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.xsec_to_order">[docs]</a>def xsec_to_order(s: str):
+    if s == &quot;NNLOapprox+NNLL&quot;:
+        return Order.aNNLO_PLUS_NNLL
+    elif s == &quot;NLO+NLL&quot;:
+        return Order.NLO_PLUS_NLL
+    elif s == &quot;NLO&quot;:
+        return Order.NLO
+    elif s == &quot;LO&quot;:
+        return Order.LO
+    else:
+        raise ValueError(&quot;Unknown Order &#39;&quot; + s + &quot;&#39;, not supported by HEPi.&quot;)</div>
+
+
+<div class="viewcode-block" id="order_to_string"><a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.order_to_string">[docs]</a>def order_to_string(o: Order, json_style=False, no_macros=False) -&gt; str:
+    ret = &quot;&quot;
+    if o == Order.LO:
+        ret = &quot;LO&quot;
+    elif o == Order.NLO:
+        ret = &quot;NLO&quot;
+    elif o == Order.NLO_PLUS_NLL:
+        ret = &quot;NLO_PLUS_NLL&quot;
+    elif o == Order.aNNLO_PLUS_NNLL:
+        if json_style:
+            ret = &quot;NNLOapprox+NNLL&quot;
+        else:
+            ret = &quot;aNNLO_PLUS_NNLL&quot;
+    else:
+        raise ValueError(&quot;Order &#39;&quot; + o + &quot;&#39; not supported by HEPi.&quot;)
+    if no_macros:
+        return replace_macros(ret)
+    return ret</div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2022, Alexander Puck Neuwirth.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Module Contents &mdash; hepi  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/jupyter-sphinx.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/thebelab.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Submodules" href="../../spheno/index.html" />
+    <link rel="prev" title="Module Contents" href="../result/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> hepi
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.8-13-g33bb368c
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_pyslha.html">pyslha comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_write.html">Result writing example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Subpackages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../data/index.html">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../data/index.html#package-contents">Package Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plot/index.html">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plot/index.html#package-contents">Package Contents</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../madgraph/index.html">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../madgraph/index.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nllfast/index.html">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../nllfast/index.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prospino2/index.html">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prospino2/index.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../result/index.html">Module Contents</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Module Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spheno/index.html">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../spheno/index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html#submodules">Submodules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html#package-contents">Package Contents</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">hepi</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Subpackages</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Subpackages</a> &raquo;</li>
+        
+          <li><a href="../index.html">Submodules</a> &raquo;</li>
+        
+      <li>Module Contents</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../../_sources/autoapi/hepi/run/resummino/run/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<p><a class="reference internal" href="#module-hepi.run.resummino.run" title="hepi.run.resummino.run"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.resummino.run</span></code></a></p>
+<hr class="docutils" />
+<span class="target" id="module-hepi.run.resummino.run"></span><p>Runs Resummino</p>
+<section id="module-contents">
+<h1>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.resummino.run.ResumminoRunner" title="hepi.run.resummino.run.ResumminoRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResumminoRunner</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.resummino.run.default_resummino_runner" title="hepi.run.resummino.run.default_resummino_runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_resummino_runner</span></code></a></p></td>
+<td><p>Default Resummino Runner to provide backward compatibility</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.run.resummino.run.run" title="hepi.run.resummino.run.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.resummino.run.set_path" title="hepi.run.resummino.run.set_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.run.resummino.run.get_path" title="hepi.run.resummino.run.get_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.resummino.run.get_version" title="hepi.run.resummino.run.get_version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_version</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.ResumminoRunner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.resummino.run.</span></span><span class="sig-name descname"><span class="pre">ResumminoRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#ResumminoRunner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.ResumminoRunner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../index.html#hepi.run.Runner" title="hepi.run.Runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.run.Runner</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.ResumminoRunner.orders">
+<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">hepi.input.Order</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#ResumminoRunner.orders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.ResumminoRunner.orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of supported Orders in this runner.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.ResumminoRunner.get_version">
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#ResumminoRunner.get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.ResumminoRunner.get_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.ResumminoRunner._check_path">
+<span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#ResumminoRunner._check_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.ResumminoRunner._check_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the passed path is valid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.ResumminoRunner._check_input">
+<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../index.html#hepi.run.Input" title="hepi.run.Input"><span class="pre">hepi.run.Input</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#ResumminoRunner._check_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.ResumminoRunner._check_input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.ResumminoRunner._is_valid">
+<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../index.html#hepi.run.Input" title="hepi.run.Input"><span class="pre">hepi.run.Input</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#ResumminoRunner._is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.ResumminoRunner._is_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies that a file is a complete output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p></li>
+<li><p><strong>p</strong> (<a class="reference internal" href="../../../index.html#id29" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Onput parameters.</p></li>
+<li><p><strong>d</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Param dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if <cite>file</cite> could be parsed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.ResumminoRunner._parse_file">
+<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../../results/index.html#hepi.results.Result" title="hepi.results.Result"><span class="pre">hepi.results.Result</span></a></span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#ResumminoRunner._parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.ResumminoRunner._parse_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts results from an output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If a value is not found in the file None is used.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.ResumminoRunner._prepare">
+<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../index.html#hepi.run.Input" title="hepi.run.Input"><span class="pre">hepi.run.Input</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../index.html#hepi.run.RunParam" title="hepi.run.RunParam"><span class="pre">hepi.run.RunParam</span></a></span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#ResumminoRunner._prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.ResumminoRunner._prepare" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.default_resummino_runner">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.resummino.run.</span></span><span class="sig-name descname"><span class="pre">default_resummino_runner</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#default_resummino_runner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.default_resummino_runner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default Resummino Runner to provide backward compatibility</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.run">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.resummino.run.</span></span><span class="sig-name descname"><span class="pre">run</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.set_path">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.resummino.run.</span></span><span class="sig-name descname"><span class="pre">set_path</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.set_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.get_path">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.resummino.run.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.get_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.run.resummino.run.get_version">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.resummino.run.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/resummino/run.html#get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.resummino.run.get_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../../spheno/index.html" class="btn btn-neutral float-right" title="Submodules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../result/index.html" class="btn btn-neutral float-left" title="Module Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2022, Alexander Puck Neuwirth.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
