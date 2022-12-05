@@ -1,5 +1,7 @@
 {{ fullname | escape | underline}}
 
+o
+oo
 .. automodule:: {{ fullname }}
   
    {% block attributes %}

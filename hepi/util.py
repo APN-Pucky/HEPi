@@ -1,4 +1,6 @@
-"""Collection of utility functions for the :mod:`hepi` package."""
+"""
+Collection of utility functions for the :mod:`hepi` package.
+"""
 import hashlib
 import json
 import warnings

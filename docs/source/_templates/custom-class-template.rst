@@ -2,6 +2,10 @@
 
 .. currentmodule:: {{ module }}
 
+   ok 1234
+
+any thing?
+
 .. autoclass:: {{ objname }}
    :members:                                    <-- add at least this line
    :show-inheritance:                           <-- plus I want to show inheritance...

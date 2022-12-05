@@ -8,17 +8,9 @@
 =================================
 
 
+.. include:: ../../README.md
+   :parser: myst_parser.sphinx_
 
-Install
-=======
-
-Stable version::
-
-   $ pip install hepi
-
-Dev version::
-
-   $ pip install --index-url https://test.pypi.org/simple/ hepi
 
 
 
@@ -55,7 +47,7 @@ Dev version::
    :titlesonly:
    :caption: Module:
 
-   /autoapi/hepi/index
+   autoapi/index
 
 Indices and tables
 ==================
