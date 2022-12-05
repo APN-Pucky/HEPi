@@ -259,8 +259,8 @@ def write_json(
     o: Order,
     parameters: str,
     output,
-    error_sym=False,
-    error_asym=False,
+    error=True,
+    error_sym=None,
     scale=True,
     pdf=True,
 ):
@@ -281,7 +281,7 @@ def write_json(
        ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
        ... ),dimensions=2)
        >>> with open("test.json", "w") as f:
-       ...     hepi.write_json(dl, Order.NLO_PLUS_NLL,["N1"],f)
+       ...     hepi.write_json(dl, Order.NLO_PLUS_NLL,["N1"],f,error=False)
        >>> with open('test.json', 'r') as f:
        ...     print(f.read())
        {
@@ -378,6 +378,29 @@ def write_json(
     )
     jd["PDF set"] = dict_list["pdf_nlo"].iloc[0]
     dat = {}
+
+    # Here we determine if the errors are asymmetric, that is NOERR and COMBINED have a different mean value
+    if error and error_sym is None:
+        if len(parameters) == 2:
+            tp = parameters[0]
+        elif len(parameters) == 1:
+            tp = parameters[0]
+        error_sym = True
+        for j in range(len(dict_list[tp])):
+            if not np.isclose(
+                float(unv(dict_list[so + "_NOERR"].iloc[j])),
+                float(unv(dict_list[so + "_COMBINED"].iloc[j])),
+                rtol=1e-05,
+                atol=1e-08,
+                equal_nan=False,
+            ):
+                error_sym = False
+                break
+        error_asym = not error_sym
+    if not error:
+        error_asym = False
+        error_sym = False
+
     if len(parameters) == 2:
         parameterj = parameters[0]
         parameteri = parameters[1]
@@ -426,9 +449,11 @@ def write_json(
                         ),
                     }
             elif error_sym:
+
+                # COMBINED and NOERR are the same mean for sym errors
                 td = {
-                    "xsec_pb": float(unv(dict_list[so].iloc[j])),
-                    "unc_pb": float(usd(dict_list[so].iloc[j])),
+                    "xsec_pb": float(unv(dict_list[so + "_NOERR"].iloc[j])),
+                    "unc_pb": float(usd(dict_list[so + "_COMBINED"].iloc[j])),
                 }
                 if scale:
                     td = {
@@ -441,7 +466,7 @@ def write_json(
                         "unc_pdf_pb": float(usd(dict_list[so + "_PDF"].iloc[j])),
                     }
             else:
-                td = {"xsec_pb": float(unv(dict_list[so].iloc[j]))}
+                td = {"xsec_pb": float(unv(dict_list[so + "_NOERR"].iloc[j]))}
             if str(dict_list[parameterj].iloc[j]) in dat:
                 dat[str(dict_list[parameterj].iloc[j])] = {
                     **dat[str(dict_list[parameterj].iloc[j])],
@@ -499,9 +524,10 @@ def write_json(
                         ),
                     }
             elif error_sym:
+                # COMBINED and NOERR are the same mean for sym errors
                 td = {
-                    "xsec_pb": float(unv(dict_list[so].iloc[j])),
-                    "unc_pb": float(usd(dict_list[so].iloc[j])),
+                    "xsec_pb": float(unv(dict_list[so + "_NOERR"].iloc[j])),
+                    "unc_pb": float(usd(dict_list[so + "_COMBINED"].iloc[j])),
                 }
                 if scale:
                     td = {
@@ -514,7 +540,7 @@ def write_json(
                         "unc_pdf_pb": float(usd(dict_list[so + "_PDF"].iloc[j])),
                     }
             else:
-                td = {"xsec_pb": float(unv(dict_list[so].iloc[j]))}
+                td = {"xsec_pb": float(unv(dict_list[so + "_NOERR"].iloc[j]))}
             dat[str(dict_list[parameter].iloc[j])] = td
         jd["parameters"] = [[parameter]]
 
