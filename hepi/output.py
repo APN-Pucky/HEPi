@@ -281,7 +281,7 @@ def write_json(
        ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
        ... ),dimensions=2)
        >>> with open("test.json", "w") as f:
-       ...     hepi.write_json(dl, Order.NLO_PLUS_NLL,["N1"],f)
+       ...     hepi.write_json(dl, Order.NLO_PLUS_NLL_COMBINED,["N1"],f)
        >>> with open('test.json', 'r') as f:
        ...     print(f.read())
        {
