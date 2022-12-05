@@ -17,11 +17,13 @@ particle = "*"
 pqdm = "*"
 pandas = ">=1.0.0"
 smpl = ">=0.0.152"
+validators = "*"
 
-lhapdf = {version = "*", optional = true}
+
+lhapdf = {version = "^6", optional = true}
 
 [tool.poetry.extras]
-opt = ["lhapdf"]
+lhapdf = ["lhapdf"]
 
 [tool.poetry.group.docs]
 optional = true
@@ -37,7 +39,10 @@ sphinx_autobuild = "*"
 sphinx_math_dollar = "*"
 pandoc = "*"
 numpydoc = "*"
-#myst-parser  = "*"
+myst-parser  = "*"
+
+[tool.poetry.scripts]
+hepi-fast = "hepi.fast:main"
 
 [tool.poetry.group.dev]
 optional = true
