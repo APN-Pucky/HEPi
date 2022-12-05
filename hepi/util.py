@@ -1,15 +1,14 @@
 """Collection of utility functions for the :mod:`hepi` package."""
-import json
-from typing import List, Tuple
-import numpy as np
 import hashlib
-
-import pandas as pd
+import json
 import warnings
+from typing import List, Tuple
+
+import numpy as np
+import pandas as pd
 
 
 class DictData:
-
     def __str__(self):
         """Returns attributes as dict as string"""
         return str(self.__dict__)
@@ -56,10 +55,6 @@ def DL2DF(ld: dict) -> pd.DataFrame:
     return pd.DataFrame.from_dict(ld)
 
 
-
-
-
-
 def namehash(n: any) -> str:
     """
     Creates a sha256 hash from the objects string representation.
@@ -80,7 +75,7 @@ def namehash(n: any) -> str:
         '3dffaea891e5dbadb390da33bad65f509dd667779330e2720df8165a253462b8'
     """
     m = hashlib.sha256()
-    m.update(str(n).encode('utf-8'))
+    m.update(str(n).encode("utf-8"))
     return m.hexdigest()
 
 
@@ -101,30 +96,37 @@ def lhapdf_name_to_id(name: str) -> int:
     try:
         import lhapdf
     except ImportError:
-        warnings.warn("LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version).")
+        warnings.warn(
+            "LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version)."
+        )
         return 0
     if not lhapdf.availablePDFSets():
-        warnings.warn("No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).")
+        warnings.warn(
+            "No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF)."
+        )
         return 0
     if not name in lhapdf.availablePDFSets():
         warnings.warn("PDF set '" + name + "' not installed?")
         return 0
     return lhapdf.getPDFSet(name).lhapdfID
 
-def lhapdf_id_to_name(lid : int) -> str:
+
+def lhapdf_id_to_name(lid: int) -> str:
     try:
         import lhapdf
     except ImportError:
-        warnings.warn("LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version).")
+        warnings.warn(
+            "LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version)."
+        )
         return ""
     if not lhapdf.availablePDFSets():
-        warnings.warn("No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF).")
+        warnings.warn(
+            "No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF)."
+        )
         return 0
     for n in lhapdf.availablePDFSets():
         if lhapdf.getPDFSet(n).lhapdfID == lid:
             return n
-        
+
     warnings.warn("PDF set with id " + str(lid) + " unknown/not installed?")
     return "Unknown PDF ID: " + str(lid)
-
-

@@ -1,20 +1,21 @@
 livehtml:
-	$(MAKE) -C docs livehtml
+	poetry run $(MAKE) -C docs livehtml
 
 html:
-	$(MAKE) -C docs html
+	poetry run $(MAKE) -C docs html
 	
 doc: html
 
 install:
-	python3 -m pip install --user .[doc,dev]
+	poetry install --with dev --with docs
+	python3 -m pip install --user .
 
 build:
-	python3 -m build
+	poetry build
 
 test:
 	rm -f .coverage coverage.xml
-	pytest hepi
+	poetry run pytest
 
 commit: 
 	-git add .
@@ -27,7 +28,7 @@ pull: commit
 	git pull
 
 clean: 
-	rm -r .eggs .pytest_cache hepi.egg-info dist build
+	rm -r .eggs .pytest_cache *.egg-info dist build
 
 
 release: push html

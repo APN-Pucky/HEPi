@@ -1,12 +1,15 @@
-import warnings
-from hepi.input import Order
-from .. import Input, Result, get_output_dir
-import re
-from uncertainties import ufloat_fromstr
-from string import Template
-import pkgutil
 import os
+import pkgutil
+import re
 import shutil
+import warnings
+from string import Template
+
+from uncertainties import ufloat_fromstr
+
+from hepi.input import Order
+
+from .. import Input, Result, get_output_dir
 
 
 class ResumminoResult(Result):
@@ -23,8 +26,9 @@ class ResumminoResult(Result):
         RNLO_PLUS_VNLO_PLUS_P_PLUS_K (double): RNLO+VNLO+P+K result.
     """
 
-    def __init__(self, lo, nlo, nlo_plus_nll, annlo_plus_nnll, vnlo, p_plus_k,
-                 rnlog, rnloq):
+    def __init__(
+        self, lo, nlo, nlo_plus_nll, annlo_plus_nnll, vnlo, p_plus_k, rnlog, rnloq
+    ):
         """
         Sets given and computes dependent ``Attributes``.
 
@@ -56,7 +60,7 @@ class ResumminoResult(Result):
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None
 
 
-def is_valid(file: str, p: Input, d,**kwargs) -> bool:
+def is_valid(file: str, p: Input, d, **kwargs) -> bool:
     """
     Verifies that an file is a complete output.
 
@@ -69,16 +73,23 @@ def is_valid(file: str, p: Input, d,**kwargs) -> bool:
         bool : True if `file` could be parsed.
     """
     order = p.order
-    data = pkgutil.get_data(__name__, "plot_template.in").decode('utf-8')
+    data = pkgutil.get_data(__name__, "plot_template.in").decode("utf-8")
     src = Template(data)
     result = src.substitute(d)
-    sname = d['slha']
-    with open(file, mode='r') as f:
-        with open(get_output_dir() + sname, 'r') as sf:
-            if not kwargs['ignore_error'] and not f.read().startswith(result + "\n\n" + sf.read()):
+    sname = d["slha"]
+    with open(file, mode="r") as f:
+        with open(get_output_dir() + sname, "r") as sf:
+            if not kwargs["ignore_error"] and not f.read().startswith(
+                result + "\n\n" + sf.read()
+            ):
                 warnings.warn(
-                    "Possible hash collision in " + file + " -> moved to " +
-                    file + ".old", RuntimeWarning)
+                    "Possible hash collision in "
+                    + file
+                    + " -> moved to "
+                    + file
+                    + ".old",
+                    RuntimeWarning,
+                )
                 shutil.move(file, file + ".old")
                 return False
     res = parse_single(file)
@@ -86,9 +97,19 @@ def is_valid(file: str, p: Input, d,**kwargs) -> bool:
         return True
     if res.LO is not None and res.NLO is not None and order is Order.NLO:
         return True
-    if res.LO is not None and res.NLO is not None and res.NLO_PLUS_NLL is not None and order is Order.NLO_PLUS_NLL:
+    if (
+        res.LO is not None
+        and res.NLO is not None
+        and res.NLO_PLUS_NLL is not None
+        and order is Order.NLO_PLUS_NLL
+    ):
         return True
-    if res.LO is not None and res.NLO is not None and res.aNNLO_PLUS_NNLL is not None and order is Order.aNNLO_PLUS_NNLL:
+    if (
+        res.LO is not None
+        and res.NLO is not None
+        and res.aNNLO_PLUS_NNLL is not None
+        and order is Order.aNNLO_PLUS_NNLL
+    ):
         return True
     print("RESTART", res.LO, res.NLO, res.NLO_PLUS_NLL, file)
     return False
@@ -106,15 +127,15 @@ def parse_single(file: str) -> ResumminoResult:
 
     """
     # TODO generalize units like RS
-    lo_pattern = re.compile(r'^LO = \((.*)\) pb')
-    nlo_pattern = re.compile(r'^NLO = \((.*)\) pb')
-    nll_pattern = re.compile(r'^NLO\+NLL = \((.*)\) pb')
-    nnll_pattern = re.compile(r'^aNNLO\+NNLL = \((.*)\) pb')
+    lo_pattern = re.compile(r"^LO = \((.*)\) pb")
+    nlo_pattern = re.compile(r"^NLO = \((.*)\) pb")
+    nll_pattern = re.compile(r"^NLO\+NLL = \((.*)\) pb")
+    nnll_pattern = re.compile(r"^aNNLO\+NNLL = \((.*)\) pb")
 
-    vnlo_pattern = re.compile(r'^vNLO = \((.*)\) pb')
-    ppk_pattern = re.compile(r'^P\+K = \((.*)\) pb')
-    rnlog_pattern = re.compile(r'^rNLOg = \((.*)\) pb')
-    rnloq_pattern = re.compile(r'^rNLOq = \((.*)\) pb')
+    vnlo_pattern = re.compile(r"^vNLO = \((.*)\) pb")
+    ppk_pattern = re.compile(r"^P\+K = \((.*)\) pb")
+    rnlog_pattern = re.compile(r"^rNLOg = \((.*)\) pb")
+    rnloq_pattern = re.compile(r"^rNLOq = \((.*)\) pb")
 
     lo_result = None
     nlo_result = None
@@ -147,12 +168,10 @@ def parse_single(file: str) -> ResumminoResult:
                 ppk_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
             tmp = rnlog_pattern.search(line)
             if tmp is not None:
-                rnlog_result = ufloat_fromstr(
-                    tmp.group(1).replace("+-", "+/-"))
+                rnlog_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
             tmp = rnloq_pattern.search(line)
             if tmp is not None:
-                rnloq_result = ufloat_fromstr(
-                    tmp.group(1).replace("+-", "+/-"))
+                rnloq_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
     if lo_result is not None and lo_result < 0:
         warnings.warn("LO < 0")
     if nlo_result is not None and nlo_result < 0:
@@ -161,5 +180,13 @@ def parse_single(file: str) -> ResumminoResult:
         warnings.warn("NLL < 0")
     if nnll_result is not None and nnll_result < 0:
         warnings.warn("NNLL < 0")
-    return ResumminoResult(lo_result, nlo_result, nll_result, nnll_result,
-                           vnlo_result, ppk_result, rnlog_result, rnloq_result)
+    return ResumminoResult(
+        lo_result,
+        nlo_result,
+        nll_result,
+        nnll_result,
+        vnlo_result,
+        ppk_result,
+        rnlog_result,
+        rnloq_result,
+    )

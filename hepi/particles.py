@@ -1,15 +1,15 @@
-from particle.converters.bimap import DirectionalMaps
-from particle import PDGID
 from typing import List, Tuple
 
+from particle import PDGID
+from particle.converters.bimap import DirectionalMaps
 
-PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps("PDGID",
-                                                     "LaTexName",
-                                                     converters=(PDGID, str))
+PDG2LaTeXNameMap, LaTeX2PDGNameMap = DirectionalMaps(
+    "PDGID", "LaTexName", converters=(PDGID, str)
+)
 
-PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps("PDGName",
-                                                "PDGID",
-                                                converters=(str, PDGID))
+PDG2Name2IDMap, PDGID2NameMap = DirectionalMaps(
+    "PDGName", "PDGID", converters=(str, PDGID)
+)
 
 
 def get_name(pid: int) -> str:

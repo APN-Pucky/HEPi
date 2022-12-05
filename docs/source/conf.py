@@ -11,18 +11,24 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import datetime
-import re
 import os
+import re
 import sys
 
-sys.path.insert(0, os.path.abspath('../..'))
+import toml
+
+sys.path.insert(0, os.path.abspath("../.."))
 
 # -- Project information -----------------------------------------------------
-
-project = 'HEPi'
-copyright = str(datetime.datetime.now().year) + ', APN-Pucky'
-author = 'APN-Pucky'
-version = re.sub('^', '', os.popen('git describe --tags').read().strip())
+try:
+    info = toml.load("../../pyproject.toml")
+except FileNotFoundError:
+    info = toml.load("pyproject.toml")
+project = info["tool"]["poetry"]["name"]
+copyright = str(datetime.datetime.now().year) + ", Alexander Puck Neuwirth"
+author = ", ".join(info["tool"]["poetry"]["authors"])
+version = re.sub("^", "", os.popen("git describe --tags").read().strip())
+rst_prolog = f""".. |project| replace:: {project}"""
 
 # -- General configuration ---------------------------------------------------
 
@@ -30,20 +36,21 @@ version = re.sub('^', '', os.popen('git describe --tags').read().strip())
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'nbsphinx',
-    'sphinx.ext.githubpages',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.todo',
-    'sphinx.ext.doctest',
-    'matplotlib.sphinxext.plot_directive',
-    'sphinx.ext.napoleon',
-    'sphinx_math_dollar',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.coverage',
-    'jupyter_sphinx',
-    'IPython.sphinxext.ipython_console_highlighting',
+    "myst_parser",
+    "sphinx.ext.autodoc",
+    "nbsphinx",
+    "sphinx.ext.githubpages",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.todo",
+    "sphinx.ext.doctest",
+    "matplotlib.sphinxext.plot_directive",
+    "sphinx.ext.napoleon",
+    "sphinx_math_dollar",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.coverage",
+    "jupyter_sphinx",
+    "IPython.sphinxext.ipython_console_highlighting",
     #'sphinx_copybutton',
     #'sphinx.ext.doctest',
     #'sphinx.ext.autodoc',
@@ -53,15 +60,15 @@ extensions = [
     #'sphinx.ext.doctest',
     #'sphinx.ext.viewcode',
     #'sphinx.ext.autosummary',
-    'autoapi.extension',
+    "autoapi.extension",
 ]
 napoleon_use_ivar = True
-autoapi_type = 'python'
-autoapi_dirs = ['../../hepi']
-autoapi_python_class_content = 'both'
-#autosummary_generate = True  # Turn on sphinx.ext.autosummary
+autoapi_type = "python"
+autoapi_dirs = ["../../hepi"]
+autoapi_python_class_content = "both"
+# autosummary_generate = True  # Turn on sphinx.ext.autosummary
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -69,15 +76,15 @@ templates_path = ['_templates']
 exclude_patterns = []
 
 # -- Options for HTML output -------------------------------------------------
-highlight_language = 'none'
+highlight_language = "none"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
-html_theme = 'sphinx_rtd_theme'
+html_theme = "alabaster"
+html_theme = "sphinx_rtd_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]

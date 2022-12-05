@@ -10,7 +10,7 @@ jobs:
     default:
       runs-on: ubuntu-latest
       container:
-        image: apnpucky/ubuntu-pip-lhapdf:20220822235034
+        image: apnpucky/ubuntu-python-lhapdf
       steps:
         - uses: APN-Pucky/make-python-action@main
           with:

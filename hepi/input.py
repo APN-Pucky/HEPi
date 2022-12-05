@@ -1,18 +1,14 @@
-
+import copy
 import os
 import shutil
 import warnings
-import copy
-
-import numpy as np
 from typing import Iterable, List
 
+import numpy as np
 import pyslha
+
+from .order import Order, order_to_string, replace_macros, xsec_to_order
 from .util import DictData, lhapdf_name_to_id
-
-from .order     import Order,xsec_to_order,order_to_string,replace_macros
-
-import lhapdf
 
 in_dir = "./input/"
 """Input directory."""
@@ -72,7 +68,7 @@ def set_output_dir(outd, create: bool = True):
 
     Args:
         outd (str): new output directory.
-		create (bool): create directory if not existing
+                create (bool): create directory if not existing
     """
     global out_dir
     if create:
@@ -89,8 +85,6 @@ def set_pre(ppre):
     """
     global pre
     pre = ppre
-
-
 
 
 class Input(DictData):
@@ -119,35 +113,37 @@ class Input(DictData):
         invariant_mass (str): Invariant mass mode 'auto = sqrt((p1+p2)^2)' else value.
         pt (str): Transverse Momentum mode 'auto' or value.
         result (str): Result type 'total'/'pt'/'ptj'/'m'.
-        id (str): Set an id of this run. 
+        id (str): Set an id of this run.
         model (str): Path for MadGraph model.
         update (bool): Update dependent `mu` else set to zero.
     """
 
     # TODO allow unspecified input? Maybe with kwargs + defaults
-    def __init__(self,
-                 order: Order,
-                 energy: float,
-                 particle1: int,
-                 particle2: int,
-                 slha: str,
-                 pdf_lo: str,
-                 pdf_nlo: str,
-                 mu_f=1.0,
-                 mu_r=1.0,
-                 pdfset_lo=0,
-                 pdfset_nlo=0,
-                 precision=0.01,
-                 max_iters=50,
-                 invariant_mass="auto",
-                 result="total",
-                 pt="auto",
-                 id="",
-                 model="",
-                 update=True):
+    def __init__(
+        self,
+        order: Order,
+        energy: float,
+        particle1: int,
+        particle2: int,
+        slha: str,
+        pdf_lo: str,
+        pdf_nlo: str,
+        mu_f=1.0,
+        mu_r=1.0,
+        pdfset_lo=0,
+        pdfset_nlo=0,
+        precision=0.01,
+        max_iters=50,
+        invariant_mass="auto",
+        result="total",
+        pt="auto",
+        id="",
+        model="",
+        update=True,
+    ):
         self.order = order
         self.energy = energy
-        self.energyhalf = energy / 2.
+        self.energyhalf = energy / 2.0
         self.particle1 = particle1
         self.particle2 = particle2
         self.slha = slha
@@ -166,10 +162,9 @@ class Input(DictData):
         self.result = result
         self.id = id
         self.model = model
-        self.mu = 0.
+        self.mu = 0.0
         if os.path.isfile(get_input_dir() + self.slha):
-            shutil.copy(get_input_dir() + self.slha,
-                        get_output_dir() + self.slha)
+            shutil.copy(get_input_dir() + self.slha, get_output_dir() + self.slha)
         if update:
             update_slha(self)
 
@@ -230,11 +225,15 @@ def update_slha(i: Input):
     """
     b = pyslha.read(get_output_dir() + i.slha, ignorenomass=True)
     try:
-        i.mu = (abs(b.blocks["MASS"][abs(i.particle1)]) +
-                abs(b.blocks["MASS"][abs(i.particle2)])) / 2.
+        i.mu = (
+            abs(b.blocks["MASS"][abs(i.particle1)])
+            + abs(b.blocks["MASS"][abs(i.particle2)])
+        ) / 2.0
     except Exception:
-        warnings.warn("Could not set new central scale to average of masses.",
-                      RuntimeWarning)
+        warnings.warn(
+            "Could not set new central scale to average of masses.", RuntimeWarning
+        )
+
 
 def scan(input_list: List[Input], var: str, rrange: Iterable) -> List[Input]:
     """
@@ -270,7 +269,7 @@ def scan(input_list: List[Input], var: str, rrange: Iterable) -> List[Input]:
         {'order': <Order.LO: 0>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
         {'order': <Order.NLO: 1>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
         {'order': <Order.NLO_PLUS_NLL: 2>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
- 
+
     """
     ret = []
     for s in input_list:
@@ -286,7 +285,7 @@ def scan_multi(li: List[Input], **kwargs) -> List[Input]:
     Magically scans the variables passed to this function.
 
     Args:
-        **kwargs: 
+        **kwargs:
 
     Examples:
         >>> oli = [Input(Order.LO, 13000,  1000022,1000022, "None", "CT14lo","CT14lo",update=False)]
@@ -307,7 +306,7 @@ def scan_multi(li: List[Input], **kwargs) -> List[Input]:
         {'order': <Order.LO: 0>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
         {'order': <Order.NLO: 1>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
         {'order': <Order.NLO_PLUS_NLL: 2>, 'energy': 12000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
- 
+
     """
     for k, v in kwargs.items():
         li = scan(li, var=k, rrange=v)
@@ -317,7 +316,7 @@ def scan_multi(li: List[Input], **kwargs) -> List[Input]:
 multi_scan = scan_multi
 
 
-def scan_scale(l: List[Input], rrange=3, distance=2.):
+def scan_scale(l: List[Input], rrange=3, distance=2.0):
     """
     Scans scale by varying `mu_f` and `mu_r`.
 
@@ -342,15 +341,26 @@ def scan_scale(l: List[Input], rrange=3, distance=2.):
     for s in l:
         # not on error pdfs
         if s.pdfset_nlo == 0:
-            tmp = scan([s], "mu_f",
-                       np.logspace(np.log10(1. / distance), np.log10(distance),
-                                   rrange))
             tmp = scan(
-                tmp, "mu_r",
-                np.logspace(np.log10(1. / distance), np.log10(distance),
-                            rrange))
+                [s],
+                "mu_f",
+                np.logspace(np.log10(1.0 / distance), np.log10(distance), rrange),
+            )
+            tmp = scan(
+                tmp,
+                "mu_r",
+                np.logspace(np.log10(1.0 / distance), np.log10(distance), rrange),
+            )
             for t in tmp:
-                if t.mu_f == 1.0 or t.mu_r == 1.0 or t.mu_f == t.mu_r or t.mu_f == distance or t.mu_f == 1. / distance or t.mu_r == distance or t.mu_r == 1. / distance:
+                if (
+                    t.mu_f == 1.0
+                    or t.mu_r == 1.0
+                    or t.mu_f == t.mu_r
+                    or t.mu_f == distance
+                    or t.mu_f == 1.0 / distance
+                    or t.mu_r == distance
+                    or t.mu_r == 1.0 / distance
+                ):
                     ret.append(t)
 
         else:
@@ -379,21 +389,26 @@ def scan_seven_point(input_list: List[Input]):
         {'order': <Order.LO: 0>, 'energy': 13000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14lo', 'pdfset_nlo': 0, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13200, 'mu_f': 2.0, 'mu_r': 2.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
     """
     rrange = 3
-    distance = 2.
+    distance = 2.0
     ret = []
     for s in input_list:
         # not on error pdfs
         if s.pdfset_nlo == 0 and s.mu_f == 1.0 and s.mu_r == 1.0:
-            tmp = scan([s], "mu_f",
-                       np.logspace(np.log10(1. / distance), np.log10(distance),
-                                   rrange))
             tmp = scan(
-                tmp, "mu_r",
-                np.logspace(np.log10(1. / distance), np.log10(distance),
-                            rrange))
+                [s],
+                "mu_f",
+                np.logspace(np.log10(1.0 / distance), np.log10(distance), rrange),
+            )
+            tmp = scan(
+                tmp,
+                "mu_r",
+                np.logspace(np.log10(1.0 / distance), np.log10(distance), rrange),
+            )
             for t in tmp:
-                if not ((t.mu_f == distance and t.mu_r == 1. / distance) or
-                        (t.mu_r == distance and t.mu_f == 1. / distance)):
+                if not (
+                    (t.mu_f == distance and t.mu_r == 1.0 / distance)
+                    or (t.mu_r == distance and t.mu_f == 1.0 / distance)
+                ):
                     ret.append(t)
 
         else:
@@ -426,9 +441,9 @@ def remove_where(input_list: List[Input], condition, **kwargs):
 
     Args:
         input_list : List[Input]
-	    The list of inputs to filter.
+            The list of inputs to filter.
         condition : Callable[[Input.__dict__], bool]
-	    The condition to filter on.
+            The condition to filter on.
 
     Examples:
         >>> li = scan_multi([Input(Order.LO, 13000,  1000022,1000022, "None", "CT14lo","CT14lo",update=False)],energy=range(10000,13000,1000))
@@ -487,8 +502,11 @@ def scan_invariant_mass(input_list: List[Input], diff, points, low=0.001):
     """
     ret = []
     for s in input_list:
-        for r in s.mu * 2. + low + (np.logspace(
-                np.log10(low), np.log10(1 + low), points) - low) * diff:
+        for r in (
+            s.mu * 2.0
+            + low
+            + (np.logspace(np.log10(low), np.log10(1 + low), points) - low) * diff
+        ):
             tmp = copy.copy(s)
             setattr(tmp, "invariant_mass", r)
             tmp.result = "m"
@@ -501,7 +519,7 @@ def slha_write(newname, d):
         warnings.warn("probably too long filename")
     f = get_output_dir() + newname
     pyslha.write(f, d)
-    with open(f) as reader, open(f, 'r+') as writer:
+    with open(f) as reader, open(f, "r+") as writer:
         for line in reader:
             if line.strip():
                 writer.write(line)
@@ -510,16 +528,15 @@ def slha_write(newname, d):
         writer.truncate()
 
 
-def masses_scan(input_list: List[Input],
-                varis: List[int],
-                rrange,
-                diff_L_R=None,
-                negate=None) -> List[Input]:
+def masses_scan(
+    input_list: List[Input], varis: List[int], rrange, diff_L_R=None, negate=None
+) -> List[Input]:
     """
     Scans the PDG identified masses in `varis` over `rrange` in the list `input_list`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
     """
     from .particles import get_LR_partner
+
     if negate is None:
         negate = []
     ret = []
@@ -562,7 +579,7 @@ def slha_scan(input_list: List[Input], block, var, rrange: List) -> List[Input]:
     """
     Scan a generic
     """
-    return slha_scan_rel(input_list, lambda r, : [(block, var, r)], rrange)
+    return slha_scan_rel(input_list, lambda r,: [(block, var, r)], rrange)
 
 
 def slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -> List[Input]:
@@ -583,9 +600,16 @@ def slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -> List[Input]
             for b, v, res in ls:
                 d.blocks[b][v] = res
                 setattr(tmp, b + "_" + str(v), res)
-                newname = newname + "_" + str(b) + "_" + str(v).replace(" ","") + "_" + str(
-                    res)
-            #pyslha.write(get_output_dir()+newname, d)
+                newname = (
+                    newname
+                    + "_"
+                    + str(b)
+                    + "_"
+                    + str(v).replace(" ", "")
+                    + "_"
+                    + str(res)
+                )
+            # pyslha.write(get_output_dir()+newname, d)
             slha_write(newname, d)
 
             setattr(tmp, "slha", newname)
@@ -662,6 +686,16 @@ def scan_pdf(input_list: List[Input]):
         {'order': <Order.NLO: 1>, 'energy': 13000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14nlo', 'pdfset_nlo': 55, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13100, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
         {'order': <Order.NLO: 1>, 'energy': 13000, 'energyhalf': 6500.0, 'particle1': 1000022, 'particle2': 1000022, 'slha': 'None', 'pdf_lo': 'CT14lo', 'pdfset_lo': 0, 'pdf_nlo': 'CT14nlo', 'pdfset_nlo': 56, 'pdf_lo_id': 13200, 'pdf_nlo_id': 13100, 'mu_f': 1.0, 'mu_r': 1.0, 'precision': 0.01, 'max_iters': 50, 'invariant_mass': 'auto', 'pt': 'auto', 'result': 'total', 'id': '', 'model': '', 'mu': 0.0}
     """
+    try:
+        import lhapdf
+    except ImportError:
+        raise RuntimeError(
+            "LHAPDF with python bindings needed to compute PDF uncertainties. Make sure you set the PYTHONPATH correctly (i.e. correct python version)."
+        )
+    if not lhapdf.availablePDFSets():
+        raise RuntimeError(
+            "No PDF sets found. Make sure the environment variable LHAPDF_DATA_DIR points to the correct location (.../share/LHAPDF)."
+        )
     ret = []
     for s in input_list:
         # only central scale

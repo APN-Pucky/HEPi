@@ -1,12 +1,15 @@
-import warnings
-from hepi.input import Order
-from .. import Input, Result
 import re
+import warnings
+
 from uncertainties import ufloat_fromstr
+
+from hepi.input import Order
+
+from .. import Input, Result
 
 
 class MadgraphResult(Result):
-    """ MadGraph Result Data."""
+    """MadGraph Result Data."""
 
     def __init__(self, lo, nlo):
         """Sets LO and NLO result. NLO+NLL is set to None."""
@@ -53,7 +56,7 @@ def parse_single(file) -> MadgraphResult:
 
     """
     # TODO generalize units like RS
-    lo_pattern = re.compile(r'^\s*Total cross section:\s(\S+.*) pb')
+    lo_pattern = re.compile(r"^\s*Total cross section:\s(\S+.*) pb")
 
     lo_result = None
     nlo_result = None
@@ -62,10 +65,8 @@ def parse_single(file) -> MadgraphResult:
             tmp = lo_pattern.search(line)
             if tmp is not None:
                 if lo_result is None:
-                    lo_result = ufloat_fromstr(
-                        tmp.group(1).replace("+-", "+/-"))
+                    lo_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
                 elif nlo_result is None:
-                    nlo_result = ufloat_fromstr(
-                        tmp.group(1).replace("+-", "+/-"))
+                    nlo_result = ufloat_fromstr(tmp.group(1).replace("+-", "+/-"))
 
     return MadgraphResult(lo_result, nlo_result)

@@ -1,31 +1,36 @@
-from concurrent.futures import ThreadPoolExecutor
-from logging import warning
+import multiprocessing as mp
 import os
 import subprocess
-from subprocess import Popen, PIPE
-from typing import List
+import time
 import warnings
+from concurrent.futures import ThreadPoolExecutor
+from logging import warning
+from subprocess import PIPE, Popen
+from typing import List
 
 import numpy as np
+import tqdm
+from pqdm.processes import pqdm as ppqdm
+from pqdm.threads import pqdm as tpqdm
+
 from hepi.input import Input, Order, get_input_dir, get_output_dir, get_pre
 from hepi.results import Result
 from hepi.util import DL2DF, LD2DL, DictData, namehash
-import time
-import tqdm
-from pqdm.threads import pqdm as tpqdm
-from pqdm.processes import pqdm as ppqdm
-import multiprocessing as mp
-#from pqdm.processes import pqdm
+
+# from pqdm.processes import pqdm
+
 
 class RunParam(DictData):
     """Abstract class that is similar to a dictionary but with fixed keys."""
 
-    def __init__(self,
-                 skip: bool = False,
-                 in_file: str = None,
-                 out_file: str = None,
-                 execute: str = None,
-                 name: str = None):
+    def __init__(
+        self,
+        skip: bool = False,
+        in_file: str = None,
+        out_file: str = None,
+        execute: str = None,
+        name: str = None,
+    ):
         self.name = name
         self.skip = skip
         self.in_file = in_file
@@ -34,12 +39,7 @@ class RunParam(DictData):
 
 
 class Runner:
-
-    def __init__(self,
-                 path: str,
-                 in_dir: str = None,
-                 out_dir: str = None,
-                 pre=None):
+    def __init__(self, path: str, in_dir: str = None, out_dir: str = None, pre=None):
         self.path = path
         if in_dir is None:
             self.in_dir = get_input_dir()
@@ -78,47 +78,55 @@ class Runner:
         """Checks if the passed path is valid."""
         return True
 
-    def _prepare(self, p: Input, skip=False, assume_valid = False, **kwargs) -> RunParam:
+    def _prepare(self, p: Input, skip=False, assume_valid=False, **kwargs) -> RunParam:
         skip_ = skip
-        #p.runner = str(type(self).__name__) + "-" + self.get_version()
+        # p.runner = str(type(self).__name__) + "-" + self.get_version()
 
         d = p.__dict__
-        #d["runner"] = str(type(self).__name__) + "-" + self.get_version(
-        #)  # TODO re add version, but removed for reusable hashing!
-        name = namehash("_".join("".join(str(_[0]) + "_" + str(_[1]))
-                                 for _ in d.items()).replace("/", "-"))
-        #print(name)
+        # d["runner"] = str(type(self).__name__) + "-" + self.get_version(
+        # )  # TODO re add version, but removed for reusable hashing!
+        name = namehash(
+            "_".join("".join(str(_[0]) + "_" + str(_[1])) for _ in d.items()).replace(
+                "/", "-"
+            )
+        )
+        # print(name)
         skip = False
-        if skip_ and os.path.isfile(self.get_output_dir() + name + ".out") and (assume_valid or self._is_valid(
-                                        self.get_output_dir() + name + ".out",
-                                        p,
-                                        d,
-                                        skip=skip_,
-                                        **kwargs)):
-            #print(".", end='')
+        if (
+            skip_
+            and os.path.isfile(self.get_output_dir() + name + ".out")
+            and (
+                assume_valid
+                or self._is_valid(
+                    self.get_output_dir() + name + ".out", p, d, skip=skip_, **kwargs
+                )
+            )
+        ):
+            # print(".", end='')
             skip = True
         else:
-            #print(str(self.get_output_dir()  + name + ".out")) 
-            #print('|', end='')
+            # print(str(self.get_output_dir()  + name + ".out"))
+            # print('|', end='')
             skip = False
-        return RunParam(execute=self.get_output_dir() + name + ".sh",
-                        in_file=self.get_output_dir() + name + ".in",
-                        out_file=self.get_output_dir() + name + ".out",
-                        skip=skip,
-                        name=name)
+        return RunParam(
+            execute=self.get_output_dir() + name + ".sh",
+            in_file=self.get_output_dir() + name + ".in",
+            out_file=self.get_output_dir() + name + ".out",
+            skip=skip,
+            name=name,
+        )
 
     def _check_input(self, param: Input, **kwargs) -> bool:
         if param.order not in self.orders():
-            warnings.warn("Order " + str(param.order) + " not supported in " +
-                          type(self).__name__)
+            warnings.warn(
+                "Order " + str(param.order) + " not supported in " + type(self).__name__
+            )
             return False
         return True
 
-    def _prepare_all(self,
-                     params: List[Input],
-                     skip=True,
-                     n_jobs = None,
-                     **kwargs) -> List[RunParam]:
+    def _prepare_all(
+        self, params: List[Input], skip=True, n_jobs=None, **kwargs
+    ) -> List[RunParam]:
         """
         Prepares all parameters for execution.
 
@@ -129,27 +137,32 @@ class Runner:
         """
         ret = []
 
-        #ret = my_parallel(self._check_input,params,desc="Checking input")
-        ret = tpqdm(params,
-                    self._check_input,
-                    n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
-                    desc="Checking input")
+        # ret = my_parallel(self._check_input,params,desc="Checking input")
+        ret = tpqdm(
+            params,
+            self._check_input,
+            n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
+            desc="Checking input",
+        )
         if not np.alltrue(ret):
             warnings.warn("Check input failed.")
             return []
-        #ret = my_parallel(
+        # ret = my_parallel(
         #    lambda p: self._prepare(p, skip=skip, **kwargs),
         #    params,
         #    #n_jobs=mp.cpu_count(),
         #    desc="Preparing")
         runnername = str(type(self).__name__) + "-" + self.get_version()
-        for p in params: p.runner = runnername
-        args = [{'p': p, 'skip': skip, **kwargs} for p in params]
-        ret = ppqdm(args,
-                    self._prepare,
-                    n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
-                    argument_type='kwargs',
-                    desc="Preparing")
+        for p in params:
+            p.runner = runnername
+        args = [{"p": p, "skip": skip, **kwargs} for p in params]
+        ret = ppqdm(
+            args,
+            self._prepare,
+            n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
+            argument_type="kwargs",
+            desc="Preparing",
+        )
         skipped = 0
         not_skipped = 0
         for r in ret:
@@ -158,91 +171,93 @@ class Runner:
             else:
                 not_skipped += 1
         print("Skipped: " + str(skipped) + " Not skipped: " + str(not_skipped))
-        #for p in params:
+        # for p in params:
         #    if not self._check_input(p):
         #        warnings.warn("Check input failed.")
         #        return []
         #    ret.append(self._prepare(p, skip=skip, **kwargs))
         return ret
 
-    def run(self,
-            params: List[Input],
-            skip=True,
-            parse=True,
-            parallel=True,
-            sleep=0,
-            run=True,
-            ignore_error=False,
-            n_jobs = None,
-            **kwargs):
+    def run(
+        self,
+        params: List[Input],
+        skip=True,
+        parse=True,
+        parallel=True,
+        sleep=0,
+        run=True,
+        ignore_error=False,
+        n_jobs=None,
+        **kwargs
+    ):
         """
-		Run the passed list of parameters.
+            Run the passed list of parameters.
 
-		Args:
-		    params (:obj:`list` of :class:`hepi.Input`): All parameters that should be executed/queued.
-		    skip (bool): True means stored runs will be skipped. Else the are overwritten.
-		    parse (bool): Parse the results. 
-		        This is not the prefered cluster/parallel mode, as there the function only queues the job.
-		    parallel (bool): Run jobs in parallel.
-		    sleep (int): Sleep seconds after starting job.
-            run (bool): Actually start/queue runner.
-            ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
-            n_jobs (int): Number of parallel jobs. If None, use all available cores.
+            Args:
+                params (:obj:`list` of :class:`hepi.Input`): All parameters that should be executed/queued.
+                skip (bool): True means stored runs will be skipped. Else the are overwritten.
+                parse (bool): Parse the results.
+                    This is not the prefered cluster/parallel mode, as there the function only queues the job.
+                parallel (bool): Run jobs in parallel.
+                sleep (int): Sleep seconds after starting job.
+        run (bool): Actually start/queue runner.
+        ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
+        n_jobs (int): Number of parallel jobs. If None, use all available cores.
 
-		Returns:
-		    :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
+            Returns:
+                :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
 
-		"""
+        """
         if not self._check_path():
             warnings.warn("The path is not valid for " + self.get_name())
             if not ignore_error:
-                raise RuntimeError("The path is not valid for " +
-                                   self.get_name())
-        rps = self._prepare_all(params,
-                                parse=parse,
-                                skip=skip,
-                                ignore_error=ignore_error,
-                                n_jobs=n_jobs,
-                                **kwargs)
-        #print("= " + str(len(params)) + " jobs")
+                raise RuntimeError("The path is not valid for " + self.get_name())
+        rps = self._prepare_all(
+            params,
+            parse=parse,
+            skip=skip,
+            ignore_error=ignore_error,
+            n_jobs=n_jobs,
+            **kwargs
+        )
+        # print("= " + str(len(params)) + " jobs")
         if sleep is None:
             sleep = 0 if parse else 5
         if run:
-            self._run(rps,
-                      wait=parse,
-                      parallel=parallel,
-                      sleep=sleep,
-                      n_jobs = n_jobs,
-                      **kwargs)
+            self._run(
+                rps, wait=parse, parallel=parallel, sleep=sleep, n_jobs=n_jobs, **kwargs
+            )
         if parse:
             outs = LD2DL(rps)["out_file"]
-            results = self.parse(outs,n_jobs=n_jobs)
+            results = self.parse(outs, n_jobs=n_jobs)
             rdl = LD2DL(results)
             pdl = LD2DL(params)
             return DL2DF({**rdl, **pdl})
         return DL2DF({})
 
-    def _run(self,
-             rps: List[RunParam],
-             wait=True,
-             parallel=True,
-             sleep=0,
-             n_jobs = None,
-             **kwargs):
+    def _run(
+        self,
+        rps: List[RunParam],
+        wait=True,
+        parallel=True,
+        sleep=0,
+        n_jobs=None,
+        **kwargs
+    ):
         """
-		Runs Runner per :class:`RunParams`.
-	
-		Args:
-		    rps (:obj:`list` of :class:`RunParams`): Extended run parameters.
-		    bar (bool): Enable info bar.
-		    wait (bool): Wait for parallel runs to finish.
-		    sleep (int): Sleep seconds after starting subprocess.
-		    parallel (bool): Run jobs in parallel.
-            n_jobs (int): Number of parallel jobs. If None, use all available cores.
-	
-		Returns:
-		    :obj:`list` of int: return codes from jobs if `no_parse` is False.
-		"""
+            Runs Runner per :class:`RunParams`.
+
+            Args:
+                rps (:obj:`list` of :class:`RunParams`): Extended run parameters.
+                bar (bool): Enable info bar.
+                wait (bool): Wait for parallel runs to finish.
+                sleep (int): Sleep seconds after starting subprocess.
+                parallel (bool): Run jobs in parallel.
+        n_jobs (int): Number of parallel jobs. If None, use all available cores.
+
+            Returns:
+                :obj:`list` of int: return codes from jobs if `no_parse` is False.
+        """
         # get cluster or niceness prefix
         template = self.get_pre() + " " + "{}"
 
@@ -256,11 +271,13 @@ class Runner:
                 cmds.append(command)
 
         if wait and parallel:
-            return tpqdm(cmds,
-                  lambda c: subprocess.call(c,shell=True),
-                  n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
-                  desc="Running")
-            #with ThreadPoolExecutor(max_workers=n_jobs if n_jobs is not None else mp.cpu_count()) as executor:
+            return tpqdm(
+                cmds,
+                lambda c: subprocess.call(c, shell=True),
+                n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
+                desc="Running",
+            )
+            # with ThreadPoolExecutor(max_workers=n_jobs if n_jobs is not None else mp.cpu_count()) as executor:
             #    for cmd in cmds:
             #        processes.append(executor.submit(subprocess.call, cmd, shell=True))
             #        time.sleep(sleep)
@@ -283,16 +300,16 @@ class Runner:
 
     def _is_valid(self, file: str, p: Input, d, **kwargs) -> bool:
         """
-		Verifies that a file is a complete output.
-	
-		Args:
-		    file (str): File path to be parsed.
-		    p (:class:`hepi.Input`): Onput parameters.
-		    d (:obj:`dict`): Param dictionary.
-	
-		Returns:
-		    bool : True if `file` could be parsed.
-		"""
+        Verifies that a file is a complete output.
+
+        Args:
+            file (str): File path to be parsed.
+            p (:class:`hepi.Input`): Onput parameters.
+            d (:obj:`dict`): Param dictionary.
+
+        Returns:
+            bool : True if `file` could be parsed.
+        """
         res = self._parse_file(file)
         if res.LO is None and p.order is Order.LO:
             return False
@@ -304,119 +321,121 @@ class Runner:
             return False
         return True
 
-    def parse(self, outputs: List[str],n_jobs=None) -> List[Result]:
+    def parse(self, outputs: List[str], n_jobs=None) -> List[Result]:
         """
-		Parses Resummino output files and returns List of Results.
-	
-		Args:
-		    outputs (:obj:`list` of `str`): List of the filenames to be parsed.
-            n_jobs (int): Number of parallel jobs. If None, use all available cores.
-	
-		Returns:
-		    :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
-	
-		"""
+            Parses Resummino output files and returns List of Results.
+
+            Args:
+                outputs (:obj:`list` of `str`): List of the filenames to be parsed.
+        n_jobs (int): Number of parallel jobs. If None, use all available cores.
+
+            Returns:
+                :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+
+        """
         rsl = []
-        #for r in parallel(self._parse_file, outputs):
+        # for r in parallel(self._parse_file, outputs):
         #    rsl.append(r)
 
         # parallelized opens to many files at times
-        #rsl = my_parallel(self._parse_file, outputs, desc="Parsing")
-        rsl = tpqdm(outputs,
-                   self._parse_file,
-                   n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
-                   desc="Parsing")
+        # rsl = my_parallel(self._parse_file, outputs, desc="Parsing")
+        rsl = tpqdm(
+            outputs,
+            self._parse_file,
+            n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
+            desc="Parsing",
+        )
         return rsl
-        #for o in tqdm.tqdm(outputs):
+        # for o in tqdm.tqdm(outputs):
         #    rsl.append(self._parse_file(o))
-        #return rsl
+        # return rsl
 
     def _parse_file(self, file: str) -> Result:
         """
-		Extracts results from an output file.
+        Extracts results from an output file.
 
-		Args:
-		    file (str): File path to be parsed.
+        Args:
+            file (str): File path to be parsed.
 
-		Returns:
-		    :class:`Result` : If a value is not found in the file None is used.
+        Returns:
+            :class:`Result` : If a value is not found in the file None is used.
 
-		"""
+        """
         return None
 
     def get_path(self) -> str:
         """
-		Get the Runner path.
+        Get the Runner path.
 
-		Returns:
-		    str: current Runner path.
-		"""
+        Returns:
+            str: current Runner path.
+        """
         return self.path
 
     def get_input_dir(self) -> str:
         """
-		Get the input directory.
+        Get the input directory.
 
-		Returns:
-		    str: :attr:`in_dir`
-		"""
+        Returns:
+            str: :attr:`in_dir`
+        """
         return self.in_dir
 
     def get_output_dir(self) -> str:
         """
-		Get the input directory.
+        Get the input directory.
 
-		Returns:
-		    str: :attr:`out_dir`
-		"""
+        Returns:
+            str: :attr:`out_dir`
+        """
         return self.out_dir
 
     def get_pre(self) -> str:
         """
-		Gets the command prefix.
+        Gets the command prefix.
 
-		Returns:
-		    str: :attr:`pre`
-		"""
+        Returns:
+            str: :attr:`pre`
+        """
         return self.pre
 
     def set_path(self, p: str):
         """
-		Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
+        Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
 
-		Args:
-		    p (str): new path.
-		"""
+        Args:
+            p (str): new path.
+        """
         if os.path.isdir(p):
             self.path = p + ("/" if p[-1] != "/" else "")
         self.path = p
 
     def set_input_dir(self, indir: str):
         """
-		Sets the input directory.
+        Sets the input directory.
 
-		Args:
-		    indir (str): new input directory.
-		"""
+        Args:
+            indir (str): new input directory.
+        """
         self.in_dir = indir
 
     def set_output_dir(self, outdir: str, create: bool = True):
         """
-		Sets the output directory.
+        Sets the output directory.
 
-		Args:
-		    outdir (str): new output directory.
-			create (bool): create directory if not existing.
-		"""
+        Args:
+            outdir (str): new output directory.
+                create (bool): create directory if not existing.
+        """
         if create:
             os.makedirs(outdir, exist_ok=True)
         self.out_dir = outdir
 
     def set_pre(self, ppre: str):
         """
-		Sets the command prefix.
+        Sets the command prefix.
 
-		Args:
-		    ppre (str): new command prefix.
-		"""
+        Args:
+            ppre (str): new command prefix.
+        """
         self.pre = ppre

@@ -1,14 +1,16 @@
 """Runs MadGraph."""
-from typing import List
-import subprocess
-from string import Template
-from hepi.input import Order
-from hepi.run import RunParam, Runner
+import os
 import pkgutil
+import subprocess
+import time
+from string import Template
+from typing import List
+
+from hepi.input import Order
+from hepi.run import Runner, RunParam
+
 from .. import Input, Result, get_output_dir
 from .result import is_valid, parse_single
-import time
-import os
 
 
 class MadGraphRunParams(RunParam):
@@ -22,13 +24,11 @@ class MadGraphRunParams(RunParam):
 
 
 class MadGraphRunner(Runner):
-
     def orders(self) -> List[Order]:
         return [Order.LO, Order.NLO]
 
     def _check_path(self) -> bool:
-        if os.path.exists(os.path.expanduser(self.get_path() +
-                                             "/bin/mg5_aMC")):
+        if os.path.exists(os.path.expanduser(self.get_path() + "/bin/mg5_aMC")):
             self.set_path(self.get_path() + "/bin/mg5_aMC")
             return True
         if self.get_path().endswith("mg5_aMC"):
@@ -47,12 +47,7 @@ class MadGraphRunner(Runner):
     def _parse_file(self, file: str) -> Result:
         return parse_single(file)
 
-    def _run(self,
-             rps: List[RunParam],
-             wait=True,
-             parallel=True,
-             sleep=0,
-             **kwargs):
+    def _run(self, rps: List[RunParam], wait=True, parallel=True, sleep=0, **kwargs):
         # TODO clean up on exit emergency
         skipall = True
         for rp in rps:
@@ -60,18 +55,28 @@ class MadGraphRunner(Runner):
                 skipall = False
         template = ""
         if not skipall:
-            lo = "&& nice -n 5 {dir}/bin/calculate_xsect LO -f >> {out} " if rps[
-                0].dic["order"] == Order.NLO else ""
-            template =  \
-                'rm -rf {dir} && cp -r ' + rps[0].dic["bdir"] + \
-                ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && echo "nb_core = 1" >> {dir}/Cards/amcatnlo_configuration.txt ' + lo+ '&& nice -n 5 {dir}/bin/calculate_xsect -f >> {out}  && rm -rf {dir}'
+            lo = (
+                "&& nice -n 5 {dir}/bin/calculate_xsect LO -f >> {out} "
+                if rps[0].dic["order"] == Order.NLO
+                else ""
+            )
+            template = (
+                "rm -rf {dir} && cp -r "
+                + rps[0].dic["bdir"]
+                + ' {dir}  && cp {slha} {dir}/Cards/param_card.dat && cp {run} {dir}/Cards/run_card.dat && echo "nb_core = 1" >> {dir}/Cards/amcatnlo_configuration.txt '
+                + lo
+                + "&& nice -n 5 {dir}/bin/calculate_xsect -f >> {out}  && rm -rf {dir}"
+            )
             print(rps[0].dic["out"])
         if not rps[0].skip:
-            mgcom = ''
+            mgcom = ""
             if rps[0].madstr:
                 mgcom = ' --mode="MadSTR"'
-            com = self.get_path() + mgcom + \
-                ' --file {in} >> {out} && cp {slha} {bdir}/Cards/param_card.dat && cp {run} {bdir}/Cards/run_card.dat && sed -i \'s/.*= req_acc_FO/ 1 = req_acc_FO/g\' {bdir}/Cards/run_card.dat && echo "automatic_html_opening = False" >> {bdir}/Cards/amcatnlo_configuration.txt && nice -n 5 {bdir}/bin/calculate_xsect -f'
+            com = (
+                self.get_path()
+                + mgcom
+                + " --file {in} >> {out} && cp {slha} {bdir}/Cards/param_card.dat && cp {run} {bdir}/Cards/run_card.dat && sed -i 's/.*= req_acc_FO/ 1 = req_acc_FO/g' {bdir}/Cards/run_card.dat && echo \"automatic_html_opening = False\" >> {bdir}/Cards/amcatnlo_configuration.txt && nice -n 5 {bdir}/bin/calculate_xsect -f"
+            )
             pp = subprocess.Popen(com.format(**rps[0].dic), shell=True)
             pp.wait()
         # Run commands in parallel
@@ -109,13 +114,12 @@ class MadGraphRunner(Runner):
             else:
                 raise ValueError("Madgraph only supported for LO/NLO.")
 
-            data = pkgutil.get_data(__name__, infile).decode('utf-8')
+            data = pkgutil.get_data(__name__, infile).decode("utf-8")
             src = Template(data)
             result = src.substitute(d)
             open(get_output_dir() + name + ".mg", "w").write(result)
             if not rp.skip:
-                open(get_output_dir() + name + ".out",
-                     "w").write(result + "\n\n")
+                open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
 
             if p.order == Order.LO:
                 mgfile = "run_card_no_madstr.dat"
@@ -129,33 +133,31 @@ class MadGraphRunner(Runner):
                 rp.madstr = False
             else:
                 rp.madstr = True
-            data = pkgutil.get_data(__name__, mgfile).decode('utf-8')
+            data = pkgutil.get_data(__name__, mgfile).decode("utf-8")
 
             src = Template(data)
             result = src.substitute(d)
             open(get_output_dir() + name + ".dat", "w").write(result)
             if not rp.skip:
-                open(get_output_dir() + name + ".out",
-                     "a").write(result + "\n\n")
+                open(get_output_dir() + name + ".out", "a").write(result + "\n\n")
 
-            sname = d['slha']
-            with open(get_output_dir() + sname, 'r') as f:
-                #src = Template(f.read())
-                #result = src.substitute(d)
-                #open(get_input_dir() + sname + ".in", "w").write(result)
+            sname = d["slha"]
+            with open(get_output_dir() + sname, "r") as f:
+                # src = Template(f.read())
+                # result = src.substitute(d)
+                # open(get_input_dir() + sname + ".in", "w").write(result)
                 if not rp.skip:
-                    open(get_output_dir() + name + ".out",
-                         "a").write(f.read() + "\n\n")
+                    open(get_output_dir() + name + ".out", "a").write(f.read() + "\n\n")
             rp.dic = {
-                'in': get_output_dir() + name + ".mg",
-                'dir': d["dir"],
-                'bdir': d["bdir"],
-                'run': get_output_dir() + name + ".dat",
-                'slha': get_output_dir() + sname,
-                'out': get_output_dir() + name + ".out",
-                'order': p.order
+                "in": get_output_dir() + name + ".mg",
+                "dir": d["dir"],
+                "bdir": d["bdir"],
+                "run": get_output_dir() + name + ".dat",
+                "slha": get_output_dir() + sname,
+                "out": get_output_dir() + name + ".out",
+                "order": p.order,
             }
-            rp.out_file = rp.dic['out']
+            rp.out_file = rp.dic["out"]
         return rp
 
 
