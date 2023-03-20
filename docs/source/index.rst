@@ -17,10 +17,26 @@
 
 .. toctree::
    :glob:
+   :maxdepth: 3  
+   :caption: Examples:
+
+   examples/*
+
+.. toctree::
+   :titlesonly:
+   :caption: Module:
+
+   autoapi/index
+
+
+
+.. toctree::
+   :glob:
    :hidden:
    :caption: Versions:
    :maxdepth: 3
 
+   RTD <https://hepi.readthedocs.io/en/stable/>
    Stable <https://apn-pucky.github.io/HEPi/>
    Dev <https://apn-pucky.github.io/HEPi/test/>
 
@@ -33,18 +49,7 @@
    GitHub <https://github.com/APN-Pucky/HEPi>
 
 
-.. toctree::
-   :glob:
-   :maxdepth: 3  
-   :caption: Examples:
 
-   examples/*
-
-.. toctree::
-   :titlesonly:
-   :caption: Module:
-
-   autoapi/index
 
 Indices and tables
 ==================
