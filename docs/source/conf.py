@@ -64,7 +64,7 @@ extensions = [
 ]
 napoleon_use_ivar = True
 autoapi_type = "python"
-autoapi_dirs = ["../../hepi"]
+autoapi_dirs = ["../../" + project]
 autoapi_python_class_content = "both"
 autodoc_typehints = "description"
 # autosummary_generate = True  # Turn on sphinx.ext.autosummary
