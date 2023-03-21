@@ -37,9 +37,6 @@
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
         <script src="../../_static/thebelab-helper.js"></script>
@@ -77,7 +74,7 @@
             
             
               <div class="version">
-                0.2.8-26-g7bae644d
+                0.2.8-30-g19f6b959
               </div>
             
           
@@ -211,31 +208,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="module-hepi">
+  <section id="module-hepi">
 <span id="hepi"></span><h1><a class="reference internal" href="#module-hepi" title="hepi"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a><a class="headerlink" href="#module-hepi" title="Permalink to this heading">¶</a></h1>
 <p>The HEPi package aims to automize cluster computations for parameter scans with the option to produce plots.</p>
 <section id="subpackages">
@@ -698,25 +671,25 @@
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hepi.Order.LO">
-<span class="sig-name descname"><span class="pre">LO</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#hepi.Order.LO" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">LO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#hepi.Order.LO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Leading Order</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hepi.Order.NLO">
-<span class="sig-name descname"><span class="pre">NLO</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#hepi.Order.NLO" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NLO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#hepi.Order.NLO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Next-to-Leading Order</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hepi.Order.NLO_PLUS_NLL">
-<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#hepi.Order.NLO_PLUS_NLL" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#hepi.Order.NLO_PLUS_NLL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Next-to-Leading Order plus Next-to-Leading Logarithms</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="hepi.Order.aNNLO_PLUS_NNLL">
-<span class="sig-name descname"><span class="pre">aNNLO_PLUS_NNLL</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#hepi.Order.aNNLO_PLUS_NNLL" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">aNNLO_PLUS_NNLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#hepi.Order.aNNLO_PLUS_NNLL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms</p>
 </dd></dl>
 
@@ -793,19 +766,19 @@
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.in_dir">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">in_dir</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">./input/</span></em><a class="reference internal" href="../../_modules/hepi/input.html#in_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.in_dir" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">in_dir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'./input/'</span></em><a class="reference internal" href="../../_modules/hepi/input.html#in_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.in_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Input directory.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.out_dir">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">out_dir</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">./output/</span></em><a class="reference internal" href="../../_modules/hepi/input.html#out_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.out_dir" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">out_dir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'./output/'</span></em><a class="reference internal" href="../../_modules/hepi/input.html#out_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.out_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Output directory.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.pre">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">pre</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">nice</span> <span class="pre">-n</span> <span class="pre">5</span></em><a class="reference internal" href="../../_modules/hepi/input.html#pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.pre" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">pre</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'nice</span> <span class="pre">-n</span> <span class="pre">5'</span></em><a class="reference internal" href="../../_modules/hepi/input.html#pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.pre" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prefix for run commands.</p>
 </dd></dl>
 
@@ -1693,7 +1666,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.load">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">load</span></span><a class="headerlink" href="#hepi.load" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">load</span></span><a class="reference internal" href="../../_modules/hepi/load.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.load" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
@@ -1704,25 +1677,25 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id10">
-<span class="sig-name descname"><span class="pre">LO</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#id10" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">LO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#id10" title="Permalink to this definition">¶</a></dt>
 <dd><p>Leading Order</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id11">
-<span class="sig-name descname"><span class="pre">NLO</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#id11" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NLO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#id11" title="Permalink to this definition">¶</a></dt>
 <dd><p>Next-to-Leading Order</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id12">
-<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#id12" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#id12" title="Permalink to this definition">¶</a></dt>
 <dd><p>Next-to-Leading Order plus Next-to-Leading Logarithms</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id13">
-<span class="sig-name descname"><span class="pre">aNNLO_PLUS_NNLL</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#id13" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">aNNLO_PLUS_NNLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#id13" title="Permalink to this definition">¶</a></dt>
 <dd><p>Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms</p>
 </dd></dl>
 
@@ -2191,7 +2164,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hepi</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;N1&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL_COMBINED&quot;</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$m_{</span><span class="se">\\</span><span class="s2">tilde{</span><span class="se">\\</span><span class="s2">chi}_1^0}$ [GeV]&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../autoapi/hepi/index-1.py">Source code</a>, <a class="reference external" href="../../autoapi/hepi/index-1.png">png</a>, <a class="reference external" href="../../autoapi/hepi/index-1.hires.png">hires.png</a>, <a class="reference external" href="../../autoapi/hepi/index-1.pdf">pdf</a>)</p>
+<p>(<a class="reference download internal" download="" href="../../_downloads/93c18a8abeedc573798bf399b3a9dda6/index-1.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/48894fddc7bb26f3c47f78e0bd68557d/index-1.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/6f3e38d70a363ea6ff81d38840a71eb7/index-1.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/a26f9e91649709fb58014dcdc69a98a7/index-1.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
 <figure class="align-default">
 <img alt="../../_images/index-1.png" class="plot-directive" src="../../_images/index-1.png" />
 </figure>
@@ -2242,7 +2215,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hepi</span><span class="o">.</span><span class="n">mapplot</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;gl&quot;</span><span class="p">,</span><span class="s2">&quot;sq&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL_COMBINED&quot;</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$m_{</span><span class="se">\\</span><span class="s2">tilde</span><span class="si">{g}</span><span class="s2">}$ [GeV]&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$m_{</span><span class="se">\\</span><span class="s2">tilde</span><span class="si">{q}</span><span class="s2">}$ [GeV]&quot;</span> <span class="p">,</span> <span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">sigma_{</span><span class="se">\\</span><span class="s2">mathrm{NLO+NLL}}$ [pb]&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../autoapi/hepi/index-2.py">Source code</a>, <a class="reference external" href="../../autoapi/hepi/index-2.png">png</a>, <a class="reference external" href="../../autoapi/hepi/index-2.hires.png">hires.png</a>, <a class="reference external" href="../../autoapi/hepi/index-2.pdf">pdf</a>)</p>
+<p>(<a class="reference download internal" download="" href="../../_downloads/b7f90de422a76c72871c0d5882320f5e/index-2.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/3830870a656d071709a6e123b17dbdf3/index-2.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/0742f66e66b79b055170ffe2a484bb34/index-2.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/11c563e01576eddc6c9ffa38d6582022/index-2.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
 <figure class="align-default">
 <img alt="../../_images/index-2.png" class="plot-directive" src="../../_images/index-2.png" />
 </figure>
@@ -2272,7 +2245,7 @@ Central color is the central value, while the inner and outer ring are lower and
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hepi</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;N1&quot;</span><span class="p">,</span><span class="s2">&quot;N2&quot;</span><span class="p">,</span><span class="s2">&quot;NLO_PLUS_NLL_COMBINED&quot;</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$m_{</span><span class="se">\\</span><span class="s2">tilde{</span><span class="se">\\</span><span class="s2">chi}_1^0}$ [GeV]&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$m_{</span><span class="se">\\</span><span class="s2">tilde{</span><span class="se">\\</span><span class="s2">chi}_2^0}$ [GeV]&quot;</span> <span class="p">,</span> <span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">sigma_{</span><span class="se">\\</span><span class="s2">mathrm{NLO+NLL}}$ [pb]&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href="../../autoapi/hepi/index-3.py">Source code</a>, <a class="reference external" href="../../autoapi/hepi/index-3.png">png</a>, <a class="reference external" href="../../autoapi/hepi/index-3.hires.png">hires.png</a>, <a class="reference external" href="../../autoapi/hepi/index-3.pdf">pdf</a>)</p>
+<p>(<a class="reference download internal" download="" href="../../_downloads/625b91e8987ac2fc7c5d2dce1478fc96/index-3.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/0f9866ba791960996aa3e242c3bc02dd/index-3.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/bf4947083a3d4a885fccbffb4429ed05/index-3.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/eb7806febda9e2d9f5fb5e645846449d/index-3.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
 <figure class="align-default">
 <img alt="../../_images/index-3.png" class="plot-directive" src="../../_images/index-3.png" />
 </figure>
@@ -2290,12 +2263,12 @@ Central color is the central value, while the inner and outer ring are lower and
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.lines">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lines</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">[]</span></em><a class="headerlink" href="#hepi.lines" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lines</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#hepi.lines" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.labels">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">[]</span></em><a class="headerlink" href="#hepi.labels" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#hepi.labels" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -2334,7 +2307,7 @@ Central color is the central value, while the inner and outer ring are lower and
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.required_numerical_uncertainty_factor">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">required_numerical_uncertainty_factor</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">5</span></em><a class="reference internal" href="../../_modules/hepi/results.html#required_numerical_uncertainty_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.required_numerical_uncertainty_factor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">required_numerical_uncertainty_factor</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="reference internal" href="../../_modules/hepi/results.html#required_numerical_uncertainty_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.required_numerical_uncertainty_factor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
@@ -2605,25 +2578,25 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id37">
-<span class="sig-name descname"><span class="pre">LO</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#id37" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">LO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#id37" title="Permalink to this definition">¶</a></dt>
 <dd><p>Leading Order</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id38">
-<span class="sig-name descname"><span class="pre">NLO</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#id38" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NLO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#id38" title="Permalink to this definition">¶</a></dt>
 <dd><p>Next-to-Leading Order</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id39">
-<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#id39" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#id39" title="Permalink to this definition">¶</a></dt>
 <dd><p>Next-to-Leading Order plus Next-to-Leading Logarithms</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="id40">
-<span class="sig-name descname"><span class="pre">aNNLO_PLUS_NNLL</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#id40" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">aNNLO_PLUS_NNLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#id40" title="Permalink to this definition">¶</a></dt>
 <dd><p>Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms</p>
 </dd></dl>
 
@@ -3269,7 +3242,7 @@ create (bool): create directory if not existing.</p></li>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.package">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">package</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">hepi</span></em><a class="reference internal" href="../../_modules/hepi.html#package"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.package" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">package</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'hepi'</span></em><a class="reference internal" href="../../_modules/hepi.html#package"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.package" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
@@ -3295,7 +3268,7 @@ create (bool): create directory if not existing.</p></li>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2022, Alexander Puck Neuwirth.
+        &#169; Copyright 2023, Alexander Puck Neuwirth.
 
     </p>
   </div>
