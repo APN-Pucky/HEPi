@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>hepi.run.resummino.run &mdash; hepi  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/jupyter-sphinx.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/thebelab.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> hepi
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_pyslha.html">pyslha comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_spheno.html">SPheno example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_write.html">Result writing example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hepi.readthedocs.io/en/stable/">RTD</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">hepi</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../../../hepi.html">hepi</a> &raquo;</li>
+        
+      <li>hepi.run.resummino.run</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for hepi.run.resummino.run</h1><div class="highlight"><pre>
+<span></span>&quot;&quot;&quot;Runs Resummino&quot;&quot;&quot;
+import os
+import os.path
+import pkgutil
+import stat
+import warnings
+from string import Template
+from typing import List
+
+from hepi.input import Order
+from hepi.results import Result
+from hepi.run import Runner, RunParam
+
+from .. import Input
+from .result import is_valid, parse_single
+
+
+<div class="viewcode-block" id="ResumminoRunner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.ResumminoRunner">[docs]</a>class ResumminoRunner(Runner):
+<div class="viewcode-block" id="ResumminoRunner.orders"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.ResumminoRunner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
+        return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL, Order.aNNLO_PLUS_NNLL]</div>
+
+<div class="viewcode-block" id="ResumminoRunner.get_version"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.ResumminoRunner.get_version">[docs]</a>    def get_version(self) -&gt; str:
+        p = os.path.expanduser(self.get_path())
+        ret = self._sub_run([p, &quot;--version&quot;])
+        return ret.split(&quot;\n&quot;)[-2]</div>
+
+<div class="viewcode-block" id="ResumminoRunner._check_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.ResumminoRunner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
+        if os.path.exists(os.path.expanduser(self.get_path() + &quot;/build/bin/resummino&quot;)):
+            self.set_path(self.get_path() + &quot;/build/bin/resummino&quot;)
+            return True
+        if os.path.exists(os.path.expanduser(self.get_path() + &quot;/bin/resummino&quot;)):
+            self.set_path(self.get_path() + &quot;/bin/resummino&quot;)
+            return True
+        if self.get_path().endswith(&quot;resummino&quot;):
+            return True
+        return False</div>
+
+<div class="viewcode-block" id="ResumminoRunner._check_input"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.ResumminoRunner._check_input">[docs]</a>    def _check_input(self, p: Input, **kwargs) -&gt; bool:
+
+        if p.order == Order.aNNLO_PLUS_NNLL and (
+            (p.has_gluino() and p.has_weakino()) or (p.has_squark() and p.has_weakino())
+        ):
+            warnings.warn(&quot;Resummino does not support stong-weak mixed aNNLO+NNLL.&quot;)
+            return False
+        return True</div>
+
+<div class="viewcode-block" id="ResumminoRunner._is_valid"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.ResumminoRunner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d, **kwargs) -&gt; bool:
+        if not super()._is_valid(file, p, d):
+            return False
+        return is_valid(file, p, d, **kwargs)</div>
+
+<div class="viewcode-block" id="ResumminoRunner._parse_file"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.ResumminoRunner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
+        return parse_single(file)</div>
+
+<div class="viewcode-block" id="ResumminoRunner._prepare"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.ResumminoRunner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
+        rp = super()._prepare(p, **kwargs)
+        if not rp.skip:
+            data = pkgutil.get_data(__name__, &quot;plot_template.in&quot;).decode(&quot;utf-8&quot;)
+            flags = &quot;&quot;
+            if p.order == Order.LO:
+                flags = flags + &quot;--lo&quot;
+            elif p.order == Order.NLO:
+                flags = flags + &quot;--nlo&quot;
+            elif p.order == Order.NLO_PLUS_NLL:
+                flags = flags + &quot;--nll&quot;
+            elif p.order == Order.aNNLO_PLUS_NNLL:
+                flags = flags + &quot;--nnll&quot;
+            else:
+                raise ValueError(
+                    &quot;Order not supported by resummino. Must be one of LO/NLO/NLO+NLL/aNNLO+NNLL.&quot;
+                )
+
+            src = Template(data)
+            result = src.substitute(p.__dict__)
+            od = self.get_output_dir()
+            open(od + rp.name + &quot;.in&quot;, &quot;w&quot;).write(result)
+            open(od + rp.name + &quot;.sh&quot;, &quot;w&quot;).write(
+                &quot;#!/bin/sh\n&quot;
+                + get_path()
+                + &quot; {} {} &gt;&gt; {}&quot;.format(
+                    od + rp.name + &quot;.in&quot;, flags, od + rp.name + &quot;.out&quot;
+                )
+            )
+            st = os.stat(od + rp.name + &quot;.sh&quot;)
+            os.chmod(od + rp.name + &quot;.sh&quot;, st.st_mode | stat.S_IEXEC)
+            open(od + rp.name + &quot;.out&quot;, &quot;w&quot;).write(result + &quot;\n\n&quot;)
+
+            sname = p.slha
+            with open(od + sname, &quot;r&quot;) as f:
+                open(od + rp.name + &quot;.out&quot;, &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
+        return rp</div></div>
+
+
+# Legacy
+<div class="viewcode-block" id="default_resummino_runner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.default_resummino_runner">[docs]</a>default_resummino_runner = ResumminoRunner(&quot;~/resummino/&quot;)</div>
+&quot;&quot;&quot;Default Resummino Runner to provide backward compatibility&quot;&quot;&quot;
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.run">[docs]</a>run = default_resummino_runner.run</div>
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.set_path">[docs]</a>set_path = default_resummino_runner.set_path</div>
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.get_path">[docs]</a>get_path = default_resummino_runner.get_path</div>
+<div class="viewcode-block" id="get_version"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.get_version">[docs]</a>get_version = default_resummino_runner.get_version</div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, Alexander Puck Neuwirth.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

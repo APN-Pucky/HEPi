@@ -26,7 +26,6 @@ Functions
 
 .. autoapisummary::
 
-   hepi.results.my_parallel
    hepi.results.pdf_errors
    hepi.results._pdf_error_single
    hepi.results.pdf_error
@@ -44,23 +43,28 @@ Attributes
 .. autoapisummary::
 
    hepi.results.required_numerical_uncertainty_factor
+   hepi.results.unv
+   hepi.results.usd
 
 
 .. py:data:: required_numerical_uncertainty_factor
-   :annotation: = 5
+   :value: 5
 
    
 
-.. py:function:: my_parallel(arr, f, n_jobs=None, desc=None)
+.. py:data:: unv
 
-   Parallel execution of f on each element of args
+   
 
+.. py:data:: usd
+
+   
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
    Bases: :py:obj:`hepi.util.DictData`
 
-   General result class.
+   General result class. All uncertainties are of numerical origin.
 
    :ivar LO: Leading Order result. Defaults to None.
    :vartype LO: :obj:`double`
@@ -151,7 +155,7 @@ Attributes
    Just like `combine_error` but over a list of ordernames.
 
 
-.. py:function:: combine_error(dl: dict, ordername='LO')
+.. py:function:: combine_error(dl, ordername='LO')
 
    Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
 
