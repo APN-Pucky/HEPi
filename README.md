@@ -12,6 +12,20 @@ Python interface for gluing together several HEP programs (e.g. from HEPForge <h
 | [![Codacy Badge][cc s q i]][cc s q l]      |[![Codacy Badge][cc q i]][cc q l] | 
 | [![Documentation][rtd s i]][rtd s l] | [![Documentation][rtd t i]][rtd t l]  | 
 
+
+## Goals
+
+The goal of this project is to provide a simple and easy to use interface to common high-energy-physics tools (currently mainly SUSY related).
+Tools parameter scans and plotting is also included.
+Different tools should just be plugged in and out as desired (i.e. generate a SUSY spectrum before running a scan with MadGraph).
+
+## Idea
+
+First generate a list of interested parameter points i.e. mass 100 to 1000 GeV squark.
+Then if you also want to scan over the gluino mass just ask for a scan over previous list and you get a 2d scan.
+After generating all parameters they can be used to directly run the codes (in parallel or sequential) or just generate the input file for distribution across several clusters.
+The results then can be importet again and plotted in a nice way.
+
 ## Documentation
 
 -   <https://hepi.readthedocs.io/en/stable/>
@@ -32,6 +46,36 @@ pip install --index-url https://test.pypi.org/simple/ hepi[opt]
 ```
 
 `[opt]` can be omitted to avoid optional dependencies (ie. lhapdf).
+
+
+## HEPi-fast
+HEPi-fast interpolates grids in a similar fashion to (n)nll-fast <https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast> but also for Resummino <https://resummino.hepforge.org>.  
+They are given as json files as for the CERN SUSY wiki in <https://github.com/fuenfundachtzig/xsec>.
+A default set of grids is in the source folder `hepi/data/json/`.
+HEPi can be used to generate such json files for convenient reloading of the data.
+
+```
+$ hepi-fast --help
+$ hepi-fast pp13_squark_NNLO+NNLL.json
+400
+0 400.0 21.6 -1.509999999999991 1.509999999999991 0.0 0.0 0.0 0.0
+500
+0 500.0 6.12 -0.4560000000000013 0.4560000000000013 0.0 0.0 0.0 0.0
+[...]
+```
+
+Above shows squark squark cross section for requested 400 and 500 GeV mass at NNLO+NNLL.
+The order of the output is 
+```
+id | Central value | error down | error up | error pdf down | error pdf up | error scale down | error scale up
+```
+If you just want to look at a quick plot of the interpolation run
+```
+$ hepi-fast pp13_squark_NNLO+NNLL.json --plot
+```
+and sth. like 
+![plot](./img/out.png)
+
 
 [doc stable]: https://apn-pucky.github.io/HEPi/index.html
 [doc test]: https://apn-pucky.github.io/HEPi/test/index.html
