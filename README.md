@@ -49,8 +49,8 @@ pip install --index-url https://test.pypi.org/simple/ hepi[opt]
 
 
 ## HEPi-fast
-HEPi-fast interpolates grids in a similar fashion to (n)nll-fast <https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast> but also for Resummino <https://resummino.hepforge.org>.  
-They are given as json files as for the CERN SUSY wiki in <https://github.com/fuenfundachtzig/xsec>.
+HEPi-fast interpolates grids in a similar fashion to [(n)nll-fast](https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast) but also for [Resummino](https://resummino.hepforge.org).  
+They are given as json files as for the CERN SUSY wiki in [xsec](https://github.com/fuenfundachtzig/xsec).
 A default set of grids is in the source folder `hepi/data/json/`.
 HEPi can be used to generate such json files for convenient reloading of the data.
 
