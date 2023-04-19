@@ -30,7 +30,7 @@ usd = unp.std_devs
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Interpolate data (loaded from json) in the format: \nCentral value | error down | error up | error pdf down | error pdf up | error scale down | error scale up"
+        description="Interpolate data (loaded from json) in the format: \nID | Central value | error down | error up | error pdf down | error pdf up | error scale down | error scale up"
     )
     parser.add_argument(
         "json", type=str, nargs="*", help="url/file/string/name", default=[]
@@ -42,7 +42,7 @@ def main():
         "-p", "--plot", action="store_true", help="plot listed files", default=False
     )
     parser.add_argument(
-        "-i", "--info", action="store_true", help="plot listed files", default=False
+        "-i", "--info", action="store_true", help="show info of listed files", default=False
     )
     parser.add_argument(
         "-s",
@@ -50,6 +50,13 @@ def main():
         type=int,
         help="number of points after interpolation",
         default=50,
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=str,
+        help="output file (default: None)",
+        default=None,
     )
     args = parser.parse_args()
 
@@ -124,7 +131,7 @@ def main():
                 )
                 # hepi.title(li,axe=axs[xs,0],cms_energy=True,pdf_info=False)
         elif len(d) == 2:
-            if xs == 0:
+            if xs == 0 and args.plot:
                 fig, axs = plt.subplots(
                     len(args.json), 2
                 )  # Remove horizontal space between axes
@@ -246,7 +253,8 @@ def main():
             fs = [*fs, (f_noerr, f_combined, f_pdf, f_scale)]
     if args.plot:
         from matplotlib import pyplot as plt
-
+        if args.output is not None:
+            plt.savefig(args.output)
         plt.show()
     else:
         if len(fs) != 0:
