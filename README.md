@@ -73,7 +73,8 @@ If you just want to look at a quick plot of the interpolation run
 ```
 $ hepi-fast pp13_squark_NNLO+NNLL.json --plot
 ```
-and sth. like 
+for something like
+
 ![plot](./img/out.png)
 
 
