@@ -1,0 +1,855 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Result writing &mdash; hepi  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/jupyter-sphinx.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/thebelab.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Interpolation" href="demo_02_interpolate.html" />
+    <link rel="prev" title="Resummino" href="demo_00_resummino.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> hepi
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="demo_00_resummino.html">Resummino</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Result writing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Print">Print</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Pandas">Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#CSV">CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#JSON">JSON</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="demo_02_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_write.html">Result writing example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hepi.readthedocs.io/en/stable/">RTD</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hepi</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Result writing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/examples/demo_01_write.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="Result-writing">
+<h1>Result writing<a class="headerlink" href="#Result-writing" title="Permalink to this heading">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hepi</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">smpl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">hepi</span> <span class="o">.</span><span class="n">run</span> <span class="kn">import</span> <span class="nn">resummino</span> <span class="k">as</span> <span class="nn">rs</span>
+<span class="kn">import</span> <span class="nn">hepi.util</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">rs</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;~/git/resummino_releases&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.2.9.7
+~/git/resummino_releases
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mastercode_with_gm2.in&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">pss</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">(</span><span class="mi">1000011</span><span class="p">,</span><span class="o">-</span><span class="mi">1000011</span><span class="p">),</span>
+     <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<section id="Print">
+<h2>Print<a class="headerlink" href="#Print" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;cteq6l1&quot;</span><span class="p">,</span><span class="s2">&quot;cteq66&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+        <span class="c1">#i = hepi.Input(hepi.Order.NLO,13000,pa,pb,param,&quot;CT14lo&quot;,&quot;CT14lo&quot;,1., 1.,model_path=model_path,id=&quot;5&quot;)</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">([</span><span class="n">i</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+        <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">noskip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/apn/data/de.neuwirthinformatik.Alexander/Development/git/hepi/hepi/util.py:101: UserWarning: LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version) if you want to compute PDF uncertainties.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0f1f3830644e4980a8de75c90824964d", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3b010a0c1eb54ebc997faa4a8b35f2f4", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "48436c1b2f5d412d85461a4638a3c379", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "2684ff6bff224b9fa4486104deeda4d1", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "db2e6b2df49b49549d9c4595d1b59f0b", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "57cf75179a2a40acb603a15a367ef590", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Skipped: 9 Not skipped: 0
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a32736fd91044e5b9091eac7e0eb697a", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "01b3560a0bdb443d842df8b04d16006e", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a255f125450742daacf1148750c791ab", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "9ca87a40a1ef425cb5186582173229b6", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a2a13c3e292c42e6b1274f0d69684d78", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8d05054331b44cfba939db2b5bd904aa", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+                        LO                      NLO NLO_PLUS_NLL
+0        0.20208+/-0.00029          0.2679+/-0.0004      0.0+/-0  \
+1      0.013713+/-0.000018      0.017043+/-0.000020      0.0+/-0
+2    0.0026091+/-0.0000031    0.0031281+/-0.0000035      0.0+/-0
+3    0.0007347+/-0.0000008    0.0008593+/-0.0000009      0.0+/-0
+4  0.00025475+/-0.00000028  0.00029242+/-0.00000029      0.0+/-0
+5  0.00010047+/-0.00000011  0.00011369+/-0.00000011      0.0+/-0
+6      (4.322+/-0.004)e-05      (4.841+/-0.005)e-05      0.0+/-0
+7    (1.9790+/-0.0020)e-05    (2.2010+/-0.0020)e-05      0.0+/-0
+8      (9.489+/-0.009)e-06    (1.0515+/-0.0009)e-05      0.0+/-0
+
+  aNNLO_PLUS_NNLL                                             K_LO
+0            None  1.00000000000000000000+/-0.00000000000000000026  \
+1            None                                          1.0+/-0
+2            None                                          1.0+/-0
+3            None                                          1.0+/-0
+4            None  1.00000000000000000000+/-0.00000000000000000013
+5            None                                          1.0+/-0
+6            None                                          1.0+/-0
+7            None                                          1.0+/-0
+8            None                                          1.0+/-0
+
+             K_NLO K_NLO_PLUS_NLL NLO_PLUS_NLL_OVER_NLO K_aNNLO_PLUS_NNLL
+0  1.3255+/-0.0026        0.0+/-0               0.0+/-0              None  \
+1  1.2429+/-0.0022        0.0+/-0               0.0+/-0              None
+2  1.1989+/-0.0020        0.0+/-0               0.0+/-0              None
+3  1.1697+/-0.0018        0.0+/-0               0.0+/-0              None
+4  1.1479+/-0.0017        0.0+/-0               0.0+/-0              None
+5  1.1316+/-0.0016        0.0+/-0               0.0+/-0              None
+6  1.1199+/-0.0016        0.0+/-0               0.0+/-0              None
+7  1.1122+/-0.0015        0.0+/-0               0.0+/-0              None
+8  1.1081+/-0.0015        0.0+/-0               0.0+/-0              None
+
+  aNNLO_PLUS_NNLL_OVER_NLO  ... precision max_iters invariant_mass    pt
+0                     None  ...      0.01        50           auto  auto  \
+1                     None  ...      0.01        50           auto  auto
+2                     None  ...      0.01        50           auto  auto
+3                     None  ...      0.01        50           auto  auto
+4                     None  ...      0.01        50           auto  auto
+5                     None  ...      0.01        50           auto  auto
+6                     None  ...      0.01        50           auto  auto
+7                     None  ...      0.01        50           auto  auto
+8                     None  ...      0.01        50           auto  auto
+
+  result id model      mu  mass_1000011                                runner
+0  total  5         100.0         100.0  ResumminoRunner-resummino git-latest
+1  total  5         212.5         212.5  ResumminoRunner-resummino git-latest
+2  total  5         325.0         325.0  ResumminoRunner-resummino git-latest
+3  total  5         437.5         437.5  ResumminoRunner-resummino git-latest
+4  total  5         550.0         550.0  ResumminoRunner-resummino git-latest
+5  total  5         662.5         662.5  ResumminoRunner-resummino git-latest
+6  total  5         775.0         775.0  ResumminoRunner-resummino git-latest
+7  total  5         887.5         887.5  ResumminoRunner-resummino git-latest
+8  total  5        1000.0        1000.0  ResumminoRunner-resummino git-latest
+
+[9 rows x 41 columns]
+</pre></div></div>
+</div>
+</section>
+<section id="Pandas">
+<h2>Pandas<a class="headerlink" href="#Pandas" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rs_dl</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>LO</th>
+      <th>NLO</th>
+      <th>NLO_PLUS_NLL</th>
+      <th>aNNLO_PLUS_NNLL</th>
+      <th>K_LO</th>
+      <th>K_NLO</th>
+      <th>K_NLO_PLUS_NLL</th>
+      <th>NLO_PLUS_NLL_OVER_NLO</th>
+      <th>K_aNNLO_PLUS_NNLL</th>
+      <th>aNNLO_PLUS_NNLL_OVER_NLO</th>
+      <th>...</th>
+      <th>precision</th>
+      <th>max_iters</th>
+      <th>invariant_mass</th>
+      <th>pt</th>
+      <th>result</th>
+      <th>id</th>
+      <th>model</th>
+      <th>mu</th>
+      <th>mass_1000011</th>
+      <th>runner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.20208+/-0.00029</td>
+      <td>0.2679+/-0.0004</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>1.00000000000000000000+/-0.00000000000000000026</td>
+      <td>1.3255+/-0.0026</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td></td>
+      <td>100.0</td>
+      <td>100.0</td>
+      <td>ResumminoRunner-resummino git-latest</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.013713+/-0.000018</td>
+      <td>0.017043+/-0.000020</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>1.0+/-0</td>
+      <td>1.2429+/-0.0022</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td></td>
+      <td>212.5</td>
+      <td>212.5</td>
+      <td>ResumminoRunner-resummino git-latest</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0026091+/-0.0000031</td>
+      <td>0.0031281+/-0.0000035</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>1.0+/-0</td>
+      <td>1.1989+/-0.0020</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td></td>
+      <td>325.0</td>
+      <td>325.0</td>
+      <td>ResumminoRunner-resummino git-latest</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0007347+/-0.0000008</td>
+      <td>0.0008593+/-0.0000009</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>1.0+/-0</td>
+      <td>1.1697+/-0.0018</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td></td>
+      <td>437.5</td>
+      <td>437.5</td>
+      <td>ResumminoRunner-resummino git-latest</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.00025475+/-0.00000028</td>
+      <td>0.00029242+/-0.00000029</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>1.00000000000000000000+/-0.00000000000000000013</td>
+      <td>1.1479+/-0.0017</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td></td>
+      <td>550.0</td>
+      <td>550.0</td>
+      <td>ResumminoRunner-resummino git-latest</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.00010047+/-0.00000011</td>
+      <td>0.00011369+/-0.00000011</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>1.0+/-0</td>
+      <td>1.1316+/-0.0016</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td></td>
+      <td>662.5</td>
+      <td>662.5</td>
+      <td>ResumminoRunner-resummino git-latest</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>(4.322+/-0.004)e-05</td>
+      <td>(4.841+/-0.005)e-05</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>1.0+/-0</td>
+      <td>1.1199+/-0.0016</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td></td>
+      <td>775.0</td>
+      <td>775.0</td>
+      <td>ResumminoRunner-resummino git-latest</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>(1.9790+/-0.0020)e-05</td>
+      <td>(2.2010+/-0.0020)e-05</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>1.0+/-0</td>
+      <td>1.1122+/-0.0015</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td></td>
+      <td>887.5</td>
+      <td>887.5</td>
+      <td>ResumminoRunner-resummino git-latest</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>(9.489+/-0.009)e-06</td>
+      <td>(1.0515+/-0.0009)e-05</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>1.0+/-0</td>
+      <td>1.1081+/-0.0015</td>
+      <td>0.0+/-0</td>
+      <td>0.0+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>0.01</td>
+      <td>50</td>
+      <td>auto</td>
+      <td>auto</td>
+      <td>total</td>
+      <td>5</td>
+      <td></td>
+      <td>1000.0</td>
+      <td>1000.0</td>
+      <td>ResumminoRunner-resummino git-latest</td>
+    </tr>
+  </tbody>
+</table>
+<p>9 rows × 41 columns</p>
+</div></div>
+</div>
+</section>
+<section id="CSV">
+<h2>CSV<a class="headerlink" href="#CSV" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hepi</span><span class="o">.</span><span class="n">write_csv</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,</span><span class="s2">&quot;out.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;out.csv&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+LO,NLO,NLO_PLUS_NLL,aNNLO_PLUS_NNLL,K_LO,K_NLO,K_NLO_PLUS_NLL,NLO_PLUS_NLL_OVER_NLO,K_aNNLO_PLUS_NNLL,aNNLO_PLUS_NNLL_OVER_NLO,VNLO,P_PLUS_K,RNLOG,RNLOQ,VNLO_PLUS_P_PLUS_K,RNLO,RNLO_PLUS_VNLO_PLUS_P_PLUS_K,order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,mass_1000011,runner
+0.20208+/-0.00029,0.2679+/-0.0004,0.0+/-0,,1.00000000000000000000+/-0.00000000000000000026,1.3255+/-0.0026,0.0+/-0,0.0+/-0,,,0.01062+/-0.00008,0.02998+/-0.00017,-0.00218+/-0.00005,0.009949+/-0.000025,0.04059+/-0.00019,0.00777+/-0.00005,0.04837+/-0.00020,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_100.0,cteq6l1,0,cteq66,0,0,0,1.0,1.0,0.01,50,auto,auto,total,5,,100.0,100.0,ResumminoRunner-resummino git-latest
+0.013713+/-0.000018,0.017043+/-0.000020,0.0+/-0,,1.0+/-0,1.2429+/-0.0022,0.0+/-0,0.0+/-0,,,0.000639+/-0.000005,0.001524+/-0.000006,-0.0001066+/-0.0000020,0.0003784+/-0.0000009,0.002163+/-0.000008,0.0002719+/-0.0000022,0.002435+/-0.000008,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_212.5,cteq6l1,0,cteq66,0,0,0,1.0,1.0,0.01,50,auto,auto,total,5,,212.5,212.5,ResumminoRunner-resummino git-latest
+0.0026091+/-0.0000031,0.0031281+/-0.0000035,0.0+/-0,,1.0+/-0,1.1989+/-0.0020,0.0+/-0,0.0+/-0,,,0.0001128+/-0.0000008,0.0002628+/-0.0000010,(-1.554+/-0.029)e-05,(4.906+/-0.011)e-05,0.0003757+/-0.0000013,(3.352+/-0.031)e-05,0.0004092+/-0.0000013,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_325.0,cteq6l1,0,cteq66,0,0,0,1.0,1.0,0.01,50,auto,auto,total,5,,325.0,325.0,ResumminoRunner-resummino git-latest
+0.0007347+/-0.0000008,0.0008593+/-0.0000009,0.0+/-0,,1.0+/-0,1.1697+/-0.0018,0.0+/-0,0.0+/-0,,,(3.010+/-0.020)e-05,(7.281+/-0.025)e-05,(-3.50+/-0.06)e-06,(1.0308+/-0.0022)e-05,0.00010290+/-0.00000032,(6.81+/-0.07)e-06,0.00010971+/-0.00000032,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_437.5,cteq6l1,0,cteq66,0,0,0,1.0,1.0,0.01,50,auto,auto,total,5,,437.5,437.5,ResumminoRunner-resummino git-latest
+0.00025475+/-0.00000028,0.00029242+/-0.00000029,0.0+/-0,,1.00000000000000000000+/-0.00000000000000000013,1.1479+/-0.0017,0.0+/-0,0.0+/-0,,,(9.99+/-0.06)e-06,(2.562+/-0.008)e-05,(-1.005+/-0.017)e-06,(2.820+/-0.006)e-06,(3.561+/-0.010)e-05,(1.815+/-0.018)e-06,(3.743+/-0.010)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_550.0,cteq6l1,0,cteq66,0,0,0,1.0,1.0,0.01,50,auto,auto,total,5,,550.0,550.0,ResumminoRunner-resummino git-latest
+0.00010047+/-0.00000011,0.00011369+/-0.00000011,0.0+/-0,,1.0+/-0,1.1316+/-0.0016,0.0+/-0,0.0+/-0,,,(3.805+/-0.023)e-06,(1.0433+/-0.0030)e-05,(-3.438+/-0.033)e-07,(9.123+/-0.018)e-07,(1.424+/-0.004)e-05,(5.68+/-0.04)e-07,(1.481+/-0.004)e-05,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_662.5,cteq6l1,0,cteq66,0,0,0,1.0,1.0,0.01,50,auto,auto,total,5,,662.5,662.5,ResumminoRunner-resummino git-latest
+(4.322+/-0.004)e-05,(4.841+/-0.005)e-05,0.0+/-0,,1.0+/-0,1.1199+/-0.0016,0.0+/-0,0.0+/-0,,,(1.590+/-0.010)e-06,(4.678+/-0.013)e-06,(-1.245+/-0.016)e-07,(3.312+/-0.006)e-07,(6.269+/-0.016)e-06,(2.067+/-0.017)e-07,(6.475+/-0.016)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_775.0,cteq6l1,0,cteq66,0,0,0,1.0,1.0,0.01,50,auto,auto,total,5,,775.0,775.0,ResumminoRunner-resummino git-latest
+(1.9790+/-0.0020)e-05,(2.2010+/-0.0020)e-05,0.0+/-0,,1.0+/-0,1.1122+/-0.0015,0.0+/-0,0.0+/-0,,,(7.11+/-0.04)e-07,(2.242+/-0.006)e-06,(-4.90+/-0.09)e-08,(1.3073+/-0.0025)e-07,(2.954+/-0.007)e-06,(8.17+/-0.09)e-08,(3.035+/-0.007)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_887.5,cteq6l1,0,cteq66,0,0,0,1.0,1.0,0.01,50,auto,auto,total,5,,887.5,887.5,ResumminoRunner-resummino git-latest
+(9.489+/-0.009)e-06,(1.0515+/-0.0009)e-05,0.0+/-0,,1.0+/-0,1.1081+/-0.0015,0.0+/-0,0.0+/-0,,,(3.351+/-0.019)e-07,(1.1287+/-0.0028)e-06,(-2.06+/-0.04)e-08,(5.497+/-0.010)e-08,(1.4638+/-0.0034)e-06,(3.43+/-0.04)e-08,(1.4981+/-0.0034)e-06,1,13000,6500.0,1000011,-1000011,mastercode_with_gm2.in_mass_1000011_1000.0,cteq6l1,0,cteq66,0,0,0,1.0,1.0,0.01,50,auto,auto,total,5,,1000.0,1000.0,ResumminoRunner-resummino git-latest
+
+</pre></div></div>
+</div>
+</section>
+<section id="JSON">
+<h2>JSON<a class="headerlink" href="#JSON" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hepi</span><span class="o">.</span><span class="n">write_json</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">NLO</span><span class="p">,[</span><span class="s2">&quot;mass_1000011&quot;</span><span class="p">],</span><span class="s2">&quot;out.json&quot;</span><span class="p">,</span><span class="n">error</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;out.json&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+    &#34;initial state&#34;: &#34;pp&#34;,
+    &#34;order&#34;: &#34;NLO&#34;,
+    &#34;source&#34;: &#34;hepi-0.2.9.7&#34;,
+    &#34;contact&#34;: &#34;Alexander Puck Neuwirth &lt;alexander@neuwirth-informatik.de&gt;&#34;,
+    &#34;tool&#34;: &#34;Resummino-resummino git-latest&#34;,
+    &#34;process_latex&#34;: &#34;$\\tilde{e}_{L}^{-}\\tilde{e}_{L}^{+}$&#34;,
+    &#34;comment&#34;: &#34;5&#34;,
+    &#34;reference&#34;: &#34;?&#34;,
+    &#34;Ecom [GeV]&#34;: &#34;13000&#34;,
+    &#34;process_id&#34;: &#34;pp_13000_1000011_-1000011&#34;,
+    &#34;PDF set&#34;: &#34;cteq66&#34;,
+    &#34;parameters&#34;: [
+        [
+            &#34;mass_1000011&#34;
+        ]
+    ],
+    &#34;data&#34;: {
+        &#34;100.0&#34;: {
+            &#34;xsec_pb&#34;: 0.26786916
+        },
+        &#34;212.5&#34;: {
+            &#34;xsec_pb&#34;: 0.017042798
+        },
+        &#34;325.0&#34;: {
+            &#34;xsec_pb&#34;: 0.0031280684
+        },
+        &#34;437.5&#34;: {
+            &#34;xsec_pb&#34;: 0.00085929957
+        },
+        &#34;550.0&#34;: {
+            &#34;xsec_pb&#34;: 0.00029242159
+        },
+        &#34;662.5&#34;: {
+            &#34;xsec_pb&#34;: 0.00011369143
+        },
+        &#34;775.0&#34;: {
+            &#34;xsec_pb&#34;: 4.8409699e-05
+        },
+        &#34;887.5&#34;: {
+            &#34;xsec_pb&#34;: 2.2010282e-05
+        },
+        &#34;1000.0&#34;: {
+            &#34;xsec_pb&#34;: 1.0515472e-05
+        }
+    }
+}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="demo_02_interpolate.html" class="btn btn-neutral float-right" title="Interpolation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="demo_00_resummino.html" class="btn btn-neutral float-left" title="Resummino" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, Alexander Puck Neuwirth.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
