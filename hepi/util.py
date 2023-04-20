@@ -99,7 +99,7 @@ def lhapdf_name_to_id(name: str) -> int:
         import lhapdf
     except ImportError:
         warnings.warn(
-            "LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version)."
+            "LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version) if you want to compute PDF uncertainties."
         )
         return 0
     if not lhapdf.availablePDFSets():
@@ -118,7 +118,7 @@ def lhapdf_id_to_name(lid: int) -> str:
         import lhapdf
     except ImportError:
         warnings.warn(
-            "LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version)."
+            "LHAPDF python binding not installed? Make sure you set PYTHONPATH correctly (i.e. correct python version) if you want to compute PDF uncertainties.."
         )
         return ""
     if not lhapdf.availablePDFSets():

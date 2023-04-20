@@ -1,4 +1,5 @@
 import json
+from typing import List
 
 # from smpl import plot
 import numpy as np
@@ -257,7 +258,7 @@ def write_csv(dict_list: list, filename: str):
 def write_json(
     dict_list: list,
     o: Order,
-    parameters: str,
+    parameters: List[str],
     output,
     error=True,
     error_sym=None,
@@ -380,23 +381,26 @@ def write_json(
     dat = {}
 
     # Here we determine if the errors are asymmetric, that is NOERR and COMBINED have a different mean value
-    if error and error_sym is None:
-        if len(parameters) == 2:
-            tp = parameters[0]
-        elif len(parameters) == 1:
-            tp = parameters[0]
-        error_sym = True
-        for j in range(len(dict_list[tp])):
-            if not np.isclose(
-                float(unv(dict_list[so + "_NOERR"].iloc[j])),
-                float(unv(dict_list[so + "_COMBINED"].iloc[j])),
-                rtol=1e-05,
-                atol=1e-08,
-                equal_nan=False,
-            ):
-                error_sym = False
-                break
-        error_asym = not error_sym
+    if error:
+        if error_sym is None:
+            if len(parameters) == 2:
+                tp = parameters[0]
+            elif len(parameters) == 1:
+                tp = parameters[0]
+            error_sym = True
+            for j in range(len(dict_list[tp])):
+                if not np.isclose(
+                    float(unv(dict_list[so + "_NOERR"].iloc[j])),
+                    float(unv(dict_list[so + "_COMBINED"].iloc[j])),
+                    rtol=1e-05,
+                    atol=1e-08,
+                    equal_nan=False,
+                ):
+                    error_sym = False
+                    break
+            error_asym = not error_sym
+        else:
+            error_asym = not error_sym
     if not error:
         error_asym = False
         error_sym = False
@@ -466,7 +470,10 @@ def write_json(
                         "unc_pdf_pb": float(usd(dict_list[so + "_PDF"].iloc[j])),
                     }
             else:
-                td = {"xsec_pb": float(unv(dict_list[so + "_NOERR"].iloc[j]))}
+                if so + "_NOERR" in dict_list:
+                    td = {"xsec_pb": float(unv(dict_list[so + "_NOERR"].iloc[j]))}
+                else:
+                    td = {"xsec_pb": float(unv(dict_list[so].iloc[j]))}
             if str(dict_list[parameterj].iloc[j]) in dat:
                 dat[str(dict_list[parameterj].iloc[j])] = {
                     **dat[str(dict_list[parameterj].iloc[j])],
@@ -540,7 +547,10 @@ def write_json(
                         "unc_pdf_pb": float(usd(dict_list[so + "_PDF"].iloc[j])),
                     }
             else:
-                td = {"xsec_pb": float(unv(dict_list[so + "_NOERR"].iloc[j]))}
+                if so + "_NOERR" in dict_list:
+                    td = {"xsec_pb": float(unv(dict_list[so + "_NOERR"].iloc[j]))}
+                else:
+                    td = {"xsec_pb": float(unv(dict_list[so].iloc[j]))}
             dat[str(dict_list[parameter].iloc[j])] = td
         jd["parameters"] = [[parameter]]
 

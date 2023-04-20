@@ -188,7 +188,7 @@ class Runner:
         run=True,
         ignore_error=False,
         n_jobs=None,
-        **kwargs
+        **kwargs,
     ):
         """
             Run the passed list of parameters.
@@ -211,14 +211,16 @@ class Runner:
         if not self._check_path():
             warnings.warn("The path is not valid for " + self.get_name())
             if not ignore_error:
-                raise RuntimeError("The path is not valid for " + self.get_name())
+                raise RuntimeError(
+                    f"The path '{self.get_path()}' is not valid for " + self.get_name()
+                )
         rps = self._prepare_all(
             params,
             parse=parse,
             skip=skip,
             ignore_error=ignore_error,
             n_jobs=n_jobs,
-            **kwargs
+            **kwargs,
         )
         # print("= " + str(len(params)) + " jobs")
         if sleep is None:
@@ -242,7 +244,7 @@ class Runner:
         parallel=True,
         sleep=0,
         n_jobs=None,
-        **kwargs
+        **kwargs,
     ):
         """
             Runs Runner per :class:`RunParams`.

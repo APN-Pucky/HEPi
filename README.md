@@ -22,11 +22,19 @@ Different tools should just be plugged in and out as desired (i.e. generate a SU
 ## Idea
 
 First generate a list of interested parameter points i.e. mass 100 to 1000 GeV squark.
-Then if you also want to scan over the gluino mass just ask for a scan over previous list and you get a 2d scan.
+Then if you also want to scan over the gluino mass just ask for a scan over previous list, and you get a 2d scan.
 After generating all parameters they can be used to directly run the codes (in parallel or sequential) or just generate the input file for distribution across several clusters.
-The results then can be importet again and plotted in a nice way.
+The results then can be imported again and plotted nicely.
+
+## Realisation
+In the working directory you have an `input` and `output` folder. The input would typically contain the baseline slha file.
+The `output` will contain the produced scripts to execute the tools.
+To avoid file collisions the files in the output folder correspond to a hashed value of all input parameters.
+If a result already exists hepi won't rerun the tool.
 
 ## Documentation
+
+For more details on the usage of different tools, called runners, check the respective documentation.
 
 -   <https://hepi.readthedocs.io/en/stable/>
 -   <https://apn-pucky.github.io/HEPi/index.html>
