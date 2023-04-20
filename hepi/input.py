@@ -132,7 +132,7 @@ class Input(DictData):
         mu_r=1.0,
         pdfset_lo=0,
         pdfset_nlo=0,
-        precision=0.01,
+        precision=0.001,
         max_iters=50,
         invariant_mass="auto",
         result="total",
