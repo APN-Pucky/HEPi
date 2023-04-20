@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.2.9-7-g695fec52
+                0.2.9-8-gb1e9c4ca
               </div>
             
           
@@ -98,13 +98,13 @@
             
               <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/test_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_write.html">Result writing example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -188,6 +188,7 @@
             
   <h1>Source code for hepi.output</h1><div class="highlight"><pre>
 <span></span>import json
+from typing import List
 
 # from smpl import plot
 import numpy as np
@@ -446,7 +447,7 @@ from .util import DL2DF
 <div class="viewcode-block" id="write_json"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_json">[docs]</a>def write_json(
     dict_list: list,
     o: Order,
-    parameters: str,
+    parameters: List[str],
     output,
     error=True,
     error_sym=None,
@@ -569,23 +570,26 @@ from .util import DL2DF
     dat = {}
 
     # Here we determine if the errors are asymmetric, that is NOERR and COMBINED have a different mean value
-    if error and error_sym is None:
-        if len(parameters) == 2:
-            tp = parameters[0]
-        elif len(parameters) == 1:
-            tp = parameters[0]
-        error_sym = True
-        for j in range(len(dict_list[tp])):
-            if not np.isclose(
-                float(unv(dict_list[so + &quot;_NOERR&quot;].iloc[j])),
-                float(unv(dict_list[so + &quot;_COMBINED&quot;].iloc[j])),
-                rtol=1e-05,
-                atol=1e-08,
-                equal_nan=False,
-            ):
-                error_sym = False
-                break
-        error_asym = not error_sym
+    if error:
+        if error_sym is None:
+            if len(parameters) == 2:
+                tp = parameters[0]
+            elif len(parameters) == 1:
+                tp = parameters[0]
+            error_sym = True
+            for j in range(len(dict_list[tp])):
+                if not np.isclose(
+                    float(unv(dict_list[so + &quot;_NOERR&quot;].iloc[j])),
+                    float(unv(dict_list[so + &quot;_COMBINED&quot;].iloc[j])),
+                    rtol=1e-05,
+                    atol=1e-08,
+                    equal_nan=False,
+                ):
+                    error_sym = False
+                    break
+            error_asym = not error_sym
+        else:
+            error_asym = not error_sym
     if not error:
         error_asym = False
         error_sym = False
@@ -655,7 +659,10 @@ from .util import DL2DF
                         &quot;unc_pdf_pb&quot;: float(usd(dict_list[so + &quot;_PDF&quot;].iloc[j])),
                     }
             else:
-                td = {&quot;xsec_pb&quot;: float(unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]))}
+                if so + &quot;_NOERR&quot; in dict_list:
+                    td = {&quot;xsec_pb&quot;: float(unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]))}
+                else:
+                    td = {&quot;xsec_pb&quot;: float(unv(dict_list[so].iloc[j]))}
             if str(dict_list[parameterj].iloc[j]) in dat:
                 dat[str(dict_list[parameterj].iloc[j])] = {
                     **dat[str(dict_list[parameterj].iloc[j])],
@@ -729,7 +736,10 @@ from .util import DL2DF
                         &quot;unc_pdf_pb&quot;: float(usd(dict_list[so + &quot;_PDF&quot;].iloc[j])),
                     }
             else:
-                td = {&quot;xsec_pb&quot;: float(unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]))}
+                if so + &quot;_NOERR&quot; in dict_list:
+                    td = {&quot;xsec_pb&quot;: float(unv(dict_list[so + &quot;_NOERR&quot;].iloc[j]))}
+                else:
+                    td = {&quot;xsec_pb&quot;: float(unv(dict_list[so].iloc[j]))}
             dat[str(dict_list[parameter].iloc[j])] = td
         jd[&quot;parameters&quot;] = [[parameter]]
 
