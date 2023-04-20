@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.2.9
+                0.2.10
               </div>
             
           
@@ -98,13 +98,16 @@
             
               <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_00_resummino.html">Resummino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_01_write.html">Result writing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_02_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/test_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_write.html">Result writing example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -219,7 +222,7 @@ import hepi.data
 
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.main">[docs]</a>def main():
     parser = argparse.ArgumentParser(
-        description=&quot;Interpolate data (loaded from json) in the format: \nCentral value | error down | error up | error pdf down | error pdf up | error scale down | error scale up&quot;
+        description=&quot;Interpolate data (loaded from json) in the format: \nID | Central value | error down | error up | error pdf down | error pdf up | error scale down | error scale up&quot;
     )
     parser.add_argument(
         &quot;json&quot;, type=str, nargs=&quot;*&quot;, help=&quot;url/file/string/name&quot;, default=[]
@@ -231,7 +234,7 @@ import hepi.data
         &quot;-p&quot;, &quot;--plot&quot;, action=&quot;store_true&quot;, help=&quot;plot listed files&quot;, default=False
     )
     parser.add_argument(
-        &quot;-i&quot;, &quot;--info&quot;, action=&quot;store_true&quot;, help=&quot;plot listed files&quot;, default=False
+        &quot;-i&quot;, &quot;--info&quot;, action=&quot;store_true&quot;, help=&quot;show info of listed files&quot;, default=False
     )
     parser.add_argument(
         &quot;-s&quot;,
@@ -239,6 +242,13 @@ import hepi.data
         type=int,
         help=&quot;number of points after interpolation&quot;,
         default=50,
+    )
+    parser.add_argument(
+        &quot;-o&quot;,
+        &quot;--output&quot;,
+        type=str,
+        help=&quot;output file (default: None)&quot;,
+        default=None,
     )
     args = parser.parse_args()
 
@@ -313,7 +323,7 @@ import hepi.data
                 )
                 # hepi.title(li,axe=axs[xs,0],cms_energy=True,pdf_info=False)
         elif len(d) == 2:
-            if xs == 0:
+            if xs == 0 and args.plot:
                 fig, axs = plt.subplots(
                     len(args.json), 2
                 )  # Remove horizontal space between axes
@@ -435,7 +445,8 @@ import hepi.data
             fs = [*fs, (f_noerr, f_combined, f_pdf, f_scale)]
     if args.plot:
         from matplotlib import pyplot as plt
-
+        if args.output is not None:
+            plt.savefig(args.output)
         plt.show()
     else:
         if len(fs) != 0:

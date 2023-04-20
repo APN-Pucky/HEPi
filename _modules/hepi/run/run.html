@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.2.9
+                0.2.10
               </div>
             
           
@@ -98,13 +98,16 @@
             
               <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_00_resummino.html">Resummino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_01_write.html">Result writing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_02_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_write.html">Result writing example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_pyslha.html">pyslha comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_write.html">Result writing example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
 <ul>
@@ -377,7 +380,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         run=True,
         ignore_error=False,
         n_jobs=None,
-        **kwargs
+        **kwargs,
     ):
         &quot;&quot;&quot;
             Run the passed list of parameters.
@@ -400,14 +403,16 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         if not self._check_path():
             warnings.warn(&quot;The path is not valid for &quot; + self.get_name())
             if not ignore_error:
-                raise RuntimeError(&quot;The path is not valid for &quot; + self.get_name())
+                raise RuntimeError(
+                    f&quot;The path &#39;{self.get_path()}&#39; is not valid for &quot; + self.get_name()
+                )
         rps = self._prepare_all(
             params,
             parse=parse,
             skip=skip,
             ignore_error=ignore_error,
             n_jobs=n_jobs,
-            **kwargs
+            **kwargs,
         )
         # print(&quot;= &quot; + str(len(params)) + &quot; jobs&quot;)
         if sleep is None:
@@ -431,7 +436,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         parallel=True,
         sleep=0,
         n_jobs=None,
-        **kwargs
+        **kwargs,
     ):
         &quot;&quot;&quot;
             Runs Runner per :class:`RunParams`.
