@@ -15,8 +15,8 @@ Python interface for gluing together several HEP programs (e.g. from HEPForge <h
 
 ## Goals
 
-The goal of this project is to provide a simple and easy to use interface to common high-energy-physics tools (currently mainly SUSY related).
-Tools parameter scans and plotting is also included.
+The goal of this project is to provide a simple and easy to use interface to common high-energy-physics tools (currently mainly SUSY related Tools).
+Parameter scans and plotting is also included.
 Different tools should just be plugged in and out as desired (i.e. generate a SUSY spectrum before running a scan with MadGraph).
 
 ## Idea
