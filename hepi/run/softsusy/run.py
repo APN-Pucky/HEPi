@@ -7,7 +7,7 @@ from hepi.input import Input, update_slha
 from hepi.run import Runner
 
 
-class SPhenoRunner(Runner):
+class SoftsusyRunner(Runner):
     def _check_path(self) -> bool:
         if os.path.exists(os.path.expanduser(self.get_path() + "/bin/softpoint.x")):
             self.set_path(self.get_path() + "/bin/softpoint.x")
@@ -18,10 +18,10 @@ class SPhenoRunner(Runner):
 
     def run(self, slhas: List[Input], **kwargs) -> List[Input]:
         """
-        Run the passed list of parameters for SPheno.
+        Run the passed list of parameters for softsusy.
 
         Args:
-            slhas (:obj:`list` of :class:`Input`): Input parameters with a SLHA file that can be processed by SPheno.
+            slhas (:obj:`list` of :class:`Input`): Input parameters with a SLHA file that can be processed by softsusy.
         Returns:
             :obj:`list` of :class:`Input`
         """
@@ -57,7 +57,7 @@ class SPhenoRunner(Runner):
 
 
 # Backward compatibility
-spheno_default_runner = SPhenoRunner("softpoint.x")
+spheno_default_runner = SoftsusyRunner("softpoint.x")
 """Default SoftSusy Runner to provide backward compatibility"""
 run = spheno_default_runner.run
 set_path = spheno_default_runner.set_path
