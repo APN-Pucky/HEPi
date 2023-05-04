@@ -1,0 +1,867 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>hepi.run.softsusy &mdash; hepi  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/jupyter-sphinx.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/thebelab.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="hepi.run.softsusy.run" href="run/index.html" />
+    <link rel="prev" title="hepi.run.resummino.run" href="../resummino/run/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> hepi
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.10-3-g471f1455
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_00_resummino.html">Resummino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_01_write.html">Result writing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_02_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_resummino.html">Resummino example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_write.html">Result writing example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_softsusy.html">Softsusy example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../data/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../plot/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../feynhiggs/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.feynhiggs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../madgraph/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.madgraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nllfast/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../prospino2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.prospino2</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.resummino</span></code></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.softsusy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.spheno</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../run/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.run</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../fast/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.fast</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../input/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.input</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../interpolate/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.interpolate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../load/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.load</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../order/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.order</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../output/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.output</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../particles/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.particles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../results/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.results</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../util/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.util</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hepi.readthedocs.io/en/stable/">RTD</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">hepi</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a> &raquo;</li>
+        
+          <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.softsusy</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../_sources/autoapi/hepi/run/softsusy/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="module-hepi.run.softsusy">
+<span id="hepi-run-softsusy"></span><h1><a class="reference internal" href="#module-hepi.run.softsusy" title="hepi.run.softsusy"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.softsusy</span></code></a><a class="headerlink" href="#module-hepi.run.softsusy" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference internal" href="../../index.html#module-hepi" title="hepi"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a> interface to softsusy.</p>
+<p>find it here <a class="reference external" href="https://softsusy.hepforge.org/">https://softsusy.hepforge.org/</a>.</p>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="run/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.softsusy.run</span></code></a></li>
+</ul>
+</div>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this heading">¶</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.softsusy.Input" title="hepi.run.softsusy.Input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code></a></p></td>
+<td><p>Input for computation and scans.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.run.softsusy.Runner" title="hepi.run.softsusy.Runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Runner</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.softsusy.SoftsusyRunner" title="hepi.run.softsusy.SoftsusyRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SoftsusyRunner</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.softsusy.update_slha" title="hepi.run.softsusy.update_slha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_slha</span></code></a>(i)</p></td>
+<td><p>Updates dependent parameters in Input <cite>i</cite>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.softsusy.spheno_default_runner" title="hepi.run.softsusy.spheno_default_runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spheno_default_runner</span></code></a></p></td>
+<td><p>Default SoftSusy Runner to provide backward compatibility</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="run/index.html#module-hepi.run.softsusy.run" title="hepi.run.softsusy.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.softsusy.set_path" title="hepi.run.softsusy.set_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.run.softsusy.get_path" title="hepi.run.softsusy.get_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_path</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Input">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.softsusy.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invariant_mass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'total'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../util/index.html#hepi.util.DictData" title="hepi.util.DictData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.util.DictData</span></code></a></p>
+<p>Input for computation and scans.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>order</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code>) – LO, NLO or NLO+NLL computation.</p></li>
+<li><p><strong>energy</strong> (<em>int</em>) – CMS energy in GeV.</p></li>
+<li><p><strong>energyhalf</strong> (<em>int</em>) – Halfed <cite>energy</cite>.</p></li>
+<li><p><strong>particle1</strong> (<em>int</em>) – PDG identifier of the first final state particle.</p></li>
+<li><p><strong>particle2</strong> (<em>int</em>) – PDG identifier of the second final state particle.</p></li>
+<li><p><strong>slha</strong> (<em>str</em>) – File path of for the base slha.
+Modified slha files will be used if a scan requires a change of the input.</p></li>
+<li><p><strong>pdf_lo</strong> (<em>str</em>) – LO PDF name.</p></li>
+<li><p><strong>pdf_nlo</strong> (<em>str</em>) – NLO PDF name.</p></li>
+<li><p><strong>pdfset_lo</strong> (<em>int</em>) – LO PDF member/set id.</p></li>
+<li><p><strong>pdfset_nlo</strong> (<em>int</em>) – NLO PDF member/set id.</p></li>
+<li><p><strong>pdf_lo_id</strong> (<em>int</em>) – LO PDF first member/set id.</p></li>
+<li><p><strong>pdf_nlo_id</strong> (<em>int</em>) – NLO PDF first member/set id.</p></li>
+<li><p><strong>mu</strong> (<em>double</em>) – central scale factor.</p></li>
+<li><p><strong>mu_f</strong> (<em>double</em>) – Factorization scale factor.</p></li>
+<li><p><strong>mu_r</strong> (<em>double</em>) – Renormalization scale factor.</p></li>
+<li><p><strong>precision</strong> (<em>double</em>) – Desired numerical relative precision.</p></li>
+<li><p><strong>max_iters</strong> (<em>int</em>) – Upper limit on integration iterations.</p></li>
+<li><p><strong>invariant_mass</strong> (<em>str</em>) – Invariant mass mode ‘auto = sqrt((p1+p2)^2)’ else value.</p></li>
+<li><p><strong>pt</strong> (<em>str</em>) – Transverse Momentum mode ‘auto’ or value.</p></li>
+<li><p><strong>result</strong> (<em>str</em>) – Result type ‘total’/’pt’/’ptj’/’m’.</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – Set an id of this run.</p></li>
+<li><p><strong>model</strong> (<em>str</em>) – Path for MadGraph model.</p></li>
+<li><p><strong>update</strong> (<em>bool</em>) – Update dependent <cite>mu</cite> else set to zero.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>order</strong> (<a class="reference internal" href="../../order/index.html#hepi.order.Order" title="hepi.order.Order"><em>hepi.order.Order</em></a>) – </p></li>
+<li><p><strong>energy</strong> (<em>float</em>) – </p></li>
+<li><p><strong>particle1</strong> (<em>int</em>) – </p></li>
+<li><p><strong>particle2</strong> (<em>int</em>) – </p></li>
+<li><p><strong>slha</strong> (<em>str</em>) – </p></li>
+<li><p><strong>pdf_lo</strong> (<em>str</em>) – </p></li>
+<li><p><strong>pdf_nlo</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Input.has_gluino">
+<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Input.has_gluino" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Input.has_neutralino">
+<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Input.has_neutralino" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Input.has_charginos">
+<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Input.has_charginos" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Input.has_weakino">
+<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Input.has_weakino" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Input.has_squark">
+<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Input.has_squark" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Input.has_slepton">
+<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Input.has_slepton" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.run.softsusy.update_slha">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.softsusy.</span></span><span class="sig-name descname"><span class="pre">update_slha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.update_slha" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates dependent parameters in Input <cite>i</cite>.</p>
+<p>Mainly concerns the <cite>mu</cite> value used by <cite>madgraph</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> (<a class="reference internal" href="#hepi.run.softsusy.Input" title="hepi.run.softsusy.Input"><em>Input</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.softsusy.</span></span><span class="sig-name descname"><span class="pre">Runner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – </p></li>
+<li><p><strong>in_dir</strong> (<em>str</em>) – </p></li>
+<li><p><strong>out_dir</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.orders">
+<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of supported Orders in this runner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[hepi.input.Order]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of the runner.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.get_version">
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner._sub_run">
+<span class="sig-name descname"><span class="pre">_sub_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner._sub_run" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coms</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner._check_path">
+<span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner._check_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the passed path is valid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner._prepare">
+<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_valid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner._prepare" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>p</strong> (<a class="reference internal" href="../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../../index.html#hepi.RunParam" title="hepi.RunParam">RunParam</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner._check_input">
+<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner._check_input" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>param</strong> (<a class="reference internal" href="../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner._prepare_all">
+<span class="sig-name descname"><span class="pre">_prepare_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner._prepare_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepares all parameters for execution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (List[<a class="reference internal" href="../../index.html#id29" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>]) – List of input parameters.</p></li>
+<li><p><strong>skip</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the runner will check if the output file already exists and skip the execution if it does. Defaults to True.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em>) – Number of parallel jobs. If None, use all available cores.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[<a class="reference internal" href="../../index.html#hepi.RunParam" title="hepi.RunParam">RunParam</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.run" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Run the passed list of parameters.</p>
+<dl>
+<dt>Args:</dt><dd><p>params (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="../../index.html#id29" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>): All parameters that should be executed/queued.
+skip (bool): True means stored runs will be skipped. Else the are overwritten.
+parse (bool): Parse the results.</p>
+<blockquote>
+<div><p>This is not the prefered cluster/parallel mode, as there the function only queues the job.</p>
+</div></blockquote>
+<p>parallel (bool): Run jobs in parallel.
+sleep (int): Sleep seconds after starting job.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>run (bool): Actually start/queue runner.
+ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
+n_jobs (int): Number of parallel jobs. If None, use all available cores.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> : combined dataframe of results and parameters. The dataframe is empty if <cite>parse</cite> is set to False.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>List</em><em>[</em><a class="reference internal" href="../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner._run">
+<span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner._run" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Runs Runner per <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>rps (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>): Extended run parameters.
+bar (bool): Enable info bar.
+wait (bool): Wait for parallel runs to finish.
+sleep (int): Sleep seconds after starting subprocess.
+parallel (bool): Run jobs in parallel.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>n_jobs (int): Number of parallel jobs. If None, use all available cores.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of int: return codes from jobs if <cite>no_parse</cite> is False.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rps</strong> (<em>List</em><em>[</em><a class="reference internal" href="../../index.html#hepi.RunParam" title="hepi.RunParam"><em>RunParam</em></a><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner._is_valid">
+<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner._is_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies that a file is a complete output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p></li>
+<li><p><strong>p</strong> (<a class="reference internal" href="../../index.html#id29" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Onput parameters.</p></li>
+<li><p><strong>d</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Param dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if <cite>file</cite> could be parsed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.parse" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Parses Resummino output files and returns List of Results.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>outputs (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <cite>str</cite>): List of the filenames to be parsed.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>n_jobs (int): Number of parallel jobs. If None, use all available cores.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.resummino.result.ResumminoResult</span></code></p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>outputs</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[<a class="reference internal" href="../../results/index.html#hepi.results.Result" title="hepi.results.Result">hepi.results.Result</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner._parse_file">
+<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner._parse_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts results from an output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If a value is not found in the file None is used.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.get_path">
+<span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.get_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Runner path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>current Runner path.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.get_input_dir">
+<span class="sig-name descname"><span class="pre">get_input_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.get_input_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the input directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">in_dir</span></code></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.get_output_dir">
+<span class="sig-name descname"><span class="pre">get_output_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.get_output_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the input directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">out_dir</span></code></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.get_pre">
+<span class="sig-name descname"><span class="pre">get_pre</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.get_pre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the command prefix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">pre</span></code></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.set_path">
+<span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.set_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the path to the Runner folder containing the binary in ‘./bin’ or ‘./build/bin’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>str</em>) – new path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.set_input_dir">
+<span class="sig-name descname"><span class="pre">set_input_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.set_input_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the input directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>indir</strong> (<em>str</em>) – new input directory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.set_output_dir">
+<span class="sig-name descname"><span class="pre">set_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.set_output_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the output directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outdir</strong> (<em>str</em>) – new output directory.
+create (bool): create directory if not existing.</p></li>
+<li><p><strong>create</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.Runner.set_pre">
+<span class="sig-name descname"><span class="pre">set_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ppre</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.Runner.set_pre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the command prefix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ppre</strong> (<em>str</em>) – new command prefix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="hepi.run.softsusy.SoftsusyRunner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.softsusy.</span></span><span class="sig-name descname"><span class="pre">SoftsusyRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/softsusy/run.html#SoftsusyRunner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.softsusy.SoftsusyRunner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../index.html#hepi.run.Runner" title="hepi.run.Runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.run.Runner</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – </p></li>
+<li><p><strong>in_dir</strong> (<em>str</em>) – </p></li>
+<li><p><strong>out_dir</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.SoftsusyRunner._check_path">
+<span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.SoftsusyRunner._check_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the passed path is valid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.softsusy.SoftsusyRunner.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slhas</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.softsusy.SoftsusyRunner.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the passed list of parameters for softsusy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>slhas</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#hepi.run.softsusy.Input" title="hepi.run.softsusy.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code></a>) – Input parameters with a SLHA file that can be processed by softsusy.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#hepi.run.softsusy.Input" title="hepi.run.softsusy.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code></a></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../../input/index.html#hepi.input.Input" title="hepi.input.Input">hepi.input.Input</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.run.softsusy.spheno_default_runner">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.softsusy.</span></span><span class="sig-name descname"><span class="pre">spheno_default_runner</span></span><a class="reference internal" href="../../../../_modules/hepi/run/softsusy/run.html#spheno_default_runner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.softsusy.spheno_default_runner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default SoftSusy Runner to provide backward compatibility</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.run.softsusy.run">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.softsusy.</span></span><span class="sig-name descname"><span class="pre">run</span></span><a class="headerlink" href="#hepi.run.softsusy.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.run.softsusy.set_path">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.softsusy.</span></span><span class="sig-name descname"><span class="pre">set_path</span></span><a class="reference internal" href="../../../../_modules/hepi/run/softsusy/run.html#set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.softsusy.set_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="hepi.run.softsusy.get_path">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.softsusy.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><a class="reference internal" href="../../../../_modules/hepi/run/softsusy/run.html#get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.softsusy.get_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="run/index.html" class="btn btn-neutral float-right" title="hepi.run.softsusy.run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../resummino/run/index.html" class="btn btn-neutral float-left" title="hepi.run.resummino.run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, Alexander Puck Neuwirth.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
