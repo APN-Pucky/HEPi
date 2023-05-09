@@ -51,26 +51,26 @@ class Result(DictData):
             self.K_LO = lo / lo
         else:
             self.K_LO = None
-        if nlo is not None and lo != 0:
+        if nlo is not None and lo != 0 and lo is not None:
             self.K_NLO = nlo / lo
         else:
             self.K_NLO = None
-        if nlo_plus_nll is not None and lo != 0:
+        if nlo_plus_nll is not None and lo != 0 and lo is not None:
             self.K_NLO_PLUS_NLL = nlo_plus_nll / lo
         else:
             self.K_NLO_PLUS_NLL = None
 
-        if nlo_plus_nll is not None and nlo != 0:
+        if nlo_plus_nll is not None and nlo != 0 and nlo is not None:
             self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll / nlo
         else:
             self.NLO_PLUS_NLL_OVER_NLO = None
 
-        if annlo_plus_nnll is not None and lo != 0:
+        if annlo_plus_nnll is not None and lo != 0 and lo is not None:
             self.K_aNNLO_PLUS_NNLL = annlo_plus_nnll / lo
         else:
             self.K_aNNLO_PLUS_NNLL = None
 
-        if annlo_plus_nnll is not None and nlo != 0:
+        if annlo_plus_nnll is not None and nlo != 0 and nlo is not None:
             self.aNNLO_PLUS_NNLL_OVER_NLO = annlo_plus_nnll / nlo
         else:
             self.aNNLO_PLUS_NNLL_OVER_NLO = None
