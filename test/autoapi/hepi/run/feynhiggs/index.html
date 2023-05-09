@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                0.2.10-14-g31a7ac0f
+                0.2.10-15-g8026e111
               </div>
             
           
@@ -519,32 +519,26 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.run" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Run the passed list of parameters.</p>
-<dl>
-<dt>Args:</dt><dd><p>params (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="../../index.html#id29" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>): All parameters that should be executed/queued.
-skip (bool): True means stored runs will be skipped. Else the are overwritten.
-parse (bool): Parse the results.</p>
-<blockquote>
-<div><p>This is not the prefered cluster/parallel mode, as there the function only queues the job.</p>
-</div></blockquote>
-<p>parallel (bool): Run jobs in parallel.
-sleep (int): Sleep seconds after starting job.</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>run (bool): Actually start/queue runner.
-ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
-n_jobs (int): Number of parallel jobs. If None, use all available cores.</p>
-<blockquote>
-<div><dl class="simple">
-<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> : combined dataframe of results and parameters. The dataframe is empty if <cite>parse</cite> is set to False.</p>
-</dd>
-</dl>
-</div></blockquote>
+<dd><p>Run the passed list of parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>params</strong> (<em>List</em><em>[</em><a class="reference internal" href="../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a><em>]</em>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="../../index.html#id29" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – All parameters that should be executed/queued.</p></li>
+<li><p><strong>skip</strong> (<em>bool</em>) – True means stored runs will be skipped. Else the are overwritten.</p></li>
+<li><p><strong>parse</strong> (<em>bool</em>) – Parse the results.
+This is not the prefered cluster/parallel mode, as there the function only queues the job.</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em>) – Run jobs in parallel.</p></li>
+<li><p><strong>sleep</strong> (<em>int</em>) – Sleep seconds after starting job.</p></li>
+<li><p><strong>run</strong> (<em>bool</em>) – Actually start/queue runner.</p></li>
+<li><p><strong>ignore_error</strong> (<em>bool</em>) – Continue instead of raising Exceptions. Also ignores hash collisions.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em>) – Number of parallel jobs. If None, use all available cores.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>combined dataframe of results and parameters. The dataframe is empty if <cite>parse</cite> is set to False.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pd.DataFrame</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -552,27 +546,23 @@ n_jobs (int): Number of parallel jobs. If None, use all available cores.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner._run">
 <span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner._run" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Runs Runner per <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>rps (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>): Extended run parameters.
-bar (bool): Enable info bar.
-wait (bool): Wait for parallel runs to finish.
-sleep (int): Sleep seconds after starting subprocess.
-parallel (bool): Run jobs in parallel.</p>
-</dd>
-</dl>
-</div></blockquote>
-<p>n_jobs (int): Number of parallel jobs. If None, use all available cores.</p>
-<blockquote>
-<div><dl class="simple">
-<dt>Returns:</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of int: return codes from jobs if <cite>no_parse</cite> is False.</p>
-</dd>
-</dl>
-</div></blockquote>
+<dd><p>Runs Runner per <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rps</strong> (<em>List</em><em>[</em><a class="reference internal" href="../../index.html#hepi.RunParam" title="hepi.RunParam"><em>RunParam</em></a><em>]</em>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rps</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>) – Extended run parameters.</p></li>
+<li><p><strong>bar</strong> (<em>bool</em>) – Enable info bar.</p></li>
+<li><p><strong>wait</strong> (<em>bool</em>) – Wait for parallel runs to finish.</p></li>
+<li><p><strong>sleep</strong> (<em>int</em>) – Sleep seconds after starting subprocess.</p></li>
+<li><p><strong>parallel</strong> (<em>bool</em>) – Run jobs in parallel.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em>) – Number of parallel jobs. If None, use all available cores.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>return codes from jobs if <cite>no_parse</cite> is False.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of int</p>
 </dd>
 </dl>
 </dd></dl>
