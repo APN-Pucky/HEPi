@@ -36,7 +36,7 @@ def title(
         + get_name(i.particle2)
         + "$"
         + (" at $\\sqrt{S} = " + str(i.energy / 1000) + "$ TeV" if cms_energy else "")
-        + ((" for " + i.slha.split(".")[0]) if scenario is None else (" " +scenario)
+        + ((" for " + i.slha.split(".")[0]) if scenario is None else (" " +scenario))
         + (" with " + i.pdf_nlo if pdf_info else "")
         + " "
         + extra
