@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.2.10-6-gf5215915
+                0.2.10-13-g41760f79
               </div>
             
           
@@ -102,12 +102,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_01_write.html">Result writing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_02_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_interpolate.html">Interpolation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples/demo_write.html">Result writing example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_feynhiggs.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_nllfast.html">nll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/test_nnllfast.html">nnll-fast</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_softsusy.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../examples/test_spheno.html">SPheno example</a></li>
 </ul>
@@ -230,7 +228,7 @@ from ..particles import get_name
         + get_name(i.particle2)
         + &quot;$&quot;
         + (&quot; at $\\sqrt{S} = &quot; + str(i.energy / 1000) + &quot;$ TeV&quot; if cms_energy else &quot;&quot;)
-        + ((&quot; for &quot; + i.slha.split(&quot;.&quot;)[0]) if scenario is None else scenario)
+        + ((&quot; for &quot; + i.slha.split(&quot;.&quot;)[0]) if scenario is None else (&quot; &quot; +scenario))
         + (&quot; with &quot; + i.pdf_nlo if pdf_info else &quot;&quot;)
         + &quot; &quot;
         + extra

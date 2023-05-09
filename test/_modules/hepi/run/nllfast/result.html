@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.2.10-6-gf5215915
+                0.2.10-13-g41760f79
               </div>
             
           
@@ -102,12 +102,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_01_write.html">Result writing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_02_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_interpolate.html">Interpolation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_write.html">Result writing example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_feynhiggs.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_nllfast.html">nll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_nnllfast.html">nnll-fast</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_softsusy.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_spheno.html">SPheno example</a></li>
 </ul>
@@ -202,19 +200,19 @@
 
     def __init__(
         self,
-        lo,
-        nlo,
-        nlo_plus_nll,
-        scale_err_up,
-        scale_err_down,
-        pdf_err_up,
-        pdf_err_down,
+        LO,
+        NLO,
+        NLO_PLUS_NLL,
+        NLO_PLUS_NLL_SCALE_ERRMINUS,
+        NLO_PLUS_NLL_SCALE_ERRPLUS,
+        NLO_PLUS_NLL_PDF_ERRMINUS,
+        NLO_PLUS_NLL_PDF_ERRPLUS,
     ):
-        Result.__init__(self, lo, nlo, nlo_plus_nll)
-        self.scale_err_up = scale_err_up
-        self.scale_err_down = scale_err_down
-        self.pdf_err_up = pdf_err_up
-        self.pdf_err_down = pdf_err_down</div>
+        Result.__init__(self, LO, NLO, NLO_PLUS_NLL)
+        self.NLO_PLUS_NLL_SCALE_ERRMINUS=NLO_PLUS_NLL_SCALE_ERRMINUS
+        self.NLO_PLUS_NLL_SCALE_ERRPLUS=NLO_PLUS_NLL_SCALE_ERRPLUS
+        self.NLO_PLUS_NLL_PDF_ERRMINUS=NLO_PLUS_NLL_PDF_ERRMINUS
+        self.NLO_PLUS_NLL_PDF_ERRPLUS=NLO_PLUS_NLL_PDF_ERRPLUS</div>
 </pre></div>
 
            </div>

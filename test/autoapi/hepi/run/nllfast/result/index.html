@@ -74,7 +74,7 @@
             
             
               <div class="version">
-                0.2.10-6-gf5215915
+                0.2.10-13-g41760f79
               </div>
             
           
@@ -105,12 +105,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_01_write.html">Result writing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_02_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_interpolate.html">Interpolation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_write.html">Result writing example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_feynhiggs.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_nllfast.html">nll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_nnllfast.html">nnll-fast</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_softsusy.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_spheno.html">SPheno example</a></li>
 </ul>
@@ -124,6 +122,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../feynhiggs/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.feynhiggs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../madgraph/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.madgraph</span></code></a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nnllfast/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nnllfast</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../prospino2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.prospino2</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.resummino</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../softsusy/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.softsusy</span></code></a></li>
@@ -244,7 +243,7 @@
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.result.</span></span><span class="sig-name descname"><span class="pre">NLLFastResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_err_up</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_err_down</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_err_up</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_err_down</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.result.</span></span><span class="sig-name descname"><span class="pre">NLLFastResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_SCALE_ERRMINUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_SCALE_ERRPLUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_PDF_ERRMINUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_PDF_ERRPLUS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../../results/index.html#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.results.Result</span></code></a></p>
 <p>(N)NLL-fast Result Data.</p>
 <p>Sets given and computes dependent <code class="docutils literal notranslate"><span class="pre">Attributes</span></code>.</p>
