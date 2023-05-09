@@ -1,5 +1,5 @@
 """
-:mod:`hepi` interface to (N)NLL-fast.
+:mod:`hepi` interface to NLL-fast version 3.1.
 
 Find it here https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=start.
 """

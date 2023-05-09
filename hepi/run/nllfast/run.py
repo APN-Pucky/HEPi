@@ -95,31 +95,18 @@ class NLLfastRunner(Runner):
             ufloat(ret[4]/ret[13], 0.0),
             ufloat(ret[6]/ret[13], 0.0),
             ufloat(ret[5]/ret[13], 0.0),
-            ufloat((1-(ret[8]**2+ret[10]**2)**.5 )*ret[13]/10 , 0.0),
-            ufloat((1+(ret[7]**2+ret[9]**2)**.5)*ret[13]/10, 0.0),
+            ufloat((1-(ret[8]**2+ret[10]**2)**.5 )*ret[4]/ret[13] , 0.0),
+            ufloat((1+(ret[7]**2+ret[9]**2)**.5)*ret[4]/ret[13], 0.0),
         )
 
     def _prepare(self, p: Input, **kwargs) -> RunParam:
         rp = super()._prepare(p, **kwargs)
         if not rp.skip:
             d = p.__dict__
-            #data = pkgutil.get_data(__name__, "prospino_main.f90_template").decode(
-            #    "utf-8"
-            #)
-            #src = Template(data)
-            ## compute dependent pieces for template
+
             for k, v in self._get_nf_input(p).items():
                 d[k] = v
-            #result = src.substitute(d)
-            ## open(rp.in_file, "w").write(result)
-            #open(rp.out_file, "w").write(result + "\n\n")
-            # rdir = self.get_output_dir() + rp.name + ".rdir"
-            # if os.path.exists(rdir) and os.path.isdir(rdir):
-            # 	shutil.rmtree(rdir)
-            # shutil.copytree(self.get_path(),rdir)
-            # open(rdir  +"/prospino_main.f90", "w").write(result)
-            ## compile
-            # subprocess.Popen("cd " + rdir + " && make", shell=True,stdout=subprocess.DEVNULL).wait()
+
 
             open(rp.execute, "w").write(
                 "#!/bin/sh\n"
