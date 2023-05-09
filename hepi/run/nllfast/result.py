@@ -8,16 +8,16 @@ class NLLFastResult(Result):
 
     def __init__(
         self,
-        lo,
-        nlo,
-        nlo_plus_nll,
-        scale_err_up,
-        scale_err_down,
-        pdf_err_up,
-        pdf_err_down,
+        LO,
+        NLO,
+        NLO_PLUS_NLL,
+        NLO_PLUS_NLL_SCALE_ERRMINUS,
+        NLO_PLUS_NLL_SCALE_ERRPLUS,
+        NLO_PLUS_NLL_PDF_ERRMINUS,
+        NLO_PLUS_NLL_PDF_ERRPLUS,
     ):
-        Result.__init__(self, lo, nlo, nlo_plus_nll)
-        self.scale_err_up = scale_err_up
-        self.scale_err_down = scale_err_down
-        self.pdf_err_up = pdf_err_up
-        self.pdf_err_down = pdf_err_down
+        Result.__init__(self, LO, NLO, NLO_PLUS_NLL)
+        self.NLO_PLUS_NLL_SCALE_ERRMINUS=NLO_PLUS_NLL_SCALE_ERRMINUS
+        self.NLO_PLUS_NLL_SCALE_ERRPLUS=NLO_PLUS_NLL_SCALE_ERRPLUS
+        self.NLO_PLUS_NLL_PDF_ERRMINUS=NLO_PLUS_NLL_PDF_ERRMINUS
+        self.NLO_PLUS_NLL_PDF_ERRPLUS=NLO_PLUS_NLL_PDF_ERRPLUS

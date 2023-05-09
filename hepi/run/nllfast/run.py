@@ -4,6 +4,7 @@ import stat
 import warnings
 from string import Template
 from typing import List
+from hepi.run.nllfast.result import NLLFastResult
 
 import pyslha
 from uncertainties import ufloat
@@ -14,9 +15,6 @@ from hepi.run import Runner, RunParam
 
 
 class NLLfastRunner(Runner):
-    # TODO treat stop sbot separately
-    # TODO separate nll and nnll
-
     def orders(self) -> List[Order]:
         return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL]
 
@@ -24,28 +22,36 @@ class NLLfastRunner(Runner):
         d = pyslha.read(self.get_output_dir() + p.slha)
         mg = d.blocks["MASS"][1000021]
         ms = 0.0
-        for r in range(1000001, 1000007):
+        for r in range(1000001, 1000006):
             ms += d.blocks["MASS"][r]
-        for r in range(2000001, 2000007):
+        for r in range(2000001, 2000006):
             ms += d.blocks["MASS"][r]
-        ms /= 12
+        ms /= 10 # 10 flavors no (s)top
         if p.has_gluino() and p.has_squark():
-            return "sg", "cteq", ms, mg
+            if is_squark(p.particle1):
+                ms = d.blocks["MASS"][abs(p.particle1)]
+            if is_squark(p.particle2):
+                ms = d.blocks["MASS"][abs(p.particle2)]
+            return "sg", "cteq", ms, mg, 10
         if is_gluino(p.particle1) and is_gluino(p.particle2):
-            return "gg", "cteq", ms, mg
+            if ms > 2000: # go into decoupling limit
+                return "gdcpl", "cteq","", mg, 1
+            return "gg", "cteq", ms, mg, 1
         if is_squark(p.particle1) and is_squark(p.particle2):
+            if mg > 2000: # go into decoupling limit
+                return "sdcpl", "cteq", ms,"", 1
+            ms =(d.blocks["MASS"][abs(p.particle1)] +d.blocks["MASS"][abs(p.particle2)])/2
             if p.particle1 > 0 and p.particle2 > 0:
-                return "ss", "cteq", ms, mg
+                return "ss", "cteq", ms, mg,10*10
             elif (p.particle1 > 0 and p.particle2 < 0) or (
                 p.particle1 < 0 and p.particle2 > 0
             ):
                 s = p.particle1 if p.particle1 > p.particle2 else p.particle2
                 b = p.particle2 if p.particle1 > p.particle2 else p.particle1
-                return "sb", "cteq", s, b
+                return "sb", "cteq", ms, mg, 10
         return "UNKNOWN_PROCESS_OR_UNIMPLEMENTED_PROCESS"
 
     def _get_nf_input(self, p: Input) -> dict:
-        # TODO return masses of squark and gluino
         d = {}
         # d["ps_inlo"] = int(p.order)
         (
@@ -53,11 +59,15 @@ class NLLfastRunner(Runner):
             d["nf_pdf"],
             d["nf_squark_mass"],
             d["nf_gluino_mass"],
-        ) = self._get_ps_proc(p)
+            d["nf_deg"],
+        ) = self._get_nf_proc(p)
         return d
 
     def _check_input(self, p: Input, **kwargs) -> bool:
         """Checks input parameter for compatibility with Prospino"""
+        if p.energy != 13000:
+            warnings.warn("NLL-fast does not support other energies than 13 TeV.")
+            return False
         if p.mu_f != 1.0 or p.mu_r != 1.0:
             warnings.warn("NLL-fast does not support varying the scales manually.")
             return False
@@ -68,7 +78,7 @@ class NLLfastRunner(Runner):
             return False
         return True
 
-    def _is_valid(self, file: str, p: Input, d) -> bool:
+    def _is_valid(self, file: str, p: Input, d,**kwargs) -> bool:
         return super()._is_valid(file, p, d)
 
     def _parse_file(self, file: str) -> Result:
@@ -76,38 +86,33 @@ class NLLfastRunner(Runner):
         ret = []
         with open(file) as output:
             for line in output:
-                if (
-                    line.startswith("nn")
-                    or line.startswith("ng")
-                    or line.startswith("ns")
-                    or line.startswith("sg")
-                    or line.startswith("ll")
-                    or line.startswith("gg")
-                    or line.startswith("ss")
-                    or line.startswith("sb")
-                ):  # TODO generalize
-                    for s in line[2:].split():
-                        ret.append(float(s))
-        return Result(
-            ufloat(ret[8], ret[8] * ret[9]),
-            ufloat(ret[10], ret[10] * ret[11]) if ret[10] != 0.0 else None,
-            None,
+                pass
+            for s in line.split():
+                ret.append(float(s))
+        return NLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
+            ufloat(ret[2]/ret[13], 0.0),
+            ufloat(ret[3]/ret[13], 0.0),
+            ufloat(ret[4]/ret[13], 0.0),
+            ufloat(ret[6]/ret[13], 0.0),
+            ufloat(ret[5]/ret[13], 0.0),
+            ufloat((1-(ret[8]**2+ret[10]**2)**.5 )*ret[13]/10 , 0.0),
+            ufloat((1+(ret[7]**2+ret[9]**2)**.5)*ret[13]/10, 0.0),
         )
 
     def _prepare(self, p: Input, **kwargs) -> RunParam:
         rp = super()._prepare(p, **kwargs)
         if not rp.skip:
             d = p.__dict__
-            data = pkgutil.get_data(__name__, "prospino_main.f90_template").decode(
-                "utf-8"
-            )
-            src = Template(data)
-            # compute dependent pieces for template
+            #data = pkgutil.get_data(__name__, "prospino_main.f90_template").decode(
+            #    "utf-8"
+            #)
+            #src = Template(data)
+            ## compute dependent pieces for template
             for k, v in self._get_nf_input(p).items():
                 d[k] = v
-            result = src.substitute(d)
-            # open(rp.in_file, "w").write(result)
-            open(rp.out_file, "w").write(result + "\n\n")
+            #result = src.substitute(d)
+            ## open(rp.in_file, "w").write(result)
+            #open(rp.out_file, "w").write(result + "\n\n")
             # rdir = self.get_output_dir() + rp.name + ".rdir"
             # if os.path.exists(rdir) and os.path.isdir(rdir):
             # 	shutil.rmtree(rdir)
@@ -118,13 +123,15 @@ class NLLfastRunner(Runner):
 
             open(rp.execute, "w").write(
                 "#!/bin/sh\n"
-                + "{path}/nll-fast {proc} {pdf} {sq} {gl}> {out}".format(
-                    path=self.get_path(),
+                + "pushd {path} > /dev/null\nR=\"$({exec} {proc} {pdf} {sq} {gl})\"\npopd > /dev/null\necho \"$R {deg}\">{out}".format(
+                    exec=self.get_path(),
+                    path=os.path.dirname(self.get_path()),
                     out=rp.out_file,
                     proc=d["nf_final_state_in"],
                     sq=d["nf_squark_mass"],
                     gl=d["nf_gluino_mass"],
                     pdf=d["nf_pdf"],
+                    deg=d["nf_deg"],
                 )
             )
             st = os.stat(rp.execute)
@@ -137,7 +144,7 @@ class NLLfastRunner(Runner):
 
 
 # Legacy
-default_nllfast_runner = NLLfastRunner("~/git/nll-fast/")
+default_nllfast_runner = NLLfastRunner("~/git/nll-fast/nll-fast")
 """Default Prospino Runner to provide backward compatibility"""
 run = default_nllfast_runner.run
 set_path = default_nllfast_runner.set_path
