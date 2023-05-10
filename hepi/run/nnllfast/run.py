@@ -90,12 +90,14 @@ class NLLfastRunner(Runner):
             for s in line.split():
                 ret.append(float(s))
         return NNLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
-            ufloat(ret[len(ret)-10+2]/ret[len(ret)-10+9], 0.0),
-            ufloat(ret[len(ret)-10+3]/ret[len(ret)-10+9], 0.0),
-            ufloat((1-(ret[len(ret)-10+5]**2)**.5 )*ret[len(ret)-10+3]/ret[len(ret)-10+9] , 0.0),
-            ufloat((1+(ret[len(ret)-10+4]**2)**.5)*ret[len(ret)-10+3]/ret[len(ret)-10+9], 0.0),
-            ufloat((1-(ret[len(ret)-10+7]**2)**.5 )*ret[len(ret)-10+3]/ret[len(ret)-10+9] , 0.0),
-            ufloat((1+(ret[len(ret)-10+6]**2)**.5)*ret[len(ret)-10+3]/ret[len(ret)-10+9], 0.0),
+            (ret[len(ret)-10+2]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+7])/100)*ret[len(ret)-10+2]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+6])/100)*ret[len(ret)-10+2]/ret[len(ret)-10+9]),
+            (ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+5])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+4])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+7])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+6])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
         )
 
     def _prepare(self, p: Input, **kwargs) -> RunParam:
