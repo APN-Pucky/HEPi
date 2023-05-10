@@ -38,7 +38,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.10-17-gc854c729
+                0.2.10-21-g58e0f255
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -143,9 +143,9 @@ from hepi.run import Runner, RunParam
                 return &quot;gdcpl&quot;, &quot;&quot;, mg, 1
             return &quot;gg&quot;,  ms, mg, 1
         if is_squark(p.particle1) and is_squark(p.particle2):
-            if mg &gt; 3000: # go into decoupling limit
-                return &quot;sdcpl&quot;, ms,&quot;&quot;, 1
             ms =(d.blocks[&quot;MASS&quot;][abs(p.particle1)] +d.blocks[&quot;MASS&quot;][abs(p.particle2)])/2
+            if mg &gt; 3000: # go into decoupling limit
+                return &quot;sdcpl&quot;, ms,&quot;&quot;, 10
             if p.particle1 &gt; 0 and p.particle2 &gt; 0:
                 return &quot;ss&quot;,  ms, mg,10*10
             elif (p.particle1 &gt; 0 and p.particle2 &lt; 0) or (
@@ -194,12 +194,12 @@ from hepi.run import Runner, RunParam
             for s in line.split():
                 ret.append(float(s))
         return NNLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
-            ufloat(ret[2]/ret[9], 0.0),
-            ufloat(ret[3]/ret[9], 0.0),
-            ufloat((1-(ret[5]**2)**.5 )*ret[3]/ret[9] , 0.0),
-            ufloat((1+(ret[4]**2)**.5)*ret[3]/ret[9], 0.0),
-            ufloat((1-(ret[7]**2)**.5 )*ret[3]/ret[9] , 0.0),
-            ufloat((1+(ret[6]**2)**.5)*ret[3]/ret[9], 0.0),
+            ufloat(ret[len(ret)-10+2]/ret[len(ret)-10+9], 0.0),
+            ufloat(ret[len(ret)-10+3]/ret[len(ret)-10+9], 0.0),
+            ufloat((1-(ret[len(ret)-10+5]**2)**.5 )*ret[len(ret)-10+3]/ret[len(ret)-10+9] , 0.0),
+            ufloat((1+(ret[len(ret)-10+4]**2)**.5)*ret[len(ret)-10+3]/ret[len(ret)-10+9], 0.0),
+            ufloat((1-(ret[len(ret)-10+7]**2)**.5 )*ret[len(ret)-10+3]/ret[len(ret)-10+9] , 0.0),
+            ufloat((1+(ret[len(ret)-10+6]**2)**.5)*ret[len(ret)-10+3]/ret[len(ret)-10+9], 0.0),
         )</div>
 
 <div class="viewcode-block" id="NLLfastRunner._prepare"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
