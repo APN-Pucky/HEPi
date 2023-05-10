@@ -144,6 +144,9 @@ Functions
    hepi.scale_error
    hepi.combine_errors
    hepi.combine_error
+   hepi.asym_to_sym_error
+   hepi.add_errors
+   hepi.asym_to_sym_combined_error
    hepi.get_input_dir
    hepi.get_output_dir
    hepi.get_pre
@@ -1432,6 +1435,15 @@ Attributes
              Modified `dl` with new `ordername_{COMBINED,ERRPLUS,ERRMINUS}` entries.
                  - `ordername_COMBINED` contains a symmetrized :mod:`uncertainties` object.
    :rtype: :obj:`dict`
+
+
+.. py:function:: asym_to_sym_error(central, errminus, errplus)
+
+
+.. py:function:: add_errors(error1, error2)
+
+
+.. py:function:: asym_to_sym_combined_error(central, errminus1, errplus1, errminus2, errplus2)
 
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)

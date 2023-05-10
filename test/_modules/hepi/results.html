@@ -38,7 +38,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.10-22-geb946bd3
+                0.2.10-25-g367984d8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -108,6 +108,7 @@ import warnings
 
 import numpy as np
 import uncertainties.unumpy as unp
+from uncertainties import ufloat
 
 # from pqdm.processes import pqdm as ppqdm
 from pqdm.threads import pqdm as tpqdm
@@ -470,6 +471,18 @@ from .util import DictData
     )
 
     return dl</div>
+
+<div class="viewcode-block" id="asym_to_sym_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.asym_to_sym_error">[docs]</a>def asym_to_sym_error(central,errminus,errplus):
+    return ufloat(
+        central + (errplus + errminus) / 2.0,
+        (errplus - errminus) / 2.0,
+    )</div>
+
+<div class="viewcode-block" id="add_errors"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.add_errors">[docs]</a>def add_errors(error1,error2):
+    return (error1**2 + error2**2)**0.5</div>
+
+<div class="viewcode-block" id="asym_to_sym_combined_error"><a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.asym_to_sym_combined_error">[docs]</a>def asym_to_sym_combined_error(central,errminus1,errplus1,errminus2,errplus2):
+    return asym_to_sym_error(central,add_errors(errplus1,errplus2),add_errors(errminus1,errminus2))</div>
 </pre></div>
 
            </div>

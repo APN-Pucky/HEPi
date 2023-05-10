@@ -38,7 +38,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.10-22-geb946bd3
+                0.2.10-25-g367984d8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -119,6 +119,10 @@ from hepi.run import Runner, RunParam
 
 
 <div class="viewcode-block" id="NLLfastRunner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/run/index.html#hepi.run.nllfast.NLLfastRunner">[docs]</a>class NLLfastRunner(Runner):
+
+<div class="viewcode-block" id="NLLfastRunner.get_version"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/run/index.html#hepi.run.nllfast.NLLfastRunner.get_version">[docs]</a>    def get_version(self) -&gt; str:
+        return &quot;3.1&quot;</div>
+
 <div class="viewcode-block" id="NLLfastRunner.orders"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/run/index.html#hepi.run.nllfast.NLLfastRunner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
         return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL]</div>
 
@@ -196,13 +200,15 @@ from hepi.run import Runner, RunParam
                     warnings.warn(&quot;NLL-fast failed to calculate the cross section due to too large masses.&quot;)
                 ret.append(float(s))
         return NLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
-            ufloat(ret[len(ret)-14+2]/ret[len(ret)-14+13], 0.0),
-            ufloat(ret[len(ret)-14+3]/ret[len(ret)-14+13], 0.0),
-            ufloat(ret[len(ret)-14+4]/ret[len(ret)-14+13], 0.0),
-            ufloat(ret[len(ret)-14+6]/ret[len(ret)-14+13], 0.0),
-            ufloat(ret[len(ret)-14+5]/ret[len(ret)-14+13], 0.0),
-            ufloat((1-(ret[len(ret)-14+8]**2+ret[len(ret)-14+10]**2)**.5 )*ret[len(ret)-14+4]/ret[len(ret)-14+13] , 0.0),
-            ufloat((1+(ret[len(ret)-14+7]**2+ret[len(ret)-14+9]**2)**.5)*ret[len(ret)-14+4]/ret[len(ret)-14+13], 0.0),
+            ret[len(ret)-14+2]/ret[len(ret)-14+13],
+            ret[len(ret)-14+3]/ret[len(ret)-14+13],
+            -((ret[len(ret)-14+8]**2+ret[len(ret)-14+10]**2)**.5/100 )*ret[len(ret)-14+3]/ret[len(ret)-14+13] ,
+            ((ret[len(ret)-14+7]**2+ret[len(ret)-14+9]**2)**.5/100)*ret[len(ret)-14+3]/ret[len(ret)-14+13],
+            ret[len(ret)-14+4]/ret[len(ret)-14+13],
+            ret[len(ret)-14+6]/ret[len(ret)-14+13],
+            ret[len(ret)-14+5]/ret[len(ret)-14+13],
+            -((ret[len(ret)-14+8]**2+ret[len(ret)-14+10]**2)**.5/100 )*ret[len(ret)-14+4]/ret[len(ret)-14+13],
+            ((ret[len(ret)-14+7]**2+ret[len(ret)-14+9]**2)**.5/100)*ret[len(ret)-14+4]/ret[len(ret)-14+13],
         )</div>
 
 <div class="viewcode-block" id="NLLfastRunner._prepare"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/run/index.html#hepi.run.nllfast.NLLfastRunner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:

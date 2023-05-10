@@ -38,7 +38,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.10-22-geb946bd3
+                0.2.10-25-g367984d8
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -102,7 +102,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for hepi.run.nllfast.result</h1><div class="highlight"><pre>
-<span></span>from hepi.results import Result
+<span></span>from hepi.results import Result, add_errors, asym_to_sym_error
 
 
 <div class="viewcode-block" id="NLLFastResult"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult">[docs]</a>class NLLFastResult(Result):
@@ -114,6 +114,8 @@
         self,
         LO,
         NLO,
+        NLO_PDF_ERRMINUS,
+        NLO_PDF_ERRPLUS,
         NLO_PLUS_NLL,
         NLO_PLUS_NLL_SCALE_ERRMINUS,
         NLO_PLUS_NLL_SCALE_ERRPLUS,
@@ -121,10 +123,27 @@
         NLO_PLUS_NLL_PDF_ERRPLUS,
     ):
         Result.__init__(self, LO, NLO, NLO_PLUS_NLL)
+        self.LO_NOERR= LO
+        self.NLO_NOERR= NLO
+        self.NLO_PDF_ERRMINUS=NLO_PDF_ERRMINUS
+        self.NLO_PDF_ERRPLUS =NLO_PDF_ERRPLUS
+        self.NLO_PDF = asym_to_sym_error(NLO, NLO_PDF_ERRMINUS, NLO_PDF_ERRPLUS)
+
+        self.NLO_PLUS_NLL_NOERR = NLO_PLUS_NLL
+
         self.NLO_PLUS_NLL_SCALE_ERRMINUS=NLO_PLUS_NLL_SCALE_ERRMINUS
         self.NLO_PLUS_NLL_SCALE_ERRPLUS=NLO_PLUS_NLL_SCALE_ERRPLUS
+        self.NLO_PLUS_NLL_SCALE=asym_to_sym_error(NLO_PLUS_NLL, NLO_PLUS_NLL_SCALE_ERRMINUS, NLO_PLUS_NLL_SCALE_ERRPLUS)
+
         self.NLO_PLUS_NLL_PDF_ERRMINUS=NLO_PLUS_NLL_PDF_ERRMINUS
-        self.NLO_PLUS_NLL_PDF_ERRPLUS=NLO_PLUS_NLL_PDF_ERRPLUS</div>
+        self.NLO_PLUS_NLL_PDF_ERRPLUS=NLO_PLUS_NLL_PDF_ERRPLUS
+        self.NLO_PLUS_NLL_PDF=asym_to_sym_error(NLO_PLUS_NLL, NLO_PLUS_NLL_PDF_ERRMINUS, NLO_PLUS_NLL_PDF_ERRPLUS)
+
+        self.NLO_PLUS_NLL_ERRMINUS=-add_errors(NLO_PLUS_NLL_PDF_ERRMINUS, NLO_PLUS_NLL_SCALE_ERRMINUS)
+        self.NLO_PLUS_NLL_ERRPLUS=add_errors(NLO_PLUS_NLL_PDF_ERRPLUS, NLO_PLUS_NLL_SCALE_ERRPLUS)
+        self.NLO_PLUS_NLL = asym_to_sym_error(NLO_PLUS_NLL, self.NLO_PLUS_NLL_ERRMINUS, self.NLO_PLUS_NLL_ERRPLUS)</div>
+
+
 </pre></div>
 
            </div>

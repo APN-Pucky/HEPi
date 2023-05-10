@@ -34,6 +34,9 @@ Functions
    hepi.results.scale_error
    hepi.results.combine_errors
    hepi.results.combine_error
+   hepi.results.asym_to_sym_error
+   hepi.results.add_errors
+   hepi.results.asym_to_sym_combined_error
 
 
 
@@ -169,5 +172,14 @@ Attributes
              Modified `dl` with new `ordername_{COMBINED,ERRPLUS,ERRMINUS}` entries.
                  - `ordername_COMBINED` contains a symmetrized :mod:`uncertainties` object.
    :rtype: :obj:`dict`
+
+
+.. py:function:: asym_to_sym_error(central, errminus, errplus)
+
+
+.. py:function:: add_errors(error1, error2)
+
+
+.. py:function:: asym_to_sym_combined_error(central, errminus1, errplus1, errminus2, errplus2)
 
 
