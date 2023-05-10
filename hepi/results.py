@@ -4,6 +4,7 @@ import warnings
 
 import numpy as np
 import uncertainties.unumpy as unp
+from uncertainties import ufloat
 
 # from pqdm.processes import pqdm as ppqdm
 from pqdm.threads import pqdm as tpqdm
@@ -366,3 +367,15 @@ def combine_error(dl: dict, ordername="LO"):
     )
 
     return dl
+
+def asym_to_sym_error(central,errminus,errplus):
+    return ufloat(
+        central + (errplus + errminus) / 2.0,
+        (errplus - errminus) / 2.0,
+    )
+
+def add_errors(error1,error2):
+    return (error1**2 + error2**2)**0.5
+
+def asym_to_sym_combined_error(central,errminus1,errplus1,errminus2,errplus2):
+    return asym_to_sym_error(central,add_errors(errplus1,errplus2),add_errors(errminus1,errminus2))
