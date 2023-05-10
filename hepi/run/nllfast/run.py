@@ -38,9 +38,9 @@ class NLLfastRunner(Runner):
                 return "gdcpl", "cteq","", mg, 1
             return "gg", "cteq", ms, mg, 1
         if is_squark(p.particle1) and is_squark(p.particle2):
+            ms =(d.blocks["MASS"][abs(p.particle1)] +d.blocks["MASS"][abs(p.particle2)])/2
             if mg > 2000: # go into decoupling limit
                 return "sdcpl", "cteq", ms,"", 1
-            ms =(d.blocks["MASS"][abs(p.particle1)] +d.blocks["MASS"][abs(p.particle2)])/2
             if p.particle1 > 0 and p.particle2 > 0:
                 return "ss", "cteq", ms, mg,10*10
             elif (p.particle1 > 0 and p.particle2 < 0) or (
@@ -88,6 +88,8 @@ class NLLfastRunner(Runner):
             for line in output:
                 pass
             for s in line.split():
+                if "TOO" in s:
+                    warnings.warn("NLL-fast failed to calculate the cross section due to too large masses.")
                 ret.append(float(s))
         return NLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
             ufloat(ret[2]/ret[13], 0.0),
