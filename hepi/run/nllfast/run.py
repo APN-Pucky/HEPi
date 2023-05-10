@@ -15,6 +15,10 @@ from hepi.run import Runner, RunParam
 
 
 class NLLfastRunner(Runner):
+
+    def get_version(self) -> str:
+        return "3.1"
+
     def orders(self) -> List[Order]:
         return [Order.LO, Order.NLO, Order.NLO_PLUS_NLL]
 
