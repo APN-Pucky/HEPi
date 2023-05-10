@@ -92,13 +92,13 @@ class NLLfastRunner(Runner):
                     warnings.warn("NLL-fast failed to calculate the cross section due to too large masses.")
                 ret.append(float(s))
         return NLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
-            ufloat(ret[2]/ret[13], 0.0),
-            ufloat(ret[3]/ret[13], 0.0),
-            ufloat(ret[4]/ret[13], 0.0),
-            ufloat(ret[6]/ret[13], 0.0),
-            ufloat(ret[5]/ret[13], 0.0),
-            ufloat((1-(ret[8]**2+ret[10]**2)**.5 )*ret[4]/ret[13] , 0.0),
-            ufloat((1+(ret[7]**2+ret[9]**2)**.5)*ret[4]/ret[13], 0.0),
+            ufloat(ret[len(ret)-14+2]/ret[len(ret)-14+13], 0.0),
+            ufloat(ret[len(ret)-14+3]/ret[len(ret)-14+13], 0.0),
+            ufloat(ret[len(ret)-14+4]/ret[len(ret)-14+13], 0.0),
+            ufloat(ret[len(ret)-14+6]/ret[len(ret)-14+13], 0.0),
+            ufloat(ret[len(ret)-14+5]/ret[len(ret)-14+13], 0.0),
+            ufloat((1-(ret[len(ret)-14+8]**2+ret[len(ret)-14+10]**2)**.5 )*ret[len(ret)-14+4]/ret[len(ret)-14+13] , 0.0),
+            ufloat((1+(ret[len(ret)-14+7]**2+ret[len(ret)-14+9]**2)**.5)*ret[len(ret)-14+4]/ret[len(ret)-14+13], 0.0),
         )
 
     def _prepare(self, p: Input, **kwargs) -> RunParam:
