@@ -40,7 +40,7 @@ class NLLfastRunner(Runner):
         if is_squark(p.particle1) and is_squark(p.particle2):
             ms =(d.blocks["MASS"][abs(p.particle1)] +d.blocks["MASS"][abs(p.particle2)])/2
             if mg > 2000: # go into decoupling limit
-                return "sdcpl", "cteq", ms,"", 1
+                return "sdcpl", "cteq", ms,"", 10
             if p.particle1 > 0 and p.particle2 > 0:
                 return "ss", "cteq", ms, mg,10*10
             elif (p.particle1 > 0 and p.particle2 < 0) or (

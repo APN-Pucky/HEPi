@@ -39,9 +39,9 @@ class NLLfastRunner(Runner):
                 return "gdcpl", "", mg, 1
             return "gg",  ms, mg, 1
         if is_squark(p.particle1) and is_squark(p.particle2):
+            ms =(d.blocks["MASS"][abs(p.particle1)] +d.blocks["MASS"][abs(p.particle2)])/2
             if mg > 3000: # go into decoupling limit
                 return "sdcpl", ms,"", 10
-            ms =(d.blocks["MASS"][abs(p.particle1)] +d.blocks["MASS"][abs(p.particle2)])/2
             if p.particle1 > 0 and p.particle2 > 0:
                 return "ss",  ms, mg,10*10
             elif (p.particle1 > 0 and p.particle2 < 0) or (
