@@ -40,7 +40,7 @@ class NLLfastRunner(Runner):
             return "gg",  ms, mg, 1
         if is_squark(p.particle1) and is_squark(p.particle2):
             if mg > 3000: # go into decoupling limit
-                return "sdcpl", ms,"", 1
+                return "sdcpl", ms,"", 10
             ms =(d.blocks["MASS"][abs(p.particle1)] +d.blocks["MASS"][abs(p.particle2)])/2
             if p.particle1 > 0 and p.particle2 > 0:
                 return "ss",  ms, mg,10*10
@@ -90,12 +90,12 @@ class NLLfastRunner(Runner):
             for s in line.split():
                 ret.append(float(s))
         return NNLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
-            ufloat(ret[2]/ret[9], 0.0),
-            ufloat(ret[3]/ret[9], 0.0),
-            ufloat((1-(ret[5]**2)**.5 )*ret[3]/ret[9] , 0.0),
-            ufloat((1+(ret[4]**2)**.5)*ret[3]/ret[9], 0.0),
-            ufloat((1-(ret[7]**2)**.5 )*ret[3]/ret[9] , 0.0),
-            ufloat((1+(ret[6]**2)**.5)*ret[3]/ret[9], 0.0),
+            ufloat(ret[len(ret)-10+2]/ret[len(ret)-10+9], 0.0),
+            ufloat(ret[len(ret)-10+3]/ret[len(ret)-10+9], 0.0),
+            ufloat((1-(ret[len(ret)-10+5]**2)**.5 )*ret[len(ret)-10+3]/ret[len(ret)-10+9] , 0.0),
+            ufloat((1+(ret[len(ret)-10+4]**2)**.5)*ret[len(ret)-10+3]/ret[len(ret)-10+9], 0.0),
+            ufloat((1-(ret[len(ret)-10+7]**2)**.5 )*ret[len(ret)-10+3]/ret[len(ret)-10+9] , 0.0),
+            ufloat((1+(ret[len(ret)-10+6]**2)**.5)*ret[len(ret)-10+3]/ret[len(ret)-10+9], 0.0),
         )
 
     def _prepare(self, p: Input, **kwargs) -> RunParam:
