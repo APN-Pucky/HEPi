@@ -4,6 +4,7 @@ import warnings
 
 import numpy as np
 import uncertainties.unumpy as unp
+from uncertainties import ufloat
 
 # from pqdm.processes import pqdm as ppqdm
 from pqdm.threads import pqdm as tpqdm
@@ -51,26 +52,26 @@ class Result(DictData):
             self.K_LO = lo / lo
         else:
             self.K_LO = None
-        if nlo is not None and lo != 0:
+        if nlo is not None and lo != 0 and lo is not None:
             self.K_NLO = nlo / lo
         else:
             self.K_NLO = None
-        if nlo_plus_nll is not None and lo != 0:
+        if nlo_plus_nll is not None and lo != 0 and lo is not None:
             self.K_NLO_PLUS_NLL = nlo_plus_nll / lo
         else:
             self.K_NLO_PLUS_NLL = None
 
-        if nlo_plus_nll is not None and nlo != 0:
+        if nlo_plus_nll is not None and nlo != 0 and nlo is not None:
             self.NLO_PLUS_NLL_OVER_NLO = nlo_plus_nll / nlo
         else:
             self.NLO_PLUS_NLL_OVER_NLO = None
 
-        if annlo_plus_nnll is not None and lo != 0:
+        if annlo_plus_nnll is not None and lo != 0 and lo is not None:
             self.K_aNNLO_PLUS_NNLL = annlo_plus_nnll / lo
         else:
             self.K_aNNLO_PLUS_NNLL = None
 
-        if annlo_plus_nnll is not None and nlo != 0:
+        if annlo_plus_nnll is not None and nlo != 0 and nlo is not None:
             self.aNNLO_PLUS_NNLL_OVER_NLO = annlo_plus_nnll / nlo
         else:
             self.aNNLO_PLUS_NNLL_OVER_NLO = None
@@ -366,3 +367,15 @@ def combine_error(dl: dict, ordername="LO"):
     )
 
     return dl
+
+def asym_to_sym_error(central,errminus,errplus):
+    return ufloat(
+        central + (errplus + errminus) / 2.0,
+        (errplus - errminus) / 2.0,
+    )
+
+def add_errors(error1,error2):
+    return (error1**2 + error2**2)**0.5
+
+def asym_to_sym_combined_error(central,errminus1,errplus1,errminus2,errplus2):
+    return asym_to_sym_error(central,add_errors(errplus1,errplus2),add_errors(errminus1,errminus2))

@@ -200,9 +200,9 @@ class Runner:
                     This is not the prefered cluster/parallel mode, as there the function only queues the job.
                 parallel (bool): Run jobs in parallel.
                 sleep (int): Sleep seconds after starting job.
-        run (bool): Actually start/queue runner.
-        ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
-        n_jobs (int): Number of parallel jobs. If None, use all available cores.
+                run (bool): Actually start/queue runner.
+                ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
+                n_jobs (int): Number of parallel jobs. If None, use all available cores.
 
             Returns:
                 :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
@@ -255,7 +255,7 @@ class Runner:
                 wait (bool): Wait for parallel runs to finish.
                 sleep (int): Sleep seconds after starting subprocess.
                 parallel (bool): Run jobs in parallel.
-        n_jobs (int): Number of parallel jobs. If None, use all available cores.
+                n_jobs (int): Number of parallel jobs. If None, use all available cores.
 
             Returns:
                 :obj:`list` of int: return codes from jobs if `no_parse` is False.

@@ -7,7 +7,7 @@ html:
 doc: html
 
 install:
-	poetry install --with dev --with docs
+	poetry install --with docs --with test
 	python3 -m pip install --user .
 
 build:

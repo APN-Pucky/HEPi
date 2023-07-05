@@ -2,9 +2,8 @@ name: stable
 
 on: 
   push:
-    branches:
-      - 'stable'
-
+    tags: 
+      - '*'
 jobs:
     default:
       runs-on: ubuntu-latest
@@ -17,6 +16,6 @@ jobs:
             doc: true
             coveralls: true
             codacy-api-token: ${{ secrets.CODACY_API_TOKEN }}
-            # pypi-token: ${{ secrets.pypi_token }}
+            pypi-token: ${{ secrets.pypi_token }}
             gh-pages: true
             gh-pages-folder: docs/build/html
