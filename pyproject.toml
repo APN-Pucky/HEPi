@@ -34,7 +34,7 @@ lhapdf = ["lhapdf"]
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "*"
+sphinx = "<7.0.0" # pinned due to RTD issues
 sphinx-rtd-theme = "*"
 sphinxcontrib-napoleon = "*"
 nbsphinx = "*"
