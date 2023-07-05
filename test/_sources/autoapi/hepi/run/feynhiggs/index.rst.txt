@@ -56,6 +56,7 @@ Attributes
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
+
    Bases: :py:obj:`hepi.util.DictData`
 
    Input for computation and scans.
@@ -136,6 +137,7 @@ Attributes
 
 
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
+
 
    .. py:method:: orders()
 
@@ -329,6 +331,7 @@ Attributes
 
 
 .. py:class:: FeynHiggsRunner(path, in_dir = None, out_dir = None, pre=None)
+
 
    Bases: :py:obj:`hepi.run.Runner`
 

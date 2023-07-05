@@ -14,6 +14,8 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
@@ -38,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.10-34-g923e00e8
+                0.2.10-74-gfa651c3f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -122,7 +124,7 @@ from .util import DictData, lhapdf_name_to_id
 &quot;&quot;&quot;Prefix for run commands.&quot;&quot;&quot;
 
 
-<div class="viewcode-block" id="get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_input_dir">[docs]</a>def get_input_dir():
+<div class="viewcode-block" id="get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_input_dir">[docs]</a>def get_input_dir():
     &quot;&quot;&quot;
     Get the input directory.
 
@@ -133,7 +135,7 @@ from .util import DictData, lhapdf_name_to_id
     return in_dir</div>
 
 
-<div class="viewcode-block" id="get_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_output_dir">[docs]</a>def get_output_dir():
+<div class="viewcode-block" id="get_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_output_dir">[docs]</a>def get_output_dir():
     &quot;&quot;&quot;
     Get the input directory.
 
@@ -144,7 +146,7 @@ from .util import DictData, lhapdf_name_to_id
     return out_dir</div>
 
 
-<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_pre">[docs]</a>def get_pre():
+<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_pre">[docs]</a>def get_pre():
     &quot;&quot;&quot;
     Gets the command prefix.
 
@@ -191,7 +193,7 @@ from .util import DictData, lhapdf_name_to_id
     pre = ppre</div>
 
 
-<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input">[docs]</a>class Input(DictData):
+<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input">[docs]</a>class Input(DictData):
     &quot;&quot;&quot;
     Input for computation and scans.
 
@@ -272,22 +274,22 @@ from .util import DictData, lhapdf_name_to_id
         if update:
             update_slha(self)
 
-<div class="viewcode-block" id="Input.has_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_gluino">[docs]</a>    def has_gluino(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_gluino"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_gluino">[docs]</a>    def has_gluino(self) -&gt; bool:
         return is_gluino(self.particle1) or is_gluino(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_neutralino">[docs]</a>    def has_neutralino(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_neutralino">[docs]</a>    def has_neutralino(self) -&gt; bool:
         return is_neutralino(self.particle1) or is_neutralino(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_charginos"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_charginos">[docs]</a>    def has_charginos(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_charginos"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_charginos">[docs]</a>    def has_charginos(self) -&gt; bool:
         return is_chargino(self.particle1) or is_chargino(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_weakino">[docs]</a>    def has_weakino(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_weakino"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_weakino">[docs]</a>    def has_weakino(self) -&gt; bool:
         return self.has_charginos() or self.has_neutralino()</div>
 
-<div class="viewcode-block" id="Input.has_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_squark">[docs]</a>    def has_squark(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_squark"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_squark">[docs]</a>    def has_squark(self) -&gt; bool:
         return is_squark(self.particle1) or is_squark(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_slepton">[docs]</a>    def has_slepton(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_slepton"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_slepton">[docs]</a>    def has_slepton(self) -&gt; bool:
         return is_slepton(self.particle1) or is_slepton(self.particle2)</div></div>
 
 
@@ -321,7 +323,7 @@ from .util import DictData, lhapdf_name_to_id
     return abs(iid) in l_slepton or abs(iid) in r_slepton</div>
 
 
-<div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.update_slha">[docs]</a>def update_slha(i: Input):
+<div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.update_slha">[docs]</a>def update_slha(i: Input):
     &quot;&quot;&quot;
     Updates dependent parameters in Input `i`.
 

@@ -14,6 +14,8 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
@@ -38,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.10-34-g923e00e8
+                0.2.10-74-gfa651c3f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -120,7 +122,7 @@ from ..input import Input, get_output_dir, replace_macros
 from ..particles import get_name
 
 
-<div class="viewcode-block" id="title"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.title">[docs]</a>def title(
+<div class="viewcode-block" id="title"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.title">[docs]</a>def title(
     i: Input,
     axe=None,
     scenario=None,
@@ -148,7 +150,7 @@ from ..particles import get_name
     )</div>
 
 
-<div class="viewcode-block" id="energy_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.energy_plot">[docs]</a>def energy_plot(
+<div class="viewcode-block" id="energy_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.energy_plot">[docs]</a>def energy_plot(
     dict_list,
     y,
     yscale=1.0,
@@ -171,7 +173,7 @@ from ..particles import get_name
     )</div>
 
 
-<div class="viewcode-block" id="combined_mass_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.combined_mass_plot">[docs]</a>def combined_mass_plot(dict_list, y, part, label=None, **kwargs):
+<div class="viewcode-block" id="combined_mass_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.combined_mass_plot">[docs]</a>def combined_mass_plot(dict_list, y, part, label=None, **kwargs):
     if label == &quot;&quot;:
         kwargs[&quot;label&quot;] = &quot;&quot;
     mass_plot(
@@ -199,7 +201,7 @@ from ..particles import get_name
     )</div>
 
 
-<div class="viewcode-block" id="combined_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.combined_plot">[docs]</a>def combined_plot(dict_list, x, y, label=None, **kwargs):
+<div class="viewcode-block" id="combined_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.combined_plot">[docs]</a>def combined_plot(dict_list, x, y, label=None, **kwargs):
     if label == &quot;&quot;:
         kwargs[&quot;label&quot;] = &quot;&quot;
     plot(
@@ -227,7 +229,7 @@ from ..particles import get_name
     )</div>
 
 
-<div class="viewcode-block" id="mass_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.mass_plot">[docs]</a>def mass_plot(
+<div class="viewcode-block" id="mass_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.mass_plot">[docs]</a>def mass_plot(
     dict_list,
     y,
     part,
@@ -255,7 +257,7 @@ from ..particles import get_name
     )</div>
 
 
-<div class="viewcode-block" id="mass_vplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.mass_vplot">[docs]</a>def mass_vplot(
+<div class="viewcode-block" id="mass_vplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.mass_vplot">[docs]</a>def mass_vplot(
     dict_list,
     y,
     part,
@@ -279,7 +281,7 @@ from ..particles import get_name
     )</div>
 
 
-<div class="viewcode-block" id="get_mass"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.get_mass">[docs]</a>def get_mass(l: dict, iid: int):
+<div class="viewcode-block" id="get_mass"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.get_mass">[docs]</a>def get_mass(l: dict, iid: int):
     &quot;&quot;&quot;
     Get the mass of particle with id `iid` out of the list in the &quot;slha&quot; element in the dict.
 
@@ -295,7 +297,7 @@ from ..particles import get_name
     return np.array(ret)</div>
 
 
-<div class="viewcode-block" id="plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.plot">[docs]</a>def plot(
+<div class="viewcode-block" id="plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot">[docs]</a>def plot(
     dict_list,
     x,
     y,
@@ -366,13 +368,13 @@ from ..particles import get_name
     vplot(vx, vy, label, xaxis, yaxis, logy, yscale, mask=mask, **kwargs)</div>
 
 
-<div class="viewcode-block" id="index_open"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.index_open">[docs]</a>def index_open(var, idx):
+<div class="viewcode-block" id="index_open"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.index_open">[docs]</a>def index_open(var, idx):
     if len(idx) == 1:
         return var[idx]
     return index_open(var[idx[0]], idx[1:])</div>
 
 
-<div class="viewcode-block" id="slha_data"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.slha_data">[docs]</a>def slha_data(li, index_list):
+<div class="viewcode-block" id="slha_data"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.slha_data">[docs]</a>def slha_data(li, index_list):
     vx = []
     for l in li:
         b = pyslha.read(get_output_dir() + l.slha)
@@ -380,14 +382,14 @@ from ..particles import get_name
     return np.array(vx)</div>
 
 
-<div class="viewcode-block" id="slha_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.slha_plot">[docs]</a>def slha_plot(li, x, y, **kwargs):
+<div class="viewcode-block" id="slha_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.slha_plot">[docs]</a>def slha_plot(li, x, y, **kwargs):
     vx = slha_data(li, x)
     vy = slha_data(li, y)
 
     vplot(np.array(vx), np.array(vy), **kwargs)</div>
 
 
-<div class="viewcode-block" id="vplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.vplot">[docs]</a>def vplot(
+<div class="viewcode-block" id="vplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.vplot">[docs]</a>def vplot(
     x,
     y,
     label=None,
@@ -473,7 +475,7 @@ from ..particles import get_name
         )</div>
 
 
-<div class="viewcode-block" id="mass_mapplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.mass_mapplot">[docs]</a>def mass_mapplot(
+<div class="viewcode-block" id="mass_mapplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.mass_mapplot">[docs]</a>def mass_mapplot(
     dict_list,
     part1,
     part2,
@@ -496,7 +498,7 @@ from ..particles import get_name
     )</div>
 
 
-<div class="viewcode-block" id="mapplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.mapplot">[docs]</a>def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
+<div class="viewcode-block" id="mapplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.mapplot">[docs]</a>def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
     &quot;&quot;&quot;
 
     Examples
@@ -526,11 +528,11 @@ from ..particles import get_name
     )</div>
 
 
-<div class="viewcode-block" id="map_vplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.map_vplot">[docs]</a>map_vplot = lambda *a, **da: splot.plot2d(*a, style=&quot;pcolormesh&quot;, **da)</div>
-<div class="viewcode-block" id="scatter_vplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.scatter_vplot">[docs]</a>scatter_vplot = lambda *a, **da: splot.plot2d(*a, style=&quot;scatter&quot;, **da)</div>
+<div class="viewcode-block" id="map_vplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.map_vplot">[docs]</a>map_vplot = lambda *a, **da: splot.plot2d(*a, style=&quot;pcolormesh&quot;, **da)</div>
+<div class="viewcode-block" id="scatter_vplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.scatter_vplot">[docs]</a>scatter_vplot = lambda *a, **da: splot.plot2d(*a, style=&quot;scatter&quot;, **da)</div>
 
 
-<div class="viewcode-block" id="scatterplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.scatterplot">[docs]</a>def scatterplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
+<div class="viewcode-block" id="scatterplot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.scatterplot">[docs]</a>def scatterplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
     &quot;&quot;&quot;
     Scatter map 2d.
     Central color is the central value, while the inner and outer ring are lower and upper bounds of the uncertainty interval.
@@ -562,13 +564,13 @@ from ..particles import get_name
     )</div>
 
 
-<div class="viewcode-block" id="fig"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.fig">[docs]</a>fig = None</div>
-<div class="viewcode-block" id="axs"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.axs">[docs]</a>axs = None</div>
-<div class="viewcode-block" id="lines"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.lines">[docs]</a>lines = []</div>
-<div class="viewcode-block" id="labels"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.labels">[docs]</a>labels = []</div>
+<div class="viewcode-block" id="fig"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.fig">[docs]</a>fig = None</div>
+<div class="viewcode-block" id="axs"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.axs">[docs]</a>axs = None</div>
+<div class="viewcode-block" id="lines"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.lines">[docs]</a>lines = []</div>
+<div class="viewcode-block" id="labels"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.labels">[docs]</a>labels = []</div>
 
 
-<div class="viewcode-block" id="err_plt"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.err_plt">[docs]</a>def err_plt(axes, x, y, label=None, error=False):
+<div class="viewcode-block" id="err_plt"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.err_plt">[docs]</a>def err_plt(axes, x, y, label=None, error=False):
     v = label
     ind = np.argsort(splot.unv(x), kind=&quot;stable&quot;)
     if error:
@@ -581,7 +583,7 @@ from ..particles import get_name
         return l[0]</div>
 
 
-<div class="viewcode-block" id="scale_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.scale_plot">[docs]</a>def scale_plot(
+<div class="viewcode-block" id="scale_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.scale_plot">[docs]</a>def scale_plot(
     dict_list,
     vl,
     seven_point_band=False,
@@ -746,7 +748,7 @@ from ..particles import get_name
     mpl.rcParams[&quot;axes.prop_cycle&quot;] = cycle_safe</div>
 
 
-<div class="viewcode-block" id="central_scale_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.central_scale_plot">[docs]</a>def central_scale_plot(
+<div class="viewcode-block" id="central_scale_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.central_scale_plot">[docs]</a>def central_scale_plot(
     dict_list, vl, cont=False, error=True, yscale=1.0, unit=&quot;pb&quot;, yaxis=None
 ):
     &quot;&quot;&quot;Creates a scale variance plot with 3 panels (ystacked).&quot;&quot;&quot;
@@ -788,7 +790,7 @@ from ..particles import get_name
     # plt.show()
 
 
-<div class="viewcode-block" id="init_double_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.plot.init_double_plot">[docs]</a>def init_double_plot(
+<div class="viewcode-block" id="init_double_plot"><a class="viewcode-back" href="../../../autoapi/hepi/plot/plot/index.html#hepi.init_double_plot">[docs]</a>def init_double_plot(
     figsize=(6, 8), sharex=True, sharey=False, gridspec_kw={&quot;height_ratios&quot;: [3, 1]}
 ):
     &quot;&quot;&quot;Initialze subplot for Ratio/K plots with another figure below.&quot;&quot;&quot;

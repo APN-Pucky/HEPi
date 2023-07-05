@@ -62,6 +62,7 @@ Functions
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
+
    Bases: :py:obj:`hepi.util.DictData`
 
    Input for computation and scans.
@@ -136,6 +137,7 @@ Functions
 
 .. py:class:: Order
 
+
    Bases: :py:obj:`enum.IntEnum`
 
    Computation orders.
@@ -188,6 +190,7 @@ Functions
 
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
+
 
    Bases: :py:obj:`hepi.util.DictData`
 
@@ -257,6 +260,7 @@ Functions
 
 .. py:class:: DictData
 
+
    .. py:method:: __str__()
 
       Returns attributes as dict as string
@@ -286,12 +290,14 @@ Functions
 
 .. py:class:: RunParam(skip = False, in_file = None, out_file = None, execute = None, name = None)
 
+
    Bases: :py:obj:`hepi.util.DictData`
 
    Abstract class that is similar to a dictionary but with fixed keys.
 
 
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
+
 
    .. py:method:: orders()
 

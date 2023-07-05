@@ -15,6 +15,8 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
@@ -41,7 +43,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.10-34-g923e00e8
+                0.2.10-74-gfa651c3f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -600,7 +602,7 @@
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.Order">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><a class="headerlink" href="#hepi.Order" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><a class="reference internal" href="../../_modules/hepi/order.html#Order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Order" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
 <p>Computation orders.</p>
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
@@ -632,7 +634,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.order_to_string">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.order_to_string" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/order.html#order_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.order_to_string" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>o</strong> (<a class="reference internal" href="#id36" title="hepi.Order"><em>Order</em></a>) – </p>
@@ -645,7 +647,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.replace_macros">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">replace_macros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.replace_macros" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">replace_macros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/order.html#replace_macros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.replace_macros" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – </p>
@@ -658,7 +660,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.xsec_to_order">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">xsec_to_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.xsec_to_order" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">xsec_to_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/order.html#xsec_to_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.xsec_to_order" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – </p>
@@ -668,10 +670,10 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.DictData">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DictData</span></span><a class="headerlink" href="#hepi.DictData" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DictData</span></span><a class="reference internal" href="../../_modules/hepi/util.html#DictData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.DictData" title="Permalink to this definition"></a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="hepi.DictData.__str__">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.DictData.__str__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#DictData.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.DictData.__str__" title="Permalink to this definition"></a></dt>
 <dd><p>Returns attributes as dict as string</p>
 </dd></dl>
 
@@ -679,7 +681,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.lhapdf_name_to_id">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.lhapdf_name_to_id" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#lhapdf_name_to_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.lhapdf_name_to_id" title="Permalink to this definition"></a></dt>
 <dd><p>Converts a LHAPDF name to the sets id.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -844,7 +846,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Input.has_gluino">
-<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Input.has_gluino" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_gluino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Input.has_gluino" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -854,7 +856,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Input.has_neutralino">
-<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Input.has_neutralino" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_neutralino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Input.has_neutralino" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -864,7 +866,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Input.has_charginos">
-<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Input.has_charginos" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_charginos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Input.has_charginos" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -874,7 +876,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Input.has_weakino">
-<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Input.has_weakino" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_weakino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Input.has_weakino" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -884,7 +886,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Input.has_squark">
-<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Input.has_squark" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_squark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Input.has_squark" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -894,7 +896,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Input.has_slepton">
-<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Input.has_slepton" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_slepton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Input.has_slepton" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1452,7 +1454,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="id1">
-<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_gluino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1462,7 +1464,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id2">
-<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_neutralino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1472,7 +1474,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id3">
-<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_charginos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1482,7 +1484,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id4">
-<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_weakino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1492,7 +1494,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id5">
-<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id5" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_squark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1502,7 +1504,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id6">
-<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id6" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_slepton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1514,7 +1516,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id7">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id7" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/order.html#order_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>o</strong> (<a class="reference internal" href="#id36" title="hepi.Order"><em>Order</em></a>) – </p>
@@ -1527,7 +1529,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id8">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">xsec_to_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id8" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">xsec_to_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/order.html#xsec_to_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – </p>
@@ -1537,7 +1539,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.DL2DF">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.DL2DF" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#DL2DF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.DL2DF" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1551,7 +1553,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.LD2DL">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.LD2DL" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.LD2DL" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a list of objects into a dictionary of lists.</p>
 <p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
 <dl class="field-list simple">
@@ -1606,7 +1608,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py class">
 <dt class="sig sig-object py" id="id9">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><a class="headerlink" href="#id9" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><a class="reference internal" href="../../_modules/hepi/order.html#Order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
 <p>Computation orders.</p>
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
@@ -1638,7 +1640,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id14">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id14" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/order.html#order_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id14" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>o</strong> (<a class="reference internal" href="#id36" title="hepi.Order"><em>Order</em></a>) – </p>
@@ -1651,7 +1653,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id15">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id15" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#DL2DF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id15" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1920,7 +1922,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="id17">
-<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id17" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_gluino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id17" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1930,7 +1932,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id18">
-<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id18" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_neutralino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id18" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1940,7 +1942,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id19">
-<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id19" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_charginos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id19" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1950,7 +1952,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id20">
-<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id20" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_weakino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id20" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1960,7 +1962,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id21">
-<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id21" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_squark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id21" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1970,7 +1972,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id22">
-<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id22" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_slepton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id22" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1996,7 +1998,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id24">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">replace_macros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id24" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">replace_macros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/order.html#replace_macros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id24" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – </p>
@@ -2009,7 +2011,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.get_name">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.get_name" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/particles.html#get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.get_name" title="Permalink to this definition"></a></dt>
 <dd><p>Get the latex name of a particle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2033,7 +2035,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.title">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_L_R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cms_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.title" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diff_L_R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cms_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#title"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.title" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the title on axis <cite>axe</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2044,33 +2046,33 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.energy_plot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">energy_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'E</span> <span class="pre">[GeV]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.energy_plot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">energy_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'E</span> <span class="pre">[GeV]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#energy_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.energy_plot" title="Permalink to this definition"></a></dt>
 <dd><p>Plot energy on the x-axis.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.combined_mass_plot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">combined_mass_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.combined_mass_plot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">combined_mass_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#combined_mass_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.combined_mass_plot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.combined_plot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">combined_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.combined_plot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">combined_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#combined_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.combined_plot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.mass_plot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">mass_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.mass_plot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">mass_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#mass_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.mass_plot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.mass_vplot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">mass_vplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.mass_vplot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">mass_vplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#mass_vplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.mass_vplot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.get_mass">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.get_mass" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">get_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#get_mass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.get_mass" title="Permalink to this definition"></a></dt>
 <dd><p>Get the mass of particle with id <cite>iid</cite> out of the list in the “slha” element in the dict.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of float : masses of particles in each element of the dict list.</p>
@@ -2112,33 +2114,33 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.index_open">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">index_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.index_open" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">index_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#index_open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.index_open" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.slha_data">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">slha_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.slha_data" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">slha_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#slha_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.slha_data" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.slha_plot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">slha_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.slha_plot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">slha_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">li</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#slha_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.slha_plot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.vplot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">vplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'E</span> <span class="pre">[GeV]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.vplot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">vplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'E</span> <span class="pre">[GeV]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_area</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#vplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.vplot" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a plot based on the values in <cite>x`and `y</cite>.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.mass_mapplot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">mass_mapplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.mass_mapplot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">mass_mapplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#mass_mapplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.mass_mapplot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.mapplot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">mapplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.mapplot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">mapplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#mapplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.mapplot" title="Permalink to this definition"></a></dt>
 <dd><p>Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">urllib.request</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hepi</span>
@@ -2158,17 +2160,17 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.map_vplot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">map_vplot</span></span><a class="headerlink" href="#hepi.map_vplot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">map_vplot</span></span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#map_vplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.map_vplot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.scatter_vplot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">scatter_vplot</span></span><a class="headerlink" href="#hepi.scatter_vplot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">scatter_vplot</span></span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#scatter_vplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.scatter_vplot" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.scatterplot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">scatterplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.scatterplot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">scatterplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#scatterplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.scatterplot" title="Permalink to this definition"></a></dt>
 <dd><p>Scatter map 2d.
 Central color is the central value, while the inner and outer ring are lower and upper bounds of the uncertainty interval.</p>
 <p>Examples</p>
@@ -2188,53 +2190,53 @@ Central color is the central value, while the inner and outer ring are lower and
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.fig">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">fig</span></span><a class="headerlink" href="#hepi.fig" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">fig</span></span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#fig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.fig" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.axs">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">axs</span></span><a class="headerlink" href="#hepi.axs" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">axs</span></span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#axs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.axs" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.lines">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lines</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#hepi.lines" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lines</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="reference internal" href="../../_modules/hepi/plot/plot.html#lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.lines" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.labels">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#hepi.labels" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">labels</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="reference internal" href="../../_modules/hepi/plot/plot.html#labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.labels" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.err_plt">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">err_plt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.err_plt" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">err_plt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#err_plt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.err_plt" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.scale_plot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">scale_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seven_point_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">li</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plehn_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.scale_plot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">scale_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seven_point_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">li</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plehn_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#scale_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.scale_plot" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a scale variance plot with 5 panels (xline).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.central_scale_plot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">central_scale_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.central_scale_plot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">central_scale_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cont</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pb'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#central_scale_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.central_scale_plot" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a scale variance plot with 3 panels (ystacked).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.init_double_plot">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">init_double_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridspec_kw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'height_ratios':</span> <span class="pre">[3,</span> <span class="pre">1]}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.init_double_plot" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">init_double_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(6,</span> <span class="pre">8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sharey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridspec_kw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'height_ratios':</span> <span class="pre">[3,</span> <span class="pre">1]}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/plot/plot.html#init_double_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.init_double_plot" title="Permalink to this definition"></a></dt>
 <dd><p>Initialze subplot for Ratio/K plots with another figure below.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="id25">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DictData</span></span><a class="headerlink" href="#id25" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DictData</span></span><a class="reference internal" href="../../_modules/hepi/util.html#DictData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id25" title="Permalink to this definition"></a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="id26">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id26" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#DictData.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id26" title="Permalink to this definition"></a></dt>
 <dd><p>Returns attributes as dict as string</p>
 </dd></dl>
 
@@ -2460,7 +2462,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="id30">
-<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id30" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_gluino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id30" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -2470,7 +2472,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id31">
-<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id31" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_neutralino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id31" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -2480,7 +2482,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id32">
-<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id32" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_charginos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id32" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -2490,7 +2492,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id33">
-<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id33" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_weakino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id33" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -2500,7 +2502,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id34">
-<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id34" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_squark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id34" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -2510,7 +2512,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="id35">
-<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id35" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/input.html#Input.has_slepton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id35" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -2522,7 +2524,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py class">
 <dt class="sig sig-object py" id="id36">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><a class="headerlink" href="#id36" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><a class="reference internal" href="../../_modules/hepi/order.html#Order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id36" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
 <p>Computation orders.</p>
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
@@ -2629,7 +2631,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id45">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id45" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#DL2DF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id45" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2643,7 +2645,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id46">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id46" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id46" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a list of objects into a dictionary of lists.</p>
 <p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
 <dl class="field-list simple">
@@ -2674,10 +2676,10 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py class">
 <dt class="sig sig-object py" id="id47">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DictData</span></span><a class="headerlink" href="#id47" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DictData</span></span><a class="reference internal" href="../../_modules/hepi/util.html#DictData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id47" title="Permalink to this definition"></a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="id48">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id48" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#DictData.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id48" title="Permalink to this definition"></a></dt>
 <dd><p>Returns attributes as dict as string</p>
 </dd></dl>
 
@@ -2685,7 +2687,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.namehash">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">namehash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.namehash" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">namehash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#namehash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.namehash" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a sha256 hash from the objects string representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2712,7 +2714,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.RunParam">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">RunParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">execute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.RunParam" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">RunParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">execute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#RunParam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.RunParam" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="util/index.html#hepi.util.DictData" title="hepi.util.DictData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.util.DictData</span></code></a></p>
 <p>Abstract class that is similar to a dictionary but with fixed keys.</p>
 <dl class="field-list simple">
@@ -2730,7 +2732,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.Runner">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Runner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">Runner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -2742,7 +2744,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.orders">
-<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.orders" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.orders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.orders" title="Permalink to this definition"></a></dt>
 <dd><p>List of supported Orders in this runner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -2753,7 +2755,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.get_name">
-<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.get_name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.get_name" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the name of the runner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -2764,7 +2766,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.get_version">
-<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.get_version" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.get_version" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -2774,7 +2776,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner._sub_run">
-<span class="sig-name descname"><span class="pre">_sub_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner._sub_run" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_sub_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner._sub_run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner._sub_run" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>coms</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p>
@@ -2787,7 +2789,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner._check_path">
-<span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner._check_path" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner._check_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner._check_path" title="Permalink to this definition"></a></dt>
 <dd><p>Checks if the passed path is valid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -2798,7 +2800,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner._prepare">
-<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_valid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner._prepare" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_valid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner._prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner._prepare" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>p</strong> (<a class="reference internal" href="input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>) – </p>
@@ -2811,7 +2813,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner._check_input">
-<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner._check_input" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner._check_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner._check_input" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>param</strong> (<a class="reference internal" href="input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>) – </p>
@@ -2824,7 +2826,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner._prepare_all">
-<span class="sig-name descname"><span class="pre">_prepare_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner._prepare_all" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_prepare_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner._prepare_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner._prepare_all" title="Permalink to this definition"></a></dt>
 <dd><p>Prepares all parameters for execution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2842,7 +2844,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.run" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.run" title="Permalink to this definition"></a></dt>
 <dd><p>Run the passed list of parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2869,7 +2871,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner._run">
-<span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner._run" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner._run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner._run" title="Permalink to this definition"></a></dt>
 <dd><p>Runs Runner per <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2893,7 +2895,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner._is_valid">
-<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner._is_valid" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner._is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner._is_valid" title="Permalink to this definition"></a></dt>
 <dd><p>Verifies that a file is a complete output.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2914,7 +2916,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.parse">
-<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.parse" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.parse" title="Permalink to this definition"></a></dt>
 <dd><blockquote>
 <div><p>Parses Resummino output files and returns List of Results.</p>
 <dl class="simple">
@@ -2941,7 +2943,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner._parse_file">
-<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner._parse_file" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner._parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner._parse_file" title="Permalink to this definition"></a></dt>
 <dd><p>Extracts results from an output file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2958,7 +2960,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.get_path">
-<span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.get_path" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.get_path" title="Permalink to this definition"></a></dt>
 <dd><p>Get the Runner path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2972,7 +2974,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.get_input_dir">
-<span class="sig-name descname"><span class="pre">get_input_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.get_input_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_input_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.get_input_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.get_input_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Get the input directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -2986,7 +2988,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.get_output_dir">
-<span class="sig-name descname"><span class="pre">get_output_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.get_output_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_output_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.get_output_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.get_output_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Get the input directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -3000,7 +3002,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.get_pre">
-<span class="sig-name descname"><span class="pre">get_pre</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.get_pre" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_pre</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.get_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.get_pre" title="Permalink to this definition"></a></dt>
 <dd><p>Gets the command prefix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -3014,7 +3016,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.set_path">
-<span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.set_path" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.set_path" title="Permalink to this definition"></a></dt>
 <dd><p>Set the path to the Runner folder containing the binary in ‘./bin’ or ‘./build/bin’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -3025,7 +3027,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.set_input_dir">
-<span class="sig-name descname"><span class="pre">set_input_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.set_input_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_input_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.set_input_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.set_input_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the input directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -3036,7 +3038,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.set_output_dir">
-<span class="sig-name descname"><span class="pre">set_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.set_output_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.set_output_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.set_output_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the output directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -3051,7 +3053,7 @@ create (bool): create directory if not existing.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.Runner.set_pre">
-<span class="sig-name descname"><span class="pre">set_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ppre</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.Runner.set_pre" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ppre</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/run/run.html#Runner.set_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.Runner.set_pre" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the command prefix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -3064,10 +3066,10 @@ create (bool): create directory if not existing.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="id49">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DictData</span></span><a class="headerlink" href="#id49" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DictData</span></span><a class="reference internal" href="../../_modules/hepi/util.html#DictData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id49" title="Permalink to this definition"></a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="id50">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id50" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#DictData.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id50" title="Permalink to this definition"></a></dt>
 <dd><p>Returns attributes as dict as string</p>
 </dd></dl>
 
@@ -3075,7 +3077,7 @@ create (bool): create directory if not existing.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id51">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id51" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">LD2DL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actual_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#LD2DL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id51" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a list of objects into a dictionary of lists.</p>
 <p>The values of each object are first converted to a <cite>dict</cite> through the <cite>__dict__</cite> attribute.</p>
 <dl class="field-list simple">
@@ -3106,7 +3108,7 @@ create (bool): create directory if not existing.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id52">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id52" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#DL2DF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id52" title="Permalink to this definition"></a></dt>
 <dd><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -3120,7 +3122,7 @@ create (bool): create directory if not existing.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id53">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">namehash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id53" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">namehash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#namehash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id53" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a sha256 hash from the objects string representation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -3147,7 +3149,7 @@ create (bool): create directory if not existing.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="id54">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id54" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">lhapdf_name_to_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/util.html#lhapdf_name_to_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id54" title="Permalink to this definition"></a></dt>
 <dd><p>Converts a LHAPDF name to the sets id.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

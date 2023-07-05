@@ -15,6 +15,8 @@
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/doctools.js"></script>
         <script src="../../../../_static/sphinx_highlight.js"></script>
@@ -41,7 +43,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.10-34-g923e00e8
+                0.2.10-74-gfa651c3f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -194,7 +196,7 @@
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Input">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.feynhiggs.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invariant_mass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'total'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Input" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.feynhiggs.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invariant_mass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'total'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/input.html#Input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Input" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../util/index.html#hepi.util.DictData" title="hepi.util.DictData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.util.DictData</span></code></a></p>
 <p>Input for computation and scans.</p>
 <dl class="field-list simple">
@@ -240,7 +242,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Input.has_gluino">
-<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_gluino" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/input.html#Input.has_gluino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_gluino" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -250,7 +252,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Input.has_neutralino">
-<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_neutralino" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/input.html#Input.has_neutralino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_neutralino" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -260,7 +262,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Input.has_charginos">
-<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_charginos" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/input.html#Input.has_charginos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_charginos" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -270,7 +272,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Input.has_weakino">
-<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_weakino" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/input.html#Input.has_weakino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_weakino" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -280,7 +282,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Input.has_squark">
-<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_squark" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/input.html#Input.has_squark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_squark" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -290,7 +292,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Input.has_slepton">
-<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_slepton" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/input.html#Input.has_slepton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Input.has_slepton" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
@@ -302,7 +304,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.update_slha">
-<span class="sig-prename descclassname"><span class="pre">hepi.run.feynhiggs.</span></span><span class="sig-name descname"><span class="pre">update_slha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.update_slha" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.run.feynhiggs.</span></span><span class="sig-name descname"><span class="pre">update_slha</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/input.html#update_slha"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.update_slha" title="Permalink to this definition"></a></dt>
 <dd><p>Updates dependent parameters in Input <cite>i</cite>.</p>
 <p>Mainly concerns the <cite>mu</cite> value used by <cite>madgraph</cite>.</p>
 <dl class="field-list simple">
@@ -314,7 +316,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.feynhiggs.</span></span><span class="sig-name descname"><span class="pre">Runner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.feynhiggs.</span></span><span class="sig-name descname"><span class="pre">Runner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -326,7 +328,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.orders">
-<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.orders" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.orders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.orders" title="Permalink to this definition"></a></dt>
 <dd><p>List of supported Orders in this runner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -337,7 +339,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.get_name">
-<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_name" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the name of the runner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -348,7 +350,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.get_version">
-<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_version" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_version" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -358,7 +360,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner._sub_run">
-<span class="sig-name descname"><span class="pre">_sub_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner._sub_run" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_sub_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner._sub_run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner._sub_run" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>coms</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p>
@@ -371,7 +373,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner._check_path">
-<span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner._check_path" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner._check_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner._check_path" title="Permalink to this definition"></a></dt>
 <dd><p>Checks if the passed path is valid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -382,7 +384,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner._prepare">
-<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_valid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner._prepare" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_valid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner._prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner._prepare" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>p</strong> (<a class="reference internal" href="../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>) – </p>
@@ -395,7 +397,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner._check_input">
-<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner._check_input" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner._check_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner._check_input" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>param</strong> (<a class="reference internal" href="../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>) – </p>
@@ -408,7 +410,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner._prepare_all">
-<span class="sig-name descname"><span class="pre">_prepare_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner._prepare_all" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_prepare_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner._prepare_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner._prepare_all" title="Permalink to this definition"></a></dt>
 <dd><p>Prepares all parameters for execution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -426,7 +428,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.run" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.run" title="Permalink to this definition"></a></dt>
 <dd><p>Run the passed list of parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -453,7 +455,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner._run">
-<span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner._run" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner._run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner._run" title="Permalink to this definition"></a></dt>
 <dd><p>Runs Runner per <code class="xref py py-class docutils literal notranslate"><span class="pre">RunParams</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -477,7 +479,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner._is_valid">
-<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner._is_valid" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner._is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner._is_valid" title="Permalink to this definition"></a></dt>
 <dd><p>Verifies that a file is a complete output.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -498,7 +500,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.parse">
-<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.parse" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.parse" title="Permalink to this definition"></a></dt>
 <dd><blockquote>
 <div><p>Parses Resummino output files and returns List of Results.</p>
 <dl class="simple">
@@ -525,7 +527,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner._parse_file">
-<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner._parse_file" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner._parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner._parse_file" title="Permalink to this definition"></a></dt>
 <dd><p>Extracts results from an output file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -542,7 +544,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.get_path">
-<span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_path" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_path" title="Permalink to this definition"></a></dt>
 <dd><p>Get the Runner path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -556,7 +558,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.get_input_dir">
-<span class="sig-name descname"><span class="pre">get_input_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_input_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_input_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.get_input_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_input_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Get the input directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -570,7 +572,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.get_output_dir">
-<span class="sig-name descname"><span class="pre">get_output_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_output_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_output_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.get_output_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_output_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Get the input directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -584,7 +586,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.get_pre">
-<span class="sig-name descname"><span class="pre">get_pre</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_pre" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_pre</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.get_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.get_pre" title="Permalink to this definition"></a></dt>
 <dd><p>Gets the command prefix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -598,7 +600,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.set_path">
-<span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.set_path" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.set_path" title="Permalink to this definition"></a></dt>
 <dd><p>Set the path to the Runner folder containing the binary in ‘./bin’ or ‘./build/bin’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -609,7 +611,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.set_input_dir">
-<span class="sig-name descname"><span class="pre">set_input_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.set_input_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_input_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.set_input_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.set_input_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the input directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -620,7 +622,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.set_output_dir">
-<span class="sig-name descname"><span class="pre">set_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.set_output_dir" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_output_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.set_output_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.set_output_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the output directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -635,7 +637,7 @@ create (bool): create directory if not existing.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.Runner.set_pre">
-<span class="sig-name descname"><span class="pre">set_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ppre</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.Runner.set_pre" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ppre</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/run.html#Runner.set_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.Runner.set_pre" title="Permalink to this definition"></a></dt>
 <dd><p>Sets the command prefix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -661,7 +663,7 @@ create (bool): create directory if not existing.</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.FeynHiggsRunner._check_path">
-<span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.FeynHiggsRunner._check_path" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_check_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/feynhiggs/run.html#FeynHiggsRunner._check_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.FeynHiggsRunner._check_path" title="Permalink to this definition"></a></dt>
 <dd><p>Checks if the passed path is valid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -672,7 +674,7 @@ create (bool): create directory if not existing.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.feynhiggs.FeynHiggsRunner.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slhas</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hepi.run.feynhiggs.FeynHiggsRunner.run" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slhas</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/hepi/run/feynhiggs/run.html#FeynHiggsRunner.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.feynhiggs.FeynHiggsRunner.run" title="Permalink to this definition"></a></dt>
 <dd><p>Run the passed list of parameters for feynhiggs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

@@ -14,6 +14,8 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
@@ -38,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.10-34-g923e00e8
+                0.2.10-74-gfa651c3f
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -124,7 +126,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
 # from pqdm.processes import pqdm
 
 
-<div class="viewcode-block" id="RunParam"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.RunParam">[docs]</a>class RunParam(DictData):
+<div class="viewcode-block" id="RunParam"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.RunParam">[docs]</a>class RunParam(DictData):
     &quot;&quot;&quot;Abstract class that is similar to a dictionary but with fixed keys.&quot;&quot;&quot;
 
     def __init__(
@@ -142,7 +144,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         self.execute = execute</div>
 
 
-<div class="viewcode-block" id="Runner"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner">[docs]</a>class Runner:
+<div class="viewcode-block" id="Runner"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner">[docs]</a>class Runner:
     def __init__(self, path: str, in_dir: str = None, out_dir: str = None, pre=None):
         self.path = path
         if in_dir is None:
@@ -158,18 +160,18 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         else:
             self.pre = pre
 
-<div class="viewcode-block" id="Runner.orders"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
+<div class="viewcode-block" id="Runner.orders"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
         &quot;&quot;&quot;List of supported Orders in this runner.&quot;&quot;&quot;
         return [e.value for e in Order]</div>
 
-<div class="viewcode-block" id="Runner.get_name"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.get_name">[docs]</a>    def get_name(self) -&gt; str:
+<div class="viewcode-block" id="Runner.get_name"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_name">[docs]</a>    def get_name(self) -&gt; str:
         &quot;&quot;&quot;Returns the name of the runner.&quot;&quot;&quot;
         return type(self).__name__</div>
 
-<div class="viewcode-block" id="Runner.get_version"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.get_version">[docs]</a>    def get_version(self) -&gt; str:
+<div class="viewcode-block" id="Runner.get_version"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_version">[docs]</a>    def get_version(self) -&gt; str:
         return &quot;?&quot;</div>
 
-<div class="viewcode-block" id="Runner._sub_run"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner._sub_run">[docs]</a>    def _sub_run(self, coms: List[str]) -&gt; str:
+<div class="viewcode-block" id="Runner._sub_run"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._sub_run">[docs]</a>    def _sub_run(self, coms: List[str]) -&gt; str:
         process = Popen(coms, stdout=PIPE)
         (output, err) = process.communicate()
         exit_code = process.wait()
@@ -178,11 +180,11 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         else:
             return output.decode()</div>
 
-<div class="viewcode-block" id="Runner._check_path"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
+<div class="viewcode-block" id="Runner._check_path"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
         &quot;&quot;&quot;Checks if the passed path is valid.&quot;&quot;&quot;
         return True</div>
 
-<div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, skip=False, assume_valid=False, **kwargs) -&gt; RunParam:
+<div class="viewcode-block" id="Runner._prepare"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._prepare">[docs]</a>    def _prepare(self, p: Input, skip=False, assume_valid=False, **kwargs) -&gt; RunParam:
         skip_ = skip
         # p.runner = str(type(self).__name__) + &quot;-&quot; + self.get_version()
 
@@ -220,7 +222,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
             name=name,
         )</div>
 
-<div class="viewcode-block" id="Runner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner._check_input">[docs]</a>    def _check_input(self, param: Input, **kwargs) -&gt; bool:
+<div class="viewcode-block" id="Runner._check_input"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._check_input">[docs]</a>    def _check_input(self, param: Input, **kwargs) -&gt; bool:
         if param.order not in self.orders():
             warnings.warn(
                 &quot;Order &quot; + str(param.order) + &quot; not supported in &quot; + type(self).__name__
@@ -228,7 +230,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
             return False
         return True</div>
 
-<div class="viewcode-block" id="Runner._prepare_all"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner._prepare_all">[docs]</a>    def _prepare_all(
+<div class="viewcode-block" id="Runner._prepare_all"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._prepare_all">[docs]</a>    def _prepare_all(
         self, params: List[Input], skip=True, n_jobs=None, **kwargs
     ) -&gt; List[RunParam]:
         &quot;&quot;&quot;
@@ -282,7 +284,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         #    ret.append(self._prepare(p, skip=skip, **kwargs))
         return ret</div>
 
-<div class="viewcode-block" id="Runner.run"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.run">[docs]</a>    def run(
+<div class="viewcode-block" id="Runner.run"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.run">[docs]</a>    def run(
         self,
         params: List[Input],
         skip=True,
@@ -341,7 +343,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
             return DL2DF({**rdl, **pdl})
         return DL2DF({})</div>
 
-<div class="viewcode-block" id="Runner._run"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner._run">[docs]</a>    def _run(
+<div class="viewcode-block" id="Runner._run"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._run">[docs]</a>    def _run(
         self,
         rps: List[RunParam],
         wait=True,
@@ -404,7 +406,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
             return output
         return []</div>
 
-<div class="viewcode-block" id="Runner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d, **kwargs) -&gt; bool:
+<div class="viewcode-block" id="Runner._is_valid"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d, **kwargs) -&gt; bool:
         &quot;&quot;&quot;
         Verifies that a file is a complete output.
 
@@ -427,7 +429,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
             return False
         return True</div>
 
-<div class="viewcode-block" id="Runner.parse"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.parse">[docs]</a>    def parse(self, outputs: List[str], n_jobs=None) -&gt; List[Result]:
+<div class="viewcode-block" id="Runner.parse"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.parse">[docs]</a>    def parse(self, outputs: List[str], n_jobs=None) -&gt; List[Result]:
         &quot;&quot;&quot;
             Parses Resummino output files and returns List of Results.
 
@@ -456,7 +458,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         #    rsl.append(self._parse_file(o))
         # return rsl
 
-<div class="viewcode-block" id="Runner._parse_file"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
+<div class="viewcode-block" id="Runner._parse_file"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
         &quot;&quot;&quot;
         Extracts results from an output file.
 
@@ -469,7 +471,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         &quot;&quot;&quot;
         return None</div>
 
-<div class="viewcode-block" id="Runner.get_path"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.get_path">[docs]</a>    def get_path(self) -&gt; str:
+<div class="viewcode-block" id="Runner.get_path"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_path">[docs]</a>    def get_path(self) -&gt; str:
         &quot;&quot;&quot;
         Get the Runner path.
 
@@ -478,7 +480,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         &quot;&quot;&quot;
         return self.path</div>
 
-<div class="viewcode-block" id="Runner.get_input_dir"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.get_input_dir">[docs]</a>    def get_input_dir(self) -&gt; str:
+<div class="viewcode-block" id="Runner.get_input_dir"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_input_dir">[docs]</a>    def get_input_dir(self) -&gt; str:
         &quot;&quot;&quot;
         Get the input directory.
 
@@ -487,7 +489,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         &quot;&quot;&quot;
         return self.in_dir</div>
 
-<div class="viewcode-block" id="Runner.get_output_dir"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.get_output_dir">[docs]</a>    def get_output_dir(self) -&gt; str:
+<div class="viewcode-block" id="Runner.get_output_dir"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_output_dir">[docs]</a>    def get_output_dir(self) -&gt; str:
         &quot;&quot;&quot;
         Get the input directory.
 
@@ -496,7 +498,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         &quot;&quot;&quot;
         return self.out_dir</div>
 
-<div class="viewcode-block" id="Runner.get_pre"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.get_pre">[docs]</a>    def get_pre(self) -&gt; str:
+<div class="viewcode-block" id="Runner.get_pre"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_pre">[docs]</a>    def get_pre(self) -&gt; str:
         &quot;&quot;&quot;
         Gets the command prefix.
 
@@ -505,7 +507,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         &quot;&quot;&quot;
         return self.pre</div>
 
-<div class="viewcode-block" id="Runner.set_path"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.set_path">[docs]</a>    def set_path(self, p: str):
+<div class="viewcode-block" id="Runner.set_path"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.set_path">[docs]</a>    def set_path(self, p: str):
         &quot;&quot;&quot;
         Set the path to the Runner folder containing the binary in &#39;./bin&#39; or &#39;./build/bin&#39;.
 
@@ -516,7 +518,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
             self.path = p + (&quot;/&quot; if p[-1] != &quot;/&quot; else &quot;&quot;)
         self.path = p</div>
 
-<div class="viewcode-block" id="Runner.set_input_dir"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.set_input_dir">[docs]</a>    def set_input_dir(self, indir: str):
+<div class="viewcode-block" id="Runner.set_input_dir"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.set_input_dir">[docs]</a>    def set_input_dir(self, indir: str):
         &quot;&quot;&quot;
         Sets the input directory.
 
@@ -525,7 +527,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
         &quot;&quot;&quot;
         self.in_dir = indir</div>
 
-<div class="viewcode-block" id="Runner.set_output_dir"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.set_output_dir">[docs]</a>    def set_output_dir(self, outdir: str, create: bool = True):
+<div class="viewcode-block" id="Runner.set_output_dir"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.set_output_dir">[docs]</a>    def set_output_dir(self, outdir: str, create: bool = True):
         &quot;&quot;&quot;
         Sets the output directory.
 
@@ -537,7 +539,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
             os.makedirs(outdir, exist_ok=True)
         self.out_dir = outdir</div>
 
-<div class="viewcode-block" id="Runner.set_pre"><a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.Runner.set_pre">[docs]</a>    def set_pre(self, ppre: str):
+<div class="viewcode-block" id="Runner.set_pre"><a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.set_pre">[docs]</a>    def set_pre(self, ppre: str):
         &quot;&quot;&quot;
         Sets the command prefix.
 
