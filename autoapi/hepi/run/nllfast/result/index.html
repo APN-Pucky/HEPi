@@ -1,41 +1,22 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>hepi.run.nllfast.result &mdash; hepi  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/jupyter-sphinx.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/thebelab.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
         <script src="../../../../../_static/doctools.js"></script>
         <script src="../../../../../_static/sphinx_highlight.js"></script>
@@ -43,73 +24,46 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
     <link rel="next" title="hepi.run.nllfast.run" href="../run/index.html" />
     <link rel="prev" title="hepi.run.nllfast" href="../index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../../../index.html" class="icon icon-home"> hepi
           
-
-          
+          <a href="../../../../../index.html" class="icon icon-home">
+            hepi
           </a>
-
-          
-            
-            
               <div class="version">
-                0.2.10
+                0.2.11
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_00_resummino.html">Resummino</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_01_write.html">Result writing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_02_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_interpolate.html">Interpolation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_write.html">Result writing example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_feynhiggs.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_nllfast.html">nll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_nnllfast.html">nnll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_softsusy.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_spheno.html">SPheno example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
@@ -119,10 +73,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../data/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.data</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plot/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../feynhiggs/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.feynhiggs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../madgraph/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.madgraph</span></code></a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nnllfast/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nnllfast</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../prospino2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.prospino2</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.resummino</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../softsusy/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.softsusy</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.spheno</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../run/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.run</span></code></a></li>
 </ul>
@@ -152,85 +109,40 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../../index.html">hepi</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../../../index.html">API Reference</a> &raquo;</li>
-        
-          <li><a href="../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a> &raquo;</li>
-        
-          <li><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a> &raquo;</li>
-        
-          <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast</span></code></a> &raquo;</li>
-        
-      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast.result</span></code></li>
-    
-    
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast.result</span></code></li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../../../../../_sources/autoapi/hepi/run/nllfast/result/index.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="module-hepi.run.nllfast.result">
-<span id="hepi-run-nllfast-result"></span><h1><a class="reference internal" href="#module-hepi.run.nllfast.result" title="hepi.run.nllfast.result"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast.result</span></code></a><a class="headerlink" href="#module-hepi.run.nllfast.result" title="Permalink to this heading">¶</a></h1>
+<span id="hepi-run-nllfast-result"></span><h1><a class="reference internal" href="#module-hepi.run.nllfast.result" title="hepi.run.nllfast.result"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast.result</span></code></a><a class="headerlink" href="#module-hepi.run.nllfast.result" title="Permalink to this heading"></a></h1>
 <section id="module-contents">
-<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
 <section id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">¶</a></h3>
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nllfast.result.NLLFastResult" title="hepi.run.nllfast.result.NLLFastResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NLLFastResult</span></code></a></p></td>
@@ -240,7 +152,7 @@
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.result.</span></span><span class="sig-name descname"><span class="pre">NLLFastResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_err_up</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_err_down</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_err_up</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_err_down</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.result.</span></span><span class="sig-name descname"><span class="pre">NLLFastResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PDF_ERRMINUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PDF_ERRPLUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_SCALE_ERRMINUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_SCALE_ERRPLUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_PDF_ERRMINUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_PDF_ERRPLUS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../../results/index.html#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.results.Result</span></code></a></p>
 <p>(N)NLL-fast Result Data.</p>
 <p>Sets given and computes dependent <code class="docutils literal notranslate"><span class="pre">Attributes</span></code>.</p>
@@ -262,50 +174,33 @@
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../run/index.html" class="btn btn-neutral float-right" title="hepi.run.nllfast.run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../index.html" class="btn btn-neutral float-left" title="hepi.run.nllfast" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../run/index.html" class="btn btn-neutral float-right" title="hepi.run.nllfast.run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2023, Alexander Puck Neuwirth.
-
-    </p>
+    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

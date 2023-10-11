@@ -1,0 +1,38 @@
+:py:mod:`hepi.run.nnllfast.result`
+==================================
+
+.. py:module:: hepi.run.nnllfast.result
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   hepi.run.nnllfast.result.NNLLFastResult
+
+
+
+
+.. py:class:: NNLLFastResult(NLO, NLO_PDF_ERRMINUS, NLO_PDF_ERRPLUS, aNNLO_PLUS_NNLL, aNNLO_PLUS_NNLL_SCALE_ERRMINUS, aNNLO_PLUS_NNLL_SCALE_ERRPLUS, aNNLO_PLUS_NNLL_PDF_ERRMINUS, aNNLO_PLUS_NNLL_PDF_ERRPLUS)
+
+
+   Bases: :py:obj:`hepi.results.Result`
+
+   NNLL-fast Result Data.
+
+   Sets given and computes dependent ``Attributes``.
+
+   :param lo: corresponds to :attr:`LO`.
+   :type lo: :obj:`double`
+   :param nlo: corresponds to :attr:`NLO`.
+   :type nlo: :obj:`double`
+   :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
+   :type nlo_plus_nll: :obj:`double`
+   :param annlo_plus_nnll: corresponds to :attr:`aNNLO_PLUS_NNLL`.
+   :type annlo_plus_nnll: :obj:`double`
+
+

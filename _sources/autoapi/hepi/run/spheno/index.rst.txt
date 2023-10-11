@@ -56,6 +56,7 @@ Attributes
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
+
    Bases: :py:obj:`hepi.util.DictData`
 
    Input for computation and scans.
@@ -137,6 +138,7 @@ Attributes
 
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
 
+
    .. py:method:: orders()
 
       List of supported Orders in this runner.
@@ -178,38 +180,49 @@ Attributes
 
    .. py:method:: run(params, skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
 
-          Run the passed list of parameters.
+      Run the passed list of parameters.
 
-          Args:
-              params (:obj:`list` of :class:`hepi.Input`): All parameters that should be executed/queued.
-              skip (bool): True means stored runs will be skipped. Else the are overwritten.
-              parse (bool): Parse the results.
-                  This is not the prefered cluster/parallel mode, as there the function only queues the job.
-              parallel (bool): Run jobs in parallel.
-              sleep (int): Sleep seconds after starting job.
-      run (bool): Actually start/queue runner.
-      ignore_error (bool): Continue instead of raising Exceptions. Also ignores hash collisions.
-      n_jobs (int): Number of parallel jobs. If None, use all available cores.
+      :param params: All parameters that should be executed/queued.
+      :type params: :obj:`list` of :class:`hepi.Input`
+      :param skip: True means stored runs will be skipped. Else the are overwritten.
+      :type skip: bool
+      :param parse: Parse the results.
+                    This is not the prefered cluster/parallel mode, as there the function only queues the job.
+      :type parse: bool
+      :param parallel: Run jobs in parallel.
+      :type parallel: bool
+      :param sleep: Sleep seconds after starting job.
+      :type sleep: int
+      :param run: Actually start/queue runner.
+      :type run: bool
+      :param ignore_error: Continue instead of raising Exceptions. Also ignores hash collisions.
+      :type ignore_error: bool
+      :param n_jobs: Number of parallel jobs. If None, use all available cores.
+      :type n_jobs: int
 
-          Returns:
-              :obj:`pd.DataFrame` : combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
-
+      :returns: combined dataframe of results and parameters. The dataframe is empty if `parse` is set to False.
+      :rtype: :obj:`pd.DataFrame`
 
 
    .. py:method:: _run(rps, wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
 
-          Runs Runner per :class:`RunParams`.
+      Runs Runner per :class:`RunParams`.
 
-          Args:
-              rps (:obj:`list` of :class:`RunParams`): Extended run parameters.
-              bar (bool): Enable info bar.
-              wait (bool): Wait for parallel runs to finish.
-              sleep (int): Sleep seconds after starting subprocess.
-              parallel (bool): Run jobs in parallel.
-      n_jobs (int): Number of parallel jobs. If None, use all available cores.
+      :param rps: Extended run parameters.
+      :type rps: :obj:`list` of :class:`RunParams`
+      :param bar: Enable info bar.
+      :type bar: bool
+      :param wait: Wait for parallel runs to finish.
+      :type wait: bool
+      :param sleep: Sleep seconds after starting subprocess.
+      :type sleep: int
+      :param parallel: Run jobs in parallel.
+      :type parallel: bool
+      :param n_jobs: Number of parallel jobs. If None, use all available cores.
+      :type n_jobs: int
 
-          Returns:
-              :obj:`list` of int: return codes from jobs if `no_parse` is False.
+      :returns: return codes from jobs if `no_parse` is False.
+      :rtype: :obj:`list` of int
 
 
    .. py:method:: _is_valid(file, p, d, **kwargs)
@@ -318,6 +331,7 @@ Attributes
 
 
 .. py:class:: SPhenoRunner(path, in_dir = None, out_dir = None, pre=None)
+
 
    Bases: :py:obj:`hepi.run.Runner`
 

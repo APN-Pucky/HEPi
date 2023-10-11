@@ -1,40 +1,21 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>hepi.input &mdash; hepi  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
@@ -42,71 +23,44 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../index.html" class="icon icon-home"> hepi
           
-
-          
+          <a href="../../index.html" class="icon icon-home">
+            hepi
           </a>
-
-          
-            
-            
               <div class="version">
-                0.2.10
+                0.2.11
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/demo_00_resummino.html">Resummino</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/demo_01_write.html">Result writing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/demo_02_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_interpolate.html">Interpolation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples/demo_write.html">Result writing example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_feynhiggs.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_nllfast.html">nll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_nnllfast.html">nnll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/test_softsusy.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/test_spheno.html">SPheno example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
@@ -124,71 +78,31 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">hepi</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-        
-          <li><a href="../hepi.html">hepi</a> &raquo;</li>
-        
-      <li>hepi.input</li>
-    
-    
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../hepi.html">hepi</a></li>
+      <li class="breadcrumb-item active">hepi.input</li>
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for hepi.input</h1><div class="highlight"><pre>
 <span></span>import copy
 import os
@@ -210,7 +124,7 @@ from .util import DictData, lhapdf_name_to_id
 &quot;&quot;&quot;Prefix for run commands.&quot;&quot;&quot;
 
 
-<div class="viewcode-block" id="get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_input_dir">[docs]</a>def get_input_dir():
+<div class="viewcode-block" id="get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_input_dir">[docs]</a>def get_input_dir():
     &quot;&quot;&quot;
     Get the input directory.
 
@@ -221,7 +135,7 @@ from .util import DictData, lhapdf_name_to_id
     return in_dir</div>
 
 
-<div class="viewcode-block" id="get_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_output_dir">[docs]</a>def get_output_dir():
+<div class="viewcode-block" id="get_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_output_dir">[docs]</a>def get_output_dir():
     &quot;&quot;&quot;
     Get the input directory.
 
@@ -232,7 +146,7 @@ from .util import DictData, lhapdf_name_to_id
     return out_dir</div>
 
 
-<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.get_pre">[docs]</a>def get_pre():
+<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_pre">[docs]</a>def get_pre():
     &quot;&quot;&quot;
     Gets the command prefix.
 
@@ -279,7 +193,7 @@ from .util import DictData, lhapdf_name_to_id
     pre = ppre</div>
 
 
-<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input">[docs]</a>class Input(DictData):
+<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input">[docs]</a>class Input(DictData):
     &quot;&quot;&quot;
     Input for computation and scans.
 
@@ -360,22 +274,22 @@ from .util import DictData, lhapdf_name_to_id
         if update:
             update_slha(self)
 
-<div class="viewcode-block" id="Input.has_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_gluino">[docs]</a>    def has_gluino(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_gluino"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_gluino">[docs]</a>    def has_gluino(self) -&gt; bool:
         return is_gluino(self.particle1) or is_gluino(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_neutralino">[docs]</a>    def has_neutralino(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_neutralino">[docs]</a>    def has_neutralino(self) -&gt; bool:
         return is_neutralino(self.particle1) or is_neutralino(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_charginos"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_charginos">[docs]</a>    def has_charginos(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_charginos"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_charginos">[docs]</a>    def has_charginos(self) -&gt; bool:
         return is_chargino(self.particle1) or is_chargino(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_weakino">[docs]</a>    def has_weakino(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_weakino"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_weakino">[docs]</a>    def has_weakino(self) -&gt; bool:
         return self.has_charginos() or self.has_neutralino()</div>
 
-<div class="viewcode-block" id="Input.has_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_squark">[docs]</a>    def has_squark(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_squark"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_squark">[docs]</a>    def has_squark(self) -&gt; bool:
         return is_squark(self.particle1) or is_squark(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.has_slepton">[docs]</a>    def has_slepton(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_slepton"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_slepton">[docs]</a>    def has_slepton(self) -&gt; bool:
         return is_slepton(self.particle1) or is_slepton(self.particle2)</div></div>
 
 
@@ -409,7 +323,7 @@ from .util import DictData, lhapdf_name_to_id
     return abs(iid) in l_slepton or abs(iid) in r_slepton</div>
 
 
-<div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.update_slha">[docs]</a>def update_slha(i: Input):
+<div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.update_slha">[docs]</a>def update_slha(i: Input):
     &quot;&quot;&quot;
     Updates dependent parameters in Input `i`.
 
@@ -907,46 +821,30 @@ from .util import DictData, lhapdf_name_to_id
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2023, Alexander Puck Neuwirth.
-
-    </p>
+    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

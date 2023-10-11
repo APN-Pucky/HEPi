@@ -30,7 +30,11 @@ Attributes
 
 .. py:class:: NLLfastRunner(path, in_dir = None, out_dir = None, pre=None)
 
+
    Bases: :py:obj:`hepi.run.Runner`
+
+   .. py:method:: get_version()
+
 
    .. py:method:: orders()
 
@@ -48,7 +52,7 @@ Attributes
       Checks input parameter for compatibility with Prospino
 
 
-   .. py:method:: _is_valid(file, p, d)
+   .. py:method:: _is_valid(file, p, d, **kwargs)
 
       Verifies that a file is a complete output.
 

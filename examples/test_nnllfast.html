@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nnll-fast &mdash; hepi  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Softsusy example" href="test_softsusy.html" />
+    <link rel="prev" title="nll-fast" href="test_nllfast.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            hepi
+          </a>
+              <div class="version">
+                0.2.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="demo_00_resummino.html">Resummino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_01_write.html">Result writing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_02_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_feynhiggs.html">Softsusy example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_nllfast.html">nll-fast</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">nnll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_softsusy.html">Softsusy example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hepi.readthedocs.io/en/stable/">RTD</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hepi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">nnll-fast</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/test_nnllfast.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nnll-fast">
+<h1>nnll-fast<a class="headerlink" href="#nnll-fast" title="Permalink to this heading"></a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hepi</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">smpl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">hepi.util</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">hepi.run</span> <span class="kn">import</span> <span class="n">nnllfast</span> <span class="k">as</span> <span class="n">nnll</span>
+<span class="c1"># set the folder where the resummino binary can be found either in either ./{,bin,bin/build}/resummino</span>
+<span class="n">nnll</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;/home/apn/git/nnll-fast/nnll-fast&quot;</span><span class="p">)</span>
+<span class="c1"># By default hepi will run with nice -n5 to prevent overloading the system if more scans than cores are running</span>
+<span class="c1">#rs.set_pre(&quot;&quot;) disables any prefixing with nice</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">nnll</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.2.10.6
+/home/apn/git/nnll-fast/nnll-fast
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mastercode_with_gm2.in&quot;</span><span class="p">,</span> <span class="c1"># baseline slha file in the relative ./output folder by default unless set_output_dir was used</span>
+<span class="p">]</span>
+<span class="n">pss</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">(</span><span class="mi">1000001</span><span class="p">,</span><span class="mi">1000021</span><span class="p">),</span> <span class="c1"># Final state particles for resummino to run</span>
+     <span class="p">]</span>
+
+<span class="k">for</span> <span class="n">pa</span><span class="p">,</span><span class="n">pb</span> <span class="ow">in</span> <span class="n">pss</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="c1"># All the inputs Order, CMS in GeV, particle 1, particle 2, slha, pdf_lo, pdf_nlo,mu_f, mu_r</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">hepi</span><span class="o">.</span><span class="n">Order</span><span class="o">.</span><span class="n">aNNLO_PLUS_NNLL</span><span class="p">,</span><span class="mi">13000</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s2">&quot;PDF4LHC15&quot;</span><span class="p">,</span><span class="s2">&quot;PDF4LHC15&quot;</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1"># li is our list of inputs that we want resummino to run</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">pb</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">2000</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">li</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">mass_scan</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">pa</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2000</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span> <span class="c1"># we scan the slepton mass from 100 to 1000 at 15 equidistant points</span>
+        <span class="n">rs_dl</span> <span class="o">=</span> <span class="n">nnll</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="n">skip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># run resummino, skipping if the result already exists.</span>
+        <span class="c1"># rs_dl is a panda table(dataframe) with all inputs and result</span>
+        <span class="n">_</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">init_double_plot</span><span class="p">()</span>
+        <span class="c1"># hepi has some useful plotting routines, but the results from rs_dl can easily be accessed</span>
+        <span class="c1"># Now plot the mass of PDG id pa from the results at LO ,NLO and aNNLO+NLL</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;NLO&quot;</span><span class="p">,</span><span class="s2">&quot;aNNLO_PLUS_NNLL&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Plot K factors vs LO and aNNLO+NLL/NLO</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">mass_plot</span><span class="p">(</span><span class="n">rs_dl</span><span class="p">,[</span><span class="s2">&quot;aNNLO_PLUS_NNLL_OVER_NLO&quot;</span><span class="p">],</span><span class="n">pa</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">logy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">tight</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># construct a title from the inputs</span>
+        <span class="n">hepi</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">scenario</span><span class="o">=</span><span class="s2">&quot;mastercode&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "cf5c5e3a062d42a481e99fd39d66048b", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5d7100b501f2435187fc6d585fdbb56f", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Skipped: 0 Not skipped: 16
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e5282d5c336b44d68d0c86f35c2541f0", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a96787d657ba4d2d9447b205a793b619", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 494 ms, sys: 14.1 ms, total: 508 ms
+Wall time: 614 ms
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_test_nnllfast_2_6.png" src="../_images/examples_test_nnllfast_2_6.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rs_dl</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>LO</th>
+      <th>NLO</th>
+      <th>NLO_PLUS_NLL</th>
+      <th>aNNLO_PLUS_NNLL</th>
+      <th>K_LO</th>
+      <th>K_NLO</th>
+      <th>K_NLO_PLUS_NLL</th>
+      <th>NLO_PLUS_NLL_OVER_NLO</th>
+      <th>K_aNNLO_PLUS_NNLL</th>
+      <th>aNNLO_PLUS_NNLL_OVER_NLO</th>
+      <th>...</th>
+      <th>id</th>
+      <th>model</th>
+      <th>mu</th>
+      <th>mass_1000021</th>
+      <th>mass_1000001</th>
+      <th>runner</th>
+      <th>nf_final_state_in</th>
+      <th>nf_squark_mass</th>
+      <th>nf_gluino_mass</th>
+      <th>nf_deg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>None</td>
+      <td>0.00361+/-0</td>
+      <td>None</td>
+      <td>0.00434+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2022160664819945+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1500.000000</td>
+      <td>2000.0</td>
+      <td>1000.000000</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1000.000000</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>None</td>
+      <td>0.00304+/-0</td>
+      <td>None</td>
+      <td>0.00368+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2105263157894737+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1533.333333</td>
+      <td>2000.0</td>
+      <td>1066.666667</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1066.666667</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>None</td>
+      <td>0.00256+/-0</td>
+      <td>None</td>
+      <td>0.00311+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2148437499999998+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1566.666667</td>
+      <td>2000.0</td>
+      <td>1133.333333</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1133.333333</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>None</td>
+      <td>0.00216+/-0</td>
+      <td>None</td>
+      <td>0.00263+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2175925925925926+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1600.000000</td>
+      <td>2000.0</td>
+      <td>1200.000000</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1200.000000</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>None</td>
+      <td>0.00183+/-0</td>
+      <td>None</td>
+      <td>0.00224+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2240437158469943+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1633.333333</td>
+      <td>2000.0</td>
+      <td>1266.666667</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1266.666667</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>None</td>
+      <td>0.0015400000000000001+/-0</td>
+      <td>None</td>
+      <td>0.0019+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2337662337662336+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1666.666667</td>
+      <td>2000.0</td>
+      <td>1333.333333</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1333.333333</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>None</td>
+      <td>0.00131+/-0</td>
+      <td>None</td>
+      <td>0.00162+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2366412213740459+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1700.000000</td>
+      <td>2000.0</td>
+      <td>1400.000000</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1400.000000</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>None</td>
+      <td>0.00111+/-0</td>
+      <td>None</td>
+      <td>0.00138+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.243243243243243+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1733.333333</td>
+      <td>2000.0</td>
+      <td>1466.666667</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1466.666667</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>None</td>
+      <td>0.0009440000000000001+/-0</td>
+      <td>None</td>
+      <td>0.00118+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.25+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1766.666667</td>
+      <td>2000.0</td>
+      <td>1533.333333</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1533.333333</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>None</td>
+      <td>0.000802+/-0</td>
+      <td>None</td>
+      <td>0.00101+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.259351620947631+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1800.000000</td>
+      <td>2000.0</td>
+      <td>1600.000000</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1600.000000</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>None</td>
+      <td>0.0006850000000000001+/-0</td>
+      <td>None</td>
+      <td>0.000867+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2656934306569343+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1833.333333</td>
+      <td>2000.0</td>
+      <td>1666.666667</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1666.666667</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>None</td>
+      <td>0.000584+/-0</td>
+      <td>None</td>
+      <td>0.0007440000000000001+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2739726027397262+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1866.666667</td>
+      <td>2000.0</td>
+      <td>1733.333333</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1733.333333</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>None</td>
+      <td>0.000498+/-0</td>
+      <td>None</td>
+      <td>0.00064+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2851405622489962+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1900.000000</td>
+      <td>2000.0</td>
+      <td>1800.000000</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1800.000000</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>None</td>
+      <td>0.000428+/-0</td>
+      <td>None</td>
+      <td>0.000553+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.2920560747663552+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1933.333333</td>
+      <td>2000.0</td>
+      <td>1866.666667</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1866.666667</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>None</td>
+      <td>0.000368+/-0</td>
+      <td>None</td>
+      <td>0.000481+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.3070652173913042+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>1966.666667</td>
+      <td>2000.0</td>
+      <td>1933.333333</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>1933.333333</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>None</td>
+      <td>0.000319+/-0</td>
+      <td>None</td>
+      <td>0.00042100000000000004+/-0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>1.3197492163009406+/-0</td>
+      <td>...</td>
+      <td>1</td>
+      <td></td>
+      <td>2000.000000</td>
+      <td>2000.0</td>
+      <td>2000.000000</td>
+      <td>NLLfastRunner-?</td>
+      <td>sg</td>
+      <td>2000.000000</td>
+      <td>2000</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<p>16 rows × 43 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="test_nllfast.html" class="btn btn-neutral float-left" title="nll-fast" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_softsusy.html" class="btn btn-neutral float-right" title="Softsusy example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

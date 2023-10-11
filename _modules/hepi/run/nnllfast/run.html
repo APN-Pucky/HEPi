@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hepi.run.nnllfast.run &mdash; hepi  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/thebelab-helper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            hepi
+          </a>
+              <div class="version">
+                0.2.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_00_resummino.html">Resummino</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_01_write.html">Result writing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_02_interpolate.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_feynhiggs.html">Softsusy example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_nllfast.html">nll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_nnllfast.html">nnll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_softsusy.html">Softsusy example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/test_spheno.html">SPheno example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Versions:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://hepi.readthedocs.io/en/stable/">RTD</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/">Stable</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://apn-pucky.github.io/HEPi/test/">Dev</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">hepi</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../hepi.html">hepi</a></li>
+      <li class="breadcrumb-item active">hepi.run.nnllfast.run</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for hepi.run.nnllfast.run</h1><div class="highlight"><pre>
+<span></span>import os
+import pkgutil
+import stat
+import warnings
+from string import Template
+from typing import List
+from hepi.run.nllfast.result import NLLFastResult
+from hepi.run.nnllfast.result import NNLLFastResult
+
+import pyslha
+from uncertainties import ufloat
+
+from hepi.input import Input, Order, is_gluino, is_squark
+from hepi.results import Result
+from hepi.run import Runner, RunParam
+
+
+<div class="viewcode-block" id="NLLfastRunner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner">[docs]</a>class NLLfastRunner(Runner):
+
+<div class="viewcode-block" id="NLLfastRunner.get_version"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner.get_version">[docs]</a>    def get_version(self) -&gt; str:
+        return &quot;1.1&quot;</div>
+
+<div class="viewcode-block" id="NLLfastRunner.orders"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
+        return [Order.LO, Order.NLO, Order.aNNLO_PLUS_NNLL]</div>
+
+<div class="viewcode-block" id="NLLfastRunner._get_nf_proc"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._get_nf_proc">[docs]</a>    def _get_nf_proc(self, p: Input):
+        d = pyslha.read(self.get_output_dir() + p.slha)
+        mg = d.blocks[&quot;MASS&quot;][1000021]
+        ms = 0.0
+        for r in range(1000001, 1000006):
+            ms += d.blocks[&quot;MASS&quot;][r]
+        for r in range(2000001, 2000006):
+            ms += d.blocks[&quot;MASS&quot;][r]
+        ms /= 10 # 10 flavors no (s)top
+        if p.has_gluino() and p.has_squark():
+            if is_squark(p.particle1):
+                ms = d.blocks[&quot;MASS&quot;][abs(p.particle1)]
+            if is_squark(p.particle2):
+                ms = d.blocks[&quot;MASS&quot;][abs(p.particle2)]
+            return &quot;sg&quot;,  ms, mg, 10
+        if is_gluino(p.particle1) and is_gluino(p.particle2):
+            if ms &gt; 3000: # go into decoupling limit
+                return &quot;gdcpl&quot;, &quot;&quot;, mg, 1
+            return &quot;gg&quot;,  ms, mg, 1
+        if is_squark(p.particle1) and is_squark(p.particle2):
+            ms =(d.blocks[&quot;MASS&quot;][abs(p.particle1)] +d.blocks[&quot;MASS&quot;][abs(p.particle2)])/2
+            if mg &gt; 3000: # go into decoupling limit
+                return &quot;sdcpl&quot;, ms,&quot;&quot;, 10
+            if p.particle1 &gt; 0 and p.particle2 &gt; 0:
+                return &quot;ss&quot;,  ms, mg,10*10
+            elif (p.particle1 &gt; 0 and p.particle2 &lt; 0) or (
+                p.particle1 &lt; 0 and p.particle2 &gt; 0
+            ):
+                s = p.particle1 if p.particle1 &gt; p.particle2 else p.particle2
+                b = p.particle2 if p.particle1 &gt; p.particle2 else p.particle1
+                return &quot;sb&quot;,  ms, mg, 10
+        return &quot;UNKNOWN_PROCESS_OR_UNIMPLEMENTED_PROCESS&quot;</div>
+
+<div class="viewcode-block" id="NLLfastRunner._get_nf_input"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._get_nf_input">[docs]</a>    def _get_nf_input(self, p: Input) -&gt; dict:
+        d = {}
+        # d[&quot;ps_inlo&quot;] = int(p.order)
+        (
+            d[&quot;nf_final_state_in&quot;],
+            d[&quot;nf_squark_mass&quot;],
+            d[&quot;nf_gluino_mass&quot;],
+            d[&quot;nf_deg&quot;],
+        ) = self._get_nf_proc(p)
+        return d</div>
+
+<div class="viewcode-block" id="NLLfastRunner._check_input"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._check_input">[docs]</a>    def _check_input(self, p: Input, **kwargs) -&gt; bool:
+        &quot;&quot;&quot;Checks input parameter for compatibility with Prospino&quot;&quot;&quot;
+        if p.energy != 13000:
+            warnings.warn(&quot;NLL-fast does not support other energies than 13 TeV.&quot;)
+            return False
+        if p.mu_f != 1.0 or p.mu_r != 1.0:
+            warnings.warn(&quot;NLL-fast does not support varying the scales manually.&quot;)
+            return False
+        if p.pdf_lo != &quot;PDF4LHC15&quot; or p.pdf_nlo != &quot;PDF4LHC15&quot;:
+            warnings.warn(
+                &quot;NNLL-fast does not support all pdfs (PDF4LHC15 is the allowed defaults).&quot;
+            )
+            return False
+        return True</div>
+
+<div class="viewcode-block" id="NLLfastRunner._is_valid"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d,**kwargs) -&gt; bool:
+        return super()._is_valid(file, p, d)</div>
+
+<div class="viewcode-block" id="NLLfastRunner._parse_file"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
+        # TODO parse result
+        ret = []
+        with open(file) as output:
+            for line in output:
+                pass
+            for s in line.split():
+                ret.append(float(s))
+        return NNLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
+            (ret[len(ret)-10+2]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+7])/100)*ret[len(ret)-10+2]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+6])/100)*ret[len(ret)-10+2]/ret[len(ret)-10+9]),
+            (ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+5])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+4])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+7])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+            (((ret[len(ret)-10+6])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+        )</div>
+
+<div class="viewcode-block" id="NLLfastRunner._prepare"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
+        rp = super()._prepare(p, **kwargs)
+        if not rp.skip:
+            d = p.__dict__
+
+            for k, v in self._get_nf_input(p).items():
+                d[k] = v
+
+
+            open(rp.execute, &quot;w&quot;).write(
+                &quot;#!/bin/sh\n&quot;
+                + &quot;pushd {path} &gt; /dev/null\nR=\&quot;$({exec} {proc} {sq} {gl})\&quot;\npopd &gt; /dev/null\necho \&quot;$R {deg}\&quot;&gt;{out}&quot;.format(
+                    exec=self.get_path(),
+                    path=os.path.dirname(self.get_path()),
+                    out=rp.out_file,
+                    proc=d[&quot;nf_final_state_in&quot;],
+                    sq=d[&quot;nf_squark_mass&quot;],
+                    gl=d[&quot;nf_gluino_mass&quot;],
+                    deg=d[&quot;nf_deg&quot;],
+                )
+            )
+            st = os.stat(rp.execute)
+            os.chmod(rp.execute, st.st_mode | stat.S_IEXEC)
+
+            sname = d[&quot;slha&quot;]
+            with open(self.get_output_dir() + sname, &quot;r&quot;) as f:
+                open(rp.out_file, &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
+        return rp</div></div>
+
+
+# Legacy
+<div class="viewcode-block" id="default_nllfast_runner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.default_nllfast_runner">[docs]</a>default_nllfast_runner = NLLfastRunner(&quot;~/git/nnll-fast/nnll-fast&quot;)</div>
+&quot;&quot;&quot;Default Prospino Runner to provide backward compatibility&quot;&quot;&quot;
+<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.run">[docs]</a>run = default_nllfast_runner.run</div>
+<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.set_path">[docs]</a>set_path = default_nllfast_runner.set_path</div>
+<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.get_path">[docs]</a>get_path = default_nllfast_runner.get_path</div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

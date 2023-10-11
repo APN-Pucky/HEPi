@@ -1,41 +1,22 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>hepi.run.nllfast.run &mdash; hepi  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/jupyter-sphinx.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/thebelab.css" type="text/css" />
-  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/jupyter-sphinx.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/thebelab.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
         <script src="../../../../../_static/doctools.js"></script>
         <script src="../../../../../_static/sphinx_highlight.js"></script>
@@ -43,73 +24,46 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
-
-    
+    <script src="../../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="hepi.run.prospino2" href="../../prospino2/index.html" />
+    <link rel="next" title="hepi.run.nnllfast" href="../../nnllfast/index.html" />
     <link rel="prev" title="hepi.run.nllfast.result" href="../result/index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../../../../../index.html" class="icon icon-home"> hepi
           
-
-          
+          <a href="../../../../../index.html" class="icon icon-home">
+            hepi
           </a>
-
-          
-            
-            
               <div class="version">
-                0.2.10
+                0.2.11
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_00_resummino.html">Resummino</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_01_write.html">Result writing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_02_interpolate.html">Interpolation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_03_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_distribute.html">Distribute resummino run files to clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_interpolate.html">Interpolation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_resummino.html">Resummino example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/demo_write.html">Result writing example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_feynhiggs.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_madgraph.html">MadGraph example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_nllfast.html">nll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_nnllfast.html">nnll-fast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_softsusy.html">Softsusy example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/test_spheno.html">SPheno example</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Module:</span></p>
@@ -119,10 +73,13 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../data/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.data</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plot/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.plot</span></code></a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../feynhiggs/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.feynhiggs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../madgraph/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.madgraph</span></code></a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../nnllfast/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nnllfast</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../prospino2/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.prospino2</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../resummino/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.resummino</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../softsusy/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.softsusy</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../spheno/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.spheno</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../run/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.run</span></code></a></li>
 </ul>
@@ -152,85 +109,40 @@
 <li class="toctree-l1"><a class="reference external" href="https://github.com/APN-Pucky/HEPi">GitHub</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../../../index.html">hepi</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../../../index.html">API Reference</a> &raquo;</li>
-        
-          <li><a href="../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a> &raquo;</li>
-        
-          <li><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a> &raquo;</li>
-        
-          <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast</span></code></a> &raquo;</li>
-        
-      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast.run</span></code></li>
-    
-    
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run</span></code></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast.run</span></code></li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../../../../../_sources/autoapi/hepi/run/nllfast/run/index.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="module-hepi.run.nllfast.run">
-<span id="hepi-run-nllfast-run"></span><h1><a class="reference internal" href="#module-hepi.run.nllfast.run" title="hepi.run.nllfast.run"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast.run</span></code></a><a class="headerlink" href="#module-hepi.run.nllfast.run" title="Permalink to this heading">¶</a></h1>
+<span id="hepi-run-nllfast-run"></span><h1><a class="reference internal" href="#module-hepi.run.nllfast.run" title="hepi.run.nllfast.run"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hepi.run.nllfast.run</span></code></a><a class="headerlink" href="#module-hepi.run.nllfast.run" title="Permalink to this heading"></a></h1>
 <section id="module-contents">
-<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
 <section id="classes">
-<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">¶</a></h3>
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nllfast.run.NLLfastRunner" title="hepi.run.nllfast.run.NLLfastRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NLLfastRunner</span></code></a></p></td>
@@ -240,7 +152,7 @@
 </table>
 </section>
 <section id="attributes">
-<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h3>
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nllfast.run.default_nllfast_runner" title="hepi.run.nllfast.run.default_nllfast_runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_nllfast_runner</span></code></a></p></td>
@@ -259,7 +171,7 @@
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.NLLfastRunner">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">NLLfastRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">NLLfastRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../index.html#hepi.run.Runner" title="hepi.run.Runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.run.Runner</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -271,8 +183,18 @@
 </dd>
 </dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="hepi.run.nllfast.run.NLLfastRunner.get_version">
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner.get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner.get_version" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.NLLfastRunner.orders">
-<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner.orders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner.orders" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner.orders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner.orders" title="Permalink to this definition"></a></dt>
 <dd><p>List of supported Orders in this runner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -283,7 +205,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.NLLfastRunner._get_nf_proc">
-<span class="sig-name descname"><span class="pre">_get_nf_proc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._get_nf_proc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._get_nf_proc" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_get_nf_proc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._get_nf_proc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._get_nf_proc" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>p</strong> (<a class="reference internal" href="../../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>) – </p>
@@ -293,7 +215,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.NLLfastRunner._get_nf_input">
-<span class="sig-name descname"><span class="pre">_get_nf_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._get_nf_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._get_nf_input" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_get_nf_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._get_nf_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._get_nf_input" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>p</strong> (<a class="reference internal" href="../../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>) – </p>
@@ -306,7 +228,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.NLLfastRunner._check_input">
-<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._check_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._check_input" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._check_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._check_input" title="Permalink to this definition"></a></dt>
 <dd><p>Checks input parameter for compatibility with Prospino</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -320,7 +242,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.NLLfastRunner._is_valid">
-<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._is_valid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._is_valid" title="Permalink to this definition"></a></dt>
 <dd><p>Verifies that a file is a complete output.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -341,7 +263,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.NLLfastRunner._parse_file">
-<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._parse_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._parse_file" title="Permalink to this definition"></a></dt>
 <dd><p>Extracts results from an output file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -358,7 +280,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.NLLfastRunner._prepare">
-<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._prepare" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#NLLfastRunner._prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.NLLfastRunner._prepare" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>p</strong> (<a class="reference internal" href="../../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>) – </p>
@@ -373,23 +295,23 @@
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.default_nllfast_runner">
-<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">default_nllfast_runner</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#default_nllfast_runner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.default_nllfast_runner" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">default_nllfast_runner</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#default_nllfast_runner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.default_nllfast_runner" title="Permalink to this definition"></a></dt>
 <dd><p>Default Prospino Runner to provide backward compatibility</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.run">
-<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">run</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.run" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">run</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.run" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.set_path">
-<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">set_path</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.set_path" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">set_path</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.set_path" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.run.nllfast.run.get_path">
-<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.get_path" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.run.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/run.html#get_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.run.get_path" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </section>
@@ -398,50 +320,33 @@
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../../prospino2/index.html" class="btn btn-neutral float-right" title="hepi.run.prospino2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../result/index.html" class="btn btn-neutral float-left" title="hepi.run.nllfast.result" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../nnllfast/index.html" class="btn btn-neutral float-right" title="hepi.run.nnllfast" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2023, Alexander Puck Neuwirth.
-
-    </p>
+    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
