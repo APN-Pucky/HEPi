@@ -3,7 +3,10 @@ livehtml:
 
 html:
 	poetry run $(MAKE) -C docs html
-	
+
+ci:
+	poetry config virtualenvs.create false
+
 doc: html
 
 install:
