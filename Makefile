@@ -4,13 +4,12 @@ livehtml:
 html:
 	poetry run $(MAKE) -C docs html
 
-ci:
-	poetry config virtualenvs.create false
-
 doc: html
 
 install:
 	poetry install --with docs --with test
+	# Make lhapdf available in the virtualenv
+	sed -i 's/include-system-site-packages\s*=.*/include-system-site-packages = true/g' $(shell poetry env info -p)/pyvenv.cfg
 	python3 -m pip install --user .
 
 build:
