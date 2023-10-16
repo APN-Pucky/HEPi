@@ -17,6 +17,7 @@ jobs:
           with:
             test: true
             doc: true
+            ci: true
             coveralls: true
             codacy-api-token: ${{ secrets.CODACY_API_TOKEN }}
             # test-pypi-token: ${{ secrets.test_pypi_token }}
