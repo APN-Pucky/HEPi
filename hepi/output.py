@@ -172,7 +172,8 @@ def write_csv(dict_list: list, filename: str):
        >>> dl = hepi.load(urllib.request.urlopen(
        ... "https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json"
        ... ),dimensions=2)
-       >>> hepi.write_csv(dl, open("test.csv", 'w'))
+       >>> with open("test.csv", 'w') as f:
+       ...     hepi.write_csv(dl, f)
        >>> with open('test.csv', 'r') as f:
        ...     print(f.read())
        order,energy,energyhalf,particle1,particle2,slha,pdf_lo,pdfset_lo,pdf_nlo,pdfset_nlo,pdf_lo_id,pdf_nlo_id,mu_f,mu_r,precision,max_iters,invariant_mass,pt,result,id,model,mu,runner,N2,N1,NLO_PLUS_NLL_NOERR,NLO_PLUS_NLL_COMBINED
@@ -453,7 +454,6 @@ def write_json(
                         ),
                     }
             elif error_sym:
-
                 # COMBINED and NOERR are the same mean for sym errors
                 td = {
                     "xsec_pb": float(unv(dict_list[so + "_NOERR"].iloc[j])),

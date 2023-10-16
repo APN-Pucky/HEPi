@@ -21,7 +21,8 @@ smpl = ">=0.0.152"
 validators = "*"
 
 
-lhapdf = {version = "^6", optional = true}
+# does not exist on pypi for recent pythons
+#lhapdf = {version = "^6", optional = true}
 
 
 [tool.poetry.scripts]
@@ -79,3 +80,14 @@ dirty = true
 pattern = '(?x)(?# ignore whitespace)^((?P<epoch>\d+)!)?(?P<base>\d+(\.\d+)*)(?# v1.2.3 or v1!2000.1.2)([-._]?((?P<stage>[a-zA-Z]+)[-._]?(?P<revision>\d+)?))?(?# b0)(\+(?P<tagged_metadata>.+))?$(?# +linux)'
 strict = true
 format-jinja = "{% if distance == 0 %}{{ base }}{% else %}{{ base }}.{{ distance }}{% endif %}"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = [ 
+    "-v","--cov=hepi","--cov-config=.coveragerc","--cov-append","--cov-report=term","--cov-report=xml","--doctest-modules","--ignore=docs/source/examples/output/"
+]
+filterwarnings = [
+    'error',
+    'ignore:PDF set .* not installed?:UserWarning',
+    'ignore: pkg_resources is deprecated as an API:DeprecationWarning',
+]
