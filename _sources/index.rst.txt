@@ -36,7 +36,7 @@
    :caption: Versions:
    :maxdepth: 3
 
-   RTD <https://hepi.readthedocs.io/en/stable/>
+   RTD <https://hepi.readthedocs.io/en/latest/>
    Stable <https://apn-pucky.github.io/HEPi/>
    Dev <https://apn-pucky.github.io/HEPi/test/>
 
