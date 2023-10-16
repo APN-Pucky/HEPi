@@ -4,8 +4,6 @@ import stat
 import warnings
 from string import Template
 from typing import List
-from hepi.run.nllfast.result import NLLFastResult
-from hepi.run.nnllfast.result import NNLLFastResult
 
 import pyslha
 from uncertainties import ufloat
@@ -13,10 +11,11 @@ from uncertainties import ufloat
 from hepi.input import Input, Order, is_gluino, is_squark
 from hepi.results import Result
 from hepi.run import Runner, RunParam
+from hepi.run.nllfast.result import NLLFastResult
+from hepi.run.nnllfast.result import NNLLFastResult
 
 
 class NLLfastRunner(Runner):
-
     def get_version(self) -> str:
         return "1.1"
 
@@ -31,29 +30,31 @@ class NLLfastRunner(Runner):
             ms += d.blocks["MASS"][r]
         for r in range(2000001, 2000006):
             ms += d.blocks["MASS"][r]
-        ms /= 10 # 10 flavors no (s)top
+        ms /= 10  # 10 flavors no (s)top
         if p.has_gluino() and p.has_squark():
             if is_squark(p.particle1):
                 ms = d.blocks["MASS"][abs(p.particle1)]
             if is_squark(p.particle2):
                 ms = d.blocks["MASS"][abs(p.particle2)]
-            return "sg",  ms, mg, 10
+            return "sg", ms, mg, 10
         if is_gluino(p.particle1) and is_gluino(p.particle2):
-            if ms > 3000: # go into decoupling limit
+            if ms > 3000:  # go into decoupling limit
                 return "gdcpl", "", mg, 1
-            return "gg",  ms, mg, 1
+            return "gg", ms, mg, 1
         if is_squark(p.particle1) and is_squark(p.particle2):
-            ms =(d.blocks["MASS"][abs(p.particle1)] +d.blocks["MASS"][abs(p.particle2)])/2
-            if mg > 3000: # go into decoupling limit
-                return "sdcpl", ms,"", 10
+            ms = (
+                d.blocks["MASS"][abs(p.particle1)] + d.blocks["MASS"][abs(p.particle2)]
+            ) / 2
+            if mg > 3000:  # go into decoupling limit
+                return "sdcpl", ms, "", 10
             if p.particle1 > 0 and p.particle2 > 0:
-                return "ss",  ms, mg,10*10
+                return "ss", ms, mg, 10 * 10
             elif (p.particle1 > 0 and p.particle2 < 0) or (
                 p.particle1 < 0 and p.particle2 > 0
             ):
                 s = p.particle1 if p.particle1 > p.particle2 else p.particle2
                 b = p.particle2 if p.particle1 > p.particle2 else p.particle1
-                return "sb",  ms, mg, 10
+                return "sb", ms, mg, 10
         return "UNKNOWN_PROCESS_OR_UNIMPLEMENTED_PROCESS"
 
     def _get_nf_input(self, p: Input) -> dict:
@@ -82,7 +83,7 @@ class NLLfastRunner(Runner):
             return False
         return True
 
-    def _is_valid(self, file: str, p: Input, d,**kwargs) -> bool:
+    def _is_valid(self, file: str, p: Input, d, **kwargs) -> bool:
         return super()._is_valid(file, p, d)
 
     def _parse_file(self, file: str) -> Result:
@@ -93,15 +94,39 @@ class NLLfastRunner(Runner):
                 pass
             for s in line.split():
                 ret.append(float(s))
-        return NNLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
-            (ret[len(ret)-10+2]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+7])/100)*ret[len(ret)-10+2]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+6])/100)*ret[len(ret)-10+2]/ret[len(ret)-10+9]),
-            (ret[len(ret)-10+3]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+5])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+4])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+7])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+6])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+        return NNLLFastResult(  # divide by 10 due to degeneracy, this is injeted into the result
+            (ret[len(ret) - 10 + 2] / ret[len(ret) - 10 + 9]),
+            (
+                ((ret[len(ret) - 10 + 7]) / 100)
+                * ret[len(ret) - 10 + 2]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (
+                ((ret[len(ret) - 10 + 6]) / 100)
+                * ret[len(ret) - 10 + 2]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (ret[len(ret) - 10 + 3] / ret[len(ret) - 10 + 9]),
+            (
+                ((ret[len(ret) - 10 + 5]) / 100)
+                * ret[len(ret) - 10 + 3]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (
+                ((ret[len(ret) - 10 + 4]) / 100)
+                * ret[len(ret) - 10 + 3]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (
+                ((ret[len(ret) - 10 + 7]) / 100)
+                * ret[len(ret) - 10 + 3]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (
+                ((ret[len(ret) - 10 + 6]) / 100)
+                * ret[len(ret) - 10 + 3]
+                / ret[len(ret) - 10 + 9]
+            ),
         )
 
     def _prepare(self, p: Input, **kwargs) -> RunParam:
@@ -112,25 +137,26 @@ class NLLfastRunner(Runner):
             for k, v in self._get_nf_input(p).items():
                 d[k] = v
 
-
-            open(rp.execute, "w").write(
-                "#!/bin/sh\n"
-                + "pushd {path} > /dev/null\nR=\"$({exec} {proc} {sq} {gl})\"\npopd > /dev/null\necho \"$R {deg}\">{out}".format(
-                    exec=self.get_path(),
-                    path=os.path.dirname(self.get_path()),
-                    out=rp.out_file,
-                    proc=d["nf_final_state_in"],
-                    sq=d["nf_squark_mass"],
-                    gl=d["nf_gluino_mass"],
-                    deg=d["nf_deg"],
+            with open(rp.execute, "w") as tmp:
+                tmp.write(
+                    "#!/bin/sh\n"
+                    + 'pushd {path} > /dev/null\nR="$({exec} {proc} {sq} {gl})"\npopd > /dev/null\necho "$R {deg}">{out}'.format(
+                        exec=self.get_path(),
+                        path=os.path.dirname(self.get_path()),
+                        out=rp.out_file,
+                        proc=d["nf_final_state_in"],
+                        sq=d["nf_squark_mass"],
+                        gl=d["nf_gluino_mass"],
+                        deg=d["nf_deg"],
+                    )
                 )
-            )
             st = os.stat(rp.execute)
             os.chmod(rp.execute, st.st_mode | stat.S_IEXEC)
 
             sname = d["slha"]
             with open(self.get_output_dir() + sname, "r") as f:
-                open(rp.out_file, "a").write(f.read() + "\n\n")
+                with open(rp.out_file, "a") as a:
+                    a.write(f.read() + "\n\n")
         return rp
 
 

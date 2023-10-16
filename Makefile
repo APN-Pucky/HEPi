@@ -7,6 +7,7 @@ html:
 doc: html
 
 install:
+	lhapdf install cteq6l1 cteq66 CT14lo CT14nlo
 	poetry install --with docs --with test
 	# Make lhapdf available in the virtualenv
 	sed -i 's/include-system-site-packages\s*=.*/include-system-site-packages = true/g' $(shell poetry env info -p)/pyvenv.cfg

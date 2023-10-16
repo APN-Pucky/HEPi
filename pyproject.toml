@@ -86,8 +86,10 @@ minversion = "6.0"
 addopts = [ 
     "-v","--cov=hepi","--cov-config=.coveragerc","--cov-append","--cov-report=term","--cov-report=xml","--doctest-modules","--ignore=docs/source/examples/output/"
 ]
+testpaths = ["tests"]
 filterwarnings = [
     'error',
     'ignore:PDF set .* not installed?:UserWarning',
+    'ignore:Could not set new central scale .*:RuntimeWarning',
     'ignore: pkg_resources is deprecated as an API:DeprecationWarning',
 ]

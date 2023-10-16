@@ -117,9 +117,11 @@ class MadGraphRunner(Runner):
             data = pkgutil.get_data(__name__, infile).decode("utf-8")
             src = Template(data)
             result = src.substitute(d)
-            open(get_output_dir() + name + ".mg", "w").write(result)
+            with open(get_output_dir() + name + ".mg", "w") as tmp:
+                tmp.write(result)
             if not rp.skip:
-                open(get_output_dir() + name + ".out", "w").write(result + "\n\n")
+                with open(get_output_dir() + name + ".out", "w") as tmp:
+                    tmp.write(result + "\n\n")
 
             if p.order == Order.LO:
                 mgfile = "run_card_no_madstr.dat"
@@ -137,9 +139,11 @@ class MadGraphRunner(Runner):
 
             src = Template(data)
             result = src.substitute(d)
-            open(get_output_dir() + name + ".dat", "w").write(result)
+            with open(get_output_dir() + name + ".dat", "w") as tmp:
+                tmp.write(result)
             if not rp.skip:
-                open(get_output_dir() + name + ".out", "a").write(result + "\n\n")
+                with open(get_output_dir() + name + ".out", "a") as tmp:
+                    tmp.write(result + "\n\n")
 
             sname = d["slha"]
             with open(get_output_dir() + sname, "r") as f:
@@ -147,7 +151,8 @@ class MadGraphRunner(Runner):
                 # result = src.substitute(d)
                 # open(get_input_dir() + sname + ".in", "w").write(result)
                 if not rp.skip:
-                    open(get_output_dir() + name + ".out", "a").write(f.read() + "\n\n")
+                    with open(get_output_dir() + name + ".out", "a") as a:
+                        a.write(f.read() + "\n\n")
             rp.dic = {
                 "in": get_output_dir() + name + ".mg",
                 "dir": d["dir"],

@@ -36,7 +36,6 @@ class ResumminoRunner(Runner):
         return False
 
     def _check_input(self, p: Input, **kwargs) -> bool:
-
         if p.order == Order.aNNLO_PLUS_NNLL and (
             (p.has_gluino() and p.has_weakino()) or (p.has_squark() and p.has_weakino())
         ):
@@ -73,21 +72,25 @@ class ResumminoRunner(Runner):
             src = Template(data)
             result = src.substitute(p.__dict__)
             od = self.get_output_dir()
-            open(od + rp.name + ".in", "w").write(result)
-            open(od + rp.name + ".sh", "w").write(
-                "#!/bin/sh\n"
-                + get_path()
-                + " {} {} >> {}".format(
-                    od + rp.name + ".in", flags, od + rp.name + ".out"
+            with open(od + rp.name + ".in", "w") as tmp:
+                tmp.write(result)
+            with open(od + rp.name + ".sh", "w") as tmp:
+                tmp.write(
+                    "#!/bin/sh\n"
+                    + get_path()
+                    + " {} {} >> {}".format(
+                        od + rp.name + ".in", flags, od + rp.name + ".out"
+                    )
                 )
-            )
             st = os.stat(od + rp.name + ".sh")
             os.chmod(od + rp.name + ".sh", st.st_mode | stat.S_IEXEC)
-            open(od + rp.name + ".out", "w").write(result + "\n\n")
+            with open(od + rp.name + ".out", "w") as tmp:
+                tmp.write(result + "\n\n")
 
             sname = p.slha
             with open(od + sname, "r") as f:
-                open(od + rp.name + ".out", "a").write(f.read() + "\n\n")
+                with open(od + rp.name + ".out", "a") as a:
+                    a.write(f.read() + "\n\n")
         return rp
 
 
