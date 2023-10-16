@@ -26,7 +26,7 @@ def test_resummino():
         for param in params:
             # All the inputs Order, CMS in GeV, particle 1, particle 2, slha, pdf_lo, pdf_nlo,mu_f, mu_r
             i = hepi.Input(
-                hepi.Order.aNNLO_PLUS_NNLL,
+                hepi.Order.LO,
                 13000,
                 pa,
                 pb,

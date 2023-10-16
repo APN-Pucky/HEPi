@@ -7,11 +7,12 @@ import smpl
 
 import hepi.util as util
 from hepi.input import set_input_dir, set_output_dir
-from hepi.run import spheno as sp
 
-sp.set_path("SPheno")
 set_input_dir("./tests/input/")
 set_output_dir("./tests/output/")
+from hepi.run import spheno as sp
+
+sp.set_path("~/git/SPheno-3.3.8/")
 
 
 def test_spheno():

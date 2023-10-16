@@ -7,11 +7,10 @@ import smpl
 
 import hepi.util as util
 from hepi.input import set_input_dir, set_output_dir
-from hepi.run import resummino as rs
-from hepi.run import softsusy as ss
 
 set_input_dir("./tests/input/")
 set_output_dir("./tests/output/")
+from hepi.run import softsusy as ss
 
 
 def test_softsusy():

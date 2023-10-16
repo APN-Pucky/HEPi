@@ -7,12 +7,14 @@ import smpl
 
 import hepi.util as util
 from hepi.input import set_input_dir, set_output_dir
+
+set_input_dir("./tests/input/")
+set_output_dir("./tests/output/")
 from hepi.run import nllfast as nll
 
 # set the folder where the resummino binary can be found either in either ./{,bin,bin/build}/resummino
+
 nll.set_path("nll-fast-3.1")
-set_input_dir("./tests/input/")
-set_output_dir("./tests/output/")
 
 
 def test_nllfast():
