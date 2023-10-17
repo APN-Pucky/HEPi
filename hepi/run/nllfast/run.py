@@ -131,7 +131,9 @@ class NLLfastRunner(Runner):
                     "#!/bin/sh\n"
                     + 'pushd {path} > /dev/null\nR="$({exec} {proc} {pdf} {sq} {gl})"\npopd > /dev/null\necho "$R {deg}">{out}'.format(
                         exec=self.get_path(),
-                        path=os.path.dirname(self.get_path()),
+                        path=os.path.dirname(self.get_path())
+                        if not os.path.dirname(self.get_path()) == ""
+                        else ".",
                         out=rp.out_file,
                         proc=d["nf_final_state_in"],
                         sq=d["nf_squark_mass"],
