@@ -40,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.14-23-g961e674b
+                0.2.15
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -237,7 +237,9 @@ from hepi.run.nllfast.result import NLLFastResult
                     &quot;#!/bin/sh\n&quot;
                     + &#39;pushd {path} &gt; /dev/null\nR=&quot;$({exec} {proc} {pdf} {sq} {gl})&quot;\npopd &gt; /dev/null\necho &quot;$R {deg}&quot;&gt;{out}&#39;.format(
                         exec=self.get_path(),
-                        path=os.path.dirname(self.get_path()),
+                        path=os.path.dirname(self.get_path())
+                        if not os.path.dirname(self.get_path()) == &quot;&quot;
+                        else &quot;.&quot;,
                         out=rp.out_file,
                         proc=d[&quot;nf_final_state_in&quot;],
                         sq=d[&quot;nf_squark_mass&quot;],
