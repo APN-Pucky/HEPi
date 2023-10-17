@@ -1,4 +1,4 @@
-FROM apnpucky/gentoo-hepi:44885245f7b5
+FROM apnpucky/gentoo-hepi
 
 RUN lhapdf install cteq6l1 cteq66 CT14lo CT14nlo
 
@@ -18,4 +18,4 @@ WORKDIR ${HOME}
 USER ${NB_USER}
 ENV PATH "$PATH:${HOME}/.local/bin"
 
-RUN python3 -m pip install --no-cache-dir --break-system-packages notebook jupyterlab hepi
+RUN python3 -m pip install --no-cache-dir --break-system-packages notebook jupyterlab jupyterhub hepi
