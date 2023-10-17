@@ -18,4 +18,4 @@ WORKDIR ${HOME}
 USER ${NB_USER}
 ENV PATH "$PATH:${HOME}/.local/bin"
 
-RUN python3 -m pip install --no-cache-dir --break-system-packages notebook jupyterlab hepi
+RUN python3 -m pip install --no-cache-dir --break-system-packages notebook jupyterlab jupyterhub hepi
