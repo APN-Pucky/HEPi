@@ -31,12 +31,13 @@ def get_input_dir():
 
 def get_output_dir():
     """
-    Get the input directory.
+    Get the output directory.
 
     Returns:
         str: :attr:`out_dir`
     """
     global out_dir
+
     return out_dir
 
 

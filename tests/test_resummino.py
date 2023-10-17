@@ -4,11 +4,11 @@ from hepi.input import set_input_dir, set_output_dir
 print(hepi.__version__)
 import numpy as np
 
+set_input_dir("./tests/input/")
+set_output_dir("./tests/output/")
 from hepi.run import resummino as rs
 
 rs.set_path("resummino")
-set_input_dir("./tests/input/")
-set_output_dir("./tests/output/")
 
 
 def test_resummino():

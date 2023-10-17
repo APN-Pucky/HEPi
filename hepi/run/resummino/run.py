@@ -72,6 +72,8 @@ class ResumminoRunner(Runner):
             src = Template(data)
             result = src.substitute(p.__dict__)
             od = self.get_output_dir()
+            if not os.path.exists(od):
+                os.makedirs(od)
             with open(od + rp.name + ".in", "w") as tmp:
                 tmp.write(result)
             with open(od + rp.name + ".sh", "w") as tmp:
