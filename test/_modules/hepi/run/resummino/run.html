@@ -40,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.14-16-g24f1f8b8
+                0.2.14-19-g2049f6b3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -178,6 +178,8 @@ from .result import is_valid, parse_single
             src = Template(data)
             result = src.substitute(p.__dict__)
             od = self.get_output_dir()
+            if not os.path.exists(od):
+                os.makedirs(od)
             with open(od + rp.name + &quot;.in&quot;, &quot;w&quot;) as tmp:
                 tmp.write(result)
             with open(od + rp.name + &quot;.sh&quot;, &quot;w&quot;) as tmp:
