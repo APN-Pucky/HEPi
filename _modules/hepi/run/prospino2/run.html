@@ -40,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.14
+                0.2.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -285,23 +285,26 @@ from hepi.run import Runner, RunParam
                 d[k] = v
             result = src.substitute(d)
             # open(rp.in_file, &quot;w&quot;).write(result)
-            open(rp.out_file, &quot;w&quot;).write(result + &quot;\n\n&quot;)
+            with open(rp.out_file, &quot;w&quot;) as tmp:
+                tmp.write(result + &quot;\n\n&quot;)
             rdir = self.get_output_dir() + rp.name + &quot;.rdir&quot;
             if os.path.exists(rdir) and os.path.isdir(rdir):
                 shutil.rmtree(rdir)
             shutil.copytree(self.get_path(), rdir)
-            open(rdir + &quot;/prospino_main.f90&quot;, &quot;w&quot;).write(result)
+            with open(rdir + &quot;/prospino_main.f90&quot;, &quot;w&quot;) as tmp:
+                tmp.write(result)
             # compile
             subprocess.Popen(
                 &quot;cd &quot; + rdir + &quot; &amp;&amp; make&quot;, shell=True, stdout=subprocess.DEVNULL
             ).wait()
 
-            open(rp.execute, &quot;w&quot;).write(
-                &quot;#!/bin/sh\n&quot;
-                + &quot;H=$PWD &amp;&amp; cd {rdir}&amp;&amp; ./prospino_2.run &gt; tmp.out &amp;&amp; cd $H  &amp;&amp; cat {rdir}/tmp.out  &gt;&gt; {out} &amp;&amp; cat {rdir}/prospino.dat&gt;&gt; {out} &amp;&amp; rm -rf {rdir}&quot;.format(
-                    rdir=rdir, out=rp.out_file
+            with open(rp.execute, &quot;w&quot;) as tmp:
+                tmp.write(
+                    &quot;#!/bin/sh\n&quot;
+                    + &quot;H=$PWD &amp;&amp; cd {rdir}&amp;&amp; ./prospino_2.run &gt; tmp.out &amp;&amp; cd $H  &amp;&amp; cat {rdir}/tmp.out  &gt;&gt; {out} &amp;&amp; cat {rdir}/prospino.dat&gt;&gt; {out} &amp;&amp; rm -rf {rdir}&quot;.format(
+                        rdir=rdir, out=rp.out_file
+                    )
                 )
-            )
             st = os.stat(rp.execute)
             os.chmod(rp.execute, st.st_mode | stat.S_IEXEC)
 
@@ -310,7 +313,8 @@ from hepi.run import Runner, RunParam
                 self.get_output_dir() + sname, rdir + &quot;/prospino.in.les_houches&quot;
             )
             with open(self.get_output_dir() + sname, &quot;r&quot;) as f:
-                open(rp.out_file, &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
+                with open(rp.out_file, &quot;a&quot;) as a:
+                    a.write(f.read() + &quot;\n\n&quot;)
         return rp</div></div>
 
 

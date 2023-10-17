@@ -40,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.14
+                0.2.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -146,19 +146,19 @@ from hepi.run import Runner
                 + &quot;Softsusy.spc &quot;
                 + self.get_output_dir()
                 + s.slha
-#                + &quot; &amp;&amp; sed -i &#39;/Created/d&#39; &quot;
-#                + self.get_output_dir()
-#                + s.slha
+                #                + &quot; &amp;&amp; sed -i &#39;/Created/d&#39; &quot;
+                #                + self.get_output_dir()
+                #                + s.slha
             )
-            #print(comm)
-            proc = subprocess.Popen(
+            # print(comm)
+            with subprocess.Popen(
                 comm, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-            )
-            proc.wait()
-            # get proc return code
-            if proc.returncode != 0:
-                warnings.warn(&quot;softsusy failed&quot;)
-            update_slha(s)
+            ) as proc:
+                proc.wait()
+                # get proc return code
+                if proc.returncode != 0:
+                    warnings.warn(&quot;softsusy failed&quot;)
+                update_slha(s)
         return slhas</div></div>
 
 

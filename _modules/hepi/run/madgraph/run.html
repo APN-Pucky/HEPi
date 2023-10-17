@@ -40,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.14
+                0.2.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -223,9 +223,11 @@ from .result import is_valid, parse_single
             data = pkgutil.get_data(__name__, infile).decode(&quot;utf-8&quot;)
             src = Template(data)
             result = src.substitute(d)
-            open(get_output_dir() + name + &quot;.mg&quot;, &quot;w&quot;).write(result)
+            with open(get_output_dir() + name + &quot;.mg&quot;, &quot;w&quot;) as tmp:
+                tmp.write(result)
             if not rp.skip:
-                open(get_output_dir() + name + &quot;.out&quot;, &quot;w&quot;).write(result + &quot;\n\n&quot;)
+                with open(get_output_dir() + name + &quot;.out&quot;, &quot;w&quot;) as tmp:
+                    tmp.write(result + &quot;\n\n&quot;)
 
             if p.order == Order.LO:
                 mgfile = &quot;run_card_no_madstr.dat&quot;
@@ -243,9 +245,11 @@ from .result import is_valid, parse_single
 
             src = Template(data)
             result = src.substitute(d)
-            open(get_output_dir() + name + &quot;.dat&quot;, &quot;w&quot;).write(result)
+            with open(get_output_dir() + name + &quot;.dat&quot;, &quot;w&quot;) as tmp:
+                tmp.write(result)
             if not rp.skip:
-                open(get_output_dir() + name + &quot;.out&quot;, &quot;a&quot;).write(result + &quot;\n\n&quot;)
+                with open(get_output_dir() + name + &quot;.out&quot;, &quot;a&quot;) as tmp:
+                    tmp.write(result + &quot;\n\n&quot;)
 
             sname = d[&quot;slha&quot;]
             with open(get_output_dir() + sname, &quot;r&quot;) as f:
@@ -253,7 +257,8 @@ from .result import is_valid, parse_single
                 # result = src.substitute(d)
                 # open(get_input_dir() + sname + &quot;.in&quot;, &quot;w&quot;).write(result)
                 if not rp.skip:
-                    open(get_output_dir() + name + &quot;.out&quot;, &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
+                    with open(get_output_dir() + name + &quot;.out&quot;, &quot;a&quot;) as a:
+                        a.write(f.read() + &quot;\n\n&quot;)
             rp.dic = {
                 &quot;in&quot;: get_output_dir() + name + &quot;.mg&quot;,
                 &quot;dir&quot;: d[&quot;dir&quot;],

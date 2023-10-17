@@ -46,7 +46,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.14
+                0.2.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -116,7 +116,7 @@
              
   <section id="Distribute-resummino-run-files-to-clusters">
 <h1>Distribute resummino run files to clusters<a class="headerlink" href="#Distribute-resummino-run-files-to-clusters" title="Permalink to this heading"></a></h1>
-<p>After running this example one only needs to run the generated output/<a href="#id1"><span class="problematic" id="id2">*</span></a>.sh files or queue them to your favourite cluster:</p>
+<p>After running this example one only needs to run the generated output/*.sh files or queue them to your favourite cluster:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./output/*.sh
 </pre></div>
 </div>
@@ -131,7 +131,7 @@
 <span class="kn">from</span> <span class="nn">hepi.run</span> <span class="kn">import</span> <span class="n">resummino</span> <span class="k">as</span> <span class="n">rs</span>
 <span class="kn">import</span> <span class="nn">hepi.util</span> <span class="k">as</span> <span class="nn">util</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">rs</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;~/git/resummino&quot;</span><span class="p">)</span>
+<span class="n">rs</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;resummino&quot;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">rs</span><span class="o">.</span><span class="n">get_path</span><span class="p">())</span>
 </pre></div>
 </div>

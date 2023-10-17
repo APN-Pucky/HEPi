@@ -49,7 +49,7 @@
     "import matplotlib.pyplot as plt\n",
     "from hepi.run import resummino as rs\n",
     "# set the folder where the resummino binary can be found either in either ./{,bin,bin/build}/resummino\n",
-    "rs.set_path(\"~/git/resummino_releases/\")\n",
+    "rs.set_path(\"resummino\")\n",
     "# By default hepi will run with nice -n5 to prevent overloading the system if more scans than cores are running\n",
     "#rs.set_pre(\"\") disables any prefixing with nice\n",
     "print (rs.get_path())"

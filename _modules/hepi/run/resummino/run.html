@@ -40,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.14
+                0.2.17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -142,7 +142,6 @@ from .result import is_valid, parse_single
         return False</div>
 
 <div class="viewcode-block" id="ResumminoRunner._check_input"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.ResumminoRunner._check_input">[docs]</a>    def _check_input(self, p: Input, **kwargs) -&gt; bool:
-
         if p.order == Order.aNNLO_PLUS_NNLL and (
             (p.has_gluino() and p.has_weakino()) or (p.has_squark() and p.has_weakino())
         ):
@@ -179,21 +178,27 @@ from .result import is_valid, parse_single
             src = Template(data)
             result = src.substitute(p.__dict__)
             od = self.get_output_dir()
-            open(od + rp.name + &quot;.in&quot;, &quot;w&quot;).write(result)
-            open(od + rp.name + &quot;.sh&quot;, &quot;w&quot;).write(
-                &quot;#!/bin/sh\n&quot;
-                + get_path()
-                + &quot; {} {} &gt;&gt; {}&quot;.format(
-                    od + rp.name + &quot;.in&quot;, flags, od + rp.name + &quot;.out&quot;
+            if not os.path.exists(od):
+                os.makedirs(od)
+            with open(od + rp.name + &quot;.in&quot;, &quot;w&quot;) as tmp:
+                tmp.write(result)
+            with open(od + rp.name + &quot;.sh&quot;, &quot;w&quot;) as tmp:
+                tmp.write(
+                    &quot;#!/bin/sh\n&quot;
+                    + get_path()
+                    + &quot; {} {} &gt;&gt; {}&quot;.format(
+                        od + rp.name + &quot;.in&quot;, flags, od + rp.name + &quot;.out&quot;
+                    )
                 )
-            )
             st = os.stat(od + rp.name + &quot;.sh&quot;)
             os.chmod(od + rp.name + &quot;.sh&quot;, st.st_mode | stat.S_IEXEC)
-            open(od + rp.name + &quot;.out&quot;, &quot;w&quot;).write(result + &quot;\n\n&quot;)
+            with open(od + rp.name + &quot;.out&quot;, &quot;w&quot;) as tmp:
+                tmp.write(result + &quot;\n\n&quot;)
 
             sname = p.slha
             with open(od + sname, &quot;r&quot;) as f:
-                open(od + rp.name + &quot;.out&quot;, &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
+                with open(od + rp.name + &quot;.out&quot;, &quot;a&quot;) as a:
+                    a.write(f.read() + &quot;\n\n&quot;)
         return rp</div></div>
 
 
