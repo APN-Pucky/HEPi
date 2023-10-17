@@ -11,7 +11,9 @@ install:
 	poetry install --with docs --with test
 	# Make lhapdf available in the virtualenv
 	sed -i 's/include-system-site-packages\s*=.*/include-system-site-packages = true/g' $(shell poetry env info -p)/pyvenv.cfg
-	python3 -m pip install --user .
+
+install-user:
+	python3 -m pip install --user --break-system-packages .
 
 build:
 	poetry build
