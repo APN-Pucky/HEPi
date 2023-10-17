@@ -1,4 +1,4 @@
-FROM apnpucky/gentoo-hepi:44885245f7b5
+FROM apnpucky/gentoo-hepi
 
 RUN lhapdf install cteq6l1 cteq66 CT14lo CT14nlo
 
