@@ -2,7 +2,11 @@
 
 Python interface for gluing together several HEP programs (e.g. from HEPForge <https://www.hepforge.org/>).
 
-[![PyPI version][pypi image]][pypi link] ![downloads](https://img.shields.io/pypi/dm/hepi.svg)  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430837.svg)](https://doi.org/10.5281/zenodo.8430837) [![SSL Binder](https://binderhub.ssl-hep.org/badge_logo.svg)](https://binderhub.ssl-hep.org/v2/gh/APN-Pucky/HEPi/binder) [![MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/APN-Pucky/HEPi/binder) 
+[![PyPI version][pypi image]][pypi link] 
+![downloads](https://img.shields.io/pypi/dm/hepi.svg)  
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430837.svg)](https://doi.org/10.5281/zenodo.8430837) 
+[![SSLBinder](https://binderhub.ssl-hep.org/badge_logo.svg)](https://binderhub.ssl-hep.org/v2/gh/APN-Pucky/HEPi/binder?labpath=docs%2Fsource%2Fexamples%2Fdemo_00_resummino.ipynb)
+[![MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/APN-Pucky/HEPi/binder?labpath=docs%2Fsource%2Fexamples%2Fdemo_00_resummino.ipynb)
 
 | [Stable][doc stable]        | [Unstable][doc test]           |
 | ------------- |:-------------:|
