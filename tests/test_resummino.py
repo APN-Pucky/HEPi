@@ -2,11 +2,8 @@ import hepi
 from hepi.input import set_input_dir, set_output_dir
 
 print(hepi.__version__)
-import matplotlib.pyplot as plt
 import numpy as np
-import smpl
 
-import hepi.util as util
 from hepi.run import resummino as rs
 
 rs.set_path("resummino")
@@ -40,4 +37,4 @@ def test_resummino():
             li = hepi.mass_scan(
                 [i], pa, np.linspace(100, 1000, 7 + 8)
             )  # we scan the slepton mass from 100 to 1000 at 15 equidistant points
-            rs_dl = rs.run(li, skip=True, n_jobs=1)
+            rs.run(li, skip=True, n_jobs=1)

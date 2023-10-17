@@ -1,11 +1,8 @@
 import hepi
 
 print(hepi.__version__)
-import matplotlib.pyplot as plt
 import numpy as np
-import smpl
 
-import hepi.util as util
 from hepi.input import set_input_dir, set_output_dir
 
 set_input_dir("./tests/input/")

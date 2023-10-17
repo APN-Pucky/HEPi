@@ -1,11 +1,8 @@
 import hepi
 
 print(hepi.__version__)
-import matplotlib.pyplot as plt
 import numpy as np
-import smpl
 
-import hepi.util as util
 from hepi.input import set_input_dir, set_output_dir
 
 set_input_dir("./tests/input/")
@@ -44,4 +41,4 @@ def test_nllfast():
             li = hepi.mass_scan(
                 [i], pa, np.linspace(1000, 2000, 16)
             )  # we scan the slepton mass from 100 to 1000 at 15 equidistant points
-            rs_dl = nll.run(li, skip=False, n_jobs=1)
+            nll.run(li, skip=False, n_jobs=1)
