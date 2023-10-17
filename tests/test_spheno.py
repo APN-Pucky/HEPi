@@ -9,7 +9,7 @@ set_input_dir("./tests/input/")
 set_output_dir("./tests/output/")
 from hepi.run import spheno as sp
 
-sp.set_path("~/git/SPheno-3.3.8/")
+sp.set_path("SPheno")
 
 
 def test_spheno():
