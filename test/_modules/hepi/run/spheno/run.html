@@ -40,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.14
+                0.2.14-1-g938eef4d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -151,16 +151,18 @@ from hepi.run import Runner
                 + self.get_output_dir()
                 + s.slha
             )
-            proc = subprocess.Popen(
+            with subprocess.Popen(
                 comm, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-            )
-            proc.wait()
-            update_slha(s)
+            ) as proc:
+                proc.wait()
+                if proc.returncode != 0:
+                    warnings.warn(&quot;spheno failed&quot;)
+                update_slha(s)
         if os.path.exists(&quot;Messages.out&quot;):
             with open(&quot;Messages.out&quot;, &quot;r&quot;) as r:
                 t = r.read()
                 if t != &quot;&quot;:
-                    warnings.warn(r.read())
+                    warnings.warn(&quot;Spheno error in Messages.out&quot; + r.read())
         return slhas</div></div>
 
 

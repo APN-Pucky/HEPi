@@ -40,7 +40,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.14
+                0.2.14-1-g938eef4d
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -110,8 +110,6 @@ import stat
 import warnings
 from string import Template
 from typing import List
-from hepi.run.nllfast.result import NLLFastResult
-from hepi.run.nnllfast.result import NNLLFastResult
 
 import pyslha
 from uncertainties import ufloat
@@ -119,10 +117,11 @@ from uncertainties import ufloat
 from hepi.input import Input, Order, is_gluino, is_squark
 from hepi.results import Result
 from hepi.run import Runner, RunParam
+from hepi.run.nllfast.result import NLLFastResult
+from hepi.run.nnllfast.result import NNLLFastResult
 
 
 <div class="viewcode-block" id="NLLfastRunner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner">[docs]</a>class NLLfastRunner(Runner):
-
 <div class="viewcode-block" id="NLLfastRunner.get_version"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner.get_version">[docs]</a>    def get_version(self) -&gt; str:
         return &quot;1.1&quot;</div>
 
@@ -137,29 +136,31 @@ from hepi.run import Runner, RunParam
             ms += d.blocks[&quot;MASS&quot;][r]
         for r in range(2000001, 2000006):
             ms += d.blocks[&quot;MASS&quot;][r]
-        ms /= 10 # 10 flavors no (s)top
+        ms /= 10  # 10 flavors no (s)top
         if p.has_gluino() and p.has_squark():
             if is_squark(p.particle1):
                 ms = d.blocks[&quot;MASS&quot;][abs(p.particle1)]
             if is_squark(p.particle2):
                 ms = d.blocks[&quot;MASS&quot;][abs(p.particle2)]
-            return &quot;sg&quot;,  ms, mg, 10
+            return &quot;sg&quot;, ms, mg, 10
         if is_gluino(p.particle1) and is_gluino(p.particle2):
-            if ms &gt; 3000: # go into decoupling limit
+            if ms &gt; 3000:  # go into decoupling limit
                 return &quot;gdcpl&quot;, &quot;&quot;, mg, 1
-            return &quot;gg&quot;,  ms, mg, 1
+            return &quot;gg&quot;, ms, mg, 1
         if is_squark(p.particle1) and is_squark(p.particle2):
-            ms =(d.blocks[&quot;MASS&quot;][abs(p.particle1)] +d.blocks[&quot;MASS&quot;][abs(p.particle2)])/2
-            if mg &gt; 3000: # go into decoupling limit
-                return &quot;sdcpl&quot;, ms,&quot;&quot;, 10
+            ms = (
+                d.blocks[&quot;MASS&quot;][abs(p.particle1)] + d.blocks[&quot;MASS&quot;][abs(p.particle2)]
+            ) / 2
+            if mg &gt; 3000:  # go into decoupling limit
+                return &quot;sdcpl&quot;, ms, &quot;&quot;, 10
             if p.particle1 &gt; 0 and p.particle2 &gt; 0:
-                return &quot;ss&quot;,  ms, mg,10*10
+                return &quot;ss&quot;, ms, mg, 10 * 10
             elif (p.particle1 &gt; 0 and p.particle2 &lt; 0) or (
                 p.particle1 &lt; 0 and p.particle2 &gt; 0
             ):
                 s = p.particle1 if p.particle1 &gt; p.particle2 else p.particle2
                 b = p.particle2 if p.particle1 &gt; p.particle2 else p.particle1
-                return &quot;sb&quot;,  ms, mg, 10
+                return &quot;sb&quot;, ms, mg, 10
         return &quot;UNKNOWN_PROCESS_OR_UNIMPLEMENTED_PROCESS&quot;</div>
 
 <div class="viewcode-block" id="NLLfastRunner._get_nf_input"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._get_nf_input">[docs]</a>    def _get_nf_input(self, p: Input) -&gt; dict:
@@ -188,7 +189,7 @@ from hepi.run import Runner, RunParam
             return False
         return True</div>
 
-<div class="viewcode-block" id="NLLfastRunner._is_valid"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d,**kwargs) -&gt; bool:
+<div class="viewcode-block" id="NLLfastRunner._is_valid"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d, **kwargs) -&gt; bool:
         return super()._is_valid(file, p, d)</div>
 
 <div class="viewcode-block" id="NLLfastRunner._parse_file"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
@@ -199,15 +200,39 @@ from hepi.run import Runner, RunParam
                 pass
             for s in line.split():
                 ret.append(float(s))
-        return NNLLFastResult( # divide by 10 due to degeneracy, this is injeted into the result
-            (ret[len(ret)-10+2]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+7])/100)*ret[len(ret)-10+2]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+6])/100)*ret[len(ret)-10+2]/ret[len(ret)-10+9]),
-            (ret[len(ret)-10+3]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+5])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+4])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+7])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
-            (((ret[len(ret)-10+6])/100)*ret[len(ret)-10+3]/ret[len(ret)-10+9]),
+        return NNLLFastResult(  # divide by 10 due to degeneracy, this is injeted into the result
+            (ret[len(ret) - 10 + 2] / ret[len(ret) - 10 + 9]),
+            (
+                ((ret[len(ret) - 10 + 7]) / 100)
+                * ret[len(ret) - 10 + 2]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (
+                ((ret[len(ret) - 10 + 6]) / 100)
+                * ret[len(ret) - 10 + 2]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (ret[len(ret) - 10 + 3] / ret[len(ret) - 10 + 9]),
+            (
+                ((ret[len(ret) - 10 + 5]) / 100)
+                * ret[len(ret) - 10 + 3]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (
+                ((ret[len(ret) - 10 + 4]) / 100)
+                * ret[len(ret) - 10 + 3]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (
+                ((ret[len(ret) - 10 + 7]) / 100)
+                * ret[len(ret) - 10 + 3]
+                / ret[len(ret) - 10 + 9]
+            ),
+            (
+                ((ret[len(ret) - 10 + 6]) / 100)
+                * ret[len(ret) - 10 + 3]
+                / ret[len(ret) - 10 + 9]
+            ),
         )</div>
 
 <div class="viewcode-block" id="NLLfastRunner._prepare"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nnllfast.NLLfastRunner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
@@ -218,25 +243,26 @@ from hepi.run import Runner, RunParam
             for k, v in self._get_nf_input(p).items():
                 d[k] = v
 
-
-            open(rp.execute, &quot;w&quot;).write(
-                &quot;#!/bin/sh\n&quot;
-                + &quot;pushd {path} &gt; /dev/null\nR=\&quot;$({exec} {proc} {sq} {gl})\&quot;\npopd &gt; /dev/null\necho \&quot;$R {deg}\&quot;&gt;{out}&quot;.format(
-                    exec=self.get_path(),
-                    path=os.path.dirname(self.get_path()),
-                    out=rp.out_file,
-                    proc=d[&quot;nf_final_state_in&quot;],
-                    sq=d[&quot;nf_squark_mass&quot;],
-                    gl=d[&quot;nf_gluino_mass&quot;],
-                    deg=d[&quot;nf_deg&quot;],
+            with open(rp.execute, &quot;w&quot;) as tmp:
+                tmp.write(
+                    &quot;#!/bin/sh\n&quot;
+                    + &#39;pushd {path} &gt; /dev/null\nR=&quot;$({exec} {proc} {sq} {gl})&quot;\npopd &gt; /dev/null\necho &quot;$R {deg}&quot;&gt;{out}&#39;.format(
+                        exec=self.get_path(),
+                        path=os.path.dirname(self.get_path()),
+                        out=rp.out_file,
+                        proc=d[&quot;nf_final_state_in&quot;],
+                        sq=d[&quot;nf_squark_mass&quot;],
+                        gl=d[&quot;nf_gluino_mass&quot;],
+                        deg=d[&quot;nf_deg&quot;],
+                    )
                 )
-            )
             st = os.stat(rp.execute)
             os.chmod(rp.execute, st.st_mode | stat.S_IEXEC)
 
             sname = d[&quot;slha&quot;]
             with open(self.get_output_dir() + sname, &quot;r&quot;) as f:
-                open(rp.out_file, &quot;a&quot;).write(f.read() + &quot;\n\n&quot;)
+                with open(rp.out_file, &quot;a&quot;) as a:
+                    a.write(f.read() + &quot;\n\n&quot;)
         return rp</div></div>
 
 
