@@ -15,5 +15,6 @@ USER root
 RUN chown -R ${NB_UID} ${HOME}
 WORKDIR ${HOME}
 USER ${NB_USER}
+ENV PATH "$PATH:${HOME}/.local/bin"
 
 RUN python3 -m pip install --no-cache-dir --break-system-packages notebook jupyterlab hepi
