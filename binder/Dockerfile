@@ -1,5 +1,6 @@
 FROM apnpucky/gentoo-hepi:44885245f7b5
 
+RUN lhapdf install cteq6l1 cteq66 CT14lo CT14nlo
 
 ARG NB_USER=jovyan
 ARG NB_UID=1000
