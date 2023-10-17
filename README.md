@@ -2,7 +2,7 @@
 
 Python interface for gluing together several HEP programs (e.g. from HEPForge <https://www.hepforge.org/>).
 
-[![PyPI version][pypi image]][pypi link] ![downloads](https://img.shields.io/pypi/dm/hepi.svg)  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430837.svg)](https://doi.org/10.5281/zenodo.8430837)
+[![PyPI version][pypi image]][pypi link] ![downloads](https://img.shields.io/pypi/dm/hepi.svg)  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430837.svg)](https://doi.org/10.5281/zenodo.8430837) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/APN-Pucky/HEPi/binder)
 
 | [Stable][doc stable]        | [Unstable][doc test]           |
 | ------------- |:-------------:|
