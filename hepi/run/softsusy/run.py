@@ -40,19 +40,19 @@ class SoftsusyRunner(Runner):
                 + "Softsusy.spc "
                 + self.get_output_dir()
                 + s.slha
-#                + " && sed -i '/Created/d' "
-#                + self.get_output_dir()
-#                + s.slha
+                #                + " && sed -i '/Created/d' "
+                #                + self.get_output_dir()
+                #                + s.slha
             )
-            #print(comm)
-            proc = subprocess.Popen(
+            # print(comm)
+            with subprocess.Popen(
                 comm, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-            )
-            proc.wait()
-            # get proc return code
-            if proc.returncode != 0:
-                warnings.warn("softsusy failed")
-            update_slha(s)
+            ) as proc:
+                proc.wait()
+                # get proc return code
+                if proc.returncode != 0:
+                    warnings.warn("softsusy failed")
+                update_slha(s)
         return slhas
 
 

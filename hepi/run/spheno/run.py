@@ -45,16 +45,18 @@ class SPhenoRunner(Runner):
                 + self.get_output_dir()
                 + s.slha
             )
-            proc = subprocess.Popen(
+            with subprocess.Popen(
                 comm, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-            )
-            proc.wait()
-            update_slha(s)
+            ) as proc:
+                proc.wait()
+                if proc.returncode != 0:
+                    warnings.warn("spheno failed")
+                update_slha(s)
         if os.path.exists("Messages.out"):
             with open("Messages.out", "r") as r:
                 t = r.read()
                 if t != "":
-                    warnings.warn(r.read())
+                    warnings.warn("Spheno error in Messages.out" + r.read())
         return slhas
 
 

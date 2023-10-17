@@ -231,7 +231,7 @@ def update_slha(i: Input):
         ) / 2.0
     except Exception:
         warnings.warn(
-            "Could not set new central scale to average of masses (concerting for MadGraph, but not Resummino).",
+            "Could not set new central scale to average of masses (concerning for MadGraph, but not Resummino).",
             RuntimeWarning,
         )
 

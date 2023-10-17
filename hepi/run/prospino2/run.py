@@ -179,23 +179,26 @@ class ProspinoRunner(Runner):
                 d[k] = v
             result = src.substitute(d)
             # open(rp.in_file, "w").write(result)
-            open(rp.out_file, "w").write(result + "\n\n")
+            with open(rp.out_file, "w") as tmp:
+                tmp.write(result + "\n\n")
             rdir = self.get_output_dir() + rp.name + ".rdir"
             if os.path.exists(rdir) and os.path.isdir(rdir):
                 shutil.rmtree(rdir)
             shutil.copytree(self.get_path(), rdir)
-            open(rdir + "/prospino_main.f90", "w").write(result)
+            with open(rdir + "/prospino_main.f90", "w") as tmp:
+                tmp.write(result)
             # compile
             subprocess.Popen(
                 "cd " + rdir + " && make", shell=True, stdout=subprocess.DEVNULL
             ).wait()
 
-            open(rp.execute, "w").write(
-                "#!/bin/sh\n"
-                + "H=$PWD && cd {rdir}&& ./prospino_2.run > tmp.out && cd $H  && cat {rdir}/tmp.out  >> {out} && cat {rdir}/prospino.dat>> {out} && rm -rf {rdir}".format(
-                    rdir=rdir, out=rp.out_file
+            with open(rp.execute, "w") as tmp:
+                tmp.write(
+                    "#!/bin/sh\n"
+                    + "H=$PWD && cd {rdir}&& ./prospino_2.run > tmp.out && cd $H  && cat {rdir}/tmp.out  >> {out} && cat {rdir}/prospino.dat>> {out} && rm -rf {rdir}".format(
+                        rdir=rdir, out=rp.out_file
+                    )
                 )
-            )
             st = os.stat(rp.execute)
             os.chmod(rp.execute, st.st_mode | stat.S_IEXEC)
 
@@ -204,7 +207,8 @@ class ProspinoRunner(Runner):
                 self.get_output_dir() + sname, rdir + "/prospino.in.les_houches"
             )
             with open(self.get_output_dir() + sname, "r") as f:
-                open(rp.out_file, "a").write(f.read() + "\n\n")
+                with open(rp.out_file, "a") as a:
+                    a.write(f.read() + "\n\n")
         return rp
 
 
