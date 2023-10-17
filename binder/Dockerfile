@@ -1,4 +1,4 @@
-FROM apnpucky/gentoo-hepi
+FROM apnpucky/gentoo-hepi:44885245f7b5
 
 
 ARG NB_USER=jovyan
