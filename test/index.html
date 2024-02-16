@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hepi 0.2.18-1-gcebb49d1 documentation &mdash; hepi  documentation</title>
+  <title>hepi 0.2.18-2-g62348850 documentation &mdash; hepi  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
@@ -44,7 +44,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.18-1-gcebb49d1
+                0.2.18-2-g62348850
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -96,7 +96,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">hepi 0.2.18-1-gcebb49d1 documentation</li>
+      <li class="breadcrumb-item active">hepi 0.2.18-2-g62348850 documentation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -107,7 +107,7 @@
            <div itemprop="articleBody">
              
   <section id="project-version-documentation">
-<h1>hepi 0.2.18-1-gcebb49d1 documentation<a class="headerlink" href="#project-version-documentation" title="Permalink to this heading"></a></h1>
+<h1>hepi 0.2.18-2-g62348850 documentation<a class="headerlink" href="#project-version-documentation" title="Permalink to this heading"></a></h1>
 <section id="hepi">
 <h2>HEPi<a class="headerlink" href="#hepi" title="Permalink to this heading"></a></h2>
 <p>Python interface for gluing together several HEP programs (e.g. from HEPForge <a class="reference external" href="https://www.hepforge.org/">https://www.hepforge.org/</a>).</p>
@@ -192,15 +192,16 @@ A default set of grids is in the source folder <code class="docutils literal not
 HEPi can be used to generate such json files for convenient reloading of the data.
 Just enter a mass point and the cross sections are returned:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ hepi-fast --help
-$ hepi-fast pp13_squark_NNLO+NNLL.json
-400
-0 400.0 21.6 -1.509999999999991 1.509999999999991 0.0 0.0 0.0 0.0
-500
-0 500.0 6.12 -0.4560000000000013 0.4560000000000013 0.0 0.0 0.0 0.0
+[...]
+$ hepi-fast 13600_sleptons_1000011_-1000011_NNLL.json
+547
+0 547.0 0.00035958771606265744 -2.5249300930888148e-05 2.5209060862746587e-05 -1.737815390324732e-06 9.940418677810902e-07 -2.5189449417355387e-05 2.5189449417355387e-05
+988
+0 988.0 1.4318461918225316e-05 -2.4420586244508355e-06 2.441359644963803e-06 -6.140331443352323e-08 2.0494188119359375e-08 -2.4412735921671295e-06 2.4412735921671295e-06
 [...]
 </pre></div>
 </div>
-<p>Above shows squark squark cross section for requested 400 and 500 GeV mass at NNLO+NNLL.
+<p>Above shows slepton-pair cross section for requested 547 and 988 GeV mass at aNNLO+NNLL.
 The order of the output is</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>id | Central value | error down | error up | error pdf down | error pdf up | error scale down | error scale up
 </pre></div>
