@@ -69,15 +69,16 @@ Just enter a mass point and the cross sections are returned:
 
 ```
 $ hepi-fast --help
-$ hepi-fast pp13_squark_NNLO+NNLL.json
-400
-0 400.0 21.6 -1.509999999999991 1.509999999999991 0.0 0.0 0.0 0.0
-500
-0 500.0 6.12 -0.4560000000000013 0.4560000000000013 0.0 0.0 0.0 0.0
+[...]
+$ hepi-fast 13600_sleptons_1000011_-1000011_NNLL.json
+547
+0 547.0 0.00035958771606265744 -2.5249300930888148e-05 2.5209060862746587e-05 -1.737815390324732e-06 9.940418677810902e-07 -2.5189449417355387e-05 2.5189449417355387e-05
+988
+0 988.0 1.4318461918225316e-05 -2.4420586244508355e-06 2.441359644963803e-06 -6.140331443352323e-08 2.0494188119359375e-08 -2.4412735921671295e-06 2.4412735921671295e-06
 [...]
 ```
 
-Above shows squark squark cross section for requested 400 and 500 GeV mass at NNLO+NNLL.
+Above shows slepton-pair cross section for requested 547 and 988 GeV mass at aNNLO+NNLL.
 The order of the output is 
 ```
 id | Central value | error down | error up | error pdf down | error pdf up | error scale down | error scale up
