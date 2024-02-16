@@ -65,6 +65,7 @@ HEPi-fast interpolates grids in a similar fashion to [(n)nll-fast](https://www.u
 They are given as json files as for the CERN SUSY wiki in [xsec](https://github.com/fuenfundachtzig/xsec).
 A default set of grids is in the source folder `hepi/data/json/`.
 HEPi can be used to generate such json files for convenient reloading of the data.
+Just enter a mass point and the cross sections are returned:
 
 ```
 $ hepi-fast --help
