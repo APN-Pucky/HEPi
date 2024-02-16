@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hepi 0.2.17-41-g749c515c documentation &mdash; hepi  documentation</title>
+  <title>hepi 0.2.18-1-gcebb49d1 documentation &mdash; hepi  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
@@ -44,7 +44,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.17-41-g749c515c
+                0.2.18-1-gcebb49d1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -96,7 +96,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">hepi 0.2.17-41-g749c515c documentation</li>
+      <li class="breadcrumb-item active">hepi 0.2.18-1-gcebb49d1 documentation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -107,7 +107,7 @@
            <div itemprop="articleBody">
              
   <section id="project-version-documentation">
-<h1>hepi 0.2.17-41-g749c515c documentation<a class="headerlink" href="#project-version-documentation" title="Permalink to this heading"></a></h1>
+<h1>hepi 0.2.18-1-gcebb49d1 documentation<a class="headerlink" href="#project-version-documentation" title="Permalink to this heading"></a></h1>
 <section id="hepi">
 <h2>HEPi<a class="headerlink" href="#hepi" title="Permalink to this heading"></a></h2>
 <p>Python interface for gluing together several HEP programs (e.g. from HEPForge <a class="reference external" href="https://www.hepforge.org/">https://www.hepforge.org/</a>).</p>
@@ -189,7 +189,8 @@ If a result already exists hepi won’t rerun the tool.</p>
 <p>HEPi-fast interpolates grids in a similar fashion to <a class="reference external" href="https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast">(n)nll-fast</a> but also for <a class="reference external" href="https://resummino.hepforge.org">Resummino</a>.
 They are given as json files as for the CERN SUSY wiki in <a class="reference external" href="https://github.com/fuenfundachtzig/xsec">xsec</a>.
 A default set of grids is in the source folder <code class="docutils literal notranslate"><span class="pre">hepi/data/json/</span></code>.
-HEPi can be used to generate such json files for convenient reloading of the data.</p>
+HEPi can be used to generate such json files for convenient reloading of the data.
+Just enter a mass point and the cross sections are returned:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ hepi-fast --help
 $ hepi-fast pp13_squark_NNLO+NNLL.json
 400
