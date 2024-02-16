@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi &mdash; hepi  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -43,7 +45,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.17-1-gb01780e2
+                0.2.17-40-g3f4b19dc
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -378,151 +380,154 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#id52" title="hepi.DL2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DL2DF</span></code></a>(ld)</p></td>
 <td><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.write_latex_table_transposed_header" title="hepi.write_latex_table_transposed_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_latex_table_transposed_header</span></code></a>(dict_list, t, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.write_twiki" title="hepi.write_twiki"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_twiki</span></code></a>(rs_dl, mass, main)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.write_latex_table_transposed" title="hepi.write_latex_table_transposed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_latex_table_transposed</span></code></a>(dict_list, t, fname[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.write_latex_table_transposed_header" title="hepi.write_latex_table_transposed_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_latex_table_transposed_header</span></code></a>(dict_list, t, ...)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.write_latex" title="hepi.write_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_latex</span></code></a>(dict_list, t, key, fname[, scale, pdf, yscale])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.write_latex_table_transposed" title="hepi.write_latex_table_transposed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_latex_table_transposed</span></code></a>(dict_list, t, fname[, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.write_latex" title="hepi.write_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_latex</span></code></a>(dict_list, t, key, fname[, scale, pdf, yscale])</p></td>
 <td><p>Saves a <cite>dict</cite> of <cite>list`s to `filename</cite> as latex table.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.write_csv" title="hepi.write_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_csv</span></code></a>(dict_list, filename)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.write_csv" title="hepi.write_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_csv</span></code></a>(dict_list, filename)</p></td>
 <td><p>Saves a <cite>dict</cite> of <cite>list`s to `filename</cite> as csv table.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.write_json" title="hepi.write_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_json</span></code></a>(dict_list, o, parameters, output[, error, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.write_json" title="hepi.write_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_json</span></code></a>(dict_list, o, parameters, output[, error, ...])</p></td>
 <td><p>Saves a <cite>dict</cite> of <cite>list`s to `filename</cite> as json.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id42" title="hepi.get_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_dir</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id42" title="hepi.get_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_dir</span></code></a>()</p></td>
 <td><p>Get the output directory.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id24" title="hepi.replace_macros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_macros</span></code></a>(s)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id24" title="hepi.replace_macros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_macros</span></code></a>(s)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.get_name" title="hepi.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(pid)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.get_name" title="hepi.get_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_name</span></code></a>(pid)</p></td>
 <td><p>Get the latex name of a particle.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.title" title="hepi.title"><code class="xref py py-obj docutils literal notranslate"><span class="pre">title</span></code></a>(i[, axe, scenario, diff_L_R, extra, cms_energy, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.title" title="hepi.title"><code class="xref py py-obj docutils literal notranslate"><span class="pre">title</span></code></a>(i[, axe, scenario, diff_L_R, extra, cms_energy, ...])</p></td>
 <td><p>Sets the title on axis <cite>axe</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.energy_plot" title="hepi.energy_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_plot</span></code></a>(dict_list, y[, yscale, xaxis, yaxis, label])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.energy_plot" title="hepi.energy_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">energy_plot</span></code></a>(dict_list, y[, yscale, xaxis, yaxis, label])</p></td>
 <td><p>Plot energy on the x-axis.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.combined_mass_plot" title="hepi.combined_mass_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_mass_plot</span></code></a>(dict_list, y, part[, label])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.combined_mass_plot" title="hepi.combined_mass_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_mass_plot</span></code></a>(dict_list, y, part[, label])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.combined_plot" title="hepi.combined_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_plot</span></code></a>(dict_list, x, y[, label])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.combined_plot" title="hepi.combined_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combined_plot</span></code></a>(dict_list, x, y[, label])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_plot" title="hepi.mass_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_plot</span></code></a>(dict_list, y, part[, logy, yaxis, yscale, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mass_plot" title="hepi.mass_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_plot</span></code></a>(dict_list, y, part[, logy, yaxis, yscale, ...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mass_vplot" title="hepi.mass_vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_vplot</span></code></a>(dict_list, y, part[, logy, yaxis, yscale, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_vplot" title="hepi.mass_vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_vplot</span></code></a>(dict_list, y, part[, logy, yaxis, yscale, ...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.get_mass" title="hepi.get_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mass</span></code></a>(l, iid)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.get_mass" title="hepi.get_mass"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mass</span></code></a>(l, iid)</p></td>
 <td><p>Get the mass of particle with id <cite>iid</cite> out of the list in the &quot;slha&quot; element in the dict.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="plot/index.html#module-hepi.plot" title="hepi.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="plot/index.html#module-hepi.plot" title="hepi.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.index_open" title="hepi.index_open"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_open</span></code></a>(var, idx)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.index_open" title="hepi.index_open"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_open</span></code></a>(var, idx)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.slha_data" title="hepi.slha_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_data</span></code></a>(li, index_list)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.slha_data" title="hepi.slha_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_data</span></code></a>(li, index_list)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.slha_plot" title="hepi.slha_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_plot</span></code></a>(li, x, y, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.slha_plot" title="hepi.slha_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slha_plot</span></code></a>(li, x, y, **kwargs)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.vplot" title="hepi.vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vplot</span></code></a>(x, y[, label, xaxis, yaxis, logy, yscale, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.vplot" title="hepi.vplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vplot</span></code></a>(x, y[, label, xaxis, yaxis, logy, yscale, ...])</p></td>
 <td><p>Creates a plot based on the values in <cite>x`and `y</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mass_mapplot" title="hepi.mass_mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_mapplot</span></code></a>(dict_list, part1, part2, z[, logz, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mass_mapplot" title="hepi.mass_mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mass_mapplot</span></code></a>(dict_list, part1, part2, z[, logz, ...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.mapplot" title="hepi.mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapplot</span></code></a>(dict_list, x, y, z[, xaxis, yaxis, zaxis])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.mapplot" title="hepi.mapplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapplot</span></code></a>(dict_list, x, y, z[, xaxis, yaxis, zaxis])</p></td>
 <td><p>Examples</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.scatterplot" title="hepi.scatterplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scatterplot</span></code></a>(dict_list, x, y, z[, xaxis, yaxis, zaxis])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.scatterplot" title="hepi.scatterplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scatterplot</span></code></a>(dict_list, x, y, z[, xaxis, yaxis, zaxis])</p></td>
 <td><p>Scatter map 2d.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.err_plt" title="hepi.err_plt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">err_plt</span></code></a>(axes, x, y[, label, error])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.err_plt" title="hepi.err_plt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">err_plt</span></code></a>(axes, x, y[, label, error])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.scale_plot" title="hepi.scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_plot</span></code></a>(dict_list, vl[, seven_point_band, cont, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.scale_plot" title="hepi.scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_plot</span></code></a>(dict_list, vl[, seven_point_band, cont, ...])</p></td>
 <td><p>Creates a scale variance plot with 5 panels (xline).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.central_scale_plot" title="hepi.central_scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">central_scale_plot</span></code></a>(dict_list, vl[, cont, error, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.central_scale_plot" title="hepi.central_scale_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">central_scale_plot</span></code></a>(dict_list, vl[, cont, error, ...])</p></td>
 <td><p>Creates a scale variance plot with 3 panels (ystacked).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.init_double_plot" title="hepi.init_double_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_double_plot</span></code></a>([figsize, sharex, sharey, gridspec_kw])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.init_double_plot" title="hepi.init_double_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_double_plot</span></code></a>([figsize, sharex, sharey, gridspec_kw])</p></td>
 <td><p>Initialze subplot for Ratio/K plots with another figure below.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.pdf_errors" title="hepi.pdf_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_errors</span></code></a>(li, dl[, ordernames, confidence_level, n_jobs])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.pdf_errors" title="hepi.pdf_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_errors</span></code></a>(li, dl[, ordernames, confidence_level, n_jobs])</p></td>
 <td><p>Just like <cite>pdf_error</cite> but over a list of ordernames.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi._pdf_error_single" title="hepi._pdf_error_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_pdf_error_single</span></code></a>(members, i, dl, ordername[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi._pdf_error_single" title="hepi._pdf_error_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_pdf_error_single</span></code></a>(members, i, dl, ordername[, ...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.pdf_error" title="hepi.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl[, ordername, confidence_level, n_jobs])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.pdf_error" title="hepi.pdf_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pdf_error</span></code></a>(li, dl[, ordername, confidence_level, n_jobs])</p></td>
 <td><p>Computes Parton Density Function (PDF) uncertainties through <code class="xref py py-func docutils literal notranslate"><span class="pre">lhapdf.set.uncertainty()</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.scale_errors" title="hepi.scale_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_errors</span></code></a>(li, dl[, ordernames, n_jobs])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.scale_errors" title="hepi.scale_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_errors</span></code></a>(li, dl[, ordernames, n_jobs])</p></td>
 <td><p>Just like <cite>scale_error</cite> but over a list of ordernames.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi._scale_error_single" title="hepi._scale_error_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_scale_error_single</span></code></a>(members, i, dl[, ordername])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi._scale_error_single" title="hepi._scale_error_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_scale_error_single</span></code></a>(members, i, dl[, ordername])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.scale_error" title="hepi.scale_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error</span></code></a>(li, dl[, ordername, n_jobs])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.scale_error" title="hepi.scale_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scale_error</span></code></a>(li, dl[, ordername, n_jobs])</p></td>
 <td><p>Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. <a class="reference internal" href="#hepi.seven_point_scan" title="hepi.seven_point_scan"><code class="xref py py-meth docutils literal notranslate"><span class="pre">seven_point_scan()</span></code></a>).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.combine_errors" title="hepi.combine_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_errors</span></code></a>(dl[, ordernames])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.combine_errors" title="hepi.combine_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_errors</span></code></a>(dl[, ordernames])</p></td>
 <td><p>Just like <cite>combine_error</cite> but over a list of ordernames.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.combine_error" title="hepi.combine_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_error</span></code></a>(dl[, ordername])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.combine_error" title="hepi.combine_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_error</span></code></a>(dl[, ordername])</p></td>
 <td><p>Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.asym_to_sym_error" title="hepi.asym_to_sym_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asym_to_sym_error</span></code></a>(central, errminus, errplus)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.asym_to_sym_error" title="hepi.asym_to_sym_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asym_to_sym_error</span></code></a>(central, errminus, errplus)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.add_errors" title="hepi.add_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_errors</span></code></a>(error1, error2)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.add_errors" title="hepi.add_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_errors</span></code></a>(error1, error2)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.asym_to_sym_combined_error" title="hepi.asym_to_sym_combined_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asym_to_sym_combined_error</span></code></a>(central, errminus1, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.asym_to_sym_combined_error" title="hepi.asym_to_sym_combined_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asym_to_sym_combined_error</span></code></a>(central, errminus1, ...)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id41" title="hepi.get_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_dir</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id41" title="hepi.get_input_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_dir</span></code></a>()</p></td>
 <td><p>Get the input directory.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id42" title="hepi.get_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_dir</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id42" title="hepi.get_output_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_dir</span></code></a>()</p></td>
 <td><p>Get the output directory.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id43" title="hepi.get_pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pre</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id43" title="hepi.get_pre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pre</span></code></a>()</p></td>
 <td><p>Gets the command prefix.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id52" title="hepi.DL2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DL2DF</span></code></a>(ld)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#id52" title="hepi.DL2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DL2DF</span></code></a>(ld)</p></td>
 <td><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id51" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l[, actual_dict])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id51" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l[, actual_dict])</p></td>
 <td><p>Convert a list of objects into a dictionary of lists.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id53" title="hepi.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n)</p></td>
-<td><p>Creates a sha256 hash from the objects string representation.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#id51" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l[, actual_dict])</p></td>
-<td><p>Convert a list of objects into a dictionary of lists.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id52" title="hepi.DL2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DL2DF</span></code></a>(ld)</p></td>
-<td><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#id53" title="hepi.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n)</p></td>
 <td><p>Creates a sha256 hash from the objects string representation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#id54" title="hepi.lhapdf_name_to_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_to_id</span></code></a>(name)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id51" title="hepi.LD2DL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LD2DL</span></code></a>(l[, actual_dict])</p></td>
+<td><p>Convert a list of objects into a dictionary of lists.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id52" title="hepi.DL2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DL2DF</span></code></a>(ld)</p></td>
+<td><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id53" title="hepi.namehash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">namehash</span></code></a>(n)</p></td>
+<td><p>Creates a sha256 hash from the objects string representation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#id54" title="hepi.lhapdf_name_to_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_name_to_id</span></code></a>(name)</p></td>
 <td><p>Converts a LHAPDF name to the sets id.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.lhapdf_id_to_name" title="hepi.lhapdf_id_to_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_id_to_name</span></code></a>(lid)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.lhapdf_id_to_name" title="hepi.lhapdf_id_to_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lhapdf_id_to_name</span></code></a>(lid)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -1386,7 +1391,7 @@ The condition to filter on.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="hepi.interpolate_1d">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">interpolate_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xrange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/interpolate.html#interpolate_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.interpolate_1d" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">interpolate_1d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xrange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/interpolate.html#interpolate_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.interpolate_1d" title="Permalink to this definition"></a></dt>
 <dd><p>Last key is the value to be interpolated, while the rest are cooridnates.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1603,7 +1608,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.load">
-<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">load</span></span><a class="headerlink" href="#hepi.load" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">load</span></span><a class="reference internal" href="../../_modules/hepi/load.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.load" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py class">
@@ -1673,6 +1678,11 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.usd">
 <span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">usd</span></span><a class="reference internal" href="../../_modules/hepi/output.html#usd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.usd" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.write_twiki">
+<span class="sig-prename descclassname"><span class="pre">hepi.</span></span><span class="sig-name descname"><span class="pre">write_twiki</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rs_dl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">main</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/hepi/output.html#write_twiki"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.write_twiki" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -3208,7 +3218,7 @@ create (bool): create directory if not existing.</p></li>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+    <p>&#169; Copyright 2024, Alexander Puck Neuwirth.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -109,6 +109,7 @@ Functions
    hepi.load_json
    hepi.order_to_string
    hepi.DL2DF
+   hepi.write_twiki
    hepi.write_latex_table_transposed_header
    hepi.write_latex_table_transposed
    hepi.write_latex
@@ -693,7 +694,7 @@ Attributes
 
    
 
-.. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True)
+.. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True, **kwargs)
 
    Last key is the value to be interpolated, while the rest are cooridnates.
 
@@ -881,6 +882,9 @@ Attributes
 .. py:data:: usd
 
    
+
+.. py:function:: write_twiki(rs_dl, mass, main)
+
 
 .. py:function:: write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0)
 
