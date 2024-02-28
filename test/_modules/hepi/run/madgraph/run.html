@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.run.madgraph.run &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=eafc0fe6" />
 
   
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.18-11-g79efd0f6
+                0.2.18-14-g02e86926
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -121,7 +121,9 @@ from .. import Input, Result, get_output_dir
 from .result import is_valid, parse_single
 
 
-<div class="viewcode-block" id="MadGraphRunParams"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunParams">[docs]</a>class MadGraphRunParams(RunParam):
+<div class="viewcode-block" id="MadGraphRunParams">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunParams">[docs]</a>
+class MadGraphRunParams(RunParam):
     &quot;&quot;&quot;Parameters for MadGraph.&quot;&quot;&quot;
 
     def __init__(self, dic, skip=False, madstr=True):
@@ -131,11 +133,19 @@ from .result import is_valid, parse_single
         self.madstr = madstr</div>
 
 
-<div class="viewcode-block" id="MadGraphRunner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner">[docs]</a>class MadGraphRunner(Runner):
-<div class="viewcode-block" id="MadGraphRunner.orders"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner.orders">[docs]</a>    def orders(self) -&gt; List[Order]:
+
+<div class="viewcode-block" id="MadGraphRunner">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner">[docs]</a>
+class MadGraphRunner(Runner):
+<div class="viewcode-block" id="MadGraphRunner.orders">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner.orders">[docs]</a>
+    def orders(self) -&gt; List[Order]:
         return [Order.LO, Order.NLO]</div>
 
-<div class="viewcode-block" id="MadGraphRunner._check_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
+
+<div class="viewcode-block" id="MadGraphRunner._check_path">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._check_path">[docs]</a>
+    def _check_path(self) -&gt; bool:
         if os.path.exists(os.path.expanduser(self.get_path() + &quot;/bin/mg5_aMC&quot;)):
             self.set_path(self.get_path() + &quot;/bin/mg5_aMC&quot;)
             return True
@@ -143,19 +153,31 @@ from .result import is_valid, parse_single
             return True
         return False</div>
 
-<div class="viewcode-block" id="MadGraphRunner._check_input"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._check_input">[docs]</a>    def _check_input(self, param: Input, **kwargs) -&gt; bool:
+
+<div class="viewcode-block" id="MadGraphRunner._check_input">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._check_input">[docs]</a>
+    def _check_input(self, param: Input, **kwargs) -&gt; bool:
         &quot;&quot;&quot;Checks input parameter for compatibility with Prospino&quot;&quot;&quot;
         return True</div>
 
-<div class="viewcode-block" id="MadGraphRunner._is_valid"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._is_valid">[docs]</a>    def _is_valid(self, file: str, p: Input, d) -&gt; bool:
+
+<div class="viewcode-block" id="MadGraphRunner._is_valid">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._is_valid">[docs]</a>
+    def _is_valid(self, file: str, p: Input, d) -&gt; bool:
         if not super()._is_valid(file, p, d):
             return False
         return is_valid(file, p, d)</div>
 
-<div class="viewcode-block" id="MadGraphRunner._parse_file"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._parse_file">[docs]</a>    def _parse_file(self, file: str) -&gt; Result:
+
+<div class="viewcode-block" id="MadGraphRunner._parse_file">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._parse_file">[docs]</a>
+    def _parse_file(self, file: str) -&gt; Result:
         return parse_single(file)</div>
 
-<div class="viewcode-block" id="MadGraphRunner._run"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._run">[docs]</a>    def _run(self, rps: List[RunParam], wait=True, parallel=True, sleep=0, **kwargs):
+
+<div class="viewcode-block" id="MadGraphRunner._run">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._run">[docs]</a>
+    def _run(self, rps: List[RunParam], wait=True, parallel=True, sleep=0, **kwargs):
         # TODO clean up on exit emergency
         skipall = True
         for rp in rps:
@@ -206,7 +228,10 @@ from .result import is_valid, parse_single
             return output
         return []</div>
 
-<div class="viewcode-block" id="MadGraphRunner._prepare"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._prepare">[docs]</a>    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
+
+<div class="viewcode-block" id="MadGraphRunner._prepare">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.MadGraphRunner._prepare">[docs]</a>
+    def _prepare(self, p: Input, **kwargs) -&gt; RunParam:
         rp = super()._prepare(p, **kwargs)
         name = rp.name
         if not rp.skip:
@@ -271,15 +296,29 @@ from .result import is_valid, parse_single
                 &quot;order&quot;: p.order,
             }
             rp.out_file = rp.dic[&quot;out&quot;]
-        return rp</div></div>
+        return rp</div>
+</div>
+
 
 
 # Legacy
-<div class="viewcode-block" id="default_madgraph_runner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.default_madgraph_runner">[docs]</a>default_madgraph_runner = MadGraphRunner(&quot;/opt/MG5_aMC_v2_7_0/&quot;)</div>
+<div class="viewcode-block" id="default_madgraph_runner">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.default_madgraph_runner">[docs]</a>
+default_madgraph_runner = MadGraphRunner(&quot;/opt/MG5_aMC_v2_7_0/&quot;)</div>
+
 &quot;&quot;&quot;Default MadGraph Runner to provide backward compatibility&quot;&quot;&quot;
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.run">[docs]</a>run = default_madgraph_runner.run</div>
-<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.set_path">[docs]</a>set_path = default_madgraph_runner.set_path</div>
-<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.get_path">[docs]</a>get_path = default_madgraph_runner.get_path</div>
+<div class="viewcode-block" id="run">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.run">[docs]</a>
+run = default_madgraph_runner.run</div>
+
+<div class="viewcode-block" id="set_path">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.set_path">[docs]</a>
+set_path = default_madgraph_runner.set_path</div>
+
+<div class="viewcode-block" id="get_path">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/run/index.html#hepi.run.madgraph.get_path">[docs]</a>
+get_path = default_madgraph_runner.get_path</div>
+
 
 # print(sp)
 # names = queue(sp)

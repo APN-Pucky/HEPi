@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hepi 0.2.18-11-g79efd0f6 documentation &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+  <title>hepi 0.2.18-14-g02e86926 documentation &mdash; hepi  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="_static/jupyter-sphinx.css" />
       <link rel="stylesheet" type="text/css" href="_static/thebelab.css" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
 
   
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
@@ -44,7 +44,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.18-11-g79efd0f6
+                0.2.18-14-g02e86926
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -96,7 +96,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">hepi 0.2.18-11-g79efd0f6 documentation</li>
+      <li class="breadcrumb-item active">hepi 0.2.18-14-g02e86926 documentation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -107,9 +107,9 @@
            <div itemprop="articleBody">
              
   <section id="project-version-documentation">
-<h1>hepi 0.2.18-11-g79efd0f6 documentation<a class="headerlink" href="#project-version-documentation" title="Permalink to this heading"></a></h1>
+<h1>hepi 0.2.18-14-g02e86926 documentation<a class="headerlink" href="#project-version-documentation" title="Link to this heading"></a></h1>
 <section id="hepi">
-<h2>HEPi<a class="headerlink" href="#hepi" title="Permalink to this heading"></a></h2>
+<h2>HEPi<a class="headerlink" href="#hepi" title="Link to this heading"></a></h2>
 <p>Python interface for gluing together several HEP programs (e.g. from HEPForge <a class="reference external" href="https://www.hepforge.org/">https://www.hepforge.org/</a>).</p>
 <p><a class="reference external" href="https://pypi.org/project/hepi/"><img alt="PyPI version" src="https://badge.fury.io/py/hepi.svg" /></a>
 <img alt="downloads" src="https://img.shields.io/pypi/dm/hepi.svg" />
@@ -141,27 +141,27 @@
 </tbody>
 </table>
 <section id="goals">
-<h3>Goals<a class="headerlink" href="#goals" title="Permalink to this heading"></a></h3>
+<h3>Goals<a class="headerlink" href="#goals" title="Link to this heading"></a></h3>
 <p>The goal of this project is to provide a simple and easy to use interface to common high-energy-physics tools (currently mainly SUSY related Tools).
 Parameter scans and plotting is also included.
 Different tools should just be plugged in and out as desired (i.e. generate a SUSY spectrum before running a scan with MadGraph).</p>
 </section>
 <section id="idea">
-<h3>Idea<a class="headerlink" href="#idea" title="Permalink to this heading"></a></h3>
+<h3>Idea<a class="headerlink" href="#idea" title="Link to this heading"></a></h3>
 <p>First generate a list of interested parameter points i.e. mass 100 to 1000 GeV squark.
 Then if you also want to scan over the gluino mass just ask for a scan over previous list, and you get a 2d scan.
 After generating all parameters they can be used to directly run the codes (in parallel or sequential) or just generate the input file for distribution across several clusters.
 The results then can be imported again and plotted nicely.</p>
 </section>
 <section id="realisation">
-<h3>Realisation<a class="headerlink" href="#realisation" title="Permalink to this heading"></a></h3>
+<h3>Realisation<a class="headerlink" href="#realisation" title="Link to this heading"></a></h3>
 <p>In the working directory you have an <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">output</span></code> folder. The input would typically contain the baseline slha file.
 The <code class="docutils literal notranslate"><span class="pre">output</span></code> will contain the produced scripts to execute the tools.
 To avoid file collisions the files in the output folder correspond to a hashed value of all input parameters.
 If a result already exists hepi won’t rerun the tool.</p>
 </section>
 <section id="documentation">
-<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h3>
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h3>
 <p>For more details on the usage of different tools, called runners, check the respective documentation.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://hepi.readthedocs.io/en/stable/">https://hepi.readthedocs.io/en/stable/</a></p></li>
@@ -169,15 +169,15 @@ If a result already exists hepi won’t rerun the tool.</p>
 </ul>
 </section>
 <section id="versions">
-<h3>Versions<a class="headerlink" href="#versions" title="Permalink to this heading"></a></h3>
+<h3>Versions<a class="headerlink" href="#versions" title="Link to this heading"></a></h3>
 <section id="stable">
-<h4>Stable<a class="headerlink" href="#stable" title="Permalink to this heading"></a></h4>
+<h4>Stable<a class="headerlink" href="#stable" title="Link to this heading"></a></h4>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>hepi<span class="o">[</span>opt<span class="o">]</span><span class="w"> </span><span class="o">[</span>--user<span class="o">]</span><span class="w"> </span><span class="o">[</span>--upgrade<span class="o">]</span>
 </pre></div>
 </div>
 </section>
 <section id="dev">
-<h4>Dev<a class="headerlink" href="#dev" title="Permalink to this heading"></a></h4>
+<h4>Dev<a class="headerlink" href="#dev" title="Link to this heading"></a></h4>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--index-url<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>hepi<span class="o">[</span>opt<span class="o">]</span>
 </pre></div>
 </div>
@@ -185,7 +185,7 @@ If a result already exists hepi won’t rerun the tool.</p>
 </section>
 </section>
 <section id="hepi-fast">
-<h3>HEPi-fast<a class="headerlink" href="#hepi-fast" title="Permalink to this heading"></a></h3>
+<h3>HEPi-fast<a class="headerlink" href="#hepi-fast" title="Link to this heading"></a></h3>
 <p>HEPi-fast interpolates grids in a similar fashion to <a class="reference external" href="https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast">(n)nll-fast</a> but also for <a class="reference external" href="https://resummino.hepforge.org">Resummino</a>.
 They are given as json files as for the CERN SUSY wiki in <a class="reference external" href="https://github.com/fuenfundachtzig/xsec">xsec</a>.
 A default set of grids is in the source folder <code class="docutils literal notranslate"><span class="pre">hepi/data/json/</span></code>.
@@ -324,7 +324,7 @@ The order of the output is</p>
 <div class="toctree-wrapper compound">
 </div>
 <section id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h2>
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>

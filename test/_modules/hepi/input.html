@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.input &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.18-11-g79efd0f6
+                0.2.18-14-g02e86926
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -118,15 +118,26 @@ import pyslha
 from .order import Order, order_to_string, replace_macros, xsec_to_order
 from .util import DictData, lhapdf_name_to_id
 
-<div class="viewcode-block" id="in_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.in_dir">[docs]</a>in_dir = &quot;./input/&quot;</div>
+<div class="viewcode-block" id="in_dir">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.in_dir">[docs]</a>
+in_dir = &quot;./input/&quot;</div>
+
 &quot;&quot;&quot;Input directory.&quot;&quot;&quot;
-<div class="viewcode-block" id="out_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.out_dir">[docs]</a>out_dir = &quot;./output/&quot;</div>
+<div class="viewcode-block" id="out_dir">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.out_dir">[docs]</a>
+out_dir = &quot;./output/&quot;</div>
+
 &quot;&quot;&quot;Output directory.&quot;&quot;&quot;
-<div class="viewcode-block" id="pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pre">[docs]</a>pre = &quot;nice -n 5&quot;</div>
+<div class="viewcode-block" id="pre">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pre">[docs]</a>
+pre = &quot;nice -n 5&quot;</div>
+
 &quot;&quot;&quot;Prefix for run commands.&quot;&quot;&quot;
 
 
-<div class="viewcode-block" id="get_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_input_dir">[docs]</a>def get_input_dir():
+<div class="viewcode-block" id="get_input_dir">
+<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_input_dir">[docs]</a>
+def get_input_dir():
     &quot;&quot;&quot;
     Get the input directory.
 
@@ -137,7 +148,10 @@ from .util import DictData, lhapdf_name_to_id
     return in_dir</div>
 
 
-<div class="viewcode-block" id="get_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_output_dir">[docs]</a>def get_output_dir():
+
+<div class="viewcode-block" id="get_output_dir">
+<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_output_dir">[docs]</a>
+def get_output_dir():
     &quot;&quot;&quot;
     Get the output directory.
 
@@ -149,7 +163,10 @@ from .util import DictData, lhapdf_name_to_id
     return out_dir</div>
 
 
-<div class="viewcode-block" id="get_pre"><a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_pre">[docs]</a>def get_pre():
+
+<div class="viewcode-block" id="get_pre">
+<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_pre">[docs]</a>
+def get_pre():
     &quot;&quot;&quot;
     Gets the command prefix.
 
@@ -160,7 +177,10 @@ from .util import DictData, lhapdf_name_to_id
     return pre</div>
 
 
-<div class="viewcode-block" id="set_input_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_input_dir">[docs]</a>def set_input_dir(ind):
+
+<div class="viewcode-block" id="set_input_dir">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_input_dir">[docs]</a>
+def set_input_dir(ind):
     &quot;&quot;&quot;
     Sets the input directory.
 
@@ -171,7 +191,10 @@ from .util import DictData, lhapdf_name_to_id
     in_dir = ind</div>
 
 
-<div class="viewcode-block" id="set_output_dir"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_output_dir">[docs]</a>def set_output_dir(outd, create: bool = True):
+
+<div class="viewcode-block" id="set_output_dir">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_output_dir">[docs]</a>
+def set_output_dir(outd, create: bool = True):
     &quot;&quot;&quot;
     Sets the output directory.
 
@@ -185,7 +208,10 @@ from .util import DictData, lhapdf_name_to_id
     out_dir = outd</div>
 
 
-<div class="viewcode-block" id="set_pre"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_pre">[docs]</a>def set_pre(ppre):
+
+<div class="viewcode-block" id="set_pre">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.set_pre">[docs]</a>
+def set_pre(ppre):
     &quot;&quot;&quot;
     Sets the command prefix.
 
@@ -196,7 +222,10 @@ from .util import DictData, lhapdf_name_to_id
     pre = ppre</div>
 
 
-<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input">[docs]</a>class Input(DictData):
+
+<div class="viewcode-block" id="Input">
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input">[docs]</a>
+class Input(DictData):
     &quot;&quot;&quot;
     Input for computation and scans.
 
@@ -277,56 +306,95 @@ from .util import DictData, lhapdf_name_to_id
         if update:
             update_slha(self)
 
-<div class="viewcode-block" id="Input.has_gluino"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_gluino">[docs]</a>    def has_gluino(self) -&gt; bool:
+<div class="viewcode-block" id="Input.has_gluino">
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_gluino">[docs]</a>
+    def has_gluino(self) -&gt; bool:
         return is_gluino(self.particle1) or is_gluino(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_neutralino">[docs]</a>    def has_neutralino(self) -&gt; bool:
+
+<div class="viewcode-block" id="Input.has_neutralino">
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_neutralino">[docs]</a>
+    def has_neutralino(self) -&gt; bool:
         return is_neutralino(self.particle1) or is_neutralino(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_charginos"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_charginos">[docs]</a>    def has_charginos(self) -&gt; bool:
+
+<div class="viewcode-block" id="Input.has_charginos">
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_charginos">[docs]</a>
+    def has_charginos(self) -&gt; bool:
         return is_chargino(self.particle1) or is_chargino(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_weakino"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_weakino">[docs]</a>    def has_weakino(self) -&gt; bool:
+
+<div class="viewcode-block" id="Input.has_weakino">
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_weakino">[docs]</a>
+    def has_weakino(self) -&gt; bool:
         return self.has_charginos() or self.has_neutralino()</div>
 
-<div class="viewcode-block" id="Input.has_squark"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_squark">[docs]</a>    def has_squark(self) -&gt; bool:
+
+<div class="viewcode-block" id="Input.has_squark">
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_squark">[docs]</a>
+    def has_squark(self) -&gt; bool:
         return is_squark(self.particle1) or is_squark(self.particle2)</div>
 
-<div class="viewcode-block" id="Input.has_slepton"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_slepton">[docs]</a>    def has_slepton(self) -&gt; bool:
-        return is_slepton(self.particle1) or is_slepton(self.particle2)</div></div>
+
+<div class="viewcode-block" id="Input.has_slepton">
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_slepton">[docs]</a>
+    def has_slepton(self) -&gt; bool:
+        return is_slepton(self.particle1) or is_slepton(self.particle2)</div>
+</div>
 
 
-<div class="viewcode-block" id="is_gluino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_gluino">[docs]</a>def is_gluino(iid: int) -&gt; bool:
+
+<div class="viewcode-block" id="is_gluino">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_gluino">[docs]</a>
+def is_gluino(iid: int) -&gt; bool:
     return iid == 1000021</div>
 
 
-<div class="viewcode-block" id="is_neutralino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_neutralino">[docs]</a>def is_neutralino(iid: int) -&gt; bool:
+
+<div class="viewcode-block" id="is_neutralino">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_neutralino">[docs]</a>
+def is_neutralino(iid: int) -&gt; bool:
     neutralinos = [1000022, 1000023, 1000025, 1000035]
     return abs(iid) in neutralinos</div>
 
 
-<div class="viewcode-block" id="is_chargino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_chargino">[docs]</a>def is_chargino(iid: int) -&gt; bool:
+
+<div class="viewcode-block" id="is_chargino">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_chargino">[docs]</a>
+def is_chargino(iid: int) -&gt; bool:
     charginos = [1000024, 1000037]
     return abs(iid) in charginos</div>
 
 
-<div class="viewcode-block" id="is_weakino"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_weakino">[docs]</a>def is_weakino(iid: int) -&gt; bool:
+
+<div class="viewcode-block" id="is_weakino">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_weakino">[docs]</a>
+def is_weakino(iid: int) -&gt; bool:
     return is_chargino(iid) or is_neutralino(iid)</div>
 
 
-<div class="viewcode-block" id="is_squark"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_squark">[docs]</a>def is_squark(iid: int) -&gt; bool:
+
+<div class="viewcode-block" id="is_squark">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_squark">[docs]</a>
+def is_squark(iid: int) -&gt; bool:
     l_squark = range(1000001, 1000007)
     r_squark = range(2000001, 2000007)
     return abs(iid) in l_squark or abs(iid) in r_squark</div>
 
 
-<div class="viewcode-block" id="is_slepton"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_slepton">[docs]</a>def is_slepton(iid: int) -&gt; bool:
+
+<div class="viewcode-block" id="is_slepton">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_slepton">[docs]</a>
+def is_slepton(iid: int) -&gt; bool:
     l_slepton = range(1000011, 1000016)
     r_slepton = range(2000011, 2000016)  # TODO remove righthandend snu&#39;s
     return abs(iid) in l_slepton or abs(iid) in r_slepton</div>
 
 
-<div class="viewcode-block" id="update_slha"><a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.update_slha">[docs]</a>def update_slha(i: Input):
+
+<div class="viewcode-block" id="update_slha">
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.update_slha">[docs]</a>
+def update_slha(i: Input):
     &quot;&quot;&quot;
     Updates dependent parameters in Input `i`.
 
@@ -345,7 +413,10 @@ from .util import DictData, lhapdf_name_to_id
         )</div>
 
 
-<div class="viewcode-block" id="scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan">[docs]</a>def scan(input_list: List[Input], var: str, rrange: Iterable) -&gt; List[Input]:
+
+<div class="viewcode-block" id="scan">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan">[docs]</a>
+def scan(input_list: List[Input], var: str, rrange: Iterable) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scans a variable `var` over `rrange` in `input_list`.
 
@@ -390,7 +461,10 @@ from .util import DictData, lhapdf_name_to_id
     return ret</div>
 
 
-<div class="viewcode-block" id="scan_multi"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_multi">[docs]</a>def scan_multi(li: List[Input], **kwargs) -&gt; List[Input]:
+
+<div class="viewcode-block" id="scan_multi">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_multi">[docs]</a>
+def scan_multi(li: List[Input], **kwargs) -&gt; List[Input]:
     &quot;&quot;&quot;
     Magically scans the variables passed to this function.
 
@@ -423,10 +497,16 @@ from .util import DictData, lhapdf_name_to_id
     return li</div>
 
 
-<div class="viewcode-block" id="multi_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.multi_scan">[docs]</a>multi_scan = scan_multi</div>
+
+<div class="viewcode-block" id="multi_scan">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.multi_scan">[docs]</a>
+multi_scan = scan_multi</div>
 
 
-<div class="viewcode-block" id="scan_scale"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_scale">[docs]</a>def scan_scale(l: List[Input], rrange=3, distance=2.0):
+
+<div class="viewcode-block" id="scan_scale">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_scale">[docs]</a>
+def scan_scale(l: List[Input], rrange=3, distance=2.0):
     &quot;&quot;&quot;
     Scans scale by varying `mu_f` and `mu_r`.
 
@@ -479,10 +559,16 @@ from .util import DictData, lhapdf_name_to_id
     return ret</div>
 
 
-<div class="viewcode-block" id="scale_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scale_scan">[docs]</a>scale_scan = scan_scale</div>
+
+<div class="viewcode-block" id="scale_scan">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scale_scan">[docs]</a>
+scale_scan = scan_scale</div>
 
 
-<div class="viewcode-block" id="scan_seven_point"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_seven_point">[docs]</a>def scan_seven_point(input_list: List[Input]):
+
+<div class="viewcode-block" id="scan_seven_point">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_seven_point">[docs]</a>
+def scan_seven_point(input_list: List[Input]):
     &quot;&quot;&quot;
     Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
 
@@ -527,10 +613,16 @@ from .util import DictData, lhapdf_name_to_id
     return ret</div>
 
 
-<div class="viewcode-block" id="seven_point_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.seven_point_scan">[docs]</a>seven_point_scan = scan_seven_point</div>
+
+<div class="viewcode-block" id="seven_point_scan">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.seven_point_scan">[docs]</a>
+seven_point_scan = scan_seven_point</div>
 
 
-<div class="viewcode-block" id="keep_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.keep_where">[docs]</a>def keep_where(input_list: List[Input], condition):
+
+<div class="viewcode-block" id="keep_where">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.keep_where">[docs]</a>
+def keep_where(input_list: List[Input], condition):
     &quot;&quot;&quot;
     Only keep the inputs where the condition is true.
 
@@ -545,7 +637,10 @@ from .util import DictData, lhapdf_name_to_id
     return remove_where(input_list, lambda x: not condition(x))</div>
 
 
-<div class="viewcode-block" id="remove_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.remove_where">[docs]</a>def remove_where(input_list: List[Input], condition, **kwargs):
+
+<div class="viewcode-block" id="remove_where">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.remove_where">[docs]</a>
+def remove_where(input_list: List[Input], condition, **kwargs):
     &quot;&quot;&quot;
     Remove elements in list which satisfy condition.
 
@@ -568,7 +663,10 @@ from .util import DictData, lhapdf_name_to_id
     return nl</div>
 
 
-<div class="viewcode-block" id="change_where"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.change_where">[docs]</a>def change_where(input_list: List[Input], dicts: dict, **kwargs):
+
+<div class="viewcode-block" id="change_where">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.change_where">[docs]</a>
+def change_where(input_list: List[Input], dicts: dict, **kwargs):
     &quot;&quot;&quot;
     Applies the values of `dicts` if the key value pairs in `kwargs` agree with a member of the list `input_list`.
 
@@ -606,7 +704,10 @@ from .util import DictData, lhapdf_name_to_id
     return ret</div>
 
 
-<div class="viewcode-block" id="scan_invariant_mass"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_invariant_mass">[docs]</a>def scan_invariant_mass(input_list: List[Input], diff, points, low=0.001):
+
+<div class="viewcode-block" id="scan_invariant_mass">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_invariant_mass">[docs]</a>
+def scan_invariant_mass(input_list: List[Input], diff, points, low=0.001):
     &quot;&quot;&quot;
     Logarithmic `invariant_mass` scan close to the production threshold.
     &quot;&quot;&quot;
@@ -624,7 +725,10 @@ from .util import DictData, lhapdf_name_to_id
     return ret</div>
 
 
-<div class="viewcode-block" id="slha_write"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_write">[docs]</a>def slha_write(newname, d):
+
+<div class="viewcode-block" id="slha_write">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_write">[docs]</a>
+def slha_write(newname, d):
     if len(newname) &gt;= 256:
         warnings.warn(&quot;probably too long filename&quot;)
     f = get_output_dir() + newname
@@ -638,7 +742,10 @@ from .util import DictData, lhapdf_name_to_id
         writer.truncate()</div>
 
 
-<div class="viewcode-block" id="masses_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.masses_scan">[docs]</a>def masses_scan(
+
+<div class="viewcode-block" id="masses_scan">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.masses_scan">[docs]</a>
+def masses_scan(
     input_list: List[Input], varis: List[int], rrange, diff_L_R=None, negate=None
 ) -&gt; List[Input]:
     &quot;&quot;&quot;
@@ -677,7 +784,10 @@ from .util import DictData, lhapdf_name_to_id
     return ret</div>
 
 
-<div class="viewcode-block" id="mass_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.mass_scan">[docs]</a>def mass_scan(input_list: List[Input], var: int, rrange, diff_L_R=None) -&gt; List[Input]:
+
+<div class="viewcode-block" id="mass_scan">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.mass_scan">[docs]</a>
+def mass_scan(input_list: List[Input], var: int, rrange, diff_L_R=None) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scans the PDG identified mass `var` over `rrange` in the list `l`.
     `diff_L_R` allows to set a fixed difference between masses of left- and right-handed particles.
@@ -685,14 +795,20 @@ from .util import DictData, lhapdf_name_to_id
     return masses_scan(input_list, [var], rrange, diff_L_R)</div>
 
 
-<div class="viewcode-block" id="slha_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan">[docs]</a>def slha_scan(input_list: List[Input], block, var, rrange: List) -&gt; List[Input]:
+
+<div class="viewcode-block" id="slha_scan">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan">[docs]</a>
+def slha_scan(input_list: List[Input], block, var, rrange: List) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scan a generic
     &quot;&quot;&quot;
     return slha_scan_rel(input_list, lambda r,: [(block, var, r)], rrange)</div>
 
 
-<div class="viewcode-block" id="slha_scan_rel"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan_rel">[docs]</a>def slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -&gt; List[Input]:
+
+<div class="viewcode-block" id="slha_scan_rel">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.slha_scan_rel">[docs]</a>
+def slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -&gt; List[Input]:
     &quot;&quot;&quot;
     Scan a generic slha variable.
     &quot;&quot;&quot;
@@ -728,7 +844,10 @@ from .util import DictData, lhapdf_name_to_id
     return ret</div>
 
 
-<div class="viewcode-block" id="scan_pdf"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_pdf">[docs]</a>def scan_pdf(input_list: List[Input]):
+
+<div class="viewcode-block" id="scan_pdf">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.scan_pdf">[docs]</a>
+def scan_pdf(input_list: List[Input]):
     &quot;&quot;&quot;
     Scans NLO PDF sets.
 
@@ -820,7 +939,11 @@ from .util import DictData, lhapdf_name_to_id
     return ret</div>
 
 
-<div class="viewcode-block" id="pdf_scan"><a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pdf_scan">[docs]</a>pdf_scan = scan_pdf</div>
+
+<div class="viewcode-block" id="pdf_scan">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.pdf_scan">[docs]</a>
+pdf_scan = scan_pdf</div>
+
 </pre></div>
 
            </div>

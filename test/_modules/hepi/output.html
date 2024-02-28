@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.output &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.18-11-g79efd0f6
+                0.2.18-14-g02e86926
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -122,10 +122,18 @@ from .util import DL2DF
 # splot = plot
 
 
-<div class="viewcode-block" id="unv"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.unv">[docs]</a>unv = unp.nominal_values</div>
-<div class="viewcode-block" id="usd"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.usd">[docs]</a>usd = unp.std_devs</div>
+<div class="viewcode-block" id="unv">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.unv">[docs]</a>
+unv = unp.nominal_values</div>
 
-<div class="viewcode-block" id="write_twiki"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_twiki">[docs]</a>def write_twiki(rs_dl, mass, main):
+<div class="viewcode-block" id="usd">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.usd">[docs]</a>
+usd = unp.std_devs</div>
+
+
+<div class="viewcode-block" id="write_twiki">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_twiki">[docs]</a>
+def write_twiki(rs_dl, mass, main):
     for i in range(len(rs_dl[main + &quot;_NOERR&quot;])):
         cen = rs_dl[main + &quot;_NOERR&quot;].iloc[i],
         cen = cen[0]
@@ -139,7 +147,10 @@ from .util import DL2DF
               &quot;{:.1f}&quot;.format((unv(rs_dl[main + &quot;_PDF&quot;].iloc[i])-cen - usd(rs_dl[main + &quot;_PDF&quot;].iloc[i]))/cen*100), &quot;|&quot;,
              )</div>
 
-<div class="viewcode-block" id="write_latex_table_transposed_header"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex_table_transposed_header">[docs]</a>def write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0):
+
+<div class="viewcode-block" id="write_latex_table_transposed_header">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex_table_transposed_header">[docs]</a>
+def write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0):
     dl = dict_list
     mask = dl[t + &quot;_SCALE&quot;].notnull()
     # lo = unv(dl[&quot;LO&quot;][mask])
@@ -154,8 +165,11 @@ from .util import DL2DF
         io.write(fname, s + &quot;\\\\\n&quot;, mode=&quot;a+&quot;)</div>
 
 
+
 # TODO fix PDF scale brackets here for output
-<div class="viewcode-block" id="write_latex_table_transposed"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex_table_transposed">[docs]</a>def write_latex_table_transposed(
+<div class="viewcode-block" id="write_latex_table_transposed">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex_table_transposed">[docs]</a>
+def write_latex_table_transposed(
     dict_list, t, fname, scale=True, pdf=True, yscale=1.0, max_rows=None
 ):
     dl = dict_list
@@ -207,7 +221,10 @@ from .util import DL2DF
         f.write(&quot;\\\\\n&quot;)</div>
 
 
-<div class="viewcode-block" id="write_latex"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex">[docs]</a>def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0):
+
+<div class="viewcode-block" id="write_latex">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex">[docs]</a>
+def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0):
     &quot;&quot;&quot;
     Saves a `dict` of `list`s to `filename` as latex table.
     &quot;&quot;&quot;
@@ -280,10 +297,16 @@ from .util import DL2DF
             )</div>
 
 
-<div class="viewcode-block" id="tex_table"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.tex_table">[docs]</a>tex_table = write_latex</div>
+
+<div class="viewcode-block" id="tex_table">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.tex_table">[docs]</a>
+tex_table = write_latex</div>
 
 
-<div class="viewcode-block" id="write_csv"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_csv">[docs]</a>def write_csv(dict_list: list, filename: str):
+
+<div class="viewcode-block" id="write_csv">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_csv">[docs]</a>
+def write_csv(dict_list: list, filename: str):
     &quot;&quot;&quot;
     Saves a `dict` of `list`s to `filename` as csv table.
 
@@ -377,7 +400,10 @@ from .util import DL2DF
     df.to_csv(filename, index=False)</div>
 
 
-<div class="viewcode-block" id="write_json"><a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_json">[docs]</a>def write_json(
+
+<div class="viewcode-block" id="write_json">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_json">[docs]</a>
+def write_json(
     dict_list: list,
     o: Order,
     parameters: List[str],
@@ -677,6 +703,7 @@ from .util import DL2DF
 
     jd[&quot;data&quot;] = dat
     io.write(output, json.dumps(jd, indent=4))</div>
+
 </pre></div>
 
            </div>

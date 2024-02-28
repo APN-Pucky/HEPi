@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.run.feynhiggs.run &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
-      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=eafc0fe6" />
 
   
   <!--[if lt IE 9]>
     <script src="../../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.18-11-g79efd0f6
+                0.2.18-14-g02e86926
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -115,8 +115,12 @@ from hepi.input import Input, update_slha
 from hepi.run import Runner
 
 
-<div class="viewcode-block" id="FeynHiggsRunner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.FeynHiggsRunner">[docs]</a>class FeynHiggsRunner(Runner):
-<div class="viewcode-block" id="FeynHiggsRunner._check_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.FeynHiggsRunner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
+<div class="viewcode-block" id="FeynHiggsRunner">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.FeynHiggsRunner">[docs]</a>
+class FeynHiggsRunner(Runner):
+<div class="viewcode-block" id="FeynHiggsRunner._check_path">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.FeynHiggsRunner._check_path">[docs]</a>
+    def _check_path(self) -&gt; bool:
         if os.path.exists(os.path.expanduser(self.get_path() + &quot;/bin/FeynHiggs&quot;)):
             self.set_path(self.get_path() + &quot;/bin/FeynHiggs&quot;)
             return True
@@ -124,7 +128,10 @@ from hepi.run import Runner
             return True
         return False</div>
 
-<div class="viewcode-block" id="FeynHiggsRunner.run"><a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.FeynHiggsRunner.run">[docs]</a>    def run(self, slhas: List[Input], **kwargs) -&gt; List[Input]:
+
+<div class="viewcode-block" id="FeynHiggsRunner.run">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.FeynHiggsRunner.run">[docs]</a>
+    def run(self, slhas: List[Input], **kwargs) -&gt; List[Input]:
         &quot;&quot;&quot;
         Run the passed list of parameters for feynhiggs.
 
@@ -161,15 +168,29 @@ from hepi.run import Runner
             if proc.returncode != 0:
                 warnings.warn(&quot;feynhiggs failed&quot;)
             update_slha(s)
-        return slhas</div></div>
+        return slhas</div>
+</div>
+
 
 
 # Backward compatibility
-<div class="viewcode-block" id="spheno_default_runner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.spheno_default_runner">[docs]</a>spheno_default_runner = FeynHiggsRunner(&quot;FeynHiggs&quot;)</div>
+<div class="viewcode-block" id="spheno_default_runner">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.spheno_default_runner">[docs]</a>
+spheno_default_runner = FeynHiggsRunner(&quot;FeynHiggs&quot;)</div>
+
 &quot;&quot;&quot;Default SoftSusy Runner to provide backward compatibility&quot;&quot;&quot;
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.run">[docs]</a>run = spheno_default_runner.run</div>
-<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.set_path">[docs]</a>set_path = spheno_default_runner.set_path</div>
-<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.get_path">[docs]</a>get_path = spheno_default_runner.get_path</div>
+<div class="viewcode-block" id="run">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.run">[docs]</a>
+run = spheno_default_runner.run</div>
+
+<div class="viewcode-block" id="set_path">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.set_path">[docs]</a>
+set_path = spheno_default_runner.set_path</div>
+
+<div class="viewcode-block" id="get_path">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/feynhiggs/run/index.html#hepi.run.feynhiggs.get_path">[docs]</a>
+get_path = spheno_default_runner.get_path</div>
+
 </pre></div>
 
            </div>
