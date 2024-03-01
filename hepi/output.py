@@ -17,6 +17,19 @@ from .util import DL2DF
 unv = unp.nominal_values
 usd = unp.std_devs
 
+def write_twiki(rs_dl, mass, main):
+    for i in range(len(rs_dl[main + "_NOERR"])):
+        cen = rs_dl[main + "_NOERR"].iloc[i],
+        cen = cen[0]
+        print( "|" , 
+              rs_dl[mass].iloc[i]              , " | " ,
+              "{:.4g}".format(cen), " | ",
+              "{:.1f}".format((unv(rs_dl[main + "_SCALE"].iloc[i])-cen + usd(rs_dl[main + "_SCALE"].iloc[i]))/cen*100), "|",
+              "{:.1f}".format((unv(rs_dl[main + "_PDF"].iloc[i])-cen + usd(rs_dl[main + "_PDF"].iloc[i]))/cen*100), "|",
+              
+              "{:.1f}".format((unv(rs_dl[main + "_SCALE"].iloc[i])-cen - usd(rs_dl[main + "_SCALE"].iloc[i]))/cen*100), "|",
+              "{:.1f}".format((unv(rs_dl[main + "_PDF"].iloc[i])-cen - usd(rs_dl[main + "_PDF"].iloc[i]))/cen*100), "|",
+             )
 
 def write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0):
     dl = dict_list

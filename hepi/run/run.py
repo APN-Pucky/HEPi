@@ -144,7 +144,7 @@ class Runner:
             n_jobs=n_jobs if n_jobs is not None else mp.cpu_count(),
             desc="Checking input",
         )
-        if not np.alltrue(ret):
+        if not np.all(ret):
             warnings.warn("Check input failed.")
             return []
         # ret = my_parallel(

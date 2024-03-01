@@ -3,14 +3,14 @@ from smpl import interpolate as ip
 
 
 # TODO fix dependent(mu) for new masses
-def interpolate_1d(df, x, y, xrange, only_interpolation=True):
+def interpolate_1d(df, x, y, xrange, only_interpolation=True,**kwargs):
     """
     Last key is the value to be interpolated, while the rest are cooridnates.
 
     Args:
         df (pandas.DataFrame): results
     """
-    f = ip.interpolate(df[x], df[y])
+    f = ip.interpolate(df[x], df[y],**kwargs)
     a = []
     for xr in xrange:
         c = df.head(1)
