@@ -1,5 +1,5 @@
-:py:mod:`hepi.results`
-======================
+hepi.results
+============
 
 .. py:module:: hepi.results
 
@@ -9,20 +9,27 @@
 
 
 
-Module Contents
----------------
-
-Classes
-~~~~~~~
+Attributes
+----------
 
 .. autoapisummary::
 
+   hepi.results.required_numerical_uncertainty_factor
+   hepi.results.unv
+   hepi.results.usd
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.results.DictData
    hepi.results.Result
 
 
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -39,34 +46,29 @@ Functions
    hepi.results.asym_to_sym_combined_error
 
 
+Module Contents
+---------------
 
-Attributes
-~~~~~~~~~~
+.. py:class:: DictData
 
-.. autoapisummary::
+   .. py:method:: __str__()
 
-   hepi.results.required_numerical_uncertainty_factor
-   hepi.results.unv
-   hepi.results.usd
+      Returns attributes as dict as string
+
 
 
 .. py:data:: required_numerical_uncertainty_factor
    :value: 5
 
-   
 
 .. py:data:: unv
 
-   
-
 .. py:data:: usd
-
-   
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    General result class. All uncertainties are of numerical origin.
 
@@ -109,7 +111,6 @@ Attributes
 
 .. py:function:: _pdf_error_single(members, i, dl, ordername, confidence_level=90)
 
-
 .. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90, n_jobs=None)
 
    Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
@@ -136,7 +137,6 @@ Attributes
 
 
 .. py:function:: _scale_error_single(members, i, dl, ordername='LO')
-
 
 .. py:function:: scale_error(li, dl, ordername='LO', n_jobs=None)
 
@@ -177,10 +177,7 @@ Attributes
 
 .. py:function:: asym_to_sym_error(central, errminus, errplus)
 
-
 .. py:function:: add_errors(error1, error2)
 
-
 .. py:function:: asym_to_sym_combined_error(central, errminus1, errplus1, errminus2, errplus2)
-
 

@@ -1,29 +1,148 @@
-:py:mod:`hepi.load`
-===================
+hepi.load
+=========
 
 .. py:module:: hepi.load
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   hepi.load.load
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.load.Input
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   hepi.load.order_to_string
+   hepi.load.xsec_to_order
+   hepi.load.DL2DF
+   hepi.load.LD2DL
+   hepi.load.load_json_with_metadata
+   hepi.load.load_json
 
 
 Module Contents
 ---------------
 
+.. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.load.load_json_with_metadata
-   hepi.load.load_json
+   Bases: :py:obj:`hepi.util.DictData`
 
 
+   Input for computation and scans.
 
-Attributes
-~~~~~~~~~~
+   :ivar order: LO, NLO or NLO+NLL computation.
+   :vartype order: :class:`Order`
+   :ivar energy: CMS energy in GeV.
+   :vartype energy: int
+   :ivar energyhalf: Halfed `energy`.
+   :vartype energyhalf: int
+   :ivar particle1: PDG identifier of the first final state particle.
+   :vartype particle1: int
+   :ivar particle2: PDG identifier of the second final state particle.
+   :vartype particle2: int
+   :ivar slha: File path of for the base slha.
+               Modified slha files will be used if a scan requires a change of the input.
+   :vartype slha: str
+   :ivar pdf_lo: LO PDF name.
+   :vartype pdf_lo: str
+   :ivar pdf_nlo: NLO PDF name.
+   :vartype pdf_nlo: str
+   :ivar pdfset_lo: LO PDF member/set id.
+   :vartype pdfset_lo: int
+   :ivar pdfset_nlo: NLO PDF member/set id.
+   :vartype pdfset_nlo: int
+   :ivar pdf_lo_id: LO PDF first member/set id.
+   :vartype pdf_lo_id: int
+   :ivar pdf_nlo_id: NLO PDF first member/set id.
+   :vartype pdf_nlo_id: int
+   :ivar mu: central scale factor.
+   :vartype mu: double
+   :ivar mu_f: Factorization scale factor.
+   :vartype mu_f: double
+   :ivar mu_r: Renormalization scale factor.
+   :vartype mu_r: double
+   :ivar precision: Desired numerical relative precision.
+   :vartype precision: double
+   :ivar max_iters: Upper limit on integration iterations.
+   :vartype max_iters: int
+   :ivar invariant_mass: Invariant mass mode 'auto = sqrt((p1+p2)^2)' else value.
+   :vartype invariant_mass: str
+   :ivar pt: Transverse Momentum mode 'auto' or value.
+   :vartype pt: str
+   :ivar result: Result type 'total'/'pt'/'ptj'/'m'.
+   :vartype result: str
+   :ivar id: Set an id of this run.
+   :vartype id: str
+   :ivar model: Path for MadGraph model.
+   :vartype model: str
+   :ivar update: Update dependent `mu` else set to zero.
 
-.. autoapisummary::
+   :vartype update: bool
 
-   hepi.load.load
+
+   .. py:method:: has_gluino()
+
+
+   .. py:method:: has_neutralino()
+
+
+   .. py:method:: has_charginos()
+
+
+   .. py:method:: has_weakino()
+
+
+   .. py:method:: has_squark()
+
+
+   .. py:method:: has_slepton()
+
+
+.. py:function:: order_to_string(o, json_style=False, no_macros=False)
+
+.. py:function:: xsec_to_order(s)
+
+.. py:function:: DL2DF(ld)
+
+   Convert a `dict` of `list`s to a `pandas.DataFrame`.
+
+
+.. py:function:: LD2DL(l, actual_dict=False)
+
+   Convert a list of objects into a dictionary of lists.
+
+   The values of each object are first converted to a `dict` through the `__dict__` attribute.
+
+   :param l: list of objects.
+   :type l: List
+   :param actual_dict: objects are already dicts
+   :type actual_dict: bool
+
+   :returns: dictionary of numpy arrays.
+   :rtype: dict
+
+   .. rubric:: Examples
+
+   >>> class Param:
+   ...      def __init__(self,a,b,c):
+   ...         self.a = a
+   ...         self.b = b
+   ...         self.c = c
+   >>> LD2DL([ Param(1,2,3), Param(4,5,6) , Param(7,8,9) ])
+   {'a': array([1, 4, 7]), 'b': array([2, 5, 8]), 'c': array([3, 6, 9])}
 
 
 .. py:function:: load_json_with_metadata(file)
@@ -37,8 +156,5 @@ Attributes
 
 .. py:function:: load_json(f, dimensions=1)
 
-
 .. py:data:: load
-
-   
 

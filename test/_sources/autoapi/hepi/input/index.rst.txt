@@ -1,26 +1,42 @@
-:py:mod:`hepi.input`
-====================
+hepi.input
+==========
 
 .. py:module:: hepi.input
 
 
-Module Contents
----------------
-
-Classes
-~~~~~~~
+Attributes
+----------
 
 .. autoapisummary::
 
+   hepi.input.in_dir
+   hepi.input.out_dir
+   hepi.input.pre
+   hepi.input.multi_scan
+   hepi.input.scale_scan
+   hepi.input.seven_point_scan
+   hepi.input.pdf_scan
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.input.Order
+   hepi.input.DictData
    hepi.input.Input
 
 
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
+   hepi.input.order_to_string
+   hepi.input.replace_macros
+   hepi.input.xsec_to_order
+   hepi.input.lhapdf_name_to_id
    hepi.input.get_input_dir
    hepi.input.get_output_dir
    hepi.input.get_pre
@@ -50,33 +66,92 @@ Functions
    hepi.input.scan_pdf
 
 
+Module Contents
+---------------
 
-Attributes
-~~~~~~~~~~
+.. py:class:: Order
 
-.. autoapisummary::
+   Bases: :py:obj:`enum.IntEnum`
 
-   hepi.input.in_dir
-   hepi.input.out_dir
-   hepi.input.pre
-   hepi.input.multi_scan
-   hepi.input.scale_scan
-   hepi.input.seven_point_scan
-   hepi.input.pdf_scan
+
+   Computation orders.
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+   .. py:attribute:: LO
+      :value: 0
+
+
+      Leading Order
+
+
+   .. py:attribute:: NLO
+      :value: 1
+
+
+      Next-to-Leading Order
+
+
+   .. py:attribute:: NLO_PLUS_NLL
+      :value: 2
+
+
+      Next-to-Leading Order plus Next-to-Leading Logarithms
+
+
+   .. py:attribute:: aNNLO_PLUS_NNLL
+      :value: 3
+
+
+      Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
+
+
+.. py:function:: order_to_string(o, json_style=False, no_macros=False)
+
+.. py:function:: replace_macros(s)
+
+.. py:function:: xsec_to_order(s)
+
+.. py:class:: DictData
+
+   .. py:method:: __str__()
+
+      Returns attributes as dict as string
+
+
+
+.. py:function:: lhapdf_name_to_id(name)
+
+   Converts a LHAPDF name to the sets id.
+
+   :param name: LHAPDF set name.
+   :type name: str
+
+   :returns: id of the LHAPDF set.
+   :rtype: int
+
+   .. rubric:: Examples
+
+   >>> lhapdf_name_to_id("CT14lo")
+   13200
 
 
 .. py:data:: in_dir
    :value: './input/'
+
 
    Input directory.
 
 .. py:data:: out_dir
    :value: './output/'
 
+
    Output directory.
 
 .. py:data:: pre
    :value: 'nice -n 5'
+
 
    Prefix for run commands.
 
@@ -131,8 +206,8 @@ Attributes
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Input for computation and scans.
 
@@ -185,6 +260,7 @@ Attributes
 
    :vartype update: bool
 
+
    .. py:method:: has_gluino()
 
 
@@ -203,24 +279,17 @@ Attributes
    .. py:method:: has_slepton()
 
 
-
 .. py:function:: is_gluino(iid)
-
 
 .. py:function:: is_neutralino(iid)
 
-
 .. py:function:: is_chargino(iid)
-
 
 .. py:function:: is_weakino(iid)
 
-
 .. py:function:: is_squark(iid)
 
-
 .. py:function:: is_slepton(iid)
-
 
 .. py:function:: update_slha(i)
 
@@ -297,8 +366,6 @@ Attributes
 
 .. py:data:: multi_scan
 
-   
-
 .. py:function:: scan_scale(l, rrange=3, distance=2.0)
 
    Scans scale by varying `mu_f` and `mu_r`.
@@ -324,8 +391,6 @@ Attributes
 
 .. py:data:: scale_scan
 
-   
-
 .. py:function:: scan_seven_point(input_list)
 
    Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
@@ -345,8 +410,6 @@ Attributes
 
 
 .. py:data:: seven_point_scan
-
-   
 
 .. py:function:: keep_where(input_list, condition)
 
@@ -406,7 +469,6 @@ Attributes
 
 
 .. py:function:: slha_write(newname, d)
-
 
 .. py:function:: masses_scan(input_list, varis, rrange, diff_L_R=None, negate=None)
 
@@ -501,6 +563,4 @@ Attributes
 
 
 .. py:data:: pdf_scan
-
-   
 

@@ -1,5 +1,5 @@
-:py:mod:`hepi`
-==============
+hepi
+====
 
 .. py:module:: hepi
 
@@ -11,37 +11,63 @@
 
 Subpackages
 -----------
-.. toctree::
-   :titlesonly:
-   :maxdepth: 3
 
-   data/index.rst
-   plot/index.rst
-   run/index.rst
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/hepi/data/index
+   /autoapi/hepi/plot/index
+   /autoapi/hepi/run/index
 
 
 Submodules
 ----------
+
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
-   fast/index.rst
-   input/index.rst
-   interpolate/index.rst
-   load/index.rst
-   order/index.rst
-   output/index.rst
-   particles/index.rst
-   results/index.rst
-   util/index.rst
+   /autoapi/hepi/fast/index
+   /autoapi/hepi/input/index
+   /autoapi/hepi/interpolate/index
+   /autoapi/hepi/load/index
+   /autoapi/hepi/order/index
+   /autoapi/hepi/output/index
+   /autoapi/hepi/particles/index
+   /autoapi/hepi/results/index
+   /autoapi/hepi/util/index
 
 
-Package Contents
-----------------
+Attributes
+----------
+
+.. autoapisummary::
+
+   hepi.in_dir
+   hepi.out_dir
+   hepi.pre
+   hepi.multi_scan
+   hepi.scale_scan
+   hepi.seven_point_scan
+   hepi.pdf_scan
+   hepi.load
+   hepi.unv
+   hepi.usd
+   hepi.tex_table
+   hepi.map_vplot
+   hepi.scatter_vplot
+   hepi.fig
+   hepi.axs
+   hepi.lines
+   hepi.labels
+   hepi.required_numerical_uncertainty_factor
+   hepi.unv
+   hepi.usd
+   hepi.package
+   hepi.__version__
+
 
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
@@ -62,9 +88,8 @@ Classes
    hepi.DictData
 
 
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -161,77 +186,54 @@ Functions
    hepi.lhapdf_id_to_name
 
 
-
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.in_dir
-   hepi.out_dir
-   hepi.pre
-   hepi.multi_scan
-   hepi.scale_scan
-   hepi.seven_point_scan
-   hepi.pdf_scan
-   hepi.load
-   hepi.unv
-   hepi.usd
-   hepi.tex_table
-   hepi.map_vplot
-   hepi.scatter_vplot
-   hepi.fig
-   hepi.axs
-   hepi.lines
-   hepi.labels
-   hepi.required_numerical_uncertainty_factor
-   hepi.unv
-   hepi.usd
-   hepi.package
-   hepi.__version__
-
+Package Contents
+----------------
 
 .. py:class:: Order
 
-
    Bases: :py:obj:`enum.IntEnum`
+
 
    Computation orders.
 
    Initialize self.  See help(type(self)) for accurate signature.
 
+
    .. py:attribute:: LO
       :value: 0
 
+
       Leading Order
+
 
    .. py:attribute:: NLO
       :value: 1
 
+
       Next-to-Leading Order
+
 
    .. py:attribute:: NLO_PLUS_NLL
       :value: 2
 
+
       Next-to-Leading Order plus Next-to-Leading Logarithms
+
 
    .. py:attribute:: aNNLO_PLUS_NNLL
       :value: 3
+
 
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
 
 
 .. py:function:: order_to_string(o, json_style=False, no_macros=False)
 
-
 .. py:function:: replace_macros(s)
-
 
 .. py:function:: xsec_to_order(s)
 
-
 .. py:class:: DictData
-
 
    .. py:method:: __str__()
 
@@ -258,15 +260,18 @@ Attributes
 .. py:data:: in_dir
    :value: './input/'
 
+
    Input directory.
 
 .. py:data:: out_dir
    :value: './output/'
 
+
    Output directory.
 
 .. py:data:: pre
    :value: 'nice -n 5'
+
 
    Prefix for run commands.
 
@@ -321,8 +326,8 @@ Attributes
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Input for computation and scans.
 
@@ -375,6 +380,7 @@ Attributes
 
    :vartype update: bool
 
+
    .. py:method:: has_gluino()
 
 
@@ -393,24 +399,17 @@ Attributes
    .. py:method:: has_slepton()
 
 
-
 .. py:function:: is_gluino(iid)
-
 
 .. py:function:: is_neutralino(iid)
 
-
 .. py:function:: is_chargino(iid)
-
 
 .. py:function:: is_weakino(iid)
 
-
 .. py:function:: is_squark(iid)
 
-
 .. py:function:: is_slepton(iid)
-
 
 .. py:function:: update_slha(i)
 
@@ -487,8 +486,6 @@ Attributes
 
 .. py:data:: multi_scan
 
-   
-
 .. py:function:: scan_scale(l, rrange=3, distance=2.0)
 
    Scans scale by varying `mu_f` and `mu_r`.
@@ -514,8 +511,6 @@ Attributes
 
 .. py:data:: scale_scan
 
-   
-
 .. py:function:: scan_seven_point(input_list)
 
    Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
@@ -535,8 +530,6 @@ Attributes
 
 
 .. py:data:: seven_point_scan
-
-   
 
 .. py:function:: keep_where(input_list, condition)
 
@@ -596,7 +589,6 @@ Attributes
 
 
 .. py:function:: slha_write(newname, d)
-
 
 .. py:function:: masses_scan(input_list, varis, rrange, diff_L_R=None, negate=None)
 
@@ -692,8 +684,6 @@ Attributes
 
 .. py:data:: pdf_scan
 
-   
-
 .. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True, **kwargs)
 
    Last key is the value to be interpolated, while the rest are cooridnates.
@@ -712,8 +702,8 @@ Attributes
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Input for computation and scans.
 
@@ -766,6 +756,7 @@ Attributes
 
    :vartype update: bool
 
+
    .. py:method:: has_gluino()
 
 
@@ -784,12 +775,9 @@ Attributes
    .. py:method:: has_slepton()
 
 
-
 .. py:function:: order_to_string(o, json_style=False, no_macros=False)
 
-
 .. py:function:: xsec_to_order(s)
-
 
 .. py:function:: DL2DF(ld)
 
@@ -832,43 +820,47 @@ Attributes
 
 .. py:function:: load_json(f, dimensions=1)
 
-
 .. py:data:: load
-
-   
 
 .. py:class:: Order
 
-
    Bases: :py:obj:`enum.IntEnum`
+
 
    Computation orders.
 
    Initialize self.  See help(type(self)) for accurate signature.
 
+
    .. py:attribute:: LO
       :value: 0
 
+
       Leading Order
+
 
    .. py:attribute:: NLO
       :value: 1
 
+
       Next-to-Leading Order
+
 
    .. py:attribute:: NLO_PLUS_NLL
       :value: 2
 
+
       Next-to-Leading Order plus Next-to-Leading Logarithms
+
 
    .. py:attribute:: aNNLO_PLUS_NNLL
       :value: 3
+
 
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
 
 
 .. py:function:: order_to_string(o, json_style=False, no_macros=False)
-
 
 .. py:function:: DL2DF(ld)
 
@@ -877,20 +869,13 @@ Attributes
 
 .. py:data:: unv
 
-   
-
 .. py:data:: usd
-
-   
 
 .. py:function:: write_twiki(rs_dl, mass, main)
 
-
 .. py:function:: write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0)
 
-
 .. py:function:: write_latex_table_transposed(dict_list, t, fname, scale=True, pdf=True, yscale=1.0, max_rows=None)
-
 
 .. py:function:: write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0)
 
@@ -898,8 +883,6 @@ Attributes
 
 
 .. py:data:: tex_table
-
-   
 
 .. py:function:: write_csv(dict_list, filename)
 
@@ -1069,8 +1052,8 @@ Attributes
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Input for computation and scans.
 
@@ -1123,6 +1106,7 @@ Attributes
 
    :vartype update: bool
 
+
    .. py:method:: has_gluino()
 
 
@@ -1141,7 +1125,6 @@ Attributes
    .. py:method:: has_slepton()
 
 
-
 .. py:function:: get_output_dir()
 
    Get the output directory.
@@ -1151,7 +1134,6 @@ Attributes
 
 
 .. py:function:: replace_macros(s)
-
 
 .. py:function:: get_name(pid)
 
@@ -1183,15 +1165,11 @@ Attributes
 
 .. py:function:: combined_mass_plot(dict_list, y, part, label=None, **kwargs)
 
-
 .. py:function:: combined_plot(dict_list, x, y, label=None, **kwargs)
-
 
 .. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, xaxis=None, **kwargs)
 
-
 .. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)
-
 
 .. py:function:: get_mass(l, iid)
 
@@ -1221,12 +1199,9 @@ Attributes
 
 .. py:function:: index_open(var, idx)
 
-
 .. py:function:: slha_data(li, index_list)
 
-
 .. py:function:: slha_plot(li, x, y, **kwargs)
-
 
 .. py:function:: vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', print_area=False, sort=True, **kwargs)
 
@@ -1235,7 +1210,6 @@ Attributes
 
 
 .. py:function:: mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)
-
 
 .. py:function:: mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
 
@@ -1255,11 +1229,7 @@ Attributes
 
 .. py:data:: map_vplot
 
-   
-
 .. py:data:: scatter_vplot
-
-   
 
 .. py:function:: scatterplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
 
@@ -1281,25 +1251,22 @@ Attributes
 
 
 .. py:data:: fig
+   :value: None
 
-   
 
 .. py:data:: axs
+   :value: None
 
-   
 
 .. py:data:: lines
    :value: []
 
-   
 
 .. py:data:: labels
    :value: []
 
-   
 
 .. py:function:: err_plt(axes, x, y, label=None, error=False)
-
 
 .. py:function:: scale_plot(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', yaxis=None, **kwargs)
 
@@ -1318,7 +1285,6 @@ Attributes
 
 .. py:class:: DictData
 
-
    .. py:method:: __str__()
 
       Returns attributes as dict as string
@@ -1328,20 +1294,15 @@ Attributes
 .. py:data:: required_numerical_uncertainty_factor
    :value: 5
 
-   
 
 .. py:data:: unv
 
-   
-
 .. py:data:: usd
-
-   
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    General result class. All uncertainties are of numerical origin.
 
@@ -1384,7 +1345,6 @@ Attributes
 
 .. py:function:: _pdf_error_single(members, i, dl, ordername, confidence_level=90)
 
-
 .. py:function:: pdf_error(li, dl, ordername='LO', confidence_level=90, n_jobs=None)
 
    Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
@@ -1411,7 +1371,6 @@ Attributes
 
 
 .. py:function:: _scale_error_single(members, i, dl, ordername='LO')
-
 
 .. py:function:: scale_error(li, dl, ordername='LO', n_jobs=None)
 
@@ -1452,17 +1411,14 @@ Attributes
 
 .. py:function:: asym_to_sym_error(central, errminus, errplus)
 
-
 .. py:function:: add_errors(error1, error2)
-
 
 .. py:function:: asym_to_sym_combined_error(central, errminus1, errplus1, errminus2, errplus2)
 
-
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Input for computation and scans.
 
@@ -1515,6 +1471,7 @@ Attributes
 
    :vartype update: bool
 
+
    .. py:method:: has_gluino()
 
 
@@ -1533,33 +1490,40 @@ Attributes
    .. py:method:: has_slepton()
 
 
-
 .. py:class:: Order
 
-
    Bases: :py:obj:`enum.IntEnum`
+
 
    Computation orders.
 
    Initialize self.  See help(type(self)) for accurate signature.
 
+
    .. py:attribute:: LO
       :value: 0
 
+
       Leading Order
+
 
    .. py:attribute:: NLO
       :value: 1
 
+
       Next-to-Leading Order
+
 
    .. py:attribute:: NLO_PLUS_NLL
       :value: 2
 
+
       Next-to-Leading Order plus Next-to-Leading Logarithms
+
 
    .. py:attribute:: aNNLO_PLUS_NNLL
       :value: 3
+
 
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
 
@@ -1590,8 +1554,8 @@ Attributes
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    General result class. All uncertainties are of numerical origin.
 
@@ -1659,7 +1623,6 @@ Attributes
 
 .. py:class:: DictData
 
-
    .. py:method:: __str__()
 
       Returns attributes as dict as string
@@ -1689,23 +1652,24 @@ Attributes
 
 .. py:class:: RunParam(skip = False, in_file = None, out_file = None, execute = None, name = None)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Abstract class that is similar to a dictionary but with fixed keys.
 
 
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
 
-
    .. py:method:: orders()
 
       List of supported Orders in this runner.
 
 
+
    .. py:method:: get_name()
 
       Returns the name of the runner.
+
 
 
    .. py:method:: get_version()
@@ -1717,6 +1681,7 @@ Attributes
    .. py:method:: _check_path()
 
       Checks if the passed path is valid.
+
 
 
    .. py:method:: _prepare(p, skip=False, assume_valid=False, **kwargs)
@@ -1735,6 +1700,7 @@ Attributes
       :type skip: bool, optional
       :param n_jobs: Number of parallel jobs. If None, use all available cores.
       :type n_jobs: int
+
 
 
    .. py:method:: run(params, skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
@@ -1763,6 +1729,7 @@ Attributes
       :rtype: :obj:`pd.DataFrame`
 
 
+
    .. py:method:: _run(rps, wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
 
       Runs Runner per :class:`RunParams`.
@@ -1784,6 +1751,7 @@ Attributes
       :rtype: :obj:`list` of int
 
 
+
    .. py:method:: _is_valid(file, p, d, **kwargs)
 
       Verifies that a file is a complete output.
@@ -1799,6 +1767,7 @@ Attributes
       :rtype: bool
 
 
+
    .. py:method:: parse(outputs, n_jobs=None)
 
           Parses Resummino output files and returns List of Results.
@@ -1809,6 +1778,7 @@ Attributes
 
           Returns:
               :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+
 
 
 
@@ -1823,12 +1793,14 @@ Attributes
       :rtype: :class:`Result`
 
 
+
    .. py:method:: get_path()
 
       Get the Runner path.
 
       :returns: current Runner path.
       :rtype: str
+
 
 
    .. py:method:: get_input_dir()
@@ -1839,12 +1811,14 @@ Attributes
       :rtype: str
 
 
+
    .. py:method:: get_output_dir()
 
       Get the input directory.
 
       :returns: :attr:`out_dir`
       :rtype: str
+
 
 
    .. py:method:: get_pre()
@@ -1855,12 +1829,14 @@ Attributes
       :rtype: str
 
 
+
    .. py:method:: set_path(p)
 
       Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
 
       :param p: new path.
       :type p: str
+
 
 
    .. py:method:: set_input_dir(indir)
@@ -1871,6 +1847,7 @@ Attributes
       :type indir: str
 
 
+
    .. py:method:: set_output_dir(outdir, create = True)
 
       Sets the output directory.
@@ -1878,6 +1855,7 @@ Attributes
       :param outdir: new output directory.
                      create (bool): create directory if not existing.
       :type outdir: str
+
 
 
    .. py:method:: set_pre(ppre)
@@ -1890,7 +1868,6 @@ Attributes
 
 
 .. py:class:: DictData
-
 
    .. py:method:: __str__()
 
@@ -1967,13 +1944,9 @@ Attributes
 
 .. py:function:: lhapdf_id_to_name(lid)
 
-
 .. py:data:: package
    :value: 'hepi'
 
-   
 
 .. py:data:: __version__
-
-   
 

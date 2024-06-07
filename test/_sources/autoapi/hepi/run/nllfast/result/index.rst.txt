@@ -1,26 +1,77 @@
-:py:mod:`hepi.run.nllfast.result`
-=================================
+hepi.run.nllfast.result
+=======================
 
 .. py:module:: hepi.run.nllfast.result
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.run.nllfast.result.Result
+   hepi.run.nllfast.result.NLLFastResult
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   hepi.run.nllfast.result.add_errors
+   hepi.run.nllfast.result.asym_to_sym_error
 
 
 Module Contents
 ---------------
 
-Classes
-~~~~~~~
+.. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
-.. autoapisummary::
-
-   hepi.run.nllfast.result.NLLFastResult
+   Bases: :py:obj:`hepi.util.DictData`
 
 
+   General result class. All uncertainties are of numerical origin.
 
+   :ivar LO: Leading Order result. Defaults to None.
+   :vartype LO: :obj:`double`
+   :ivar NLO: Next-to-Leading Order result. Defaults to None.
+   :vartype NLO: :obj:`double`
+   :ivar NLO_PLUS_NLL: Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+   :vartype NLO_PLUS_NLL: :obj:`double`
+   :ivar K_LO: LO divided by LO.
+   :vartype K_LO: :obj:`double`
+   :ivar K_NLO: NLO divided by LO result.
+   :vartype K_NLO: :obj:`double`
+   :ivar K_NLO_PLUS_NLL: NLO+NLL divided by LO.
+   :vartype K_NLO_PLUS_NLL: :obj:`double`
+   :ivar K_aNNLO_PLUS_NNLL: aNNLO+NNLL divided by LO.
+   :vartype K_aNNLO_PLUS_NNLL: :obj:`double`
+   :ivar NLO_PLUS_NLL_OVER_NLO: NLO+NLL divided by NLO.
+   :vartype NLO_PLUS_NLL_OVER_NLO: :obj:`double`
+   :ivar aNNLO_PLUS_NNLL_OVER_NLO: aNNLO+NNLL divided by NLO.
+
+   :vartype aNNLO_PLUS_NNLL_OVER_NLO: :obj:`double`
+
+   Sets given and computes dependent ``Attributes``.
+
+   :param lo: corresponds to :attr:`LO`.
+   :type lo: :obj:`double`
+   :param nlo: corresponds to :attr:`NLO`.
+   :type nlo: :obj:`double`
+   :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
+   :type nlo_plus_nll: :obj:`double`
+   :param annlo_plus_nnll: corresponds to :attr:`aNNLO_PLUS_NNLL`.
+   :type annlo_plus_nnll: :obj:`double`
+
+
+.. py:function:: add_errors(error1, error2)
+
+.. py:function:: asym_to_sym_error(central, errminus, errplus)
 
 .. py:class:: NLLFastResult(LO, NLO, NLO_PDF_ERRMINUS, NLO_PDF_ERRPLUS, NLO_PLUS_NLL, NLO_PLUS_NLL_SCALE_ERRMINUS, NLO_PLUS_NLL_SCALE_ERRPLUS, NLO_PLUS_NLL_PDF_ERRMINUS, NLO_PLUS_NLL_PDF_ERRPLUS)
 
-
    Bases: :py:obj:`hepi.results.Result`
+
 
    (N)NLL-fast Result Data.
 

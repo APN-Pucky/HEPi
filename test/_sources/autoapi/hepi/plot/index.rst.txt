@@ -1,32 +1,41 @@
-:py:mod:`hepi.plot`
-===================
+hepi.plot
+=========
 
 .. py:module:: hepi.plot
 
 
 Submodules
 ----------
+
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
-   plot/index.rst
+   /autoapi/hepi/plot/plot/index
 
 
-Package Contents
-----------------
+Attributes
+----------
+
+.. autoapisummary::
+
+   hepi.plot.map_vplot
+   hepi.plot.scatter_vplot
+   hepi.plot.fig
+   hepi.plot.axs
+   hepi.plot.lines
+   hepi.plot.labels
+
 
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    hepi.plot.Input
 
 
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -54,24 +63,13 @@ Functions
    hepi.plot.init_double_plot
 
 
-
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.plot.map_vplot
-   hepi.plot.scatter_vplot
-   hepi.plot.fig
-   hepi.plot.axs
-   hepi.plot.lines
-   hepi.plot.labels
-
+Package Contents
+----------------
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Input for computation and scans.
 
@@ -124,6 +122,7 @@ Attributes
 
    :vartype update: bool
 
+
    .. py:method:: has_gluino()
 
 
@@ -142,7 +141,6 @@ Attributes
    .. py:method:: has_slepton()
 
 
-
 .. py:function:: get_output_dir()
 
    Get the output directory.
@@ -152,7 +150,6 @@ Attributes
 
 
 .. py:function:: replace_macros(s)
-
 
 .. py:function:: get_name(pid)
 
@@ -184,15 +181,11 @@ Attributes
 
 .. py:function:: combined_mass_plot(dict_list, y, part, label=None, **kwargs)
 
-
 .. py:function:: combined_plot(dict_list, x, y, label=None, **kwargs)
-
 
 .. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, xaxis=None, **kwargs)
 
-
 .. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)
-
 
 .. py:function:: get_mass(l, iid)
 
@@ -222,12 +215,9 @@ Attributes
 
 .. py:function:: index_open(var, idx)
 
-
 .. py:function:: slha_data(li, index_list)
 
-
 .. py:function:: slha_plot(li, x, y, **kwargs)
-
 
 .. py:function:: vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', print_area=False, sort=True, **kwargs)
 
@@ -236,7 +226,6 @@ Attributes
 
 
 .. py:function:: mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)
-
 
 .. py:function:: mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
 
@@ -256,11 +245,7 @@ Attributes
 
 .. py:data:: map_vplot
 
-   
-
 .. py:data:: scatter_vplot
-
-   
 
 .. py:function:: scatterplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
 
@@ -282,25 +267,22 @@ Attributes
 
 
 .. py:data:: fig
+   :value: None
 
-   
 
 .. py:data:: axs
+   :value: None
 
-   
 
 .. py:data:: lines
    :value: []
 
-   
 
 .. py:data:: labels
    :value: []
 
-   
 
 .. py:function:: err_plt(axes, x, y, label=None, error=False)
-
 
 .. py:function:: scale_plot(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', yaxis=None, **kwargs)
 

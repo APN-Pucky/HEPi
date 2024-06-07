@@ -1,29 +1,11 @@
-:py:mod:`hepi.output`
-=====================
+hepi.output
+===========
 
 .. py:module:: hepi.output
 
 
-Module Contents
----------------
-
-
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.output.write_twiki
-   hepi.output.write_latex_table_transposed_header
-   hepi.output.write_latex_table_transposed
-   hepi.output.write_latex
-   hepi.output.write_csv
-   hepi.output.write_json
-
-
-
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
@@ -32,22 +14,86 @@ Attributes
    hepi.output.tex_table
 
 
-.. py:data:: unv
+Classes
+-------
 
-   
+.. autoapisummary::
+
+   hepi.output.Order
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   hepi.output.order_to_string
+   hepi.output.DL2DF
+   hepi.output.write_twiki
+   hepi.output.write_latex_table_transposed_header
+   hepi.output.write_latex_table_transposed
+   hepi.output.write_latex
+   hepi.output.write_csv
+   hepi.output.write_json
+
+
+Module Contents
+---------------
+
+.. py:class:: Order
+
+   Bases: :py:obj:`enum.IntEnum`
+
+
+   Computation orders.
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+   .. py:attribute:: LO
+      :value: 0
+
+
+      Leading Order
+
+
+   .. py:attribute:: NLO
+      :value: 1
+
+
+      Next-to-Leading Order
+
+
+   .. py:attribute:: NLO_PLUS_NLL
+      :value: 2
+
+
+      Next-to-Leading Order plus Next-to-Leading Logarithms
+
+
+   .. py:attribute:: aNNLO_PLUS_NNLL
+      :value: 3
+
+
+      Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
+
+
+.. py:function:: order_to_string(o, json_style=False, no_macros=False)
+
+.. py:function:: DL2DF(ld)
+
+   Convert a `dict` of `list`s to a `pandas.DataFrame`.
+
+
+.. py:data:: unv
 
 .. py:data:: usd
 
-   
-
 .. py:function:: write_twiki(rs_dl, mass, main)
-
 
 .. py:function:: write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0)
 
-
 .. py:function:: write_latex_table_transposed(dict_list, t, fname, scale=True, pdf=True, yscale=1.0, max_rows=None)
-
 
 .. py:function:: write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0)
 
@@ -55,8 +101,6 @@ Attributes
 
 
 .. py:data:: tex_table
-
-   
 
 .. py:function:: write_csv(dict_list, filename)
 

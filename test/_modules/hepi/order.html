@@ -9,7 +9,7 @@
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-3-g28a6f936
+                0.2.19-78-gee605255
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -110,29 +110,29 @@
 
 
 <div class="viewcode-block" id="Order">
-<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Order">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/run/index.html#hepi.fast.Order">[docs]</a>
 class Order(IntEnum):
     &quot;&quot;&quot;
     Computation orders.
     &quot;&quot;&quot;
 
 <div class="viewcode-block" id="Order.LO">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.Order.LO">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.fast.Order.LO">[docs]</a>
     LO = 0</div>
 
     &quot;&quot;&quot;Leading Order&quot;&quot;&quot;
 <div class="viewcode-block" id="Order.NLO">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.Order.NLO">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.fast.Order.NLO">[docs]</a>
     NLO = 1</div>
 
     &quot;&quot;&quot;Next-to-Leading Order&quot;&quot;&quot;
 <div class="viewcode-block" id="Order.NLO_PLUS_NLL">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.Order.NLO_PLUS_NLL">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.fast.Order.NLO_PLUS_NLL">[docs]</a>
     NLO_PLUS_NLL = 2</div>
 
     &quot;&quot;&quot;Next-to-Leading Order plus Next-to-Leading Logarithms&quot;&quot;&quot;
 <div class="viewcode-block" id="Order.aNNLO_PLUS_NNLL">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.Order.aNNLO_PLUS_NNLL">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.fast.Order.aNNLO_PLUS_NNLL">[docs]</a>
     aNNLO_PLUS_NNLL = 3</div>
 
     &quot;&quot;&quot;Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms&quot;&quot;&quot;</div>
@@ -140,14 +140,14 @@ class Order(IntEnum):
 
 
 <div class="viewcode-block" id="replace_macros">
-<a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.replace_macros">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/plot/plot/index.html#hepi.fast.replace_macros">[docs]</a>
 def replace_macros(s: str) -&gt; str:
     return s.replace(&quot;_PLUS_&quot;, &quot;+&quot;).replace(&quot; &quot;, &quot;\\ &quot;)</div>
 
 
 
 <div class="viewcode-block" id="xsec_to_order">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.xsec_to_order">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.fast.xsec_to_order">[docs]</a>
 def xsec_to_order(s: str):
     if s == &quot;NNLOapprox+NNLL&quot;:
         return Order.aNNLO_PLUS_NNLL
@@ -163,7 +163,7 @@ def xsec_to_order(s: str):
 
 
 <div class="viewcode-block" id="order_to_string">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order_to_string">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.fast.order_to_string">[docs]</a>
 def order_to_string(o: Order, json_style=False, no_macros=False) -&gt; str:
     ret = &quot;&quot;
     if o == Order.LO:

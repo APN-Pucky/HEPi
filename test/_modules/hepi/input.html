@@ -9,7 +9,7 @@
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
 
   
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/thebelab-helper.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-3-g28a6f936
+                0.2.19-78-gee605255
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -136,7 +136,7 @@ pre = &quot;nice -n 5&quot;</div>
 
 
 <div class="viewcode-block" id="get_input_dir">
-<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_input_dir">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/run/index.html#hepi.get_input_dir">[docs]</a>
 def get_input_dir():
     &quot;&quot;&quot;
     Get the input directory.
@@ -150,7 +150,7 @@ def get_input_dir():
 
 
 <div class="viewcode-block" id="get_output_dir">
-<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_output_dir">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/run/index.html#hepi.get_output_dir">[docs]</a>
 def get_output_dir():
     &quot;&quot;&quot;
     Get the output directory.
@@ -165,7 +165,7 @@ def get_output_dir():
 
 
 <div class="viewcode-block" id="get_pre">
-<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_pre">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/run/index.html#hepi.get_pre">[docs]</a>
 def get_pre():
     &quot;&quot;&quot;
     Gets the command prefix.
@@ -224,7 +224,7 @@ def set_pre(ppre):
 
 
 <div class="viewcode-block" id="Input">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input">[docs]</a>
 class Input(DictData):
     &quot;&quot;&quot;
     Input for computation and scans.
@@ -307,37 +307,37 @@ class Input(DictData):
             update_slha(self)
 
 <div class="viewcode-block" id="Input.has_gluino">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_gluino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_gluino">[docs]</a>
     def has_gluino(self) -&gt; bool:
         return is_gluino(self.particle1) or is_gluino(self.particle2)</div>
 
 
 <div class="viewcode-block" id="Input.has_neutralino">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_neutralino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_neutralino">[docs]</a>
     def has_neutralino(self) -&gt; bool:
         return is_neutralino(self.particle1) or is_neutralino(self.particle2)</div>
 
 
 <div class="viewcode-block" id="Input.has_charginos">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_charginos">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_charginos">[docs]</a>
     def has_charginos(self) -&gt; bool:
         return is_chargino(self.particle1) or is_chargino(self.particle2)</div>
 
 
 <div class="viewcode-block" id="Input.has_weakino">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_weakino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_weakino">[docs]</a>
     def has_weakino(self) -&gt; bool:
         return self.has_charginos() or self.has_neutralino()</div>
 
 
 <div class="viewcode-block" id="Input.has_squark">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_squark">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_squark">[docs]</a>
     def has_squark(self) -&gt; bool:
         return is_squark(self.particle1) or is_squark(self.particle2)</div>
 
 
 <div class="viewcode-block" id="Input.has_slepton">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_slepton">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_slepton">[docs]</a>
     def has_slepton(self) -&gt; bool:
         return is_slepton(self.particle1) or is_slepton(self.particle2)</div>
 </div>
@@ -345,7 +345,7 @@ class Input(DictData):
 
 
 <div class="viewcode-block" id="is_gluino">
-<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_gluino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/prospino2/run/index.html#hepi.is_gluino">[docs]</a>
 def is_gluino(iid: int) -&gt; bool:
     return iid == 1000021</div>
 
@@ -368,14 +368,14 @@ def is_chargino(iid: int) -&gt; bool:
 
 
 <div class="viewcode-block" id="is_weakino">
-<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_weakino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/prospino2/run/index.html#hepi.is_weakino">[docs]</a>
 def is_weakino(iid: int) -&gt; bool:
     return is_chargino(iid) or is_neutralino(iid)</div>
 
 
 
 <div class="viewcode-block" id="is_squark">
-<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_squark">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/prospino2/run/index.html#hepi.is_squark">[docs]</a>
 def is_squark(iid: int) -&gt; bool:
     l_squark = range(1000001, 1000007)
     r_squark = range(2000001, 2000007)
@@ -384,7 +384,7 @@ def is_squark(iid: int) -&gt; bool:
 
 
 <div class="viewcode-block" id="is_slepton">
-<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_slepton">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/prospino2/run/index.html#hepi.is_slepton">[docs]</a>
 def is_slepton(iid: int) -&gt; bool:
     l_slepton = range(1000011, 1000016)
     r_slepton = range(2000011, 2000016)  # TODO remove righthandend snu&#39;s
@@ -393,7 +393,7 @@ def is_slepton(iid: int) -&gt; bool:
 
 
 <div class="viewcode-block" id="update_slha">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.update_slha">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.update_slha">[docs]</a>
 def update_slha(i: Input):
     &quot;&quot;&quot;
     Updates dependent parameters in Input `i`.

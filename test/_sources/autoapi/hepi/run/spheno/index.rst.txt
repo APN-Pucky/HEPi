@@ -1,5 +1,5 @@
-:py:mod:`hepi.run.spheno`
-=========================
+hepi.run.spheno
+===============
 
 .. py:module:: hepi.run.spheno
 
@@ -13,38 +13,15 @@
 
 Submodules
 ----------
+
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
-   run/index.rst
-
-
-Package Contents
-----------------
-
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   hepi.run.spheno.Input
-   hepi.run.spheno.Runner
-   hepi.run.spheno.SPhenoRunner
-
-
-
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.run.spheno.update_slha
-
+   /autoapi/hepi/run/spheno/run/index
 
 
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
@@ -54,10 +31,31 @@ Attributes
    hepi.run.spheno.get_path
 
 
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.run.spheno.Input
+   hepi.run.spheno.Runner
+   hepi.run.spheno.SPhenoRunner
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   hepi.run.spheno.update_slha
+
+
+Package Contents
+----------------
+
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Input for computation and scans.
 
@@ -110,6 +108,7 @@ Attributes
 
    :vartype update: bool
 
+
    .. py:method:: has_gluino()
 
 
@@ -128,7 +127,6 @@ Attributes
    .. py:method:: has_slepton()
 
 
-
 .. py:function:: update_slha(i)
 
    Updates dependent parameters in Input `i`.
@@ -138,15 +136,16 @@ Attributes
 
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
 
-
    .. py:method:: orders()
 
       List of supported Orders in this runner.
 
 
+
    .. py:method:: get_name()
 
       Returns the name of the runner.
+
 
 
    .. py:method:: get_version()
@@ -158,6 +157,7 @@ Attributes
    .. py:method:: _check_path()
 
       Checks if the passed path is valid.
+
 
 
    .. py:method:: _prepare(p, skip=False, assume_valid=False, **kwargs)
@@ -176,6 +176,7 @@ Attributes
       :type skip: bool, optional
       :param n_jobs: Number of parallel jobs. If None, use all available cores.
       :type n_jobs: int
+
 
 
    .. py:method:: run(params, skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
@@ -204,6 +205,7 @@ Attributes
       :rtype: :obj:`pd.DataFrame`
 
 
+
    .. py:method:: _run(rps, wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
 
       Runs Runner per :class:`RunParams`.
@@ -225,6 +227,7 @@ Attributes
       :rtype: :obj:`list` of int
 
 
+
    .. py:method:: _is_valid(file, p, d, **kwargs)
 
       Verifies that a file is a complete output.
@@ -240,6 +243,7 @@ Attributes
       :rtype: bool
 
 
+
    .. py:method:: parse(outputs, n_jobs=None)
 
           Parses Resummino output files and returns List of Results.
@@ -250,6 +254,7 @@ Attributes
 
           Returns:
               :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+
 
 
 
@@ -264,12 +269,14 @@ Attributes
       :rtype: :class:`Result`
 
 
+
    .. py:method:: get_path()
 
       Get the Runner path.
 
       :returns: current Runner path.
       :rtype: str
+
 
 
    .. py:method:: get_input_dir()
@@ -280,12 +287,14 @@ Attributes
       :rtype: str
 
 
+
    .. py:method:: get_output_dir()
 
       Get the input directory.
 
       :returns: :attr:`out_dir`
       :rtype: str
+
 
 
    .. py:method:: get_pre()
@@ -296,12 +305,14 @@ Attributes
       :rtype: str
 
 
+
    .. py:method:: set_path(p)
 
       Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
 
       :param p: new path.
       :type p: str
+
 
 
    .. py:method:: set_input_dir(indir)
@@ -312,6 +323,7 @@ Attributes
       :type indir: str
 
 
+
    .. py:method:: set_output_dir(outdir, create = True)
 
       Sets the output directory.
@@ -319,6 +331,7 @@ Attributes
       :param outdir: new output directory.
                      create (bool): create directory if not existing.
       :type outdir: str
+
 
 
    .. py:method:: set_pre(ppre)
@@ -332,12 +345,13 @@ Attributes
 
 .. py:class:: SPhenoRunner(path, in_dir = None, out_dir = None, pre=None)
 
-
    Bases: :py:obj:`hepi.run.Runner`
+
 
    .. py:method:: _check_path()
 
       Checks if the passed path is valid.
+
 
 
    .. py:method:: run(slhas, **kwargs)
@@ -357,13 +371,7 @@ Attributes
 
 .. py:data:: run
 
-   
-
 .. py:data:: set_path
 
-   
-
 .. py:data:: get_path
-
-   
 

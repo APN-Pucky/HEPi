@@ -1,24 +1,11 @@
-:py:mod:`hepi.fast`
-===================
+hepi.fast
+=========
 
 .. py:module:: hepi.fast
 
 
-Module Contents
----------------
-
-
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.fast.main
-
-
-
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
@@ -26,14 +13,36 @@ Attributes
    hepi.fast.usd
 
 
-.. py:data:: unv
+Functions
+---------
 
-   
+.. autoapisummary::
+
+   hepi.fast.order_to_string
+   hepi.fast.load_json_with_metadata
+   hepi.fast.replace_macros
+   hepi.fast.main
+
+
+Module Contents
+---------------
+
+.. py:function:: order_to_string(o, json_style=False, no_macros=False)
+
+.. py:function:: load_json_with_metadata(file)
+
+   Load xsec data from json in to something that works within hepi's plotting.
+
+   :param f: readable object, e.g. `open(filepath:str)`.
+   :param dimensions: 1 or 2 currently supported.
+   :type dimensions: int
+
+
+.. py:function:: replace_macros(s)
+
+.. py:data:: unv
 
 .. py:data:: usd
 
-   
-
 .. py:function:: main()
-
 

@@ -1,23 +1,22 @@
-:py:mod:`hepi.run.madgraph.result`
-==================================
+hepi.run.madgraph.result
+========================
 
 .. py:module:: hepi.run.madgraph.result
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
+   hepi.run.madgraph.result.Order
+   hepi.run.madgraph.result.Input
+   hepi.run.madgraph.result.Result
    hepi.run.madgraph.result.MadgraphResult
 
 
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -25,11 +24,165 @@ Functions
    hepi.run.madgraph.result.parse_single
 
 
+Module Contents
+---------------
+
+.. py:class:: Order
+
+   Bases: :py:obj:`enum.IntEnum`
+
+
+   Computation orders.
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+   .. py:attribute:: LO
+      :value: 0
+
+
+      Leading Order
+
+
+   .. py:attribute:: NLO
+      :value: 1
+
+
+      Next-to-Leading Order
+
+
+   .. py:attribute:: NLO_PLUS_NLL
+      :value: 2
+
+
+      Next-to-Leading Order plus Next-to-Leading Logarithms
+
+
+   .. py:attribute:: aNNLO_PLUS_NNLL
+      :value: 3
+
+
+      Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
+
+
+.. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
+
+   Bases: :py:obj:`hepi.util.DictData`
+
+
+   Input for computation and scans.
+
+   :ivar order: LO, NLO or NLO+NLL computation.
+   :vartype order: :class:`Order`
+   :ivar energy: CMS energy in GeV.
+   :vartype energy: int
+   :ivar energyhalf: Halfed `energy`.
+   :vartype energyhalf: int
+   :ivar particle1: PDG identifier of the first final state particle.
+   :vartype particle1: int
+   :ivar particle2: PDG identifier of the second final state particle.
+   :vartype particle2: int
+   :ivar slha: File path of for the base slha.
+               Modified slha files will be used if a scan requires a change of the input.
+   :vartype slha: str
+   :ivar pdf_lo: LO PDF name.
+   :vartype pdf_lo: str
+   :ivar pdf_nlo: NLO PDF name.
+   :vartype pdf_nlo: str
+   :ivar pdfset_lo: LO PDF member/set id.
+   :vartype pdfset_lo: int
+   :ivar pdfset_nlo: NLO PDF member/set id.
+   :vartype pdfset_nlo: int
+   :ivar pdf_lo_id: LO PDF first member/set id.
+   :vartype pdf_lo_id: int
+   :ivar pdf_nlo_id: NLO PDF first member/set id.
+   :vartype pdf_nlo_id: int
+   :ivar mu: central scale factor.
+   :vartype mu: double
+   :ivar mu_f: Factorization scale factor.
+   :vartype mu_f: double
+   :ivar mu_r: Renormalization scale factor.
+   :vartype mu_r: double
+   :ivar precision: Desired numerical relative precision.
+   :vartype precision: double
+   :ivar max_iters: Upper limit on integration iterations.
+   :vartype max_iters: int
+   :ivar invariant_mass: Invariant mass mode 'auto = sqrt((p1+p2)^2)' else value.
+   :vartype invariant_mass: str
+   :ivar pt: Transverse Momentum mode 'auto' or value.
+   :vartype pt: str
+   :ivar result: Result type 'total'/'pt'/'ptj'/'m'.
+   :vartype result: str
+   :ivar id: Set an id of this run.
+   :vartype id: str
+   :ivar model: Path for MadGraph model.
+   :vartype model: str
+   :ivar update: Update dependent `mu` else set to zero.
+
+   :vartype update: bool
+
+
+   .. py:method:: has_gluino()
+
+
+   .. py:method:: has_neutralino()
+
+
+   .. py:method:: has_charginos()
+
+
+   .. py:method:: has_weakino()
+
+
+   .. py:method:: has_squark()
+
+
+   .. py:method:: has_slepton()
+
+
+.. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
+
+   Bases: :py:obj:`hepi.util.DictData`
+
+
+   General result class. All uncertainties are of numerical origin.
+
+   :ivar LO: Leading Order result. Defaults to None.
+   :vartype LO: :obj:`double`
+   :ivar NLO: Next-to-Leading Order result. Defaults to None.
+   :vartype NLO: :obj:`double`
+   :ivar NLO_PLUS_NLL: Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.
+   :vartype NLO_PLUS_NLL: :obj:`double`
+   :ivar K_LO: LO divided by LO.
+   :vartype K_LO: :obj:`double`
+   :ivar K_NLO: NLO divided by LO result.
+   :vartype K_NLO: :obj:`double`
+   :ivar K_NLO_PLUS_NLL: NLO+NLL divided by LO.
+   :vartype K_NLO_PLUS_NLL: :obj:`double`
+   :ivar K_aNNLO_PLUS_NNLL: aNNLO+NNLL divided by LO.
+   :vartype K_aNNLO_PLUS_NNLL: :obj:`double`
+   :ivar NLO_PLUS_NLL_OVER_NLO: NLO+NLL divided by NLO.
+   :vartype NLO_PLUS_NLL_OVER_NLO: :obj:`double`
+   :ivar aNNLO_PLUS_NNLL_OVER_NLO: aNNLO+NNLL divided by NLO.
+
+   :vartype aNNLO_PLUS_NNLL_OVER_NLO: :obj:`double`
+
+   Sets given and computes dependent ``Attributes``.
+
+   :param lo: corresponds to :attr:`LO`.
+   :type lo: :obj:`double`
+   :param nlo: corresponds to :attr:`NLO`.
+   :type nlo: :obj:`double`
+   :param nlo_plus_nll: corresponds to :attr:`NLO_PLUS_NLL`.
+   :type nlo_plus_nll: :obj:`double`
+   :param annlo_plus_nnll: corresponds to :attr:`aNNLO_PLUS_NNLL`.
+   :type annlo_plus_nnll: :obj:`double`
+
 
 .. py:class:: MadgraphResult(lo, nlo)
 
-
    Bases: :py:obj:`hepi.run.Result`
+
 
    MadGraph Result Data.
 
