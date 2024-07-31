@@ -30,7 +30,8 @@ usd = unp.std_devs
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Interpolate data (loaded from json) in the format: \nID | Central value | error down | error up | error pdf down | error pdf up | error scale down | error scale up"
+        description="""Interpolate data (loaded from json) in the format: 
+ID | Central value | error up | error down | error scale up | error scale down | error pdf up | error pdf down """
     )
     parser.add_argument(
         "json", type=str, nargs="*", help="url/file/string/name", default=[]
@@ -42,7 +43,11 @@ def main():
         "-p", "--plot", action="store_true", help="plot listed files", default=False
     )
     parser.add_argument(
-        "-i", "--info", action="store_true", help="show info of listed files", default=False
+        "-i",
+        "--info",
+        action="store_true",
+        help="show info of listed files",
+        default=False,
     )
     parser.add_argument(
         "-s",
@@ -217,7 +222,7 @@ def main():
                 interpolator=interpolator,
                 pre=np.log,
                 post=np.exp,
-                interpolate_lower_uncertainty=False
+                interpolate_lower_uncertainty=False,
             )
             f_combined = ip.interpolate(
                 *dat,
@@ -225,7 +230,7 @@ def main():
                 interpolator=interpolator,
                 pre=np.log,
                 post=np.exp,
-                interpolate_lower_uncertainty=False
+                interpolate_lower_uncertainty=False,
             )
             if so + "_PDF" in df.columns:
                 f_pdf = ip.interpolate(
@@ -234,7 +239,7 @@ def main():
                     interpolator=interpolator,
                     pre=np.log,
                     post=np.exp,
-                    interpolate_lower_uncertainty=False
+                    interpolate_lower_uncertainty=False,
                 )
             else:
                 f_pdf = f_noerr
@@ -245,7 +250,7 @@ def main():
                     interpolator=interpolator,
                     pre=np.log,
                     post=np.exp,
-                    interpolate_lower_uncertainty=False
+                    interpolate_lower_uncertainty=False,
                 )
             else:
                 f_scale = f_noerr
@@ -253,6 +258,7 @@ def main():
             fs = [*fs, (f_noerr, f_combined, f_pdf, f_scale)]
     if args.plot:
         from matplotlib import pyplot as plt
+
         if args.output is not None:
             plt.savefig(args.output)
         plt.show()
@@ -270,12 +276,13 @@ def main():
                             i,
                             *arg,
                             vn,
-                            vn - unv(vc) - usd(vc),
-                            vn - unv(vc) + usd(vc),
-                            vn - unv(vs) - usd(vs),
-                            vn - unv(vs) + usd(vs),
-                            vn - unv(vp) - usd(vp),
-                            vn - unv(vp) + usd(vp)
+                            -vn + unv(vc) + usd(vc),
+                            -vn + unv(vc) - usd(vc),
+                            -vn + unv(vs) + usd(vs),
+                            -vn + unv(vs) - usd(vs),
+                            -vn + unv(vp) + usd(vp),
+                            -vn + unv(vp) - usd(vp),
                         )
             except KeyboardInterrupt:
+                # stops the inifinite input loop
                 pass
