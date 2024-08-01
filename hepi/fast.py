@@ -30,7 +30,7 @@ usd = unp.std_devs
 
 def main():
     parser = argparse.ArgumentParser(
-        description="""Interpolate data (loaded from json) in the format: 
+        description="""Interpolate data (loaded from json) in the format:
 ID | Central value | error up | error down | error scale up | error scale down | error pdf up | error pdf down """
     )
     parser.add_argument(
