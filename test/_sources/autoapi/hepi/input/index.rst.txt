@@ -23,8 +23,6 @@ Classes
 
 .. autoapisummary::
 
-   hepi.input.Order
-   hepi.input.DictData
    hepi.input.Input
 
 
@@ -33,10 +31,6 @@ Functions
 
 .. autoapisummary::
 
-   hepi.input.order_to_string
-   hepi.input.replace_macros
-   hepi.input.xsec_to_order
-   hepi.input.lhapdf_name_to_id
    hepi.input.get_input_dir
    hepi.input.get_output_dir
    hepi.input.get_pre
@@ -68,74 +62,6 @@ Functions
 
 Module Contents
 ---------------
-
-.. py:class:: Order
-
-   Bases: :py:obj:`enum.IntEnum`
-
-
-   Computation orders.
-
-   Initialize self.  See help(type(self)) for accurate signature.
-
-
-   .. py:attribute:: LO
-      :value: 0
-
-
-      Leading Order
-
-
-   .. py:attribute:: NLO
-      :value: 1
-
-
-      Next-to-Leading Order
-
-
-   .. py:attribute:: NLO_PLUS_NLL
-      :value: 2
-
-
-      Next-to-Leading Order plus Next-to-Leading Logarithms
-
-
-   .. py:attribute:: aNNLO_PLUS_NNLL
-      :value: 3
-
-
-      Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
-
-
-.. py:function:: order_to_string(o, json_style=False, no_macros=False)
-
-.. py:function:: replace_macros(s)
-
-.. py:function:: xsec_to_order(s)
-
-.. py:class:: DictData
-
-   .. py:method:: __str__()
-
-      Returns attributes as dict as string
-
-
-
-.. py:function:: lhapdf_name_to_id(name)
-
-   Converts a LHAPDF name to the sets id.
-
-   :param name: LHAPDF set name.
-   :type name: str
-
-   :returns: id of the LHAPDF set.
-   :rtype: int
-
-   .. rubric:: Examples
-
-   >>> lhapdf_name_to_id("CT14lo")
-   13200
-
 
 .. py:data:: in_dir
    :value: './input/'
@@ -259,6 +185,74 @@ Module Contents
    :ivar update: Update dependent `mu` else set to zero.
 
    :vartype update: bool
+
+
+   .. py:attribute:: order
+
+
+   .. py:attribute:: energy
+
+
+   .. py:attribute:: energyhalf
+
+
+   .. py:attribute:: particle1
+
+
+   .. py:attribute:: particle2
+
+
+   .. py:attribute:: slha
+
+
+   .. py:attribute:: pdf_lo
+
+
+   .. py:attribute:: pdfset_lo
+
+
+   .. py:attribute:: pdf_nlo
+
+
+   .. py:attribute:: pdfset_nlo
+
+
+   .. py:attribute:: pdf_lo_id
+
+
+   .. py:attribute:: pdf_nlo_id
+
+
+   .. py:attribute:: mu_f
+
+
+   .. py:attribute:: mu_r
+
+
+   .. py:attribute:: precision
+
+
+   .. py:attribute:: max_iters
+
+
+   .. py:attribute:: invariant_mass
+
+
+   .. py:attribute:: pt
+
+
+   .. py:attribute:: result
+
+
+   .. py:attribute:: id
+
+
+   .. py:attribute:: model
+
+
+   .. py:attribute:: mu
+      :value: 0.0
+
 
 
    .. py:method:: has_gluino()

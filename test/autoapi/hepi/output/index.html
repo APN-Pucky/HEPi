@@ -45,7 +45,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-78-gee605255
+                0.2.19-129-g3ff945be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -144,26 +144,10 @@
 </tbody>
 </table>
 </section>
-<section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.output.Order" title="hepi.output.Order"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Order</span></code></a></p></td>
-<td><p>Computation orders.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.output.order_to_string" title="hepi.output.order_to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">order_to_string</span></code></a>(o[, json_style, no_macros])</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.output.DL2DF" title="hepi.output.DL2DF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DL2DF</span></code></a>(ld)</p></td>
-<td><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p></td>
-</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hepi.output.write_twiki" title="hepi.output.write_twiki"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_twiki</span></code></a>(rs_dl, mass, main)</p></td>
 <td><p></p></td>
 </tr>
@@ -187,65 +171,6 @@
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="hepi.output.Order">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.output.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><a class="reference internal" href="../../../_modules/hepi/order.html#Order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.output.Order" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
-<p>Computation orders.</p>
-<p>Initialize self.  See help(type(self)) for accurate signature.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="hepi.output.Order.LO">
-<span class="sig-name descname"><span class="pre">LO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#hepi.output.Order.LO" title="Link to this definition"></a></dt>
-<dd><p>Leading Order</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="hepi.output.Order.NLO">
-<span class="sig-name descname"><span class="pre">NLO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#hepi.output.Order.NLO" title="Link to this definition"></a></dt>
-<dd><p>Next-to-Leading Order</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="hepi.output.Order.NLO_PLUS_NLL">
-<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#hepi.output.Order.NLO_PLUS_NLL" title="Link to this definition"></a></dt>
-<dd><p>Next-to-Leading Order plus Next-to-Leading Logarithms</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="hepi.output.Order.aNNLO_PLUS_NNLL">
-<span class="sig-name descname"><span class="pre">aNNLO_PLUS_NNLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#hepi.output.Order.aNNLO_PLUS_NNLL" title="Link to this definition"></a></dt>
-<dd><p>Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="hepi.output.order_to_string">
-<span class="sig-prename descclassname"><span class="pre">hepi.output.</span></span><span class="sig-name descname"><span class="pre">order_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_macros</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/order.html#order_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.output.order_to_string" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>o</strong> (<a class="reference internal" href="#hepi.output.Order" title="hepi.output.Order"><em>Order</em></a>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="hepi.output.DL2DF">
-<span class="sig-prename descclassname"><span class="pre">hepi.output.</span></span><span class="sig-name descname"><span class="pre">DL2DF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ld</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/util.html#DL2DF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.output.DL2DF" title="Link to this definition"></a></dt>
-<dd><p>Convert a <cite>dict</cite> of <cite>list`s to a `pandas.DataFrame</cite>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ld</strong> (<em>dict</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>pandas.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.output.unv">
 <span class="sig-prename descclassname"><span class="pre">hepi.output.</span></span><span class="sig-name descname"><span class="pre">unv</span></span><a class="reference internal" href="../../../_modules/hepi/output.html#unv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.output.unv" title="Link to this definition"></a></dt>

@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-78-gee605255
+                0.2.19-129-g3ff945be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -152,10 +152,22 @@ class ResumminoResult(Result):
             rnloq (:obj:`double`): corresponds to :attr:`RNLOQ`.
         &quot;&quot;&quot;
         Result.__init__(self, lo, nlo, nlo_plus_nll, annlo_plus_nnll)
-        self.VNLO = vnlo
-        self.P_PLUS_K = p_plus_k
-        self.RNLOG = rnlog
-        self.RNLOQ = rnloq
+<div class="viewcode-block" id="ResumminoResult.VNLO">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult.VNLO">[docs]</a>
+        self.VNLO = vnlo</div>
+
+<div class="viewcode-block" id="ResumminoResult.P_PLUS_K">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult.P_PLUS_K">[docs]</a>
+        self.P_PLUS_K = p_plus_k</div>
+
+<div class="viewcode-block" id="ResumminoResult.RNLOG">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult.RNLOG">[docs]</a>
+        self.RNLOG = rnlog</div>
+
+<div class="viewcode-block" id="ResumminoResult.RNLOQ">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult.RNLOQ">[docs]</a>
+        self.RNLOQ = rnloq</div>
+
         if not (vnlo is None or p_plus_k is None):
             self.VNLO_PLUS_P_PLUS_K = self.VNLO + self.P_PLUS_K
         else:
@@ -172,7 +184,7 @@ class ResumminoResult(Result):
 
 
 <div class="viewcode-block" id="is_valid">
-<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.result.is_valid">[docs]</a>
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.is_valid">[docs]</a>
 def is_valid(file: str, p: Input, d, **kwargs) -&gt; bool:
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
@@ -230,7 +242,7 @@ def is_valid(file: str, p: Input, d, **kwargs) -&gt; bool:
 
 
 <div class="viewcode-block" id="parse_single">
-<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/run/index.html#hepi.run.resummino.result.parse_single">[docs]</a>
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.parse_single">[docs]</a>
 def parse_single(file: str) -&gt; ResumminoResult:
     &quot;&quot;&quot;
     Extracts LO, NLO and NLO+NLL from Resummino output file.

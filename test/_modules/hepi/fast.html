@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-78-gee605255
+                0.2.19-129-g3ff945be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -146,7 +146,8 @@ usd = unp.std_devs</div>
 <a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.main">[docs]</a>
 def main():
     parser = argparse.ArgumentParser(
-        description=&quot;Interpolate data (loaded from json) in the format: \nID | Central value | error down | error up | error pdf down | error pdf up | error scale down | error scale up&quot;
+        description=&quot;&quot;&quot;Interpolate data (loaded from json) in the format:
+ID | Central value | error up | error down | error scale up | error scale down | error pdf up | error pdf down &quot;&quot;&quot;
     )
     parser.add_argument(
         &quot;json&quot;, type=str, nargs=&quot;*&quot;, help=&quot;url/file/string/name&quot;, default=[]
@@ -158,7 +159,11 @@ def main():
         &quot;-p&quot;, &quot;--plot&quot;, action=&quot;store_true&quot;, help=&quot;plot listed files&quot;, default=False
     )
     parser.add_argument(
-        &quot;-i&quot;, &quot;--info&quot;, action=&quot;store_true&quot;, help=&quot;show info of listed files&quot;, default=False
+        &quot;-i&quot;,
+        &quot;--info&quot;,
+        action=&quot;store_true&quot;,
+        help=&quot;show info of listed files&quot;,
+        default=False,
     )
     parser.add_argument(
         &quot;-s&quot;,
@@ -333,7 +338,7 @@ def main():
                 interpolator=interpolator,
                 pre=np.log,
                 post=np.exp,
-                interpolate_lower_uncertainty=False
+                interpolate_lower_uncertainty=False,
             )
             f_combined = ip.interpolate(
                 *dat,
@@ -341,7 +346,7 @@ def main():
                 interpolator=interpolator,
                 pre=np.log,
                 post=np.exp,
-                interpolate_lower_uncertainty=False
+                interpolate_lower_uncertainty=False,
             )
             if so + &quot;_PDF&quot; in df.columns:
                 f_pdf = ip.interpolate(
@@ -350,7 +355,7 @@ def main():
                     interpolator=interpolator,
                     pre=np.log,
                     post=np.exp,
-                    interpolate_lower_uncertainty=False
+                    interpolate_lower_uncertainty=False,
                 )
             else:
                 f_pdf = f_noerr
@@ -361,7 +366,7 @@ def main():
                     interpolator=interpolator,
                     pre=np.log,
                     post=np.exp,
-                    interpolate_lower_uncertainty=False
+                    interpolate_lower_uncertainty=False,
                 )
             else:
                 f_scale = f_noerr
@@ -369,6 +374,7 @@ def main():
             fs = [*fs, (f_noerr, f_combined, f_pdf, f_scale)]
     if args.plot:
         from matplotlib import pyplot as plt
+
         if args.output is not None:
             plt.savefig(args.output)
         plt.show()
@@ -386,14 +392,15 @@ def main():
                             i,
                             *arg,
                             vn,
-                            vn - unv(vc) - usd(vc),
-                            vn - unv(vc) + usd(vc),
-                            vn - unv(vs) - usd(vs),
-                            vn - unv(vs) + usd(vs),
-                            vn - unv(vp) - usd(vp),
-                            vn - unv(vp) + usd(vp)
+                            -vn + unv(vc) + usd(vc),
+                            -vn + unv(vc) - usd(vc),
+                            -vn + unv(vs) + usd(vs),
+                            -vn + unv(vs) - usd(vs),
+                            -vn + unv(vp) + usd(vp),
+                            -vn + unv(vp) - usd(vp),
                         )
             except KeyboardInterrupt:
+                # stops the inifinite input loop
                 pass</div>
 
 </pre></div>

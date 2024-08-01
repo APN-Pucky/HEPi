@@ -45,7 +45,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-78-gee605255
+                0.2.19-129-g3ff945be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -149,10 +149,7 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.DictData" title="hepi.results.DictData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DictData</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Result</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.results.Result" title="hepi.results.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Result</span></code></a></p></td>
 <td><p>General result class. All uncertainties are of numerical origin.</p></td>
 </tr>
 </tbody>
@@ -200,17 +197,6 @@
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="hepi.results.DictData">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">DictData</span></span><a class="reference internal" href="../../../_modules/hepi/util.html#DictData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.DictData" title="Link to this definition"></a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="hepi.results.DictData.__str__">
-<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/util.html#DictData.__str__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.DictData.__str__" title="Link to this definition"></a></dt>
-<dd><p>Returns attributes as dict as string</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py data">
 <dt class="sig sig-object py" id="hepi.results.required_numerical_uncertainty_factor">
 <span class="sig-prename descclassname"><span class="pre">hepi.results.</span></span><span class="sig-name descname"><span class="pre">required_numerical_uncertainty_factor</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="reference internal" href="../../../_modules/hepi/results.html#required_numerical_uncertainty_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.required_numerical_uncertainty_factor" title="Link to this definition"></a></dt>
@@ -250,13 +236,33 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">LO</span></code>.</p></li>
-<li><p><strong>nlo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO</span></code>.</p></li>
-<li><p><strong>nlo_plus_nll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO_PLUS_NLL</span></code>.</p></li>
-<li><p><strong>annlo_plus_nnll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">aNNLO_PLUS_NNLL</span></code>.</p></li>
+<li><p><strong>lo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <a class="reference internal" href="#hepi.results.Result.LO" title="hepi.results.Result.LO"><code class="xref py py-attr docutils literal notranslate"><span class="pre">LO</span></code></a>.</p></li>
+<li><p><strong>nlo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <a class="reference internal" href="#hepi.results.Result.NLO" title="hepi.results.Result.NLO"><code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO</span></code></a>.</p></li>
+<li><p><strong>nlo_plus_nll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <a class="reference internal" href="#hepi.results.Result.NLO_PLUS_NLL" title="hepi.results.Result.NLO_PLUS_NLL"><code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO_PLUS_NLL</span></code></a>.</p></li>
+<li><p><strong>annlo_plus_nnll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <a class="reference internal" href="#hepi.results.Result.aNNLO_PLUS_NNLL" title="hepi.results.Result.aNNLO_PLUS_NNLL"><code class="xref py py-attr docutils literal notranslate"><span class="pre">aNNLO_PLUS_NNLL</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.results.Result.LO">
+<span class="sig-name descname"><span class="pre">LO</span></span><a class="reference internal" href="../../../_modules/hepi/results.html#Result.LO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.Result.LO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.results.Result.NLO">
+<span class="sig-name descname"><span class="pre">NLO</span></span><a class="reference internal" href="../../../_modules/hepi/results.html#Result.NLO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.Result.NLO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.results.Result.NLO_PLUS_NLL">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><a class="reference internal" href="../../../_modules/hepi/results.html#Result.NLO_PLUS_NLL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.Result.NLO_PLUS_NLL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.results.Result.aNNLO_PLUS_NNLL">
+<span class="sig-name descname"><span class="pre">aNNLO_PLUS_NNLL</span></span><a class="reference internal" href="../../../_modules/hepi/results.html#Result.aNNLO_PLUS_NNLL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.results.Result.aNNLO_PLUS_NNLL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py function">

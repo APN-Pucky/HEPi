@@ -24,7 +24,6 @@ Classes
 
 .. autoapisummary::
 
-   hepi.results.DictData
    hepi.results.Result
 
 
@@ -48,14 +47,6 @@ Functions
 
 Module Contents
 ---------------
-
-.. py:class:: DictData
-
-   .. py:method:: __str__()
-
-      Returns attributes as dict as string
-
-
 
 .. py:data:: required_numerical_uncertainty_factor
    :value: 5
@@ -102,6 +93,18 @@ Module Contents
    :type nlo_plus_nll: :obj:`double`
    :param annlo_plus_nnll: corresponds to :attr:`aNNLO_PLUS_NNLL`.
    :type annlo_plus_nnll: :obj:`double`
+
+
+   .. py:attribute:: LO
+
+
+   .. py:attribute:: NLO
+
+
+   .. py:attribute:: NLO_PLUS_NLL
+
+
+   .. py:attribute:: aNNLO_PLUS_NNLL
 
 
 .. py:function:: pdf_errors(li, dl, ordernames=None, confidence_level=90, n_jobs=None)

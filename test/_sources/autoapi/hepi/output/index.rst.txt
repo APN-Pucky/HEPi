@@ -14,21 +14,11 @@ Attributes
    hepi.output.tex_table
 
 
-Classes
--------
-
-.. autoapisummary::
-
-   hepi.output.Order
-
-
 Functions
 ---------
 
 .. autoapisummary::
 
-   hepi.output.order_to_string
-   hepi.output.DL2DF
    hepi.output.write_twiki
    hepi.output.write_latex_table_transposed_header
    hepi.output.write_latex_table_transposed
@@ -39,51 +29,6 @@ Functions
 
 Module Contents
 ---------------
-
-.. py:class:: Order
-
-   Bases: :py:obj:`enum.IntEnum`
-
-
-   Computation orders.
-
-   Initialize self.  See help(type(self)) for accurate signature.
-
-
-   .. py:attribute:: LO
-      :value: 0
-
-
-      Leading Order
-
-
-   .. py:attribute:: NLO
-      :value: 1
-
-
-      Next-to-Leading Order
-
-
-   .. py:attribute:: NLO_PLUS_NLL
-      :value: 2
-
-
-      Next-to-Leading Order plus Next-to-Leading Logarithms
-
-
-   .. py:attribute:: aNNLO_PLUS_NNLL
-      :value: 3
-
-
-      Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
-
-
-.. py:function:: order_to_string(o, json_style=False, no_macros=False)
-
-.. py:function:: DL2DF(ld)
-
-   Convert a `dict` of `list`s to a `pandas.DataFrame`.
-
 
 .. py:data:: unv
 

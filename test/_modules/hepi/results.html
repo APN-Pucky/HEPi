@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-78-gee605255
+                0.2.19-129-g3ff945be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -136,7 +136,7 @@ usd = unp.std_devs</div>
 
 
 <div class="viewcode-block" id="Result">
-<a class="viewcode-back" href="../../autoapi/hepi/run/run/index.html#hepi.Result">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Result">[docs]</a>
 class Result(DictData):
     &quot;&quot;&quot;
     General result class. All uncertainties are of numerical origin.
@@ -163,10 +163,22 @@ class Result(DictData):
             nlo_plus_nll (:obj:`double`): corresponds to :attr:`NLO_PLUS_NLL`.
             annlo_plus_nnll (:obj:`double`): corresponds to :attr:`aNNLO_PLUS_NNLL`.
         &quot;&quot;&quot;
-        self.LO = lo
-        self.NLO = nlo
-        self.NLO_PLUS_NLL = nlo_plus_nll
-        self.aNNLO_PLUS_NNLL = annlo_plus_nnll
+<div class="viewcode-block" id="Result.LO">
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result.LO">[docs]</a>
+        self.LO = lo</div>
+
+<div class="viewcode-block" id="Result.NLO">
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result.NLO">[docs]</a>
+        self.NLO = nlo</div>
+
+<div class="viewcode-block" id="Result.NLO_PLUS_NLL">
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result.NLO_PLUS_NLL">[docs]</a>
+        self.NLO_PLUS_NLL = nlo_plus_nll</div>
+
+<div class="viewcode-block" id="Result.aNNLO_PLUS_NNLL">
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result.aNNLO_PLUS_NNLL">[docs]</a>
+        self.aNNLO_PLUS_NNLL = annlo_plus_nnll</div>
+
         if lo is not None and lo != 0:
             self.K_LO = lo / lo
         else:
@@ -513,7 +525,7 @@ def combine_error(dl: dict, ordername=&quot;LO&quot;):
 
 
 <div class="viewcode-block" id="asym_to_sym_error">
-<a class="viewcode-back" href="../../autoapi/hepi/run/nnllfast/result/index.html#hepi.asym_to_sym_error">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.asym_to_sym_error">[docs]</a>
 def asym_to_sym_error(central,errminus,errplus):
     return ufloat(
         central + (errplus + errminus) / 2.0,
@@ -522,7 +534,7 @@ def asym_to_sym_error(central,errminus,errplus):
 
 
 <div class="viewcode-block" id="add_errors">
-<a class="viewcode-back" href="../../autoapi/hepi/run/nnllfast/result/index.html#hepi.add_errors">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.add_errors">[docs]</a>
 def add_errors(error1,error2):
     return (error1**2 + error2**2)**0.5</div>
 

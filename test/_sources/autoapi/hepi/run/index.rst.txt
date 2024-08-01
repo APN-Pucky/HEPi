@@ -115,6 +115,74 @@ Package Contents
    :vartype update: bool
 
 
+   .. py:attribute:: order
+
+
+   .. py:attribute:: energy
+
+
+   .. py:attribute:: energyhalf
+
+
+   .. py:attribute:: particle1
+
+
+   .. py:attribute:: particle2
+
+
+   .. py:attribute:: slha
+
+
+   .. py:attribute:: pdf_lo
+
+
+   .. py:attribute:: pdfset_lo
+
+
+   .. py:attribute:: pdf_nlo
+
+
+   .. py:attribute:: pdfset_nlo
+
+
+   .. py:attribute:: pdf_lo_id
+
+
+   .. py:attribute:: pdf_nlo_id
+
+
+   .. py:attribute:: mu_f
+
+
+   .. py:attribute:: mu_r
+
+
+   .. py:attribute:: precision
+
+
+   .. py:attribute:: max_iters
+
+
+   .. py:attribute:: invariant_mass
+
+
+   .. py:attribute:: pt
+
+
+   .. py:attribute:: result
+
+
+   .. py:attribute:: id
+
+
+   .. py:attribute:: model
+
+
+   .. py:attribute:: mu
+      :value: 0.0
+
+
+
    .. py:method:: has_gluino()
 
 
@@ -234,6 +302,18 @@ Package Contents
    :type annlo_plus_nnll: :obj:`double`
 
 
+   .. py:attribute:: LO
+
+
+   .. py:attribute:: NLO
+
+
+   .. py:attribute:: NLO_PLUS_NLL
+
+
+   .. py:attribute:: aNNLO_PLUS_NNLL
+
+
 .. py:function:: DL2DF(ld)
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
@@ -301,7 +381,25 @@ Package Contents
    Abstract class that is similar to a dictionary but with fixed keys.
 
 
+   .. py:attribute:: name
+
+
+   .. py:attribute:: skip
+
+
+   .. py:attribute:: in_file
+
+
+   .. py:attribute:: out_file
+
+
+   .. py:attribute:: execute
+
+
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
+
+   .. py:attribute:: path
+
 
    .. py:method:: orders()
 

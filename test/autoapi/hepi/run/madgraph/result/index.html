@@ -45,7 +45,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-78-gee605255
+                0.2.19-129-g3ff945be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
@@ -145,16 +145,7 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.madgraph.result.Order" title="hepi.run.madgraph.result.Order"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Order</span></code></a></p></td>
-<td><p>Computation orders.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.run.madgraph.result.Input" title="hepi.run.madgraph.result.Input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code></a></p></td>
-<td><p>Input for computation and scans.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.madgraph.result.Result" title="hepi.run.madgraph.result.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Result</span></code></a></p></td>
-<td><p>General result class. All uncertainties are of numerical origin.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.run.madgraph.result.MadgraphResult" title="hepi.run.madgraph.result.MadgraphResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MadgraphResult</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.madgraph.result.MadgraphResult" title="hepi.run.madgraph.result.MadgraphResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MadgraphResult</span></code></a></p></td>
 <td><p>MadGraph Result Data.</p></td>
 </tr>
 </tbody>
@@ -176,179 +167,6 @@
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Order">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.madgraph.result.</span></span><span class="sig-name descname"><span class="pre">Order</span></span><a class="reference internal" href="../../../../../_modules/hepi/order.html#Order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.Order" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
-<p>Computation orders.</p>
-<p>Initialize self.  See help(type(self)) for accurate signature.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Order.LO">
-<span class="sig-name descname"><span class="pre">LO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#hepi.run.madgraph.result.Order.LO" title="Link to this definition"></a></dt>
-<dd><p>Leading Order</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Order.NLO">
-<span class="sig-name descname"><span class="pre">NLO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#hepi.run.madgraph.result.Order.NLO" title="Link to this definition"></a></dt>
-<dd><p>Next-to-Leading Order</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Order.NLO_PLUS_NLL">
-<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#hepi.run.madgraph.result.Order.NLO_PLUS_NLL" title="Link to this definition"></a></dt>
-<dd><p>Next-to-Leading Order plus Next-to-Leading Logarithms</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Order.aNNLO_PLUS_NNLL">
-<span class="sig-name descname"><span class="pre">aNNLO_PLUS_NNLL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#hepi.run.madgraph.result.Order.aNNLO_PLUS_NNLL" title="Link to this definition"></a></dt>
-<dd><p>Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Input">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.madgraph.result.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdf_nlo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdfset_nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invariant_mass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'total'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/input.html#Input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.Input" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../../../util/index.html#hepi.util.DictData" title="hepi.util.DictData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.util.DictData</span></code></a></p>
-<p>Input for computation and scans.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>order</strong> (<a class="reference internal" href="#hepi.run.madgraph.result.Order" title="hepi.run.madgraph.result.Order"><code class="xref py py-class docutils literal notranslate"><span class="pre">Order</span></code></a>) – LO, NLO or NLO+NLL computation.</p></li>
-<li><p><strong>energy</strong> (<em>int</em>) – CMS energy in GeV.</p></li>
-<li><p><strong>energyhalf</strong> (<em>int</em>) – Halfed <cite>energy</cite>.</p></li>
-<li><p><strong>particle1</strong> (<em>int</em>) – PDG identifier of the first final state particle.</p></li>
-<li><p><strong>particle2</strong> (<em>int</em>) – PDG identifier of the second final state particle.</p></li>
-<li><p><strong>slha</strong> (<em>str</em>) – File path of for the base slha.
-Modified slha files will be used if a scan requires a change of the input.</p></li>
-<li><p><strong>pdf_lo</strong> (<em>str</em>) – LO PDF name.</p></li>
-<li><p><strong>pdf_nlo</strong> (<em>str</em>) – NLO PDF name.</p></li>
-<li><p><strong>pdfset_lo</strong> (<em>int</em>) – LO PDF member/set id.</p></li>
-<li><p><strong>pdfset_nlo</strong> (<em>int</em>) – NLO PDF member/set id.</p></li>
-<li><p><strong>pdf_lo_id</strong> (<em>int</em>) – LO PDF first member/set id.</p></li>
-<li><p><strong>pdf_nlo_id</strong> (<em>int</em>) – NLO PDF first member/set id.</p></li>
-<li><p><strong>mu</strong> (<em>double</em>) – central scale factor.</p></li>
-<li><p><strong>mu_f</strong> (<em>double</em>) – Factorization scale factor.</p></li>
-<li><p><strong>mu_r</strong> (<em>double</em>) – Renormalization scale factor.</p></li>
-<li><p><strong>precision</strong> (<em>double</em>) – Desired numerical relative precision.</p></li>
-<li><p><strong>max_iters</strong> (<em>int</em>) – Upper limit on integration iterations.</p></li>
-<li><p><strong>invariant_mass</strong> (<em>str</em>) – Invariant mass mode ‘auto = sqrt((p1+p2)^2)’ else value.</p></li>
-<li><p><strong>pt</strong> (<em>str</em>) – Transverse Momentum mode ‘auto’ or value.</p></li>
-<li><p><strong>result</strong> (<em>str</em>) – Result type ‘total’/’pt’/’ptj’/’m’.</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – Set an id of this run.</p></li>
-<li><p><strong>model</strong> (<em>str</em>) – Path for MadGraph model.</p></li>
-<li><p><strong>update</strong> (<em>bool</em>) – Update dependent <cite>mu</cite> else set to zero.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Parameters<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>order</strong> (<a class="reference internal" href="../../../order/index.html#hepi.order.Order" title="hepi.order.Order"><em>hepi.order.Order</em></a>)</p></li>
-<li><p><strong>energy</strong> (<em>float</em>)</p></li>
-<li><p><strong>particle1</strong> (<em>int</em>)</p></li>
-<li><p><strong>particle2</strong> (<em>int</em>)</p></li>
-<li><p><strong>slha</strong> (<em>str</em>)</p></li>
-<li><p><strong>pdf_lo</strong> (<em>str</em>)</p></li>
-<li><p><strong>pdf_nlo</strong> (<em>str</em>)</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Input.has_gluino">
-<span class="sig-name descname"><span class="pre">has_gluino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/input.html#Input.has_gluino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.Input.has_gluino" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Input.has_neutralino">
-<span class="sig-name descname"><span class="pre">has_neutralino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/input.html#Input.has_neutralino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.Input.has_neutralino" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Input.has_charginos">
-<span class="sig-name descname"><span class="pre">has_charginos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/input.html#Input.has_charginos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.Input.has_charginos" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Input.has_weakino">
-<span class="sig-name descname"><span class="pre">has_weakino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/input.html#Input.has_weakino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.Input.has_weakino" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Input.has_squark">
-<span class="sig-name descname"><span class="pre">has_squark</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/input.html#Input.has_squark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.Input.has_squark" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Input.has_slepton">
-<span class="sig-name descname"><span class="pre">has_slepton</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/input.html#Input.has_slepton"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.Input.has_slepton" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="hepi.run.madgraph.result.Result">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.madgraph.result.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annlo_plus_nnll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/results.html#Result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.Result" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../../../util/index.html#hepi.util.DictData" title="hepi.util.DictData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.util.DictData</span></code></a></p>
-<p>General result class. All uncertainties are of numerical origin.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>LO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Leading Order result. Defaults to None.</p></li>
-<li><p><strong>NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Next-to-Leading Order result. Defaults to None.</p></li>
-<li><p><strong>NLO_PLUS_NLL</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.</p></li>
-<li><p><strong>K_LO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – LO divided by LO.</p></li>
-<li><p><strong>K_NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – NLO divided by LO result.</p></li>
-<li><p><strong>K_NLO_PLUS_NLL</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – NLO+NLL divided by LO.</p></li>
-<li><p><strong>K_aNNLO_PLUS_NNLL</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – aNNLO+NNLL divided by LO.</p></li>
-<li><p><strong>NLO_PLUS_NLL_OVER_NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – NLO+NLL divided by NLO.</p></li>
-<li><p><strong>aNNLO_PLUS_NNLL_OVER_NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – aNNLO+NNLL divided by NLO.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Sets given and computes dependent <code class="docutils literal notranslate"><span class="pre">Attributes</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>lo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">LO</span></code>.</p></li>
-<li><p><strong>nlo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO</span></code>.</p></li>
-<li><p><strong>nlo_plus_nll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO_PLUS_NLL</span></code>.</p></li>
-<li><p><strong>annlo_plus_nnll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">aNNLO_PLUS_NNLL</span></code>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="hepi.run.madgraph.result.MadgraphResult">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.madgraph.result.</span></span><span class="sig-name descname"><span class="pre">MadgraphResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/madgraph/result.html#MadgraphResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.madgraph.result.MadgraphResult" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../index.html#hepi.run.Result" title="hepi.run.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.run.Result</span></code></a></p>
@@ -364,7 +182,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p></li>
-<li><p><strong>p</strong> (<a class="reference internal" href="../../../index.html#id29" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Input parameters.</p></li>
+<li><p><strong>p</strong> (<a class="reference internal" href="../../../index.html#id73" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Input parameters.</p></li>
 <li><p><strong>d</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Param dictionary.</p></li>
 </ul>
 </dd>

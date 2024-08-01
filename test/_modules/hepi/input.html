@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-78-gee605255
+                0.2.19-129-g3ff945be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -136,7 +136,7 @@ pre = &quot;nice -n 5&quot;</div>
 
 
 <div class="viewcode-block" id="get_input_dir">
-<a class="viewcode-back" href="../../autoapi/hepi/run/run/index.html#hepi.get_input_dir">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_input_dir">[docs]</a>
 def get_input_dir():
     &quot;&quot;&quot;
     Get the input directory.
@@ -150,7 +150,7 @@ def get_input_dir():
 
 
 <div class="viewcode-block" id="get_output_dir">
-<a class="viewcode-back" href="../../autoapi/hepi/run/run/index.html#hepi.get_output_dir">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_output_dir">[docs]</a>
 def get_output_dir():
     &quot;&quot;&quot;
     Get the output directory.
@@ -165,7 +165,7 @@ def get_output_dir():
 
 
 <div class="viewcode-block" id="get_pre">
-<a class="viewcode-back" href="../../autoapi/hepi/run/run/index.html#hepi.get_pre">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.get_pre">[docs]</a>
 def get_pre():
     &quot;&quot;&quot;
     Gets the command prefix.
@@ -224,7 +224,7 @@ def set_pre(ppre):
 
 
 <div class="viewcode-block" id="Input">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input">[docs]</a>
 class Input(DictData):
     &quot;&quot;&quot;
     Input for computation and scans.
@@ -279,65 +279,131 @@ class Input(DictData):
         model=&quot;&quot;,
         update=True,
     ):
-        self.order = order
-        self.energy = energy
-        self.energyhalf = energy / 2.0
-        self.particle1 = particle1
-        self.particle2 = particle2
-        self.slha = slha
-        self.pdf_lo = pdf_lo
-        self.pdfset_lo = pdfset_lo
-        self.pdf_nlo = pdf_nlo
-        self.pdfset_nlo = pdfset_nlo
-        self.pdf_lo_id = lhapdf_name_to_id(pdf_lo)
-        self.pdf_nlo_id = lhapdf_name_to_id(pdf_nlo)
-        self.mu_f = mu_f
-        self.mu_r = mu_r
-        self.precision = precision
-        self.max_iters = max_iters
-        self.invariant_mass = invariant_mass
-        self.pt = pt
-        self.result = result
-        self.id = id
-        self.model = model
-        self.mu = 0.0
+<div class="viewcode-block" id="Input.order">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.order">[docs]</a>
+        self.order = order</div>
+
+<div class="viewcode-block" id="Input.energy">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.energy">[docs]</a>
+        self.energy = energy</div>
+
+<div class="viewcode-block" id="Input.energyhalf">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.energyhalf">[docs]</a>
+        self.energyhalf = energy / 2.0</div>
+
+<div class="viewcode-block" id="Input.particle1">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.particle1">[docs]</a>
+        self.particle1 = particle1</div>
+
+<div class="viewcode-block" id="Input.particle2">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.particle2">[docs]</a>
+        self.particle2 = particle2</div>
+
+<div class="viewcode-block" id="Input.slha">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.slha">[docs]</a>
+        self.slha = slha</div>
+
+<div class="viewcode-block" id="Input.pdf_lo">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.pdf_lo">[docs]</a>
+        self.pdf_lo = pdf_lo</div>
+
+<div class="viewcode-block" id="Input.pdfset_lo">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.pdfset_lo">[docs]</a>
+        self.pdfset_lo = pdfset_lo</div>
+
+<div class="viewcode-block" id="Input.pdf_nlo">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.pdf_nlo">[docs]</a>
+        self.pdf_nlo = pdf_nlo</div>
+
+<div class="viewcode-block" id="Input.pdfset_nlo">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.pdfset_nlo">[docs]</a>
+        self.pdfset_nlo = pdfset_nlo</div>
+
+<div class="viewcode-block" id="Input.pdf_lo_id">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.pdf_lo_id">[docs]</a>
+        self.pdf_lo_id = lhapdf_name_to_id(pdf_lo)</div>
+
+<div class="viewcode-block" id="Input.pdf_nlo_id">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.pdf_nlo_id">[docs]</a>
+        self.pdf_nlo_id = lhapdf_name_to_id(pdf_nlo)</div>
+
+<div class="viewcode-block" id="Input.mu_f">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.mu_f">[docs]</a>
+        self.mu_f = mu_f</div>
+
+<div class="viewcode-block" id="Input.mu_r">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.mu_r">[docs]</a>
+        self.mu_r = mu_r</div>
+
+<div class="viewcode-block" id="Input.precision">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.precision">[docs]</a>
+        self.precision = precision</div>
+
+<div class="viewcode-block" id="Input.max_iters">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.max_iters">[docs]</a>
+        self.max_iters = max_iters</div>
+
+<div class="viewcode-block" id="Input.invariant_mass">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.invariant_mass">[docs]</a>
+        self.invariant_mass = invariant_mass</div>
+
+<div class="viewcode-block" id="Input.pt">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.pt">[docs]</a>
+        self.pt = pt</div>
+
+<div class="viewcode-block" id="Input.result">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.result">[docs]</a>
+        self.result = result</div>
+
+<div class="viewcode-block" id="Input.id">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.id">[docs]</a>
+        self.id = id</div>
+
+<div class="viewcode-block" id="Input.model">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.model">[docs]</a>
+        self.model = model</div>
+
+<div class="viewcode-block" id="Input.mu">
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.Input.mu">[docs]</a>
+        self.mu = 0.0</div>
+
         if os.path.isfile(get_input_dir() + self.slha):
             shutil.copy(get_input_dir() + self.slha, get_output_dir() + self.slha)
         if update:
             update_slha(self)
 
 <div class="viewcode-block" id="Input.has_gluino">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_gluino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_gluino">[docs]</a>
     def has_gluino(self) -&gt; bool:
         return is_gluino(self.particle1) or is_gluino(self.particle2)</div>
 
 
 <div class="viewcode-block" id="Input.has_neutralino">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_neutralino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_neutralino">[docs]</a>
     def has_neutralino(self) -&gt; bool:
         return is_neutralino(self.particle1) or is_neutralino(self.particle2)</div>
 
 
 <div class="viewcode-block" id="Input.has_charginos">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_charginos">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_charginos">[docs]</a>
     def has_charginos(self) -&gt; bool:
         return is_chargino(self.particle1) or is_chargino(self.particle2)</div>
 
 
 <div class="viewcode-block" id="Input.has_weakino">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_weakino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_weakino">[docs]</a>
     def has_weakino(self) -&gt; bool:
         return self.has_charginos() or self.has_neutralino()</div>
 
 
 <div class="viewcode-block" id="Input.has_squark">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_squark">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_squark">[docs]</a>
     def has_squark(self) -&gt; bool:
         return is_squark(self.particle1) or is_squark(self.particle2)</div>
 
 
 <div class="viewcode-block" id="Input.has_slepton">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.Input.has_slepton">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.Input.has_slepton">[docs]</a>
     def has_slepton(self) -&gt; bool:
         return is_slepton(self.particle1) or is_slepton(self.particle2)</div>
 </div>
@@ -345,7 +411,7 @@ class Input(DictData):
 
 
 <div class="viewcode-block" id="is_gluino">
-<a class="viewcode-back" href="../../autoapi/hepi/run/prospino2/run/index.html#hepi.is_gluino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_gluino">[docs]</a>
 def is_gluino(iid: int) -&gt; bool:
     return iid == 1000021</div>
 
@@ -368,14 +434,14 @@ def is_chargino(iid: int) -&gt; bool:
 
 
 <div class="viewcode-block" id="is_weakino">
-<a class="viewcode-back" href="../../autoapi/hepi/run/prospino2/run/index.html#hepi.is_weakino">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_weakino">[docs]</a>
 def is_weakino(iid: int) -&gt; bool:
     return is_chargino(iid) or is_neutralino(iid)</div>
 
 
 
 <div class="viewcode-block" id="is_squark">
-<a class="viewcode-back" href="../../autoapi/hepi/run/prospino2/run/index.html#hepi.is_squark">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_squark">[docs]</a>
 def is_squark(iid: int) -&gt; bool:
     l_squark = range(1000001, 1000007)
     r_squark = range(2000001, 2000007)
@@ -384,7 +450,7 @@ def is_squark(iid: int) -&gt; bool:
 
 
 <div class="viewcode-block" id="is_slepton">
-<a class="viewcode-back" href="../../autoapi/hepi/run/prospino2/run/index.html#hepi.is_slepton">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/input/index.html#hepi.is_slepton">[docs]</a>
 def is_slepton(iid: int) -&gt; bool:
     l_slepton = range(1000011, 1000016)
     r_slepton = range(2000011, 2000016)  # TODO remove righthandend snu&#39;s
@@ -393,7 +459,7 @@ def is_slepton(iid: int) -&gt; bool:
 
 
 <div class="viewcode-block" id="update_slha">
-<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/run/index.html#hepi.update_slha">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/spheno/index.html#hepi.update_slha">[docs]</a>
 def update_slha(i: Input):
     &quot;&quot;&quot;
     Updates dependent parameters in Input `i`.

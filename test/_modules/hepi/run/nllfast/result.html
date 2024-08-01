@@ -42,7 +42,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-78-gee605255
+                0.2.19-129-g3ff945be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -110,7 +110,7 @@
 
 
 <div class="viewcode-block" id="NLLFastResult">
-<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/run/index.html#hepi.run.nllfast.result.NLLFastResult">[docs]</a>
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult">[docs]</a>
 class NLLFastResult(Result):
     &quot;&quot;&quot;
     (N)NLL-fast Result Data.
@@ -129,25 +129,70 @@ class NLLFastResult(Result):
         NLO_PLUS_NLL_PDF_ERRPLUS,
     ):
         Result.__init__(self, LO, NLO, NLO_PLUS_NLL)
-        self.LO_NOERR= LO
-        self.NLO_NOERR= NLO
-        self.NLO_PDF_ERRMINUS=NLO_PDF_ERRMINUS
-        self.NLO_PDF_ERRPLUS =NLO_PDF_ERRPLUS
-        self.NLO_PDF = asym_to_sym_error(NLO, NLO_PDF_ERRMINUS, NLO_PDF_ERRPLUS)
+<div class="viewcode-block" id="NLLFastResult.LO_NOERR">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.LO_NOERR">[docs]</a>
+        self.LO_NOERR= LO</div>
 
-        self.NLO_PLUS_NLL_NOERR = NLO_PLUS_NLL
+<div class="viewcode-block" id="NLLFastResult.NLO_NOERR">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_NOERR">[docs]</a>
+        self.NLO_NOERR= NLO</div>
 
-        self.NLO_PLUS_NLL_SCALE_ERRMINUS=NLO_PLUS_NLL_SCALE_ERRMINUS
-        self.NLO_PLUS_NLL_SCALE_ERRPLUS=NLO_PLUS_NLL_SCALE_ERRPLUS
-        self.NLO_PLUS_NLL_SCALE=asym_to_sym_error(NLO_PLUS_NLL, NLO_PLUS_NLL_SCALE_ERRMINUS, NLO_PLUS_NLL_SCALE_ERRPLUS)
+<div class="viewcode-block" id="NLLFastResult.NLO_PDF_ERRMINUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PDF_ERRMINUS">[docs]</a>
+        self.NLO_PDF_ERRMINUS=NLO_PDF_ERRMINUS</div>
 
-        self.NLO_PLUS_NLL_PDF_ERRMINUS=NLO_PLUS_NLL_PDF_ERRMINUS
-        self.NLO_PLUS_NLL_PDF_ERRPLUS=NLO_PLUS_NLL_PDF_ERRPLUS
-        self.NLO_PLUS_NLL_PDF=asym_to_sym_error(NLO_PLUS_NLL, NLO_PLUS_NLL_PDF_ERRMINUS, NLO_PLUS_NLL_PDF_ERRPLUS)
+<div class="viewcode-block" id="NLLFastResult.NLO_PDF_ERRPLUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PDF_ERRPLUS">[docs]</a>
+        self.NLO_PDF_ERRPLUS =NLO_PDF_ERRPLUS</div>
 
-        self.NLO_PLUS_NLL_ERRMINUS=-add_errors(NLO_PLUS_NLL_PDF_ERRMINUS, NLO_PLUS_NLL_SCALE_ERRMINUS)
-        self.NLO_PLUS_NLL_ERRPLUS=add_errors(NLO_PLUS_NLL_PDF_ERRPLUS, NLO_PLUS_NLL_SCALE_ERRPLUS)
+<div class="viewcode-block" id="NLLFastResult.NLO_PDF">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PDF">[docs]</a>
+        self.NLO_PDF = asym_to_sym_error(NLO, NLO_PDF_ERRMINUS, NLO_PDF_ERRPLUS)</div>
+
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL_NOERR">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_NOERR">[docs]</a>
+        self.NLO_PLUS_NLL_NOERR = NLO_PLUS_NLL</div>
+
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL_SCALE_ERRMINUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_SCALE_ERRMINUS">[docs]</a>
+        self.NLO_PLUS_NLL_SCALE_ERRMINUS=NLO_PLUS_NLL_SCALE_ERRMINUS</div>
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL_SCALE_ERRPLUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_SCALE_ERRPLUS">[docs]</a>
+        self.NLO_PLUS_NLL_SCALE_ERRPLUS=NLO_PLUS_NLL_SCALE_ERRPLUS</div>
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL_SCALE">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_SCALE">[docs]</a>
+        self.NLO_PLUS_NLL_SCALE=asym_to_sym_error(NLO_PLUS_NLL, NLO_PLUS_NLL_SCALE_ERRMINUS, NLO_PLUS_NLL_SCALE_ERRPLUS)</div>
+
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL_PDF_ERRMINUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_PDF_ERRMINUS">[docs]</a>
+        self.NLO_PLUS_NLL_PDF_ERRMINUS=NLO_PLUS_NLL_PDF_ERRMINUS</div>
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL_PDF_ERRPLUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_PDF_ERRPLUS">[docs]</a>
+        self.NLO_PLUS_NLL_PDF_ERRPLUS=NLO_PLUS_NLL_PDF_ERRPLUS</div>
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL_PDF">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_PDF">[docs]</a>
+        self.NLO_PLUS_NLL_PDF=asym_to_sym_error(NLO_PLUS_NLL, NLO_PLUS_NLL_PDF_ERRMINUS, NLO_PLUS_NLL_PDF_ERRPLUS)</div>
+
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL_ERRMINUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_ERRMINUS">[docs]</a>
+        self.NLO_PLUS_NLL_ERRMINUS=-add_errors(NLO_PLUS_NLL_PDF_ERRMINUS, NLO_PLUS_NLL_SCALE_ERRMINUS)</div>
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL_ERRPLUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_ERRPLUS">[docs]</a>
+        self.NLO_PLUS_NLL_ERRPLUS=add_errors(NLO_PLUS_NLL_PDF_ERRPLUS, NLO_PLUS_NLL_SCALE_ERRPLUS)</div>
+
+<div class="viewcode-block" id="NLLFastResult.NLO_PLUS_NLL">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nllfast/result/index.html#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL">[docs]</a>
         self.NLO_PLUS_NLL = asym_to_sym_error(NLO_PLUS_NLL, self.NLO_PLUS_NLL_ERRMINUS, self.NLO_PLUS_NLL_ERRPLUS)</div>
+</div>
 
 
 

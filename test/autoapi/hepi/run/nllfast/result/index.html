@@ -45,7 +45,7 @@
             hepi
           </a>
               <div class="version">
-                0.2.19-78-gee605255
+                0.2.19-129-g3ff945be
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
@@ -145,73 +145,14 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nllfast.result.Result" title="hepi.run.nllfast.result.Result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Result</span></code></a></p></td>
-<td><p>General result class. All uncertainties are of numerical origin.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.run.nllfast.result.NLLFastResult" title="hepi.run.nllfast.result.NLLFastResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NLLFastResult</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nllfast.result.NLLFastResult" title="hepi.run.nllfast.result.NLLFastResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NLLFastResult</span></code></a></p></td>
 <td><p>(N)NLL-fast Result Data.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nllfast.result.add_errors" title="hepi.run.nllfast.result.add_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_errors</span></code></a>(error1, error2)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.run.nllfast.result.asym_to_sym_error" title="hepi.run.nllfast.result.asym_to_sym_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">asym_to_sym_error</span></code></a>(central, errminus, errplus)</p></td>
-<td><p></p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="hepi.run.nllfast.result.Result">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.result.</span></span><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlo_plus_nll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annlo_plus_nnll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/results.html#Result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.Result" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="../../../util/index.html#hepi.util.DictData" title="hepi.util.DictData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.util.DictData</span></code></a></p>
-<p>General result class. All uncertainties are of numerical origin.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>LO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Leading Order result. Defaults to None.</p></li>
-<li><p><strong>NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Next-to-Leading Order result. Defaults to None.</p></li>
-<li><p><strong>NLO_PLUS_NLL</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – Next-to-Leading Order plus Next-to-Leading Logarithm result. Defaults to None.</p></li>
-<li><p><strong>K_LO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – LO divided by LO.</p></li>
-<li><p><strong>K_NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – NLO divided by LO result.</p></li>
-<li><p><strong>K_NLO_PLUS_NLL</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – NLO+NLL divided by LO.</p></li>
-<li><p><strong>K_aNNLO_PLUS_NNLL</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – aNNLO+NNLL divided by LO.</p></li>
-<li><p><strong>NLO_PLUS_NLL_OVER_NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – NLO+NLL divided by NLO.</p></li>
-<li><p><strong>aNNLO_PLUS_NNLL_OVER_NLO</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – aNNLO+NNLL divided by NLO.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Sets given and computes dependent <code class="docutils literal notranslate"><span class="pre">Attributes</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>lo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">LO</span></code>.</p></li>
-<li><p><strong>nlo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO</span></code>.</p></li>
-<li><p><strong>nlo_plus_nll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO_PLUS_NLL</span></code>.</p></li>
-<li><p><strong>annlo_plus_nnll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">aNNLO_PLUS_NNLL</span></code>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="hepi.run.nllfast.result.add_errors">
-<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.result.</span></span><span class="sig-name descname"><span class="pre">add_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/results.html#add_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.add_errors" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="hepi.run.nllfast.result.asym_to_sym_error">
-<span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.result.</span></span><span class="sig-name descname"><span class="pre">asym_to_sym_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">central</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errminus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errplus</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/results.html#asym_to_sym_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.asym_to_sym_error" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nllfast.result.</span></span><span class="sig-name descname"><span class="pre">NLLFastResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">LO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PDF_ERRMINUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PDF_ERRPLUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_SCALE_ERRMINUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_SCALE_ERRPLUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_PDF_ERRMINUS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NLO_PLUS_NLL_PDF_ERRPLUS</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult" title="Link to this definition"></a></dt>
@@ -223,11 +164,86 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">LO</span></code>.</p></li>
 <li><p><strong>nlo</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO</span></code>.</p></li>
-<li><p><strong>nlo_plus_nll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO_PLUS_NLL</span></code>.</p></li>
+<li><p><strong>nlo_plus_nll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <a class="reference internal" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL" title="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL"><code class="xref py py-attr docutils literal notranslate"><span class="pre">NLO_PLUS_NLL</span></code></a>.</p></li>
 <li><p><strong>annlo_plus_nnll</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>) – corresponds to <code class="xref py py-attr docutils literal notranslate"><span class="pre">aNNLO_PLUS_NNLL</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.LO_NOERR">
+<span class="sig-name descname"><span class="pre">LO_NOERR</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.LO_NOERR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.LO_NOERR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_NOERR">
+<span class="sig-name descname"><span class="pre">NLO_NOERR</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_NOERR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_NOERR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PDF_ERRMINUS">
+<span class="sig-name descname"><span class="pre">NLO_PDF_ERRMINUS</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PDF_ERRMINUS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PDF_ERRMINUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PDF_ERRPLUS">
+<span class="sig-name descname"><span class="pre">NLO_PDF_ERRPLUS</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PDF_ERRPLUS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PDF_ERRPLUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PDF">
+<span class="sig-name descname"><span class="pre">NLO_PDF</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PDF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PDF" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_NOERR">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL_NOERR</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL_NOERR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_NOERR" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_SCALE_ERRMINUS">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL_SCALE_ERRMINUS</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL_SCALE_ERRMINUS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_SCALE_ERRMINUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_SCALE_ERRPLUS">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL_SCALE_ERRPLUS</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL_SCALE_ERRPLUS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_SCALE_ERRPLUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_SCALE">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL_SCALE</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL_SCALE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_SCALE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_PDF_ERRMINUS">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL_PDF_ERRMINUS</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL_PDF_ERRMINUS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_PDF_ERRMINUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_PDF_ERRPLUS">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL_PDF_ERRPLUS</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL_PDF_ERRPLUS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_PDF_ERRPLUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_PDF">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL_PDF</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL_PDF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_PDF" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_ERRMINUS">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL_ERRMINUS</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL_ERRMINUS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_ERRMINUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_ERRPLUS">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL_ERRPLUS</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL_ERRPLUS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL_ERRPLUS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL">
+<span class="sig-name descname"><span class="pre">NLO_PLUS_NLL</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nllfast/result.html#NLLFastResult.NLO_PLUS_NLL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nllfast.result.NLLFastResult.NLO_PLUS_NLL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </section>
