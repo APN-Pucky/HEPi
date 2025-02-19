@@ -87,7 +87,6 @@ class NLLfastRunner(Runner):
         return super()._is_valid(file, p, d)
 
     def _parse_file(self, file: str) -> Result:
-        # TODO parse result
         ret = []
         with open(file) as output:
             for line in output:
