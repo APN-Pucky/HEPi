@@ -4,8 +4,8 @@ hepi.run
 .. py:module:: hepi.run
 
 
-Subpackages
------------
+Submodules
+----------
 
 .. toctree::
    :maxdepth: 1
@@ -16,17 +16,9 @@ Subpackages
    /autoapi/hepi/run/nnllfast/index
    /autoapi/hepi/run/prospino2/index
    /autoapi/hepi/run/resummino/index
+   /autoapi/hepi/run/run/index
    /autoapi/hepi/run/softsusy/index
    /autoapi/hepi/run/spheno/index
-
-
-Submodules
-----------
-
-.. toctree::
-   :maxdepth: 1
-
-   /autoapi/hepi/run/run/index
 
 
 Classes
@@ -137,45 +129,71 @@ Package Contents
 
 
    .. py:attribute:: pdfset_lo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo
 
 
    .. py:attribute:: pdfset_nlo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_lo_id
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo_id
+      :value: 0
+
 
 
    .. py:attribute:: mu_f
+      :value: 1.0
+
 
 
    .. py:attribute:: mu_r
+      :value: 1.0
+
 
 
    .. py:attribute:: precision
+      :value: 0.001
+
 
 
    .. py:attribute:: max_iters
+      :value: 50
+
 
 
    .. py:attribute:: invariant_mass
+      :value: 'auto'
+
 
 
    .. py:attribute:: pt
+      :value: 'auto'
+
 
 
    .. py:attribute:: result
+      :value: 'total'
+
 
 
    .. py:attribute:: id
+      :value: ''
+
 
 
    .. py:attribute:: model
+      :value: ''
+
 
 
    .. py:attribute:: mu
@@ -303,15 +321,23 @@ Package Contents
 
 
    .. py:attribute:: LO
+      :value: None
+
 
 
    .. py:attribute:: NLO
+      :value: None
+
 
 
    .. py:attribute:: NLO_PLUS_NLL
+      :value: None
+
 
 
    .. py:attribute:: aNNLO_PLUS_NNLL
+      :value: None
+
 
 
 .. py:function:: DL2DF(ld)
@@ -382,18 +408,28 @@ Package Contents
 
 
    .. py:attribute:: name
+      :value: None
+
 
 
    .. py:attribute:: skip
+      :value: False
+
 
 
    .. py:attribute:: in_file
+      :value: None
+
 
 
    .. py:attribute:: out_file
+      :value: None
+
 
 
    .. py:attribute:: execute
+      :value: None
+
 
 
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)

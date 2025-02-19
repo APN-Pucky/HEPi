@@ -9,23 +9,13 @@ hepi
 
 
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 1
-
-   /autoapi/hepi/data/index
-   /autoapi/hepi/plot/index
-   /autoapi/hepi/run/index
-
-
 Submodules
 ----------
 
 .. toctree::
    :maxdepth: 1
 
+   /autoapi/hepi/data/index
    /autoapi/hepi/fast/index
    /autoapi/hepi/input/index
    /autoapi/hepi/interpolate/index
@@ -33,7 +23,9 @@ Submodules
    /autoapi/hepi/order/index
    /autoapi/hepi/output/index
    /autoapi/hepi/particles/index
+   /autoapi/hepi/plot/index
    /autoapi/hepi/results/index
+   /autoapi/hepi/run/index
    /autoapi/hepi/util/index
 
 
@@ -403,45 +395,71 @@ Package Contents
 
 
    .. py:attribute:: pdfset_lo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo
 
 
    .. py:attribute:: pdfset_nlo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_lo_id
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo_id
+      :value: 0
+
 
 
    .. py:attribute:: mu_f
+      :value: 1.0
+
 
 
    .. py:attribute:: mu_r
+      :value: 1.0
+
 
 
    .. py:attribute:: precision
+      :value: 0.001
+
 
 
    .. py:attribute:: max_iters
+      :value: 50
+
 
 
    .. py:attribute:: invariant_mass
+      :value: 'auto'
+
 
 
    .. py:attribute:: pt
+      :value: 'auto'
+
 
 
    .. py:attribute:: result
+      :value: 'total'
+
 
 
    .. py:attribute:: id
+      :value: ''
+
 
 
    .. py:attribute:: model
+      :value: ''
+
 
 
    .. py:attribute:: mu
@@ -847,45 +865,71 @@ Package Contents
 
 
    .. py:attribute:: pdfset_lo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo
 
 
    .. py:attribute:: pdfset_nlo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_lo_id
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo_id
+      :value: 0
+
 
 
    .. py:attribute:: mu_f
+      :value: 1.0
+
 
 
    .. py:attribute:: mu_r
+      :value: 1.0
+
 
 
    .. py:attribute:: precision
+      :value: 0.001
+
 
 
    .. py:attribute:: max_iters
+      :value: 50
+
 
 
    .. py:attribute:: invariant_mass
+      :value: 'auto'
+
 
 
    .. py:attribute:: pt
+      :value: 'auto'
+
 
 
    .. py:attribute:: result
+      :value: 'total'
+
 
 
    .. py:attribute:: id
+      :value: ''
+
 
 
    .. py:attribute:: model
+      :value: ''
+
 
 
    .. py:attribute:: mu
@@ -1265,45 +1309,71 @@ Package Contents
 
 
    .. py:attribute:: pdfset_lo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo
 
 
    .. py:attribute:: pdfset_nlo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_lo_id
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo_id
+      :value: 0
+
 
 
    .. py:attribute:: mu_f
+      :value: 1.0
+
 
 
    .. py:attribute:: mu_r
+      :value: 1.0
+
 
 
    .. py:attribute:: precision
+      :value: 0.001
+
 
 
    .. py:attribute:: max_iters
+      :value: 50
+
 
 
    .. py:attribute:: invariant_mass
+      :value: 'auto'
+
 
 
    .. py:attribute:: pt
+      :value: 'auto'
+
 
 
    .. py:attribute:: result
+      :value: 'total'
+
 
 
    .. py:attribute:: id
+      :value: ''
+
 
 
    .. py:attribute:: model
+      :value: ''
+
 
 
    .. py:attribute:: mu
@@ -1543,15 +1613,23 @@ Package Contents
 
 
    .. py:attribute:: LO
+      :value: None
+
 
 
    .. py:attribute:: NLO
+      :value: None
+
 
 
    .. py:attribute:: NLO_PLUS_NLL
+      :value: None
+
 
 
    .. py:attribute:: aNNLO_PLUS_NNLL
+      :value: None
+
 
 
 .. py:function:: pdf_errors(li, dl, ordernames=None, confidence_level=90, n_jobs=None)
@@ -1710,45 +1788,71 @@ Package Contents
 
 
    .. py:attribute:: pdfset_lo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo
 
 
    .. py:attribute:: pdfset_nlo
+      :value: 0
+
 
 
    .. py:attribute:: pdf_lo_id
+      :value: 0
+
 
 
    .. py:attribute:: pdf_nlo_id
+      :value: 0
+
 
 
    .. py:attribute:: mu_f
+      :value: 1.0
+
 
 
    .. py:attribute:: mu_r
+      :value: 1.0
+
 
 
    .. py:attribute:: precision
+      :value: 0.001
+
 
 
    .. py:attribute:: max_iters
+      :value: 50
+
 
 
    .. py:attribute:: invariant_mass
+      :value: 'auto'
+
 
 
    .. py:attribute:: pt
+      :value: 'auto'
+
 
 
    .. py:attribute:: result
+      :value: 'total'
+
 
 
    .. py:attribute:: id
+      :value: ''
+
 
 
    .. py:attribute:: model
+      :value: ''
+
 
 
    .. py:attribute:: mu
@@ -1876,15 +1980,23 @@ Package Contents
 
 
    .. py:attribute:: LO
+      :value: None
+
 
 
    .. py:attribute:: NLO
+      :value: None
+
 
 
    .. py:attribute:: NLO_PLUS_NLL
+      :value: None
+
 
 
    .. py:attribute:: aNNLO_PLUS_NNLL
+      :value: None
+
 
 
 .. py:function:: DL2DF(ld)
@@ -1955,18 +2067,28 @@ Package Contents
 
 
    .. py:attribute:: name
+      :value: None
+
 
 
    .. py:attribute:: skip
+      :value: False
+
 
 
    .. py:attribute:: in_file
+      :value: None
+
 
 
    .. py:attribute:: out_file
+      :value: None
+
 
 
    .. py:attribute:: execute
+      :value: None
+
 
 
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
