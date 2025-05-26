@@ -618,7 +618,6 @@ def slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -> List[Input]
                 )
             # pyslha.write(get_output_dir()+newname, d)
             slha_write(newname, d)
-            print("slha written to", newname)
 
             setattr(tmp, "slha", newname)
             update_slha(tmp)
