@@ -9,7 +9,7 @@ Attributes
 
 .. autoapisummary::
 
-   hepi.run.nnllfast.run.default_nllfast_runner
+   hepi.run.nnllfast.run.default_nnllfast_runner
    hepi.run.nnllfast.run.run
    hepi.run.nnllfast.run.set_path
    hepi.run.nnllfast.run.get_path
@@ -20,15 +20,18 @@ Classes
 
 .. autoapisummary::
 
-   hepi.run.nnllfast.run.NLLfastRunner
+   hepi.run.nnllfast.run.NNLLfastRunner
 
 
 Module Contents
 ---------------
 
-.. py:class:: NLLfastRunner(path, in_dir = None, out_dir = None, pre=None)
+.. py:class:: NNLLfastRunner(path, in_dir = None, out_dir = None, pre=None)
 
    Bases: :py:obj:`hepi.run.Runner`
+
+
+   Only works with NNLL-fast-1.1.
 
 
    .. py:method:: get_version()
@@ -83,9 +86,9 @@ Module Contents
    .. py:method:: _prepare(p, **kwargs)
 
 
-.. py:data:: default_nllfast_runner
+.. py:data:: default_nnllfast_runner
 
-   Default Prospino Runner to provide backward compatibility
+   Default NNLL-fast Runner to provide backward compatibility
 
 .. py:data:: run
 

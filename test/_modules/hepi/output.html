@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.output &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
@@ -90,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.output</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -118,16 +117,16 @@ from .util import DL2DF
 
 
 <div class="viewcode-block" id="unv">
-<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.unv">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.unv">[docs]</a>
 unv = unp.nominal_values</div>
 
 <div class="viewcode-block" id="usd">
-<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.usd">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.usd">[docs]</a>
 usd = unp.std_devs</div>
 
 
 <div class="viewcode-block" id="write_twiki">
-<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_twiki">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.write_twiki">[docs]</a>
 def write_twiki(rs_dl, mass, main):
     for i in range(len(rs_dl[main + &quot;_NOERR&quot;])):
         cen = rs_dl[main + &quot;_NOERR&quot;].iloc[i],
@@ -144,7 +143,7 @@ def write_twiki(rs_dl, mass, main):
 
 
 <div class="viewcode-block" id="write_latex_table_transposed_header">
-<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex_table_transposed_header">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.write_latex_table_transposed_header">[docs]</a>
 def write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0):
     dl = dict_list
     mask = dl[t + &quot;_SCALE&quot;].notnull()
@@ -163,7 +162,7 @@ def write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0):
 
 # TODO fix PDF scale brackets here for output
 <div class="viewcode-block" id="write_latex_table_transposed">
-<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex_table_transposed">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.write_latex_table_transposed">[docs]</a>
 def write_latex_table_transposed(
     dict_list, t, fname, scale=True, pdf=True, yscale=1.0, max_rows=None
 ):
@@ -218,7 +217,7 @@ def write_latex_table_transposed(
 
 
 <div class="viewcode-block" id="write_latex">
-<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_latex">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.write_latex">[docs]</a>
 def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0):
     &quot;&quot;&quot;
     Saves a `dict` of `list`s to `filename` as latex table.
@@ -294,13 +293,13 @@ def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0):
 
 
 <div class="viewcode-block" id="tex_table">
-<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.tex_table">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.tex_table">[docs]</a>
 tex_table = write_latex</div>
 
 
 
 <div class="viewcode-block" id="write_csv">
-<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_csv">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.write_csv">[docs]</a>
 def write_csv(dict_list: list, filename: str):
     &quot;&quot;&quot;
     Saves a `dict` of `list`s to `filename` as csv table.
@@ -397,7 +396,7 @@ def write_csv(dict_list: list, filename: str):
 
 
 <div class="viewcode-block" id="write_json">
-<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.write_json">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.write_json">[docs]</a>
 def write_json(
     dict_list: list,
     o: Order,

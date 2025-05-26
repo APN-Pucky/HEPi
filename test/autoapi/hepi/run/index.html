@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.run &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
@@ -67,6 +67,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">hepi</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../_version/index.html">hepi._version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../data/index.html">hepi.data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../fast/index.html">hepi.fast</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../input/index.html">hepi.input</a></li>
@@ -581,8 +582,8 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Param</span><span class="p">:</span>
-<span class="gp">... </span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">Param</span><span class="p">:</span>
+<span class="gp">... </span>     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span>
@@ -779,7 +780,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>params</strong> (List[<a class="reference internal" href="../index.html#id73" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>]) – List of input parameters.</p></li>
+<li><p><strong>params</strong> (List[<code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code>]) – List of input parameters.</p></li>
 <li><p><strong>skip</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the runner will check if the output file already exists and skip the execution if it does. Defaults to True.</p></li>
 <li><p><strong>n_jobs</strong> (<em>int</em>) – Number of parallel jobs. If None, use all available cores.</p></li>
 </ul>
@@ -797,7 +798,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>params</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="../index.html#id73" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – All parameters that should be executed/queued.</p></li>
+<li><p><strong>params</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code>) – All parameters that should be executed/queued.</p></li>
 <li><p><strong>skip</strong> (<em>bool</em>) – True means stored runs will be skipped. Else the are overwritten.</p></li>
 <li><p><strong>parse</strong> (<em>bool</em>) – Parse the results.
 This is not the prefered cluster/parallel mode, as there the function only queues the job.</p></li>
@@ -849,7 +850,7 @@ This is not the prefered cluster/parallel mode, as there the function only queue
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p></li>
-<li><p><strong>p</strong> (<a class="reference internal" href="../index.html#id73" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Onput parameters.</p></li>
+<li><p><strong>p</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code>) – Onput parameters.</p></li>
 <li><p><strong>d</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Param dictionary.</p></li>
 </ul>
 </dd>

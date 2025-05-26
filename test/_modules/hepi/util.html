@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.util &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
@@ -90,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.util</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -114,10 +113,10 @@ import pandas as pd
 
 
 <div class="viewcode-block" id="DictData">
-<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DictData">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.DictData">[docs]</a>
 class DictData:
 <div class="viewcode-block" id="DictData.__str__">
-<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DictData.__str__">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.DictData.__str__">[docs]</a>
     def __str__(self):
         &quot;&quot;&quot;Returns attributes as dict as string&quot;&quot;&quot;
         return str(self.__dict__)</div>
@@ -126,7 +125,7 @@ class DictData:
 
 
 <div class="viewcode-block" id="LD2DL">
-<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.LD2DL">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.LD2DL">[docs]</a>
 def LD2DL(l: List, actual_dict=False) -&gt; dict:
     &quot;&quot;&quot;
     Convert a list of objects into a dictionary of lists.
@@ -163,7 +162,7 @@ def LD2DL(l: List, actual_dict=False) -&gt; dict:
 
 
 <div class="viewcode-block" id="DL2DF">
-<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DL2DF">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.DL2DF">[docs]</a>
 def DL2DF(ld: dict) -&gt; pd.DataFrame:
     &quot;&quot;&quot;
     Convert a `dict` of `list`s to a `pandas.DataFrame`.
@@ -173,7 +172,7 @@ def DL2DF(ld: dict) -&gt; pd.DataFrame:
 
 
 <div class="viewcode-block" id="namehash">
-<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.namehash">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.namehash">[docs]</a>
 def namehash(n: any) -&gt; str:
     &quot;&quot;&quot;
     Creates a sha256 hash from the objects string representation.
@@ -200,7 +199,7 @@ def namehash(n: any) -&gt; str:
 
 
 <div class="viewcode-block" id="lhapdf_name_to_id">
-<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_name_to_id">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.lhapdf_name_to_id">[docs]</a>
 def lhapdf_name_to_id(name: str) -&gt; int:
     &quot;&quot;&quot;
     Converts a LHAPDF name to the sets id.
@@ -235,7 +234,7 @@ def lhapdf_name_to_id(name: str) -&gt; int:
 
 
 <div class="viewcode-block" id="lhapdf_id_to_name">
-<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_id_to_name">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.lhapdf_id_to_name">[docs]</a>
 def lhapdf_id_to_name(lid: int) -&gt; str:
     try:
         import lhapdf

@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.run.nnllfast.run &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../../../../_static/jupyter-sphinx.css" />
@@ -67,6 +67,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">hepi</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../_version/index.html">hepi._version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../data/index.html">hepi.data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../fast/index.html">hepi.fast</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../input/index.html">hepi.input</a></li>
@@ -140,8 +141,8 @@
 <h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nnllfast.run.default_nllfast_runner" title="hepi.run.nnllfast.run.default_nllfast_runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_nllfast_runner</span></code></a></p></td>
-<td><p>Default Prospino Runner to provide backward compatibility</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nnllfast.run.default_nnllfast_runner" title="hepi.run.nnllfast.run.default_nnllfast_runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">default_nnllfast_runner</span></code></a></p></td>
+<td><p>Default NNLL-fast Runner to provide backward compatibility</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hepi.run.nnllfast.run.run" title="hepi.run.nnllfast.run.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a></p></td>
 <td><p></p></td>
@@ -159,8 +160,8 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nnllfast.run.NLLfastRunner" title="hepi.run.nnllfast.run.NLLfastRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NLLfastRunner</span></code></a></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.run.nnllfast.run.NNLLfastRunner" title="hepi.run.nnllfast.run.NNLLfastRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NNLLfastRunner</span></code></a></p></td>
+<td><p>Only works with NNLL-fast-1.1.</p></td>
 </tr>
 </tbody>
 </table>
@@ -168,9 +169,10 @@
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NLLfastRunner">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nnllfast.run.</span></span><span class="sig-name descname"><span class="pre">NLLfastRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NLLfastRunner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NLLfastRunner" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NNLLfastRunner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hepi.run.nnllfast.run.</span></span><span class="sig-name descname"><span class="pre">NNLLfastRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NNLLfastRunner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NNLLfastRunner" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../index.html#hepi.run.Runner" title="hepi.run.Runner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hepi.run.Runner</span></code></a></p>
+<p>Only works with NNLL-fast-1.1.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -181,8 +183,8 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NLLfastRunner.get_version">
-<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NLLfastRunner.get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NLLfastRunner.get_version" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NNLLfastRunner.get_version">
+<span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NNLLfastRunner.get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NNLLfastRunner.get_version" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -191,8 +193,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NLLfastRunner.orders">
-<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NLLfastRunner.orders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NLLfastRunner.orders" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NNLLfastRunner.orders">
+<span class="sig-name descname"><span class="pre">orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NNLLfastRunner.orders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NNLLfastRunner.orders" title="Link to this definition"></a></dt>
 <dd><p>List of supported Orders in this runner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -202,8 +204,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NLLfastRunner._get_nf_proc">
-<span class="sig-name descname"><span class="pre">_get_nf_proc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NLLfastRunner._get_nf_proc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NLLfastRunner._get_nf_proc" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NNLLfastRunner._get_nf_proc">
+<span class="sig-name descname"><span class="pre">_get_nf_proc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NNLLfastRunner._get_nf_proc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NNLLfastRunner._get_nf_proc" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>p</strong> (<a class="reference internal" href="../../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>)</p>
@@ -212,8 +214,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NLLfastRunner._get_nf_input">
-<span class="sig-name descname"><span class="pre">_get_nf_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NLLfastRunner._get_nf_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NLLfastRunner._get_nf_input" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NNLLfastRunner._get_nf_input">
+<span class="sig-name descname"><span class="pre">_get_nf_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NNLLfastRunner._get_nf_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NNLLfastRunner._get_nf_input" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>p</strong> (<a class="reference internal" href="../../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>)</p>
@@ -225,8 +227,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NLLfastRunner._check_input">
-<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NLLfastRunner._check_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NLLfastRunner._check_input" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NNLLfastRunner._check_input">
+<span class="sig-name descname"><span class="pre">_check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NNLLfastRunner._check_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NNLLfastRunner._check_input" title="Link to this definition"></a></dt>
 <dd><p>Checks input parameter for compatibility with Prospino</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -239,14 +241,14 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NLLfastRunner._is_valid">
-<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NLLfastRunner._is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NLLfastRunner._is_valid" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NNLLfastRunner._is_valid">
+<span class="sig-name descname"><span class="pre">_is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NNLLfastRunner._is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NNLLfastRunner._is_valid" title="Link to this definition"></a></dt>
 <dd><p>Verifies that a file is a complete output.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>file</strong> (<em>str</em>) – File path to be parsed.</p></li>
-<li><p><strong>p</strong> (<a class="reference internal" href="../../../index.html#id73" title="hepi.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code></a>) – Onput parameters.</p></li>
+<li><p><strong>p</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">hepi.Input</span></code>) – Onput parameters.</p></li>
 <li><p><strong>d</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – Param dictionary.</p></li>
 </ul>
 </dd>
@@ -260,8 +262,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NLLfastRunner._parse_file">
-<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NLLfastRunner._parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NLLfastRunner._parse_file" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NNLLfastRunner._parse_file">
+<span class="sig-name descname"><span class="pre">_parse_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NNLLfastRunner._parse_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NNLLfastRunner._parse_file" title="Link to this definition"></a></dt>
 <dd><p>Extracts results from an output file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -277,8 +279,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NLLfastRunner._prepare">
-<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NLLfastRunner._prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NLLfastRunner._prepare" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.NNLLfastRunner._prepare">
+<span class="sig-name descname"><span class="pre">_prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#NNLLfastRunner._prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.NNLLfastRunner._prepare" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>p</strong> (<a class="reference internal" href="../../../input/index.html#hepi.input.Input" title="hepi.input.Input"><em>hepi.input.Input</em></a>)</p>
@@ -292,9 +294,9 @@
 </dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="hepi.run.nnllfast.run.default_nllfast_runner">
-<span class="sig-prename descclassname"><span class="pre">hepi.run.nnllfast.run.</span></span><span class="sig-name descname"><span class="pre">default_nllfast_runner</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#default_nllfast_runner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.default_nllfast_runner" title="Link to this definition"></a></dt>
-<dd><p>Default Prospino Runner to provide backward compatibility</p>
+<dt class="sig sig-object py" id="hepi.run.nnllfast.run.default_nnllfast_runner">
+<span class="sig-prename descclassname"><span class="pre">hepi.run.nnllfast.run.</span></span><span class="sig-name descname"><span class="pre">default_nnllfast_runner</span></span><a class="reference internal" href="../../../../../_modules/hepi/run/nnllfast/run.html#default_nnllfast_runner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.run.nnllfast.run.default_nnllfast_runner" title="Link to this definition"></a></dt>
+<dd><p>Default NNLL-fast Runner to provide backward compatibility</p>
 </dd></dl>
 
 <dl class="py data">

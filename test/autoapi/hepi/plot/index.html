@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.plot &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
@@ -67,6 +67,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">hepi</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../_version/index.html">hepi._version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../data/index.html">hepi.data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../fast/index.html">hepi.fast</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../input/index.html">hepi.input</a></li>
@@ -573,8 +574,8 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'M</span> <span class="pre">[GeV]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'$\\sigma$</span> <span class="pre">[pb]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_plus_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot/plot.html#plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.plot" title="Link to this definition"></a></dt>
 <dd><p>Creates a plot based on the entries <cite>x`and `y</cite> in <cite>dict_list</cite>.</p>
 <p>Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hepi</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">hepi</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dl</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
 <span class="gp">... </span><span class="s2">&quot;https://raw.githubusercontent.com/fuenfundachtzig/xsec/master/json/pp13_hino_NLO%2BNLL.json&quot;</span>
 <span class="gp">... </span><span class="p">))</span>
@@ -583,7 +584,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </div>
 <p>(<a class="reference download internal" download="" href="../../../_downloads/795d9b786cf63a9d6fecc8da2567de8e/index-1.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../../../_downloads/07179fc6c753d35df47589a82518578b/index-1.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../../../_downloads/bdf97c7ab740d250aa930ae5757f3d1f/index-1.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../../../_downloads/dbfec8cd4bb241001f31250c06659008/index-1.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
 <figure class="align-default">
-<img alt="../../../_images/index-11.png" class="plot-directive" src="../../../_images/index-11.png" />
+<img alt="../../../_images/index-1.png" class="plot-directive" src="../../../_images/index-1.png" />
 </figure>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -622,8 +623,8 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <dt class="sig sig-object py" id="hepi.plot.mapplot">
 <span class="sig-prename descclassname"><span class="pre">hepi.plot.</span></span><span class="sig-name descname"><span class="pre">mapplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zaxis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/plot/plot.html#mapplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.plot.mapplot" title="Link to this definition"></a></dt>
 <dd><p>Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hepi</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">hepi</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dl</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
@@ -634,7 +635,7 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 </div>
 <p>(<a class="reference download internal" download="" href="../../../_downloads/be11979a36999266c3671fb48a9cb89f/index-2.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../../../_downloads/5cce67927890cf549811c5d98fecc051/index-2.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../../../_downloads/13117bfc0074ddda831946f1aa2c5541/index-2.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../../../_downloads/4491d42b7a73267a082ec05a4df81479/index-2.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
 <figure class="align-default">
-<img alt="../../../_images/index-21.png" class="plot-directive" src="../../../_images/index-21.png" />
+<img alt="../../../_images/index-2.png" class="plot-directive" src="../../../_images/index-2.png" />
 </figure>
 </dd></dl>
 
@@ -654,8 +655,8 @@ Modified slha files will be used if a scan requires a change of the input.</p></
 <dd><p>Scatter map 2d.
 Central color is the central value, while the inner and outer ring are lower and upper bounds of the uncertainty interval.</p>
 <p>Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hepi</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">hepi</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dl</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
 <span class="gp">... </span><span class="s2">&quot;https://raw.githubusercontent.com/APN-Pucky/xsec/master/json/pp13_hinosplit_N2N1_NLO%2BNLL.json&quot;</span>
 <span class="gp">... </span><span class="p">),</span><span class="n">dimensions</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -664,7 +665,7 @@ Central color is the central value, while the inner and outer ring are lower and
 </div>
 <p>(<a class="reference download internal" download="" href="../../../_downloads/2ee072e7db5158ed682d46faf68ffa88/index-3.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../../../_downloads/28bb3ad1aec07f8cabdda4525d204880/index-3.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../../../_downloads/ccc3f1ef5103844dc59401ffd5346302/index-3.hires.png"><code class="xref download docutils literal notranslate"><span class="pre">hires.png</span></code></a>, <a class="reference download internal" download="" href="../../../_downloads/eefbd5a146e307b88191b4f91ec1568c/index-3.pdf"><code class="xref download docutils literal notranslate"><span class="pre">pdf</span></code></a>)</p>
 <figure class="align-default">
-<img alt="../../../_images/index-31.png" class="plot-directive" src="../../../_images/index-31.png" />
+<img alt="../../../_images/index-3.png" class="plot-directive" src="../../../_images/index-3.png" />
 </figure>
 </dd></dl>
 

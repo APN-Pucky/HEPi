@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.order &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
@@ -90,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.order</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -105,29 +104,29 @@
 
 
 <div class="viewcode-block" id="Order">
-<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Order">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.order.Order">[docs]</a>
 class Order(IntEnum):
     &quot;&quot;&quot;
     Computation orders.
     &quot;&quot;&quot;
 
 <div class="viewcode-block" id="Order.LO">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.Order.LO">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.Order.LO">[docs]</a>
     LO = 0</div>
 
     &quot;&quot;&quot;Leading Order&quot;&quot;&quot;
 <div class="viewcode-block" id="Order.NLO">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.Order.NLO">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.Order.NLO">[docs]</a>
     NLO = 1</div>
 
     &quot;&quot;&quot;Next-to-Leading Order&quot;&quot;&quot;
 <div class="viewcode-block" id="Order.NLO_PLUS_NLL">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.Order.NLO_PLUS_NLL">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.Order.NLO_PLUS_NLL">[docs]</a>
     NLO_PLUS_NLL = 2</div>
 
     &quot;&quot;&quot;Next-to-Leading Order plus Next-to-Leading Logarithms&quot;&quot;&quot;
 <div class="viewcode-block" id="Order.aNNLO_PLUS_NNLL">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.Order.aNNLO_PLUS_NNLL">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.Order.aNNLO_PLUS_NNLL">[docs]</a>
     aNNLO_PLUS_NNLL = 3</div>
 
     &quot;&quot;&quot;Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms&quot;&quot;&quot;</div>
@@ -135,14 +134,14 @@ class Order(IntEnum):
 
 
 <div class="viewcode-block" id="replace_macros">
-<a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.replace_macros">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/plot/index.html#hepi.order.replace_macros">[docs]</a>
 def replace_macros(s: str) -&gt; str:
     return s.replace(&quot;_PLUS_&quot;, &quot;+&quot;).replace(&quot; &quot;, &quot;\\ &quot;)</div>
 
 
 
 <div class="viewcode-block" id="xsec_to_order">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.xsec_to_order">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.xsec_to_order">[docs]</a>
 def xsec_to_order(s: str):
     if s == &quot;NNLOapprox+NNLL&quot;:
         return Order.aNNLO_PLUS_NNLL
@@ -158,7 +157,7 @@ def xsec_to_order(s: str):
 
 
 <div class="viewcode-block" id="order_to_string">
-<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order_to_string">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/order/index.html#hepi.order.order_to_string">[docs]</a>
 def order_to_string(o: Order, json_style=False, no_macros=False) -&gt; str:
     ret = &quot;&quot;
     if o == Order.LO:

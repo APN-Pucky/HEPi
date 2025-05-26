@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.run.run &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
@@ -90,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.run.run</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -124,7 +123,7 @@ from hepi.util import DL2DF, LD2DL, DictData, namehash
 
 
 <div class="viewcode-block" id="RunParam">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.RunParam">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.feynhiggs.RunParam">[docs]</a>
 class RunParam(DictData):
     &quot;&quot;&quot;Abstract class that is similar to a dictionary but with fixed keys.&quot;&quot;&quot;
 
@@ -137,34 +136,34 @@ class RunParam(DictData):
         name: str = None,
     ):
 <div class="viewcode-block" id="RunParam.name">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.RunParam.name">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.feynhiggs.RunParam.name">[docs]</a>
         self.name = name</div>
 
 <div class="viewcode-block" id="RunParam.skip">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.RunParam.skip">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.feynhiggs.RunParam.skip">[docs]</a>
         self.skip = skip</div>
 
 <div class="viewcode-block" id="RunParam.in_file">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.RunParam.in_file">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.feynhiggs.RunParam.in_file">[docs]</a>
         self.in_file = in_file</div>
 
 <div class="viewcode-block" id="RunParam.out_file">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.RunParam.out_file">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.feynhiggs.RunParam.out_file">[docs]</a>
         self.out_file = out_file</div>
 
 <div class="viewcode-block" id="RunParam.execute">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.RunParam.execute">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.feynhiggs.RunParam.execute">[docs]</a>
         self.execute = execute</div>
 </div>
 
 
 
 <div class="viewcode-block" id="Runner">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner">[docs]</a>
 class Runner:
     def __init__(self, path: str, in_dir: str = None, out_dir: str = None, pre=None):
 <div class="viewcode-block" id="Runner.path">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.Runner.path">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/run/index.html#hepi.run.feynhiggs.Runner.path">[docs]</a>
         self.path = path</div>
 
         if in_dir is None:
@@ -181,27 +180,27 @@ class Runner:
             self.pre = pre
 
 <div class="viewcode-block" id="Runner.orders">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.orders">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.orders">[docs]</a>
     def orders(self) -&gt; List[Order]:
         &quot;&quot;&quot;List of supported Orders in this runner.&quot;&quot;&quot;
         return [e.value for e in Order]</div>
 
 
 <div class="viewcode-block" id="Runner.get_name">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_name">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.get_name">[docs]</a>
     def get_name(self) -&gt; str:
         &quot;&quot;&quot;Returns the name of the runner.&quot;&quot;&quot;
         return type(self).__name__</div>
 
 
 <div class="viewcode-block" id="Runner.get_version">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_version">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.get_version">[docs]</a>
     def get_version(self) -&gt; str:
         return &quot;?&quot;</div>
 
 
 <div class="viewcode-block" id="Runner._sub_run">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._sub_run">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner._sub_run">[docs]</a>
     def _sub_run(self, coms: List[str]) -&gt; str:
         process = Popen(coms, stdout=PIPE)
         (output, err) = process.communicate()
@@ -213,14 +212,14 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner._check_path">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._check_path">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner._check_path">[docs]</a>
     def _check_path(self) -&gt; bool:
         &quot;&quot;&quot;Checks if the passed path is valid.&quot;&quot;&quot;
         return True</div>
 
 
 <div class="viewcode-block" id="Runner._prepare">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._prepare">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner._prepare">[docs]</a>
     def _prepare(self, p: Input, skip=False, assume_valid=False, **kwargs) -&gt; RunParam:
         skip_ = skip
         # p.runner = str(type(self).__name__) + &quot;-&quot; + self.get_version()
@@ -261,7 +260,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner._check_input">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._check_input">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner._check_input">[docs]</a>
     def _check_input(self, param: Input, **kwargs) -&gt; bool:
         if param.order not in self.orders():
             warnings.warn(
@@ -272,7 +271,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner._prepare_all">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._prepare_all">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner._prepare_all">[docs]</a>
     def _prepare_all(
         self, params: List[Input], skip=True, n_jobs=None, **kwargs
     ) -&gt; List[RunParam]:
@@ -329,7 +328,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.run">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.run">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.run">[docs]</a>
     def run(
         self,
         params: List[Input],
@@ -391,7 +390,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner._run">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._run">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner._run">[docs]</a>
     def _run(
         self,
         rps: List[RunParam],
@@ -457,7 +456,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner._is_valid">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._is_valid">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner._is_valid">[docs]</a>
     def _is_valid(self, file: str, p: Input, d, **kwargs) -&gt; bool:
         &quot;&quot;&quot;
         Verifies that a file is a complete output.
@@ -483,7 +482,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.parse">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.parse">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.parse">[docs]</a>
     def parse(self, outputs: List[str], n_jobs=None) -&gt; List[Result]:
         &quot;&quot;&quot;
             Parses Resummino output files and returns List of Results.
@@ -515,7 +514,7 @@ class Runner:
         # return rsl
 
 <div class="viewcode-block" id="Runner._parse_file">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner._parse_file">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner._parse_file">[docs]</a>
     def _parse_file(self, file: str) -&gt; Result:
         &quot;&quot;&quot;
         Extracts results from an output file.
@@ -531,7 +530,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.get_path">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_path">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.get_path">[docs]</a>
     def get_path(self) -&gt; str:
         &quot;&quot;&quot;
         Get the Runner path.
@@ -543,7 +542,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.get_input_dir">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_input_dir">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.get_input_dir">[docs]</a>
     def get_input_dir(self) -&gt; str:
         &quot;&quot;&quot;
         Get the input directory.
@@ -555,7 +554,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.get_output_dir">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_output_dir">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.get_output_dir">[docs]</a>
     def get_output_dir(self) -&gt; str:
         &quot;&quot;&quot;
         Get the input directory.
@@ -567,7 +566,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.get_pre">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.get_pre">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.get_pre">[docs]</a>
     def get_pre(self) -&gt; str:
         &quot;&quot;&quot;
         Gets the command prefix.
@@ -579,7 +578,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.set_path">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.set_path">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.set_path">[docs]</a>
     def set_path(self, p: str):
         &quot;&quot;&quot;
         Set the path to the Runner folder containing the binary in &#39;./bin&#39; or &#39;./build/bin&#39;.
@@ -593,7 +592,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.set_input_dir">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.set_input_dir">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.set_input_dir">[docs]</a>
     def set_input_dir(self, indir: str):
         &quot;&quot;&quot;
         Sets the input directory.
@@ -605,7 +604,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.set_output_dir">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.set_output_dir">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.set_output_dir">[docs]</a>
     def set_output_dir(self, outdir: str, create: bool = True):
         &quot;&quot;&quot;
         Sets the output directory.
@@ -620,7 +619,7 @@ class Runner:
 
 
 <div class="viewcode-block" id="Runner.set_pre">
-<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.Runner.set_pre">[docs]</a>
+<a class="viewcode-back" href="../../../autoapi/hepi/run/spheno/index.html#hepi.run.feynhiggs.Runner.set_pre">[docs]</a>
     def set_pre(self, ppre: str):
         &quot;&quot;&quot;
         Sets the command prefix.

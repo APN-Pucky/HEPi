@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.results &mdash; hepi  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
@@ -90,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.results</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -116,22 +115,22 @@ from .util import DictData
 
 # If the numerical uncertainty times :attr:`required_numerical_uncertainty_factor` is higher than the scale or pdf uncertainty a warning is shown.
 <div class="viewcode-block" id="required_numerical_uncertainty_factor">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.required_numerical_uncertainty_factor">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.required_numerical_uncertainty_factor">[docs]</a>
 required_numerical_uncertainty_factor = 5</div>
 
 
 <div class="viewcode-block" id="unv">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.unv">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.unv">[docs]</a>
 unv = unp.nominal_values</div>
 
 <div class="viewcode-block" id="usd">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.usd">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.usd">[docs]</a>
 usd = unp.std_devs</div>
 
 
 
 <div class="viewcode-block" id="Result">
-<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.Result">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/run/index.html#hepi.results.Result">[docs]</a>
 class Result(DictData):
     &quot;&quot;&quot;
     General result class. All uncertainties are of numerical origin.
@@ -159,19 +158,19 @@ class Result(DictData):
             annlo_plus_nnll (:obj:`double`): corresponds to :attr:`aNNLO_PLUS_NNLL`.
         &quot;&quot;&quot;
 <div class="viewcode-block" id="Result.LO">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result.LO">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.Result.LO">[docs]</a>
         self.LO = lo</div>
 
 <div class="viewcode-block" id="Result.NLO">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result.NLO">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.Result.NLO">[docs]</a>
         self.NLO = nlo</div>
 
 <div class="viewcode-block" id="Result.NLO_PLUS_NLL">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result.NLO_PLUS_NLL">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.Result.NLO_PLUS_NLL">[docs]</a>
         self.NLO_PLUS_NLL = nlo_plus_nll</div>
 
 <div class="viewcode-block" id="Result.aNNLO_PLUS_NNLL">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.Result.aNNLO_PLUS_NNLL">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.Result.aNNLO_PLUS_NNLL">[docs]</a>
         self.aNNLO_PLUS_NNLL = annlo_plus_nnll</div>
 
         if lo is not None and lo != 0:
@@ -206,7 +205,7 @@ class Result(DictData):
 
 # TODO detect which errors also for scales
 <div class="viewcode-block" id="pdf_errors">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_errors">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.pdf_errors">[docs]</a>
 def pdf_errors(li, dl, ordernames=None, confidence_level=90, n_jobs=None):
     &quot;&quot;&quot;
     Just like `pdf_error` but over a list of ordernames.
@@ -222,7 +221,7 @@ def pdf_errors(li, dl, ordernames=None, confidence_level=90, n_jobs=None):
 
 
 <div class="viewcode-block" id="_pdf_error_single">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi._pdf_error_single">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results._pdf_error_single">[docs]</a>
 def _pdf_error_single(members, i, dl, ordername, confidence_level=90):
     try:
         import lhapdf
@@ -260,7 +259,7 @@ def _pdf_error_single(members, i, dl, ordername, confidence_level=90):
 
 
 <div class="viewcode-block" id="pdf_error">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.pdf_error">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.pdf_error">[docs]</a>
 def pdf_error(li, dl, ordername=&quot;LO&quot;, confidence_level=90, n_jobs=None):
     &quot;&quot;&quot;
     Computes Parton Density Function (PDF) uncertainties through :func:`lhapdf.set.uncertainty`.
@@ -347,7 +346,7 @@ def pdf_error(li, dl, ordername=&quot;LO&quot;, confidence_level=90, n_jobs=None
 
 
 <div class="viewcode-block" id="scale_errors">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_errors">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.scale_errors">[docs]</a>
 def scale_errors(li, dl, ordernames=None, n_jobs=None):
     &quot;&quot;&quot;
     Just like `scale_error` but over a list of ordernames.
@@ -363,7 +362,7 @@ def scale_errors(li, dl, ordernames=None, n_jobs=None):
 
 
 <div class="viewcode-block" id="_scale_error_single">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi._scale_error_single">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results._scale_error_single">[docs]</a>
 def _scale_error_single(members, i, dl, ordername=&quot;LO&quot;):
     if dl[&quot;pdfset_nlo&quot;][i] == 0 and dl[&quot;mu_f&quot;][i] == 1.0 and dl[&quot;mu_r&quot;][i] == 1.0:
         scales = []
@@ -382,7 +381,7 @@ def _scale_error_single(members, i, dl, ordername=&quot;LO&quot;):
 
 
 <div class="viewcode-block" id="scale_error">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.scale_error">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.scale_error">[docs]</a>
 def scale_error(li, dl, ordername=&quot;LO&quot;, n_jobs=None):
     &quot;&quot;&quot;
     Computes seven-point scale uncertainties from the results where the renormalization and factorization scales are varied by factors of 2 and  relative factors of four are excluded (cf. :meth:`seven_point_scan`).
@@ -463,7 +462,7 @@ def scale_error(li, dl, ordername=&quot;LO&quot;, n_jobs=None):
 
 
 <div class="viewcode-block" id="combine_errors">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.combine_errors">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.combine_errors">[docs]</a>
 def combine_errors(dl, ordernames=None):
     &quot;&quot;&quot;
     Just like `combine_error` but over a list of ordernames.
@@ -479,7 +478,7 @@ def combine_errors(dl, ordernames=None):
 
 
 <div class="viewcode-block" id="combine_error">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.combine_error">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.combine_error">[docs]</a>
 def combine_error(dl: dict, ordername=&quot;LO&quot;):
     &quot;&quot;&quot;
     Combines seven-point scale uncertainties and pdf uncertainties from the results by Pythagorean addition.
@@ -520,7 +519,7 @@ def combine_error(dl: dict, ordername=&quot;LO&quot;):
 
 
 <div class="viewcode-block" id="asym_to_sym_error">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.asym_to_sym_error">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.asym_to_sym_error">[docs]</a>
 def asym_to_sym_error(central,errminus,errplus):
     return ufloat(
         central + (errplus + errminus) / 2.0,
@@ -529,13 +528,13 @@ def asym_to_sym_error(central,errminus,errplus):
 
 
 <div class="viewcode-block" id="add_errors">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.add_errors">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.add_errors">[docs]</a>
 def add_errors(error1,error2):
     return (error1**2 + error2**2)**0.5</div>
 
 
 <div class="viewcode-block" id="asym_to_sym_combined_error">
-<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.asym_to_sym_combined_error">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/hepi/results/index.html#hepi.results.asym_to_sym_combined_error">[docs]</a>
 def asym_to_sym_combined_error(central,errminus1,errplus1,errminus2,errplus2):
     return asym_to_sym_error(central,add_errors(errplus1,errplus2),add_errors(errminus1,errminus2))</div>
 
