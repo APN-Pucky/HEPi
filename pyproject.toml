@@ -1,85 +1,84 @@
-[tool.poetry]
-name = "hepi"
-version = "0.0.0"
-description = "Interface to High Energy Physics tools."
-authors = ["Alexander Puck Neuwirth <alexander@neuwirth-informatik.de>"]
-readme = "README.md"
-repository = "https://github.com/APN-Pucky/HEPi"
-
-[tool.poetry.dependencies]
-python = "^3.9"
-uncertainties="*"
-numpy="*"
-matplotlib="*"
-scipy  = ">=1.7.0"
-sympy= "*"
-pyslha = "*"
-particle = "*"
-pqdm = "*"
-pandas = ">=1.0.0"
-smpl = ">=1.3.0"
-validators = "*"
-
-
-# does not exist on pypi for recent pythons
-#lhapdf = {version = "^6", optional = true}
-
-
-[tool.poetry.scripts]
-hepi-fast = "hepi.fast:main"
-
-[tool.poetry.extras]
-lhapdf = ["lhapdf"]
-
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-sphinx = "<8.0.0" # pinned due to RTD issues
-sphinx-rtd-theme = "*"
-sphinxcontrib-napoleon = "*"
-nbsphinx = "*"
-jupyter-sphinx = "*"
-sphinx-autoapi = "*"
-sphinx_autobuild = "*"
-sphinx_math_dollar = "*"
-pandoc = "*"
-numpydoc = "*"
-myst-parser  = "*"
-toml ="*"
-
-[tool.poetry.group.test]
-optional = true
-
-[tool.poetry.group.test.dependencies]
-pytest = "*"
-pytest-cov =  "*"
-pytest-profiling =  "*"
-pytest-line-profiler-apn = ">=0.1.3"
-
-[tool.poetry.group.dev]
-optional = true
-
-[tool.poetry.group.dev.dependencies]
-pre-commit = ">=2.20,<5.0"
-ipython =  "*"
-jupyterlab =  "*"
-jupyter = "*"
-poetry-dynamic-versioning = {extras = ["plugin"], version = ">=1.0.0,<2.0.0"}
-
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
-build-backend = "poetry_dynamic_versioning.backend"
+requires = [
+  "hatchling",
+  "hatch-vcs",
+]
+build-backend = "hatchling.build"
 
-[tool.poetry-dynamic-versioning]
-enable = true
-vcs = "git"
-style = "pep440"
-dirty = true
-# modified dunami default pattern without v
-pattern = '(?x)(?# ignore whitespace)^((?P<epoch>\d+)!)?(?P<base>\d+(\.\d+)*)(?# v1.2.3 or v1!2000.1.2)([-._]?((?P<stage>[a-zA-Z]+)[-._]?(?P<revision>\d+)?))?(?# b0)(\+(?P<tagged_metadata>.+))?$(?# +linux)'
-strict = true
-format-jinja = "{% if distance == 0 %}{{ base }}{% else %}{{ base }}.{{ distance }}{% endif %}"
+[project]
+name = "hepi"
+dynamic = ["version"]
+description = "Interface to High Energy Physics tools."
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = []
+authors = [
+  { name = "Alexander Puck Neuwirth", email = "alexander@neuwirth-informatik.de" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Scientific/Engineering",
+]
+
+dependencies = [
+    "uncertainties",
+    "numpy",
+    "matplotlib",
+    "scipy >=1.7.0",
+    "sympy",
+    "pyslha",
+    "particle",
+    "pqdm",
+    "pandas >=1.0.0",
+    "smpl >=1.3.0",
+    "validators",
+]
+
+[project.urls]
+Documentation = "https://hepi.readthedocs.io/"
+Issues = "https://github.com/APN-Pucky/HEPi/issues"
+Source = "https://github.com/APN-Pucky/HEPi"
+
+[project.optional-dependencies]
+lhapdf = ["lhapdf"]
+docs = [
+    "sphinx <8.0.0",  # pinned due to RTD issues
+    "sphinx-rtd-theme",
+    "sphinxcontrib-napoleon",
+    "nbsphinx",
+    "jupyter-sphinx",
+    "sphinx-autoapi",
+    "sphinx_autobuild",
+    "sphinx_math_dollar",
+    "pandoc",
+    "numpydoc",
+    "myst-parser",
+    "toml",
+]
+
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-profiling",
+    "pytest-line-profiler-apn >=0.1.3",
+]
+
+dev = [
+    "pre-commit",
+    "ipython",
+    "jupyterlab",
+    "jupyter",
+]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -92,4 +91,11 @@ filterwarnings = [
     'ignore:PDF set .* not installed?:UserWarning',
     'ignore:Could not set new central scale .*:RuntimeWarning',
     'ignore: pkg_resources is deprecated as an API:DeprecationWarning',
+]
+
+[tool.coverage.run]
+relative_files = true
+omit = [
+  "scripts/*",
+  "./docs/source/conf.py",
 ]
