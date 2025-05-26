@@ -2,19 +2,17 @@
 
 Python interface for gluing together several HEP programs (e.g. from HEPForge <https://www.hepforge.org/>).
 
-[![PyPI version][pypi image]][pypi link] 
-![downloads](https://img.shields.io/pypi/dm/hepi.svg)  
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430837.svg)](https://doi.org/10.5281/zenodo.8430837) 
+[![PyPI version][pypi image]][pypi link]
+![downloads](https://img.shields.io/pypi/dm/hepi.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430837.svg)](https://doi.org/10.5281/zenodo.8430837)
 [![SSLBinder](https://binderhub.ssl-hep.org/badge_logo.svg)](https://binderhub.ssl-hep.org/v2/gh/APN-Pucky/HEPi/binder?labpath=docs%2Fsource%2Fexamples%2Fdemo_00_resummino.ipynb)
 [![MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/APN-Pucky/HEPi/binder?labpath=docs%2Fsource%2Fexamples%2Fdemo_00_resummino.ipynb)
-
-| [Stable][doc stable]        | [Unstable][doc test]           |
-| ------------- |:-------------:|
-| [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
-| [![Coverage Status][c s i]][c s l] | [![Coverage Status][c t i]][c t l] |
-| [![Codacy Badge][cc s c i]][cc s c l]      |[![Codacy Badge][cc c i]][cc c l] | 
-| [![Codacy Badge][cc s q i]][cc s q l]      |[![Codacy Badge][cc q i]][cc q l] | 
-| [![Documentation][rtd s i]][rtd s l] | [![Documentation][rtd t i]][rtd t l]  | 
+[Unstable][doc test]
+[![test][a t image]][a t link]
+[![Coverage Status][c t i]][c t l]
+[![Codacy Badge][cc c i]][cc c l]
+[![Codacy Badge][cc q i]][cc q l]
+[![Documentation][rtd t i]][rtd t l]
 
 
 ## Goals
