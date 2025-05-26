@@ -9,7 +9,7 @@ docs: html
 
 install:
 	# only if pip is installed
-	command -v pip3 && python3 -m pip install -user .
+	hatch build
 
 install-user:
 	python3 -m pip install --user --break-system-packages .
