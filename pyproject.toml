@@ -80,6 +80,16 @@ dev = [
     "jupyter",
 ]
 
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "hepi/_version.py"
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = [ 

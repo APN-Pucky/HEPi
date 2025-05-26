@@ -16,9 +16,8 @@ from .util import *
 # import json
 # import requests
 # from urllib.request import urlopen
-
+from ._version import version as __version__
 package = "hepi"
-__version__ = version(package)
 
 
 # try:
