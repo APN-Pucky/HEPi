@@ -120,4 +120,4 @@ for something like
 
 [nnll-fast]: https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast
 [resummino]: https://resummino.hepforge.org
-[xsec]: https://github.com/fuenfundachtzig/xsec)
+[xsec]: https://github.com/fuenfundachtzig/xsec
