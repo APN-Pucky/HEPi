@@ -1248,6 +1248,73 @@ files = [
 ]
 
 [[package]]
+name = "iminuit"
+version = "2.31.1"
+description = "Jupyter-friendly Python frontend for MINUIT2 in C++"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "iminuit-2.31.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:6f756dfd97910d26ec5a27eab23d6469286881082a7e4f55b031f3c7fd337b53"},
+    {file = "iminuit-2.31.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:911ea64503ae5c9fcad05d255fd1f868553b24ee779a8cd3ec5b4c29df92c1fb"},
+    {file = "iminuit-2.31.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e6c8359103037171d26899e04697b6356e73f79d68c72e9ed5f8fdbe0d3501e4"},
+    {file = "iminuit-2.31.1-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:814cf3d0017b41c41ce3093ad708e5fe335b3957716e25c4264bb8208a1e32be"},
+    {file = "iminuit-2.31.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d2d1d844a9903ada73d803b82861c3179fe70de60b3a4ac540d66f2ef8515805"},
+    {file = "iminuit-2.31.1-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:a2c76e00fbe59409c22266778962700b50c621a50230e4da77b2e73b8daffa1c"},
+    {file = "iminuit-2.31.1-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:2d9064c495f5fbf6c505d98b1bfe1c3e3d8abf88940b38a5e94d2e81210e01ba"},
+    {file = "iminuit-2.31.1-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:cfd8af60772104a6d66805b3140a5a0e7f66024f730281d473b5fe5103eadfe9"},
+    {file = "iminuit-2.31.1-cp310-cp310-win32.whl", hash = "sha256:e37e3f510ccae1e417cd4f2d6bdc0fdd4b4c9d5c02ab8c5ae2e97d6193cffcc8"},
+    {file = "iminuit-2.31.1-cp310-cp310-win_amd64.whl", hash = "sha256:435cc31647fad4d8322eb1e473597a850fc6fec0f7c6b6f331d34544ab502719"},
+    {file = "iminuit-2.31.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:d65ef5fc506242dd239c022cbf1af3809a1b4b9b35f10ed6f9e6811b3311895e"},
+    {file = "iminuit-2.31.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:94abebcc24f4989f9bd3e0a46d6d6554d5d94cdcbe29ed09918c23f42b62e5b6"},
+    {file = "iminuit-2.31.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:26b22c3ac992289bf38c05cd59273ee17e3859982139f38b4679e526b4353f4b"},
+    {file = "iminuit-2.31.1-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:6d473543f42db31769d275ff4270a29e4af3425562c3b99c51dd3b8aaea8bae6"},
+    {file = "iminuit-2.31.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cc20686cc95c2265b4366086f1dedf6c8ebfa15c0bb9262ed1f4abbb9fd67ea9"},
+    {file = "iminuit-2.31.1-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:ce23aec1408d18a81c2f27036918d161551f8d55b8585f467f3331c148d582b2"},
+    {file = "iminuit-2.31.1-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:ac02d807b8a5a5035bda1ae5a0dec1ce601768ce82af5b1083070a7b44a70834"},
+    {file = "iminuit-2.31.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:14b2e676ddda333afe4277a123fbaeb945df16b18877cfd656cfd2fba57f5786"},
+    {file = "iminuit-2.31.1-cp311-cp311-win32.whl", hash = "sha256:82602fb87a700821402c39d14ff64bc1cb82cc63fe28ceb8ea8a5bc9cbb5168a"},
+    {file = "iminuit-2.31.1-cp311-cp311-win_amd64.whl", hash = "sha256:ea3e3e63eeeda7fbf511f7e30b017aab06725f95f80138c220265f76787db5a8"},
+    {file = "iminuit-2.31.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:930c02290d81bfbf7c935f607ec27891eb9c951a9b3cbd3b1578737a9546c038"},
+    {file = "iminuit-2.31.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:88d839f7a4574af5aeae561dd52c8fcd30f1c1850e845a640ac5c3867fc3ecf7"},
+    {file = "iminuit-2.31.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:805e3e09d31ddc3000813dcf306bf2e07a691a6cb6cd4d80baadbf4e295abad4"},
+    {file = "iminuit-2.31.1-cp312-cp312-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:7ed59c9de2788f6df2cc957e38d7da9b5f3d413234553981cfb105ce89312bdb"},
+    {file = "iminuit-2.31.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e9dfc97ec48389840dcb5d092df0087101135f7e71f783000e20da4da16aaf5c"},
+    {file = "iminuit-2.31.1-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:2ba2ddd2590ba418653ea4463df4508ea93ae2820c495b72df45038d74223b9f"},
+    {file = "iminuit-2.31.1-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:9c12a0ff24d2d9a77643d591b7be266c3e7d00cd6a565745da218c8cadd1c7ba"},
+    {file = "iminuit-2.31.1-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:2d1fba39c44c3538320b5669278ff3b0df4af6c33bc3136d6bc23cd15dc370a7"},
+    {file = "iminuit-2.31.1-cp312-cp312-win32.whl", hash = "sha256:c6e22319e99ed8eec8b78d5d2a7c21de3f38a114672285ecbe1d2626782eacda"},
+    {file = "iminuit-2.31.1-cp312-cp312-win_amd64.whl", hash = "sha256:44ffa222d6dca4b54b074365aacfa349972bf38f4854832dac1010c85316ac89"},
+    {file = "iminuit-2.31.1-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:7b20e7b857075a550909f793fe9b3ba66710bff2f30e10ab92551becee9508cf"},
+    {file = "iminuit-2.31.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:e85c075acf2d859c0f97ba046752deb2cafbe2c9784d7d0c90f2b8e654c0ba20"},
+    {file = "iminuit-2.31.1-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f3136e561166856c7c20b6e2d4c25fa659eb19b39b3d4ac80764bb6d1adb7938"},
+    {file = "iminuit-2.31.1-cp313-cp313-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:1a2438ef482820ef34b018acced6c7d9f868ab0919dccffe90fed27004afdde0"},
+    {file = "iminuit-2.31.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c51928445524c0d86df481aa24683879c39021d354cf585abaf28034e38a85ff"},
+    {file = "iminuit-2.31.1-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:88f7f27b3b626bb33ddf84daab098aa051cd8bd339325f4d7a46a3c9c56e7c4a"},
+    {file = "iminuit-2.31.1-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:0371ef6e922ece82c12ca5fd837a7076b16cd22533e5a26a83993e1cc44e24c1"},
+    {file = "iminuit-2.31.1-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:bc1359208163c60709ce69fbe6252254b5a94bd3a1eaa342988849fa87d1e545"},
+    {file = "iminuit-2.31.1-cp313-cp313-win32.whl", hash = "sha256:ad2ce2fcfe16f241997040d8d5a9073340e1ac6351ad64a123fea2e7b2feb499"},
+    {file = "iminuit-2.31.1-cp313-cp313-win_amd64.whl", hash = "sha256:fa1e0cf88517b74320d26a1cd68c8be961c22f392d2f078807ebccd6aec71ed8"},
+    {file = "iminuit-2.31.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:7a406057ba6131e36b6c5fd5c1bb3b2ef00ca7eeaba93eef5fd9ddc7c1bf9677"},
+    {file = "iminuit-2.31.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:ad7c0b8260458595336d5b7c7de585b47b704ff3f893f9d4dd52b58e124e5fa3"},
+    {file = "iminuit-2.31.1-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:bbfa364262a516b8e3cbe472c36c26cb3707178006d1870400702e14871bfa1d"},
+    {file = "iminuit-2.31.1-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:f877549aacd60d00aa925d0c15e047b7b9f9677e2bfb09093a1f8a9bdeefbf48"},
+    {file = "iminuit-2.31.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:8821e6c057dea2c155550ead8349f8b9df17ba4323af92a91bc74f85aca27e86"},
+    {file = "iminuit-2.31.1-cp39-cp39-musllinux_1_2_aarch64.whl", hash = "sha256:a037d51ca2f910677499a955a45c800995378777c66e7502e7cfbd2d62072f96"},
+    {file = "iminuit-2.31.1-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:d465462d037b4b5b086b3a574a872ac4fce86aab72f03375b1ab2f64a2f461cd"},
+    {file = "iminuit-2.31.1-cp39-cp39-win32.whl", hash = "sha256:da5f966b9baf5950ecf4951437c28c85439285fb8bcdbaf7dbaeb9a856533ba7"},
+    {file = "iminuit-2.31.1-cp39-cp39-win_amd64.whl", hash = "sha256:18abc293baba499645c235ef0c6296edf22ef1787d0570f40b9cdbda49131eb6"},
+    {file = "iminuit-2.31.1.tar.gz", hash = "sha256:d5e004f1ffd83d2a076409fbf4a79691e7a17c9d73950bb63465af32e104de18"},
+]
+
+[package.dependencies]
+numpy = ">=1.21"
+
+[package.extras]
+doc = ["ipykernel", "jax", "jaxlib", "jupyter_client", "nbconvert", "nbformat", "nbsphinx", "pytest-xdist", "sphinx-rtd-theme"]
+test = ["PySide6", "annotated_types", "boost_histogram", "coverage", "ipykernel", "ipywidgets", "jacobi", "joblib", "matplotlib", "numba ; platform_python_implementation == \"CPython\"", "numba-stats ; platform_python_implementation == \"CPython\"", "numpy", "pydantic", "pytest", "pytest-qt", "pytest-xdist", "pytest-xvfb", "resample", "scipy", "tabulate", "unicodeitplus"]
+
+[[package]]
 name = "importlib-metadata"
 version = "7.0.1"
 description = "Read metadata from Python packages"
@@ -4079,34 +4146,36 @@ files = [
 
 [[package]]
 name = "smpl"
-version = "1.3.0"
+version = "1.4.1"
 description = "SiMPLe plotting and fitting"
 optional = false
-python-versions = ">=3.8,<4.0"
+python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "smpl-1.3.0-py3-none-any.whl", hash = "sha256:61047177b3df640d836ace1ba1cbf2bd267f71d31d9258a4ff8af80064a423be"},
-    {file = "smpl-1.3.0.tar.gz", hash = "sha256:47bdd54e867fbd3e9ec3f5b8c5ab7fdd6139042680f4078ad79c87c99fc988cf"},
+    {file = "smpl-1.4.1-py3-none-any.whl", hash = "sha256:cb98c734ef0977d5799b739f56471c320722085ba7daf2024f07a4b06e23192a"},
+    {file = "smpl-1.4.1.tar.gz", hash = "sha256:79311bd448311bfad3fb5d2105f26c8de3c202e889f05a8ff79632e16d1ccfc6"},
 ]
 
 [package.dependencies]
-deprecation = "*"
+iminuit = "*"
 matplotlib = "*"
 numpy = "*"
 pandas = ">=1.0.0"
 scipy = ">=1.7.0"
-smpl_animation = "*"
-smpl_debug = ">=1.0.5,<2.0.0"
-smpl_doc = ">=1.0.5,<2.0.0"
-smpl_io = ">=1.0.5,<2.0.0"
-smpl_parallel = ">=1.0.5,<2.0.0"
-smpl_util = ">=1.0.5,<2.0.0"
+smpl-animation = "*"
+smpl-debug = ">=1.0.5"
+smpl-doc = ">=1.0.5"
+smpl-io = ">=1.0.5"
+smpl-parallel = ">=1.0.5"
+smpl-util = ">=1.0.5"
+smplr = "*"
 sympy = "*"
 tqdm = "*"
 uncertainties = "*"
 
 [package.extras]
-opt = ["iminuit"]
+dev = ["ipython", "jupyter", "jupyterlab", "nbval", "pre-commit (>=2.20,<4.0)", "pytest", "pytest-cov", "pytest-line-profiler-apn (>=0.1.5)", "pytest-mpl", "pytest-profiling"]
+doc = ["jupyter-sphinx", "myst-parser", "nbsphinx", "numpydoc", "pandoc", "sphinx (<8.0.0)", "sphinx-autoapi", "sphinx-autobuild", "sphinx-math-dollar", "sphinx-rtd-theme", "sphinxcontrib-napoleon", "toml"]
 
 [[package]]
 name = "smpl-animation"
@@ -4202,6 +4271,21 @@ files = [
 [package.dependencies]
 numpy = "*"
 smpl_doc = "*"
+
+[[package]]
+name = "smplr"
+version = "0.0.2"
+description = "Simplified smpl"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "smplr-0.0.2-py3-none-any.whl", hash = "sha256:8879e94f7ff03fccdebf51cd2eb2012b8b08e5abb5f069db141367470b89f41c"},
+    {file = "smplr-0.0.2.tar.gz", hash = "sha256:4c6ba876a276bd4480b2c547fda9826db1dda3c08ca89a77d7c0883317eeb1d3"},
+]
+
+[package.dependencies]
+matplotlib = "*"
 
 [[package]]
 name = "sniffio"
