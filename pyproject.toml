@@ -88,6 +88,8 @@ features = ["dev", "test"]
 
 [tool.hatch.envs.test]
 features = ["test"]
+# we need lhapdf
+system-packages = true
 
 [tool.hatch.version]
 source = "vcs"
