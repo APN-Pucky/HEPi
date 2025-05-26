@@ -2,19 +2,17 @@
 
 Python interface for gluing together several HEP programs (e.g. from HEPForge <https://www.hepforge.org/>).
 
-[![PyPI version][pypi image]][pypi link] 
-![downloads](https://img.shields.io/pypi/dm/hepi.svg)  
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430837.svg)](https://doi.org/10.5281/zenodo.8430837) 
+[![PyPI version][pypi image]][pypi link]
+![downloads](https://img.shields.io/pypi/dm/hepi.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8430837.svg)](https://doi.org/10.5281/zenodo.8430837)
 [![SSLBinder](https://binderhub.ssl-hep.org/badge_logo.svg)](https://binderhub.ssl-hep.org/v2/gh/APN-Pucky/HEPi/binder?labpath=docs%2Fsource%2Fexamples%2Fdemo_00_resummino.ipynb)
 [![MyBinder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/APN-Pucky/HEPi/binder?labpath=docs%2Fsource%2Fexamples%2Fdemo_00_resummino.ipynb)
-
-| [Stable][doc stable]        | [Unstable][doc test]           |
-| ------------- |:-------------:|
-| [![workflow][a s image]][a s link]      | [![test][a t image]][a t link]     |
-| [![Coverage Status][c s i]][c s l] | [![Coverage Status][c t i]][c t l] |
-| [![Codacy Badge][cc s c i]][cc s c l]      |[![Codacy Badge][cc c i]][cc c l] | 
-| [![Codacy Badge][cc s q i]][cc s q l]      |[![Codacy Badge][cc q i]][cc q l] | 
-| [![Documentation][rtd s i]][rtd s l] | [![Documentation][rtd t i]][rtd t l]  | 
+[Unstable][doc test]
+[![test][a t image]][a t link]
+[![Coverage Status][c t i]][c t l]
+[![Codacy Badge][cc c i]][cc c l]
+[![Codacy Badge][cc q i]][cc q l]
+[![Documentation][rtd t i]][rtd t l]
 
 
 ## Goals
@@ -40,8 +38,7 @@ If a result already exists hepi won't rerun the tool.
 
 For more details on the usage of different tools, called runners, check the respective documentation.
 
--   <https://hepi.readthedocs.io/en/stable/>
--   <https://apn-pucky.github.io/HEPi/index.html>
+-   <https://hepi.readthedocs.io/en/latest/>
 
 ## Versions
 
@@ -51,20 +48,14 @@ For more details on the usage of different tools, called runners, check the resp
 pip install hepi[opt] [--user] [--upgrade]
 ```
 
-### Dev
-
-```sh
-pip install --index-url https://test.pypi.org/simple/ hepi[opt]
-```
-
 `[opt]` can be omitted to avoid optional dependencies (ie. lhapdf).
 
 
 ## HEPi-fast
-HEPi-fast interpolates grids in a similar fashion to [(n)nll-fast](https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast) but also for [Resummino](https://resummino.hepforge.org).  
-They are given as json files as for the CERN SUSY wiki in [xsec](https://github.com/fuenfundachtzig/xsec).
+HEPi-fast interpolates grids similarly to [(n)nll-fast](https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast) but also for [Resummino](https://resummino.hepforge.org).  
+They are given as JSON files as for the CERN SUSY wiki in [xsec](https://github.com/fuenfundachtzig/xsec).
 A default set of grids is in the source folder `hepi/data/json/`.
-HEPi can be used to generate such json files for convenient reloading of the data.
+HEPi can be used to generate such JSON files for convenient reloading of the data.
 Just enter a mass point and the cross sections are returned:
 
 ```
@@ -126,3 +117,5 @@ for something like
 [rtd s l]: https://hepi.readthedocs.io/en/stable/?badge=stable
 [rtd t i]: https://readthedocs.org/projects/hepi/badge/?version=latest
 [rtd t l]: https://hepi.readthedocs.io/en/latest/?badge=latest
+
+
