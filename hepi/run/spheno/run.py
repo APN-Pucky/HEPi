@@ -8,11 +8,19 @@ from hepi.run import Runner
 
 
 class SPhenoRunner(Runner):
+    """
+    Only works with SPheno-3.
+    """
     def _check_path(self) -> bool:
         if os.path.exists(os.path.expanduser(self.get_path() + "/bin/SPheno")):
             self.set_path(self.get_path() + "/bin/SPheno")
             return True
+        if os.path.exists(os.path.expanduser(self.get_path() + "/bin/spheno")):
+            self.set_path(self.get_path() + "/bin/spheno")
+            return True
         if self.get_path().endswith("SPheno"):
+            return True
+        if self.get_path().endswith("spheno"):
             return True
         return False
 

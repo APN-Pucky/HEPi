@@ -154,7 +154,7 @@ class NLLfastRunner(Runner):
 
 # Legacy
 default_nllfast_runner = NLLfastRunner("~/git/nll-fast/nll-fast")
-"""Default Prospino Runner to provide backward compatibility"""
+"""Default NLL-fast Runner to provide backward compatibility"""
 run = default_nllfast_runner.run
 set_path = default_nllfast_runner.set_path
 get_path = default_nllfast_runner.get_path

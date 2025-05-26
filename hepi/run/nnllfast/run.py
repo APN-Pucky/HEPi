@@ -15,7 +15,10 @@ from hepi.run.nllfast.result import NLLFastResult
 from hepi.run.nnllfast.result import NNLLFastResult
 
 
-class NLLfastRunner(Runner):
+class NNLLfastRunner(Runner):
+    """
+    Onlyworks with NNLL-fast-1.1.
+    """
     def get_version(self) -> str:
         return "1.1"
 
@@ -162,8 +165,8 @@ class NLLfastRunner(Runner):
 
 
 # Legacy
-default_nllfast_runner = NLLfastRunner("~/git/nnll-fast/nnll-fast")
-"""Default Prospino Runner to provide backward compatibility"""
-run = default_nllfast_runner.run
-set_path = default_nllfast_runner.set_path
-get_path = default_nllfast_runner.get_path
+default_nnllfast_runner = NNLLfastRunner("~/git/nnll-fast/nnll-fast")
+"""Default NNLL-fast Runner to provide backward compatibility"""
+run = default_nnllfast_runner.run
+set_path = default_nnllfast_runner.set_path
+get_path = default_nnllfast_runner.get_path
