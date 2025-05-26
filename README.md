@@ -28,7 +28,7 @@ Then if you also want to scan over the gluino mass just ask for a scan over prev
 After generating all parameters they can be used to directly run the codes (in parallel or sequential) or just generate the input file for distribution across several clusters.
 The results then can be imported again and plotted nicely.
 
-## Realisation
+## Realization
 In the working directory you have an `input` and `output` folder. The input would typically contain the baseline slha file.
 The `output` will contain the produced scripts to execute the tools.
 To avoid file collisions the files in the output folder correspond to a hashed value of all input parameters.
@@ -38,7 +38,7 @@ If a result already exists hepi won't rerun the tool.
 
 For more details on the usage of different tools, called runners, check the respective documentation.
 
--   <https://hepi.readthedocs.io/en/latest/>
+- <https://hepi.readthedocs.io/en/latest/>
 
 ## Versions
 
@@ -52,8 +52,8 @@ pip install hepi[opt] [--user] [--upgrade]
 
 
 ## HEPi-fast
-HEPi-fast interpolates grids similarly to [(n)nll-fast](https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast) but also for [Resummino](https://resummino.hepforge.org).  
-They are given as JSON files as for the CERN SUSY wiki in [xsec](https://github.com/fuenfundachtzig/xsec).
+HEPi-fast interpolates grids similarly to [(n)nll-fast][nnll-fast] but also for [Resummino][resummino].  
+They are given as JSON files as for the CERN SUSY wiki in [xsec][xsec].
 A default set of grids is in the source folder `hepi/data/json/`.
 HEPi can be used to generate such JSON files for convenient reloading of the data.
 Just enter a mass point and the cross sections are returned:
@@ -117,3 +117,7 @@ for something like
 [rtd s l]: https://hepi.readthedocs.io/en/stable/?badge=stable
 [rtd t i]: https://readthedocs.org/projects/hepi/badge/?version=latest
 [rtd t l]: https://hepi.readthedocs.io/en/latest/?badge=latest
+
+[nnll-fast]: https://www.uni-muenster.de/Physik.TP/~akule_01/nnllfast/doku.php?id=nllfast
+[resummino]: https://resummino.hepforge.org
+[xsec]: https://github.com/fuenfundachtzig/xsec)

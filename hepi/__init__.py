@@ -17,7 +17,9 @@ from .util import *
 # import requests
 # from urllib.request import urlopen
 from ._version import version as __version__
+
 package = "hepi"
+__all__ = ["__version__"]
 
 
 # try:
