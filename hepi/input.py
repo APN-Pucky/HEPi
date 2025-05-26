@@ -521,13 +521,18 @@ def slha_write(newname, d):
         warnings.warn("probably too long filename")
     f = get_output_dir() + newname
     pyslha.write(f, d)
-    with open(f) as reader, open(f, "r+") as writer:
+
+    # Post-process to replace empty lines with '#'
+    with open(f, "r") as reader:
+        lines = []
         for line in reader:
             if line.strip():
-                writer.write(line)
+                lines.append(line)
             else:
-                writer.write("#\n")
-        writer.truncate()
+                lines.append("#\n")
+
+    with open(f, "w") as writer:
+        writer.writelines(lines)
 
 
 def masses_scan(
@@ -613,6 +618,7 @@ def slha_scan_rel(input_list: List[Input], lambdas, rrange: List) -> List[Input]
                 )
             # pyslha.write(get_output_dir()+newname, d)
             slha_write(newname, d)
+            print("slha written to", newname)
 
             setattr(tmp, "slha", newname)
             update_slha(tmp)
