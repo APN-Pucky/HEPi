@@ -8,8 +8,8 @@ doc: html
 docs: html
 
 install:
-	lhapdf install cteq6l1 cteq66 CT14lo CT14nlo
-	python3 -m pip install -user .
+	# only if pip is installed
+	command -v pip3 && python3 -m pip install -user .
 
 install-user:
 	python3 -m pip install --user --break-system-packages .
