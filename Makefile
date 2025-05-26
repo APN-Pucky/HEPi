@@ -1,26 +1,25 @@
 livehtml:
-	poetry run $(MAKE) -C docs livehtml
+	hatch run docs:$(MAKE) -C docs livehtml
 
 html:
-	poetry run $(MAKE) -C docs html
+	hatch run docs:$(MAKE) -C docs html
 
 doc: html
+docs: html
 
 install:
-	lhapdf install cteq6l1 cteq66 CT14lo CT14nlo
-	poetry install --with docs --with test
-	# Make lhapdf available in the virtualenv
-	sed -i 's/include-system-site-packages\s*=.*/include-system-site-packages = true/g' $(shell poetry env info -p)/pyvenv.cfg
+	# only if pip is installed
+	hatch build
 
 install-user:
 	python3 -m pip install --user --break-system-packages .
 
 build:
-	poetry build
+	hatch build
 
 test:
 	rm -f .coverage coverage.xml
-	poetry run pytest
+	hatch run test:pytest
 
 commit: 
 	-git add .
