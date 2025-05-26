@@ -17,7 +17,7 @@ from hepi.run.nnllfast.result import NNLLFastResult
 
 class NNLLfastRunner(Runner):
     """
-    Onlyworks with NNLL-fast-1.1.
+    Only works with NNLL-fast-1.1.
     """
     def get_version(self) -> str:
         return "1.1"
