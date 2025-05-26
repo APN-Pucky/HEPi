@@ -88,7 +88,7 @@ features = ["dev", "test"]
 
 [tool.hatch.envs.test]
 features = ["test"]
-# we need lhapdf
+# we need lhapdf, which is not available on pypi
 system-packages = true
 
 [tool.hatch.version]
