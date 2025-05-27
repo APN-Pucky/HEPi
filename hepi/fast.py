@@ -68,7 +68,7 @@ ID | Central value | error up | error down | error scale up | error scale down |
         "--data",
         type=str,
         help="just prints the data in given format: json, twiki, latex",
-        default="json",
+        default=None,
     )
     args = parser.parse_args()
 
