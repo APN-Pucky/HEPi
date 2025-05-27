@@ -142,7 +142,6 @@ def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0):
     lo = unv(dl["LO"][mask])
     nlo = unv(dl["NLO"][mask])
     nlo_plus_nll = unv(dl["NLO_PLUS_NLL"][mask])
-    #with open(fname, "w+") as f:
     for i in range(len(dl[t][mask])):
         io.write(fname,
             "$"
