@@ -126,7 +126,7 @@ ID | Central value | error up | error down | error scale up | error scale down |
 
         if args.data == "latex":
             cen = df[so+ "_NOERR"]
-            df[so ] = df[so+ "_NOERR"]
+            df[so] = df[so+ "_NOERR"]
 
             df[so + "_SCALE_ERRPLUS"] = (unv(df[so+ "_SCALE"])-cen + usd(df[so+ "_SCALE"]))
             df[so + "_SCALE_ERRMINUS"] = (unv(df[so+ "_SCALE"])-cen - usd(df[so+ "_SCALE"]))
