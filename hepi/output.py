@@ -1,4 +1,5 @@
 import json
+import sys
 from typing import List
 
 # from smpl import plot
@@ -17,18 +18,50 @@ from .util import DL2DF
 unv = unp.nominal_values
 usd = unp.std_devs
 
-def write_twiki(rs_dl, mass, main):
+def write_twiki(rs_dl, mass, main, output=sys.stdout):
+    """
+
+    Examples:
+       >>> import hepi
+       >>> import hepi.data
+       >>> import urllib.request
+       >>> with open(hepi.data.get_file('13600_wino_1000023_-1000024_NNLL.json')) as f:
+       ...     dl,d,_ = hepi.load_json_with_metadata(f)
+       >>> with open('test.twiki', 'w') as f:
+       ...    hepi.write_twiki(dl, d[0][0], order_to_string(dl["order"].iloc[0]),f)
+       >>> with open('test.twiki', 'r') as f:
+       ...     print(f.read())
+       | 100.0 | 9.695 | 2.2 | 2.8 | -3.0 | -2.8 |
+       | 200.0 | 0.7167 | 1.2 | 3.8 | -1.3 | -3.8 |
+       | 300.0 | 0.1445 | 0.8 | 4.9 | -0.8 | -4.9 |
+       | 400.0 | 0.04289 | 0.6 | 6.1 | -0.6 | -6.1 |
+       | 500.0 | 0.0157 | 0.5 | 7.4 | -0.5 | -7.4 |
+       | 600.0 | 0.006556 | 0.4 | 9.0 | -0.4 | -9.0 |
+       | 700.0 | 0.002996 | 0.3 | 10.8 | -0.3 | -10.8 |
+       | 800.0 | 0.001463 | 0.3 | 13.1 | -0.2 | -13.1 |
+       | 900.0 | 0.0007511 | 0.3 | 15.9 | -0.2 | -15.9 |
+       | 1000.0 | 0.0004012 | 0.3 | 19.5 | -0.2 | -19.5 |
+       | 1100.0 | 0.0002212 | 0.2 | 24.0 | -0.1 | -24.0 |
+       | 1200.0 | 0.0001253 | 0.2 | 29.4 | -0.1 | -29.4 |
+       | 1300.0 | 7.254e-05 | 0.2 | 36.0 | -0.1 | -36.0 |
+       | 1400.0 | 4.28e-05 | 0.2 | 44.0 | -0.2 | -44.0 |
+       | 1500.0 | 2.568e-05 | 0.2 | 53.5 | -0.1 | -53.5 |
+       | 1600.0 | 1.563e-05 | 0.2 | 64.7 | -0.1 | -64.7 |
+       | 1700.0 | 9.64e-06 | 0.2 | 77.8 | -0.1 | -77.8 |
+       | 1800.0 | 6.017e-06 | 0.2 | 92.9 | -0.0 | -92.9 |
+       | 1900.0 | 3.797e-06 | 0.2 | 110.3 | -0.0 | -110.3 |
+       | 2000.0 | 2.419e-06 | 0.2 | 129.8 | -0.0 | -129.8 |
+       <BLANKLINE>
+    """
     for i in range(len(rs_dl[main + "_NOERR"])):
         cen = rs_dl[main + "_NOERR"].iloc[i],
         cen = cen[0]
-        print( "|" , 
-              rs_dl[mass].iloc[i]              , " | " ,
-              "{:.4g}".format(cen), " | ",
-              "{:.1f}".format((unv(rs_dl[main + "_SCALE"].iloc[i])-cen + usd(rs_dl[main + "_SCALE"].iloc[i]))/cen*100), "|",
-              "{:.1f}".format((unv(rs_dl[main + "_PDF"].iloc[i])-cen + usd(rs_dl[main + "_PDF"].iloc[i]))/cen*100), "|",
-              
-              "{:.1f}".format((unv(rs_dl[main + "_SCALE"].iloc[i])-cen - usd(rs_dl[main + "_SCALE"].iloc[i]))/cen*100), "|",
-              "{:.1f}".format((unv(rs_dl[main + "_PDF"].iloc[i])-cen - usd(rs_dl[main + "_PDF"].iloc[i]))/cen*100), "|",
+        io.write(output, "| " + str(rs_dl[mass].iloc[i])              + " | " +
+              "{:.4g}".format(cen)+ " | "+
+              "{:.1f}".format((unv(rs_dl[main + "_SCALE"].iloc[i])-cen + usd(rs_dl[main + "_SCALE"].iloc[i]))/cen*100)+ " | "+
+              "{:.1f}".format((unv(rs_dl[main + "_PDF"].iloc[i])-cen + usd(rs_dl[main + "_PDF"].iloc[i]))/cen*100)+ " | "+
+              "{:.1f}".format((unv(rs_dl[main + "_SCALE"].iloc[i])-cen - usd(rs_dl[main + "_SCALE"].iloc[i]))/cen*100)+ " | "+
+              "{:.1f}".format((unv(rs_dl[main + "_PDF"].iloc[i])-cen - usd(rs_dl[main + "_PDF"].iloc[i]))/cen*100)+ " |\n"
              )
 
 def write_latex_table_transposed_header(dict_list, t, fname, key, yscale=1.0):
@@ -54,49 +87,50 @@ def write_latex_table_transposed(
     mask = dl[t + "_SCALE"].notnull()
     # NLO is a relict misnomer
     nlo = unv(dl[t][mask])
-    with open(fname, "a") as f:
-        for i in range(
-            0,
-            len(dl[t][mask]),
-            1 if max_rows is None else int(len(dl[t][mask]) / max_rows),
-        ):
-            f.write(
-                "${:.4g}".format(nlo[i] * yscale)
-                + "^{+"
-                + (
-                    "{:.1f}".format(
-                        dl[t + "_SCALE_ERRPLUS"][mask].iloc[i] / nlo[i] * 100.0
-                    )
-                    if scale
-                    else ""
+
+    for i in range(
+        0,
+        len(dl[t][mask]),
+        1 if max_rows is None else int(len(dl[t][mask]) / max_rows),
+    ):
+        io.write(fname,
+        #f.write(
+            "${:.4g}".format(nlo[i] * yscale)
+            + "^{+"
+            + (
+                "{:.1f}".format(
+                    dl[t + "_SCALE_ERRPLUS"][mask].iloc[i] / nlo[i] * 100.0
                 )
-                + (
-                    "\\%+"
-                    + "{:.1f}".format(
-                        dl[t + "_PDF_ERRPLUS"][mask].iloc[i] / nlo[i] * 100.0
-                    )
-                    if pdf
-                    else ""
-                )
-                + (
-                    "\\%}_{"
-                    + "{:.1f}".format(
-                        dl[t + "_SCALE_ERRMINUS"][mask].iloc[i] / nlo[i] * 100.0
-                    )
-                    if scale
-                    else ""
-                )
-                + (
-                    "\\%"
-                    + "{:.1f}".format(
-                        dl[t + "_PDF_ERRMINUS"][mask].iloc[i] / nlo[i] * 100.0
-                    )
-                    if pdf
-                    else ""
-                )
-                + "\\%}$ \t&\t "
+                if scale
+                else ""
             )
-        f.write("\\\\\n")
+            + (
+                "\\%+"
+                + "{:.1f}".format(
+                    dl[t + "_PDF_ERRPLUS"][mask].iloc[i] / nlo[i] * 100.0
+                )
+                if pdf
+                else ""
+            )
+            + (
+                "\\%}_{"
+                + "{:.1f}".format(
+                    dl[t + "_SCALE_ERRMINUS"][mask].iloc[i] / nlo[i] * 100.0
+                )
+                if scale
+                else ""
+            )
+            + (
+                "\\%"
+                + "{:.1f}".format(
+                    dl[t + "_PDF_ERRMINUS"][mask].iloc[i] / nlo[i] * 100.0
+                )
+                if pdf
+                else ""
+            )
+            + "\\%}$ \t&\t "
+        )
+    io.write(fname, "\\\\\n")
 
 
 def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0):
@@ -108,68 +142,67 @@ def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0):
     lo = unv(dl["LO"][mask])
     nlo = unv(dl["NLO"][mask])
     nlo_plus_nll = unv(dl["NLO_PLUS_NLL"][mask])
-    with open(fname, "w+") as f:
-        for i in range(len(dl[t][mask])):
-            f.write(
-                "$"
-                + io.gf(4).format(dl[key][mask][i])
-                + "$ \t&\t $"
-                + "{:.3f}".format(lo[i] * yscale)
-                + "^{+"
-                + "{:.1f}".format(dl["LO_SCALE_ERRPLUS"][mask][i] / lo[i] * 100.0)
-                + "\\%}_{"
-                + "{:.1f}".format(dl["LO_SCALE_ERRMINUS"][mask][i] / lo[i] * 100.0)
-                + "\\%}$ \t&\t $"
-                + "{:.3f}".format(nlo[i] * yscale)
-                + "^{+"
-                + "{:.1f}".format(dl["NLO_SCALE_ERRPLUS"][mask][i] / nlo[i] * 100.0)
-                + (
-                    "\\%+"
-                    + "{:.1f}".format(dl["NLO_PDF_ERRPLUS"][mask][i] / nlo[i] * 100.0)
-                    if pdf
-                    else ""
-                )
-                + "\\%}_{"
-                + "{:.1f}".format(dl["NLO_SCALE_ERRMINUS"][mask][i] / nlo[i] * 100.0)
-                + (
-                    "\\%"
-                    + "{:.1f}".format(dl["NLO_PDF_ERRMINUS"][mask][i] / nlo[i] * 100.0)
-                    if pdf
-                    else ""
-                )
-                + "\\%}$ \t&\t $"
-                + "{:.3f}".format(nlo_plus_nll[i] * yscale)
-                + "^{+"
-                + "{:.1f}".format(
-                    dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask][i] / nlo_plus_nll[i] * 100.0
-                )
-                + (
-                    "\\%+"
-                    + "{:.1f}".format(
-                        dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask][i]
-                        / nlo_plus_nll[i]
-                        * 100.0
-                    )
-                    if pdf
-                    else ""
-                )
-                + "\\%}_{"
-                + "{:.1f}".format(
-                    dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask][i] / nlo_plus_nll[i] * 100.0
-                )
-                + (
-                    "\\%"
-                    + "{:.1f}".format(
-                        dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask][i]
-                        / nlo_plus_nll[i]
-                        * 100.0
-                    )
-                    if pdf
-                    else ""
-                )
-                + "\\%}$ "
-                + "\\\\\n"
+    for i in range(len(dl[t][mask])):
+        io.write(fname,
+            "$"
+            + io.gf(4).format(dl[key][mask][i])
+            + "$ \t&\t $"
+            + "{:.3f}".format(lo[i] * yscale)
+            + "^{+"
+            + "{:.1f}".format(dl["LO_SCALE_ERRPLUS"][mask][i] / lo[i] * 100.0)
+            + "\\%}_{"
+            + "{:.1f}".format(dl["LO_SCALE_ERRMINUS"][mask][i] / lo[i] * 100.0)
+            + "\\%}$ \t&\t $"
+            + "{:.3f}".format(nlo[i] * yscale)
+            + "^{+"
+            + "{:.1f}".format(dl["NLO_SCALE_ERRPLUS"][mask][i] / nlo[i] * 100.0)
+            + (
+                "\\%+"
+                + "{:.1f}".format(dl["NLO_PDF_ERRPLUS"][mask][i] / nlo[i] * 100.0)
+                if pdf
+                else ""
             )
+            + "\\%}_{"
+            + "{:.1f}".format(dl["NLO_SCALE_ERRMINUS"][mask][i] / nlo[i] * 100.0)
+            + (
+                "\\%"
+                + "{:.1f}".format(dl["NLO_PDF_ERRMINUS"][mask][i] / nlo[i] * 100.0)
+                if pdf
+                else ""
+            )
+            + "\\%}$ \t&\t $"
+            + "{:.3f}".format(nlo_plus_nll[i] * yscale)
+            + "^{+"
+            + "{:.1f}".format(
+                dl["NLO_PLUS_NLL_SCALE_ERRPLUS"][mask][i] / nlo_plus_nll[i] * 100.0
+            )
+            + (
+                "\\%+"
+                + "{:.1f}".format(
+                    dl["NLO_PLUS_NLL_PDF_ERRPLUS"][mask][i]
+                    / nlo_plus_nll[i]
+                    * 100.0
+                )
+                if pdf
+                else ""
+            )
+            + "\\%}_{"
+            + "{:.1f}".format(
+                dl["NLO_PLUS_NLL_SCALE_ERRMINUS"][mask][i] / nlo_plus_nll[i] * 100.0
+            )
+            + (
+                "\\%"
+                + "{:.1f}".format(
+                    dl["NLO_PLUS_NLL_PDF_ERRMINUS"][mask][i]
+                    / nlo_plus_nll[i]
+                    * 100.0
+                )
+                if pdf
+                else ""
+            )
+            + "\\%}$ "
+            + "\\\\\n"
+        )
 
 
 tex_table = write_latex

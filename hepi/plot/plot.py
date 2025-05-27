@@ -331,8 +331,8 @@ def vplot(
         vx,
         vy * yscale,
         label=label,
-        xaxis=xaxis,
-        yaxis=yaxis,
+        xlabel=xaxis,
+        ylabel=yaxis,
         logy=logy,
         data_color=color,
         fit_color=color,
@@ -418,7 +418,7 @@ def mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs):
     vy = dict_list[y]
     vz = dict_list[z]
     splot.plot2d(
-        vx, vy, vz, style="pcolormesh", xaxis=xaxis, yaxis=yaxis, zaxis=zaxis, **kwargs
+        vx, vy, vz, style="pcolormesh", xlabel=xaxis, ylabel=yaxis, zlabel=zaxis, **kwargs
     )
 
 
@@ -454,7 +454,7 @@ def scatterplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs
     vy = dict_list[y]
     vz = dict_list[z]
     splot.plot2d(
-        vx, vy, vz, style="scatter", xaxis=xaxis, yaxis=yaxis, zaxis=zaxis, **kwargs
+        vx, vy, vz, style="scatter", xlabel=xaxis, ylabel=yaxis, zlabel=zaxis, **kwargs
     )
 
 
