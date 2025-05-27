@@ -53,49 +53,50 @@ def write_latex_table_transposed(
     mask = dl[t + "_SCALE"].notnull()
     # NLO is a relict misnomer
     nlo = unv(dl[t][mask])
-    with open(fname, "a") as f:
-        for i in range(
-            0,
-            len(dl[t][mask]),
-            1 if max_rows is None else int(len(dl[t][mask]) / max_rows),
-        ):
-            f.write(
-                "${:.4g}".format(nlo[i] * yscale)
-                + "^{+"
-                + (
-                    "{:.1f}".format(
-                        dl[t + "_SCALE_ERRPLUS"][mask].iloc[i] / nlo[i] * 100.0
-                    )
-                    if scale
-                    else ""
+
+    for i in range(
+        0,
+        len(dl[t][mask]),
+        1 if max_rows is None else int(len(dl[t][mask]) / max_rows),
+    ):
+        io.write(fname,
+        #f.write(
+            "${:.4g}".format(nlo[i] * yscale)
+            + "^{+"
+            + (
+                "{:.1f}".format(
+                    dl[t + "_SCALE_ERRPLUS"][mask].iloc[i] / nlo[i] * 100.0
                 )
-                + (
-                    "\\%+"
-                    + "{:.1f}".format(
-                        dl[t + "_PDF_ERRPLUS"][mask].iloc[i] / nlo[i] * 100.0
-                    )
-                    if pdf
-                    else ""
-                )
-                + (
-                    "\\%}_{"
-                    + "{:.1f}".format(
-                        dl[t + "_SCALE_ERRMINUS"][mask].iloc[i] / nlo[i] * 100.0
-                    )
-                    if scale
-                    else ""
-                )
-                + (
-                    "\\%"
-                    + "{:.1f}".format(
-                        dl[t + "_PDF_ERRMINUS"][mask].iloc[i] / nlo[i] * 100.0
-                    )
-                    if pdf
-                    else ""
-                )
-                + "\\%}$ \t&\t "
+                if scale
+                else ""
             )
-        f.write("\\\\\n")
+            + (
+                "\\%+"
+                + "{:.1f}".format(
+                    dl[t + "_PDF_ERRPLUS"][mask].iloc[i] / nlo[i] * 100.0
+                )
+                if pdf
+                else ""
+            )
+            + (
+                "\\%}_{"
+                + "{:.1f}".format(
+                    dl[t + "_SCALE_ERRMINUS"][mask].iloc[i] / nlo[i] * 100.0
+                )
+                if scale
+                else ""
+            )
+            + (
+                "\\%"
+                + "{:.1f}".format(
+                    dl[t + "_PDF_ERRMINUS"][mask].iloc[i] / nlo[i] * 100.0
+                )
+                if pdf
+                else ""
+            )
+            + "\\%}$ \t&\t "
+        )
+    io.write(fname, "\\\\\n")
 
 
 def write_latex(dict_list, t, key, fname, scale=True, pdf=True, yscale=1.0):
