@@ -63,6 +63,13 @@ ID | Central value | error up | error down | error scale up | error scale down |
         help="output file (default: None)",
         default=None,
     )
+    parser.add_argument(
+        "-d",
+        "--data",
+        type=str,
+        help="just prints the data in given format: json, twiki, latex",
+        default="json",
+    )
     args = parser.parse_args()
 
     fs = []
@@ -108,6 +115,15 @@ ID | Central value | error up | error down | error scale up | error scale down |
             continue
 
         so = order_to_string(df["order"].iloc[0])
+
+        if args.data == "json":
+            hepi.write_json(df, df["order"].iloc[0], [d[0][0]], sys.stdout)
+            continue
+
+        if args.data == "twiki":
+            hepi.write_twiki(df, d[0][0], so, sys.stdout)
+            continue
+
         if len(d) == 1:
             dat = [df[d[0][0]]]
             interpolator = "cubic"
