@@ -173,6 +173,13 @@ ID | Central value | error up | error down | error scale up | error scale down |
         help=&quot;output file (default: None)&quot;,
         default=None,
     )
+    parser.add_argument(
+        &quot;-d&quot;,
+        &quot;--data&quot;,
+        type=str,
+        help=&quot;just prints the data in given format: json, twiki, latex&quot;,
+        default=None,
+    )
     args = parser.parse_args()
 
     fs = []
@@ -218,6 +225,28 @@ ID | Central value | error up | error down | error scale up | error scale down |
             continue
 
         so = order_to_string(df[&quot;order&quot;].iloc[0])
+
+        if args.data == &quot;json&quot;:
+            hepi.write_json(df, df[&quot;order&quot;].iloc[0], [d[0][0]], sys.stdout)
+            continue
+
+        if args.data == &quot;twiki&quot;:
+            hepi.write_twiki(df, d[0][0], so, sys.stdout)
+            continue
+
+        if args.data == &quot;latex&quot;:
+            cen = df[so+ &quot;_NOERR&quot;]
+            df[so] = df[so+ &quot;_NOERR&quot;]
+
+            df[so + &quot;_SCALE_ERRPLUS&quot;] = (unv(df[so+ &quot;_SCALE&quot;])-cen + usd(df[so+ &quot;_SCALE&quot;]))
+            df[so + &quot;_SCALE_ERRMINUS&quot;] = (unv(df[so+ &quot;_SCALE&quot;])-cen - usd(df[so+ &quot;_SCALE&quot;]))
+            df[so + &quot;_PDF_ERRPLUS&quot;] = (unv(df[so+ &quot;_PDF&quot;])-cen + usd(df[so+ &quot;_PDF&quot;]))
+            df[so + &quot;_PDF_ERRMINUS&quot;] = (unv(df[so+ &quot;_PDF&quot;])-cen - usd(df[so+ &quot;_PDF&quot;]))
+
+            hepi.write_latex_table_transposed_header(df, so,sys.stdout, d[0][0])
+            hepi.write_latex_table_transposed(df, so,sys.stdout, d[0][0])
+            continue
+
         if len(d) == 1:
             dat = [df[d[0][0]]]
             interpolator = &quot;cubic&quot;
