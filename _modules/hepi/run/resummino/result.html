@@ -1,28 +1,28 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.run.resummino.result &mdash; hepi  documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/jupyter-sphinx.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/thebelab.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/thebelab-helper.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/thebelab-helper.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -39,9 +39,6 @@
           <a href="../../../../index.html" class="icon icon-home">
             hepi
           </a>
-              <div class="version">
-                0.2.17
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -93,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../../../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.run.resummino.result</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -118,7 +114,9 @@ from hepi.input import Order
 from .. import Input, Result, get_output_dir
 
 
-<div class="viewcode-block" id="ResumminoResult"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult">[docs]</a>class ResumminoResult(Result):
+<div class="viewcode-block" id="ResumminoResult">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult">[docs]</a>
+class ResumminoResult(Result):
     &quot;&quot;&quot;
     Resummino Result Data.
 
@@ -148,10 +146,22 @@ from .. import Input, Result, get_output_dir
             rnloq (:obj:`double`): corresponds to :attr:`RNLOQ`.
         &quot;&quot;&quot;
         Result.__init__(self, lo, nlo, nlo_plus_nll, annlo_plus_nnll)
-        self.VNLO = vnlo
-        self.P_PLUS_K = p_plus_k
-        self.RNLOG = rnlog
-        self.RNLOQ = rnloq
+<div class="viewcode-block" id="ResumminoResult.VNLO">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult.VNLO">[docs]</a>
+        self.VNLO = vnlo</div>
+
+<div class="viewcode-block" id="ResumminoResult.P_PLUS_K">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult.P_PLUS_K">[docs]</a>
+        self.P_PLUS_K = p_plus_k</div>
+
+<div class="viewcode-block" id="ResumminoResult.RNLOG">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult.RNLOG">[docs]</a>
+        self.RNLOG = rnlog</div>
+
+<div class="viewcode-block" id="ResumminoResult.RNLOQ">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.ResumminoResult.RNLOQ">[docs]</a>
+        self.RNLOQ = rnloq</div>
+
         if not (vnlo is None or p_plus_k is None):
             self.VNLO_PLUS_P_PLUS_K = self.VNLO + self.P_PLUS_K
         else:
@@ -166,7 +176,10 @@ from .. import Input, Result, get_output_dir
             self.RNLO_PLUS_VNLO_PLUS_P_PLUS_K = None</div>
 
 
-<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.is_valid">[docs]</a>def is_valid(file: str, p: Input, d, **kwargs) -&gt; bool:
+
+<div class="viewcode-block" id="is_valid">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.is_valid">[docs]</a>
+def is_valid(file: str, p: Input, d, **kwargs) -&gt; bool:
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
 
@@ -221,7 +234,10 @@ from .. import Input, Result, get_output_dir
     return False</div>
 
 
-<div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.parse_single">[docs]</a>def parse_single(file: str) -&gt; ResumminoResult:
+
+<div class="viewcode-block" id="parse_single">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/resummino/result/index.html#hepi.run.resummino.result.parse_single">[docs]</a>
+def parse_single(file: str) -&gt; ResumminoResult:
     &quot;&quot;&quot;
     Extracts LO, NLO and NLO+NLL from Resummino output file.
 
@@ -278,13 +294,13 @@ from .. import Input, Result, get_output_dir
             tmp = rnloq_pattern.search(line)
             if tmp is not None:
                 rnloq_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
-    if lo_result is not None and lo_result &lt; 0:
+    if lo_result is not None and lo_result.nominal_value &lt; 0:
         warnings.warn(&quot;LO &lt; 0&quot;)
-    if nlo_result is not None and nlo_result &lt; 0:
+    if nlo_result is not None and nlo_result.nominal_value &lt; 0:
         warnings.warn(&quot;NLO &lt; 0&quot;)
-    if nll_result is not None and nll_result &lt; 0:
+    if nll_result is not None and nll_result.nominal_value &lt; 0:
         warnings.warn(&quot;NLL &lt; 0&quot;)
-    if nnll_result is not None and nnll_result &lt; 0:
+    if nnll_result is not None and nnll_result.nominal_value &lt; 0:
         warnings.warn(&quot;NNLL &lt; 0&quot;)
     return ResumminoResult(
         lo_result,
@@ -296,6 +312,7 @@ from .. import Input, Result, get_output_dir
         rnlog_result,
         rnloq_result,
     )</div>
+
 </pre></div>
 
            </div>
@@ -305,7 +322,7 @@ from .. import Input, Result, get_output_dir
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+    <p>&#169; Copyright 2025, Alexander Puck Neuwirth.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

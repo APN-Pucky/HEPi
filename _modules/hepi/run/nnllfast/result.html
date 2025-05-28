@@ -1,28 +1,28 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.run.nnllfast.result &mdash; hepi  documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/jupyter-sphinx.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/thebelab.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/thebelab-helper.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/thebelab-helper.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -39,9 +39,6 @@
           <a href="../../../../index.html" class="icon icon-home">
             hepi
           </a>
-              <div class="version">
-                0.2.17
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -93,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../../../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.run.nnllfast.result</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -107,7 +103,9 @@
 <span></span>from hepi.results import Result, add_errors, asym_to_sym_error
 
 
-<div class="viewcode-block" id="NNLLFastResult"><a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult">[docs]</a>class NNLLFastResult(Result):
+<div class="viewcode-block" id="NNLLFastResult">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult">[docs]</a>
+class NNLLFastResult(Result):
     &quot;&quot;&quot;
     NNLL-fast Result Data.
     &quot;&quot;&quot;
@@ -124,24 +122,67 @@
         aNNLO_PLUS_NNLL_PDF_ERRPLUS,
     ):
         Result.__init__(self, None, NLO, None,aNNLO_PLUS_NNLL)
-        self.NLO_NOERR= NLO
-        self.NLO_PDF_ERRMINUS  =NLO_PDF_ERRMINUS
-        self.NLO_PDF_ERRPLUS   =NLO_PDF_ERRPLUS
-        self.NLO_PDF = asym_to_sym_error(NLO, NLO_PDF_ERRMINUS, NLO_PDF_ERRPLUS)
+<div class="viewcode-block" id="NNLLFastResult.NLO_NOERR">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.NLO_NOERR">[docs]</a>
+        self.NLO_NOERR= NLO</div>
 
-        self.aNNLO_PLUS_NNLL_NOERR = aNNLO_PLUS_NNLL
+<div class="viewcode-block" id="NNLLFastResult.NLO_PDF_ERRMINUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.NLO_PDF_ERRMINUS">[docs]</a>
+        self.NLO_PDF_ERRMINUS  =NLO_PDF_ERRMINUS</div>
 
-        self.aNNLO_PLUS_NNLL_SCALE_ERRMINUS=aNNLO_PLUS_NNLL_SCALE_ERRMINUS
-        self.aNNLO_PLUS_NNLL_SCALE_ERRPLUS =aNNLO_PLUS_NNLL_SCALE_ERRPLUS
-        self.aNNLO_PLUS_NNLL_SCALE        = asym_to_sym_error(aNNLO_PLUS_NNLL, aNNLO_PLUS_NNLL_SCALE_ERRMINUS, aNNLO_PLUS_NNLL_SCALE_ERRPLUS)
+<div class="viewcode-block" id="NNLLFastResult.NLO_PDF_ERRPLUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.NLO_PDF_ERRPLUS">[docs]</a>
+        self.NLO_PDF_ERRPLUS   =NLO_PDF_ERRPLUS</div>
 
-        self.aNNLO_PLUS_NNLL_PDF_ERRMINUS  =aNNLO_PLUS_NNLL_PDF_ERRMINUS
-        self.aNNLO_PLUS_NNLL_PDF_ERRPLUS   =aNNLO_PLUS_NNLL_PDF_ERRPLUS
-        self.aNNLO_PLUS_NNLL_PDF           = asym_to_sym_error(aNNLO_PLUS_NNLL, aNNLO_PLUS_NNLL_PDF_ERRMINUS, aNNLO_PLUS_NNLL_PDF_ERRPLUS)
+<div class="viewcode-block" id="NNLLFastResult.NLO_PDF">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.NLO_PDF">[docs]</a>
+        self.NLO_PDF = asym_to_sym_error(NLO, NLO_PDF_ERRMINUS, NLO_PDF_ERRPLUS)</div>
 
-        self.aNNLO_PLUS_NNLL_ERRMINUS = -add_errors(aNNLO_PLUS_NNLL_SCALE_ERRMINUS, aNNLO_PLUS_NNLL_PDF_ERRMINUS)
-        self.aNNLO_PLUS_NNLL_ERRPLUS= add_errors(aNNLO_PLUS_NNLL_SCALE_ERRPLUS, aNNLO_PLUS_NNLL_PDF_ERRPLUS)
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL_NOERR">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL_NOERR">[docs]</a>
+        self.aNNLO_PLUS_NNLL_NOERR = aNNLO_PLUS_NNLL</div>
+
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL_SCALE_ERRMINUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL_SCALE_ERRMINUS">[docs]</a>
+        self.aNNLO_PLUS_NNLL_SCALE_ERRMINUS=aNNLO_PLUS_NNLL_SCALE_ERRMINUS</div>
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL_SCALE_ERRPLUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL_SCALE_ERRPLUS">[docs]</a>
+        self.aNNLO_PLUS_NNLL_SCALE_ERRPLUS =aNNLO_PLUS_NNLL_SCALE_ERRPLUS</div>
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL_SCALE">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL_SCALE">[docs]</a>
+        self.aNNLO_PLUS_NNLL_SCALE        = asym_to_sym_error(aNNLO_PLUS_NNLL, aNNLO_PLUS_NNLL_SCALE_ERRMINUS, aNNLO_PLUS_NNLL_SCALE_ERRPLUS)</div>
+
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL_PDF_ERRMINUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL_PDF_ERRMINUS">[docs]</a>
+        self.aNNLO_PLUS_NNLL_PDF_ERRMINUS  =aNNLO_PLUS_NNLL_PDF_ERRMINUS</div>
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL_PDF_ERRPLUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL_PDF_ERRPLUS">[docs]</a>
+        self.aNNLO_PLUS_NNLL_PDF_ERRPLUS   =aNNLO_PLUS_NNLL_PDF_ERRPLUS</div>
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL_PDF">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL_PDF">[docs]</a>
+        self.aNNLO_PLUS_NNLL_PDF           = asym_to_sym_error(aNNLO_PLUS_NNLL, aNNLO_PLUS_NNLL_PDF_ERRMINUS, aNNLO_PLUS_NNLL_PDF_ERRPLUS)</div>
+
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL_ERRMINUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL_ERRMINUS">[docs]</a>
+        self.aNNLO_PLUS_NNLL_ERRMINUS = -add_errors(aNNLO_PLUS_NNLL_SCALE_ERRMINUS, aNNLO_PLUS_NNLL_PDF_ERRMINUS)</div>
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL_ERRPLUS">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL_ERRPLUS">[docs]</a>
+        self.aNNLO_PLUS_NNLL_ERRPLUS= add_errors(aNNLO_PLUS_NNLL_SCALE_ERRPLUS, aNNLO_PLUS_NNLL_PDF_ERRPLUS)</div>
+
+<div class="viewcode-block" id="NNLLFastResult.aNNLO_PLUS_NNLL">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/nnllfast/result/index.html#hepi.run.nnllfast.result.NNLLFastResult.aNNLO_PLUS_NNLL">[docs]</a>
         self.aNNLO_PLUS_NNLL = asym_to_sym_error(aNNLO_PLUS_NNLL, self.aNNLO_PLUS_NNLL_ERRMINUS, self.aNNLO_PLUS_NNLL_ERRPLUS) </div>
+</div>
+
 
 
 </pre></div>
@@ -153,7 +194,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+    <p>&#169; Copyright 2025, Alexander Puck Neuwirth.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

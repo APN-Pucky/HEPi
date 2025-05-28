@@ -1,37 +1,38 @@
-:py:mod:`hepi.run.nnllfast.run`
-===============================
+hepi.run.nnllfast.run
+=====================
 
 .. py:module:: hepi.run.nnllfast.run
 
 
-Module Contents
----------------
-
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   hepi.run.nnllfast.run.NLLfastRunner
-
-
-
-
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
-   hepi.run.nnllfast.run.default_nllfast_runner
+   hepi.run.nnllfast.run.default_nnllfast_runner
    hepi.run.nnllfast.run.run
    hepi.run.nnllfast.run.set_path
    hepi.run.nnllfast.run.get_path
 
 
-.. py:class:: NLLfastRunner(path, in_dir = None, out_dir = None, pre=None)
+Classes
+-------
 
+.. autoapisummary::
+
+   hepi.run.nnllfast.run.NNLLfastRunner
+
+
+Module Contents
+---------------
+
+.. py:class:: NNLLfastRunner(path, in_dir = None, out_dir = None, pre=None)
 
    Bases: :py:obj:`hepi.run.Runner`
+
+
+   Only works with NNLL-fast-1.1.
+
 
    .. py:method:: get_version()
 
@@ -39,6 +40,7 @@ Attributes
    .. py:method:: orders()
 
       List of supported Orders in this runner.
+
 
 
    .. py:method:: _get_nf_proc(p)
@@ -50,6 +52,7 @@ Attributes
    .. py:method:: _check_input(p, **kwargs)
 
       Checks input parameter for compatibility with Prospino
+
 
 
    .. py:method:: _is_valid(file, p, d, **kwargs)
@@ -67,6 +70,7 @@ Attributes
       :rtype: bool
 
 
+
    .. py:method:: _parse_file(file)
 
       Extracts results from an output file.
@@ -78,23 +82,17 @@ Attributes
       :rtype: :class:`Result`
 
 
+
    .. py:method:: _prepare(p, **kwargs)
 
 
+.. py:data:: default_nnllfast_runner
 
-.. py:data:: default_nllfast_runner
-
-   Default Prospino Runner to provide backward compatibility
+   Default NNLL-fast Runner to provide backward compatibility
 
 .. py:data:: run
 
-   
-
 .. py:data:: set_path
 
-   
-
 .. py:data:: get_path
-
-   
 

@@ -1,15 +1,11 @@
-:py:mod:`hepi.interpolate`
-==========================
+hepi.interpolate
+================
 
 .. py:module:: hepi.interpolate
 
 
-Module Contents
----------------
-
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -17,8 +13,10 @@ Functions
    hepi.interpolate.interpolate_2d
 
 
+Module Contents
+---------------
 
-.. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True)
+.. py:function:: interpolate_1d(df, x, y, xrange, only_interpolation=True, **kwargs)
 
    Last key is the value to be interpolated, while the rest are cooridnates.
 

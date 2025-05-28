@@ -1,24 +1,11 @@
-:py:mod:`hepi.run.softsusy.run`
-===============================
+hepi.run.softsusy.run
+=====================
 
 .. py:module:: hepi.run.softsusy.run
 
 
-Module Contents
----------------
-
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   hepi.run.softsusy.run.SoftsusyRunner
-
-
-
-
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
@@ -28,14 +15,26 @@ Attributes
    hepi.run.softsusy.run.get_path
 
 
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.run.softsusy.run.SoftsusyRunner
+
+
+Module Contents
+---------------
+
 .. py:class:: SoftsusyRunner(path, in_dir = None, out_dir = None, pre=None)
 
-
    Bases: :py:obj:`hepi.run.Runner`
+
 
    .. py:method:: _check_path()
 
       Checks if the passed path is valid.
+
 
 
    .. py:method:: run(slhas, **kwargs)
@@ -55,13 +54,7 @@ Attributes
 
 .. py:data:: run
 
-   
-
 .. py:data:: set_path
 
-   
-
 .. py:data:: get_path
-
-   
 

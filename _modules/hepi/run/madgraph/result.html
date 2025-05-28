@@ -1,28 +1,28 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.run.madgraph.result &mdash; hepi  documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/jupyter-sphinx.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/thebelab.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/thebelab-helper.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/thebelab-helper.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -39,9 +39,6 @@
           <a href="../../../../index.html" class="icon icon-home">
             hepi
           </a>
-              <div class="version">
-                0.2.17
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -93,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../../../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.run.madgraph.result</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -114,7 +110,9 @@ from hepi.input import Order
 from .. import Input, Result
 
 
-<div class="viewcode-block" id="MadgraphResult"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/result/index.html#hepi.run.madgraph.result.MadgraphResult">[docs]</a>class MadgraphResult(Result):
+<div class="viewcode-block" id="MadgraphResult">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/result/index.html#hepi.run.madgraph.result.MadgraphResult">[docs]</a>
+class MadgraphResult(Result):
     &quot;&quot;&quot;MadGraph Result Data.&quot;&quot;&quot;
 
     def __init__(self, lo, nlo):
@@ -122,7 +120,10 @@ from .. import Input, Result
         Result.__init__(self, lo, nlo, None)</div>
 
 
-<div class="viewcode-block" id="is_valid"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/result/index.html#hepi.run.madgraph.result.is_valid">[docs]</a>def is_valid(file: str, p: Input, d) -&gt; bool:
+
+<div class="viewcode-block" id="is_valid">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/result/index.html#hepi.run.madgraph.result.is_valid">[docs]</a>
+def is_valid(file: str, p: Input, d) -&gt; bool:
     &quot;&quot;&quot;
     Verifies that an file is a complete output.
 
@@ -146,7 +147,10 @@ from .. import Input, Result
     return False</div>
 
 
-<div class="viewcode-block" id="parse_single"><a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/result/index.html#hepi.run.madgraph.result.parse_single">[docs]</a>def parse_single(file) -&gt; MadgraphResult:
+
+<div class="viewcode-block" id="parse_single">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/madgraph/result/index.html#hepi.run.madgraph.result.parse_single">[docs]</a>
+def parse_single(file) -&gt; MadgraphResult:
     &quot;&quot;&quot;
     Extracts Result from MadGraph output file.
 
@@ -176,6 +180,7 @@ from .. import Input, Result
                     nlo_result = ufloat_fromstr(tmp.group(1).replace(&quot;+-&quot;, &quot;+/-&quot;))
 
     return MadgraphResult(lo_result, nlo_result)</div>
+
 </pre></div>
 
            </div>
@@ -185,7 +190,7 @@ from .. import Input, Result
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+    <p>&#169; Copyright 2025, Alexander Puck Neuwirth.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

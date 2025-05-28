@@ -1,5 +1,5 @@
-:py:mod:`hepi.run.madgraph.run`
-===============================
+hepi.run.madgraph.run
+=====================
 
 .. py:module:: hepi.run.madgraph.run
 
@@ -9,22 +9,8 @@
 
 
 
-Module Contents
----------------
-
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   hepi.run.madgraph.run.MadGraphRunParams
-   hepi.run.madgraph.run.MadGraphRunner
-
-
-
-
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
@@ -34,22 +20,43 @@ Attributes
    hepi.run.madgraph.run.get_path
 
 
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.run.madgraph.run.MadGraphRunParams
+   hepi.run.madgraph.run.MadGraphRunner
+
+
+Module Contents
+---------------
+
 .. py:class:: MadGraphRunParams(dic, skip=False, madstr=True)
 
-
    Bases: :py:obj:`hepi.run.RunParam`
+
 
    Parameters for MadGraph.
 
 
+   .. py:attribute:: dic
+
+
+   .. py:attribute:: madstr
+      :value: True
+
+
+
 .. py:class:: MadGraphRunner(path, in_dir = None, out_dir = None, pre=None)
 
-
    Bases: :py:obj:`hepi.run.Runner`
+
 
    .. py:method:: orders()
 
       List of supported Orders in this runner.
+
 
 
    .. py:method:: _check_path()
@@ -57,9 +64,11 @@ Attributes
       Checks if the passed path is valid.
 
 
+
    .. py:method:: _check_input(param, **kwargs)
 
       Checks input parameter for compatibility with Prospino
+
 
 
    .. py:method:: _is_valid(file, p, d)
@@ -77,6 +86,7 @@ Attributes
       :rtype: bool
 
 
+
    .. py:method:: _parse_file(file)
 
       Extracts results from an output file.
@@ -86,6 +96,7 @@ Attributes
 
       :returns: If a value is not found in the file None is used.
       :rtype: :class:`Result`
+
 
 
    .. py:method:: _run(rps, wait=True, parallel=True, sleep=0, **kwargs)
@@ -109,8 +120,8 @@ Attributes
       :rtype: :obj:`list` of int
 
 
-   .. py:method:: _prepare(p, **kwargs)
 
+   .. py:method:: _prepare(p, **kwargs)
 
 
 .. py:data:: default_madgraph_runner
@@ -119,13 +130,7 @@ Attributes
 
 .. py:data:: run
 
-   
-
 .. py:data:: set_path
 
-   
-
 .. py:data:: get_path
-
-   
 

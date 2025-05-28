@@ -1,14 +1,11 @@
-:py:mod:`hepi.run.run`
-======================
+hepi.run.run
+============
 
 .. py:module:: hepi.run.run
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
@@ -16,17 +13,45 @@ Classes
    hepi.run.run.Runner
 
 
-
+Module Contents
+---------------
 
 .. py:class:: RunParam(skip = False, in_file = None, out_file = None, execute = None, name = None)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Abstract class that is similar to a dictionary but with fixed keys.
 
 
+   .. py:attribute:: name
+      :value: None
+
+
+
+   .. py:attribute:: skip
+      :value: False
+
+
+
+   .. py:attribute:: in_file
+      :value: None
+
+
+
+   .. py:attribute:: out_file
+      :value: None
+
+
+
+   .. py:attribute:: execute
+      :value: None
+
+
+
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
+
+   .. py:attribute:: path
 
 
    .. py:method:: orders()
@@ -34,9 +59,11 @@ Classes
       List of supported Orders in this runner.
 
 
+
    .. py:method:: get_name()
 
       Returns the name of the runner.
+
 
 
    .. py:method:: get_version()
@@ -48,6 +75,7 @@ Classes
    .. py:method:: _check_path()
 
       Checks if the passed path is valid.
+
 
 
    .. py:method:: _prepare(p, skip=False, assume_valid=False, **kwargs)
@@ -66,6 +94,7 @@ Classes
       :type skip: bool, optional
       :param n_jobs: Number of parallel jobs. If None, use all available cores.
       :type n_jobs: int
+
 
 
    .. py:method:: run(params, skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
@@ -94,6 +123,7 @@ Classes
       :rtype: :obj:`pd.DataFrame`
 
 
+
    .. py:method:: _run(rps, wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
 
       Runs Runner per :class:`RunParams`.
@@ -115,6 +145,7 @@ Classes
       :rtype: :obj:`list` of int
 
 
+
    .. py:method:: _is_valid(file, p, d, **kwargs)
 
       Verifies that a file is a complete output.
@@ -130,6 +161,7 @@ Classes
       :rtype: bool
 
 
+
    .. py:method:: parse(outputs, n_jobs=None)
 
           Parses Resummino output files and returns List of Results.
@@ -140,6 +172,7 @@ Classes
 
           Returns:
               :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+
 
 
 
@@ -154,12 +187,14 @@ Classes
       :rtype: :class:`Result`
 
 
+
    .. py:method:: get_path()
 
       Get the Runner path.
 
       :returns: current Runner path.
       :rtype: str
+
 
 
    .. py:method:: get_input_dir()
@@ -170,12 +205,14 @@ Classes
       :rtype: str
 
 
+
    .. py:method:: get_output_dir()
 
       Get the input directory.
 
       :returns: :attr:`out_dir`
       :rtype: str
+
 
 
    .. py:method:: get_pre()
@@ -186,12 +223,14 @@ Classes
       :rtype: str
 
 
+
    .. py:method:: set_path(p)
 
       Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
 
       :param p: new path.
       :type p: str
+
 
 
    .. py:method:: set_input_dir(indir)
@@ -202,6 +241,7 @@ Classes
       :type indir: str
 
 
+
    .. py:method:: set_output_dir(outdir, create = True)
 
       Sets the output directory.
@@ -209,6 +249,7 @@ Classes
       :param outdir: new output directory.
                      create (bool): create directory if not existing.
       :type outdir: str
+
 
 
    .. py:method:: set_pre(ppre)

@@ -1,15 +1,24 @@
-:py:mod:`hepi.plot.plot`
-========================
+hepi.plot.plot
+==============
 
 .. py:module:: hepi.plot.plot
 
 
-Module Contents
----------------
+Attributes
+----------
+
+.. autoapisummary::
+
+   hepi.plot.plot.map_vplot
+   hepi.plot.plot.scatter_vplot
+   hepi.plot.plot.fig
+   hepi.plot.plot.axs
+   hepi.plot.plot.lines
+   hepi.plot.plot.labels
 
 
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -34,19 +43,8 @@ Functions
    hepi.plot.plot.init_double_plot
 
 
-
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.plot.plot.map_vplot
-   hepi.plot.plot.scatter_vplot
-   hepi.plot.plot.fig
-   hepi.plot.plot.axs
-   hepi.plot.plot.lines
-   hepi.plot.plot.labels
-
+Module Contents
+---------------
 
 .. py:function:: title(i, axe=None, scenario=None, diff_L_R=None, extra='', cms_energy=True, pdf_info=True, id=False, **kwargs)
 
@@ -60,15 +58,11 @@ Attributes
 
 .. py:function:: combined_mass_plot(dict_list, y, part, label=None, **kwargs)
 
-
 .. py:function:: combined_plot(dict_list, x, y, label=None, **kwargs)
-
 
 .. py:function:: mass_plot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, xaxis=None, **kwargs)
 
-
 .. py:function:: mass_vplot(dict_list, y, part, logy=True, yaxis='$\\sigma$ [pb]', yscale=1.0, label=None, mask=None, **kwargs)
-
 
 .. py:function:: get_mass(l, iid)
 
@@ -98,12 +92,9 @@ Attributes
 
 .. py:function:: index_open(var, idx)
 
-
 .. py:function:: slha_data(li, index_list)
 
-
 .. py:function:: slha_plot(li, x, y, **kwargs)
-
 
 .. py:function:: vplot(x, y, label=None, xaxis='E [GeV]', yaxis='$\\sigma$ [pb]', logy=True, yscale=1.0, interpolate=True, plot_data=True, data_color=None, mask=-1, fill=False, data_fmt='.', fmt='-', print_area=False, sort=True, **kwargs)
 
@@ -112,7 +103,6 @@ Attributes
 
 
 .. py:function:: mass_mapplot(dict_list, part1, part2, z, logz=True, zaxis='$\\sigma$ [pb]', zscale=1.0, label=None)
-
 
 .. py:function:: mapplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
 
@@ -132,11 +122,7 @@ Attributes
 
 .. py:data:: map_vplot
 
-   
-
 .. py:data:: scatter_vplot
-
-   
 
 .. py:function:: scatterplot(dict_list, x, y, z, xaxis=None, yaxis=None, zaxis=None, **kwargs)
 
@@ -158,25 +144,22 @@ Attributes
 
 
 .. py:data:: fig
+   :value: None
 
-   
 
 .. py:data:: axs
+   :value: None
 
-   
 
 .. py:data:: lines
    :value: []
 
-   
 
 .. py:data:: labels
    :value: []
 
-   
 
 .. py:function:: err_plt(axes, x, y, label=None, error=False)
-
 
 .. py:function:: scale_plot(dict_list, vl, seven_point_band=False, cont=False, error=True, li=None, plehn_color=False, yscale=1.0, unit='pb', yaxis=None, **kwargs)
 

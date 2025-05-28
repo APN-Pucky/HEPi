@@ -1,32 +1,32 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Interpolation &mdash; hepi  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/jupyter-sphinx.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/thebelab.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/thebelab-helper.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/thebelab-helper.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -45,9 +45,6 @@
           <a href="../index.html" class="icon icon-home">
             hepi
           </a>
-              <div class="version">
-                0.2.17
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -109,16 +106,16 @@
            <div itemprop="articleBody">
              
   <section id="Interpolation">
-<h1>Interpolation<a class="headerlink" href="#Interpolation" title="Permalink to this heading"></a></h1>
+<h1>Interpolation<a class="headerlink" href="#Interpolation" title="Link to this heading"></a></h1>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="kn">import</span> <span class="nn">hepi</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">hepi.run</span> <span class="kn">import</span> <span class="n">resummino</span> <span class="k">as</span> <span class="n">rs</span>
-<span class="kn">from</span> <span class="nn">hepi.run</span> <span class="kn">import</span> <span class="n">spheno</span> <span class="k">as</span> <span class="n">sp</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib.request</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hepi</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hepi.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">resummino</span> <span class="k">as</span> <span class="n">rs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hepi.run</span><span class="w"> </span><span class="kn">import</span> <span class="n">spheno</span> <span class="k">as</span> <span class="n">sp</span>
 <span class="n">sp</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;SPheno&quot;</span><span class="p">)</span>
 <span class="n">rs</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="s2">&quot;resummino&quot;</span><span class="p">)</span>
 </pre></div>
@@ -247,7 +244,7 @@ Skipped: 25 Not skipped: 0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">smpl</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">smpl</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
 <span class="n">xx</span><span class="p">,</span><span class="n">yy</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">flatmesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">dll</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">interpolate_2d</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;mass_1000022&quot;</span><span class="p">,</span><span class="s2">&quot;mass_2000002&quot;</span><span class="p">,</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">interpolator</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
 <span class="n">hepi</span><span class="o">.</span><span class="n">mapplot</span><span class="p">(</span><span class="n">dll</span><span class="p">,</span><span class="s2">&quot;mass_2000002&quot;</span><span class="p">,</span><span class="s2">&quot;mass_1000022&quot;</span><span class="p">,</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$\sigma_</span><span class="si">{LO}</span><span class="s2">$&quot;</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fill_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -303,7 +300,7 @@ array([0.0+/-0.0016154263871670225,
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">smpl</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">smpl</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
 <span class="n">xx</span><span class="p">,</span><span class="n">yy</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">flatmesh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">16</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">1500</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
 <span class="n">dll</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">interpolate_2d</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;mass_1000022&quot;</span><span class="p">,</span><span class="s2">&quot;mass_2000002&quot;</span><span class="p">,</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">interpolator</span><span class="o">=</span><span class="s2">&quot;cubic&quot;</span><span class="p">)</span>
 <span class="n">hepi</span><span class="o">.</span><span class="n">mapplot</span><span class="p">(</span><span class="n">dll</span><span class="p">,</span><span class="s2">&quot;mass_2000002&quot;</span><span class="p">,</span><span class="s2">&quot;mass_1000022&quot;</span><span class="p">,</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="n">xaxis</span><span class="o">=</span><span class="s2">&quot;$M_1$&quot;</span><span class="p">,</span><span class="n">yaxis</span><span class="o">=</span><span class="s2">&quot;$M_2$&quot;</span><span class="p">,</span><span class="n">zaxis</span><span class="o">=</span><span class="s2">&quot;$\sigma_</span><span class="si">{LO}</span><span class="s2">$&quot;</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fill_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -425,7 +422,7 @@ Skipped: 256 Not skipped: 0
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">smpl</span> <span class="kn">import</span> <span class="n">stat</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">smpl</span><span class="w"> </span><span class="kn">import</span> <span class="n">stat</span>
 
 <span class="n">dll</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">interpolate_2d</span><span class="p">(</span><span class="n">dl</span><span class="p">,</span><span class="s2">&quot;mass_1000022&quot;</span><span class="p">,</span><span class="s2">&quot;mass_2000002&quot;</span><span class="p">,</span><span class="s2">&quot;LO&quot;</span><span class="p">,</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">interpolator</span><span class="o">=</span><span class="s2">&quot;cubic&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">stat</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">dl2</span><span class="p">[</span><span class="s2">&quot;LO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">-</span><span class="n">dll</span><span class="p">[</span><span class="s2">&quot;LO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span><span class="o">/</span><span class="n">dl2</span><span class="p">[</span><span class="s2">&quot;LO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())))</span>
@@ -729,7 +726,7 @@ array([-4.127045252457755e-16+/-0.0016154263871672174,
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">dl</span> <span class="o">=</span> <span class="n">hepi</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
     <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
@@ -780,7 +777,7 @@ array([-4.127045252457755e-16+/-0.0016154263871672174,
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+    <p>&#169; Copyright 2025, Alexander Puck Neuwirth.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

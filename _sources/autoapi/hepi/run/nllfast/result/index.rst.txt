@@ -1,26 +1,24 @@
-:py:mod:`hepi.run.nllfast.result`
-=================================
+hepi.run.nllfast.result
+=======================
 
 .. py:module:: hepi.run.nllfast.result
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    hepi.run.nllfast.result.NLLFastResult
 
 
-
+Module Contents
+---------------
 
 .. py:class:: NLLFastResult(LO, NLO, NLO_PDF_ERRMINUS, NLO_PDF_ERRPLUS, NLO_PLUS_NLL, NLO_PLUS_NLL_SCALE_ERRMINUS, NLO_PLUS_NLL_SCALE_ERRPLUS, NLO_PLUS_NLL_PDF_ERRMINUS, NLO_PLUS_NLL_PDF_ERRPLUS)
 
-
    Bases: :py:obj:`hepi.results.Result`
+
 
    (N)NLL-fast Result Data.
 
@@ -34,5 +32,50 @@ Classes
    :type nlo_plus_nll: :obj:`double`
    :param annlo_plus_nnll: corresponds to :attr:`aNNLO_PLUS_NNLL`.
    :type annlo_plus_nnll: :obj:`double`
+
+
+   .. py:attribute:: LO_NOERR
+
+
+   .. py:attribute:: NLO_NOERR
+
+
+   .. py:attribute:: NLO_PDF_ERRMINUS
+
+
+   .. py:attribute:: NLO_PDF_ERRPLUS
+
+
+   .. py:attribute:: NLO_PDF
+
+
+   .. py:attribute:: NLO_PLUS_NLL_NOERR
+
+
+   .. py:attribute:: NLO_PLUS_NLL_SCALE_ERRMINUS
+
+
+   .. py:attribute:: NLO_PLUS_NLL_SCALE_ERRPLUS
+
+
+   .. py:attribute:: NLO_PLUS_NLL_SCALE
+
+
+   .. py:attribute:: NLO_PLUS_NLL_PDF_ERRMINUS
+
+
+   .. py:attribute:: NLO_PLUS_NLL_PDF_ERRPLUS
+
+
+   .. py:attribute:: NLO_PLUS_NLL_PDF
+
+
+   .. py:attribute:: NLO_PLUS_NLL_ERRMINUS
+
+
+   .. py:attribute:: NLO_PLUS_NLL_ERRPLUS
+
+
+   .. py:attribute:: NLO_PLUS_NLL
 
 

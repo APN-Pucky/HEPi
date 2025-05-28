@@ -1,28 +1,28 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.util &mdash; hepi  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/thebelab-helper.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/thebelab-helper.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -39,9 +39,6 @@
           <a href="../../index.html" class="icon icon-home">
             hepi
           </a>
-              <div class="version">
-                0.2.17
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -93,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.util</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -116,13 +112,21 @@ import numpy as np
 import pandas as pd
 
 
-<div class="viewcode-block" id="DictData"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DictData">[docs]</a>class DictData:
-<div class="viewcode-block" id="DictData.__str__"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DictData.__str__">[docs]</a>    def __str__(self):
+<div class="viewcode-block" id="DictData">
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.DictData">[docs]</a>
+class DictData:
+<div class="viewcode-block" id="DictData.__str__">
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.DictData.__str__">[docs]</a>
+    def __str__(self):
         &quot;&quot;&quot;Returns attributes as dict as string&quot;&quot;&quot;
-        return str(self.__dict__)</div></div>
+        return str(self.__dict__)</div>
+</div>
 
 
-<div class="viewcode-block" id="LD2DL"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.LD2DL">[docs]</a>def LD2DL(l: List, actual_dict=False) -&gt; dict:
+
+<div class="viewcode-block" id="LD2DL">
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.LD2DL">[docs]</a>
+def LD2DL(l: List, actual_dict=False) -&gt; dict:
     &quot;&quot;&quot;
     Convert a list of objects into a dictionary of lists.
 
@@ -156,14 +160,20 @@ import pandas as pd
     }</div>
 
 
-<div class="viewcode-block" id="DL2DF"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.DL2DF">[docs]</a>def DL2DF(ld: dict) -&gt; pd.DataFrame:
+
+<div class="viewcode-block" id="DL2DF">
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.DL2DF">[docs]</a>
+def DL2DF(ld: dict) -&gt; pd.DataFrame:
     &quot;&quot;&quot;
     Convert a `dict` of `list`s to a `pandas.DataFrame`.
     &quot;&quot;&quot;
     return pd.DataFrame.from_dict(ld)</div>
 
 
-<div class="viewcode-block" id="namehash"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.namehash">[docs]</a>def namehash(n: any) -&gt; str:
+
+<div class="viewcode-block" id="namehash">
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.namehash">[docs]</a>
+def namehash(n: any) -&gt; str:
     &quot;&quot;&quot;
     Creates a sha256 hash from the objects string representation.
 
@@ -187,7 +197,10 @@ import pandas as pd
     return m.hexdigest()</div>
 
 
-<div class="viewcode-block" id="lhapdf_name_to_id"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_name_to_id">[docs]</a>def lhapdf_name_to_id(name: str) -&gt; int:
+
+<div class="viewcode-block" id="lhapdf_name_to_id">
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.lhapdf_name_to_id">[docs]</a>
+def lhapdf_name_to_id(name: str) -&gt; int:
     &quot;&quot;&quot;
     Converts a LHAPDF name to the sets id.
 
@@ -219,7 +232,10 @@ import pandas as pd
     return lhapdf.getPDFSet(name).lhapdfID</div>
 
 
-<div class="viewcode-block" id="lhapdf_id_to_name"><a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.lhapdf_id_to_name">[docs]</a>def lhapdf_id_to_name(lid: int) -&gt; str:
+
+<div class="viewcode-block" id="lhapdf_id_to_name">
+<a class="viewcode-back" href="../../autoapi/hepi/util/index.html#hepi.run.lhapdf_id_to_name">[docs]</a>
+def lhapdf_id_to_name(lid: int) -&gt; str:
     try:
         import lhapdf
     except ImportError:
@@ -238,6 +254,7 @@ import pandas as pd
 
     warnings.warn(&quot;PDF set with id &quot; + str(lid) + &quot; unknown/not installed?&quot;)
     return &quot;Unknown PDF ID: &quot; + str(lid)</div>
+
 </pre></div>
 
            </div>
@@ -247,7 +264,7 @@ import pandas as pd
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+    <p>&#169; Copyright 2025, Alexander Puck Neuwirth.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

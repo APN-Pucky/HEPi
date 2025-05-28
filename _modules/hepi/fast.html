@@ -1,28 +1,28 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.fast &mdash; hepi  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
-        <script src="../../_static/thebelab-helper.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/thebelab-helper.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -39,9 +39,6 @@
           <a href="../../index.html" class="icon icon-home">
             hepi
           </a>
-              <div class="version">
-                0.2.17
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -93,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.fast</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -130,13 +126,22 @@ except ImportError:
 
 import hepi.data
 
-<div class="viewcode-block" id="unv"><a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.unv">[docs]</a>unv = unp.nominal_values</div>
-<div class="viewcode-block" id="usd"><a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.usd">[docs]</a>usd = unp.std_devs</div>
+<div class="viewcode-block" id="unv">
+<a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.unv">[docs]</a>
+unv = unp.nominal_values</div>
+
+<div class="viewcode-block" id="usd">
+<a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.usd">[docs]</a>
+usd = unp.std_devs</div>
 
 
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.main">[docs]</a>def main():
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../autoapi/hepi/fast/index.html#hepi.fast.main">[docs]</a>
+def main():
     parser = argparse.ArgumentParser(
-        description=&quot;Interpolate data (loaded from json) in the format: \nID | Central value | error down | error up | error pdf down | error pdf up | error scale down | error scale up&quot;
+        description=&quot;&quot;&quot;Interpolate data (loaded from json) in the format:
+ID | Central value | error up | error down | error scale up | error scale down | error pdf up | error pdf down &quot;&quot;&quot;
     )
     parser.add_argument(
         &quot;json&quot;, type=str, nargs=&quot;*&quot;, help=&quot;url/file/string/name&quot;, default=[]
@@ -148,7 +153,11 @@ import hepi.data
         &quot;-p&quot;, &quot;--plot&quot;, action=&quot;store_true&quot;, help=&quot;plot listed files&quot;, default=False
     )
     parser.add_argument(
-        &quot;-i&quot;, &quot;--info&quot;, action=&quot;store_true&quot;, help=&quot;show info of listed files&quot;, default=False
+        &quot;-i&quot;,
+        &quot;--info&quot;,
+        action=&quot;store_true&quot;,
+        help=&quot;show info of listed files&quot;,
+        default=False,
     )
     parser.add_argument(
         &quot;-s&quot;,
@@ -162,6 +171,13 @@ import hepi.data
         &quot;--output&quot;,
         type=str,
         help=&quot;output file (default: None)&quot;,
+        default=None,
+    )
+    parser.add_argument(
+        &quot;-d&quot;,
+        &quot;--data&quot;,
+        type=str,
+        help=&quot;just prints the data in given format: json, twiki, latex&quot;,
         default=None,
     )
     args = parser.parse_args()
@@ -209,6 +225,29 @@ import hepi.data
             continue
 
         so = order_to_string(df[&quot;order&quot;].iloc[0])
+
+        if args.data == &quot;json&quot;:
+            hepi.write_json(df, df[&quot;order&quot;].iloc[0], [d[0][0]], sys.stdout)
+            continue
+
+        if args.data == &quot;twiki&quot;:
+            hepi.write_twiki_header(d[0][0], sys.stdout, unit=&quot;fb&quot;)
+            hepi.write_twiki(df, d[0][0], so, sys.stdout, yscale=1000)
+            continue
+
+        if args.data == &quot;latex&quot;:
+            cen = df[so+ &quot;_NOERR&quot;]
+            df[so] = df[so+ &quot;_NOERR&quot;]
+
+            df[so + &quot;_SCALE_ERRPLUS&quot;] = (unv(df[so+ &quot;_SCALE&quot;])-cen + usd(df[so+ &quot;_SCALE&quot;]))
+            df[so + &quot;_SCALE_ERRMINUS&quot;] = (unv(df[so+ &quot;_SCALE&quot;])-cen - usd(df[so+ &quot;_SCALE&quot;]))
+            df[so + &quot;_PDF_ERRPLUS&quot;] = (unv(df[so+ &quot;_PDF&quot;])-cen + usd(df[so+ &quot;_PDF&quot;]))
+            df[so + &quot;_PDF_ERRMINUS&quot;] = (unv(df[so+ &quot;_PDF&quot;])-cen - usd(df[so+ &quot;_PDF&quot;]))
+
+            hepi.write_latex_table_transposed_header(df, so,sys.stdout, d[0][0])
+            hepi.write_latex_table_transposed(df, so,sys.stdout, d[0][0],yscale=1000)
+            continue
+
         if len(d) == 1:
             dat = [df[d[0][0]]]
             interpolator = &quot;cubic&quot;
@@ -323,7 +362,7 @@ import hepi.data
                 interpolator=interpolator,
                 pre=np.log,
                 post=np.exp,
-                interpolate_lower_uncertainty=False
+                interpolate_lower_uncertainty=False,
             )
             f_combined = ip.interpolate(
                 *dat,
@@ -331,7 +370,7 @@ import hepi.data
                 interpolator=interpolator,
                 pre=np.log,
                 post=np.exp,
-                interpolate_lower_uncertainty=False
+                interpolate_lower_uncertainty=False,
             )
             if so + &quot;_PDF&quot; in df.columns:
                 f_pdf = ip.interpolate(
@@ -340,7 +379,7 @@ import hepi.data
                     interpolator=interpolator,
                     pre=np.log,
                     post=np.exp,
-                    interpolate_lower_uncertainty=False
+                    interpolate_lower_uncertainty=False,
                 )
             else:
                 f_pdf = f_noerr
@@ -351,7 +390,7 @@ import hepi.data
                     interpolator=interpolator,
                     pre=np.log,
                     post=np.exp,
-                    interpolate_lower_uncertainty=False
+                    interpolate_lower_uncertainty=False,
                 )
             else:
                 f_scale = f_noerr
@@ -359,6 +398,7 @@ import hepi.data
             fs = [*fs, (f_noerr, f_combined, f_pdf, f_scale)]
     if args.plot:
         from matplotlib import pyplot as plt
+
         if args.output is not None:
             plt.savefig(args.output)
         plt.show()
@@ -376,15 +416,17 @@ import hepi.data
                             i,
                             *arg,
                             vn,
-                            vn - unv(vc) - usd(vc),
-                            vn - unv(vc) + usd(vc),
-                            vn - unv(vs) - usd(vs),
-                            vn - unv(vs) + usd(vs),
-                            vn - unv(vp) - usd(vp),
-                            vn - unv(vp) + usd(vp)
+                            -vn + unv(vc) + usd(vc),
+                            -vn + unv(vc) - usd(vc),
+                            -vn + unv(vs) + usd(vs),
+                            -vn + unv(vs) - usd(vs),
+                            -vn + unv(vp) + usd(vp),
+                            -vn + unv(vp) - usd(vp),
                         )
             except KeyboardInterrupt:
+                # stops the inifinite input loop
                 pass</div>
+
 </pre></div>
 
            </div>
@@ -394,7 +436,7 @@ import hepi.data
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+    <p>&#169; Copyright 2025, Alexander Puck Neuwirth.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,24 +1,11 @@
-:py:mod:`hepi.run.spheno.run`
-=============================
+hepi.run.spheno.run
+===================
 
 .. py:module:: hepi.run.spheno.run
 
 
-Module Contents
----------------
-
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   hepi.run.spheno.run.SPhenoRunner
-
-
-
-
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
@@ -28,14 +15,29 @@ Attributes
    hepi.run.spheno.run.get_path
 
 
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.run.spheno.run.SPhenoRunner
+
+
+Module Contents
+---------------
+
 .. py:class:: SPhenoRunner(path, in_dir = None, out_dir = None, pre=None)
 
-
    Bases: :py:obj:`hepi.run.Runner`
+
+
+   Only works with SPheno-3.
+
 
    .. py:method:: _check_path()
 
       Checks if the passed path is valid.
+
 
 
    .. py:method:: run(slhas, **kwargs)
@@ -55,13 +57,7 @@ Attributes
 
 .. py:data:: run
 
-   
-
 .. py:data:: set_path
 
-   
-
 .. py:data:: get_path
-
-   
 

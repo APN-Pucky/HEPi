@@ -1,23 +1,19 @@
-:py:mod:`hepi.run.resummino.result`
-===================================
+hepi.run.resummino.result
+=========================
 
 .. py:module:: hepi.run.resummino.result
 
 
-Module Contents
----------------
-
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    hepi.run.resummino.result.ResumminoResult
 
 
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -25,11 +21,13 @@ Functions
    hepi.run.resummino.result.parse_single
 
 
+Module Contents
+---------------
 
 .. py:class:: ResumminoResult(lo, nlo, nlo_plus_nll, annlo_plus_nnll, vnlo, p_plus_k, rnlog, rnloq)
 
-
    Bases: :py:obj:`hepi.run.Result`
+
 
    Resummino Result Data.
 
@@ -65,6 +63,18 @@ Functions
    :type rnlog: :obj:`double`
    :param rnloq: corresponds to :attr:`RNLOQ`.
    :type rnloq: :obj:`double`
+
+
+   .. py:attribute:: VNLO
+
+
+   .. py:attribute:: P_PLUS_K
+
+
+   .. py:attribute:: RNLOG
+
+
+   .. py:attribute:: RNLOQ
 
 
 .. py:function:: is_valid(file, p, d, **kwargs)

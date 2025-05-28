@@ -1,28 +1,28 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>hepi.run.spheno.run &mdash; hepi  documentation</title>
-      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/jupyter-sphinx.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/thebelab.css" type="text/css" />
-      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+
   
-        <script src="../../../../_static/jquery.js"></script>
-        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-        <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/sphinx_highlight.js"></script>
-        <script src="../../../../_static/thebelab-helper.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/thebelab-helper.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -39,9 +39,6 @@
           <a href="../../../../index.html" class="icon icon-home">
             hepi
           </a>
-              <div class="version">
-                0.2.17
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -93,7 +90,6 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../../../hepi.html">hepi</a></li>
       <li class="breadcrumb-item active">hepi.run.spheno.run</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -113,16 +109,31 @@ from hepi.input import Input, update_slha
 from hepi.run import Runner
 
 
-<div class="viewcode-block" id="SPhenoRunner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.SPhenoRunner">[docs]</a>class SPhenoRunner(Runner):
-<div class="viewcode-block" id="SPhenoRunner._check_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.SPhenoRunner._check_path">[docs]</a>    def _check_path(self) -&gt; bool:
+<div class="viewcode-block" id="SPhenoRunner">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.SPhenoRunner">[docs]</a>
+class SPhenoRunner(Runner):
+    &quot;&quot;&quot;
+    Only works with SPheno-3.
+    &quot;&quot;&quot;
+<div class="viewcode-block" id="SPhenoRunner._check_path">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.SPhenoRunner._check_path">[docs]</a>
+    def _check_path(self) -&gt; bool:
         if os.path.exists(os.path.expanduser(self.get_path() + &quot;/bin/SPheno&quot;)):
             self.set_path(self.get_path() + &quot;/bin/SPheno&quot;)
             return True
+        if os.path.exists(os.path.expanduser(self.get_path() + &quot;/bin/spheno&quot;)):
+            self.set_path(self.get_path() + &quot;/bin/spheno&quot;)
+            return True
         if self.get_path().endswith(&quot;SPheno&quot;):
+            return True
+        if self.get_path().endswith(&quot;spheno&quot;):
             return True
         return False</div>
 
-<div class="viewcode-block" id="SPhenoRunner.run"><a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.SPhenoRunner.run">[docs]</a>    def run(self, slhas: List[Input], **kwargs) -&gt; List[Input]:
+
+<div class="viewcode-block" id="SPhenoRunner.run">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.SPhenoRunner.run">[docs]</a>
+    def run(self, slhas: List[Input], **kwargs) -&gt; List[Input]:
         &quot;&quot;&quot;
         Run the passed list of parameters for SPheno.
 
@@ -163,15 +174,29 @@ from hepi.run import Runner
                 t = r.read()
                 if t != &quot;&quot;:
                     warnings.warn(&quot;Spheno error in Messages.out&quot; + r.read())
-        return slhas</div></div>
+        return slhas</div>
+</div>
+
 
 
 # Backward compatibility
-<div class="viewcode-block" id="spheno_default_runner"><a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.spheno_default_runner">[docs]</a>spheno_default_runner = SPhenoRunner(&quot;~/git/SPheno-3.3.8/&quot;)</div>
+<div class="viewcode-block" id="spheno_default_runner">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.spheno_default_runner">[docs]</a>
+spheno_default_runner = SPhenoRunner(&quot;~/git/SPheno-3.3.8/&quot;)</div>
+
 &quot;&quot;&quot;Default SPheno Runner to provide backward compatibility&quot;&quot;&quot;
-<div class="viewcode-block" id="run"><a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.run">[docs]</a>run = spheno_default_runner.run</div>
-<div class="viewcode-block" id="set_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.set_path">[docs]</a>set_path = spheno_default_runner.set_path</div>
-<div class="viewcode-block" id="get_path"><a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.get_path">[docs]</a>get_path = spheno_default_runner.get_path</div>
+<div class="viewcode-block" id="run">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.run">[docs]</a>
+run = spheno_default_runner.run</div>
+
+<div class="viewcode-block" id="set_path">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.set_path">[docs]</a>
+set_path = spheno_default_runner.set_path</div>
+
+<div class="viewcode-block" id="get_path">
+<a class="viewcode-back" href="../../../../autoapi/hepi/run/spheno/run/index.html#hepi.run.spheno.get_path">[docs]</a>
+get_path = spheno_default_runner.get_path</div>
+
 </pre></div>
 
            </div>
@@ -181,7 +206,7 @@ from hepi.run import Runner
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Alexander Puck Neuwirth.</p>
+    <p>&#169; Copyright 2025, Alexander Puck Neuwirth.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

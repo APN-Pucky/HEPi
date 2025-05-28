@@ -1,23 +1,33 @@
-:py:mod:`hepi.input`
-====================
+hepi.input
+==========
 
 .. py:module:: hepi.input
 
 
-Module Contents
----------------
+Attributes
+----------
+
+.. autoapisummary::
+
+   hepi.input.in_dir
+   hepi.input.out_dir
+   hepi.input.pre
+   hepi.input.multi_scan
+   hepi.input.scale_scan
+   hepi.input.seven_point_scan
+   hepi.input.pdf_scan
+
 
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
    hepi.input.Input
 
 
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -50,33 +60,24 @@ Functions
    hepi.input.scan_pdf
 
 
-
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-   hepi.input.in_dir
-   hepi.input.out_dir
-   hepi.input.pre
-   hepi.input.multi_scan
-   hepi.input.scale_scan
-   hepi.input.seven_point_scan
-   hepi.input.pdf_scan
-
+Module Contents
+---------------
 
 .. py:data:: in_dir
    :value: './input/'
+
 
    Input directory.
 
 .. py:data:: out_dir
    :value: './output/'
 
+
    Output directory.
 
 .. py:data:: pre
    :value: 'nice -n 5'
+
 
    Prefix for run commands.
 
@@ -131,8 +132,8 @@ Attributes
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Input for computation and scans.
 
@@ -185,6 +186,101 @@ Attributes
 
    :vartype update: bool
 
+
+   .. py:attribute:: order
+
+
+   .. py:attribute:: energy
+
+
+   .. py:attribute:: energyhalf
+
+
+   .. py:attribute:: particle1
+
+
+   .. py:attribute:: particle2
+
+
+   .. py:attribute:: slha
+
+
+   .. py:attribute:: pdf_lo
+
+
+   .. py:attribute:: pdfset_lo
+      :value: 0
+
+
+
+   .. py:attribute:: pdf_nlo
+
+
+   .. py:attribute:: pdfset_nlo
+      :value: 0
+
+
+
+   .. py:attribute:: pdf_lo_id
+      :value: 0
+
+
+
+   .. py:attribute:: pdf_nlo_id
+      :value: 0
+
+
+
+   .. py:attribute:: mu_f
+      :value: 1.0
+
+
+
+   .. py:attribute:: mu_r
+      :value: 1.0
+
+
+
+   .. py:attribute:: precision
+      :value: 0.001
+
+
+
+   .. py:attribute:: max_iters
+      :value: 50
+
+
+
+   .. py:attribute:: invariant_mass
+      :value: 'auto'
+
+
+
+   .. py:attribute:: pt
+      :value: 'auto'
+
+
+
+   .. py:attribute:: result
+      :value: 'total'
+
+
+
+   .. py:attribute:: id
+      :value: ''
+
+
+
+   .. py:attribute:: model
+      :value: ''
+
+
+
+   .. py:attribute:: mu
+      :value: 0.0
+
+
+
    .. py:method:: has_gluino()
 
 
@@ -203,24 +299,17 @@ Attributes
    .. py:method:: has_slepton()
 
 
-
 .. py:function:: is_gluino(iid)
-
 
 .. py:function:: is_neutralino(iid)
 
-
 .. py:function:: is_chargino(iid)
-
 
 .. py:function:: is_weakino(iid)
 
-
 .. py:function:: is_squark(iid)
 
-
 .. py:function:: is_slepton(iid)
-
 
 .. py:function:: update_slha(i)
 
@@ -297,8 +386,6 @@ Attributes
 
 .. py:data:: multi_scan
 
-   
-
 .. py:function:: scan_scale(l, rrange=3, distance=2.0)
 
    Scans scale by varying `mu_f` and `mu_r`.
@@ -324,8 +411,6 @@ Attributes
 
 .. py:data:: scale_scan
 
-   
-
 .. py:function:: scan_seven_point(input_list)
 
    Scans scale by varying `mu_f` and `mu_r` by factors of two excluding relative factors of 4.
@@ -345,8 +430,6 @@ Attributes
 
 
 .. py:data:: seven_point_scan
-
-   
 
 .. py:function:: keep_where(input_list, condition)
 
@@ -406,7 +489,6 @@ Attributes
 
 
 .. py:function:: slha_write(newname, d)
-
 
 .. py:function:: masses_scan(input_list, varis, rrange, diff_L_R=None, negate=None)
 
@@ -501,6 +583,4 @@ Attributes
 
 
 .. py:data:: pdf_scan
-
-   
 

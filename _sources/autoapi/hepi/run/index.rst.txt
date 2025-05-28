@@ -1,39 +1,28 @@
-:py:mod:`hepi.run`
-==================
+hepi.run
+========
 
 .. py:module:: hepi.run
 
 
-Subpackages
------------
-.. toctree::
-   :titlesonly:
-   :maxdepth: 3
-
-   feynhiggs/index.rst
-   madgraph/index.rst
-   nllfast/index.rst
-   nnllfast/index.rst
-   prospino2/index.rst
-   resummino/index.rst
-   softsusy/index.rst
-   spheno/index.rst
-
-
 Submodules
 ----------
+
 .. toctree::
-   :titlesonly:
    :maxdepth: 1
 
-   run/index.rst
+   /autoapi/hepi/run/feynhiggs/index
+   /autoapi/hepi/run/madgraph/index
+   /autoapi/hepi/run/nllfast/index
+   /autoapi/hepi/run/nnllfast/index
+   /autoapi/hepi/run/prospino2/index
+   /autoapi/hepi/run/resummino/index
+   /autoapi/hepi/run/run/index
+   /autoapi/hepi/run/softsusy/index
+   /autoapi/hepi/run/spheno/index
 
-
-Package Contents
-----------------
 
 Classes
-~~~~~~~
+-------
 
 .. autoapisummary::
 
@@ -45,9 +34,8 @@ Classes
    hepi.run.Runner
 
 
-
 Functions
-~~~~~~~~~
+---------
 
 .. autoapisummary::
 
@@ -59,11 +47,13 @@ Functions
    hepi.run.namehash
 
 
+Package Contents
+----------------
 
 .. py:class:: Input(order, energy, particle1, particle2, slha, pdf_lo, pdf_nlo, mu_f=1.0, mu_r=1.0, pdfset_lo=0, pdfset_nlo=0, precision=0.001, max_iters=50, invariant_mass='auto', result='total', pt='auto', id='', model='', update=True)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Input for computation and scans.
 
@@ -116,6 +106,101 @@ Functions
 
    :vartype update: bool
 
+
+   .. py:attribute:: order
+
+
+   .. py:attribute:: energy
+
+
+   .. py:attribute:: energyhalf
+
+
+   .. py:attribute:: particle1
+
+
+   .. py:attribute:: particle2
+
+
+   .. py:attribute:: slha
+
+
+   .. py:attribute:: pdf_lo
+
+
+   .. py:attribute:: pdfset_lo
+      :value: 0
+
+
+
+   .. py:attribute:: pdf_nlo
+
+
+   .. py:attribute:: pdfset_nlo
+      :value: 0
+
+
+
+   .. py:attribute:: pdf_lo_id
+      :value: 0
+
+
+
+   .. py:attribute:: pdf_nlo_id
+      :value: 0
+
+
+
+   .. py:attribute:: mu_f
+      :value: 1.0
+
+
+
+   .. py:attribute:: mu_r
+      :value: 1.0
+
+
+
+   .. py:attribute:: precision
+      :value: 0.001
+
+
+
+   .. py:attribute:: max_iters
+      :value: 50
+
+
+
+   .. py:attribute:: invariant_mass
+      :value: 'auto'
+
+
+
+   .. py:attribute:: pt
+      :value: 'auto'
+
+
+
+   .. py:attribute:: result
+      :value: 'total'
+
+
+
+   .. py:attribute:: id
+      :value: ''
+
+
+
+   .. py:attribute:: model
+      :value: ''
+
+
+
+   .. py:attribute:: mu
+      :value: 0.0
+
+
+
    .. py:method:: has_gluino()
 
 
@@ -134,33 +219,40 @@ Functions
    .. py:method:: has_slepton()
 
 
-
 .. py:class:: Order
 
-
    Bases: :py:obj:`enum.IntEnum`
+
 
    Computation orders.
 
    Initialize self.  See help(type(self)) for accurate signature.
 
+
    .. py:attribute:: LO
       :value: 0
 
+
       Leading Order
+
 
    .. py:attribute:: NLO
       :value: 1
 
+
       Next-to-Leading Order
+
 
    .. py:attribute:: NLO_PLUS_NLL
       :value: 2
 
+
       Next-to-Leading Order plus Next-to-Leading Logarithms
+
 
    .. py:attribute:: aNNLO_PLUS_NNLL
       :value: 3
+
 
       Approximate Next-to-next-to-Leading Order plus Next-to-next-to-Leading Logarithms
 
@@ -191,8 +283,8 @@ Functions
 
 .. py:class:: Result(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    General result class. All uncertainties are of numerical origin.
 
@@ -228,6 +320,26 @@ Functions
    :type annlo_plus_nnll: :obj:`double`
 
 
+   .. py:attribute:: LO
+      :value: None
+
+
+
+   .. py:attribute:: NLO
+      :value: None
+
+
+
+   .. py:attribute:: NLO_PLUS_NLL
+      :value: None
+
+
+
+   .. py:attribute:: aNNLO_PLUS_NNLL
+      :value: None
+
+
+
 .. py:function:: DL2DF(ld)
 
    Convert a `dict` of `list`s to a `pandas.DataFrame`.
@@ -260,7 +372,6 @@ Functions
 
 .. py:class:: DictData
 
-
    .. py:method:: __str__()
 
       Returns attributes as dict as string
@@ -290,13 +401,40 @@ Functions
 
 .. py:class:: RunParam(skip = False, in_file = None, out_file = None, execute = None, name = None)
 
-
    Bases: :py:obj:`hepi.util.DictData`
+
 
    Abstract class that is similar to a dictionary but with fixed keys.
 
 
+   .. py:attribute:: name
+      :value: None
+
+
+
+   .. py:attribute:: skip
+      :value: False
+
+
+
+   .. py:attribute:: in_file
+      :value: None
+
+
+
+   .. py:attribute:: out_file
+      :value: None
+
+
+
+   .. py:attribute:: execute
+      :value: None
+
+
+
 .. py:class:: Runner(path, in_dir = None, out_dir = None, pre=None)
+
+   .. py:attribute:: path
 
 
    .. py:method:: orders()
@@ -304,9 +442,11 @@ Functions
       List of supported Orders in this runner.
 
 
+
    .. py:method:: get_name()
 
       Returns the name of the runner.
+
 
 
    .. py:method:: get_version()
@@ -318,6 +458,7 @@ Functions
    .. py:method:: _check_path()
 
       Checks if the passed path is valid.
+
 
 
    .. py:method:: _prepare(p, skip=False, assume_valid=False, **kwargs)
@@ -336,6 +477,7 @@ Functions
       :type skip: bool, optional
       :param n_jobs: Number of parallel jobs. If None, use all available cores.
       :type n_jobs: int
+
 
 
    .. py:method:: run(params, skip=True, parse=True, parallel=True, sleep=0, run=True, ignore_error=False, n_jobs=None, **kwargs)
@@ -364,6 +506,7 @@ Functions
       :rtype: :obj:`pd.DataFrame`
 
 
+
    .. py:method:: _run(rps, wait=True, parallel=True, sleep=0, n_jobs=None, **kwargs)
 
       Runs Runner per :class:`RunParams`.
@@ -385,6 +528,7 @@ Functions
       :rtype: :obj:`list` of int
 
 
+
    .. py:method:: _is_valid(file, p, d, **kwargs)
 
       Verifies that a file is a complete output.
@@ -400,6 +544,7 @@ Functions
       :rtype: bool
 
 
+
    .. py:method:: parse(outputs, n_jobs=None)
 
           Parses Resummino output files and returns List of Results.
@@ -410,6 +555,7 @@ Functions
 
           Returns:
               :obj:`list` of :class:`hepi.resummino.result.ResumminoResult`
+
 
 
 
@@ -424,12 +570,14 @@ Functions
       :rtype: :class:`Result`
 
 
+
    .. py:method:: get_path()
 
       Get the Runner path.
 
       :returns: current Runner path.
       :rtype: str
+
 
 
    .. py:method:: get_input_dir()
@@ -440,12 +588,14 @@ Functions
       :rtype: str
 
 
+
    .. py:method:: get_output_dir()
 
       Get the input directory.
 
       :returns: :attr:`out_dir`
       :rtype: str
+
 
 
    .. py:method:: get_pre()
@@ -456,12 +606,14 @@ Functions
       :rtype: str
 
 
+
    .. py:method:: set_path(p)
 
       Set the path to the Runner folder containing the binary in './bin' or './build/bin'.
 
       :param p: new path.
       :type p: str
+
 
 
    .. py:method:: set_input_dir(indir)
@@ -472,6 +624,7 @@ Functions
       :type indir: str
 
 
+
    .. py:method:: set_output_dir(outdir, create = True)
 
       Sets the output directory.
@@ -479,6 +632,7 @@ Functions
       :param outdir: new output directory.
                      create (bool): create directory if not existing.
       :type outdir: str
+
 
 
    .. py:method:: set_pre(ppre)

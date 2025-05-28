@@ -1,5 +1,5 @@
-:py:mod:`hepi.run.resummino.run`
-================================
+hepi.run.resummino.run
+======================
 
 .. py:module:: hepi.run.resummino.run
 
@@ -9,21 +9,8 @@
 
 
 
-Module Contents
----------------
-
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   hepi.run.resummino.run.ResumminoRunner
-
-
-
-
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
@@ -34,14 +21,26 @@ Attributes
    hepi.run.resummino.run.get_version
 
 
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.run.resummino.run.ResumminoRunner
+
+
+Module Contents
+---------------
+
 .. py:class:: ResumminoRunner(path, in_dir = None, out_dir = None, pre=None)
 
-
    Bases: :py:obj:`hepi.run.Runner`
+
 
    .. py:method:: orders()
 
       List of supported Orders in this runner.
+
 
 
    .. py:method:: get_version()
@@ -50,6 +49,7 @@ Attributes
    .. py:method:: _check_path()
 
       Checks if the passed path is valid.
+
 
 
    .. py:method:: _check_input(p, **kwargs)
@@ -70,6 +70,7 @@ Attributes
       :rtype: bool
 
 
+
    .. py:method:: _parse_file(file)
 
       Extracts results from an output file.
@@ -81,8 +82,8 @@ Attributes
       :rtype: :class:`Result`
 
 
-   .. py:method:: _prepare(p, **kwargs)
 
+   .. py:method:: _prepare(p, **kwargs)
 
 
 .. py:data:: default_resummino_runner
@@ -91,17 +92,9 @@ Attributes
 
 .. py:data:: run
 
-   
-
 .. py:data:: set_path
-
-   
 
 .. py:data:: get_path
 
-   
-
 .. py:data:: get_version
-
-   
 

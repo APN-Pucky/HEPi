@@ -1,25 +1,11 @@
-:py:mod:`hepi.run.prospino2.run`
-================================
+hepi.run.prospino2.run
+======================
 
 .. py:module:: hepi.run.prospino2.run
 
 
-Module Contents
----------------
-
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-   hepi.run.prospino2.run.ProspinoResult
-   hepi.run.prospino2.run.ProspinoRunner
-
-
-
-
 Attributes
-~~~~~~~~~~
+----------
 
 .. autoapisummary::
 
@@ -29,10 +15,22 @@ Attributes
    hepi.run.prospino2.run.get_path
 
 
+Classes
+-------
+
+.. autoapisummary::
+
+   hepi.run.prospino2.run.ProspinoResult
+   hepi.run.prospino2.run.ProspinoRunner
+
+
+Module Contents
+---------------
+
 .. py:class:: ProspinoResult(lo=None, nlo=None, nlo_plus_nll=None, annlo_plus_nnll=None)
 
-
    Bases: :py:obj:`hepi.results.Result`
+
 
    Prospino Result Data.
 
@@ -50,20 +48,17 @@ Attributes
 
 .. py:class:: ProspinoRunner(path, in_dir = None, out_dir = None, pre=None)
 
-
    Bases: :py:obj:`hepi.run.Runner`
+
 
    .. py:attribute:: weakino_map
 
-      
 
    .. py:attribute:: squark_map
 
-      
 
    .. py:attribute:: slepton_map
 
-      
 
    .. py:method:: _get_ps_proc(p)
 
@@ -76,9 +71,11 @@ Attributes
       List of supported Orders in this runner.
 
 
+
    .. py:method:: _check_input(p, **kwargs)
 
       Checks input parameter for compatibility with Prospino
+
 
 
    .. py:method:: _is_valid(file, p, d)
@@ -96,6 +93,7 @@ Attributes
       :rtype: bool
 
 
+
    .. py:method:: _parse_file(file)
 
       Extracts results from an output file.
@@ -107,8 +105,8 @@ Attributes
       :rtype: :class:`Result`
 
 
-   .. py:method:: _prepare(p, **kwargs)
 
+   .. py:method:: _prepare(p, **kwargs)
 
 
 .. py:data:: default_prospino_runner
@@ -117,13 +115,7 @@ Attributes
 
 .. py:data:: run
 
-   
-
 .. py:data:: set_path
 
-   
-
 .. py:data:: get_path
-
-   
 
