@@ -126,9 +126,18 @@ unv = unp.nominal_values</div>
 usd = unp.std_devs</div>
 
 
+<div class="viewcode-block" id="write_twiki_header">
+<a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.write_twiki_header">[docs]</a>
+def write_twiki_header(mass, output=sys.stdout, unit=&quot;pb&quot;):
+    # |  *m&lt;sub&gt;&amp;#967;&amp;#771;&lt;/sub&gt; [GeV]* |  *xsec [fb]*  |  *+scale unc [%]*  |  *+pdf unc [%]*  |  *-scale unc [%]*  |  *-pdf unc [%]*  |
+    io.write(output,
+    &quot;|  *&quot; + mass + &quot; [GeV]* |  *xsec [&quot;+ unit + &quot;]*  |  *+scale unc [%]*  |  *+pdf unc [%]*  |  *-scale unc [%]*  |  *-pdf unc [%]*  |\n&quot;
+             )</div>
+
+
 <div class="viewcode-block" id="write_twiki">
 <a class="viewcode-back" href="../../autoapi/hepi/output/index.html#hepi.output.write_twiki">[docs]</a>
-def write_twiki(rs_dl, mass, main, output=sys.stdout):
+def write_twiki(rs_dl, mass, main, output=sys.stdout,yscale=1.0):
     &quot;&quot;&quot;
 
     Examples:
@@ -167,7 +176,7 @@ def write_twiki(rs_dl, mass, main, output=sys.stdout):
         cen = rs_dl[main + &quot;_NOERR&quot;].iloc[i],
         cen = cen[0]
         io.write(output, &quot;| &quot; + str(rs_dl[mass].iloc[i])              + &quot; | &quot; +
-              &quot;{:.4g}&quot;.format(cen)+ &quot; | &quot;+
+              &quot;{:.4g}&quot;.format(cen*yscale)+ &quot; | &quot;+
               &quot;{:.1f}&quot;.format((unv(rs_dl[main + &quot;_SCALE&quot;].iloc[i])-cen + usd(rs_dl[main + &quot;_SCALE&quot;].iloc[i]))/cen*100)+ &quot; | &quot;+
               &quot;{:.1f}&quot;.format((unv(rs_dl[main + &quot;_PDF&quot;].iloc[i])-cen + usd(rs_dl[main + &quot;_PDF&quot;].iloc[i]))/cen*100)+ &quot; | &quot;+
               &quot;{:.1f}&quot;.format((unv(rs_dl[main + &quot;_SCALE&quot;].iloc[i])-cen - usd(rs_dl[main + &quot;_SCALE&quot;].iloc[i]))/cen*100)+ &quot; | &quot;+

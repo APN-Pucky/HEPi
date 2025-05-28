@@ -19,6 +19,7 @@ Functions
 
 .. autoapisummary::
 
+   hepi.output.write_twiki_header
    hepi.output.write_twiki
    hepi.output.write_latex_table_transposed_header
    hepi.output.write_latex_table_transposed
@@ -34,7 +35,9 @@ Module Contents
 
 .. py:data:: usd
 
-.. py:function:: write_twiki(rs_dl, mass, main, output=sys.stdout)
+.. py:function:: write_twiki_header(mass, output=sys.stdout, unit='pb')
+
+.. py:function:: write_twiki(rs_dl, mass, main, output=sys.stdout, yscale=1.0)
 
    .. rubric:: Examples
 
