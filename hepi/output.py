@@ -18,7 +18,13 @@ from .util import DL2DF
 unv = unp.nominal_values
 usd = unp.std_devs
 
-def write_twiki(rs_dl, mass, main, output=sys.stdout):
+def write_twiki_header(mass, output=sys.stdout, unit="pb"):
+    # |  *m<sub>&#967;&#771;</sub> [GeV]* |  *xsec [fb]*  |  *+scale unc [%]*  |  *+pdf unc [%]*  |  *-scale unc [%]*  |  *-pdf unc [%]*  |
+    io.write(output,
+    "|  *" + mass + " [GeV]* |  *xsec ["+ unit + "]*  |  *+scale unc [%]*  |  *+pdf unc [%]*  |  *-scale unc [%]*  |  *-pdf unc [%]*  |\n"
+             )
+
+def write_twiki(rs_dl, mass, main, output=sys.stdout,yscale=1.0):
     """
 
     Examples:
@@ -57,7 +63,7 @@ def write_twiki(rs_dl, mass, main, output=sys.stdout):
         cen = rs_dl[main + "_NOERR"].iloc[i],
         cen = cen[0]
         io.write(output, "| " + str(rs_dl[mass].iloc[i])              + " | " +
-              "{:.4g}".format(cen)+ " | "+
+              "{:.4g}".format(cen*yscale)+ " | "+
               "{:.1f}".format((unv(rs_dl[main + "_SCALE"].iloc[i])-cen + usd(rs_dl[main + "_SCALE"].iloc[i]))/cen*100)+ " | "+
               "{:.1f}".format((unv(rs_dl[main + "_PDF"].iloc[i])-cen + usd(rs_dl[main + "_PDF"].iloc[i]))/cen*100)+ " | "+
               "{:.1f}".format((unv(rs_dl[main + "_SCALE"].iloc[i])-cen - usd(rs_dl[main + "_SCALE"].iloc[i]))/cen*100)+ " | "+

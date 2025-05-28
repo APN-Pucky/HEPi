@@ -121,7 +121,8 @@ ID | Central value | error up | error down | error scale up | error scale down |
             continue
 
         if args.data == "twiki":
-            hepi.write_twiki(df, d[0][0], so, sys.stdout)
+            hepi.write_twiki_header(d[0][0], sys.stdout, unit="fb")
+            hepi.write_twiki(df, d[0][0], so, sys.stdout, yscale=1000)
             continue
 
         if args.data == "latex":
@@ -134,7 +135,7 @@ ID | Central value | error up | error down | error scale up | error scale down |
             df[so + "_PDF_ERRMINUS"] = (unv(df[so+ "_PDF"])-cen - usd(df[so+ "_PDF"]))
 
             hepi.write_latex_table_transposed_header(df, so,sys.stdout, d[0][0])
-            hepi.write_latex_table_transposed(df, so,sys.stdout, d[0][0])
+            hepi.write_latex_table_transposed(df, so,sys.stdout, d[0][0],yscale=1000)
             continue
 
         if len(d) == 1:
