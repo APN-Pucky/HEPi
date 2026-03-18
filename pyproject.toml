@@ -124,6 +124,7 @@ filterwarnings = [
     'ignore: pkg_resources is deprecated as an API:DeprecationWarning',
     # Parsing Resumminos 0+/-0 gives:
     'ignore:Using UFloat objects with std_dev==0 may give unexpected results.:UserWarning',
+    'ignore:.*scipy\.odr.*deprecated.*:DeprecationWarning',
 ]
 
 [tool.coverage.run]
