@@ -217,6 +217,7 @@ ID | Central value | error up | error down | error scale up | error scale down |
                 )
                 dll[so + "_NOERR"] = dlln[so + "_NOERR"]
                 for m_x in y[::5]:
+                    # Projections of 2d plot
                     mask = (
                         (dll[d[1][0]] == m_x)
                         & (dll[so + "_NOERR"].notnull())
@@ -224,18 +225,21 @@ ID | Central value | error up | error down | error scale up | error scale down |
                         & (dll[so + "_NOERR"] > 0)
                         & (dll[so + "_COMBINED"] > 0)
                     )
+                    slice_df = dll[mask]
+                    unique_x = slice_df[d[0][0]].nunique()
+                    if unique_x < 2:
+                        continue
                     hepi.combined_plot(
-                        dll[mask],
+                        slice_df,
                         d[0][0],
                         so,
                         alpha=0.1,
                         axes=axs[xs, 1],
                         tight=False,
                         init=False,
-                        interpolator="cubic",
+                        interpolator="cubic" if unique_x >= 4 else "linear",
                         xaxis=d[0][0],
                         label=str(m_x),
-                        cont=True,
                         plot_data=False,
                         pre=np.log,
                         post=np.exp,
