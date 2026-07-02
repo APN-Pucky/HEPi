@@ -18,6 +18,18 @@ GRID_FILES = sorted(
 
 
 @pytest.mark.parametrize("grid_name", GRID_FILES, ids=GRID_FILES)
+def test_json_files_are_valid_json(grid_name):
+    try:
+        with open(hepi.data.get_json_dir().joinpath(grid_name), "r") as f:
+            import json
+
+            json.load(f)
+    except Exception as e:
+        pytest.fail(f"Failed to load {grid_name} as JSON: {e}")
+
+
+
+@pytest.mark.parametrize("grid_name", GRID_FILES, ids=GRID_FILES)
 def test_hepi_fast_plot_for_all_packaged_grids(grid_name, monkeypatch, tmp_path):
     output_path = tmp_path / f"{Path(grid_name).stem}.png"
 
