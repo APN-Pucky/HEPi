@@ -1,8 +1,22 @@
 import importlib.resources
 import os
 
+def get_json_dir():
+    """
+    Get the path to the data directory
 
-def list_files():
+    Returns
+    -------
+    importlib.resources.abc.Traversable
+        Path-like handle to the packaged JSON data directory.
+
+    """
+    return importlib.resources.files(".".join(__name__.split(".")[:-1])).joinpath(
+        "json"
+    )
+
+
+def list_json_files():
     """
     List all files in the data directory
 
@@ -14,13 +28,15 @@ def list_files():
     """
     return [
         os.path.basename(b)
-        for b in importlib.resources.files(".".join(__name__.split(".")[:-1]))
-        .joinpath("json")
+        for b in get_json_dir()
         .iterdir()
     ]
 
+def list_files():
+    return list_json_files()
 
-def get_file(filename):
+
+def get_json_file(filename : str):
     """
     Get the content of a file in the data directory
 
@@ -31,12 +47,11 @@ def get_file(filename):
 
     Returns
     -------
-    str
-            Content of the file
+    importlib.resources.abc.Traversable
+            Path-like handle to the file
 
     """
-    return (
-        importlib.resources.files(".".join(__name__.split(".")[:-1]))
-        .joinpath("json")
-        .joinpath(filename)
-    )
+    return ( get_json_dir() .joinpath(filename))
+
+def get_file(filename : str):
+    return get_json_file(filename)
