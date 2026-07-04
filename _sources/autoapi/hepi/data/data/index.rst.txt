@@ -9,14 +9,25 @@ Functions
 
 .. autoapisummary::
 
+   hepi.data.data.get_json_dir
+   hepi.data.data.list_json_files
    hepi.data.data.list_files
+   hepi.data.data.get_json_file
    hepi.data.data.get_file
 
 
 Module Contents
 ---------------
 
-.. py:function:: list_files()
+.. py:function:: get_json_dir()
+
+   Get the path to the data directory
+
+   :returns: Path-like handle to the packaged JSON data directory.
+   :rtype: importlib.resources.abc.Traversable
+
+
+.. py:function:: list_json_files()
 
    List all files in the data directory
 
@@ -24,14 +35,18 @@ Module Contents
    :rtype: list
 
 
-.. py:function:: get_file(filename)
+.. py:function:: list_files()
+
+.. py:function:: get_json_file(filename)
 
    Get the content of a file in the data directory
 
    :param filename: Name of the file
    :type filename: str
 
-   :returns: Content of the file
-   :rtype: str
+   :returns: Path-like handle to the file
+   :rtype: importlib.resources.abc.Traversable
 
+
+.. py:function:: get_file(filename)
 
