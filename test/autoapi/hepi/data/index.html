@@ -139,11 +139,20 @@
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.data.list_files" title="hepi.data.list_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_files</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.data.get_json_dir" title="hepi.data.get_json_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_json_dir</span></code></a>()</p></td>
+<td><p>Get the path to the data directory</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.data.list_json_files" title="hepi.data.list_json_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_json_files</span></code></a>()</p></td>
 <td><p>List all files in the data directory</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hepi.data.get_file" title="hepi.data.get_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_file</span></code></a>(filename)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.data.list_files" title="hepi.data.list_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_files</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#hepi.data.get_json_file" title="hepi.data.get_json_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_json_file</span></code></a>(filename)</p></td>
 <td><p>Get the content of a file in the data directory</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hepi.data.get_file" title="hepi.data.get_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_file</span></code></a>(filename)</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -151,8 +160,22 @@
 <section id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="hepi.data.list_files">
-<span class="sig-prename descclassname"><span class="pre">hepi.data.</span></span><span class="sig-name descname"><span class="pre">list_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/data/data.html#list_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.data.list_files" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.data.get_json_dir">
+<span class="sig-prename descclassname"><span class="pre">hepi.data.</span></span><span class="sig-name descname"><span class="pre">get_json_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/data/data.html#get_json_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.data.get_json_dir" title="Link to this definition"></a></dt>
+<dd><p>Get the path to the data directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path-like handle to the packaged JSON data directory.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>importlib.resources.abc.Traversable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.data.list_json_files">
+<span class="sig-prename descclassname"><span class="pre">hepi.data.</span></span><span class="sig-name descname"><span class="pre">list_json_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/data/data.html#list_json_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.data.list_json_files" title="Link to this definition"></a></dt>
 <dd><p>List all files in the data directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -165,8 +188,13 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="hepi.data.get_file">
-<span class="sig-prename descclassname"><span class="pre">hepi.data.</span></span><span class="sig-name descname"><span class="pre">get_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/data/data.html#get_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.data.get_file" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="hepi.data.list_files">
+<span class="sig-prename descclassname"><span class="pre">hepi.data.</span></span><span class="sig-name descname"><span class="pre">list_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/data/data.html#list_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.data.list_files" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.data.get_json_file">
+<span class="sig-prename descclassname"><span class="pre">hepi.data.</span></span><span class="sig-name descname"><span class="pre">get_json_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/data/data.html#get_json_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.data.get_json_file" title="Link to this definition"></a></dt>
 <dd><p>Get the content of a file in the data directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -177,6 +205,16 @@
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="hepi.data.get_file">
+<span class="sig-prename descclassname"><span class="pre">hepi.data.</span></span><span class="sig-name descname"><span class="pre">get_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/hepi/data/data.html#get_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hepi.data.get_file" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>)</p>
 </dd>
 </dl>
 </dd></dl>

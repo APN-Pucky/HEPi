@@ -103,10 +103,26 @@
 <span></span>import importlib.resources
 import os
 
+<div class="viewcode-block" id="get_json_dir">
+<a class="viewcode-back" href="../../../autoapi/hepi/data/index.html#hepi.data.data.get_json_dir">[docs]</a>
+def get_json_dir():
+    &quot;&quot;&quot;
+    Get the path to the data directory
 
-<div class="viewcode-block" id="list_files">
-<a class="viewcode-back" href="../../../autoapi/hepi/data/index.html#hepi.data.data.list_files">[docs]</a>
-def list_files():
+    Returns
+    -------
+    importlib.resources.abc.Traversable
+        Path-like handle to the packaged JSON data directory.
+    &quot;&quot;&quot;
+    return importlib.resources.files(&quot;.&quot;.join(__name__.split(&quot;.&quot;)[:-1])).joinpath(
+        &quot;json&quot;
+    )</div>
+
+
+
+<div class="viewcode-block" id="list_json_files">
+<a class="viewcode-back" href="../../../autoapi/hepi/data/index.html#hepi.data.data.list_json_files">[docs]</a>
+def list_json_files():
     &quot;&quot;&quot;
     List all files in the data directory
 
@@ -118,16 +134,21 @@ def list_files():
     &quot;&quot;&quot;
     return [
         os.path.basename(b)
-        for b in importlib.resources.files(&quot;.&quot;.join(__name__.split(&quot;.&quot;)[:-1]))
-        .joinpath(&quot;json&quot;)
+        for b in get_json_dir()
         .iterdir()
     ]</div>
 
 
+<div class="viewcode-block" id="list_files">
+<a class="viewcode-back" href="../../../autoapi/hepi/data/index.html#hepi.data.data.list_files">[docs]</a>
+def list_files():
+    return list_json_files()</div>
 
-<div class="viewcode-block" id="get_file">
-<a class="viewcode-back" href="../../../autoapi/hepi/data/index.html#hepi.data.data.get_file">[docs]</a>
-def get_file(filename):
+
+
+<div class="viewcode-block" id="get_json_file">
+<a class="viewcode-back" href="../../../autoapi/hepi/data/index.html#hepi.data.data.get_json_file">[docs]</a>
+def get_json_file(filename : str):
     &quot;&quot;&quot;
     Get the content of a file in the data directory
 
@@ -142,11 +163,13 @@ def get_file(filename):
             Content of the file
 
     &quot;&quot;&quot;
-    return (
-        importlib.resources.files(&quot;.&quot;.join(__name__.split(&quot;.&quot;)[:-1]))
-        .joinpath(&quot;json&quot;)
-        .joinpath(filename)
-    )</div>
+    return ( get_json_dir() .joinpath(filename))</div>
+
+
+<div class="viewcode-block" id="get_file">
+<a class="viewcode-back" href="../../../autoapi/hepi/data/index.html#hepi.data.data.get_file">[docs]</a>
+def get_file(filename : str):
+    return get_json_file(filename)</div>
 
 </pre></div>
 
