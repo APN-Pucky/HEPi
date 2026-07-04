@@ -12,15 +12,13 @@ matplotlib.use("Agg", force=True)
 from matplotlib import pyplot as plt
 
 
-GRID_FILES = sorted(
-    filename for filename in hepi.data.list_files() if filename.endswith(".json")
-)
+GRID_FILES = sorted(hepi.data.list_json_files())
 
 
 @pytest.mark.parametrize("grid_name", GRID_FILES, ids=GRID_FILES)
 def test_json_files_are_valid_json(grid_name):
     try:
-        with open(hepi.data.get_json_dir().joinpath(grid_name), "r") as f:
+        with open(hepi.data.get_json_file(grid_name), "r") as f:
             import json
 
             json.load(f)
