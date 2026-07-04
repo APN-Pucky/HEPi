@@ -134,3 +134,7 @@ omit = [
   "scripts/*",
   "./docs/source/conf.py",
 ]
+
+[tool.bandit]
+skips = []
+exclude_dirs = ["tests"]
