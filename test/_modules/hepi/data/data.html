@@ -113,6 +113,7 @@ def get_json_dir():
     -------
     importlib.resources.abc.Traversable
         Path-like handle to the packaged JSON data directory.
+
     &quot;&quot;&quot;
     return importlib.resources.files(&quot;.&quot;.join(__name__.split(&quot;.&quot;)[:-1])).joinpath(
         &quot;json&quot;
@@ -159,8 +160,8 @@ def get_json_file(filename : str):
 
     Returns
     -------
-    str
-            Content of the file
+    importlib.resources.abc.Traversable
+            Path-like handle to the file
 
     &quot;&quot;&quot;
     return ( get_json_dir() .joinpath(filename))</div>
