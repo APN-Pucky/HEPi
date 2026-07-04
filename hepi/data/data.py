@@ -9,6 +9,7 @@ def get_json_dir():
     -------
     importlib.resources.abc.Traversable
         Path-like handle to the packaged JSON data directory.
+
     """
     return importlib.resources.files(".".join(__name__.split(".")[:-1])).joinpath(
         "json"
@@ -46,8 +47,8 @@ def get_json_file(filename : str):
 
     Returns
     -------
-    str
-            Content of the file
+    importlib.resources.abc.Traversable
+            Path-like handle to the file
 
     """
     return ( get_json_dir() .joinpath(filename))
